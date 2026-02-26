@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGN UP</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/typograph.css">
+
+    <link rel="stylesheet" href="css/layout/header.css">
+    <link rel="stylesheet" href="css/layout/footer.css">
+
+    <link rel="stylesheet" href="css/component/button.css">
+    <link rel="stylesheet" href="css/component/check-box.css">
+    <link rel="stylesheet" href="css/component/page-head.css">
+
+    <link rel="stylesheet" href="css/pages/join.css">
+</head>
+<body>
+<!-- Header -->
+<header>
+    <!-- Logo -->
+    <h1 class="logo font-brand"><a href="#">FRAGFARM</a></h1>
+    <!-- Header Main Menu -->
+    <button id="header-menu" class="header__menu" 
+            aria-label="메인 메뉴" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <g data-state="open" transform="translate(0 0)">
+                <path d="M3.99756 8.6286H18.9976V17.8553C18.9976 18.1612 18.876 18.4545 18.6596 18.6708C18.4432 18.8871 18.1497 19.0086 17.8437 19.0086H5.1514C4.84539 19.0086 4.5519 18.8871 4.33551 18.6708C4.11912 18.4545 3.99756 18.1612 3.99756 17.8553V8.6286Z"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.99756 8.61541L5.72833 5.28078C5.91492 4.90493 6.20045 4.58708 6.5542 4.3614C6.90796 4.13573 7.31655 4.01078 7.73602 4H15.2591C15.6884 4.00023 16.1092 4.12022 16.474 4.34648C16.8389 4.57274 17.1334 4.8963 17.3245 5.28078L18.9976 8.61541"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19.0393 8.60625C19.4786 7.47947 20.3327 6.46085 21.4514 5.72954C21.5801 5.64904 21.6782 5.5336 21.7267 5.40551C21.7751 5.27741 21.7705 5.14574 21.7138 5.03591L19.8937 1.44591C19.8611 1.38149 19.8116 1.32654 19.7488 1.28485C19.686 1.24315 19.6112 1.2157 19.5298 1.20437C19.4497 1.19327 19.3651 1.19798 19.2813 1.2182C19.1976 1.23842 19.1168 1.27368 19.0442 1.32164C17.9886 2.04886 17.1847 3.03316 16.7624 4.1154L19.0393 8.60625Z"
+                        stroke="currentColor"/>
+                <path d="M4.06768 8.60625C3.62834 7.47947 2.77421 6.46085 1.65551 5.72954C1.52679 5.64904 1.42874 5.5336 1.38028 5.40551C1.33182 5.27741 1.3364 5.14574 1.39311 5.03591L3.21322 1.44591C3.24587 1.38149 3.29531 1.32654 3.35814 1.28485C3.42097 1.24315 3.49569 1.2157 3.57716 1.20437C3.65719 1.19327 3.74188 1.19798 3.8256 1.2182C3.90933 1.23842 3.99018 1.27368 4.06277 1.32164C5.11834 2.04886 5.92224 3.03316 6.34451 4.1154L4.06768 8.60625Z"
+                        stroke="currentColor"/>
+            </g>
+            <g data-state="closed" transform="translate(0 -20)">
+                <path d="M11.4976 24.0286L11.4976 28.0286"
+                        stroke="currentColor"/>
+                <path d="M3.99756 28.6285H18.9976V37.8552C18.9976 38.1611 18.876 38.4544 18.6596 38.6707C18.4432 38.887 18.1497 39.0085 17.8437 39.0085H5.1514C4.84539 39.0085 4.5519 38.887 4.33551 38.6707C4.11912 38.4544 3.99756 38.1611 3.99756 37.8552V28.6285Z"
+                        stroke="currentColor"/>
+                <path d="M3.99756 28.6154L5.72833 25.2808C5.91492 24.9049 6.20045 24.5871 6.5542 24.3614C6.90796 24.1357 7.31655 24.0108 7.73602 24H15.2591C15.6884 24.0002 16.1092 24.1202 16.474 24.3465C16.8389 24.5727 17.1334 24.8963 17.3245 25.2808L18.9976 28.6154"
+                        stroke="currentColor"/>
+            </g>
+        </svg>
+    </button>
+    <!-- Header Menu Drawer -->
+    <nav class="header__gnb">
+    <ul class="gnb__list">
+        <li class="gnb__item">
+            <a class="gnb__link" href="#">about us</a>
+        </li>
+        <li class="gnb__item">
+            <a class="gnb__link" href="#">SHOP</a>
+        </li>
+        <li class="gnb__item">
+            <a class="gnb__link" href="#">review</a>
+        </li>
+        <li class="gnb__item gnb__item--has-sub">
+            <button class="gnb__toggle" type="button" aria-expanded="false" aria-controls="submenu-season">
+                season book
+                <img src="assets/icons/expand.svg" alt="" aria-hidden="true">
+            </button>
+            <ul id="submenu-season" class="gnb__sublist">
+                <li class="gnb__subitem">
+                    <a class="gnb__link gnb__sublink" href="#">
+                        2025 S/S Sentimental Rose
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="gnb__item gnb__item--has-sub">
+            <button class="gnb__toggle" type="button" aria-expanded="false" aria-controls="submenu-cs">
+                customer service
+                <img src="assets/icons/expand.svg" alt="" aria-hidden="true">
+            </button>
+            <ul id="submenu-cs" class="gnb__sublist">
+                <li class="gnb__subitem">
+                    <a class="gnb__link gnb__sublink" href="#">
+                        QnA
+                    </a>
+                </li>
+                <li class="gnb__subitem">
+                    <a class="gnb__link gnb__sublink" href="#">
+                        my page
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="gnb__instagram">
+            <a class="instagram" href="#" aria-label="인스타그램">
+            <img src="assets/icons/instagram.svg" alt="" aria-hidden="true">
+            </a>   
+        </li>
+        <li class="gnb__search">
+            <form class="search" role="search">
+            <label class="search__label visually-hidden" for="q">검색어 입력</label>
+            <div class="search__bar">
+                <input class="search__input" type="search" name="q" id="q" placeholder="What are you looking for?">
+                <button class="search__button" type="submit" aria-label="검색">
+                    <img src="assets/icons/search.svg" alt="" aria-hidden="true">
+                </button>
+            </div>
+            </form>    
+        </li>
+    </ul>
+    </nav>
+    <!-- Header Action Menu -->
+    <div class="header__actions">
+        <a class="login" data-state="logged-out" aria-label="로그인" href="#">
+            <svg viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <g transform="translate(0 -17)" data-icon="logged-out">
+                    <path d="M10.0286 30.5429L18.4286 22.1429L21.2857 25" 
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15.2143 25.3572L17.7143 27.8572" 
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.00001 37.8572C9.36694 37.8572 11.2857 35.9384 11.2857 33.5715C11.2857 31.2045 9.36694 29.2858 7.00001 29.2858C4.63307 29.2858 2.71429 31.2045 2.71429 33.5715C2.71429 35.9384 4.63307 37.8572 7.00001 37.8572Z" 
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <g transform="translate(0 2)" data-icon="logged-in">
+                    <path d="M2.71429 12.8571L12 3.57141L21.2857 12.8571"
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.57141 10V19.2857H18.4286V10"
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 19.2857V13.5714"
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+            </svg>
+        </a>
+        <a class="cart" aria-label="장바구니" href="#" >
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <g transform="translate(0 4)">
+                    <path d="M19.1433 0.5H15.5719L14.329 12.8571C14.2773 13.1978 14.1043 13.5083 13.8418 13.7314C13.5793 13.9546 13.2449 14.0753 12.9004 14.0714H3.90043C3.5889 14.0877 3.28062 14.0015 3.02266 13.8261C2.76471 13.6507 2.57125 13.3957 2.47186 13.1L0.571856 7.38571C0.501015 7.17088 0.482206 6.94229 0.516977 6.71876C0.551747 6.49524 0.639104 6.28317 0.771856 6.1C0.910153 5.90526 1.09507 5.7483 1.3097 5.64348C1.52433 5.53866 1.76181 5.48933 2.00043 5.5H15.0719" 
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4.14327 19.0715C4.53776 19.0715 4.85756 18.7517 4.85756 18.3572C4.85756 17.9627 4.53776 17.6429 4.14327 17.6429C3.74878 17.6429 3.42899 17.9627 3.42899 18.3572C3.42899 18.7517 3.74878 19.0715 4.14327 19.0715Z" 
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.429 19.0715C13.8235 19.0715 14.1433 18.7517 14.1433 18.3572C14.1433 17.9627 13.8235 17.6429 13.429 17.6429C13.0345 17.6429 12.7147 17.9627 12.7147 18.3572C12.7147 18.7517 13.0345 19.0715 13.429 19.0715Z" 
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+            </svg>
+            <span class="cart__badge">2</span>
+        </a>
+    </div>
+
+</header>
+
+<!-- Main : Join -->
+<main>
+<section>
+    <p class="join__intro">프래그팜에 오신 걸 환영합니다.</p>
+    <h2 class="page-title">SIGN UP</h2>
+    <p class="join__note text-accent">* 필수 입력 항목입니다.</p>
+    <form action="data.php" method="post">
+         <!-- Account -->
+        <fieldset class="account">
+            <legend class="visually-hidden">계정 정보</legend>
+            <div class="form-group">
+                <label class="form-label is-required" for="user-id">ID</label>
+                <input 
+                    id="user-id" 
+                    name="user_id"
+                    type="text" 
+                    minlength="4" 
+                    maxlength="16" 
+                    autocomplete="username"
+                    placeholder="영문 소문자, 숫자 포함 4~16자 입력"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label is-required" for="password">PASSWORD</label>
+                <input 
+                    id="password"
+                    name="password"
+                    type="password"
+                    minlength="10"
+                    autocomplete="new-password"
+                    placeholder="영문, 숫자, 특수문자 포함 10자 이상 입력"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label is-required" for="confirm-password">CONFIRM PASSWORD</label>
+                <input 
+                    id="confirm-password"
+                    name="confirm_password"
+                    type="password"
+                    minlength="10"
+                    autocomplete="new-password"
+                    placeholder="영문, 숫자, 특수문자 포함 10자 이상 입력"
+                    required>
+            </div>
+        </fieldset>
+        <!-- Name -->
+        <div class="form-group name">
+            <label class="form-label is-required" for="user-name">NAME</label>
+            <input 
+                id="user-name"
+                name="user_name"
+                type="text" 
+                autocomplete="name"
+                placeholder="실명 입력"
+                required>
+        </div>
+        <!-- Adress -->
+        <fieldset class="address">
+            <legend class="visually-hidden">주소 정보</legend>
+
+            <p class="field-title is-required">ADDRESS</p>  
+            <div class="form-group address-group">
+            <div class="address-post">
+                <label class="visually-hidden" for="postcode"></label>
+                <input 
+                    id="postcode"
+                    name="postcode"
+                    type="text"
+                    autocomplete="postal-code"
+                    placeholder="우편번호"
+                    required>
+                <button class="btn-address" type="button">주소 검색</button>
+            </div>
+            <div class="address-line1">
+                <label class="visually-hidden" for="aderess-line1">기본 주소</label>
+                <input 
+                    id="aderess-line1"
+                    name="aderess_line1"
+                    type="text"
+                    autocomplete="address-line1"
+                    placeholder="기본 주소"
+                    required>
+            </div>
+            <div class="address-line2">
+                <label class="visually-hidden" for="aderess-line2">상세 주소</label>
+                <input
+                    id="aderess-line2"
+                    name="aderess_line2"
+                    type="text"
+                    autocomplete="address-line2"
+                    placeholder="상세 주소"
+                    required>
+            </div>
+            </div>
+        </fieldset>
+        <!-- Phone -->
+        <div class="form-group phone">
+            <label class="form-label is-required" for="phone">PHONE NUMBER</label>
+            <input
+                id="phone"
+                name="phone"
+                type="tel"
+                pattern="[0-9]+"
+                inputmode="tel"
+                autocomplete="tel"
+                placeholder="'-' 없이 입력"
+                required
+                >
+        </div>
+        <!-- Email -->
+        <div class="form-group email">
+            <label class="form-label is-required" for="email">EMAIL ADDRESS</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="farfram@fragfram.com"
+                required
+                >
+        </div>
+        <!-- Birth -->
+        <fieldset class="birth">
+            <legend class="visually-hidden">생년월일</legend>
+            <p class="field-title birth">BIRTH DATE</p>
+            <div class="form-group birth-group">
+            <div class="birth-selects">
+                <select id="birth-year" name="birth_year">
+                    <option value="">2008</option>
+                    <!-- js로 기본값 20살 기준 자동 설정 + 옵션 설정 -->
+                </select>
+                <label class="form-label" for="birth-year">년</label>
+                <select id="birth-month" name="birth_month">
+                    <option value="">2</option>
+                    <!-- js로 기본값 현재 월 기준 자동 설정 + 옵션 설정 -->
+                </select>
+                <label class="form-label" for="birth-month">월</label>
+                <select id="birth-day" name="birth_day">
+                    <option value="">25</option>
+                    <!-- js로 기본값 현재 일 기준 자동 설정 + 옵션 설정 -->
+                </select>
+                <label class="form-label" for="birth-day">일</label>
+            </div>
+            <div class="calendar-type">
+                <label class="radio check-box">
+                    <input 
+                        class="radio__input check-box__input"
+                        type="radio" 
+                        name="calendar_type" 
+                        value="solar" 
+                        checked>
+                        양력
+                </label>
+                <label class="radio check-box">
+                    <input 
+                        class="radio__input check-box__input"
+                        type="radio" 
+                        name="calendar_type" 
+                        value="lunar">
+                        음력
+                </label>
+            </div>
+            </div>
+        </fieldset>
+
+        <!-- Agreement -->
+        <fieldset class="agreement">
+            <legend class="visually-hidden">약관 동의</legend>
+            <div class="agreement__item">
+            <input 
+                class="check-box__input"
+                id="agree-all" 
+                type="checkbox" 
+                name="agree_all"
+                data-agreement="all">
+            <label class="agreement__label check-box" for="agree-all"> <strong>모두</strong> 동의합니다.</label>
+            </div> 
+            <div class="agreement__item">
+            <input 
+                class="check-box__input"
+                id="agree-terms" 
+                name="agree_terms" 
+                type="checkbox" 
+                required
+                data-agreement="required">
+            <label class="agreement__label check-box is-required" for="agree-terms">
+                <span class="text-accent">(필수)</span> &nbsp; <strong>이용약관</strong>에 동의합니다.
+            </label>
+            <div class="agreement__content" aria-label="이용약관 내용">
+                <div class="agreement__scroll" id="terms-area">
+                    <!-- js로 해당 페이지 내용 들어갈 예정 -->
+                    <h3>이용약관</h3>
+                    <h4>제1조(목적)</h4>
+                    <p>이 약관은 김동규(전자상거래 사업자)가 운영하는 fragfarm(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+                    <p>※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.</p>
+                    <p>...</p>
+                </div>
+            </div>
+            </div>
+            <div class="agreement__item">
+            <input 
+                class="check-box__input"
+                id="agree-privacy" 
+                name="agree_privacy" 
+                type="checkbox" 
+                required
+                data-agreement="required">
+            <label class="agreement__label check-box is-required" for="agree-privacy">
+                <span class="text-accent">(필수)</span> &nbsp; <strong>개인정보 수집 및 이용 동의</strong>에 동의합니다.
+            </label>
+            <div class="agreement__content" aria-label="개인정보 수집 및 이용 동의 내용">
+                <div class="agreement__scroll" id="privacy-area">
+                    <!-- js로 해당 페이지 내용 들어갈 예정 -->
+                    <h3>개인정보처리방침</h3>
+                    <p><strong>fragfarm</strong>은 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.</p>
+                    <p>회사는 개인정보처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</p>
+                    <p>회사는 개인정보처리방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.</p>
+                    <p>...</p>
+                </div>
+            </div>
+            </div>
+            <div class="agreement__item">
+            <input 
+                class="check-box__input"
+                id="agree-age" 
+                name="agree_age" 
+                type="checkbox" 
+                required
+                data-agreement="required">
+            <label class="agreement__label check-box is-required" for="agree-age">
+                <span class="text-accent">(필수)</span> &nbsp; <strong>만 14세 이상</strong>입니다.
+            </label>
+            <div class="agreement__content" aria-label="만 19세 미만 시 주의사항">
+                <div class="agreement__scroll">
+                    <p>만 19세 미만의 미성년자가 결제 시 법정대리인이 거래를 취소할 수 있습니다.</p>
+                </div>
+            </div>
+            </div>
+            <div class="agreement__item">
+            <input 
+                class="check-box__input"
+                id="agree-marketing" 
+                name="agree_marketing"
+                type="checkbox"
+                data-agreement="optional">
+            <label class="agreement__label check-box" for="agree-marketing">
+                <strong>(선택)</strong> &nbsp;이메일 및 SMS 마케팅 정보 수신에 동의합니다.
+            </label>
+            <div class="agreement__content" aria-label="이메일 및 SMS 마케팅 정보 수신 동의 내용">
+                <div class="agreement__scroll">
+                    <p>할인 쿠폰 및 혜택, 이벤트, 신상품 소식 등 프래그팜에서 제공하는 쇼핑 정보를 문자 또는 이메일로 먼저 받아보실 수 있습니다.</p>
+                    <p>주문/거래 정보 및 주요 정책과 관련된 내용은 수신 동의 여부와 관계없이 발송됩니다.</p>
+                    <p>선택 약관에 동의하지 않아도 회원 가입은 가능합니다.</p>
+                    <p>회원 가입 후 마이 페이지에서 언제든지 수신 여부를 변경할 수 있습니다. </p>
+                </div>
+            </div>
+            </div>
+        </fieldset>
+        <!-- Submit Button -->
+        <div>
+            <button class="btn btn-signup" type="submit">
+                SIGN UP
+            </button>
+            <button class="btn-reset" type="reset">
+                RESET
+            </button>
+        </div>
+    </form>
+</section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <nav>
+        <ul class="footer__nav">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Confirm Entrepreneur Information</a></li>
+        </ul>
+    </nav>
+    <div class="footer__escrow">
+        <a href="#" aria-label="에스크로 서비스 안내 페이지로 이동">
+            <img class="payments-logo" src="assets/icons/escrow-payments.svg" alt="에스크로 결제 로고">
+        </a>
+        <p>안전구매(에스크로) 서비스 가맹점</p>
+    </div>
+    <p class="footer__copyright">
+        COPYRIGHT &copy; 2025. FRAGFARM ALL RIGHTS RESERVED.
+    </p>
+</footer>
+</body>
+</html>
