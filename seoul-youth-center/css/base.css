@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+html { 
+  font-size: 16px; 
+}
+
+body {
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Input */
+input::placeholder {
+    color: #CCCCCC;
+}
+
+/* Keyboard-Focus */
+:focus-visible {
+  outline: 2px dashed #1F2937;
+  outline-offset: 2px;
+}
+
+/* Not Keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Scroll */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px; /* 가로 스크롤용 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
