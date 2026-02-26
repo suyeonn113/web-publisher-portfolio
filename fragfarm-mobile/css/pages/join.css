@@ -1,0 +1,123 @@
+@charset "utf-8";
+
+.join__intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    
+    font-style: italic;
+}
+
+.join__note {
+    padding: 1rem 1rem 0 1rem;
+
+    font-size: .75rem;
+    font-weight: 500;
+}
+
+/* Account */
+form {
+    padding: 0 1rem 2.5rem 1rem;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: .5rem; 
+
+    padding-top: 1.5rem;
+
+    border-bottom: 1px solid #888;
+}
+
+.form-label.is-required::after,
+.field-title.is-required::after {
+    content: "*";
+    padding-left: 4px;
+    color: #F25C74;
+}
+
+/* Address */
+.address-post {
+    display: flex;
+    justify-content: space-between;
+}
+.btn-address {
+    padding: 0 1.5rem;
+
+    border: 1px solid #141414;
+    border-radius: 5px;
+}
+
+/* Birth */
+.field-title {
+    padding-top: 2rem;
+}
+
+.birth-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    padding-top: .5rem;
+}
+
+.birth select {
+    width: 4rem;
+    text-align: center;
+    color: #ccc;
+}
+
+.calendar-type {
+    display: flex;
+    gap: 1rem
+}
+
+/* Agreement */
+.agreement {
+
+    margin-top: 2rem;
+    padding: 1.5rem 1rem;
+
+    border-radius: 5px;
+    background: #F5F5F5;
+}
+
+.agreement__scroll {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    max-height: 8rem;
+    overflow-y: auto;
+
+    padding: 1rem;
+}
+
+.agreement__scroll h3, p {
+    font-size: .875rem;
+}
+
+/* Button */
+.btn-signup {
+    width: 100%;
+    color: #fff;
+    background: #F25C74;
+
+    margin: 1.5rem 0;
+}
+
+.btn-reset {
+    display: block;
+    width: 100%;
+    text-align: end;
+
+    text-decoration: underline;
+}

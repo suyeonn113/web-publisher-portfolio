@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+.check-box {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    
+    cursor: pointer;
+}
+
+.check-box::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+
+    margin-right: .5rem;
+
+    background: url(../../assets/icons/check-box.svg) no-repeat bottom;
+    background-size: 14px 28px;
+}
+
+.check-box:has(.check-box__input:checked)::before,
+.check-box__input:checked + .check-box::before {
+    background-position: top;
+}

@@ -1,0 +1,114 @@
+@charset "utf-8";
+
+/* ===== Hero ===== */
+.hero {
+    width: 100%;
+}
+
+.hero__img {
+    width: 100%;
+    height: auto;
+}
+
+.hero__title {
+    padding: 3rem 1.5rem;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.hero__title::after {
+    content: "";
+
+    display: block;
+    width: 100%;
+
+    margin-top: 1rem;
+
+    border-bottom: 1px solid #ccc;
+}
+
+/* ===== Main Navigation ===== */
+.main-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 2rem;
+}
+
+/* ===== Section ===== */
+.new, 
+.sale,
+.review,
+.about {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+}
+
+.section__title {
+    grid-column:  1;
+
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.section__view-all,
+.about__read-more {
+    grid-column: 2;
+    justify-self: end;
+
+    font-size: .75rem;
+}
+
+
+.section__title--about {
+    grid-column: 1;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.about__title {
+    grid-column:  1 / -1;
+
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.about__image {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    object-position: 100% 43%;
+
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.product__list,
+.review__list,
+.about__link {
+    grid-column:  1 / -1;
+}
+
+/* Card Layout */
+.product__list,
+.review__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1rem .5rem;
+}
+
+/* product 2개 이하 */
+.product__list:not(:has(> :nth-child(3))){
+    grid-template-columns:repeat(2,1fr);
+}
+

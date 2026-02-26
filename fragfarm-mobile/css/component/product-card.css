@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+.product__link {
+    display:grid;
+    gap:.5rem;
+    justify-items:center;
+    text-align:center;
+}
+
+.product__image {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+}
+
+.product__name {
+    font-weight: 500;
+}
+
+.product__color {
+    font-size: .625rem;
+    font-weight: 400;
+
+    color: #888;
+}
+

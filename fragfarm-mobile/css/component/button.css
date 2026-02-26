@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+.btn {
+    height: 3rem;
+
+    border-radius: 3px;
+
+    font-size: 1rem;
+    font-weight: 700;
+}
