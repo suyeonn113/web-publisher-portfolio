@@ -1,0 +1,59 @@
+@charset "utf-8";
+
+/* ===== effect-fairy ====== */
+.effect-fairy {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.effect-fairy::after {
+    content: "";
+    position: absolute;
+    inset: -4%;
+
+    width: 180%;
+    height: 180%;
+    left: -40%;
+    top: -40%;
+
+    transform: translateX(-120%) rotate(25deg);
+    background: linear-gradient(
+        90deg,
+        transparent 35%,
+        rgba(255,255,255,0.5) 50%,
+        transparent 65%
+    );
+
+    pointer-events: none;
+    animation: effect-fairy 3s ease-in-out infinite;
+}
+
+@keyframes effect-fairy {
+    0%   { transform: translateX(-120%) rotate(25deg); }
+    100% { transform: translateX(120%) rotate(25deg); }
+}
+
+/* ===== motion-wobble ====== */
+.motion-wobble {
+    will-change: transform;
+    transform: translateZ(0);
+    animation: wobble-soft 6s ease-in-out infinite;
+}
+
+@keyframes wobble-soft {
+    0%   { transform: translateZ(0) scale(1) translateY(0); }
+    50%  { transform: translateZ(0) scale(1.01) translateY(-6px); }
+    100% { transform: translateZ(0) scale(1) translateY(0); }
+}
+
+/* ===== wingFlap ====== */
+@keyframes wingFlap {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50%      { transform: rotate(2deg) scale(1.02); }
+}
+
+@keyframes wingFlapLeft {
+    0%, 100% { transform: scaleX(-1) rotate(0deg); }
+    50%      { transform: scaleX(-1.02) rotate(2deg); }
+}

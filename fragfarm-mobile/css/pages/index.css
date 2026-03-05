@@ -1,0 +1,176 @@
+@charset "utf-8";
+
+/* ===== Hero ===== */
+.hero {
+    position: relative;
+
+    width: 100%;
+}
+
+.hero__img {
+    display: block;
+    z-index: 1;
+
+    width: 100%;
+    height: 58vh;
+    object-fit: cover; 
+    object-position: center 30%;
+
+    filter: blur(.3px) brightness(1.13) contrast(1);
+}
+
+/* Wings */
+.hero::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -5%;
+    top: 25%;
+    z-index: 3;
+
+    width: 35%;
+    height: auto;
+    aspect-ratio: 200 / 180;
+    
+    background-image: url(../../assets/images/wing.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    opacity: .9;
+    filter: 
+        blur(.8px) 
+        brightness(1.0) 
+        contrast(1.1)
+        drop-shadow(0 0 12px rgba(255,245,200,0.8));
+
+    animation: wingFlap 2.8s ease-in-out infinite;
+    transform-origin: 100% 0%;
+}
+
+.hero::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 90%;
+    top: 24%;
+    z-index: 3;
+
+    width: 35%;
+    height: auto;
+    aspect-ratio: 200 / 180;
+    
+    transform: scaleX(-1);
+    background-image: url(../../assets/images/wing.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    opacity: .9;
+    filter: 
+        blur(.8px) 
+        brightness(1.0) 
+        contrast(1.1)
+        drop-shadow(0 0 12px rgba(255,245,200,0.8));
+        
+    animation: wingFlapLeft 2.8s ease-in-out infinite;
+    transform-origin: 0% 0%;
+}
+
+.hero__title {
+    padding: 3rem 1rem;
+
+    font-size: 1.5rem;
+}
+
+.hero__title::after {
+    content: "";
+
+    display: block;
+    width: 80%;
+
+    margin-top: 1rem;
+
+    border-bottom: 1px solid #d8d5d2;
+}
+
+/* ===== Section ===== */
+.new, 
+.sale,
+.review,
+.about {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+
+    margin: 5rem 0;
+    padding: 1rem;
+}
+
+/* Section Title */
+.section__title,
+.section__title--about {
+    grid-column:  1;
+
+    font-size: 1.25rem;
+}
+
+/* View all, Read more */
+.section__view-all,
+.about__read-more {
+    grid-column: 2;
+    justify-self: end;
+
+    font-size: .75rem;
+}
+
+.product__list,
+.review__list,
+.about__link {
+    grid-column:  1 / -1;
+}
+
+/* Card Layout */
+.product__list,
+.review__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1rem .5rem;
+}
+
+.review__list{
+    gap: .25rem .25rem;
+}
+
+/* product 2개 이하 */
+.product__list:not(:has(> :nth-child(3))){
+    grid-template-columns:repeat(2,1fr);
+}
+
+/* About */
+.about__link{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.about__title {
+    grid-column:  1;
+
+    font-size: 1.25rem;
+}
+
+.about__image {
+    grid-column:  1 / -1;
+
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    object-position: 100% 43%;
+
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}

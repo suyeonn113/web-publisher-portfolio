@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+article {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 5;
+
+    background: url(../../assets/images/about__main.png) center / cover no-repeat;
+}
+.about__title {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+
+    width: 45px;
+    height: 45px;
+}
+
+.about__text {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    top: 25%;
+    transform: translateX(-50%);
+    gap: 1.5rem;
+
+    font-size: 0.9375rem;
+    font-style: italic;
+    text-align: center
+}
