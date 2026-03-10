@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/pages/product.css">
 </head>
 <body>
-
+<!-- Header -->
 <?php include __DIR__ . '/includes/header.php'; ?>
 
 <main id="main">
@@ -1008,7 +1008,11 @@
     </nav>
 </main>
 
+<!-- Footer -->
 <?php include __DIR__ . '/includes/footer.php'; ?>
+
+<!-- Chat Launcher -->
+<?php include __DIR__ . '/includes/chat-launcher.php'; ?>
 
 </body>
 </html>

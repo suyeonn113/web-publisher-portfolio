@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+/* Popup */
+.popup {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.popup__dim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.popup__dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 95vw;
+    aspect-ratio: 1300 / 1021;
+    padding: 1.5rem;
+
+    background-image: url(../../assets/images/popup.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.popup__dismiss {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    font-size: .625rem;
+    text-decoration: underline;
+
+    color: #fff;
+}

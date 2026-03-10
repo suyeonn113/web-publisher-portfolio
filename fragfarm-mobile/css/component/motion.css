@@ -57,3 +57,28 @@
     0%, 100% { transform: scaleX(-1) rotate(0deg); }
     50%      { transform: scaleX(-1.02) rotate(2deg); }
 }
+
+/* ===== cardSpin ====== */
+
+.motion-card-spin {
+    animation: cardSpin 10s cubic-bezier(.4,0,.2,1) infinite;
+    transform-origin: center;
+}
+
+@keyframes cardSpin {
+    0% { transform: rotateY(0deg); }
+
+    45% { transform: rotateY(0deg); }
+
+    50% { transform: rotateY(360deg); }
+
+    55% { transform: rotateY(720deg); }
+
+    85% { transform: rotateY(720deg); }
+
+    90% { transform: rotateY(360deg); }
+
+    95% { transform: rotateY(0deg); }
+
+    100% { transform: rotateY(0deg); }
+}

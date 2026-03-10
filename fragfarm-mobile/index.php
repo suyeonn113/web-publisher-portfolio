@@ -18,20 +18,28 @@
     <link rel="stylesheet" href="css/component/button.css">
     <link rel="stylesheet" href="css/component/card.css">
     <link rel="stylesheet" href="css/component/check-box.css">
+    <link rel="stylesheet" href="css/component/modal.css">
     <link rel="stylesheet" href="css/component/motion.css">
     <link rel="stylesheet" href="css/component/page-head.css">
 
     <link rel="stylesheet" href="css/pages/index.css">
 </head>
 <body>
-
+<!-- Header -->
 <?php include __DIR__ . '/includes/header.php'; ?>
 
 <main id="main">
     <!-- Hero -->
     <section class="hero">
-        <img class="hero__img motion-wobble" src="assets/images/hero-2.jpg" alt="메인 이미지">
-        <h2 class="hero__title font-brand"><a href="#">SOME NATURE LAYERS</a></h2>
+        <img class="hero__img" src="assets/images/hero-2.jpg" alt="메인 이미지">
+        <a class="hero__title-group" href="#">
+            <h3 class="hero__subtitle">
+                26 SS Collection 1st Release
+            </h3>
+            <h2 class="hero__title font-brand">
+               SOME NATURE LAYERS
+            </h2>
+        </a>    
     </section>
     <!-- New -->
     <section class="new">
@@ -137,10 +145,16 @@
             view all
         </a>
         <ul class="product__list">
-            <li class="product__card product__card--compact">
+            <li class="product__card product__card--compact"
+                data-state="sale">
                 <a class="product__link" href="#">
+                    <div class="product__media">
+                        <span class="product__badge" aria-label="20퍼센트 할인">
+                            -30%
+                        </span>
                         <img class="product__image" src="assets/images/product/sale/sale-1.jpg" 
                             alt="Sentimental Rose 울 장갑 제품 이미지">
+                    </div>    
                     <div class="product__name font-brand">
                         Sentimental Rose Wool Gloves
                     </div>
@@ -149,10 +163,16 @@
                     </div>
                 </a>
             </li>
-            <li class="product__card product__card--compact">
+            <li class="product__card product__card--compact"
+                data-state="sale">
                 <a class="product__link" href="#">
+                    <div class="product__media">
+                        <span class="product__badge" aria-label="20퍼센트 할인">
+                            -30%
+                        </span>
                         <img class="product__image" src="assets/images/product/sale/sale-2.jpg" 
                             alt="Sentimental Rose 머플러 제품 이미지">
+                    </div>
                     <div class="product__name font-brand">
                         Sentimental Rose Muffler
                     </div>
@@ -234,16 +254,46 @@
         <h2 class="section__title--about font-brand">
             ABOUT ⠂⠄⠄⠂⠁⠁⠂⠄⠄⠂ ⠂⠄⠄⠂☆
         </h2>
+        <img class="about__image motion-card-spin" src="assets/images/about-2.png" 
+             alt="여러 스타일링 착용 컷이 배열된 이미지 콜라주">
+        <h3 class="about__title font-brand">About FRAGFARM</h3>
         <a class="about__link" href="about.php">
-            <img class="about__image" src="assets/images/about.png" 
-                 alt="여러 스타일링 착용 컷이 배열된 이미지 콜라주">
-            <h3 class="about__title font-brand">About FRAGFARM</h3>
             <span class="about__read-more">read more</span>
         </a>
     </section>
 </main>
 
+<!-- Footer -->
 <?php include __DIR__ . '/includes/footer.php'; ?>
 
+<!-- Chat Launcher -->
+<?php include __DIR__ . '/includes/chat-launcher.php'; ?>
+
+<!-- Popup -->
+<div class="popup" hidden>
+    <div class="popup__dim" aria-hidden="true"></div>
+    <section
+        class="popup__dialog"
+        role="dialog"
+        aria-modal="true">
+            <button class="popup__dismiss" type="button">
+                오늘 다시 보지 않기
+            </button>
+    </section>
+</div>
+<script>
+    const hero_titles = document.querySelectorAll('.hero__title-group');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.dataset.visible = "true";
+            }
+        });
+    });
+
+    hero_titles.forEach(title => observer.observe(title));
+</script>
+<script src="js/popup.js"></script>
 </body>
 </html>

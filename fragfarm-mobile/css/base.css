@@ -39,6 +39,15 @@ input::placeholder {
 }
 
 /* Scroll */
+html {
+    -ms-overflow-style: none;  /* Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+.html::-webkit-scrollbar {
+    display: none;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px; /* 가로 스크롤용 */
@@ -90,4 +99,15 @@ input::placeholder {
   font-size: .875rem;
   font-weight: 600;
   color: inherit;
+}
+
+/* Popup Scroll Lock */
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.popup {
+  position: fixed;
 }

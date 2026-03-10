@@ -85,7 +85,7 @@
                 <legend class="visually-hidden">주소 정보</legend>
 
                 <p class="field-title is-required">ADDRESS</p>  
-                <div class="form-group address-group">
+                <div class="address-group">
                 <div class="address-post">
                     <label class="visually-hidden" for="postcode"></label>
                     <input 
@@ -193,93 +193,91 @@
             <fieldset class="agreement">
                 <legend class="visually-hidden">약관 동의</legend>
                 <div class="agreement__item">
-                <input 
-                    class="check-box__input"
-                    id="agree-all" 
-                    type="checkbox" 
-                    name="agree_all"
-                    data-agreement="all">
-                <label class="agreement__label check-box" for="agree-all"> <strong>모두</strong> 동의합니다.</label>
+                    <label class="agreement__label check-box all"> 
+                        <input 
+                            class="check-box__input"
+                            type="checkbox" 
+                            name="agree_all"
+                            data-agreement="all">
+                        <strong>모두</strong>&nbsp;동의합니다.
+                    </label>
                 </div> 
                 <div class="agreement__item">
-                <input 
-                    class="check-box__input"
-                    id="agree-terms" 
-                    name="agree_terms" 
-                    type="checkbox" 
-                    required
-                    data-agreement="required">
-                <label class="agreement__label check-box is-required" for="agree-terms">
-                    <span class="text-accent">(필수)</span> &nbsp; <strong>이용약관</strong>에 동의합니다.
-                </label>
-                <div class="agreement__content" aria-label="이용약관 내용">
-                    <div class="agreement__scroll" id="terms-area">
-                        <!-- js로 해당 페이지 내용 들어갈 예정 -->
-                        <h3>이용약관</h3>
-                        <h4>제1조(목적)</h4>
-                        <p>이 약관은 김동규(전자상거래 사업자)가 운영하는 fragfarm(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.</p>
-                        <p>※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.</p>
-                        <p>...</p>
+                    <label class="agreement__label check-box is-required">
+                        <input 
+                            class="check-box__input"
+                            name="agree_terms" 
+                            type="checkbox" 
+                            required
+                            data-agreement="required">
+                        <span class="text-accent">(필수)</span> &nbsp; <strong>이용약관</strong>에 동의합니다.
+                    </label>
+                    <div class="agreement__content" aria-label="이용약관 내용">
+                        <div class="agreement__scroll" id="terms-area">
+                            <!-- js로 해당 페이지 내용 들어갈 예정 -->
+                            <h3>이용약관</h3>
+                            <h4>제1조(목적)</h4>
+                            <p>이 약관은 김동규(전자상거래 사업자)가 운영하는 fragfarm(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+                            <p>※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.</p>
+                            <p>...</p>
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div class="agreement__item">
-                <input 
-                    class="check-box__input"
-                    id="agree-privacy" 
-                    name="agree_privacy" 
-                    type="checkbox" 
-                    required
-                    data-agreement="required">
-                <label class="agreement__label check-box is-required" for="agree-privacy">
-                    <span class="text-accent">(필수)</span> &nbsp; <strong>개인정보 수집 및 이용 동의</strong>에 동의합니다.
-                </label>
-                <div class="agreement__content" aria-label="개인정보 수집 및 이용 동의 내용">
-                    <div class="agreement__scroll" id="privacy-area">
-                        <!-- js로 해당 페이지 내용 들어갈 예정 -->
-                        <h3>개인정보처리방침</h3>
-                        <p><strong>fragfarm</strong>은 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.</p>
-                        <p>회사는 개인정보처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</p>
-                        <p>회사는 개인정보처리방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.</p>
-                        <p>...</p>
+                    <label class="agreement__label check-box is-required">
+                        <input 
+                            class="check-box__input"
+                            name="agree_privacy" 
+                            type="checkbox" 
+                            required
+                            data-agreement="required">
+                        <span class="text-accent">(필수)</span> &nbsp; <strong>개인정보 수집 및 이용 동의</strong>에 동의합니다.
+                    </label>
+                    <div class="agreement__content" aria-label="개인정보 수집 및 이용 동의 내용">
+                        <div class="agreement__scroll" id="privacy-area">
+                            <!-- js로 해당 페이지 내용 들어갈 예정 -->
+                            <h3>개인정보처리방침</h3>
+                            <p><strong>fragfarm</strong>은 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.</p>
+                            <p>회사는 개인정보처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</p>
+                            <p>회사는 개인정보처리방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.</p>
+                            <p>...</p>
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div class="agreement__item">
-                <input 
-                    class="check-box__input"
-                    id="agree-age" 
-                    name="agree_age" 
-                    type="checkbox" 
-                    required
-                    data-agreement="required">
-                <label class="agreement__label check-box is-required" for="agree-age">
-                    <span class="text-accent">(필수)</span> &nbsp; <strong>만 14세 이상</strong>입니다.
-                </label>
-                <div class="agreement__content" aria-label="만 19세 미만 시 주의사항">
-                    <div class="agreement__scroll">
-                        <p>만 19세 미만의 미성년자가 결제 시 법정대리인이 거래를 취소할 수 있습니다.</p>
+                    <label class="agreement__label check-box is-required">
+                        <input 
+                            class="check-box__input"
+                            id="agree-age" 
+                            name="agree_age" 
+                            type="checkbox" 
+                            required
+                            data-agreement="required">
+                        <span class="text-accent">(필수)</span> &nbsp; <strong>만 14세 이상</strong>입니다.
+                    </label>
+                    <div class="agreement__content" aria-label="만 19세 미만 시 주의사항">
+                        <div class="agreement__scroll">
+                            <p>만 19세 미만의 미성년자가 결제 시 법정대리인이 거래를 취소할 수 있습니다.</p>
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div class="agreement__item">
-                <input 
-                    class="check-box__input"
-                    id="agree-marketing" 
-                    name="agree_marketing"
-                    type="checkbox"
-                    data-agreement="optional">
-                <label class="agreement__label check-box" for="agree-marketing">
-                    <strong>(선택)</strong> &nbsp;이메일 및 SMS 마케팅 정보 수신에 동의합니다.
-                </label>
-                <div class="agreement__content" aria-label="이메일 및 SMS 마케팅 정보 수신 동의 내용">
-                    <div class="agreement__scroll">
-                        <p>할인 쿠폰 및 혜택, 이벤트, 신상품 소식 등 프래그팜에서 제공하는 쇼핑 정보를 문자 또는 이메일로 먼저 받아보실 수 있습니다.</p>
-                        <p>주문/거래 정보 및 주요 정책과 관련된 내용은 수신 동의 여부와 관계없이 발송됩니다.</p>
-                        <p>선택 약관에 동의하지 않아도 회원 가입은 가능합니다.</p>
-                        <p>회원 가입 후 마이 페이지에서 언제든지 수신 여부를 변경할 수 있습니다. </p>
+                    <label class="agreement__label check-box">
+                        <input 
+                            class="check-box__input" 
+                            name="agree_marketing"
+                            type="checkbox"
+                            data-agreement="optional">
+                        <strong>(선택)</strong> &nbsp;이메일 및 SMS 마케팅 정보 수신에 동의합니다.
+                    </label>
+                    <div class="agreement__content" aria-label="이메일 및 SMS 마케팅 정보 수신 동의 내용">
+                        <div class="agreement__scroll">
+                            <p>할인 쿠폰 및 혜택, 이벤트, 신상품 소식 등 프래그팜에서 제공하는 쇼핑 정보를 문자 또는 이메일로 먼저 받아보실 수 있습니다.</p>
+                            <p>주문/거래 정보 및 주요 정책과 관련된 내용은 수신 동의 여부와 관계없이 발송됩니다.</p>
+                            <p>선택 약관에 동의하지 않아도 회원 가입은 가능합니다.</p>
+                            <p>회원 가입 후 마이 페이지에서 언제든지 수신 여부를 변경할 수 있습니다. </p>
+                        </div>
                     </div>
-                </div>
                 </div>
             </fieldset>
             <!-- Submit Button -->
@@ -295,6 +293,7 @@
     </section>
 </main>
 
+<!-- Footer -->
 <?php include __DIR__ . '/includes/footer.php'; ?>
 
 </body>

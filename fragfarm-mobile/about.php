@@ -24,11 +24,6 @@
 <main id="main">
     <article>
     <h1 class="visually-hidden">About FRAGFARM</h1>
-    <img 
-        class="about__title" 
-        src="assets/images/symbol.png" 
-        alt="" 
-        aria-hidden="true">
     <div class="about__text">
         <p>계절은 늘 끝 없는 순환을 겪습니다.</p>
         <p>봄의 생명을 낳고</p>
@@ -43,7 +38,11 @@
 </article>
 </main>
 
+<!-- Footer -->
 <?php include __DIR__ . '/includes/footer.php'; ?>
+
+<!-- Chat Launcher -->
+<?php include __DIR__ . '/includes/chat-launcher.php'; ?>
 
 </body>
 </html>

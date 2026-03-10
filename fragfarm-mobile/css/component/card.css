@@ -5,6 +5,8 @@
     gap: .5rem;
     justify-items:center;
     text-align:center;
+
+    margin-bottom: 1rem;
 }
 
 /* ===== Hero : Compact Product Card ===== */
@@ -24,9 +26,13 @@
 }
 
 .product__card--compact .product__color {
-    font-size: .75rem;
+    font-size: .625rem;
     letter-spacing: .02em;
     color: #b4a089;
+}
+
+.product__media {
+    position: relative;
 }
 
 /* Review Card */
@@ -43,8 +49,24 @@
     display: block; 
 }
 
+.review__link {
+    position: relative;
+}
 
+.review__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
 
+    background: #D7C7B5;
+    opacity: .15;
+
+    pointer-events: none;
+}
+
+.review__image{
+    filter: contrast(1.06) saturate(1.02) brightness(1.02);
+}
 /* ===== Product : Detail Product Card ===== */
 .product__media {
     position: relative;
