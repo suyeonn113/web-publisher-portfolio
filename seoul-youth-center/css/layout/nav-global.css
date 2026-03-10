@@ -1,0 +1,106 @@
+@charset "utf-8";
+
+/* 숨기기 */
+.nav-global {display: none;} 
+
+header {
+    position: relative;
+}
+
+.nav-global [hidden] {
+    display: none;
+    
+}
+
+.nav-global {
+    position: absolute;
+    left: 0;
+    top: 6rem;
+    z-index: 1000;
+
+    width: 100%;
+    height: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    background: #fff;
+    border-radius: 10px;
+}
+
+.nav-global__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: 4rem;
+}
+
+.nav-global__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.nav-global__list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    padding: 1.5rem 0;
+}
+
+.nav-global__item {
+    display: grid;
+    grid-template-columns: .2fr 1fr;
+    column-gap: 5rem;
+    align-items: start;
+}
+
+.nav-global__item .icon {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 2.5;
+}
+
+.nav-global__main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+
+    min-width: 12rem;
+    padding: .75rem .5rem;
+
+    font-size: 1.125rem;
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+.nav-global__sub {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: .5rem;
+    align-items: start;
+
+    width: 100%;
+}
+
+.nav-global__sub a {
+    display: block;
+    min-width: 8.7rem;
+    padding: .75rem .75rem;
+    
+    font-size: 1rem;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+.nav-global__sub a:hover {
+    font-weight: 700;
+    border-radius: 10px;
+    color: #2563EB;
+    background: #EFF6FF;
+}
