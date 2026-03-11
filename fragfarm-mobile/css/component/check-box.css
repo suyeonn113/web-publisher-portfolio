@@ -4,6 +4,8 @@
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+
+    caret-color: transparent;
 }
 
 .check-box__input {

@@ -28,7 +28,7 @@
         <p class="join__intro">프래그팜에 오신 걸 환영합니다.</p>
         <h2 class="page-title">SIGN UP</h2>
         <p class="join__note text-accent">* 필수 입력 항목입니다.</p>
-        <form action="data.php" method="post">
+        <form action="data.php" method="post" id="join-form" novalidate>
             <!-- Account -->
             <fieldset class="account">
                 <legend class="visually-hidden">계정 정보</legend>
@@ -42,7 +42,8 @@
                         maxlength="16" 
                         autocomplete="username"
                         placeholder="영문 소문자, 숫자 포함 4~16자 입력"
-                        required>
+                        required
+                        pattern="[a-z0-9]{4,16}">
                 </div>
 
                 <div class="form-group">
@@ -54,7 +55,8 @@
                         minlength="10"
                         autocomplete="new-password"
                         placeholder="영문, 숫자, 특수문자 포함 10자 이상 입력"
-                        required>
+                        required
+                        pattern="(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^*+=-]).{10,}">
                 </div>
 
                 <div class="form-group">
@@ -94,27 +96,29 @@
                         type="text"
                         autocomplete="postal-code"
                         placeholder="우편번호"
-                        required>
+                        required
+                        readonly>
                     <button class="btn-address" type="button">주소 검색</button>
                 </div>
                 <div class="address-line1">
-                    <label class="visually-hidden" for="aderess-line1">기본 주소</label>
+                    <label class="visually-hidden" for="address-line1">기본 주소</label>
                     <input 
-                        id="aderess-line1"
-                        name="aderess_line1"
+                        id="address-line1"
+                        name="address_line1"
                         type="text"
                         autocomplete="address-line1"
                         placeholder="기본 주소"
-                        required>
+                        required
+                        readonly>
                 </div>
                 <div class="address-line2">
-                    <label class="visually-hidden" for="aderess-line2">상세 주소</label>
+                    <label class="visually-hidden" for="address-line2">상세 주소</label>
                     <input
-                        id="aderess-line2"
-                        name="aderess_line2"
+                        id="address-line2"
+                        name="address_line2"
                         type="text"
                         autocomplete="address-line2"
-                        placeholder="상세 주소"
+                        placeholder="상세 주소 (없으면 '없음' 입력)"
                         required>
                 </div>
                 </div>
@@ -126,8 +130,8 @@
                     id="phone"
                     name="phone"
                     type="tel"
-                    pattern="[0-9]+"
-                    inputmode="tel"
+                    pattern="[0-9]{10,11}"
+                    inputmode="numeric"
                     autocomplete="tel"
                     placeholder="'-' 없이 입력"
                     required
@@ -153,17 +157,14 @@
                 <div class="birth-selects">
                     <select id="birth-year" name="birth_year">
                         <option value="">2008</option>
-                        <!-- js로 기본값 20살 기준 자동 설정 + 옵션 설정 -->
                     </select>
                     <label class="form-label" for="birth-year">년</label>
                     <select id="birth-month" name="birth_month">
                         <option value="">2</option>
-                        <!-- js로 기본값 현재 월 기준 자동 설정 + 옵션 설정 -->
                     </select>
                     <label class="form-label" for="birth-month">월</label>
                     <select id="birth-day" name="birth_day">
                         <option value="">25</option>
-                        <!-- js로 기본값 현재 일 기준 자동 설정 + 옵션 설정 -->
                     </select>
                     <label class="form-label" for="birth-day">일</label>
                 </div>
@@ -296,5 +297,7 @@
 <!-- Footer -->
 <?php include __DIR__ . '/includes/footer.php'; ?>
 
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="js/join.js"></script>
 </body>
 </html>
