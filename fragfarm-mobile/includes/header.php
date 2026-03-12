@@ -14,8 +14,6 @@
 
     <link rel="stylesheet" href="css/layout/header.css">
     <link rel="stylesheet" href="css/layout/footer.css">
-
-    <link rel="stylesheet" href="css/pages/.css">
 </head>
 <body>
 <!-- Skip Link -->

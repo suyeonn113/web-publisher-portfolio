@@ -44,7 +44,7 @@
     <!-- New -->
     <section class="new">
         <h2 class="section__title font-brand">
-            NEW ₊ ⊹ . ݁˖ . ݁ 𝜗𝜚 ˖⁺‧₊‧⁺˖
+            NEW <small>₊ ⊹ . ݁˖ . ݁ 𝜗𝜚 ˖⁺‧₊‧⁺˖</small>
         </h2>
         <a class="section__view-all" href="product.php">
             view all
@@ -139,7 +139,7 @@
     <!-- Sale -->
     <section class="sale">
         <h2 class="section__title font-brand">
-            SALE ˚⋆ ｡⋆ .✧˚
+            SALE <small>˚⋆ ｡⋆ .✧˚</small>
         </h2>
         <a class="section__view-all" href="product.php">
             view all
@@ -186,7 +186,7 @@
     <!-- Review -->
     <section class="review">
         <h2 class="section__title font-brand">
-            REVIEW  ⋅˚⋆₊‧ .｡⋆ ⋅˚₊‧.࿔｡˚
+            REVIEW  <small>⋅˚⋆₊‧ .｡⋆ ⋅˚₊‧.࿔｡˚</small>
         </h2>
         <a class="section__view-all" href="#">
             view all
@@ -252,7 +252,7 @@
     <!-- About -->
     <section class="about">
         <h2 class="section__title--about font-brand">
-            ABOUT ⠂⠄⠄⠂⠁⠁⠂⠄⠄⠂ ⠂⠄⠄⠂☆
+            ABOUT <small>⠂⠄⠄⠂⠁⠁⠂⠄⠄⠂ ⠂⠄⠄⠂☆</small>
         </h2>
         <img class="about__image motion-card-spin" src="assets/images/about-2.png" 
              alt="여러 스타일링 착용 컷이 배열된 이미지 콜라주">
