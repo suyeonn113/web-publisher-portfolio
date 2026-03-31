@@ -136,12 +136,12 @@ footer .wrapper--bottom {
     background: var(--color-naverblog);
 }
 
-.kacao {
+.kakao {
     width: 1.125rem;
     aspect-ratio: 8 / 7;
 }
-.wrapper__kacao{
-    background: var(--color-kacao);
+.wrapper__kakao{
+    background: var(--color-kakao);
 }
 
 /* Address & Copyright */
@@ -221,7 +221,7 @@ footer .wrapper--bottom {
 }
 
 
-.kacao {
+.kakao {
     width: 1.5rem;
 }
 

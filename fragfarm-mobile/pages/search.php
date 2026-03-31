@@ -20,7 +20,7 @@ $pageCss = 'search.css';
     <main class="search-page" id="main">
         <section class="search-result">
             <div class="search-result__header">
-                <h2 class="search-result__title page-title">Search</h2>
+                <h1 class="search-result__title page-title">Search</h1>
                 <p class="search-result__text" id="search-result-text"></p>
                 <p class="search-result__count" id="search-result-count"></p>
             </div>

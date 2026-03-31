@@ -101,7 +101,10 @@
     </nav>
     <!-- Avtion Menu -->
     <div class="header__actions">
-        <a class="login" data-state="logged-out" aria-label="로그인" href="#">
+        <a class="login" 
+           data-state="logged-out" 
+           aria-label="로그인" 
+           href="<?= BASE_URL ?>/pages/login.php">
             <svg viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                 <g transform="translate(0 -17)" data-icon="logged-out">

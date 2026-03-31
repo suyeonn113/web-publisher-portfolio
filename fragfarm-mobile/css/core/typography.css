@@ -8,6 +8,10 @@
     font-display: swap;
 }
 
+:root {
+    --font-color-default: #0E0E0E;
+}
+
 /* Font Base */
 html {
     font-family: 

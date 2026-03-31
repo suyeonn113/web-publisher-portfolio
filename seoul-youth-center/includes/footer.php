@@ -65,14 +65,14 @@
                              alt="">
                     </a>
                 </li>
-                <li class="footer__sns--wrapper wrapper__kacao">
+                <li class="footer__sns--wrapper wrapper__kakao">
                     <a class="footer__sns--link" 
                        href="https://pf.kakao.com/_pqVxaG"
                        aria-label="카카오톡 채널 바로가기"
                        target="_blank" 
                        rel="noopener">
-                        <img class="kacao" 
-                             src="./assets/icons/kacao.png" 
+                        <img class="kakao" 
+                             src="./assets/icons/kakao.png" 
                              alt="">
                     </a>
                 </li>
