@@ -1,0 +1,143 @@
+@charset "utf-8";
+
+/* ========================================
+                Base - Mobile
+======================================== */
+
+
+:root {
+
+    /* ========================
+        Typography Tokens
+    ======================== */
+
+     /* Font family */
+    font-family: "Pretendard", sans-serif;
+
+    /* Font size - mobile */
+    
+    /* Navigation */
+    --text-user-size: 1rem;                  /* 16px */
+
+    --text-nav-main-size: 1rem;              /* 16px */
+    --text-nav-main-weight: 500;
+    --text-nav-main-current-weight: 800;
+
+    --text-nav-sub-size: .875rem;             /* 14px */
+    --text-nav-sub-current-weight: 700;
+
+    --text-quick-nav-size: .75rem;            /* 12px */
+    --text-quick-nav-weight: 600;
+
+    /* Section Titles */
+    --text-title-section-size: 1.125rem;      /* 18px */
+    --text-title-section-weight: 700;
+
+    --text-title-subsection-size: 1rem;       /* 16px */
+    --text-title-subsection-weight: 700;
+
+    /* Body Text */
+    --text-body-size: .875rem;                /* 14px */
+    --text-body-weight: 700;
+
+    --text-body-sm-size: .75rem;              /* 12px */
+
+    --text-body-lg-size: .9375rem;            /* 15px */
+    --text-body-lg-weight: 500;
+
+    /* Buttons */
+    --text-button-sm-size: .75rem;            /* 12px */
+    --text-button-sm-weight: 500;
+
+    --button-text-size: .8125rem;             /* 13px */
+    --button-text-weight: 700;
+    --button-text-tracking: 0.05em;           /* 5% */
+
+    /* Badge Text */
+    --text-badge-size: .75rem;                /* 12px */
+    --text-badge-weight: 600;
+    --text-badge-tracking: 0.1em;             /* 10% */
+
+    /* Footer */
+    --text-footer-size: .6875rem;             /* 11px */
+    --text-footer-accent-weight: 700;
+    --text-footer-copy-weight: 500;
+}
+
+
+
+/* ========================================
+                    Tablet
+======================================== */
+
+@media (min-width: 768px) {
+
+:root {
+    
+    /* ========================
+        Typography Tokens
+    ======================== */
+    
+    /* Navigation */
+
+    --text-nav-main-size: 1.125rem;          /* 18px */
+    --text-nav-main-weight: 500;
+    --text-nav-main-current-weight: 800;
+
+    --text-nav-main-size: 1.25rem;           /* 20px */
+    --text-nav-sub-size: 1rem;               /* 16px */
+
+    --text-quick-nav-size: .875rem;          /* 14px */
+
+    /* Section Titles */
+    --text-title-section-size: 1.5rem;        /* 24px */
+    --text-title-subsection-size: 1.125rem;   /* 18px */
+
+    /* Body Text */
+    --text-body-size: 1rem;                  /* 16px */
+    --text-body-sm-size: .9375rem;           /* 15px */
+    --text-body-lg-size: 1.125rem;           /* 18px */
+
+    /* Buttons */
+    --text-button-sm-size: .875rem;          /* 14px */
+    --button-text-size: .9375rem;            /* 15px */
+
+    /* Badge Text */
+    --text-badge-size: .875rem;               /* 14px */
+
+    /* Footer */
+    --text-footer-size: .875rem;              /* 16px */
+}
+
+}
+
+
+
+/* ========================================
+                    PC
+======================================== */
+
+@media (min-width: 1248px) {
+
+:root {
+    
+    /* ========================
+        Typography Tokens
+    ======================== */
+
+    /* Section Titles */
+    --text-title-subsection-size: 1.25rem;    /* 18px */
+
+    /* Body Text */
+    --text-body-sm-size: 1.125rem;             /* 18px */
+    --text-body-lg-size: 1.25rem;              /* 20px */
+
+    /* Buttons */
+    --text-button-sm-size: 1rem;                /* 16px */
+    --button-text-size: 1.125rem;               /* 18px */
+
+    /* Footer */
+    --text-footer-size: .875rem;                 /* 16px */
+}
+
+}

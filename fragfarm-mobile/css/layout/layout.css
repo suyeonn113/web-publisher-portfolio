@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    background: #000;
+}
+
+.mobile-shell {
+    width: 100%;
+    max-width: 430px;   /* 모바일 시안 기준값 */
+    min-height: 100vh;
+    margin-inline: auto;
+    background: #fff;   /* 실제 페이지 배경 */
+    overflow: hidden;
+}

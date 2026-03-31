@@ -1,0 +1,106 @@
+@charset "utf-8";
+[hidden] {
+    display: none !important;
+}
+
+.search-result__text,
+.search-result__count {
+    font-size: .875rem;
+    line-height: 1.5;
+    padding-inline: 1rem;
+}
+
+.search-result__count {
+    margin-top: .25rem;
+}
+
+.search-empty {
+    padding: 4rem 1rem 6rem;
+    text-align: center;
+}
+
+.search-empty__title {
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.search-empty__text {
+    font-size: .875rem;
+    color: rgb(14 14 14 / 70%);
+}
+
+
+
+.catalog__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: .25rem;
+
+    padding-inline: 1rem;
+}
+
+.catalog__list :is(
+    ol, 
+    .product__price,
+    .product__rating,
+    .product__actions-icon
+    ) {
+    display: none;
+}
+
+/* 문제 찾아보기 */
+.product__badge {
+    display: none!important;
+}
+
+.product__link {
+    grid-template-columns: auto 1fr;
+    text-align: start;
+}
+
+.product__gallery-item {
+    justify-content: center;
+    height: 12rem;
+}
+
+.product__gallery-item:not(:first-child) {
+    display: none;
+}
+
+.product__gallery-image {
+    width: auto;
+    height: auto;
+}
+
+.product__name {
+    font-size: 0.875rem;
+}
+
+.product__meta {
+    justify-content: center;
+}
+
+.button--more {
+    display: block;
+    margin: 1.5rem auto 2.5rem;
+
+    padding: 0.75rem 1.5rem;
+
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+
+    color: var(--color-text-default);
+    background: transparent;
+
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+
+    transition: all 0.3s ease;
+}
+
+.search {
+    padding-inline: 1rem;
+}

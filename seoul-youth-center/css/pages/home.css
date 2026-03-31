@@ -1,0 +1,348 @@
+@charset "utf-8";
+
+/* ========================================
+                Base - Mobile
+======================================== */
+
+/* ========== Hero ========== */
+.hero {
+    display: flex;
+    width: 100%;
+    gap: var(--space-3);
+    padding-bottom: var(--space-6);
+}
+
+/* ===== Banner ===== */
+
+.banner {
+    position: relative;
+    display: flex;
+}
+
+.banner__gallery {
+    overflow: hidden;
+    border-radius: 15px;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+}
+
+.banner__list {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.banner__item {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.banner__item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.banner__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Controls */
+
+.banner__controls {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .375rem;
+
+    padding-block: .25rem;
+    padding-inline: .5rem;
+}
+
+.banner__count{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    aspect-ratio: 1.6 / 1;
+
+    font-size: var(--text-nav-sub-size);
+    font-weight: 600;
+    color: var(--color-text-on);
+    
+    background: var(--color-text-default-70);
+    border: 2.5px solid var(--color-text-on);
+    border-radius: 100px;
+}
+
+/* ===== Quick menu ===== */
+
+.quick-menu--home {
+    display: none;
+}
+
+
+/* ========== Section ========== */
+
+.section__title {
+    font-size: var(--text-title-section-size);
+    font-weight: var(--text-title-section-weight);
+}
+
+.button--more {
+    font-size: var(--text-button-sm-size);
+    font-weight: var(--text-button-sm-weight);
+}
+
+.button--more::after {
+    content: "";
+    display: block;
+
+    width: var(--text-button-sm-size);
+    aspect-ratio: 1 / 1;
+
+    margin-left: .25rem;
+
+    background: url(../../assets/icons/arrow.svg) no-repeat center / contain;
+}
+
+
+/* ========== Programs ========== */
+
+.programs.wrapper {
+    padding-block: var(--section-padding-block);
+    background: var(--color-yellow-20);
+}
+
+.programs.inner {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1.5rem;
+}
+
+.programs__controls {
+    display: none;
+}
+@media (min-width: 480px) {
+    .programs__controls {display: flex; gap: 1rem;}
+}
+
+.programs__slider {
+    grid-column: 1 / -1;
+    overflow: hidden;
+    touch-action: pan-y;
+    user-select: none;
+}
+
+.programs__track {
+    display: flex;
+    gap: .5rem;
+    will-change: transform;
+    transition: transform 400ms ease;
+    transform: translate3d(0, 0, 0);
+}
+
+.programs__track[data-dragging="true"] {
+    transition: none;
+}
+
+.programs__prev,
+.programs__next {
+    cursor: pointer;
+}
+
+.programs__prev:disabled,
+.programs__next:disabled {
+    cursor: default;
+}
+
+.card {
+    flex: 0 0 65%;
+}
+@media (min-width: 600px) {
+    .card {flex: 0 0 40%;}
+}
+
+@media (min-width: 1024px) {
+    .card {flex: 0 0 26%;}
+}
+
+
+
+
+/* ========================================
+                    Tablet
+======================================== */
+
+@media (min-width: 768px) {
+
+/* Controls */
+.banner__count{
+    height: 2.5rem;
+    border-width: 3.7px;
+}
+
+.banner__prev,
+.banner__next {
+    display: block;
+}
+
+
+}
+
+
+
+/* ========================================
+                    PC
+======================================== */
+
+@media (min-width: 1248px) {
+
+/* ===== Banner ===== */
+
+/* Controls */
+
+.banner__controls {
+    padding-block: .5rem;
+    padding-inline: 1rem;
+}
+
+.banner__count{
+    height: 2.5rem;
+}
+
+
+/* ===== Quick menu ===== */
+
+.quick-menu--home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    padding-block: var(--space-1);
+    padding-inline: var(--space-5);
+
+    border-radius: 15px;
+    border: 1px solid var(--color-line);
+}
+
+.quick-menu--home__title {
+    font-size: var(--text-body-lg-size);
+}
+
+.quick-menu--home__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    column-gap: 3rem;
+    row-gap: 2.5rem;
+}
+
+.quick-menu--home__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    font-weight: var(--text-quick-nav-weight);
+    white-space: nowrap;
+}
+
+.line {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 4rem;
+    height: 4rem;
+
+    border-radius: 100px;
+    border: 1px solid var(--color-line);
+    background: var(--color-white);
+}
+
+/* Hover */
+/* Gradient Outer Ring Off (hover 시 두꺼워 보이게) */
+.line::before {
+    content: "";
+    position: absolute;
+    inset: -4px; /* 바깥으로 확장 → 두께 느낌 */
+
+    border-radius: inherit;
+    background: var(--color-accent-gradient);
+
+    opacity: 0;
+
+    z-index: -1;
+}
+
+/* Star Animation */
+.line::after {
+    content: "";
+    position: absolute;
+    top: -1.3rem;
+    right: -1.3rem;
+
+    width: 1.5rem;
+    height: 1.5rem;
+
+    background: url(../../assets/icons/star--hover.svg) no-repeat center / cover;
+
+    opacity: 0;
+    transform: translate(-0.375rem, 0.375rem) scale(0.85) rotate(-8deg);
+
+    transition:
+        opacity 0.18s ease-out,
+        transform 0.32s cubic-bezier(.22, 1, .36, 1);
+
+    pointer-events: none;
+}
+
+/* Hover / Focus */
+.quick-menu--home__link:is(:hover, :focus-visible) {
+    /* 텍스트 그라데이션 */
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    font-weight: 800;
+}
+
+.quick-menu--home__link:is(:hover, :focus-visible) .line {
+    border-color: transparent;
+
+    background:
+        linear-gradient(var(--color-lightyellow), var(--color-lightyellow)) padding-box,
+        var(--color-accent-gradient) border-box;
+}
+
+/*  Outer Ring ON */
+.quick-menu--home__link:is(:hover, :focus-visible) .line::before {
+    opacity: 1;
+}
+
+/* Hover / Focus - Star Animation ON */
+.quick-menu--home__link:is(:hover, :focus-visible) .line::after {
+    opacity: 1;
+    transform: translate(0.125rem, 0.1875rem) scale(1) rotate(0);
+}
+
+/* ========== Programs ========== */
+
+
+}

@@ -1,0 +1,113 @@
+@charset "utf-8";
+
+html {   
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Input */
+input::placeholder {
+  color: #CCCCCC;
+}
+
+/* Keyboard-Focus */
+:focus-visible {
+  outline: 2px dashed #1F2937;
+  outline-offset: 2px;
+}
+
+/* Not Keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Scroll */
+html {
+  -ms-overflow-style: none;  /* Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.html::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px; /* 가로 스크롤용 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.skip-links {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -200%);
+  z-index: 20000;
+
+  display: flex;
+  gap: .5rem;
+
+  padding: .5rem;
+
+  border-radius: .75rem;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 6px 24px rgba(0,0,0,.12);
+}
+
+.skip-links:focus-within{
+  transform: translate(-50%, 0);
+}
+
+.skip-links__link{
+  display: inline-flex;
+  align-items: center;
+
+  padding: .5rem .75rem;
+
+  border-radius: .5rem;
+  text-decoration: none;
+
+  font-size: .875rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+/* Popup Scroll Lock */
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.popup {
+  position: fixed;
+}

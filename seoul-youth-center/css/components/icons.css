@@ -1,0 +1,272 @@
+@charset "utf-8";
+
+:root {
+
+    /* ========================
+        Icon Tokens
+    ======================== */
+
+    --icon-size-2xs: 0.375rem;  /* 6px */
+    --icon-size-xs: 0.5rem;     /* 8px */
+    --icon-size-sm: 0.875rem;   /* 14px */
+    --icon-size-md: 1rem;       /* 16px */
+    --icon-size-lg: 1.75rem;    /* 28px */
+}
+
+@media (min-width: 768px) {
+
+:root {
+    --icon-size-xs: 0.625rem;   /* 10px */
+    --icon-size-sm: 1rem;       /* 16px */
+    --icon-size-md: 1.75rem;    /* 28px */
+    --icon-size-lg: 2.25rem;    /* 36px */
+}
+}
+
+@media (min-width: 1248px) {
+
+:root {
+    --icon-size-xs: 0.75rem;    /* 12px */
+    --icon-size-sm: 1rem;       /* 16px */
+    --icon-size-md: 2rem;       /* 32px */
+    --icon-size-lg: 3rem;       /* 48px */
+}
+}
+
+
+
+/* ==================== Moblie - Base ==================== */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    display: block;
+
+    width: 1rem;
+    aspect-ratio: 1 / 1;
+
+    fill: none;
+    stroke: var(--color-text-default);
+    
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+}
+
+
+/* ===== Gloval-nav ===== */
+
+.icon--search {
+    stroke: var(--color-text-on);
+}
+
+.search[data-state="open"] .icon--search {
+    width: 1.125rem;
+    aspect-ratio: 1 / 1;
+    stroke-width: 1.8;
+}
+
+.icon--export {
+    stroke-width: 2;
+}
+.main-menu__link:hover .icon--export,
+.main-menu__link:focus-visible .icon--export {
+    stroke: var(--color-text-on);
+    stroke-width: 4;
+}
+
+/* FIXED: resolves SVG glitch */
+.fill-full {
+    fill: var(--color-text-default);
+    stroke-width: 0;
+}
+
+.icon--quick-menu {
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;
+}
+
+.icon--home {
+    width: 1.375rem;
+    aspect-ratio: 1 / 1;
+}
+.icon--home__background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1.8rem;
+    aspect-ratio: 1 / 1;
+    background: var(--color-yellow);
+    border-radius: 100px;
+}
+
+.quick-menu .icon--menu-all,
+.quick-menu .icon--education,
+.quick-menu .icon--contact {
+    fill: var(--color-white);
+}
+
+
+/* ===== Home ===== */
+
+.quick-menu--home__link .icon--youth {
+    width: 2.5rem;
+    aspect-ratio: 1 / 1;
+}
+/* FIXED: resolves SVG glitch */
+.stroke {
+    stroke-width: 2.5;
+}
+.no-stroke {
+    stroke-width: 0;
+}
+
+.banner .icon--prev,
+.banner .icon--next,
+.banner .icon--pause,
+.banner .icon--play {
+    width: 2.25rem;
+    aspect-ratio: 1 / 1;
+
+    fill: var(--color-text-default-70);
+    stroke: var(--color-text-on);
+}
+.icon__symbol {
+    fill: none;
+}
+
+@media (min-width: 480px) {
+.programs .icon--prev,
+.programs .icon--next {
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+
+    fill: transparent;
+    stroke: var(--color-orange);
+}
+
+.programs__prev[data-available="true"] .icon--prev,
+.programs__next[data-available="true"] .icon--next {
+    fill: var(--color-orange-20);
+}
+}
+
+
+
+
+/* ==================== Tablet ==================== */
+
+@media (min-width: 768px) {
+
+/* ===== Gloval-nav ===== */
+
+.search[data-state="open"] .icon--search {
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke-width: 2;
+}
+
+.icon--export {
+    stroke-width: 2.5;
+}
+
+.icon--quick-menu {
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+.icon--home__background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.icon--home {
+    width: 1.875rem;
+    height: 1.875rem;
+}
+   
+
+/* ===== Home ===== */
+
+.banner .icon--prev,
+.banner .icon--next,
+.banner .icon--pause,
+.banner .icon--play {
+    width: 2.75rem;
+    aspect-ratio: 1 / 1;
+}
+
+/* Programs */
+.programs .icon--prev,
+.programs .icon--next {
+    width: 2.25rem;
+    aspect-ratio: 1 / 1;
+
+    fill: transparent;
+    stroke: var(--color-orange);
+}
+
+}
+
+
+/* ==================== PC ==================== */
+
+@media (min-width: 1248px) {
+
+/* ===== Gloval-nav ===== */
+
+.search[data-state="open"] .icon--search {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 2;
+}
+
+.icon--menu-all {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.main-menu__link:hover .icon--export,
+.main-menu__link:focus-visible .icon--export {
+    stroke: #e065bb!important;
+    stroke-width: 3.5;
+}
+
+#menu-panel[data-menu-mode="mega"] .icon--export:hover {
+    stroke-width: 3.5;
+}
+
+
+.button--mega-menu:hover .icon--menu-all,
+.button--mega-menu:focus-visible .icon--menu-all {
+    stroke: var(--color-white);
+    stroke-width: 2;
+}
+
+.icon-close {
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke-width: 2;
+}
+
+
+/* ===== Home ===== */
+
+.banner .icon--prev,
+.banner .icon--next,
+.banner .icon--pause,
+.banner .icon--play {
+    width: 2.75rem;
+    aspect-ratio: 1 / 1;
+}
+}
+

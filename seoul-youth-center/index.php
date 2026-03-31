@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시립서울청소년센터</title>
+    <!-- Base -->
+    <link rel="stylesheet" href="./css/base/reset.css">
+    <link rel="stylesheet" href="./css/base/base.css">
+    <link rel="stylesheet" href="./css/base/typography.css">
+    <link rel="stylesheet" href="./css/base/color.css">
+
+    <!-- Layout -->
+    <link rel="stylesheet" href="./css/layout/layout.css">
+    <link rel="stylesheet" href="./css/layout/global-nav.css">
+    <link rel="stylesheet" href="./css/layout/footer.css">
+
+    <!-- pages -->
+    <link rel="stylesheet" href="./css/pages/home.css">
+
+    <!-- Components -->
+    <link rel="stylesheet" href="./css/components/icons.css">
+    <link rel="stylesheet" href="./css/components/cards.css">    
+</head>
+<body>
+<!------------ Header & Menu ------------>
+<?php include './includes/global-nav.php'; ?>
+
+<!------------ Main ------------>
+<main>
+<!------------ Hero ------------>
+<section class="hero inner">
+    <div class="banner">
+        <div class="banner__gallery">
+            <ul class="banner__list">
+                <li class="banner__item">
+                    <a href="#"
+                       target="_blank" 
+                       rel="noopener">
+                        <img class="banner__image"
+                            src="assets/images/banners/banner-img-1.png" 
+                            alt="청소년의 행복한 꿈을 키우는 서울청소년센터 소개">
+                    </a>
+                </li>
+                <li class="banner__item">
+                    <a href="https://pf.kakao.com/_pqVxaG"
+                       target="_blank" 
+                       rel="noopener">
+                        <img class="banner__image"
+                            src="assets/images/banners/banner-img-2.jpg" 
+                            alt="서울청소년센터 카카오톡 채널 추가하고 소식 받아보기">
+                    </a>
+                </li>
+                <li class="banner__item">
+                    <a href="#"
+                       target="_blank" 
+                       rel="noopener">
+                        <img class="banner__image"
+                            src="assets/images/banners/banner-img-3.jpg" 
+                            alt="청소년 참여 모집 안내 자세히 보기">
+                    </a>
+                </li>
+                <li class="banner__item">
+                    <a href="#"
+                       target="_blank" 
+                       rel="noopener">
+                        <img class="banner__image"
+                            src="assets/images/banners/banner-img-4.jpg" 
+                            alt="장애전담 청소년 방과후 아카데미 프로그램 안내">
+                    </a>
+                </li>
+                <li class="banner__item">
+                    <a href="#"
+                       target="_blank" 
+                       rel="noopener">
+                        <img class="banner__image"
+                            src="assets/images/banners/banner-img-5.jpg" 
+                            alt="도담도담 종합체력실 이용 안내 자세히 보기">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="banner__controls">
+            <span class="banner__count">1 / 5</span>
+            <button class="banner__prev" 
+                    type="button"
+                    aria-label="이전 배너">
+                <svg class="icon--prev icon" 
+                    viewBox="0 0 24 24" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" 
+                    focusable="false">
+                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"/>
+                    <path fill="none" d="M13.26 15.53L9.74001 12L13.26 8.46997"/>
+                </svg>
+            </button>
+            <button class="banner__next" 
+                    type="button"
+                    aria-label="다음 배너">
+                <svg class="icon--next icon" 
+                    viewBox="0 0 24 24" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" 
+                    focusable="false">
+                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"/>
+                    <path fill="none" d="M10.74 15.53L14.26 12L10.74 8.46997"/>
+                </svg>
+            </button>
+            <button class="banner__pause" 
+                    type="button"
+                    aria-label="자동재생 일시정지">
+                <svg class="icon--pause icon" 
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" 
+                    focusable="false">
+                    <path class="icon__circle" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
+                    <path class="icon__symbol" d="M10 8V15.6M14 15.6V8"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <nav class="quick-menu--home" aria-label="센터 바로 이용하기">
+        <h2 class="quick-menu--home__title">센터 바로 이용하기</h2>
+        <ul class="quick-menu--home__list">
+            <li class="quick-menu--home__item">
+                <a class="quick-menu--home__link" 
+                href="#">
+                    <span class="line">
+                        <svg class="icon--youth icon--quick-menu home icon stroke" 
+                            viewBox="0 0 40 40" 
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.3333 6.66671C23.3333 8.50766 21.8409 10 20 10C18.159 10 16.6666 8.50766 16.6666 6.66671C16.6666 4.82576 18.159 3.33337 20 3.33337C21.8409 3.33337 23.3333 4.82576 23.3333 6.66671Z" fill="#2563EB"/>
+                            <path d="M13.7052 19.2906L10.0797 18.0821C9.03681 17.7344 8.33337 16.7585 8.33337 15.6592C8.33337 14.0332 9.83259 12.8212 11.4225 13.1619L14.5851 13.8396C14.7609 13.8773 14.8489 13.8961 14.9361 13.9142C18.2767 14.6052 21.7234 14.6052 25.064 13.9142C25.1512 13.8961 25.2391 13.8773 25.415 13.8396L28.5776 13.1619C30.1675 12.8212 31.6667 14.0332 31.6667 15.6592C31.6667 16.7585 30.9633 17.7344 29.9204 18.0821L26.2949 19.2906C25.8568 19.4366 25.6377 19.5096 25.473 19.6113C24.9119 19.9576 24.6078 20.6021 24.6971 21.2554C24.7233 21.4472 24.8062 21.6627 24.972 22.0937L27.05 27.4965C27.6686 29.1048 26.4814 30.8333 24.7583 30.8333C23.8772 30.8333 23.0636 30.3612 22.6264 29.5961L20 25L17.3737 29.5961C16.9365 30.3612 16.1229 30.8333 15.2418 30.8333C13.5187 30.8333 12.3315 29.1048 12.9501 27.4965L15.0281 22.0937C15.1939 21.6627 15.2768 21.4472 15.303 21.2554C15.3923 20.6021 15.0882 19.9576 14.5271 19.6113C14.3624 19.5096 14.1433 19.4366 13.7052 19.2906Z" fill="#2563EB"/>
+                            <path d="M32.4229 24.1666C35.062 25.4935 36.6667 27.2457 36.6667 29.1666C36.6667 33.3088 29.2048 36.6666 20 36.6666C10.7953 36.6666 3.33337 33.3088 3.33337 29.1666C3.33337 27.2457 4.93812 25.4935 7.57723 24.1666"/>
+                        </svg>
+                    </span>
+                    청소년프로그램
+                </a>
+            </li>
+            <li class="quick-menu--home__item">
+                <a class="quick-menu--home__link" 
+                href="#">
+                    <span class="line">
+                        <svg class="icon--education icon--quick-menu home icon" 
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            focusable="false">
+                            <path fill="#FBBF24" d="M12 21C10.204 21 7.8537 19.8787 6.38533 19.0656C5.5035 18.5772 5 17.6334 5 16.6254V11.5H19V16.6254C19 17.6334 18.4965 18.5772 17.6147 19.0656C16.1463 19.8787 13.796 21 12 21Z"/>
+                            <path fill="#FBBF24" d="M9.78272 3.49965C11.2037 2.83345 12.7962 2.83345 14.2172 3.49965L20.9084 6.63664C22.3639 7.31899 22.3639 9.68105 20.9084 10.3634L14.2173 13.5003C12.7963 14.1665 11.2038 14.1665 9.78281 13.5003L3.0916 10.3634C1.63613 9.68101 1.63614 7.31895 3.0916 6.63659L9.78272 3.49965Z"/>
+                            <path d="M2 8.5V14"/>
+                        </svg>
+                    </span>
+                    평생교육평생교육
+                </a>
+            </li>
+            <li class="quick-menu--home__item">
+                <a class="quick-menu--home__link" 
+                href="#">
+                    <span class="line">
+                        <svg class="icon--youth icon--quick-menu icon" 
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            focusable="false">
+                            <path fill="#B6C2CF" d="M2.95001 22L3.00002 9.96999C3.00002 9.35999 3.29001 8.78004 3.77001 8.40004L10.77 2.95003C11.49 2.39003 12.5 2.39003 13.23 2.95003L20.23 8.39003C20.72 8.77003 21 9.34999 21 9.96999V22"/>
+                            <path d="M2.95001 22L3.00002 9.96999C3.00002 9.35999 3.29001 8.78004 3.77001 8.40004L10.77 2.95003C11.49 2.39003 12.5 2.39003 13.23 2.95003L20.23 8.39003C20.72 8.77003 21 9.34999 21 9.96999V22"/>
+                            <path d="M2 22H22"/>
+                            <path fill="#FBBF24" d="M15.5 11H8.5C7.67 11 7 11.67 7 12.5V22H17V12.5C17 11.67 16.33 11 15.5 11Z"/>
+                            <path d="M10 16.25V17.75"/>
+                            <path d="M10.5 7.5H13.5"/>
+                        </svg>
+                    </span>
+                    청소년공감센터'움'
+                </a>
+            </li>
+            <li class="quick-menu--home__item">
+                <a class="quick-menu--home__link" 
+                href="#">
+                    <span class="line">
+                        <svg class="icon--youth icon--quick-menu home icon" 
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            focusable="false">
+                            <path fill="#14B8A6" d="M2 12C2 13.1046 2.89543 14 4 14H5L5 10H4C2.89543 10 2 10.8954 2 12Z"/>
+                            <path fill="#14B8A6" d="M22 12C22 13.1046 21.1046 14 20 14H19V10H20C21.1046 10 22 10.8954 22 12Z"/>
+                            <path d="M9 12H15M4 10C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14H5L5 10H4ZM20 10C21.1046 10 22 10.8954 22 12C22 13.1046 21.1046 14 20 14H19V10H20Z"/>
+                            <path fill="#14B8A6" d="M15.5 9L15.5 15C15.5 15.465 15.5 15.6975 15.5511 15.8882C15.6898 16.4059 16.0941 16.8102 16.6118 16.9489C16.8025 17 17.035 17 17.5 17C17.965 17 18.1975 17 18.3882 16.9489C18.9059 16.8102 19.3102 16.4059 19.4489 15.8882C19.5 15.6975 19.5 15.465 19.5 15V9C19.5 8.53501 19.5 8.30252 19.4489 8.11177C19.3102 7.59413 18.9059 7.18981 18.3882 7.05111C18.1975 7 17.965 7 17.5 7C17.035 7 16.8025 7 16.6118 7.05111C16.0941 7.18981 15.6898 7.59413 15.5511 8.11177C15.5 8.30252 15.5 8.53501 15.5 9Z"/>
+                            <path fill="#14B8A6" d="M4.5 9L4.5 15C4.5 15.465 4.5 15.6975 4.55111 15.8882C4.68981 16.4059 5.09413 16.8102 5.61177 16.9489C5.80252 17 6.03501 17 6.5 17C6.96499 17 7.19748 17 7.38823 16.9489C7.90587 16.8102 8.31019 16.4059 8.44889 15.8882C8.5 15.6975 8.5 15.465 8.5 15V9C8.5 8.53501 8.5 8.30252 8.44889 8.11177C8.31019 7.59413 7.90587 7.18981 7.38823 7.05111C7.19748 7 6.96499 7 6.5 7C6.03501 7 5.80252 7 5.61177 7.05111C5.09413 7.18981 4.68981 7.59413 4.55111 8.11177C4.5 8.30252 4.5 8.53501 4.5 9Z"/>
+                        </svg>
+                    </span>
+                    종합체력실
+                </a>
+            </li>
+            <li class="quick-menu--home__item">
+                <a class="quick-menu--home__link" 
+                href="#">
+                    <span class="line">
+                        <svg class="icon--youth icon--quick-menu home icon" 
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            focusable="false">
+                            <path fill="#B6C2CF" d="M3.95491 19.9389C3 18.6246 3 16.7497 3 13C3 11.8311 3 10.8443 3.02893 10H20.9711C21 10.8443 21 11.8311 21 13C21 14.1689 21 15.1557 20.9711 16C20.9072 17.8642 20.7023 19.0343 20.0451 19.9389C19.7367 20.3634 19.3634 20.7367 18.9389 21.0451C18.0343 21.7023 16.8642 21.9072 15 21.9711C14.1557 22 13.1689 22 12 22H12C8.25026 22 6.3754 22 5.06107 21.0451C4.6366 20.7367 4.26331 20.3634 3.95491 19.9389Z"/>
+                            <path class="no-stroke" fill="#1F2937" d="M3.95491 19.9389L4.56168 19.4981H4.56168L3.95491 19.9389ZM19.2178 16.0616L19.1005 15.3208L19.1005 15.3208L19.2178 16.0616ZM15.0616 20.2178L14.3208 20.1005V20.1005L15.0616 20.2178ZM20.0451 19.9389L19.4383 19.4981L19.4383 19.4981L20.0451 19.9389ZM3.02893 10V9.25H2.30418L2.27937 9.97432L3.02893 10ZM18.9389 21.0451L18.4981 20.4383V20.4383L18.9389 21.0451ZM5.06107 21.0451L4.62023 21.6518H4.62023L5.06107 21.0451ZM20.9711 10L21.7206 9.97432L21.6958 9.25H20.9711V10ZM3 13H2.25C2.25 14.8582 2.24897 16.312 2.37373 17.4635C2.50001 18.6291 2.76232 19.5734 3.34815 20.3798L3.95491 19.9389L4.56168 19.4981C4.19259 18.9901 3.97745 18.3399 3.865 17.302C3.75103 16.25 3.75 14.8916 3.75 13H3ZM19.2178 16.0616L19.1005 15.3208C16.6401 15.7105 14.7105 17.6401 14.3208 20.1005L15.0616 20.2178L15.8023 20.3352C16.0904 18.5166 17.5166 17.0904 19.3352 16.8023L19.2178 16.0616ZM21 13H20.25C20.25 14.1731 20.2499 15.1456 20.2215 15.9743L20.9711 16L21.7206 16.0257C21.7501 15.1658 21.75 14.1648 21.75 13H21ZM20.9711 16L20.9711 15.25C20.0888 15.25 19.5579 15.2484 19.1005 15.3208L19.2178 16.0616L19.3352 16.8023C19.647 16.7529 20.0338 16.75 20.9711 16.75L20.9711 16ZM20.9711 16L20.2215 15.9743C20.158 17.8292 19.9509 18.7925 19.4383 19.4981L20.0451 19.9389L20.6518 20.3798C21.4537 19.2761 21.6564 17.8991 21.7206 16.0257L20.9711 16ZM3 13H3.75C3.75 11.8269 3.75009 10.8544 3.77849 10.0257L3.02893 10L2.27937 9.97432C2.24991 10.8342 2.25 11.8352 2.25 13H3ZM20.0451 19.9389L19.4383 19.4981C19.1762 19.8589 18.8589 20.1762 18.4981 20.4383L18.9389 21.0451L19.3798 21.6518C19.8679 21.2972 20.2972 20.8679 20.6518 20.3798L20.0451 19.9389ZM5.06107 21.0451L5.50191 20.4383C5.14111 20.1762 4.82382 19.8589 4.56168 19.4981L3.95491 19.9389L3.34815 20.3798C3.70281 20.8679 4.13209 21.2972 4.62023 21.6518L5.06107 21.0451ZM15 21.9711L15.0257 22.7206C16.8991 22.6564 18.2761 22.4537 19.3798 21.6518L18.9389 21.0451L18.4981 20.4383C17.7925 20.9509 16.8292 21.158 14.9743 21.2215L15 21.9711ZM21 13H21.75C21.75 11.8352 21.7501 10.8342 21.7206 9.97432L20.9711 10L20.2215 10.0257C20.2499 10.8544 20.25 11.8269 20.25 13H21ZM12 22V21.25H12V22V22.75H12V22ZM12 22V21.25C10.1084 21.25 8.74999 21.249 7.69804 21.135C6.66013 21.0225 6.00992 20.8074 5.50191 20.4383L5.06107 21.0451L4.62023 21.6518C5.42656 22.2377 6.37094 22.5 7.53647 22.6263C8.68797 22.751 10.1418 22.75 12 22.75V22ZM15 21.9711L15.75 21.9711C15.75 21.0338 15.7529 20.647 15.8023 20.3352L15.0616 20.2178L14.3208 20.1005C14.2484 20.5579 14.25 21.0888 14.25 21.9711L15 21.9711ZM12 22V22.75C13.1648 22.75 14.1658 22.7501 15.0257 22.7206L15 21.9711L14.9743 21.2215C14.1456 21.2499 13.1731 21.25 12 21.25V22ZM3.02893 10V10.75H20.9711V10V9.25H3.02893V10Z"/>
+                            <path d="M9 14H15"/>
+                            <path fill="#B6C2CF" fill-opacity="0.4" d="M20.0451 6.06107C20.7023 6.96568 20.9072 8.13581 20.9711 10H3.02893C3.0928 8.13581 3.29768 6.96568 3.95492 6.06107C4.26332 5.6366 4.6366 5.26331 5.06108 4.95492C5.96568 4.29768 7.13582 4.0928 9 4.02893C9.84435 4 10.8311 4 12 4C13.1689 4 14.1557 4 15 4.02893C16.8642 4.0928 18.0343 4.29768 18.9389 4.95492C19.3634 5.26331 19.7367 5.6366 20.0451 6.06107Z"/>
+                            <path class="no-stroke" fill="#1F2937" d="M20.9711 10V10.75H21.7472L21.7206 9.97432L20.9711 10ZM20.0451 6.06107L19.4383 6.50191L19.4383 6.50191L20.0451 6.06107ZM18.9389 4.95492L18.4981 5.56168V5.56168L18.9389 4.95492ZM14.25 5C14.25 5.41421 14.5858 5.75 15 5.75C15.4142 5.75 15.75 5.41421 15.75 5H15H14.25ZM3.02893 10L2.27937 9.97432L2.25279 10.75H3.02893V10ZM3.95492 6.06107L4.56168 6.50191H4.56168L3.95492 6.06107ZM15.75 2C15.75 1.58579 15.4142 1.25 15 1.25C14.5858 1.25 14.25 1.58579 14.25 2H15H15.75ZM5.06108 4.95492L5.50191 5.56168V5.56168L5.06108 4.95492ZM9.75 2C9.75 1.58579 9.41422 1.25 9 1.25C8.58579 1.25 8.25 1.58579 8.25 2H9H9.75ZM8.25 5C8.25 5.41421 8.58579 5.75 9 5.75C9.41422 5.75 9.75 5.41421 9.75 5H9H8.25ZM20.9711 10L21.7206 9.97432C21.6564 8.10088 21.4537 6.7239 20.6518 5.62023L20.0451 6.06107L19.4383 6.50191C19.9509 7.20746 20.158 8.17075 20.2215 10.0257L20.9711 10ZM15 4.02893L14.9743 4.77849C16.8292 4.84204 17.7925 5.04907 18.4981 5.56168L18.9389 4.95492L19.3798 4.34815C18.2761 3.5463 16.8991 3.34356 15.0257 3.27937L15 4.02893ZM18.9389 4.95492L18.4981 5.56168C18.8589 5.82382 19.1762 6.14111 19.4383 6.50191L20.0451 6.06107L20.6519 5.62024C20.2972 5.13209 19.8679 4.70281 19.3798 4.34815L18.9389 4.95492ZM15 5H15.75V4.02893H15H14.25V5H15ZM3.02893 10L3.77849 10.0257C3.84204 8.17075 4.04907 7.20746 4.56168 6.50191L3.95492 6.06107L3.34815 5.62023C2.5463 6.7239 2.34356 8.10087 2.27937 9.97432L3.02893 10ZM15 4.02893H15.75V2H15H14.25V4.02893H15ZM5.06108 4.95492L4.62024 4.34815C4.13209 4.70281 3.70281 5.13209 3.34815 5.62023L3.95492 6.06107L4.56168 6.50191C4.82382 6.14111 5.14111 5.82382 5.50191 5.56168L5.06108 4.95492ZM9 4.02893H9.75V2H9H8.25V4.02893H9ZM9 5H9.75V4.02893H9H8.25V5H9ZM12 4V3.25C10.8352 3.25 9.83425 3.24991 8.97432 3.27937L9 4.02893L9.02568 4.77849C9.85445 4.75009 10.8269 4.75 12 4.75V4ZM9 4.02893L8.97432 3.27937C7.10088 3.34355 5.7239 3.5463 4.62024 4.34815L5.06108 4.95492L5.50191 5.56168C6.20746 5.04907 7.17076 4.84204 9.02568 4.77849L9 4.02893ZM12 4V4.75C13.1731 4.75 14.1456 4.75009 14.9743 4.77849L15 4.02893L15.0257 3.27937C14.1658 3.24991 13.1648 3.25 12 3.25V4ZM3.02893 10V10.75H20.9711V10V9.25H3.02893V10Z"/>
+                        </svg>
+                    </span>
+                    시설대관
+                </a>
+            </li>
+            <li class="quick-menu--home__item">
+                <a class="quick-menu--home__link" 
+                href="#">
+                    <span class="line">
+                        <svg class="icon--contact icon--quick-menu home icon" 
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            focusable="false">
+                            <path fill="#fff" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88836 21.6244 10.4003 22 12 22Z"/>
+                            <path d="M8 12H8.009M11.991 12H12M15.991 12H16"/>
+                        </svg>
+                    </span>
+                    문의하기
+                </a>
+            </li>
+        </ul>
+    </nav>
+</section>
+
+<!------------ Programs ------------>
+<div class="programs wrapper">
+    <section class="programs inner">
+        <h2 class="section__title">모집 중인 청소년 프로그램</h2>
+        <div class="programs__controls">
+            <button class="programs__prev" 
+                    type="button"
+                    aria-label="이전 배너">
+                <svg class="icon--prev icon" 
+                    viewBox="0 0 24 24" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" 
+                    focusable="false">
+                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"/>
+                    <path fill="none" d="M13.26 15.53L9.74001 12L13.26 8.46997"/>
+                </svg>
+            </button>
+            <button class="programs__next" 
+                    type="button"
+                    aria-label="다음 배너">
+                <svg class="icon--next icon" 
+                    viewBox="0 0 24 24" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" 
+                    focusable="false">
+                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"/>
+                    <path fill="none" d="M10.74 15.53L14.26 12L10.74 8.46997"/>
+                </svg>
+            </button>
+        </div>
+        <a class="button--more button"
+           href="#"
+           aria-label="청소년 프로그램 더보기">
+            더보기
+        </a>
+        <div class="programs__slider">
+            <div class="programs__track">
+                <article class="card" data-status="open" data-end-date="2099-04-20">
+                    <a class="card__link" 
+                    href="#">
+                        <div class="card__image">
+                            <img src="assets/images/youth-programs/1.png" 
+                                alt="2026년 청소년전용공간기획단 움니버스 6기 단원 추가 모집 안내 포스터">
+                            <span class="card__badge">
+                                <span class="visually-hidden">모집 상태:</span>
+                                모집중
+                            </span>
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">
+                                2026년 청소년전용공간기획단 *움니버스 6기* 단원 추가 모집
+                            </h3>
+                            <p class="card__date">
+                                <time datetime="2026-03-19">2026.03.19</time>
+                                ~
+                                <time datetime="2026-04-20">2026.04.20</time>
+                            </p>
+                            <ul class="card__tags">
+                                <li class="card__tag">기획단</li>
+                                <li class="card__tag">움</li>
+                                <li class="card__tag">후기청소년</li>
+                            </ul>
+                        </div>
+                    </a>
+                </article>
+                <article class="card" data-status="open" data-end-date="2099-04-25">
+                    <a class="card__link" 
+                    href="#">
+                        <div class="card__image">
+                            <img src="assets/images/youth-programs/2.png" 
+                                alt="특성화사업: 움 트다 공감시네마 참가자 모집(4월) 안내 포스터">
+                            <span class="card__badge">
+                                <span class="visually-hidden">모집 상태:</span>
+                                모집중
+                            </span>
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">
+                                [4월] 특성화사업 움: 트다 *공감시네마* 참가자 모집
+                            </h3>
+                            <p class="card__date">
+                                <time datetime="2026-03-25">2026.03.25</time>
+                                ~
+                                <time datetime="2026-04-25">2026.04.25</time>
+                            </p>
+                            <ul class="card__tags">
+                                <li class="card__tag">공감시네마</li>
+                                <li class="card__tag">움</li>
+                                <li class="card__tag">누구나</li>
+                            </ul>
+                        </div>
+                    </a>
+                </article>
+                <article class="card" data-status="open" data-end-date="2099-04-23">
+                    <a class="card__link" 
+                    href="#">
+                        <div class="card__image">
+                            <img src="assets/images/youth-programs/3.png" 
+                                alt="2026년 환경 동아리 도레미에코 프로젝트 모집 안내 포스터">
+                            <span class="card__badge">
+                                <span class="visually-hidden">모집 상태:</span>
+                                모집중
+                            </span>
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">
+                                2026년 환경 동아리 &lt;도레미에코 프로젝트&gt; 모집
+                            </h3>
+                            <p class="card__date">
+                                <time datetime="2026-03-13">2026.03.13</time>
+                                ~
+                                <time datetime="2026-04-23">2026.04.23</time>
+                            </p>
+                            <ul class="card__tags">
+                                <li class="card__tag">환경</li>
+                                <li class="card__tag">봉사시간</li>
+                                <li class="card__tag">중기청소년</li>
+                            </ul>
+                        </div>
+                    </a>
+                </article>
+                <article class="card" data-status="open" data-end-date="2099-05-05">
+                    <a class="card__link" 
+                    href="#">
+                        <div class="card__image">
+                            <img src="assets/images/youth-programs/4.jpg" 
+                                alt="2026년 인공지능 프로그램 기획단 서울AI메이커 모집 안내 포스터">
+                            <span class="card__badge">
+                                <span class="visually-hidden">모집 상태:</span>
+                                모집중
+                            </span>
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">
+                                2026년 인공지능 프로그램 기획단 &lt;서울AI메이커&gt; 모집
+                            </h3>
+                            <p class="card__date">
+                                <time datetime="2026-03-27">2026.03.27</time>
+                                ~
+                                <time datetime="2026-05-05">2026.05.05</time>
+                            </p>
+                            <ul class="card__tags">
+                                <li class="card__tag">인공지능</li>
+                                <li class="card__tag">기획단</li>
+                                <li class="card__tag">후기청소년</li>
+                            </ul>
+                        </div>
+                    </a>
+                </article>
+                <article class="card" data-status="open" data-end-date="ongoing">
+                    <a class="card__link" 
+                    href="#">
+                        <div class="card__image">
+                            <img src="assets/images/youth-programs/5.jpg" 
+                                alt="2026학년도 동그라미학교 서포터즈(자원봉사자) 모집 안내 포스터">
+                            <span class="card__badge">
+                                <span class="visually-hidden">모집 상태:</span>
+                                상시모집
+                            </span>
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">
+                                2026학년도 동그라미학교 서포터즈(자원봉사자) 모집
+                            </h3>
+                            <p class="card__date"></p>
+                            <ul class="card__tags">
+                                <li class="card__tag">동그라미학교</li>
+                                <li class="card__tag">제과제빵</li>
+                                <li class="card__tag">서포터즈</li>
+                            </ul>
+                        </div>
+                    </a>
+                </article>
+                <article class="card" data-status="open" data-end-date="2099-05-30">
+                    <a class="card__link" 
+                    href="#">
+                        <div class="card__image">
+                            <img src="assets/images/youth-programs/6.jpg" 
+                                alt="캠프기획단 온기 6기 모집 안내 포스터">
+                            <span class="card__badge">
+                                <span class="visually-hidden">모집 상태:</span>
+                                모집중
+                            </span>
+                        </div>
+                        <div class="card__body">
+                            <h3 class="card__title">
+                                캠프기획단 온기 6기 모집
+                            </h3>
+                            <p class="card__date">
+                                <time datetime="2026-02-13">2026.02.13</time>
+                                ~
+                                <time datetime="2026-05-30">2026.05.30</time>
+                            </p>
+                            <ul class="card__tags">
+                                <li class="card__tag">캠프</li>
+                                <li class="card__tag">봉사활동</li>
+                                <li class="card__tag">후기청소년</li>
+                            </ul>
+                        </div>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+</div>
+<!------------ recommend ------------>
+<section class="recommend">
+    
+</section>
+
+<section class="schedule">
+    
+</section>
+
+<section class="news">
+
+</section>
+
+<section class="gallery">
+    
+</section>
+
+<section class="sns">
+    
+</section>
+
+<section class="links">
+    
+</section>
+
+</main>
+
+<!------------ Footer ------------>
+<?php include './includes/footer.php'; ?>
+
+<!------------- Script ------------>
+<script src="./js/gloval-nav.js"></script>
+<script src="./js/header-search.js"></script>
+<script src="./js/banner.js"></script>
+<script src="./js/programs.js"></script>
+
+</body>
+</html>

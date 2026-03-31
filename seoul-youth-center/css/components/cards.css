@@ -1,0 +1,161 @@
+@charset "utf-8";
+
+/* ========================================
+                Base - Mobile
+======================================== */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    width: max-content;
+    min-width: 0;
+
+    border-radius: 15px;
+    border: 1px solid var(--color-text-on);
+}
+
+.card__image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    aspect-ratio: 7 / 10;
+
+    padding-inline: 7%;
+
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.card__image img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.25);
+}
+
+.card__badge {
+    position: absolute;
+    left: 5%;
+    bottom: 3%;
+
+    width: 4.5rem;
+    height: fit-content;
+
+    padding-block: .5rem;
+
+    font-size: var(--text-badge-size);
+    font-weight: var(--text-badge-weight);
+    letter-spacing: var(--text-badge-tracking);
+    text-align: center;
+
+    color: var(--color-text-on);
+    border-radius: 10px;
+    background: var(--color-orange);
+}
+
+.card__body {
+    display: grid;
+    gap: .5rem;
+
+    width: 100%;
+
+    padding: 1rem;
+    background: var(--color-text-on);
+}
+
+.card__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    min-height: calc(1em * 1.5 * 2);
+
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.card__date {
+    height: 100%;
+    font-size: .8125rem;
+}
+
+.card__date:empty::before {
+    content: "\00a0";
+}
+
+.card__tags {
+    display: flex;
+    gap: 3%;
+    overflow: hidden;  
+
+    height: max-content;
+
+    font-size: .625rem;
+    color: var(--color-orange);
+    white-space: nowrap;
+}
+@media (max-width: 460px) {
+    .card__tags .card__tag:nth-child(n+3) {
+        display: none;
+    }
+}
+
+.card__tag {
+    height: 100%;
+
+    padding-block: .25rem;
+    padding-inline: .75rem;
+
+    border-radius: 100px;
+    background: var(--color-yellow-20);
+}
+
+.card__tag::before {
+    content: "#";
+}
+
+
+
+/* ========================================
+                    Tablet
+======================================== */
+
+@media (min-width: 768px) {
+
+.card__badge {
+    width: 5rem;
+}
+
+.card__title {
+    font-size: 1.125rem;
+}
+
+.card__date {
+    font-size: 1rem;
+}
+
+.card__tags {
+    font-size: .875rem;
+}
+
+}
+
+
+/* ========================================
+                    PC
+======================================== */
+
+@media (min-width: 1248px) {
+
+.card__title {
+    font-size: 1.25rem;
+}
+
+}
