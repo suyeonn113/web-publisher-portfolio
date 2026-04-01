@@ -25,12 +25,14 @@ html {
     Arial,
     sans-serif;
 
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: #0E0E0E;
-
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+}
+
+body {
+    font-size: .875rem;
+    line-height: 1.5;
+    color: #0E0E0E;
 }
 
 /* Heading */
