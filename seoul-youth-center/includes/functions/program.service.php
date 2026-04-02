@@ -1,0 +1,359 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * 프로그램 상태 상수 (PHP 7 호환 enum 대체)
+ */
+final class ProgramStatus
+{
+    public const ALWAYS = 'always';
+    public const ONGOING = 'ongoing';
+    public const UPCOMING = 'upcoming';
+    public const CLOSED = 'closed';
+}
+
+/**
+ * 프로그램 자동화 계산 함수
+ * - DB 연결 전: 현재 PHP 배열 데이터에 그대로 사용
+ * - DB 연결 후: fetch 결과 배열에도 그대로 사용 가능
+ */
+
+/**
+ * 안전한 DateTime 생성
+ */
+function createProgramDate(?string $date): ?DateTime
+{
+    if (empty($date)) {
+        return null;
+    }
+
+    try {
+        return new DateTime($date);
+    } catch (Exception $e) {
+        return null;
+    }
+}
+
+/**
+ * 기준일 반환
+ * 운영에서는 new DateTime('today') 그대로 써도 됨
+ * 테스트 시 날짜 고정하고 싶으면 인자로 넣어서 사용
+ */
+function getProgramToday(?DateTime $today = null): DateTime
+{
+    return $today ?? new DateTime('today');
+}
+
+/**
+ * 모집 상태 코드
+ * always   : 상시모집
+ * ongoing  : 모집중
+ * upcoming : 예정
+ * closed   : 마감
+ */
+function getProgramStatus(array $program, ?DateTime $today = null): string
+{
+    $today = getProgramToday($today);
+
+    if (!empty($program['is_ongoing'])) {
+        return 'always';
+    }
+
+    $start = createProgramDate($program['recruitment_start_date'] ?? null);
+    $end = createProgramDate($program['recruitment_end_date'] ?? null);
+
+    if (!$start || !$end) {
+        return 'closed';
+    }
+
+    if ($start > $today) {
+        return 'upcoming';
+    }
+
+    if ($end < $today) {
+        return 'closed';
+    }
+
+    return 'ongoing';
+}
+
+/**
+ * 모집 상태 한글 라벨
+ */
+function getProgramStatusLabel(array $program, ?DateTime $today = null): string
+{
+    $status = getProgramStatus($program, $today);
+
+    switch ($status) {
+        case 'always':
+            return '상시';
+        case 'ongoing':
+            return '모집중';
+        case 'upcoming':
+            return '모집예정';
+        default:
+            return '모집마감';
+    }
+}
+
+/**
+ * 가격 타입
+ * free / paid
+ */
+function getProgramPriceType(array $program): string
+{
+    $price = (int) ($program['price'] ?? 0);
+
+    return $price > 0 ? 'paid' : 'free';
+}
+
+/**
+ * 가격 한글 라벨
+ */
+function getProgramPriceLabel(array $program): string
+{
+    return getProgramPriceType($program) === 'paid' ? '유료' : '무료';
+}
+
+/**
+ * 활동일 수 계산
+ * 시작/종료일 모두 포함해서 +1
+ * 상시 운영(activity_end_date = null)은 0 반환
+ */
+function getProgramActivityDays(array $program): int
+{
+    $start = createProgramDate($program['activity_start_date'] ?? null);
+    $end = createProgramDate($program['activity_end_date'] ?? null);
+
+    if (!$start || !$end) {
+        return 0;
+    }
+
+    $diff = $start->diff($end);
+
+    return max(0, (int) $diff->days + 1);
+}
+
+/**
+ * 활동기간 타입
+ * short : 단기 (7일 이하)
+ * mid   : 중기 (30일 이하)
+ * long  : 장기 (31일 이상)
+ *
+ * 상시 운영은 일수 계산이 불가능하므로 기본값 mid 반환
+ */
+function getProgramDurationType(array $program): string
+{
+    $days = getProgramActivityDays($program);
+
+    if ($days <= 0) {
+        return 'mid';
+    }
+
+    if ($days <= 7) {
+        return 'short';
+    }
+
+    if ($days <= 30) {
+        return 'mid';
+    }
+
+    return 'long';
+}
+
+/**
+ * 활동기간 한글 라벨
+ */
+function getProgramDurationLabel(array $program): string
+{
+    switch (getProgramDurationType($program)) {
+        case 'short':
+            return '단기';
+        case 'mid':
+            return '중기';
+        default:
+            return '장기';
+    }
+}
+
+/**
+ * 모집기간 출력용 포맷
+ * 상시는 기간 표시 없음
+ * 일반은 2026.03.10 ~ 2026.04.25
+ */
+function formatProgramRecruitmentPeriod(array $program): string
+{
+    if (!empty($program['is_ongoing'])) {
+        return '';
+    }
+
+    $start = createProgramDate($program['recruitment_start_date'] ?? null);
+    $end = createProgramDate($program['recruitment_end_date'] ?? null);
+
+    if (!$start || !$end) {
+        return '';
+    }
+
+    return $start->format('Y.m.d') . ' ~ ' . $end->format('Y.m.d');
+}
+
+/**
+ * 활동기간 출력용 포맷
+ * 상시 운영이면 출력 안함
+ * 일반은 2026.04.01 ~ 2026.05.01
+ */
+function formatProgramActivityPeriod(array $program): string
+{
+    $start = createProgramDate($program['activity_start_date'] ?? null);
+    $end = createProgramDate($program['activity_end_date'] ?? null);
+
+    if (!$start || !$end) {
+        return '';
+    }
+
+    return $start->format('Y.m.d') . ' ~ ' . $end->format('Y.m.d');
+}
+
+/**
+ * 카드/필터용 data-* 속성 묶음
+ * JS에서 그대로 읽어 쓰기 좋게 정리
+ */
+function getProgramDataAttributes(array $program, ?DateTime $today = null): array
+{
+    return [
+        'data-status' => getProgramStatus($program, $today),
+        'data-price' => getProgramPriceType($program),
+        'data-duration' => getProgramDurationType($program),
+        'data-field' => (string) ($program['field_code'] ?? ''),
+        'data-sort-order' => (string) ($program['sort_order'] ?? 0),
+    ];
+}
+
+/**
+ * 카드 렌더링 전에 필요한 파생값 한 번에 반환
+ */
+function getProgramCardMeta(array $program, ?DateTime $today = null): array
+{
+    return [
+        'status' => getProgramStatus($program, $today),
+        'status_label' => getProgramStatusLabel($program, $today),
+        'price_type' => getProgramPriceType($program),
+        'price_label' => getProgramPriceLabel($program),
+        'duration_type' => getProgramDurationType($program),
+        'duration_label' => getProgramDurationLabel($program),
+        'recruitment_period' => formatProgramRecruitmentPeriod($program),
+        'activity_period' => formatProgramActivityPeriod($program),
+        'activity_days' => getProgramActivityDays($program),
+        'data_attributes' => getProgramDataAttributes($program, $today),
+    ];
+}
+
+/**
+ * 현재 노출 가능한 프로그램만 필터
+ */
+function filterActivePrograms(array $programs): array
+{
+    return array_values(array_filter(
+        $programs,
+        static fn(array $program): bool => !empty($program['is_active'])
+    ));
+}
+
+/**
+ * 모집중(ongoing) 상태인 프로그램만 필터
+ * - 상시(always), 예정(upcoming), 마감(closed) 제외
+ */
+function filterOpenPrograms(array $programs, ?DateTime $today = null): array
+{
+    $today = getProgramToday($today);
+
+    return array_values(array_filter(
+        $programs,
+        static fn(array $program): bool =>
+            in_array(getProgramStatus($program, $today), ['ongoing', 'always'], true)
+    ));
+}
+
+/**
+ * 상태 우선순위 정렬
+ * ongoing → always → upcoming → closed
+ * 같은 상태면 모집 종료일 빠른 순
+ * 종료일도 같으면 sort_order 오름차순
+ */
+function sortProgramsForDisplay(array $programs, ?DateTime $today = null): array
+{
+    $today = getProgramToday($today);
+
+    $priorityMap = [
+        'ongoing' => 1,
+        'always' => 2,
+        'upcoming' => 3,
+        'closed' => 4,
+    ];
+
+    usort($programs, static function (array $a, array $b) use ($today, $priorityMap): int {
+        $statusA = getProgramStatus($a, $today);
+        $statusB = getProgramStatus($b, $today);
+
+        $priorityA = $priorityMap[$statusA] ?? 99;
+        $priorityB = $priorityMap[$statusB] ?? 99;
+
+        if ($priorityA !== $priorityB) {
+            return $priorityA <=> $priorityB;
+        }
+
+        $endA = createProgramDate($a['recruitment_end_date'] ?? null);
+        $endB = createProgramDate($b['recruitment_end_date'] ?? null);
+
+        if ($endA && $endB) {
+            $endTimestampA = $endA->getTimestamp();
+            $endTimestampB = $endB->getTimestamp();
+
+            if ($endTimestampA !== $endTimestampB) {
+                return $endTimestampA <=> $endTimestampB;
+            }
+        }
+
+        if ($endA && !$endB) {
+            return -1;
+        }
+
+        if (!$endA && $endB) {
+            return 1;
+        }
+
+        $sortA = (int) ($a['sort_order'] ?? 9999);
+        $sortB = (int) ($b['sort_order'] ?? 9999);
+
+        if ($sortA !== $sortB) {
+            return $sortA <=> $sortB;
+        }
+
+        return (int) ($a['id'] ?? 0) <=> (int) ($b['id'] ?? 0);
+    });
+
+    return $programs;
+}
+
+/**
+ * 메인 "모집 중인 프로그램" 섹션 전용 준비 함수
+ * 1) is_active 필터
+ * 2) 모집중(ongoing)만 필터
+ * 3) 정렬
+ *
+ * DB 연결 후에는
+ * - WHERE is_active = 1
+ * - AND status = 'ongoing'
+ * 같은 조건으로 치환 가능
+ */
+function getOpenProgramsForDisplay(array $programs, ?DateTime $today = null): array
+{
+    $today = getProgramToday($today);
+
+    $programs = filterActivePrograms($programs);
+    $programs = filterOpenPrograms($programs, $today);
+    $programs = sortProgramsForDisplay($programs, $today);
+
+    return array_values($programs);
+}
