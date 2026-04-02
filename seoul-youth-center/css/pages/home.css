@@ -23,8 +23,9 @@
 }
 
 .banner__gallery {
+    position: relative;
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: var(--radius-md);
     width: 100%;
     aspect-ratio: 3 / 2;
 }
@@ -83,7 +84,7 @@
     
     background: var(--color-text-default-70);
     border: 2.5px solid var(--color-text-on);
-    border-radius: 100px;
+    border-radius: var(--radius-full);
 }
 
 /* ===== Quick menu ===== */
@@ -121,21 +122,21 @@
 /* ========== Programs ========== */
 
 .programs.wrapper {
-    padding-block: var(--section-padding-block);
     background: var(--color-yellow-20);
 }
 
-.programs.inner {
+.programs {
     display: grid;
     grid-template-columns: 1fr auto auto;
-    gap: 1.5rem;
+    column-gap: var(--space-3);
+    row-gap: var(--space-4);
 }
 
 .programs__controls {
     display: none;
 }
 @media (min-width: 480px) {
-    .programs__controls {display: flex; gap: 1rem;}
+    .programs__controls {display: flex; gap: var(--space-2);}
 }
 
 .programs__slider {
@@ -147,7 +148,7 @@
 
 .programs__track {
     display: flex;
-    gap: .5rem;
+    gap: var(--space-1);
     will-change: transform;
     transition: transform 400ms ease;
     transform: translate3d(0, 0, 0);
@@ -168,6 +169,7 @@
 }
 
 .card {
+    position: relative;
     flex: 0 0 65%;
 }
 @media (min-width: 600px) {
@@ -175,9 +177,117 @@
 }
 
 @media (min-width: 1024px) {
-    .card {flex: 0 0 26%;}
+    .card {flex: 0 0 28%;}
 }
 
+/* ========== Recommend ========== */
+.recommend {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-4);
+}
+
+.recommend__content {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+/* ===== Filter ===== */
+
+.recommend-filter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.recommend-filter__title {
+    margin-bottom: var(--space-3);
+
+    font-size: var(--text-title-subsection-size);
+    font-weight: var(--text-title-subsection-weight);
+}
+
+.recommend-filter__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--space-1);
+    row-gap: var(--space-2);
+}
+
+.recommend .button--filter {
+    width: 100%;
+    border: 2px solid var(--color-line);
+    border-radius: var(--radius-sm);
+
+    font-size: var(--button-text-size);
+    font-weight: var(--button-text-weight);
+}
+
+.recommend .button--filter[aria-pressed="true"] {
+    border: none;
+    color: var(--color-text-on);
+    background: var(--color-accent-gradient);
+}
+
+.recommend .button--filter[aria-pressed="false"] {
+    color: var(--color-gray);
+}
+
+
+/* ===== Result ===== */
+
+.recommend-result {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.recommend-result section {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.recommend-result__slider {
+    grid-column: 1 / -1;
+    overflow: hidden;
+    touch-action: pan-y;
+    user-select: none;
+}
+
+.recommend-result__list {
+    display: flex;
+    gap: var(--space-1);
+    will-change: transform;
+    transition: transform 400ms ease;
+    transform: translate3d(0, 0, 0);
+}
+
+.recommend-filter__list[data-dragging="true"] {
+    transition: none;
+}
+.recommend-result__list .card {
+    flex: 0 0 50%;
+}
+
+/* Focus-visible */
+.card::after,
+.banner__gallery::after {
+    content: "";
+    position: absolute;
+    inset: 0.1875rem; /* 바깥 보더랑 너무 붙지 않게 안쪽으로 */
+    border: 2px dashed var(--color-text-default);
+    border-radius: 12px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 3;
+}
+
+.card:has(.card__link:focus-visible)::after,
+.banner__gallery:has(.banner__item a:focus-visible)::after {
+    opacity: 1;
+}
 
 
 
@@ -187,9 +297,11 @@
 
 @media (min-width: 768px) {
 
+/* ========== Hero ========== */
+
 /* Controls */
 .banner__count{
-    height: 2.5rem;
+    height: var(--fs-40);
     border-width: 3.7px;
 }
 
@@ -198,6 +310,20 @@
     display: block;
 }
 
+
+/* ========== Recommend ========== */
+
+/* ===== Filter ===== */
+
+.recommend-filter__list {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+/* ===== Result ===== */
+.recommend-result {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
 }
 
@@ -209,17 +335,19 @@
 
 @media (min-width: 1248px) {
 
+/* ========== Hero ========== */
+
 /* ===== Banner ===== */
 
 /* Controls */
 
 .banner__controls {
-    padding-block: .5rem;
-    padding-inline: 1rem;
+    padding-block: var(--space-1);
+    padding-inline: var(--space-2);
 }
 
 .banner__count{
-    height: 2.5rem;
+    height: var(--fs-40);
 }
 
 
@@ -233,7 +361,7 @@
     padding-block: var(--space-2);
     padding-inline: var(--space-3);
 
-    border-radius: 15px;
+    border-radius: var(--radius-md);
     border: 1px solid var(--color-line);
 }
 
@@ -255,9 +383,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-2);
 
-    padding: 1rem;
+    padding: var(--space-2);
 
     font-weight: var(--text-quick-nav-weight);
     white-space: nowrap;
@@ -273,7 +401,7 @@
     width: 3.75rem;
     height: 3.75rem;
 
-    border-radius: 100px;
+    border-radius: var(--radius-full);
     border: 1px solid var(--color-line);
     background: var(--color-white);
 }
@@ -300,8 +428,8 @@
     top: -1.3rem;
     right: -1.3rem;
 
-    width: 1.5rem;
-    height: 1.5rem;
+    width: var(--fs-24);
+    aspect-ratio: 1 / 1;
 
     background: url(../../assets/icons/star--hover.svg) no-repeat center / cover;
 
@@ -347,5 +475,8 @@
 
 /* ========== Programs ========== */
 
+.programs__track {
+    gap: .825rem;
+}
 
 }

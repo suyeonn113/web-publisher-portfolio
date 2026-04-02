@@ -41,8 +41,8 @@ input::placeholder {
 /* ========== Scroll ========== */
 
 ::-webkit-scrollbar {
-  width: 3px;
-  height: 3px; /* 가로 스크롤용 */
+  width: .45rem;
+  height: .45rem; /* 가로 스크롤용 */
 }
 
 ::-webkit-scrollbar-thumb {

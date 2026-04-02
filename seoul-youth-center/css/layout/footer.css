@@ -23,7 +23,7 @@ footer p {
 
 .footer__links {
     display: flex;
-    gap: .5rem;
+    gap: var(--space-1);
 
     width: 100%;
     max-width: 1200px;
@@ -32,7 +32,7 @@ footer p {
 }
 
 .footer__link {
-    padding: .5rem;
+    padding: var(--space-1);
 }
 
 .footer__link--privacy {
@@ -60,13 +60,13 @@ footer .wrapper--bottom {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto;
-    row-gap: 1rem;
+    row-gap: var(--space-2);
 
     width: 100%;
     max-width: 1200px;
     height: 100%;
     
-    padding-top: 1rem;
+    padding-top: var(--space-2);
     padding-bottom: 6rem;
 }
 
@@ -84,7 +84,7 @@ footer .wrapper--bottom {
 .footer__sns {
     display: flex;
     justify-self: end;
-    gap: .5rem;
+    gap: var(--space-1);
 }
 
 .footer__sns--wrapper {

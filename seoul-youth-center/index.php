@@ -211,7 +211,7 @@ $programs = sortProgramsForDisplay($programs);
     </section>
 
     <!------------ Programs ------------>
-    <div class="programs wrapper">
+    <div class="programs wrapper padding-block">
         <?php
         $openPrograms = getOpenProgramsForDisplay($programs);
         ?>
@@ -244,8 +244,8 @@ $programs = sortProgramsForDisplay($programs);
                 </button>
             </div>
             <a class="button--more button"
-            href="#"
-            aria-label="청소년 프로그램 더보기">
+               href="#"
+               aria-label="청소년 프로그램 더보기">
                 더보기
             </a>
             <div class="programs__slider">
@@ -258,7 +258,7 @@ $programs = sortProgramsForDisplay($programs);
                         <?php foreach ($openPrograms as $program): ?>
                             <?php
                             $programMeta = getProgramCardMeta($program);
-                            $cardVariant = 'home';
+                            $cardVariant = 'home-program';
                             include __DIR__ . '/includes/components/program-card.php';
                             ?>
                         <?php endforeach; ?>
@@ -270,8 +270,92 @@ $programs = sortProgramsForDisplay($programs);
         </section>
     </div>
     <!------------ recommend ------------>
-    <section class="recommend">
-        
+    <section class="recommend inner padding-block">
+        <h2 class="section__title">나에게 맞는 프로그램 살펴보기</h2>
+        <a class="button--more button"
+            href="#"
+            aria-label="청소년 프로그램 더보기">
+            더보기
+        </a>
+        <div class="recommend__content">
+            <form class="recommend-filter" action="" method="get">
+                <fieldset class="recommend-filter__group age_group_codes">
+                    <legend class="recommend-filter__title">연령 기준</legend>
+                    <div class="recommend-filter__list" role="group">
+                        <button class="button--filter button" type="submit" name="age" value="infant" aria-pressed="true">유아</button>
+                        <button class="button--filter button" type="submit" name="age" value="elementary-low" aria-pressed="false">초등 저학년</button>
+                        <button class="button--filter button" type="submit" name="age" value="elementary-high" aria-pressed="false">초등 고학년</button>
+                        <button class="button--filter button" type="submit" name="age" value="early-youth" aria-pressed="false">초기 청소년</button>
+                        <button class="button--filter button" type="submit" name="age" value="mid-youth" aria-pressed="false">중기 청소년</button>
+                        <button class="button--filter button" type="submit" name="age" value="late-youth" aria-pressed="false">후기 청소년</button>
+                        <button class="button--filter button" type="submit" name="age" value="citizen" aria-pressed="false">시민</button>
+                    </div>
+                </fieldset>
+                <fieldset class="recommend-filter__group field_code">
+                    <legend class="recommend-filter__title">분야 기준</legend>
+                    <div class="recommend-filter__list" role="group">
+                        <button class="button--filter button" type="submit" name="field" value="career">진로 직업</button>
+                        <button class="button--filter button" type="submit" name="field" value="culture-art">문화 예술</button>
+                        <button class="button--filter button" type="submit" name="field" value="emotional">정서 관계</button>
+                        <button class="button--filter button" type="submit" name="field" value="competency">역량 성장</button>
+                        <button class="button--filter button" type="submit" name="field" value="citizen">시민 참여</button>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="recommend-result">
+                <section class="recommend-result__youth">
+                    <h3 class="recommend-result__title">청소년 프로그램</h3>
+                    <div class="programs__controls">
+                        <button class="programs__prev" 
+                                type="button"
+                                aria-label="이전 프로그램">
+                            <svg class="icon--prev icon" 
+                                viewBox="0 0 24 24" 
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true" 
+                                focusable="false">
+                                <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"/>
+                                <path fill="none" d="M13.26 15.53L9.74001 12L13.26 8.46997"/>
+                            </svg>
+                        </button>
+                        <button class="programs__next" 
+                                type="button"
+                                aria-label="다음 프로그램">
+                            <svg class="icon--next icon" 
+                                viewBox="0 0 24 24" 
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true" 
+                                focusable="false">
+                                <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"/>
+                                <path fill="none" d="M10.74 15.53L14.26 12L10.74 8.46997"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="recommend-result__slider">
+                        <div class="recommend-result__list">
+                            <?php if (empty($openPrograms)): ?>
+                                <p class="programs__empty">프로그램이 없습니다.</p>
+                            <?php else: ?>
+
+                                <?php foreach ($openPrograms as $program): ?>
+                                    <?php
+                                    $programMeta = getProgramCardMeta($program);
+                                    $cardVariant = 'home-recommend';
+                                    include __DIR__ . '/includes/components/program-card.php';
+                                    ?>
+                                <?php endforeach; ?>
+
+                            <?php endif; ?> 
+                        </div>
+                    </div>
+                </section>
+                <section class="recommend-result__education">
+                    <h3 class="recommend-result__title">평생교육 프로그램</h3>
+                    <div class="recommend-result__list">
+                    </div>
+                </section>
+            </div>
+        </div>
     </section>
 
     <section class="schedule">

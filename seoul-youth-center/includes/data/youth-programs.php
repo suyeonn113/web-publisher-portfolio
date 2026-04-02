@@ -46,9 +46,9 @@ $youthPrograms = [
         // infant           → 유아
         // elementary-low   → 초등 저학년
         // elementary-high  → 초등 고학년
-        // early-youth      → 초기청소년
-        // mid-youth        → 중기청소년
-        // late-youth       → 후기청소년
+        // early-youth      → 초기 청소년
+        // mid-youth        → 중기 청소년
+        // late-youth       → 후기 청소년
         // citizen          → 시민
         'age_group_codes' => ['late-youth'],
 
