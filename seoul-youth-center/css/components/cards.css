@@ -28,6 +28,10 @@
 
     background: rgba(255, 255, 255, 0.2);
 }
+/* ===== Recommend Result ===== */
+.recommend-result__list .card {
+    border: 2px solid var(--color-lightyellow);
+}
 
 .card__image img {
     display: block;
@@ -60,7 +64,7 @@
 
 /* ===== Recommend Result ===== */
 .recommend-result__list .card__badge {
-    bottom: -8rem;
+    bottom: -7.5rem;
     color: var(--color-orange);
     background: var(--color-yellow-20);
 }
@@ -73,6 +77,11 @@
 
     padding: var(--space-2);
     background: var(--color-text-on);
+}
+@media (max-width: 767px) {
+    .card__body {
+        padding: .75rem;
+    }
 }
 
 .card__title {
@@ -90,6 +99,7 @@
 .card__date {
     height: 100%;
     font-size: var(--fs-14);
+    white-space: nowrap;
 }
 
 /* ===== Recommend Result ===== */

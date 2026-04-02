@@ -357,3 +357,108 @@ function getOpenProgramsForDisplay(array $programs, ?DateTime $today = null): ar
 
     return array_values($programs);
 }
+
+/**
+ * ========================================
+ * Recommend Filter
+ * ========================================
+ */
+
+/**
+ * 추천 필터 상태 정규화
+ * - URL/GET 값 기반
+ * - 허용된 값만 유지
+ */
+function normalizeRecommendFilterState(array $input): array
+{
+    $allowedAgeCodes = [
+        'infant',
+        'elementary-low',
+        'elementary-high',
+        'early-youth',
+        'mid-youth',
+        'late-youth',
+        'citizen',
+    ];
+
+    $allowedFieldCodes = [
+        'career',
+        'culture-art',
+        'emotional',
+        'competency',
+        'citizen',
+    ];
+
+    $age = isset($input['age']) ? trim((string) $input['age']) : '';
+    $field = isset($input['field']) ? trim((string) $input['field']) : '';
+
+    if ($age === '' || !in_array($age, $allowedAgeCodes, true)) {
+        $age = null;
+    }
+
+    if ($field === '' || !in_array($field, $allowedFieldCodes, true)) {
+        $field = null;
+    }
+
+    return [
+        'age' => $age,
+        'field' => $field,
+    ];
+}
+
+/**
+ * 프로그램 1개 필터 매칭
+ */
+function matchesRecommendProgram(array $program, array $state): bool
+{
+    $selectedAge = $state['age'] ?? null;
+    $selectedField = $state['field'] ?? null;
+
+    $programAgeGroups = $program['age_group_codes'] ?? [];
+    $programFieldCode = $program['field_code'] ?? null;
+
+    $matchesAge = true;
+    $matchesField = true;
+
+    if ($selectedAge !== null) {
+        $matchesAge = in_array($selectedAge, $programAgeGroups, true);
+    }
+
+    if ($selectedField !== null) {
+        $matchesField = $programFieldCode === $selectedField;
+    }
+
+    return $matchesAge && $matchesField;
+}
+
+/**
+ * 추천 프로그램 필터링 (최종)
+ *
+ * 흐름:
+ * 1) 활성
+ * 2) 모집중
+ * 3) 추천 필터 (age + field)
+ * 4) 정렬
+ */
+function getRecommendPrograms(array $programs, array $input, ?DateTime $today = null): array
+{
+    $today = getProgramToday($today);
+
+    // 1) 상태 정규화
+    $state = normalizeRecommendFilterState($input);
+
+    // 2) 기본 필터
+    $programs = filterActivePrograms($programs);
+    $programs = filterOpenPrograms($programs, $today);
+
+    // 3) 추천 필터 적용
+    $programs = array_values(array_filter(
+        $programs,
+        static fn(array $program): bool => matchesRecommendProgram($program, $state)
+    ));
+
+    // 4) 정렬
+    $programs = sortProgramsForDisplay($programs, $today);
+
+    return $programs;
+}

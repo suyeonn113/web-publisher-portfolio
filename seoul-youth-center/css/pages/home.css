@@ -125,18 +125,23 @@
     background: var(--color-yellow-20);
 }
 
-.programs {
+.programs.inner {
     display: grid;
     grid-template-columns: 1fr auto auto;
     column-gap: var(--space-3);
     row-gap: var(--space-4);
 }
 
-.programs__controls {
+.programs__controls,
+.education__controls {
     display: none;
 }
 @media (min-width: 480px) {
-    .programs__controls {display: flex; gap: var(--space-2);}
+    .programs__controls,
+    .education__controls {
+        display: flex; 
+        gap: var(--space-2);
+    }
 }
 
 .programs__slider {
@@ -159,7 +164,9 @@
 }
 
 .programs__prev,
-.programs__next {
+.programs__next,
+.education__prev,
+.education__next {
     cursor: pointer;
 }
 
@@ -246,7 +253,13 @@
 
 .recommend-result section {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.recommend-filter__title {
+    white-space: nowrap;
 }
 
 .recommend-result__slider {
@@ -268,7 +281,7 @@
     transition: none;
 }
 .recommend-result__list .card {
-    flex: 0 0 50%;
+    flex: 0 0 43%;
 }
 
 /* Focus-visible */
@@ -322,7 +335,11 @@
 /* ===== Result ===== */
 .recommend-result {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr .7fr;
+}
+
+.recommend-result__list .card {
+    flex: 0 0 calc((100% - var(--space-1)) / 2);
 }
 
 }
