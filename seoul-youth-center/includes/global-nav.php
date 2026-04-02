@@ -42,6 +42,7 @@
                     class="search__input"
                     type="search"
                     name="q"
+                    placeholder="검색어를 입력하세요"
                     autocomplete="off"
                     enterkeyhint="search">
             </div>

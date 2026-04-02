@@ -372,6 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const mainButtons = menuPanel.querySelectorAll('.main-menu__button');
         const mainLinks = menuPanel.querySelectorAll('.main-menu__link');
+        const megaButton = menuPanel.querySelector('.button--mega-menu');
         const panelItems = menuPanel.querySelectorAll('.sub-panel__item');
         const subPanel = menuPanel.querySelector('.sub-panel');
 
@@ -524,6 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 cleanups.push(
                     addListenerWithCleanup(link, 'mouseenter', () => {
                         if (!desktopMq.matches) return;
+                        if (menuPanel.dataset.menuMode !== 'drawer') return;
                         closePanel();
                     })
                 );
@@ -531,10 +533,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 cleanups.push(
                     addListenerWithCleanup(link, 'focus', () => {
                         if (!desktopMq.matches) return;
+                        if (menuPanel.dataset.menuMode !== 'drawer') return;
                         closePanel();
                     })
                 );
             });
+
+            if (megaButton) {
+                cleanups.push(
+                    addListenerWithCleanup(megaButton, 'mouseenter', () => {
+                        if (!desktopMq.matches) return;
+                        if (menuPanel.dataset.menuMode !== 'drawer') return;
+                        closePanel();
+                    })
+                );
+
+                cleanups.push(
+                    addListenerWithCleanup(megaButton, 'focus', () => {
+                        if (!desktopMq.matches) return;
+                        if (menuPanel.dataset.menuMode !== 'drawer') return;
+                        closePanel();
+                    })
+                );
+            }
 
             cleanups.push(
                 addListenerWithCleanup(menuPanel, 'mouseleave', () => {
@@ -896,20 +917,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // resetDrawerStateForMega
     // switchMenuMode
     function resetDrawerStateForMega() {
-        const mainButtons = menuPanel.querySelectorAll('.main-menu__button');
+        const mainButtons = menuPanel.querySelectorAll('.main-menu__button[aria-controls]');
         const panelItems = menuPanel.querySelectorAll('.sub-panel__item');
         const subPanel = menuPanel.querySelector('.sub-panel');
 
         mainButtons.forEach((btn) => {
             btn.setAttribute('aria-selected', 'false');
+            btn.removeAttribute('data-current');
         });
 
         panelItems.forEach((panel) => {
-            panel.hidden = false;
+            panel.hidden = true;
         });
 
         if (subPanel) {
-            subPanel.hidden = false;
+            subPanel.hidden = true;
             subPanel.style.position = '';
             subPanel.style.left = '';
             subPanel.style.top = '';
@@ -921,6 +943,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function switchMenuMode(nextMode) {
         cleanupCurrentMode();
 
+        if (nextMode === 'drawer') {
+            resetDrawerStateForMega();
+        }
+
         menuPanel.dataset.menuMode = nextMode;
 
         cleanupMenuColumns = initMenuColumns();
@@ -930,7 +956,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (nextMode === 'mega') {
-            resetDrawerStateForMega();
             cleanupMegaMenu = initMegaMenu();
         }
     }
