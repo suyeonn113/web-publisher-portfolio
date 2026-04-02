@@ -7,8 +7,11 @@
 /* ========== Hero ========== */
 .hero {
     display: flex;
-    width: 100%;
+    align-items: stretch;
     gap: var(--space-3);
+
+    width: 100%;
+
     padding-bottom: var(--space-6);
 }
 
@@ -226,10 +229,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
 
-    padding-block: var(--space-1);
-    padding-inline: var(--space-5);
+    padding-block: var(--space-2);
+    padding-inline: var(--space-3);
 
     border-radius: 15px;
     border: 1px solid var(--color-line);
@@ -237,14 +239,15 @@
 
 .quick-menu--home__title {
     font-size: var(--text-body-lg-size);
+    margin: auto;
 }
 
 .quick-menu--home__list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     place-items: center;
-    column-gap: 3rem;
-    row-gap: 2.5rem;
+    column-gap: var(--space-3);
+    row-gap: var(--space-3);
 }
 
 .quick-menu--home__link {
@@ -267,8 +270,8 @@
     justify-content: center;
     align-items: center;
 
-    width: 4rem;
-    height: 4rem;
+    width: 3.75rem;
+    height: 3.75rem;
 
     border-radius: 100px;
     border: 1px solid var(--color-line);
@@ -280,7 +283,7 @@
 .line::before {
     content: "";
     position: absolute;
-    inset: -4px; /* 바깥으로 확장 → 두께 느낌 */
+    inset: -2px; /* 바깥으로 확장 → 두께 느낌 */
 
     border-radius: inherit;
     background: var(--color-accent-gradient);

@@ -178,7 +178,7 @@
 
 .icon--quick-menu {
     width: 2.25rem;
-    height: 2.25rem;
+    aspect-ratio: 1 / 1;
 }
 
 .icon--home__background {
@@ -266,6 +266,11 @@
 .banner .icon--pause,
 .banner .icon--play {
     width: 2.75rem;
+    aspect-ratio: 1 / 1;
+}
+
+.icon--quick-menu.icon {
+    width: 2.25rem;
     aspect-ratio: 1 / 1;
 }
 }
