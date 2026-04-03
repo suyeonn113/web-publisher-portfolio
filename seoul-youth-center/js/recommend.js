@@ -5,37 +5,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const recommendSection = document.querySelector('.recommend');
     if (!recommendSection) return;
 
+    const form = recommendSection.querySelector('.recommend-filter');
+    if (!form) return;
+
     const youthSection = recommendSection.querySelector('.recommend-result__youth');
     const educationSection = recommendSection.querySelector('.recommend-result__education');
 
-    const youthList = youthSection?.querySelector('.recommend-result__list');
-    const educationList = educationSection?.querySelector('.recommend-result__list');
+    function getResultElements(section) {
+        if (!section) return null;
 
-    if (!youthList) return;
+        const body = section.querySelector('.recommend-result__body');
+        const status = section.querySelector('.recommend-result__status');
+
+        // 청소년 결과 구조
+        const recommendSlider = section.querySelector('.recommend-result__slider');
+        const recommendList = section.querySelector('.recommend-result__list');
+
+        // 평생교육 결과 구조
+        const educationSlider = section.querySelector('.education__slider');
+        const educationList = section.querySelector('.education__track');
+
+        const slider = recommendSlider || educationSlider || null;
+        const list = recommendList || educationList || null;
+
+        return {
+            section,
+            body,
+            status,
+            slider,
+            list,
+            prevBtn: section.querySelector('.programs__prev, .education__prev'),
+            nextBtn: section.querySelector('.programs__next, .education__next'),
+            moreBtn: section.querySelector('.button--more'),
+            mode: recommendList ? 'ajax' : (educationList ? 'ssr' : 'unknown'),
+        };
+    }
+
+    const youth = getResultElements(youthSection);
+    const education = getResultElements(educationSection);
+
+    if (!youth || !youth.list) return;
 
     /* =========================
-     * 2) 초기 SSR HTML 백업
-     * - 필터 전체 해제 시 복구용
-     * - DB 연결 후에도 초기 렌더 fallback 역할 유지
-     * ========================= */
-    const initialMarkup = {
-        youth: youthList.innerHTML,
-        education: educationList ? educationList.innerHTML : '',
-    };
-
-    /* =========================
-     * 3) 상태
-     * - URL 기준
-     * - age / field 동시 선택 가능
+     * 2) 상태
      * ========================= */
     const state = {
         age: null,
         field: null,
     };
 
+    function hasActiveFilters() {
+        return Boolean(state.age || state.field);
+    }
+
     function readStateFromUrl() {
         const params = new URLSearchParams(window.location.search);
-
         state.age = params.get('age') || null;
         state.field = params.get('field') || null;
     }
@@ -59,17 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
         window.history.replaceState({}, '', nextUrl);
     }
 
-    function hasActiveFilters() {
-        return Boolean(state.age || state.field);
-    }
-
     /* =========================
-     * 4) 버튼 UI 반영
-     * - 선택된 버튼만 true
-     * - 나머지는 false
+     * 3) 버튼 UI 반영
      * ========================= */
     function applyButtonState() {
-        const buttons = recommendSection.querySelectorAll('.button--filter');
+        const buttons = form.querySelectorAll('.button--filter');
+
+        form.dataset.hasSelection = hasActiveFilters() ? 'true' : 'false';
 
         buttons.forEach((button) => {
             const { name, value } = button;
@@ -88,71 +108,212 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================
-     * 5) 공통 렌더 함수
+     * 4) 컨트롤 상태
      * ========================= */
-    function getEmptyMessageHtml(message = '조건에 맞는 프로그램이 없습니다.') {
-        return `<p class="programs__empty">${message}</p>`;
-    }
+    function disableSectionControls(elements) {
+        if (!elements) return;
 
-    function restoreInitialResults() {
-        youthList.innerHTML = initialMarkup.youth;
+        if (elements.prevBtn) {
+            elements.prevBtn.disabled = true;
+            elements.prevBtn.dataset.available = 'false';
+        }
 
-        if (educationList) {
-            educationList.innerHTML = initialMarkup.education;
+        if (elements.nextBtn) {
+            elements.nextBtn.disabled = true;
+            elements.nextBtn.dataset.available = 'false';
+        }
+
+        if (elements.moreBtn) {
+            elements.moreBtn.hidden = true;
+            elements.moreBtn.setAttribute('aria-hidden', 'true');
         }
     }
 
-    function renderEmptyResults(message) {
-        youthList.innerHTML = getEmptyMessageHtml(message);
+    function enableSectionControls(elements) {
+        if (!elements) return;
 
-        if (educationList) {
-            educationList.innerHTML = getEmptyMessageHtml(message);
+        if (elements.prevBtn) {
+            elements.prevBtn.disabled = false;
+            elements.prevBtn.dataset.available = 'true';
         }
+
+        if (elements.nextBtn) {
+            elements.nextBtn.disabled = false;
+            elements.nextBtn.dataset.available = 'true';
+        }
+
+        if (elements.moreBtn) {
+            elements.moreBtn.hidden = false;
+            elements.moreBtn.removeAttribute('aria-hidden');
+        }
+    }
+
+    /* =========================
+     * 5) 상태 메시지 유틸
+     * ========================= */
+    function ensureStatusElement(elements) {
+        if (!elements) return null;
+        if (elements.status) return elements.status;
+
+        const status = document.createElement('p');
+        status.className = 'programs__empty recommend-result__status';
+        status.setAttribute('aria-live', 'polite');
+
+        if (elements.slider && elements.slider.parentNode) {
+            elements.slider.parentNode.insertBefore(status, elements.slider);
+        } else if (elements.body) {
+            elements.body.appendChild(status);
+        } else {
+            elements.section.appendChild(status);
+        }
+
+        elements.status = status;
+        return status;
+    }
+
+    /* =========================
+     * 6) 결과 영역 렌더링
+     * ========================= */
+    function resetSliderPosition(elements) {
+        if (!elements || !elements.list) return;
+        elements.list.style.transform = 'translate3d(0, 0, 0)';
+    }
+
+    function renderSectionIdle(elements, message = '기준을 선택해주세요.') {
+        if (!elements) return;
+
+        elements.section.dataset.state = 'idle';
+        if (elements.body) elements.body.dataset.state = 'idle';
+
+        const status = ensureStatusElement(elements);
+
+        if (status) {
+            status.textContent = message;
+            status.hidden = false;
+        }
+
+        if (elements.slider) {
+            elements.slider.hidden = true;
+        }
+
+        if (elements.list) {
+            elements.list.innerHTML = '';
+            resetSliderPosition(elements);
+        }
+
+        disableSectionControls(elements);
+    }
+
+    function renderSectionEmpty(elements, message = '등록된 프로그램이 없습니다.') {
+        if (!elements) return;
+
+        elements.section.dataset.state = 'empty';
+        if (elements.body) elements.body.dataset.state = 'empty';
+
+        const status = ensureStatusElement(elements);
+
+        if (status) {
+            status.textContent = message;
+            status.hidden = false;
+        }
+
+        if (elements.slider) {
+            elements.slider.hidden = true;
+        }
+
+        if (elements.list) {
+            elements.list.innerHTML = '';
+            resetSliderPosition(elements);
+        }
+
+        disableSectionControls(elements);
+    }
+
+    function renderSectionReady(elements, html) {
+        if (!elements) return;
+
+        const normalizedHtml = typeof html === 'string' ? html.trim() : '';
+
+        if (!normalizedHtml) {
+            renderSectionEmpty(elements);
+            return;
+        }
+
+        elements.section.dataset.state = 'ready';
+        if (elements.body) elements.body.dataset.state = 'ready';
+
+        if (elements.list) {
+            elements.list.innerHTML = normalizedHtml;
+            resetSliderPosition(elements);
+        }
+
+        const status = ensureStatusElement(elements);
+        if (status) {
+            status.hidden = true;
+        }
+
+        if (elements.slider) {
+            elements.slider.hidden = false;
+        }
+
+        enableSectionControls(elements);
+    }
+
+    function renderIdleResults() {
+        renderSectionIdle(youth, '기준을 선택해주세요.');
+        renderSectionIdle(education, '기준을 선택해주세요.');
+        document.dispatchEvent(new CustomEvent('recommend:updated'));
+    }
+
+    function renderErrorResults() {
+        renderSectionEmpty(youth, '데이터를 불러오지 못했습니다.');
+        renderSectionEmpty(education, '데이터를 불러오지 못했습니다.');
+        document.dispatchEvent(new CustomEvent('recommend:updated'));
     }
 
     function renderResults(payload) {
-        const youthHtml = typeof payload?.youthHtml === 'string' ? payload.youthHtml.trim() : '';
-        const educationHtml = typeof payload?.educationHtml === 'string' ? payload.educationHtml.trim() : '';
+        const youthHtml = typeof payload?.youthHtml === 'string' ? payload.youthHtml : '';
+        const educationHtml = typeof payload?.educationHtml === 'string' ? payload.educationHtml : '';
 
-        youthList.innerHTML = youthHtml || getEmptyMessageHtml();
-
-        if (educationList) {
-            educationList.innerHTML = educationHtml || getEmptyMessageHtml('조건에 맞는 프로그램이 없습니다.');
+        if (youthHtml.trim()) {
+            renderSectionReady(youth, youthHtml);
+        } else {
+            renderSectionEmpty(youth, '등록된 프로그램이 없습니다.');
         }
 
-        /*
-         * 필요하면 여기서 슬라이더 재초기화 이벤트 발행
-         * programs.js 쪽에서 듣게 만들 수 있음
-         */
+        if (education) {
+            if (educationHtml.trim()) {
+                renderSectionReady(education, educationHtml);
+            } else {
+                renderSectionEmpty(education, '등록된 프로그램이 없습니다.');
+            }
+        }
+
         document.dispatchEvent(new CustomEvent('recommend:updated'));
     }
 
     /* =========================
-     * 6) 로딩 상태
+     * 7) 로딩 상태
      * ========================= */
     function setLoading(isLoading) {
         recommendSection.dataset.loading = isLoading ? 'true' : 'false';
     }
 
     /* =========================
-     * 7) API URL 생성
-     * - 로컬/서브폴더 배포 모두 대응
-     * - BASE_URL 있으면 우선 사용
+     * 8) API URL 생성
      * ========================= */
     function buildApiUrl() {
-        return new URL('api/recommend-programs.php', window.location.href).href;
+        const basePath = window.location.pathname.replace(/\/[^/]*$/, '/');
+        return new URL(`${basePath}api/recommend-programs.php`, window.location.origin).href;
     }
 
     /* =========================
-     * 8) 데이터 요청
-     * - 필터 없으면 fetch 안 함
-     * - 초기 SSR 상태 복구
-     * - 결과 없음 / 요청 실패 분리
+     * 9) 데이터 요청
      * ========================= */
     async function fetchRecommendResults() {
         if (!hasActiveFilters()) {
-            restoreInitialResults();
             setLoading(false);
+            renderIdleResults();
             return;
         }
 
@@ -174,31 +335,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             });
 
-            const rawText = await response.text();
-            console.log('recommend api response:', rawText);
-
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`);
             }
 
-            const data = JSON.parse(rawText);
+            const data = await response.json();
             renderResults(data);
         } catch (error) {
             console.error('추천 프로그램을 불러오지 못했습니다.', error);
-            renderEmptyResults('데이터를 불러오지 못했습니다.');
+            renderErrorResults();
         } finally {
             setLoading(false);
         }
     }
 
     /* =========================
-     * 9) 버튼 클릭
-     * - 같은 그룹 내 단일 선택
-     * - 다시 누르면 해제
+     * 10) 필터 클릭
      * ========================= */
     function handleFilterClick(event) {
         const button = event.target.closest('.button--filter');
-        if (!button || !recommendSection.contains(button)) return;
+        if (!button || !form.contains(button)) return;
 
         const { name, value } = button;
         if (!name || !value) return;
@@ -217,14 +373,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================
-     * 10) 이벤트 바인딩
+     * 11) 이벤트 바인딩
      * ========================= */
-    recommendSection.addEventListener('click', handleFilterClick);
+    form.addEventListener('click', handleFilterClick);
 
     /* =========================
-     * 11) 초기 실행
-     * - URL에 필터가 있으면 fetch
-     * - 없으면 PHP 초기 마크업 유지
+     * 12) 초기 실행
      * ========================= */
     readStateFromUrl();
     applyButtonState();

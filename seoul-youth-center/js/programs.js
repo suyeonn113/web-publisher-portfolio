@@ -1,17 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    /* =========================
+    /**
+     * =========================
      * 공통 슬라이더 초기화
-     * - section: 각 슬라이더 영역 루트
-     * - sliderSelector: 뷰포트 요소
-     * - trackSelector: 이동 대상 요소
-     * - prevSelector / nextSelector: 버튼 요소
-     * - cardSelector: 카드 선택자
-     * - snapToEndWhenNearLast:
-     *   마지막 카드가 보이기 시작할 때
-     *   마지막 정렬 위치로 보정할지 여부
-     *   - true  : 프로그램 섹션
-     *   - false : 레코멘트 섹션
-     * ========================= */
+     * - 카드가 없거나 이동할 구간이 없으면 버튼 비활성화
+     * - recommend 결과 갱신 시 재초기화 가능
+     * =========================
+     */
     function initCardSlider({
         section,
         sliderSelector,
@@ -21,19 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
         cardSelector = '.card',
         snapToEndWhenNearLast = false
     }) {
-        if (!section) return;
+        if (!section) return null;
+
+        if (typeof section._destroyCardSlider === 'function') {
+            section._destroyCardSlider();
+        }
 
         const slider = section.querySelector(sliderSelector);
         const track = section.querySelector(trackSelector);
         const prevBtn = section.querySelector(prevSelector);
         const nextBtn = section.querySelector(nextSelector);
-        const cards = Array.from(track?.querySelectorAll(cardSelector) ?? []);
 
-        if (!slider || !track || cards.length === 0) return;
+        if (!slider || !track) {
+            return null;
+        }
 
-        /* =========================
-         * 상태값
-         * ========================= */
+        const cards = Array.from(track.querySelectorAll(cardSelector)).filter((card) => !card.hidden);
+        const controller = new AbortController();
+        const { signal } = controller;
+
         let currentIndex = 0;
         let positions = [];
         let maxTranslate = 0;
@@ -43,11 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const DRAG_THRESHOLD = 50;
 
-        /* =========================
-         * 유틸
-         * ========================= */
         function clamp(value, min, max) {
             return Math.min(Math.max(value, min), max);
+        }
+
+        function setButtonState(button, isAvailable) {
+            if (!button) return;
+            button.dataset.available = isAvailable ? 'true' : 'false';
+            button.disabled = !isAvailable;
+        }
+
+        function resetButtons() {
+            setButtonState(prevBtn, false);
+            setButtonState(nextBtn, false);
         }
 
         function applyTranslate(value) {
@@ -58,17 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return Math.max(positions.length - 1, 0);
         }
 
-        /* =========================
-         * 스냅 포인트 생성
-         * ========================= */
         function buildPositions() {
             maxTranslate = Math.max(0, track.scrollWidth - slider.clientWidth);
 
-            const basePositions = cards.map((card) => card.offsetLeft);
+            if (cards.length === 0 || maxTranslate <= 1) {
+                positions = [0];
+                return;
+            }
+
             const result = [];
 
-            basePositions.forEach((pos) => {
-                const clamped = clamp(pos, 0, maxTranslate);
+            cards.forEach((card) => {
+                const clamped = clamp(card.offsetLeft, 0, maxTranslate);
 
                 if (!result.some((savedPos) => Math.abs(savedPos - clamped) < 1)) {
                     result.push(clamped);
@@ -86,28 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
             positions = result;
         }
 
-        /* =========================
-         * 버튼 상태 업데이트
-         * ========================= */
         function updateButtons() {
-            if (!prevBtn || !nextBtn) return;
-
             const hasPrev = currentIndex > 0;
-            const hasNext = currentIndex < getLastIndex();
+            const hasNext = positions.length > 1 && currentIndex < getLastIndex();
 
-            prevBtn.dataset.available = hasPrev ? 'true' : 'false';
-            nextBtn.dataset.available = hasNext ? 'true' : 'false';
-
-            prevBtn.disabled = !hasPrev;
-            nextBtn.disabled = !hasNext;
+            setButtonState(prevBtn, hasPrev);
+            setButtonState(nextBtn, hasNext);
         }
 
-        /* =========================
-         * 끝 보정 조건
-         * - 프로그램 섹션에서만 사용
-         * - 다음 이동 시 마지막 카드가 화면에 걸치기 시작하면
-         *   마지막 정렬 위치(maxTranslate)로 보정
-         * ========================= */
         function shouldSnapToEnd(nextPos) {
             if (!snapToEndWhenNearLast) return false;
             if (cards.length === 0) return false;
@@ -118,9 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return viewportRight > lastCard.offsetLeft;
         }
 
-        /* =========================
-         * 이동
-         * ========================= */
         function goTo(index) {
             currentIndex = clamp(index, 0, getLastIndex());
             applyTranslate(positions[currentIndex] ?? 0);
@@ -146,89 +138,133 @@ document.addEventListener('DOMContentLoaded', () => {
             goTo(currentIndex - 1);
         }
 
-        /* =========================
-         * 버튼 이벤트
-         * ========================= */
-        prevBtn?.addEventListener('click', goPrev);
-        nextBtn?.addEventListener('click', goNext);
+        function handlePointerDown(event) {
+            if (event.pointerType === 'mouse' && event.button !== 0) return;
 
-        /* =========================
-         * 스와이프
-         * ========================= */
-        slider.addEventListener('pointerdown', (e) => {
-            startX = e.clientX;
+            startX = event.clientX;
             isDragging = true;
-        });
-
-        slider.addEventListener('pointerup', (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-
-            const delta = e.clientX - startX;
-
-            if (delta < -DRAG_THRESHOLD) {
-                goNext();
-            } else if (delta > DRAG_THRESHOLD) {
-                goPrev();
-            }
-        });
-
-        slider.addEventListener('pointercancel', () => {
-            isDragging = false;
-        });
-
-        slider.addEventListener('pointerleave', () => {
-            isDragging = false;
-        });
-
-        /* =========================
-         * 리사이즈 대응
-         * ========================= */
-        function handleResize() {
-            buildPositions();
-            goTo(currentIndex);
+            track.dataset.dragging = 'true';
         }
 
-        window.addEventListener('resize', handleResize);
+        function handlePointerUp(event) {
+            if (!isDragging) return;
 
-        /* =========================
-         * 초기 실행
-         * ========================= */
-        buildPositions();
-        goTo(0);
+            isDragging = false;
+            delete track.dataset.dragging;
+
+            const delta = event.clientX - startX;
+
+            if (delta <= -DRAG_THRESHOLD) {
+                goNext();
+                return;
+            }
+
+            if (delta >= DRAG_THRESHOLD) {
+                goPrev();
+            }
+        }
+
+        function handlePointerCancel() {
+            isDragging = false;
+            delete track.dataset.dragging;
+        }
+
+        function handleResize() {
+            buildPositions();
+            goTo(Math.min(currentIndex, getLastIndex()));
+        }
+
+        prevBtn?.addEventListener('click', goPrev, { signal });
+        nextBtn?.addEventListener('click', goNext, { signal });
+
+        slider.addEventListener('pointerdown', handlePointerDown, { signal });
+        slider.addEventListener('pointerup', handlePointerUp, { signal });
+        slider.addEventListener('pointercancel', handlePointerCancel, { signal });
+        slider.addEventListener('pointerleave', handlePointerCancel, { signal });
+
+        window.addEventListener('resize', handleResize, { signal });
+
+        if (cards.length === 0) {
+            applyTranslate(0);
+            resetButtons();
+        } else {
+            buildPositions();
+            goTo(0);
+        }
+
+        section._destroyCardSlider = () => {
+            controller.abort();
+            delete track.dataset.dragging;
+            applyTranslate(0);
+            resetButtons();
+        };
+
+        return {
+            refresh() {
+                buildPositions();
+                goTo(Math.min(currentIndex, getLastIndex()));
+            },
+            destroy() {
+                if (typeof section._destroyCardSlider === 'function') {
+                    section._destroyCardSlider();
+                    delete section._destroyCardSlider;
+                }
+            }
+        };
     }
 
-    /* =========================
-     * 1) 모집 중인 청소년 프로그램
-     * - 마지막 카드가 보이기 시작하면
-     *   마지막 위치로 보정
-     * ========================= */
-    document.querySelectorAll('.programs.inner').forEach((section) => {
-        initCardSlider({
-            section,
-            sliderSelector: '.programs__slider',
-            trackSelector: '.programs__track',
-            prevSelector: '.programs__prev',
-            nextSelector: '.programs__next',
-            cardSelector: '.card',
-            snapToEndWhenNearLast: true
+    function initProgramSections() {
+        document.querySelectorAll('.programs.inner').forEach((section) => {
+            initCardSlider({
+                section,
+                sliderSelector: '.programs__slider',
+                trackSelector: '.programs__track',
+                prevSelector: '.programs__prev',
+                nextSelector: '.programs__next',
+                cardSelector: '.card',
+                snapToEndWhenNearLast: true
+            });
         });
-    });
+    }
 
-    /* =========================
-     * 2) 나에게 맞는 프로그램 살펴보기
-     * - 한 칸씩만 이동
-     * - 첫 클릭에 맨 끝으로 점프 방지
-     * ========================= */
-    document.querySelectorAll('.recommend-result__youth').forEach((section) => {
-        initCardSlider({
-            section,
-            sliderSelector: '.recommend-result__slider',
-            trackSelector: '.recommend-result__list',
-            prevSelector: '.programs__prev',
-            nextSelector: '.programs__next',
-            cardSelector: '.card',
-            snapToEndWhenNearLast: false
+    function initRecommendSections() {
+        document.querySelectorAll('.recommend-result__youth, .recommend-result__education').forEach((section) => {
+            const slider = section.querySelector('.recommend-result__slider');
+            const track = section.querySelector('.recommend-result__list');
+
+            if (!slider || slider.hidden || !track) {
+                const prevBtn = section.querySelector('.programs__prev, .education__prev');
+                const nextBtn = section.querySelector('.programs__next, .education__next');
+
+                if (prevBtn) {
+                    prevBtn.disabled = true;
+                    prevBtn.dataset.available = 'false';
+                }
+
+                if (nextBtn) {
+                    nextBtn.disabled = true;
+                    nextBtn.dataset.available = 'false';
+                }
+
+                return;
+            }
+
+            initCardSlider({
+                section,
+                sliderSelector: '.recommend-result__slider',
+                trackSelector: '.recommend-result__list',
+                prevSelector: '.programs__prev, .education__prev',
+                nextSelector: '.programs__next, .education__next',
+                cardSelector: '.card',
+                snapToEndWhenNearLast: false
+            });
         });
+    }
+
+    initProgramSections();
+    initRecommendSections();
+
+    document.addEventListener('recommend:updated', () => {
+        initRecommendSections();
     });
 });

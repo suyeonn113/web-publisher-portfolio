@@ -2,6 +2,7 @@
 include __DIR__ . '/includes/config.php';
 include __DIR__ . '/includes/data/banners.php';
 include __DIR__ . '/includes/data/youth-programs.php';
+include __DIR__ . '/includes/data/education-programs.php';
 include __DIR__ . '/includes/functions/program.service.php';
 
 $pageTitle = '시립서울청소년센터';
@@ -273,11 +274,11 @@ $programs = sortProgramsForDisplay($programs);
     <section class="recommend inner padding-block">
         <h2 class="section__title">나에게 맞는 프로그램 살펴보기</h2>
         <div class="recommend__content">
-            <form class="recommend-filter" action="" method="get">
+            <form class="recommend-filter" action="" method="get" data-has-selection="false">
                 <fieldset class="recommend-filter__group age_group_codes">
                     <legend class="recommend-filter__title">연령 기준</legend>
                     <div class="recommend-filter__list" role="group">
-                        <button class="button--filter button" type="button" name="age" value="infant" aria-pressed="true">유아</button>
+                        <button class="button--filter button" type="button" name="age" value="infant" aria-pressed="false">유아</button>
                         <button class="button--filter button" type="button" name="age" value="elementary-low" aria-pressed="false">초등 저학년</button>
                         <button class="button--filter button" type="button" name="age" value="elementary-high" aria-pressed="false">초등 고학년</button>
                         <button class="button--filter button" type="button" name="age" value="early-youth" aria-pressed="false">초기 청소년</button>
@@ -286,14 +287,15 @@ $programs = sortProgramsForDisplay($programs);
                         <button class="button--filter button" type="button" name="age" value="citizen" aria-pressed="false">시민</button>
                     </div>
                 </fieldset>
+
                 <fieldset class="recommend-filter__group field_code">
                     <legend class="recommend-filter__title">분야 기준</legend>
                     <div class="recommend-filter__list" role="group">
-                        <button class="button--filter button" type="button" name="field" value="career">진로 직업</button>
-                        <button class="button--filter button" type="button" name="field" value="culture-art">문화 예술</button>
-                        <button class="button--filter button" type="button" name="field" value="emotional">정서 관계</button>
-                        <button class="button--filter button" type="button" name="field" value="competency">역량 성장</button>
-                        <button class="button--filter button" type="button" name="field" value="citizen">시민 참여</button>
+                        <button class="button--filter button" type="button" name="field" value="career" aria-pressed="false">진로 직업</button>
+                        <button class="button--filter button" type="button" name="field" value="culture-art" aria-pressed="false">문화 예술</button>
+                        <button class="button--filter button" type="button" name="field" value="emotional" aria-pressed="false">정서 관계</button>
+                        <button class="button--filter button" type="button" name="field" value="competency" aria-pressed="false">역량 성장</button>
+                        <button class="button--filter button" type="button" name="field" value="citizen" aria-pressed="false">시민 참여</button>
                     </div>
                 </fieldset>
             </form>
@@ -331,21 +333,13 @@ $programs = sortProgramsForDisplay($programs);
                         aria-label="청소년 프로그램 더보기">
                         더보기
                     </a>
-                    <div class="recommend-result__slider">
-                        <div class="recommend-result__list">
-                            <?php if (empty($openPrograms)): ?>
-                                <p class="programs__empty">기준을 선택해주세요.</p>
-                            <?php else: ?>
+                    <div class="recommend-result__body" data-state="idle">
+                        <p class="programs__empty recommend-result__status" aria-live="polite">
+                            기준을 선택해주세요.
+                        </p>
 
-                                <?php foreach ($openPrograms as $program): ?>
-                                    <?php
-                                    $programMeta = getProgramCardMeta($program);
-                                    $cardVariant = 'home-recommend';
-                                    include __DIR__ . '/includes/components/program-card.php';
-                                    ?>
-                                <?php endforeach; ?>
-
-                            <?php endif; ?> 
+                        <div class="recommend-result__slider" hidden>
+                            <ul class="recommend-result__list"></ul>
                         </div>
                     </div>
                 </section>
@@ -382,15 +376,128 @@ $programs = sortProgramsForDisplay($programs);
                         aria-label="평생교육 프로그램 더보기">
                         더보기
                     </a>
-                    <div class="">
+
+                    <div class="recommend-result__body" data-state="idle">
+                        <p class="programs__empty recommend-result__status" aria-live="polite">
+                            기준을 선택해주세요.
+                        </p>
+
+                        <div class="education__slider" hidden>
+                            <ul class="education__track"></ul>
+                        </div>
                     </div>
                 </section>
             </div>
         </div>
     </section>
 
-    <section class="schedule">
-        
+    <section class="schedule inner">
+        <h2 class="section__title">센터 일정 둘러보기</h2>
+
+        <div class="schedule__layout">
+            <!-- 달력 영역 -->
+            <div class="schedule-calendar" aria-labelledby="schedule-calendar-title">
+                <h3 id="schedule-calendar-title" class="visually-hidden">센터 일정 달력</h3>
+
+                <div class="schedule-calendar__box">
+                    <div class="schedule-calendar__header">
+                        <button type="button"
+                                class="schedule-calendar__nav schedule-calendar__nav--prev"
+                                aria-label="이전 달 보기">
+                            <svg class="icon--calendar-prev icon"
+                                 viewBox="0 0 24 24" 
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.09 20.67C15.28 20.67 15.47 20.6 15.62 20.45C15.91 20.16 15.91 19.68 15.62 19.39L9.10002 12.87C8.62002 12.39 8.62002 11.61 9.10002 11.13L15.62 4.61002C15.91 4.32002 15.91 3.84002 15.62 3.55002C15.33 3.26002 14.85 3.26002 14.56 3.55002L8.04002 10.07C7.53002 10.58 7.24002 11.27 7.24002 12C7.24002 12.73 7.52002 13.42 8.04002 13.93L14.56 20.45C14.71 20.59 14.9 20.67 15.09 20.67Z"/>
+                            </svg>
+                        </button>
+
+                        <button type="button"
+                                class="schedule-calendar__heading"
+                                aria-label="데모 기준 오늘 날짜가 있는 달로 이동">
+                            <p class="schedule-calendar__month" id="calendar-month">3월</p>
+                            <p class="schedule-calendar__year" id="calendar-year">2026</p>
+                        </button>
+
+                        <button type="button"
+                                class="schedule-calendar__nav schedule-calendar__nav--next"
+                                aria-label="다음 달 보기">
+                            <svg class="icon--calendar-next icon"
+                                 viewBox="0 0 24 24" 
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.90998 20.67C8.71998 20.67 8.52998 20.6 8.37998 20.45C8.08998 20.16 8.08998 19.68 8.37998 19.39L14.9 12.87C15.38 12.39 15.38 11.61 14.9 11.13L8.37998 4.61002C8.08998 4.32002 8.08998 3.84002 8.37998 3.55002C8.66998 3.26002 9.14998 3.26002 9.43998 3.55002L15.96 10.07C16.47 10.58 16.76 11.27 16.76 12C16.76 12.73 16.48 13.42 15.96 13.93L9.43998 20.45C9.28998 20.59 9.09998 20.67 8.90998 20.67Z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="schedule-calendar__body">
+                        <!-- 범례 -->
+                        <ul class="schedule-calendar__legend" aria-label="일정 유형 안내">
+                            <li class="schedule-calendar__legend-item">
+                                <span class="schedule-calendar__legend-dot schedule-calendar__legend-dot--youth" aria-hidden="true"></span>
+                                <span class="schedule-calendar__legend-text">청소년프로그램</span>
+                            </li>
+                            <li class="schedule-calendar__legend-item">
+                                <span class="schedule-calendar__legend-dot schedule-calendar__legend-dot--education" aria-hidden="true"></span>
+                                <span class="schedule-calendar__legend-text">센터 일정</span>
+                            </li>
+                            <li class="schedule-calendar__legend-item">
+                                <span class="schedule-calendar__legend-dot schedule-calendar__legend-dot--lifelong" aria-hidden="true"></span>
+                                <span class="schedule-calendar__legend-text">휴관일</span>
+                            </li>
+                        </ul>
+
+                        <div class="schedule-calendar__grid-wrap">
+                            <!-- 요일 헤더 -->
+                            <div class="schedule-calendar__weekdays" aria-hidden="true">
+                                <span>일</span>
+                                <span>월</span>
+                                <span>화</span>
+                                <span>수</span>
+                                <span>목</span>
+                                <span>금</span>
+                                <span>토</span>
+                            </div>
+
+                            <!-- JS가 날짜 셀 생성 -->
+                            <div class="schedule-calendar__grid"
+                                 id="schedule-calendar-grid"
+                                 role="grid"
+                                 aria-label="센터 일정 달력">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 일정 목록 영역 -->
+            <div class="schedule-agenda" aria-labelledby="schedule-agenda-title">
+                <h3 id="schedule-agenda-title" class="visually-hidden">선택한 날짜 기준 일정 목록</h3>
+
+                <div class="schedule-agenda__group">
+                    <h4 class="schedule-agenda__heading">어제</h4>
+                    <ul class="schedule-agenda__list"
+                        id="schedule-list-yesterday"
+                        aria-label="어제 일정">
+                    </ul>
+                </div>
+
+                <div class="schedule-agenda__group">
+                    <h4 class="schedule-agenda__heading">오늘</h4>
+                    <ul class="schedule-agenda__list"
+                        id="schedule-list-today"
+                        aria-label="오늘 일정">
+                    </ul>
+                </div>
+
+                <div class="schedule-agenda__group">
+                    <h4 class="schedule-agenda__heading">내일</h4>
+                    <ul class="schedule-agenda__list"
+                        id="schedule-list-tomorrow"
+                        aria-label="내일 일정">
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="news">
@@ -419,7 +526,9 @@ $programs = sortProgramsForDisplay($programs);
 <script src="<?= BASE_URL ?>/js/header-search.js"></script>
 <script src="<?= BASE_URL ?>/js/banner.js"></script>
 <script src="<?= BASE_URL ?>/js/programs.js"></script>
+<script src="<?= BASE_URL ?>/js/education.js"></script>
 <script src="<?= BASE_URL ?>/js/recommend.js"></script>
+<script src="<?= BASE_URL ?>/js/calendar.js"></script>
 
 </body>
 </html>

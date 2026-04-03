@@ -3,6 +3,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 include __DIR__ . '/../includes/config.php';
 include __DIR__ . '/../includes/data/youth-programs.php';
+include __DIR__ . '/../includes/data/education-programs.php';
 include __DIR__ . '/../includes/functions/program.service.php';
 
 /**
@@ -92,8 +93,6 @@ function filterRecommendPrograms($programs, $age, $field) {
 /**
  * -----------------------------------------
  * 3) 청소년 프로그램 필터링
- * - 기존 서비스 함수 유지
- * - 표시용 정렬 재사용
  * -----------------------------------------
  */
 $programs = filterActivePrograms($youthPrograms);
@@ -108,7 +107,7 @@ $filteredYouthPrograms = filterRecommendPrograms($programs, $age, $field);
 ob_start();
 
 if (empty($filteredYouthPrograms)) {
-    echo '<p class="programs__empty">조건에 맞는 프로그램이 없습니다.</p>';
+    echo '<p class="programs__empty">등록된 프로그램이 없습니다.</p>';
 } else {
     foreach ($filteredYouthPrograms as $program) {
         $programMeta = getProgramCardMeta($program);
@@ -121,16 +120,72 @@ $youthHtml = ob_get_clean();
 
 /**
  * -----------------------------------------
- * 5) 평생교육 프로그램
- * - 아직 데이터 연결 전이므로 빈 상태 반환
- * - 나중에 education 데이터 붙이면 그대로 확장 가능
+ * 5) 평생교육 프로그램 필터링
  * -----------------------------------------
  */
-$educationHtml = '<p class="programs__empty">준비 중입니다.</p>';
+$educationPrograms = isset($educationPrograms) && is_array($educationPrograms)
+    ? $educationPrograms
+    : [];
+
+$educationPrograms = array_values(array_filter($educationPrograms, function ($program) {
+    return !empty($program['is_active']);
+}));
+
+$filteredEducationPrograms = filterRecommendPrograms($educationPrograms, $age, $field);
 
 /**
  * -----------------------------------------
- * 6) 응답
+ * 6) 평생교육 프로그램 HTML 생성
+ * - ul.education__track 안에 들어가므로 li 구조 사용
+ * - 카드 전체 클릭 가능하도록 a.card__link로 감싸기
+ * - 메타는 항상 출력해서 높이 흐트러짐 방지
+ * -----------------------------------------
+ */
+ob_start();
+
+if (empty($filteredEducationPrograms)) {
+    echo '<p class="programs__empty">등록된 프로그램이 없습니다.</p>';
+} else {
+    foreach ($filteredEducationPrograms as $program) {
+        $programMeta = getProgramCardMeta($program);
+
+        $title = $program['title'] ?? '';
+        $url = $program['url'] ?? '#';
+        $statusLabel = $programMeta['status_label'] ?? '';
+        $activityPeriod = $programMeta['activity_period'] ?? '';
+
+        if ($activityPeriod === '') {
+            $activityPeriod = ' ';
+        }
+        ?>
+        <li class="card card--education">
+            <a
+                href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8'); ?>"
+                class="card__link"
+                aria-label="<?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>"
+            >
+                <span class="card__badge">
+                    <?= htmlspecialchars($statusLabel, ENT_QUOTES, 'UTF-8'); ?>
+                </span>
+
+                <h4 class="card__title">
+                    <?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>
+                </h4>
+
+                <p class="card__meta">
+                    <?= htmlspecialchars($activityPeriod, ENT_QUOTES, 'UTF-8'); ?>
+                </p>
+            </a>
+        </li>
+        <?php
+    }
+}
+
+$educationHtml = ob_get_clean();
+
+/**
+ * -----------------------------------------
+ * 7) 응답
  * -----------------------------------------
  */
 echo json_encode([

@@ -148,9 +148,11 @@
 
 /* ===== Programs ===== */
 @media (min-width: 480px) {
-.programs .icon--prev,
-.programs .icon--next {
-    width: var(--fs-32);
+.programs__prev .icon--prev,
+.programs__next .icon--next,
+.education__prev .icon--prev,
+.education__next .icon--next {
+    width: var(--fs-28);
     aspect-ratio: 1 / 1;
 
     fill: transparent;
@@ -158,20 +160,19 @@
 }
 
 .programs__prev[data-available="true"] .icon--prev,
-.programs__next[data-available="true"] .icon--next {
+.programs__next[data-available="true"] .icon--next,
+.education__prev[data-available="true"] .icon--prev,
+.education__next[data-available="true"] .icon--next {
     fill: var(--color-orange-20);
 }
-}
 
-/* ===== Recommend ===== */
-
-.recommend .icon--prev,
-.recommend .icon--next {
-    width: var(--fs-28);
-    aspect-ratio: 1 / 1;
-
-    fill: transparent;
+.programs__prev:disabled .icon--prev,
+.programs__next:disabled .icon--next,
+.education__prev:disabled .icon--prev,
+.education__next:disabled .icon--next {
     stroke: var(--color-orange);
+    opacity: 0.45;
+}
 }
 
 
@@ -221,13 +222,12 @@
 }
 
 /* ===== Programs ===== */
-.programs .icon--prev,
-.programs .icon--next {
+.programs__prev .icon--prev,
+.programs__next .icon--next,
+.education__prev .icon--prev,
+.education__next .icon--next {
     width: var(--fs-36);
     aspect-ratio: 1 / 1;
-
-    fill: transparent;
-    stroke: var(--color-orange);
 }
 
 }

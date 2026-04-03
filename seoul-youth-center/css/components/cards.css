@@ -22,9 +22,10 @@
     align-items: center;
 
     width: 100%;
+    aspect-ratio: 7.7 / 10;
 
-    padding-block: 8%;
-    padding-inline: 16%;
+    padding-block: 4%;
+    padding-inline: 10%;
 
     background: rgba(255, 255, 255, 0.2);
 }

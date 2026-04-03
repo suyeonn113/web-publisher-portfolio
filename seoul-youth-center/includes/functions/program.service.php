@@ -91,7 +91,7 @@ function getProgramStatusLabel(array $program, ?DateTime $today = null): string
         case 'ongoing':
             return '모집중';
         case 'upcoming':
-            return '모집예정';
+            return '예정';
         default:
             return '모집마감';
     }

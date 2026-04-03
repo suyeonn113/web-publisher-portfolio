@@ -82,9 +82,9 @@ foreach ($dataAttributes as $name => $value) {
         <div class="card__body">
 
             <!-- 제목 (공통) -->
-            <h3 class="card__title">
+            <h4 class="card__title">
                 <?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?>
-            </h3>
+            </h4>
 
             <!-- 모집기간 (공통) -->
             <p class="card__date">

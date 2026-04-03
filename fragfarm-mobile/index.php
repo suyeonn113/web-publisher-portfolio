@@ -225,5 +225,6 @@ $saleProducts = array_values(array_filter($products, function ($product) {
 </div>
 <!-- Script -->
 <script src="<?= BASE_URL ?>/js/popup.js"></script>
+<script src="<?= BASE_URL ?>/js/header.js"></script>
 </body>
 </html>

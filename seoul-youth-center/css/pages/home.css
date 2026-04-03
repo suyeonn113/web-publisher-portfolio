@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+@import url("../components/cards.css");
+@import url("../components/card-education.css");
+@import url("../components/slider.css");
+@import url("../sections/home-calendar.css");
+
 /* ========================================
                 Base - Mobile
 ======================================== */
@@ -132,49 +137,6 @@
     row-gap: var(--space-4);
 }
 
-.programs__controls,
-.education__controls {
-    display: none;
-}
-@media (min-width: 480px) {
-    .programs__controls,
-    .education__controls {
-        display: flex; 
-        gap: var(--space-2);
-    }
-}
-
-.programs__slider {
-    grid-column: 1 / -1;
-    overflow: hidden;
-    touch-action: pan-y;
-    user-select: none;
-}
-
-.programs__track {
-    display: flex;
-    gap: var(--space-1);
-    will-change: transform;
-    transition: transform 400ms ease;
-    transform: translate3d(0, 0, 0);
-}
-
-.programs__track[data-dragging="true"] {
-    transition: none;
-}
-
-.programs__prev,
-.programs__next,
-.education__prev,
-.education__next {
-    cursor: pointer;
-}
-
-.programs__prev:disabled,
-.programs__next:disabled {
-    cursor: default;
-}
-
 .card {
     position: relative;
     flex: 0 0 65%;
@@ -230,16 +192,26 @@
 
     font-size: var(--button-text-size);
     font-weight: var(--button-text-weight);
+    color: var(--color-text-default);
 }
 
-.recommend .button--filter[aria-pressed="true"] {
+/* 1) 초기 상태: 아무것도 선택 안 했을 때 */
+.recommend-filter[data-has-selection="false"] .button--filter {
+    color: var(--color-text-default);
+    border-color: var(--color-line);
+}
+
+/* 2) 선택된 버튼 */
+.recommend-filter[data-has-selection="true"] .button--filter[aria-pressed="true"] {
     border: none;
     color: var(--color-text-on);
     background: var(--color-accent-gradient);
 }
 
-.recommend .button--filter[aria-pressed="false"] {
+/* 3) 선택 후, 선택되지 않은 버튼 */
+.recommend-filter[data-has-selection="true"] .button--filter[aria-pressed="false"] {
     color: var(--color-gray);
+    border-color: var(--color-line);
 }
 
 
@@ -254,6 +226,7 @@
 .recommend-result section {
     display: grid;
     grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto 1fr;
     align-items: center;
     gap: var(--space-2);
 }
@@ -262,24 +235,19 @@
     white-space: nowrap;
 }
 
-.recommend-result__slider {
+.recommend-result__body {
     grid-column: 1 / -1;
-    overflow: hidden;
-    touch-action: pan-y;
-    user-select: none;
+    height: 100%;
 }
 
-.recommend-result__list {
-    display: flex;
-    gap: var(--space-1);
-    will-change: transform;
-    transition: transform 400ms ease;
-    transform: translate3d(0, 0, 0);
+.recommend-result__status {
+    margin: 0;
 }
 
-.recommend-filter__list[data-dragging="true"] {
-    transition: none;
+.recommend-result__slider[hidden] {
+    display: none;
 }
+
 .recommend-result__list .card {
     flex: 0 0 43%;
 }
@@ -289,7 +257,7 @@
 .banner__gallery::after {
     content: "";
     position: absolute;
-    inset: 0.1875rem; /* 바깥 보더랑 너무 붙지 않게 안쪽으로 */
+    inset: 0.1875rem;
     border: 2px dashed var(--color-text-default);
     border-radius: 12px;
     pointer-events: none;
@@ -298,11 +266,17 @@
 }
 
 .card:has(.card__link:focus-visible)::after,
+.card:has(a:focus-visible)::after,
+.card--education:has(a:focus-visible)::after,
 .banner__gallery:has(.banner__item a:focus-visible)::after {
     opacity: 1;
 }
 
-
+/* 카드 안 링크 기본 포커스 라인은 제거 */
+.card a:focus-visible,
+.card--education a:focus-visible {
+    outline: none;
+}
 
 /* ========================================
                     Tablet
