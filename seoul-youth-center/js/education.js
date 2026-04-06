@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * ========================================
      * 평생교육 프로그램 슬라이더
-     * - 480 미만: 버튼 숨김 + 세로 스와이프
+     * - 480 미만: 버튼 숨김 + 가로 스와이프
+     *   - 카드 1장 노출 + 다음 카드 살짝 보이기
      * - 480 이상: 버튼 표시 + 좌우 페이지 이동
      *   - 480~767: 페이지당 카드 3개
      *   - 768 이상: 페이지당 카드 6개
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let mobilePositions = [];
         let currentIndex = 0;
-        let mobileViewportHeight = 0;
+        let mobileMaxTranslate = 0;
 
         let startX = 0;
         let startY = 0;
@@ -54,26 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return Math.min(Math.max(value, min), max);
         }
 
-        function getTrackGap() {
-            const styles = window.getComputedStyle(track);
-            const gap = parseFloat(styles.rowGap || styles.columnGap || styles.gap || '0');
-            return Number.isNaN(gap) ? 0 : gap;
-        }
-
-        function getMobilePeekRatio() {
-            const styles = window.getComputedStyle(slider);
-            const raw = parseFloat(styles.getPropertyValue('--education-slider-mobile-peek').trim());
-
-            if (Number.isNaN(raw)) return 0.42;
-            return clamp(raw, 0.2, 0.8);
-        }
-
         function applyTranslateX(value) {
             track.style.transform = `translate3d(${-value}px, 0, 0)`;
-        }
-
-        function applyTranslateY(value) {
-            track.style.transform = `translate3d(0, ${-value}px, 0)`;
         }
 
         function resetTrackTransform() {
@@ -167,41 +150,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (cards.length === 0) {
                 slider.style.height = '0px';
+                mobileMaxTranslate = 0;
                 return;
             }
 
-            const gap = getTrackGap();
-            const peekRatio = getMobilePeekRatio();
-
-            if (cards.length === 1) {
-                mobileViewportHeight = cards[0].offsetHeight;
-            } else if (cards.length === 2) {
-                mobileViewportHeight =
-                    cards[0].offsetHeight +
-                    gap +
-                    cards[1].offsetHeight;
-            } else {
-                const firstHeight = cards[0].offsetHeight;
-                const secondHeight = cards[1].offsetHeight;
-                const thirdHeight = cards[2].offsetHeight;
-                const fourthHeight = cards[3] ? cards[3].offsetHeight : thirdHeight;
-
-                mobileViewportHeight =
-                    firstHeight +
-                    gap +
-                    secondHeight +
-                    gap +
-                    thirdHeight +
-                    Math.round((gap + fourthHeight) * peekRatio);
-            }
-
-            const maxTranslate = Math.max(0, track.scrollHeight - mobileViewportHeight);
+            mobileMaxTranslate = Math.max(0, track.scrollWidth - slider.clientWidth);
 
             cards.forEach((card) => {
-                mobilePositions.push(Math.min(card.offsetTop, maxTranslate));
+                const position = clamp(card.offsetLeft, 0, mobileMaxTranslate);
+
+                if (!mobilePositions.some((saved) => Math.abs(saved - position) < 1)) {
+                    mobilePositions.push(position);
+                }
             });
 
-            mobilePositions = [...new Set(mobilePositions)];
+            if (mobilePositions.length === 0) {
+                mobilePositions.push(0);
+            }
+
+            if (Math.abs(mobilePositions[mobilePositions.length - 1] - mobileMaxTranslate) > 1) {
+                mobilePositions.push(mobileMaxTranslate);
+            }
         }
 
         function goDesktop(pageIndex) {
@@ -231,8 +200,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             currentIndex = clamp(cardIndex, 0, mobilePositions.length - 1);
-            slider.style.height = `${mobileViewportHeight}px`;
-            applyTranslateY(mobilePositions[currentIndex]);
+
+            const firstCard = cards[0];
+            if (firstCard) {
+                slider.style.height = `${firstCard.offsetHeight}px`;
+            }
+
+            applyTranslateX(mobilePositions[currentIndex]);
             updateMobileButtons();
         }
 
@@ -273,12 +247,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const deltaY = event.clientY - startY;
 
             if (mode === 'mobile') {
-                if (deltaY <= -SWIPE_THRESHOLD) {
+                if (Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+                if (deltaX <= -SWIPE_THRESHOLD) {
                     goNext();
                     return;
                 }
 
-                if (deltaY >= SWIPE_THRESHOLD) {
+                if (deltaX >= SWIPE_THRESHOLD) {
                     goPrev();
                 }
 
@@ -314,14 +290,15 @@ document.addEventListener('DOMContentLoaded', () => {
             mode = window.innerWidth < MOBILE_BREAKPOINT ? 'mobile' : 'desktop';
 
             if (mode === 'mobile') {
-                currentIndex = 0;
                 buildMobilePositions();
-                goMobile(Math.min(currentIndex, mobilePositions.length - 1));
+                currentIndex = clamp(currentIndex, 0, Math.max(mobilePositions.length - 1, 0));
+                goMobile(currentIndex);
                 return;
             }
 
             buildDesktopPages();
-            goDesktop(Math.min(currentPage, pageItems.length - 1));
+            currentPage = clamp(currentPage, 0, Math.max(pageItems.length - 1, 0));
+            goDesktop(currentPage);
         }
 
         prevBtn?.addEventListener('click', goPrev, { signal });

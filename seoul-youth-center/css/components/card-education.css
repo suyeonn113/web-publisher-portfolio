@@ -11,17 +11,18 @@
     user-select: none;
     overscroll-behavior: contain;
 
-    /* JS가 읽어서 데스크톱/태블릿 페이지 높이 계산에 사용 */
-    --education-slider-desktop-max-height: 17rem;
-
     /* 모바일에서 다음 카드가 얼마나 살짝 보일지 비율 */
-    --education-slider-mobile-peek: 0.42;
+    --education-slider-mobile-peek: 0.15;
 }
 
 .education__track {
     display: flex;
     flex-direction: row;
-    gap: 0;
+    gap: var(--space-1);
+
+    will-change: transform;
+    transition: transform 400ms ease;
+    transform: translate3d(0, 0, 0);
 }
 
 .education__page {
@@ -70,9 +71,25 @@
 }
 
 @media (max-width: 479px) {
-    .education__track {
-        flex-direction: column;
+
+    .education__slider {
+        touch-action: pan-y;
     }
+
+    .education__track {
+        flex-direction: row;
+        gap: var(--space-1);
+    }
+
+    .education__track .card {
+        flex: 0 0 calc(85% - (var(--space-1) * 0.15));
+        width: calc(85% - (var(--space-1) * 0.15));
+    }
+
+    .education__controls {
+        display: none;
+    }
+
 }
 
 /* Tablet */
