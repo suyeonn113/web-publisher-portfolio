@@ -5,11 +5,11 @@
 ======================================== */
 
 .schedule {
-    margin-block: var(--section-padding-block);
+    padding-block: var(--section-padding-block);
 }
 
-.section__title {
-    margin-bottom: var(--space-3);
+.schedule .section__title {
+    margin-bottom: var(--section-gap);
 }
 
 .schedule__layout {
@@ -64,7 +64,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    padding-inline: var(--space-1);
+    margin-inline: auto;
 }
 
 /* ===== Legend ===== */
@@ -74,7 +75,7 @@
     flex-direction: column;
     gap: .25rem;
 
-    padding-inline: var(--space-1);
+    padding-inline: 3%;
 
     font-size: var(--text-quick-nav-size);
     font-weight: 600;

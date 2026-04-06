@@ -4,6 +4,9 @@
  * - 월 자동 생성
  * - 날짜 선택
  * - 어제 / 오늘 / 내일 일정 목록 렌더
+ * - roving tabindex
+ * - 방향키 이동
+ * - 정석 구조: gridcell + button
  * ======================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -36,15 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================
      * 1) 데모 기준일
-     * - 실제 오늘 대신 고정
-     * - CSS 확인용 기준 날짜
      * ========================= */
     const DEMO_TODAY = '2026-03-23';
 
     /* =========================
      * 2) 데모 일정 데이터
-     * - 지금은 고정 mock
-     * - 나중에 API 응답으로 치환 가능
      * ========================= */
     const mockEvents = [
         { id: 1, type: 'program', title: '청소년 진로 탐색 워크숍', date: '2026-03-22' },
@@ -76,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     let selectedDateStr = DEMO_TODAY;
+    let focusedDateStr = DEMO_TODAY;
 
     /* =========================
      * 4) 유틸
@@ -98,10 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return formatDate(date);
     }
 
-    function isSameDate(a, b) {
-        return formatDate(a) === formatDate(b);
-    }
-
     function getEventsByDate(dateString) {
         return mockEvents.filter((event) => event.date === dateString);
     }
@@ -111,6 +107,60 @@ document.addEventListener('DOMContentLoaded', () => {
         if (type === 'center-event') return '센터 일정';
         if (type === 'closed-day') return '휴관일';
         return '일정';
+    }
+
+    function getFocusableDateStr() {
+        return focusedDateStr || selectedDateStr || DEMO_TODAY;
+    }
+
+    function focusDateButton(dateString) {
+        const targetButton = calendarGrid.querySelector(
+            `.schedule-calendar__date[data-date="${dateString}"]`
+        );
+
+        if (targetButton) {
+            targetButton.focus();
+        }
+    }
+
+    function moveFocusByOffset(baseDateStr, offset) {
+        const nextDateStr = addDays(baseDateStr, offset);
+        const nextDate = parseLocalDate(nextDateStr);
+
+        focusedDateStr = nextDateStr;
+        currentViewDate = new Date(
+            nextDate.getFullYear(),
+            nextDate.getMonth(),
+            1
+        );
+
+        renderCalendar();
+        focusDateButton(nextDateStr);
+    }
+
+    function selectDate(dateString, options = {}) {
+        const {
+            focusTargetDateStr = dateString,
+            shouldRenderAgenda = true
+        } = options;
+
+        const selectedDate = parseLocalDate(dateString);
+
+        selectedDateStr = dateString;
+        focusedDateStr = focusTargetDateStr;
+        currentViewDate = new Date(
+            selectedDate.getFullYear(),
+            selectedDate.getMonth(),
+            1
+        );
+
+        renderCalendar();
+
+        if (shouldRenderAgenda) {
+            renderAgenda();
+        }
+
+        focusDateButton(focusTargetDateStr);
     }
 
     /* =========================
@@ -131,8 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemsMarkup = events.map((event) => {
             return `
                 <li class="schedule-agenda__item">
-                    <span class="schedule-calendar__dot schedule-calendar__dot--${event.type}">
-                    </span>
+                    <span
+                        class="schedule-calendar__dot schedule-calendar__dot--${event.type}"
+                        aria-label="${getTypeLabel(event.type)}"
+                    ></span>
                     <p class="schedule-agenda__text">${event.title}</p>
                 </li>
             `;
@@ -161,30 +213,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const cellDateStr = formatDate(cellDate);
         const events = getEventsByDate(cellDateStr);
+        const isFocused = cellDateStr === getFocusableDateStr();
+        const isSelected = cellDateStr === selectedDateStr;
+        const isToday = cellDateStr === DEMO_TODAY;
+
+        const cell = document.createElement('div');
+        cell.className = 'schedule-calendar__cell';
+        cell.setAttribute('role', 'gridcell');
+        cell.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+
+        if (isOutsideMonth) {
+            cell.classList.add('is-outside-month');
+        }
+
+        if (isToday) {
+            cell.classList.add('is-today');
+        }
+
+        if (isSelected) {
+            cell.classList.add('is-selected');
+        }
+
+        if (events.length > 0) {
+            cell.classList.add('has-event');
+        }
 
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'schedule-calendar__date';
-        button.setAttribute('role', 'gridcell');
         button.setAttribute('data-date', cellDateStr);
         button.setAttribute(
             'aria-label',
             `${cellDate.getFullYear()}년 ${cellDate.getMonth() + 1}월 ${cellDate.getDate()}일`
         );
+        button.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        button.tabIndex = isFocused ? 0 : -1;
 
         if (isOutsideMonth) {
             button.classList.add('is-outside-month');
         }
 
-        if (cellDateStr === DEMO_TODAY) {
+        if (isToday) {
             button.classList.add('is-today');
         }
 
-        if (cellDateStr === selectedDateStr) {
+        if (isSelected) {
             button.classList.add('is-selected');
-            button.setAttribute('aria-selected', 'true');
-        } else {
-            button.setAttribute('aria-selected', 'false');
         }
 
         if (events.length > 0) {
@@ -202,14 +276,67 @@ document.addEventListener('DOMContentLoaded', () => {
             </span>
         `;
 
-        button.addEventListener('click', () => {
-            selectedDateStr = cellDateStr;
-            currentViewDate = new Date(cellDate.getFullYear(), cellDate.getMonth(), 1);
-            renderCalendar();
-            renderAgenda();
+        button.addEventListener('focus', () => {
+            focusedDateStr = cellDateStr;
         });
 
-        return button;
+        button.addEventListener('click', () => {
+            const nextDateStr = addDays(cellDateStr, 1);
+
+            selectDate(cellDateStr, {
+                focusTargetDateStr: nextDateStr
+            });
+        });
+
+        button.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    moveFocusByOffset(cellDateStr, -1);
+                    break;
+
+                case 'ArrowRight':
+                    event.preventDefault();
+                    moveFocusByOffset(cellDateStr, 1);
+                    break;
+
+                case 'ArrowUp':
+                    event.preventDefault();
+                    moveFocusByOffset(cellDateStr, -7);
+                    break;
+
+                case 'ArrowDown':
+                    event.preventDefault();
+                    moveFocusByOffset(cellDateStr, 7);
+                    break;
+
+                case 'Home':
+                    event.preventDefault();
+                    moveFocusByOffset(cellDateStr, -cellDate.getDay());
+                    break;
+
+                case 'End':
+                    event.preventDefault();
+                    moveFocusByOffset(cellDateStr, 6 - cellDate.getDay());
+                    break;
+
+                case 'Enter':
+                case ' ':
+                case 'Spacebar':
+                    event.preventDefault();
+                    selectDate(cellDateStr, {
+                        focusTargetDateStr: addDays(cellDateStr, 1)
+                    });
+                    break;
+
+                default:
+                    break;
+            }
+        });
+
+        cell.appendChild(button);
+
+        return cell;
     }
 
     /* =========================
@@ -263,7 +390,15 @@ document.addEventListener('DOMContentLoaded', () => {
             currentViewDate.getMonth() - 1,
             1
         );
+
+        focusedDateStr = formatDate(new Date(
+            currentViewDate.getFullYear(),
+            currentViewDate.getMonth(),
+            1
+        ));
+
         renderCalendar();
+        focusDateButton(focusedDateStr);
     });
 
     nextButton.addEventListener('click', () => {
@@ -272,7 +407,15 @@ document.addEventListener('DOMContentLoaded', () => {
             currentViewDate.getMonth() + 1,
             1
         );
+
+        focusedDateStr = formatDate(new Date(
+            currentViewDate.getFullYear(),
+            currentViewDate.getMonth(),
+            1
+        ));
+
         renderCalendar();
+        focusDateButton(focusedDateStr);
     });
 
     headingButton.addEventListener('click', () => {
@@ -283,9 +426,11 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         selectedDateStr = DEMO_TODAY;
+        focusedDateStr = DEMO_TODAY;
 
         renderCalendar();
         renderAgenda();
+        focusDateButton(DEMO_TODAY);
     });
 
     /* =========================

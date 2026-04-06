@@ -25,6 +25,7 @@
     /* Moblie */
     --layout-padding-inline: var(--space-2);  /* 16px */
     --section-padding-block: var(--space-6);  /* 48px */
+    --section-gap: var(--space-3);            /* 24px */
 }
 
 
@@ -56,6 +57,7 @@
 :root {
     --layout-padding-inline: var(--space-3);  /* 24px */
     --section-padding-block: var(--space-7);  /* 56px */
+    --section-gap: var(--space-4);            /* 32px */
 }
 
 .inner {

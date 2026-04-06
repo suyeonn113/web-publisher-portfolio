@@ -151,7 +151,9 @@
 .programs__prev .icon--prev,
 .programs__next .icon--next,
 .education__prev .icon--prev,
-.education__next .icon--next {
+.education__next .icon--next,
+.gallery__prev .icon--prev,
+.gallery__next .icon--next {
     width: var(--fs-28);
     aspect-ratio: 1 / 1;
 
@@ -162,14 +164,18 @@
 .programs__prev[data-available="true"] .icon--prev,
 .programs__next[data-available="true"] .icon--next,
 .education__prev[data-available="true"] .icon--prev,
-.education__next[data-available="true"] .icon--next {
+.education__next[data-available="true"] .icon--next,
+.gallery__prev[data-available="true"] .icon--prev,
+.gallery__next[data-available="true"] .icon--next {
     fill: var(--color-orange-20);
 }
 
 .programs__prev:disabled .icon--prev,
 .programs__next:disabled .icon--next,
 .education__prev:disabled .icon--prev,
-.education__next:disabled .icon--next {
+.education__next:disabled .icon--next,
+.gallery__prev:disabled .icon--prev,
+.gallery__next:disabled .icon--next {
     stroke: var(--color-orange);
     opacity: 0.45;
 }
@@ -225,8 +231,10 @@
 .programs__prev .icon--prev,
 .programs__next .icon--next,
 .education__prev .icon--prev,
-.education__next .icon--next {
-    width: var(--fs-36);
+.education__next .icon--next,
+.gallery__prev .icon--prev,
+.gallery__next .icon--next {
+    width: var(--fs-32);
     aspect-ratio: 1 / 1;
 }
 
