@@ -12,14 +12,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const gallerySection = document.querySelector('.gallery');
     if (!gallerySection) return;
 
-    const galleryList = gallerySection.querySelector('.gallery__list');
+    const gallerySlider = gallerySection.querySelector('.gallery__slider');
+    const galleryTrack = gallerySection.querySelector('.gallery__track');
     const prevButton = gallerySection.querySelector('.gallery__prev');
     const nextButton = gallerySection.querySelector('.gallery__next');
 
-    if (!galleryList || !prevButton || !nextButton) return;
+    if (!gallerySlider || !galleryTrack || !prevButton || !nextButton) return;
 
     const BREAKPOINT_MOBILE = 480;
+    const DRAG_THRESHOLD = 50;
+
     let resizeTimer = null;
+    let currentIndex = 0;
+    let positions = [];
+    let maxTranslate = 0;
+
+    let startX = 0;
+    let isDragging = false;
 
     /**
      * -----------------------------------------
@@ -96,7 +105,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * -----------------------------------------
-     * 2) 카드 마크업 생성
+     * 2) 유틸
+     * -----------------------------------------
+     */
+    function isMobileGridMode() {
+        return window.innerWidth < BREAKPOINT_MOBILE;
+    }
+
+    function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+    }
+
+    function getGalleryItems() {
+        return Array.from(galleryTrack.querySelectorAll('.gallery__item')).filter((item) => !item.hidden);
+    }
+
+    function setButtonState(button, isAvailable) {
+        if (!button) return;
+
+        button.dataset.available = String(isAvailable);
+        button.disabled = !isAvailable;
+    }
+
+    function resetButtons() {
+        setButtonState(prevButton, false);
+        setButtonState(nextButton, false);
+    }
+
+    function applyTranslate(value) {
+        galleryTrack.style.transform = `translate3d(${-value}px, 0, 0)`;
+    }
+
+    function getLastIndex() {
+        return Math.max(positions.length - 1, 0);
+    }
+
+    /**
+     * -----------------------------------------
+     * 3) 카드 마크업 생성
      * -----------------------------------------
      */
     function createGalleryItem(photo) {
@@ -109,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${photo.imageSrc}" alt="${photo.imageAlt}">
                 </div>
                 <div class="gallery__content">
-                    <p class="gallery__title">${photo.title} 
+                    <p class="gallery__title">${photo.title}
                         <span class="gallery__label">${photo.label}</span>
                     </p>
                 </div>
@@ -121,14 +167,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * -----------------------------------------
-     * 3) 리스트 렌더링
+     * 4) 리스트 렌더링
      * -----------------------------------------
      */
     function renderGallery(items) {
-        galleryList.innerHTML = '';
+        galleryTrack.innerHTML = '';
 
         if (!items.length) {
-            galleryList.innerHTML = '<li class="gallery__empty">등록된 활동사진이 없습니다.</li>';
+            galleryTrack.innerHTML = '<li class="gallery__empty">등록된 활동사진이 없습니다.</li>';
             return;
         }
 
@@ -138,100 +184,135 @@ document.addEventListener('DOMContentLoaded', () => {
             fragment.appendChild(createGalleryItem(photo));
         });
 
-        galleryList.appendChild(fragment);
+        galleryTrack.appendChild(fragment);
     }
 
     /**
      * -----------------------------------------
-     * 4) 모바일 여부
+     * 5) 슬라이더 위치값 생성
+     * - 프로그램 슬라이더와 같은 기준
      * -----------------------------------------
      */
-    function isMobileGridMode() {
-        return window.innerWidth < BREAKPOINT_MOBILE;
+    function buildPositions() {
+        const items = getGalleryItems();
+
+        maxTranslate = Math.max(0, galleryTrack.scrollWidth - gallerySlider.clientWidth);
+
+        if (items.length === 0 || maxTranslate <= 1) {
+            positions = [0];
+            return;
+        }
+
+        const result = [];
+
+        items.forEach((item) => {
+            const clamped = clamp(item.offsetLeft, 0, maxTranslate);
+
+            if (!result.some((savedPos) => Math.abs(savedPos - clamped) < 1)) {
+                result.push(clamped);
+            }
+        });
+
+        if (result.length === 0) {
+            result.push(0);
+        }
+
+        if (Math.abs(result[result.length - 1] - maxTranslate) > 1) {
+            result.push(maxTranslate);
+        }
+
+        positions = result;
     }
 
-    /**
-     * -----------------------------------------
-     * 5) 카드 1칸 이동 거리 계산
-     * -----------------------------------------
-     */
-    function getMoveDistance() {
-        const firstItem = galleryList.querySelector('.gallery__item');
-        if (!firstItem) return 0;
-
-        const itemWidth = firstItem.getBoundingClientRect().width;
-        const listStyle = window.getComputedStyle(galleryList);
-        const gap = parseFloat(listStyle.columnGap || listStyle.gap || 0);
-
-        return itemWidth + gap;
-    }
-
-    /**
-     * -----------------------------------------
-     * 6) 버튼 상태 갱신
-     * - 모바일에서는 버튼 숨김 + 비활성
-     * - 슬라이더에서는 disabled / data-available 동시 관리
-     * -----------------------------------------
-     */
-    function updateButtonState() {
+    function updateButtons() {
         if (isMobileGridMode()) {
             prevButton.hidden = true;
             nextButton.hidden = true;
-
-            prevButton.disabled = true;
-            nextButton.disabled = true;
-
-            prevButton.dataset.available = 'false';
-            nextButton.dataset.available = 'false';
-
+            resetButtons();
             return;
         }
 
         prevButton.hidden = false;
         nextButton.hidden = false;
 
-        const maxScrollLeft = galleryList.scrollWidth - galleryList.clientWidth;
-        const currentScrollLeft = Math.ceil(galleryList.scrollLeft);
+        const hasPrev = currentIndex > 0;
+        const hasNext = positions.length > 1 && currentIndex < getLastIndex();
 
-        const prevAvailable = currentScrollLeft > 0;
-        const nextAvailable = currentScrollLeft < maxScrollLeft - 1;
+        setButtonState(prevButton, hasPrev);
+        setButtonState(nextButton, hasNext);
+    }
 
-        prevButton.disabled = !prevAvailable;
-        nextButton.disabled = !nextAvailable;
+    function goTo(index) {
+        currentIndex = clamp(index, 0, getLastIndex());
+        applyTranslate(positions[currentIndex] ?? 0);
+        updateButtons();
+    }
 
-        prevButton.dataset.available = String(prevAvailable);
-        nextButton.dataset.available = String(nextAvailable);
+    function goNext() {
+        if (isMobileGridMode()) return;
+        if (currentIndex >= getLastIndex()) return;
+        goTo(currentIndex + 1);
+    }
+
+    function goPrev() {
+        if (isMobileGridMode()) return;
+        if (currentIndex <= 0) return;
+        goTo(currentIndex - 1);
     }
 
     /**
      * -----------------------------------------
-     * 7) 버튼으로 1칸 이동
+     * 6) 드래그
+     * - 모바일 grid 모드에서는 비활성
      * -----------------------------------------
      */
-    function scrollGallery(direction) {
+    function handlePointerDown(event) {
         if (isMobileGridMode()) return;
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
 
-        const moveDistance = getMoveDistance();
-        if (!moveDistance) return;
+        startX = event.clientX;
+        isDragging = true;
+        galleryTrack.dataset.dragging = 'true';
+    }
 
-        galleryList.scrollBy({
-            left: direction * moveDistance,
-            behavior: 'smooth'
-        });
+    function handlePointerUp(event) {
+        if (!isDragging) return;
+
+        isDragging = false;
+        delete galleryTrack.dataset.dragging;
+
+        const delta = event.clientX - startX;
+
+        if (delta <= -DRAG_THRESHOLD) {
+            goNext();
+            return;
+        }
+
+        if (delta >= DRAG_THRESHOLD) {
+            goPrev();
+        }
+    }
+
+    function handlePointerCancel() {
+        isDragging = false;
+        delete galleryTrack.dataset.dragging;
     }
 
     /**
      * -----------------------------------------
-     * 8) 모드 전환 대응
-     * - 모바일로 내려오면 스크롤 위치 초기화
+     * 7) 모드 전환 / 리사이즈
      * -----------------------------------------
      */
     function syncGalleryState() {
         if (isMobileGridMode()) {
-            galleryList.scrollLeft = 0;
+            currentIndex = 0;
+            applyTranslate(0);
+            updateButtons();
+            return;
         }
 
-        updateButtonState();
+        buildPositions();
+        goTo(Math.min(currentIndex, getLastIndex()));
     }
 
     function handleResize() {
@@ -244,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * -----------------------------------------
-     * 9) 초기 실행
+     * 8) 초기 실행
      * -----------------------------------------
      */
     renderGallery(activityPhotos);
@@ -252,21 +333,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * -----------------------------------------
-     * 10) 이벤트 바인딩
+     * 9) 이벤트 바인딩
      * -----------------------------------------
      */
-    prevButton.addEventListener('click', () => {
-        scrollGallery(-1);
-    });
+    prevButton.addEventListener('click', goPrev);
+    nextButton.addEventListener('click', goNext);
 
-    nextButton.addEventListener('click', () => {
-        scrollGallery(1);
-    });
-
-    galleryList.addEventListener('scroll', () => {
-        if (isMobileGridMode()) return;
-        updateButtonState();
-    });
+    gallerySlider.addEventListener('pointerdown', handlePointerDown);
+    gallerySlider.addEventListener('pointerup', handlePointerUp);
+    gallerySlider.addEventListener('pointercancel', handlePointerCancel);
+    gallerySlider.addEventListener('pointerleave', handlePointerCancel);
 
     window.addEventListener('resize', handleResize);
 });

@@ -362,21 +362,6 @@
     padding-block: var(--section-padding-block);
 }
 
-.gallery__list {
-    grid-column: 1 / -1;
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--space-1);
-    row-gap: var(--space-2);
-
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
-    overflow: visible;
-}
-
 .gallery__item {
     min-width: 0;
 }
@@ -391,6 +376,11 @@
     gap: var(--space-2);
     height: 100%;
     min-width: 0;
+}
+
+.gallery__link:focus-visible {
+    outline-offset: -4px;
+    border-radius: var(--radius-md);
 }
 
 .gallery__image {
@@ -409,45 +399,33 @@
 
 .gallery__content {
     min-width: 0;
-    width: 90%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+
     justify-content: center;
     align-items: center;
+    padding-bottom: var(--space-1);
 
     word-break: keep-all;
     overflow-wrap: break-word;
-}
-
-.gallery__title {
     text-align: center;
 }
 
-/* 2) 480 이상 공통 슬라이더 */
+@media (max-width: 479px) {
+    .gallery__track {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--space-1);
+        row-gap: var(--space-2);
+        transform: none !important;
+    }
+}
+
 @media (min-width: 480px) {
-    .gallery__list {
-        display: flex;
-        gap: var(--space-2);
-
-        overflow-x: auto;
-        overflow-y: hidden;
-
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-
-        scrollbar-width: none;
-    }
-
-    .gallery__list::-webkit-scrollbar {
-        display: none;
-    }
-
     .gallery__item {
         display: block;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
+        flex: 0 0 calc((100% - 1rem) / 3);
     }
 
     .gallery__item:nth-child(n + 5) {
@@ -455,12 +433,6 @@
     }
 }
 
-/* 3) 480 이상 ~ PC 전 : 3칸 */
-@media (min-width: 480px) and (max-width: 767px) {
-    .gallery__item {
-        flex: 0 0 calc((100% - 2rem) / 3);
-    }
-}
 
 
 
@@ -531,12 +503,12 @@
 
 
 /* ========== Gallery ========== */
-.gallery__list {
-    gap: var(--space-3);
+.gallery__track {
+    gap: var(--space-2);
 }
 
 .gallery__item {
-    flex: 0 0 calc((100% - 4.5rem) / 4);
+    flex: 0 0 calc((100% - 3rem) / 4);
 }
 
 
