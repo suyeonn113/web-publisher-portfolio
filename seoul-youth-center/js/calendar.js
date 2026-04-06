@@ -47,21 +47,21 @@ document.addEventListener('DOMContentLoaded', () => {
      * - 나중에 API 응답으로 치환 가능
      * ========================= */
     const mockEvents = [
-        { id: 1, type: 'youth', title: '청소년 진로 탐색 워크숍', date: '2026-03-22' },
-        { id: 2, type: 'education', title: '센터 운영 회의', date: '2026-03-22' },
+        { id: 1, type: 'program', title: '청소년 진로 탐색 워크숍', date: '2026-03-22' },
+        { id: 2, type: 'center-event', title: '센터 운영 회의', date: '2026-03-22' },
 
-        { id: 3, type: 'youth', title: '디지털 드로잉 클래스', date: '2026-03-23' },
-        { id: 4, type: 'education', title: '평생교육 기획 강의', date: '2026-03-23' },
-        { id: 5, type: 'lifelong', title: '정기 휴관일 안내', date: '2026-03-23' },
+        { id: 3, type: 'program', title: '디지털 드로잉 클래스', date: '2026-03-23' },
+        { id: 4, type: 'center-event', title: '상반기 정직원 채용 면접', date: '2026-03-23' },
+        { id: 5, type: 'closed-day', title: '정기 휴관일 안내', date: '2026-03-23' },
 
-        { id: 6, type: 'education', title: '센터 일정 점검', date: '2026-03-24' },
-        { id: 7, type: 'youth', title: '청소년 미디어 활동', date: '2026-03-24' },
+        { id: 6, type: 'center-event', title: '센터 일정 점검', date: '2026-03-24' },
+        { id: 7, type: 'program', title: '청소년 미디어 활동', date: '2026-03-24' },
 
-        { id: 8, type: 'youth', title: '멘토링 프로그램', date: '2026-03-10' },
-        { id: 9, type: 'education', title: '학부모 특강', date: '2026-03-14' },
-        { id: 10, type: 'lifelong', title: '시설 점검 휴관', date: '2026-03-28' },
-        { id: 11, type: 'education', title: '봄맞이 특별 행사', date: '2026-04-02' },
-        { id: 12, type: 'youth', title: '자기소개서 클리닉', date: '2026-04-07' }
+        { id: 8, type: 'program', title: '멘토링 프로그램', date: '2026-03-10' },
+        { id: 9, type: 'center-event', title: '우수 기관 시상식', date: '2026-03-14' },
+        { id: 10, type: 'closed-day', title: '시설 점검 휴관', date: '2026-03-28' },
+        { id: 11, type: 'program', title: '봄맞이 특별 행사', date: '2026-04-02' },
+        { id: 12, type: 'program', title: '자기소개서 클리닉', date: '2026-04-07' }
     ];
 
     /* =========================
@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getTypeLabel(type) {
-        if (type === 'youth') return '청소년프로그램';
-        if (type === 'education') return '센터 일정';
-        if (type === 'lifelong') return '휴관일';
+        if (type === 'program') return '프로그램';
+        if (type === 'center-event') return '센터 일정';
+        if (type === 'closed-day') return '휴관일';
         return '일정';
     }
 
@@ -131,8 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemsMarkup = events.map((event) => {
             return `
                 <li class="schedule-agenda__item">
-                    <span class="schedule-agenda__badge schedule-agenda__badge--${event.type}">
-                        ${getTypeLabel(event.type)}
+                    <span class="schedule-calendar__dot schedule-calendar__dot--${event.type}">
                     </span>
                     <p class="schedule-agenda__text">${event.title}</p>
                 </li>
