@@ -268,9 +268,23 @@
         margin-bottom: var(--space-4);
     }
 
+    .schedule-calendar__weekdays {
+        margin-bottom: var(--space-2);
+    }
+
     .schedule-agenda__group.yesterday,
     .schedule-agenda__group.tomorrow {
         display: flex;
+        color: var(--color-text-secondary-disabled);
+    }
+
+    .schedule-agenda__group.yesterday .schedule-calendar__dot,
+    .schedule-agenda__group.tomorrow .schedule-calendar__dot {
+        background: var(--color-text-secondary-disabled);
+    }
+
+    .schedule-agenda__group.today .schedule-calendar__dot {
+        width: .5rem;
     }
 
     .schedule__layout {
@@ -323,5 +337,9 @@
         grid-template-columns: .75fr .35fr;
         gap: var(--space-6);
         align-items: start;
+    }
+
+    .schedule-agenda__group.today .schedule-calendar__dot {
+        width: .625rem;
     }
 }
