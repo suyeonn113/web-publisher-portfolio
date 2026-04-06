@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 1,
             title: '2026년 3월 특성화사업 움: 트다',
             label: '[움연구소 4.0]',
-            imageSrc: '../assets/images/gallery/gallery-01.jpg',
+            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-01.jpg',
             imageAlt: '프로그램 참여자들이 실내에서 활동에 참여하고 있는 모습',
             href: '#'
         },
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 2,
             title: '2026년 청소년 연합 발대식',
             label: '',
-            imageSrc: '../assets/images/gallery/gallery-02.jpg',
+            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-02.jpg',
             imageAlt: '청소년들이 현수막을 들고 있는 단체 사진',
             href: '#'
         },
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 3,
             title: '2026년 3월 특성화사업 움: 트다',
             label: '[움아트]',
-            imageSrc: '../assets/images/gallery/gallery-03.jpg',
+            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-03.jpg',
             imageAlt: '청소년들이 직접 만든 작품을 들고 있는 모습',
             href: '#'
         },
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 4,
             title: '2026년 인공지능 청소년 프로그램 기획단',
             label: '[서울AI메이커]',
-            imageSrc: '../assets/images/gallery/gallery-04.jpg',
+            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-04.jpg',
             imageAlt: '참여 청소년들의 단체 사진',
             href: '#'
         },
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 5,
             title: '2026년 2월 24기 청소년운영위원회',
             label: '[청춘]',
-            imageSrc: '../assets/images/gallery/gallery-05.jpg',
+            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-05.jpg',
             imageAlt: '청소년들이 원으로 모여 회의를 진행하고 있는 모습',
             href: '#'
         },
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 6,
             title: '2026년 겨울방학 우.다.다 프로젝트',
             label: '',
-            imageSrc: '../assets/images/gallery/gallery-06.jpg',
+            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-06.jpg',
             imageAlt: '참여자들이 둥글게 둥글게 활동을 진행하고 있는 모습',
             href: '#'
         },
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 7,
             title: '2025년 12월 청소년특봉대',
             label: '',
-            imageSrc: '../assets/images/gallery/gallery-07.jpg',
+            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-07.jpg',
             imageAlt: '참가자들이 안대를 쓰고 시각장애인 체험 활동을 하는 모습',
             href: '#'
         },
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 8,
             title: '2025년 11월 예술로 다독다독',
             label: '',
-            imageSrc: '../assets/images/gallery/gallery-08.jpg',
+            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-08.jpg',
             imageAlt: '참가자들이 그린 내가 바라는 미래 모습 작품 전시 사진',
             href: '#'
         }
