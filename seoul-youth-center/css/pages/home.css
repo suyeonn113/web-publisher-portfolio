@@ -410,6 +410,7 @@
     word-break: keep-all;
     overflow-wrap: break-word;
     text-align: center;
+    font-size: var(--text-body-size);
 }
 
 @media (max-width: 479px) {
