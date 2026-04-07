@@ -593,7 +593,7 @@ $programs = sortProgramsForDisplay($programs);
      
     <!------------ Gallery ------------>
     <section class="gallery inner">
-        <h3 class="section__title">활동 사진</h3>
+        <h2 class="section__title">활동 사진</h2>
         <div class="gallery__controls">
             <button class="gallery__prev" 
                     type="button"
@@ -633,10 +633,8 @@ $programs = sortProgramsForDisplay($programs);
     </section>
 
     <!------------ SNS ------------>
-    <section class="sns">
-
     <section class="sns inner">
-        <h3 class="section__title" id="sns-title">SNS</h3>
+        <h2 class="section__title" id="sns-title">SNS</h2>
         <div class="sns__controls">
             <div class="sns__platforms" role="tablist" aria-label="SNS 채널 선택">
                 <button class="sns__platform"
@@ -940,12 +938,134 @@ $programs = sortProgramsForDisplay($programs);
             </div>
         </div>
     </section>
-    
-    </section>
 
-    <section class="links">
-        
-    </section>
+    <!------------ Related Links ------------>
+    <div class="related-links wrapper">
+        <section class="related-links inner">
+            <button id="related-links__toggle" 
+                    class="related-links__toggle"
+                    aria-expanded="false" 
+                    aria-controls="related-links__list"
+                    aria-label="유관기관 목록 열기">
+                <span class="related-links__toggle-title">유관기관 보기</span>
+                <svg class="icon--toggle icon" 
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.67 8.9101C20.67 8.7201 20.6 8.5301 20.45 8.3801C20.16 8.0901 19.68 8.0901 19.39 8.3801L12.87 14.9001C12.39 15.3801 11.61 15.3801 11.13 14.9001L4.61002 8.3801C4.32002 8.0901 3.84002 8.0901 3.55002 8.3801C3.26002 8.6701 3.26002 9.1501 3.55002 9.4401L10.07 15.9601C10.58 16.4701 11.27 16.7601 12 16.7601C12.73 16.7601 13.42 16.4801 13.93 15.9601L20.45 9.4401C20.59 9.2901 20.67 9.1001 20.67 8.9101Z"/>
+                </svg>
+            </button>
+            <ul id="related-links__list" class="related-links__list" hidden>
+                <li class="related-links__item">
+                    <a href="https://www.seoul.go.kr/main/index.jsp"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="서울특별시 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/seoul.png"
+                            alt="서울특별시">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.sen.go.kr/sen/index.do"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="서울특별시교육청 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/sen.png"
+                            alt="서울특별시교육청">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.kywa.or.kr/main/main.jsp"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="한국청소년활동진흥원 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/kywa.png"
+                            alt="한국청소년활동진흥원">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.sitedu.or.kr/index.do"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="서울특별시기술교육원 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/edu.png"
+                            alt="서울특별시기술교육원">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.youthcenter.co.kr/"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="서울특별시청소년시설협회 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/youthcenter.png"
+                            alt="서울특별시청소년시설협회">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.kays.or.kr/"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="한국청소년육성회 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/kays.png"
+                            alt="한국청소년육성회">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.sy0404.or.kr/"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="청소년활동진흥센터 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/sy0404.png"
+                            alt="청소년활동진흥센터">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.teen1318.or.kr/"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="서울시청소년상담복지센터 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/teen1318.png"
+                            alt="서울시청소년상담복지센터">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.1388.go.kr/ind/YTOSP_SC_IND_01"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="청소년1338 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/1388.png"
+                            alt="청소년1338">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.youthnavi.net/"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="서울시청소년몽땅 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/youthnavi.png"
+                            alt="서울시청소년몽땅">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://www.youth.go.kr/youth/"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="청소년활동정보서비스 e청소년 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/youth.png"
+                            alt="청소년활동정보서비스 e청소년">
+                    </a>
+                </li>
+                <li class="related-links__item">
+                    <a href="https://slearn.seoul.go.kr/"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="서울런 새 창 열기">
+                        <img src="<?= BASE_URL ?>/assets/images/links/slearn.png"
+                            alt="서울런">
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </div>
 
 </main>
 
@@ -967,6 +1087,7 @@ $programs = sortProgramsForDisplay($programs);
 <script src="<?= BASE_URL ?>/js/calendar.js"></script>
 <script src="<?= BASE_URL ?>/js/gallery.js"></script>
 <script src="<?= BASE_URL ?>/js/sns.js"></script>
+<script src="<?= BASE_URL ?>/js/related-links.js"></script>
 
 </body>
 </html>

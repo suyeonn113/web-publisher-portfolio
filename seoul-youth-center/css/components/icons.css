@@ -181,6 +181,11 @@
 }
 }
 
+/* ===== Related Links ===== */
+.icon--toggle {
+    stroke: var(--color-text-default-soft);
+}
+
 
 /* ==================== Tablet ==================== */
 
