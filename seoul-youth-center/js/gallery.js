@@ -36,12 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
      * - 나중에 DB/API 붙일 때 이 배열만 교체
      * -----------------------------------------
      */
+
     const activityPhotos = [
         {
             id: 1,
             title: '2026년 3월 특성화사업 움: 트다',
             label: '[움연구소 4.0]',
-            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-01.jpg',
+            imageSrc: 'assets/images/gallery/gallery-01.jpg',
             imageAlt: '프로그램 참여자들이 실내에서 활동에 참여하고 있는 모습',
             href: '#'
         },
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 2,
             title: '2026년 청소년 연합 발대식',
             label: '',
-            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-02.jpg',
+            imageSrc: 'assets/images/gallery/gallery-02.jpg',
             imageAlt: '청소년들이 현수막을 들고 있는 단체 사진',
             href: '#'
         },
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 3,
             title: '2026년 3월 특성화사업 움: 트다',
             label: '[움아트]',
-            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-03.jpg',
+            imageSrc: 'assets/images/gallery/gallery-03.jpg',
             imageAlt: '청소년들이 직접 만든 작품을 들고 있는 모습',
             href: '#'
         },
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 4,
             title: '2026년 인공지능 청소년 프로그램 기획단',
             label: '[서울AI메이커]',
-            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-04.jpg',
+            imageSrc: 'assets/images/gallery/gallery-04.jpg',
             imageAlt: '참여 청소년들의 단체 사진',
             href: '#'
         },
@@ -73,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 5,
             title: '2026년 2월 24기 청소년운영위원회',
             label: '[청춘]',
-            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-05.jpg',
+            imageSrc: 'assets/images/gallery/gallery-05.jpg',
             imageAlt: '청소년들이 원으로 모여 회의를 진행하고 있는 모습',
             href: '#'
         },
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 6,
             title: '2026년 겨울방학 우.다.다 프로젝트',
             label: '',
-            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-06.jpg',
+            imageSrc: 'assets/images/gallery/gallery-06.jpg',
             imageAlt: '참여자들이 둥글게 둥글게 활동을 진행하고 있는 모습',
             href: '#'
         },
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 7,
             title: '2025년 12월 청소년특봉대',
             label: '',
-            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-07.jpg',
+            imageSrc: 'assets/images/gallery/gallery-07.jpg',
             imageAlt: '참가자들이 안대를 쓰고 시각장애인 체험 활동을 하는 모습',
             href: '#'
         },
@@ -97,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 8,
             title: '2025년 11월 예술로 다독다독',
             label: '',
-            imageSrc: '/seoul-youth-center/assets/images/gallery/gallery-08.jpg',
+            imageSrc: 'assets/images/gallery/gallery-08.jpg',
             imageAlt: '참가자들이 그린 내가 바라는 미래 모습 작품 전시 사진',
             href: '#'
         }
@@ -108,6 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
      * 2) 유틸
      * -----------------------------------------
      */
+
+    function buildAssetUrl(path) {
+        const baseUrl = window.APP_BASE_URL || '';
+        const normalizedBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+        const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
+
+        return `${normalizedBase}/${normalizedPath}`;
+    }
+    
     function isMobileGridMode() {
         return window.innerWidth < BREAKPOINT_MOBILE;
     }
@@ -152,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.innerHTML = `
             <a class="gallery__link" href="${photo.href}">
                 <div class="gallery__image">
-                    <img src="${photo.imageSrc}" alt="${photo.imageAlt}">
+                    <img src="${buildAssetUrl(photo.imageSrc)}" alt="${photo.imageAlt}">
                 </div>
                 <div class="gallery__content">
                     <p class="gallery__title">${photo.title}

@@ -25,7 +25,7 @@ $programs = sortProgramsForDisplay($programs);
 
 <!------------ <Main> ------------>
 <main>
-<!------------ Hero ------------>
+    <!------------ Hero ------------>
     <section class="hero inner">
         <!-- Banner -->
         <div class="banner">
@@ -391,6 +391,7 @@ $programs = sortProgramsForDisplay($programs);
         </div>
     </section>
 
+    <!------------ Schedule ------------>
     <section class="schedule inner">
         <h2 class="section__title">센터 일정 둘러보기</h2>
 
@@ -502,6 +503,7 @@ $programs = sortProgramsForDisplay($programs);
         </div>
     </section>
 
+    <!------------ News ------------>
     <section class="news inner">
         <h2 class="visually-hidden">센터 소식 모아보기</h2>
         <article class="news-card news-card--notice">
@@ -588,7 +590,8 @@ $programs = sortProgramsForDisplay($programs);
             </ul>
         </article>
     </section>
-
+     
+    <!------------ Gallery ------------>
     <section class="gallery inner">
         <h3 class="section__title">활동 사진</h3>
         <div class="gallery__controls">
@@ -629,287 +632,314 @@ $programs = sortProgramsForDisplay($programs);
             </div>
     </section>
 
+    <!------------ SNS ------------>
     <section class="sns">
 
-<section class="sns inner" aria-labelledby="sns-title">
-    <div class="sns__header">
+    <section class="sns inner">
         <h3 class="section__title" id="sns-title">SNS</h3>
+        <div class="sns__controls">
+            <div class="sns__platforms" role="tablist" aria-label="SNS 채널 선택">
+                <button class="sns__platform"
+                        type="button"
+                        role="tab"
+                        id="sns-tab-instagram"
+                        aria-selected="true"
+                        aria-controls="sns-panel-instagram"
+                        data-platform="instagram"
+                        tabindex="0">
+                    <span class="sns__platform-icon" aria-hidden="true">
+                        <img src="<?= BASE_URL ?>/assets/icons/instagram.png" alt="">
+                    </span>
+                    <span class="sns__platform-label">인스타그램</span>
+                </button>
 
-        <div class="sns__platforms" role="tablist" aria-label="SNS 채널 선택">
-            <button class="sns__platform is-active"
-                    type="button"
-                    role="tab"
-                    id="sns-tab-all"
-                    aria-selected="true"
-                    aria-controls="sns-panel-all"
-                    data-platform="all">
+                <button class="sns__platform"
+                        type="button"
+                        role="tab"
+                        id="sns-tab-youtube"
+                        aria-selected="false"
+                        aria-controls="sns-panel-youtube"
+                        data-platform="youtube"
+                        tabindex="-1">
+                    <span class="sns__platform-icon" aria-hidden="true">
+                        <img src="<?= BASE_URL ?>/assets/icons/youtube.png" alt="">
+                    </span>
+                    <span class="sns__platform-label">유튜브</span>
+                </button>
+
+                <button class="sns__platform"
+                        type="button"
+                        role="tab"
+                        id="sns-tab-facebook"
+                        aria-selected="false"
+                        aria-controls="sns-panel-facebook"
+                        data-platform="facebook"
+                        tabindex="-1">
+                    <span class="sns__platform-icon" aria-hidden="true">
+                        <img src="<?= BASE_URL ?>/assets/icons/facebook.png" alt="">
+                    </span>
+                    <span class="sns__platform-label">페이스북</span>
+                </button>
+
+                <button class="sns__platform"
+                        type="button"
+                        role="tab"
+                        id="sns-tab-naverblog"
+                        aria-selected="false"
+                        aria-controls="sns-panel-naverblog"
+                        data-platform="naverblog"
+                        tabindex="-1">
+                    <span class="sns__platform-icon" aria-hidden="true">
+                        <img src="<?= BASE_URL ?>/assets/icons/naverblog.png" alt="">
+                    </span>
+                    <span class="sns__platform-label">네이버 블로그</span>
+                </button>
+            </div>
+            <a class="sns__platform sns__platform--link"
+               href="https://pf.kakao.com/_pqVxaG"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="카카오톡 채널 새 창 열기">
                 <span class="sns__platform-icon" aria-hidden="true">
-                    <!-- 전체 아이콘 -->
+                    <img src="<?= BASE_URL ?>/assets/icons/kakao.png" alt="">
                 </span>
-                <span class="sns__platform-label">전체</span>
-            </button>
-
-            <button class="sns__platform"
-                    type="button"
-                    role="tab"
-                    id="sns-tab-instagram"
-                    aria-selected="false"
-                    aria-controls="sns-panel-instagram"
-                    data-platform="instagram"
-                    tabindex="-1">
-                <span class="sns__platform-icon" aria-hidden="true">
-                    <!-- 인스타그램 아이콘 -->
-                </span>
-                <span class="sns__platform-label">인스타그램</span>
-            </button>
-
-            <button class="sns__platform"
-                    type="button"
-                    role="tab"
-                    id="sns-tab-youtube"
-                    aria-selected="false"
-                    aria-controls="sns-panel-youtube"
-                    data-platform="youtube"
-                    tabindex="-1">
-                <span class="sns__platform-icon" aria-hidden="true">
-                    <!-- 유튜브 아이콘 -->
-                </span>
-                <span class="sns__platform-label">유튜브</span>
-            </button>
-
-            <button class="sns__platform"
-                    type="button"
-                    role="tab"
-                    id="sns-tab-facebook"
-                    aria-selected="false"
-                    aria-controls="sns-panel-facebook"
-                    data-platform="facebook"
-                    tabindex="-1">
-                <span class="sns__platform-icon" aria-hidden="true">
-                    <!-- 페이스북 아이콘 -->
-                </span>
-                <span class="sns__platform-label">페이스북</span>
-            </button>
-
-            <button class="sns__platform"
-                    type="button"
-                    role="tab"
-                    id="sns-tab-blog"
-                    aria-selected="false"
-                    aria-controls="sns-panel-blog"
-                    data-platform="blog"
-                    tabindex="-1">
-                <span class="sns__platform-icon" aria-hidden="true">
-                    <!-- 블로그 아이콘 -->
-                </span>
-                <span class="sns__platform-label">블로그</span>
-            </button>
-        </div>
-    </div>
-
-    <div class="sns__body">
-        <!-- 전체 -->
-        <div class="sns__panel"
-             id="sns-panel-all"
-             role="tabpanel"
-             aria-labelledby="sns-tab-all"
-             data-platform-panel="all">
-            <ul class="sns__list" aria-label="전체 SNS 최신 게시글 목록">
-                <li class="sns__item">
-                    <a class="sns__link"
-                       href="https://www.instagram.com/"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="인스타그램 게시글 새 창 열기">
-                        <figure class="sns__figure">
-                            <div class="sns__thumb">
-                                <img src="./assets/images/sns/sns-01.jpg"
-                                     alt="인스타그램 게시글 썸네일">
-                            </div>
-                            <figcaption class="sns__meta">
-                                <span class="sns__channel">인스타그램</span>
-                                <span class="sns__text">봄 특별 프로그램 안내</span>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </li>
-
-                <li class="sns__item">
-                    <a class="sns__link"
-                       href="https://blog.naver.com/"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="블로그 게시글 새 창 열기">
-                        <figure class="sns__figure">
-                            <div class="sns__thumb">
-                                <img src="./assets/images/sns/sns-02.jpg"
-                                     alt="블로그 게시글 썸네일">
-                            </div>
-                            <figcaption class="sns__meta">
-                                <span class="sns__channel">블로그</span>
-                                <span class="sns__text">1분기 특별 프로그램</span>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </li>
-
-                <li class="sns__item">
-                    <a class="sns__link"
-                       href="https://www.facebook.com/"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="페이스북 게시글 새 창 열기">
-                        <figure class="sns__figure">
-                            <div class="sns__thumb">
-                                <img src="./assets/images/sns/sns-03.jpg"
-                                     alt="페이스북 게시글 썸네일">
-                            </div>
-                            <figcaption class="sns__meta">
-                                <span class="sns__channel">페이스북</span>
-                                <span class="sns__text">육아 힐링 톡 참여 안내</span>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </li>
-
-                <li class="sns__item">
-                    <a class="sns__link"
-                       href="https://www.youtube.com/"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="유튜브 게시글 새 창 열기">
-                        <figure class="sns__figure">
-                            <div class="sns__thumb">
-                                <img src="./assets/images/sns/sns-04.jpg"
-                                     alt="유튜브 게시글 썸네일">
-                            </div>
-                            <figcaption class="sns__meta">
-                                <span class="sns__channel">유튜브</span>
-                                <span class="sns__text">유연구 4.0 카드뉴스</span>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </li>
-            </ul>
+                <span class="sns__platform-label">카카오톡 채널</span>
+            </a>
         </div>
 
-        <!-- 인스타그램 -->
-        <div class="sns__panel"
-             id="sns-panel-instagram"
-             role="tabpanel"
-             aria-labelledby="sns-tab-instagram"
-             data-platform-panel="instagram"
-             hidden>
-            <ul class="sns__list" aria-label="인스타그램 게시글 목록">
-                <li class="sns__item">
-                    <a class="sns__link"
-                       href="#"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="인스타그램 게시글 새 창 열기">
-                        <figure class="sns__figure">
+        <div class="sns__body">
+            <!-- 인스타그램 -->
+            <div class="sns__panel"
+                id="sns-panel-instagram"
+                role="tabpanel"
+                aria-labelledby="sns-tab-instagram"
+                data-platform-panel="instagram">
+                <ul class="sns__list" aria-label="인스타그램 게시글 목록">
+                    <li class="sns__item">
+                        <a class="sns__link"
+                           href="https://www.instagram.com/p/DV5U91rEreS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="인스타그램 새 창 열기: 서울특별시립 서울청소년센터 움 이용 안내">
                             <div class="sns__thumb">
-                                <img src="./assets/images/sns/instagram-01.jpg"
-                                     alt="인스타그램 게시글 썸네일">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/instagram-01.png" alt="">
                             </div>
-                            <figcaption class="sns__meta">
-                                <span class="sns__channel">인스타그램</span>
-                                <span class="sns__text">게시글 제목</span>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                           href="https://www.instagram.com/p/DU9_HrtEq4R/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="인스타그램 새 창 열기: 공감시네마 4월 프로그램 안내">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/instagram-02.png" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                           href="https://www.instagram.com/p/DWQiCDFkppq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="인스타그램 새 창 열기: 2026년 청소년 연합 발대식">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/instagram-03.png" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                           href="https://www.instagram.com/p/DSv_uS9ieSh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="인스타그램 새 창 열기: 23기 청소년운영위원회 청춘 12월 소식">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/instagram-04.png" alt="">
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-        <!-- 유튜브 -->
-        <div class="sns__panel"
-             id="sns-panel-youtube"
-             role="tabpanel"
-             aria-labelledby="sns-tab-youtube"
-             data-platform-panel="youtube"
-             hidden>
-            <ul class="sns__list" aria-label="유튜브 게시글 목록">
-                <li class="sns__item">
-                    <a class="sns__link"
-                       href="#"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="유튜브 게시글 새 창 열기">
-                        <figure class="sns__figure">
+            <!-- 유튜브 -->
+            <div class="sns__panel"
+                id="sns-panel-youtube"
+                role="tabpanel"
+                aria-labelledby="sns-tab-youtube"
+                data-platform-panel="youtube"
+                hidden>
+                <ul class="sns__list" aria-label="유튜브 게시글 목록">
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://youtu.be/ojGdoQwNG5A?si=GJmaxdlNiNqH-5ip"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="유튜브 영상 새 창 열기: 서울특별시립 서울청소년센터 안내"
+                        data-preview-video="<?= BASE_URL ?>/assets/videos/sns/youtube-01.mp4">
                             <div class="sns__thumb">
-                                <img src="./assets/images/sns/youtube-01.jpg"
-                                     alt="유튜브 게시글 썸네일">
+                                <img src="https://i.ytimg.com/vi/ojGdoQwNG5A/hqdefault.jpg" alt="">
+                                <span class="sns__preview" aria-hidden="true"></span>
+                                <span class="sns__play" aria-hidden="true"></span>
                             </div>
-                            <figcaption class="sns__meta">
-                                <span class="sns__channel">유튜브</span>
-                                <span class="sns__text">게시글 제목</span>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://youtu.be/qMk9KHPnli0?si=vD26hsfncHffGaGe"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="유튜브 영상 새 창 열기: 2026년 해외탐방 서서투어2 영상"
+                        data-preview-video="<?= BASE_URL ?>/assets/videos/sns/youtube-02.mp4">
+                            <div class="sns__thumb">
+                                <img src="https://i.ytimg.com/vi/qMk9KHPnli0/maxresdefault.jpg" alt="">
+                                <span class="sns__preview" aria-hidden="true"></span>
+                                <span class="sns__play" aria-hidden="true"></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://i.ytimg.com/vi/xPoiNOvvyjg/hqdefault.jpg"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="유튜브 쇼츠 새 창 열기: 2025 서울청소년센터 페스티벌 영상"
+                        data-preview-video="<?= BASE_URL ?>/assets/videos/sns/youtube-03.mp4">
+                            <div class="sns__thumb">
+                                <img src="https://i.ytimg.com/vi/_DtdWr4o1hQ/hqdefault.jpg" alt="">
+                                <span class="sns__preview" aria-hidden="true"></span>
+                                <span class="sns__play" aria-hidden="true"></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://youtube.com/shorts/7b4La3bsh84?si=k5csJcElY8AEg8zO"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="유튜브 쇼츠 새 창 열기: 2025년 1차 특성화사업 움트리밍 밸런스게임"
+                        data-preview-video="<?= BASE_URL ?>/assets/videos/sns/youtube-04.mp4">
+                            <div class="sns__thumb">
+                                <img src="https://i.ytimg.com/vi/7b4La3bsh84/hqdefault.jpg" alt="">
+                                <span class="sns__preview" aria-hidden="true"></span>
+                                <span class="sns__play" aria-hidden="true"></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-        <!-- 페이스북 -->
-        <div class="sns__panel"
-             id="sns-panel-facebook"
-             role="tabpanel"
-             aria-labelledby="sns-tab-facebook"
-             data-platform-panel="facebook"
-             hidden>
-            <ul class="sns__list" aria-label="페이스북 게시글 목록">
-                <li class="sns__item">
-                    <a class="sns__link"
-                       href="#"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="페이스북 게시글 새 창 열기">
-                        <figure class="sns__figure">
+            <!-- 페이스북 -->
+            <div class="sns__panel"
+                id="sns-panel-facebook"
+                role="tabpanel"
+                aria-labelledby="sns-tab-facebook"
+                data-platform-panel="facebook"
+                hidden>
+                <ul class="sns__list" aria-label="페이스북 게시글 목록">
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://www.facebook.com/100057561185532/posts/pfbid02RsKSEyG7zDU9sdTtnB1JnYstHmKKiyaNLVFxt5NajqEMaSR7fJG34T4w8Vnj8TqNl/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="페이스북 게시글 새 창 열기: 신학기 대비 안전정보">
                             <div class="sns__thumb">
-                                <img src="./assets/images/sns/facebook-01.jpg"
-                                     alt="페이스북 게시글 썸네일">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/facebook-01.jpg" alt="">
                             </div>
-                            <figcaption class="sns__meta">
-                                <span class="sns__channel">페이스북</span>
-                                <span class="sns__text">게시글 제목</span>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://www.facebook.com/100057561185532/posts/pfbid02MsaHvuiMzESFAPJ5VBgmk9k7Q9wXiEe5JeZBrcvZzgwwDbuuKdZSXaPfZK239uzHl/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="페이스북 게시글 새 창 열기: 역사로움과 움니버스의 연합 OT">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/facebook-02.jpg" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://www.facebook.com/100057561185532/posts/pfbid0pSy4JawcRqXibN96k5H2iTSvzjp5w6ii98Z53RRFkULZ6VLPLHnbCRUmFZKdrEtYl/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="페이스북 게시글 새 창 열기: 방과후아카데미 ‘폴리’ 생일파티">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/facebook-03.jpg" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://www.facebook.com/100057561185532/posts/pfbid0AzT6AuzxNWUmuBUt895yfcUvxiv2SqbDNa1wLCmRxL8B6bsgGr2MBSSu7JZoyXn9l/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="페이스북 게시글 새 창 열기: 방과후아카데미 ‘폴리’ 미션수행활동">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/facebook-04.jpg" alt="">
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-        <!-- 블로그 -->
-        <div class="sns__panel"
-             id="sns-panel-blog"
-             role="tabpanel"
-             aria-labelledby="sns-tab-blog"
-             data-platform-panel="blog"
-             hidden>
-            <ul class="sns__list" aria-label="블로그 게시글 목록">
-                <li class="sns__item">
-                    <a class="sns__link"
-                       href="#"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="블로그 게시글 새 창 열기">
-                        <figure class="sns__figure">
+            <!-- 블로그 -->
+            <div class="sns__panel"
+                id="sns-panel-naverblog"
+                role="tabpanel"
+                aria-labelledby="sns-tab-naverblog"
+                data-platform-panel="naverblog"
+                hidden>
+                <ul class="sns__list" aria-label="네이버 블로그 게시글 목록">
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://blog.naver.com/seoulyouthc/224232712575?photoView=0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="네이버 블로그 게시글 새 창 열기: 평생교육 프로그램 안내">
                             <div class="sns__thumb">
-                                <img src="./assets/images/sns/blog-01.jpg"
-                                     alt="블로그 게시글 썸네일">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/naverblog-01.jpg" alt="">
                             </div>
-                            <figcaption class="sns__meta">
-                                <span class="sns__channel">블로그</span>
-                                <span class="sns__text">게시글 제목</span>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </li>
-            </ul>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="네이버 블로그 게시글 새 창 열기: 종합체력실 일회권 안내">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/naverblog-02.jpg" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://blog.naver.com/seoulyouthc/224178854586"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="네이버 블로그 게시글 새 창 열기: 2026 설 연휴 휴관 안내">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/naverblog-03.png" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li class="sns__item">
+                        <a class="sns__link"
+                        href="https://blog.naver.com/seoulyouthc/224169767976"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="네이버 블로그 게시글 새 창 열기: 뉴스레터 194호">
+                            <div class="sns__thumb">
+                                <img src="<?= BASE_URL ?>/assets/images/sns/naverblog-04.png" alt="">
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
     
     </section>
 
@@ -922,7 +952,12 @@ $programs = sortProgramsForDisplay($programs);
 <!------------ <Footer> ------------>
 <?php include './includes/footer.php'; ?>
 
+
+
 <!------------- <Script> ------------>
+<script>
+    window.APP_BASE_URL = '<?= BASE_URL ?>';
+</script>
 <script src="<?= BASE_URL ?>/js/gloval-nav.js"></script>
 <script src="<?= BASE_URL ?>/js/header-search.js"></script>
 <script src="<?= BASE_URL ?>/js/banner.js"></script>
@@ -931,6 +966,7 @@ $programs = sortProgramsForDisplay($programs);
 <script src="<?= BASE_URL ?>/js/recommend.js"></script>
 <script src="<?= BASE_URL ?>/js/calendar.js"></script>
 <script src="<?= BASE_URL ?>/js/gallery.js"></script>
+<script src="<?= BASE_URL ?>/js/sns.js"></script>
 
 </body>
 </html>
