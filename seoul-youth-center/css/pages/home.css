@@ -477,7 +477,6 @@
     row-gap: var(--space-3);
 
     padding-block: var(--space-3);
-    padding-inline: var(--layout-padding-inline);
 }
 
 .related-links__item img {
