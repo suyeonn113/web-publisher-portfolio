@@ -68,7 +68,7 @@
 
 
     /* ---------- 레이아웃 ---------- */
-    --container-1280: 80rem;
+    --container-1200: 75rem;
 
 
 
@@ -157,7 +157,7 @@
     --shadow-card: var(--shadow-strong);
 
     /* ---------- 레이아웃 ---------- */
-    --container-width: var(--container-1280);
+    --container-width: var(--container-1200);
 }
 
 
