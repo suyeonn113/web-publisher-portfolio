@@ -1,0 +1,194 @@
+@charset "utf-8";
+
+:root {
+    /* ========================================
+       프리미티브 토큰
+       - 색상, 크기 등 원시 값 정의
+    ======================================== */
+
+    /* ---------- 색상 ---------- */
+    /* 흑백 */
+    --white: #ffffff;
+    --gray-50: #f7f7f5;
+    --gray-100: #efefeb;
+    --gray-200: #ddddd7;
+    --gray-300: #c6c6bf;
+    --gray-500: #7a7a73;
+    --gray-700: #4f4f49;
+    --gray-900: #1f1f1b;
+
+    --green-500: #44d16d;
+
+
+    /* ---------- 타이포 ---------- */
+    /* 폰트 */
+    --font-family-sans: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    --font-family-display-en: "Bebas Neue", "Anton", "Oswald", var(--font-family-sans);
+
+    /* 폰트 크기 */
+    --font-size-14: 0.875rem;
+    --font-size-16: 1rem;
+    --font-size-18: 1.125rem;
+    --font-size-20: 1.25rem;
+    --font-size-24: 1.5rem;
+    --font-size-32: 2rem;
+    --font-size-40: 2.5rem;
+    --font-size-56: 3.5rem;
+    --font-size-72: 4.5rem;
+
+    /* 줄간격 */
+    --line-height-110: 1.1;
+    --line-height-150: 1.5;
+
+
+    /* ---------- 간격 ---------- */
+    --space-8: 0.5rem;
+    --space-12: 0.75rem;
+    --space-16: 1rem;
+    --space-20: 1.25rem;
+    --space-24: 1.5rem;
+    --space-32: 2rem;
+    --space-40: 2.5rem;
+    --space-48: 3rem;
+    --space-64: 4rem;
+    --space-80: 5rem;
+    --space-120: 7.5rem;
+
+
+    /* ---------- 라운드 ---------- */
+    --radius-12: 0.75rem;
+    --radius-16: 1rem;
+    --radius-24: 1.5rem;
+    --radius-32: 2rem;
+    --radius-full: 999px;
+
+
+    /* ---------- 그림자 ---------- */
+    --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.12);
+
+
+    /* ---------- 레이아웃 ---------- */
+    --container-1280: 80rem;
+
+
+
+    /* ========================================
+       시맨틱 토큰
+       - 역할/의미 기반 토큰
+    ======================================== */
+
+    /* ---------- 색상 ---------- */
+    /* 배경 */
+    --color-background-default: #f3f3f1;
+    --color-background-elevated: var(--white);
+
+    /* 텍스트 */
+    --color-text-primary: var(--gray-900);
+    --color-text-secondary: var(--gray-700);
+
+    /* 테두리 */
+    --color-border-subtle: rgba(31, 31, 27, 0.12);
+
+    /* 액션 */
+    --color-action-primary: var(--gray-900);
+    --color-action-on-primary: var(--white);
+
+    --color-status-success: var(--green-500);
+
+
+    /* ---------- 타이포 ---------- */
+    /* 폰트 */
+    --font-family-base: var(--font-family-sans);
+    --font-family-display: var(--font-family-display-en);
+
+    /* 폰트 크기 - 본문 */
+    --font-size-body: var(--font-size-16);
+    --font-size-body-sm: var(--font-size-14);
+    --font-size-body-lg: var(--font-size-18);
+    
+    /* 폰트 크기 - 라벨 및 버튼 */
+    --font-size-label: var(--font-size-14);
+    --font-size-button: var(--font-size-16);
+
+    --font-size-title-sm: var(--font-size-24);
+    --font-size-title-md: var(--font-size-32);
+    --font-size-title-lg: var(--font-size-40);
+    --font-size-display: var(--font-size-56);
+    --font-size-hero: var(--font-size-72);
+
+    /* 줄간격 */
+    --line-height-base: var(--line-height-150);
+    --line-height-tight: var(--line-height-110);
+
+    
+    /* ---------- 간격 ---------- */
+    /* 섹션 좌우 패딩 */
+    --space-inline-page: var(--space-24);
+    --space-inline-page-wide: var(--space-32);
+
+    /* 스택 간격 */
+    --space-stack-xs: var(--space-8);
+    --space-stack-sm: var(--space-12);
+    --space-stack-md: var(--space-16);
+    --space-stack-lg: var(--space-24);
+    --space-stack-xl: var(--space-32);
+
+    /* 섹견 간격 */
+    --space-section-sm: var(--space-64);
+    --space-section-md: var(--space-80);
+    --space-section-lg: var(--space-120);
+
+    --space-card-padding: var(--space-24);
+    --space-button-inline: var(--space-20);
+    --space-button-block: var(--space-12);
+
+
+    /* ---------- 라운드 ---------- */
+    /* 카드 */
+    --radius-card: var(--radius-24);
+
+    /* 버튼 */
+    --radius-button: var(--radius-full);
+
+    /* 서피스 */
+    --radius-surface: var(--radius-16);
+
+    /* ---------- 그림자 ---------- */
+    --shadow-card: var(--shadow-strong);
+
+    /* ---------- 레이아웃 ---------- */
+    --container-width: var(--container-1280);
+}
+
+
+
+/* ========================================
+   중간 화면 (1199px 이하)
+   - 태블릿 / 브라우저 축소 시
+======================================== */
+
+@media (max-width: 1199px) {
+    :root {
+        --font-size-body: var(--font-size-18);
+        --font-size-title-sm: var(--font-size-32);
+        --font-size-title-md: var(--font-size-40);
+        --font-size-display: var(--font-size-72);
+
+        --space-inline-page: var(--space-32);
+        --space-section-sm: var(--space-80);
+        --space-section-md: var(--space-120);
+    }
+}
+
+
+
+/* ========================================
+   작은 화면 (809px 이하)
+   - 모바일 / 컴팩트 UI
+======================================== */
+
+@media (max-width: 809px) {
+    :root {
+        /* 최소 레이아웃 */
+    }
+}

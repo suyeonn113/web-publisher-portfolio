@@ -1,0 +1,140 @@
+@charset "utf-8";
+
+/* ========================================
+   Header
+   - PC: nav / lead 상태 전환
+   - Mobile: lead + toggle 고정, nav 토글
+======================================== */
+
+/* ---------- 기본 ---------- */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.site-header__inner {
+    width: 100%;
+}
+
+.site-header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 5rem;
+    padding: 1rem 1.5rem;
+}
+
+.site-header__lead {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.site-header__home-link,
+.site-header__work-link,
+.site-header__menu-link,
+.site-header__menu-toggle {
+    flex-shrink: 0;
+}
+
+.site-header__work-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.site-header__work-text {
+    display: block;
+}
+
+.site-header__work-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+}
+
+.site-header__nav {
+    min-width: 0;
+}
+
+.site-header__menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.site-header__menu-toggle {
+    display: none;
+}
+
+/* ---------- PC 기본 상태 ---------- */
+@media (min-width: 1200px) {
+    .site-header__bar {
+        justify-content: space-between;
+    }
+
+    .site-header__menu-toggle {
+        display: none;
+    }
+
+    .site-header[data-header-state="nav"] .site-header__lead {
+        display: none;
+    }
+
+    .site-header[data-header-state="nav"] .site-header__nav {
+        display: block;
+        margin-left: auto;
+    }
+
+    .site-header[data-header-state="lead"] .site-header__lead {
+        display: flex;
+    }
+
+    .site-header[data-header-state="lead"] .site-header__nav {
+        display: none;
+    }
+}
+
+/* ---------- 1200 미만 ---------- */
+@media (max-width: 1199px) {
+    .site-header__bar {
+        position: relative;
+    }
+
+    .site-header__lead {
+        display: flex;
+        flex: 1 1 auto;
+    }
+
+    .site-header__menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+
+    .site-header__nav {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 1.5rem;
+        right: 1.5rem;
+        display: none;
+    }
+
+    .site-header__nav[data-menu-state="open"] {
+        display: block;
+    }
+
+    .site-header__menu {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+html {
+    color-scheme: light dark; /* 또는 light만 */
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased; /* mac/ios 글꼴 렌더링 개선 */
+}
+
+/* Input */
+input::placeholder {
+    color: #CCCCCC;
+}
+
+/* Keyboard-Focus */
+:focus-visible {
+    outline: 2px dashed #000;
+    outline-offset: 2px;
+}
+
+/* Not Keyboard */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Scroll */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px; /* 가로 스크롤용 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.skip-links {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -200%);
+    z-index: 20000;
+
+    display: flex;
+    gap: .5rem;
+
+    padding: .5rem;
+
+    border-radius: .75rem;
+    background: rgba(255,255,255,.95);
+    box-shadow: 0 6px 24px rgba(0,0,0,.12);
+}
+
+.skip-links:focus-within{
+    transform: translate(-50%, 0);
+}
+
+.skip-links__link{
+    display: inline-flex;
+    align-items: center;
+
+    padding: .5rem .75rem;
+
+    border-radius: .5rem;
+    text-decoration: none;
+
+    font-size: .875rem;
+    font-weight: 600;
+    color: inherit;
+}
