@@ -98,19 +98,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initMobileTabletMenu() {
         const mobileMenuButton = document.querySelector('.quick-menu__button--menu');
+        const quickMenu = document.querySelector('.quick-menu');
         const closeButton = menuPanel.querySelector('.button--close');
         const mainButtons = menuPanel.querySelectorAll('.main-menu__button[aria-controls]');
         const subPanel = menuPanel.querySelector('.sub-panel');
 
-        if (!mobileMenuButton || !closeButton || !subPanel || !mainButtons.length) return () => {};
+        if (!mobileMenuButton || !quickMenu || !closeButton || !subPanel || !mainButtons.length) return () => {};
 
         const cleanups = [];
         let lastFocusedElement = null;
 
+        /* --- scroll 상태 --- */
+        let lastScrollY = window.scrollY;
+        const SCROLL_THRESHOLD = 8;
+
         /* --- 3-1. State Helpers (상태 관련 함수) --- */
         // setCurrentMainButton
+        // setCurrentMainButtonByPanel
         // scrollToPanel
         // focusFirstSubLink
+        // setQuickMenuScrollState
+        // isMobileTabletMenuOpen
+        // handleQuickMenuScroll
         function setCurrentMainButton(currentButton) {
             const mainButtons = menuPanel.querySelectorAll('.main-menu__button[aria-controls]');
 
@@ -152,6 +161,52 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        function setQuickMenuScrollState(state) {
+            // data-scroll-state="visible | hidden"
+            quickMenu.dataset.scrollState = state;
+        }
+
+        function isMobileTabletMenuOpen() {
+            return (
+                menuPanel.dataset.mobileMenuState === 'open' &&
+                mobileMenuButton.getAttribute('aria-expanded') === 'true'
+            );
+        }
+
+        function handleQuickMenuScroll() {
+            if (desktopMq.matches) return;
+
+            const currentY = window.scrollY;
+            const delta = currentY - lastScrollY;
+
+            // 메뉴 열려 있으면 항상 보이게
+            if (isMobileTabletMenuOpen()) {
+                setQuickMenuScrollState('visible');
+                lastScrollY = currentY;
+                return;
+            }
+
+            // 상단 근처에서는 항상 보이게
+            if (currentY < 40) {
+                setQuickMenuScrollState('visible');
+                lastScrollY = currentY;
+                return;
+            }
+
+            // 미세한 스크롤은 무시
+            if (Math.abs(delta) < SCROLL_THRESHOLD) return;
+
+            if (delta > 0) {
+                // ↓ 아래로 스크롤 → 숨김
+                setQuickMenuScrollState('hidden');
+            } else {
+                // ↑ 위로 스크롤 → 표시
+                setQuickMenuScrollState('visible');
+            }
+
+            lastScrollY = currentY;
+        }
+
         /* --- 3-2. Open / Close / Toggle (열기/닫기/토글) --- */
         // openMobileTabletMenu
         // closeMobileTabletMenu
@@ -168,6 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (mobileMq.matches) {
                 document.body.classList.add('no-scroll');
             }
+
+            setQuickMenuScrollState('visible');
             closeButton.focus();
         }
 
@@ -187,6 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ) {
                 lastFocusedElement.focus();
             }
+
+            setQuickMenuScrollState('visible');
         }
 
         function toggleMobileTabletMenu() {
@@ -206,8 +265,11 @@ document.addEventListener('DOMContentLoaded', () => {
             menuPanel.dataset.mobileMenuState = 'closed';
         }
 
+        // 초기 상태
+        setQuickMenuScrollState('visible');
+
         /* --- 3-3. Interaction Binding (이벤트 연결) --- */
-        // click / keydown / outside click 등
+        // click / keydown / outside click / scroll 등
         cleanups.push(
             addListenerWithCleanup(mobileMenuButton, 'click', (event) => {
                 if (desktopMq.matches) return;
@@ -247,13 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeMobileTabletMenu();
             })
         );
-
-        function isMobileTabletMenuOpen() {
-            return (
-                menuPanel.dataset.mobileMenuState === 'open' &&
-                mobileMenuButton.getAttribute('aria-expanded') === 'true'
-            );
-        }
 
         cleanups.push(
             addListenerWithCleanup(menuPanel, 'click', (event) => {
@@ -322,11 +377,16 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         );
 
+        cleanups.push(
+            addListenerWithCleanup(window, 'scroll', handleQuickMenuScroll, { passive: true })
+        );
+
         /* --- 3-4. Viewport Sync (뷰포트 대응) --- */
         // matchMedia 변경 대응
         cleanups.push(
             addMqChangeListener(desktopMq, () => {
                 closeMobileTabletMenu({ restoreFocus: false });
+                setQuickMenuScrollState('visible');
 
                 if (desktopMq.matches) {
                     switchMenuMode('drawer');
