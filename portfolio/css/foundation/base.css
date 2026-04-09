@@ -1,34 +1,70 @@
 @charset "utf-8";
 
+/* ========================================
+   1. 문서 환경 설정
+   - 브라우저 렌더링 / 기본 환경값
+======================================== */
+
 html {
-    color-scheme: light dark; /* 또는 light만 */
+    color-scheme: light dark; /* 필요 시 light만 사용 */
+}
+
+/* ========================================
+   2. 타이포 기본값
+   - 전역 글줄 / 글꼴 렌더링 / 기본 텍스트 색
+======================================== */
+/* Font Face - SUIT Variable */
+@font-face {
+    font-family: "SUIT";
+    src: url("../fonts/SUIT/SUIT-Variable.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --font-family-base: "SUIT", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 
 body {
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased; /* mac/ios 글꼴 렌더링 개선 */
+    -webkit-font-smoothing: antialiased; /* mac/iOS 글꼴 렌더링 개선 */
+    font-family: var(--font-family-base);
+    color: var(--color-text);
 }
+
 
 /* Input */
 input::placeholder {
-    color: #CCCCCC;
+    color: #cccccc;
 }
 
-/* Keyboard-Focus */
+/* ========================================
+   3. 접근성 / 포커스
+   - 키보드 포커스 표시
+   - 마우스 포커스 제거
+======================================== */
+
 :focus-visible {
-    outline: 2px dashed #000;
+    outline: 2px solid #000;
     outline-offset: 2px;
+    border-radius: 5%;
 }
 
-/* Not Keyboard */
 :focus:not(:focus-visible) {
     outline: none;
 }
 
+/* ========================================
+   4. 공통 UI 보정
+   - 스크롤바
+   - 스킵 링크
+======================================== */
+
 /* Scroll */
 ::-webkit-scrollbar {
     width: 5px;
-    height: 5px; /* 가로 스크롤용 */
+    height: 5px; /* 가로 스크롤 */
 }
 
 ::-webkit-scrollbar-thumb {
@@ -44,6 +80,7 @@ input::placeholder {
     background: transparent;
 }
 
+/* Skip Links */
 .skip-links {
     position: fixed;
     top: 0;
@@ -52,29 +89,29 @@ input::placeholder {
     z-index: 20000;
 
     display: flex;
-    gap: .5rem;
+    gap: 0.5rem;
 
-    padding: .5rem;
+    padding: 0.5rem;
 
-    border-radius: .75rem;
-    background: rgba(255,255,255,.95);
-    box-shadow: 0 6px 24px rgba(0,0,0,.12);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
 }
 
-.skip-links:focus-within{
+.skip-links:focus-within {
     transform: translate(-50%, 0);
 }
 
-.skip-links__link{
+.skip-links__link {
     display: inline-flex;
     align-items: center;
 
-    padding: .5rem .75rem;
+    padding: 0.5rem 0.75rem;
 
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     text-decoration: none;
 
-    font-size: .875rem;
+    font-size: 0.875rem;
     font-weight: 600;
     color: inherit;
 }

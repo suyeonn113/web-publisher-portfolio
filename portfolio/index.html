@@ -4,58 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Foundation -->
-    <link rel="stylesheet" href="css/foundation/reset.css">
-    <link rel="stylesheet" href="css/foundation/base.css">
-    <link rel="stylesheet" href="css/foundation/tokens.css">
-
-    <!-- Layout -->
-    <link rel="stylesheet" href="css/layout/header.css">
-
-    <!-- Components -->
-    <link rel="stylesheet" href="css/components/cursor.css">
-
-    <!-- Page Styles -->
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
     <header class="site-header" data-header-state="nav">
         <div class="site-header__inner">
             <div class="site-header__bar">
-                <!--  -->
-                <div class="site-header__lead">
-                    <a class="site-header__home-link" href="/" aria-label="홈으로 이동">
-                        <img class="site-header__avatar"
-                             src=""
-                             alt="">
-                    </a>
-
-                    <a class="site-header__work-link" href="#">
-                        <span class="site-header__work-text">저의 [작업물]을 보시겠어요?</span>
-                        <span class="site-header__work-icon" aria-hidden="true"></span>
-                    </a>
+                <!-- 프로필 사진 -->
+                <a class="site-header__home-link" href="#" aria-label="홈으로 이동">
+                    <img class="site-header__avatar"
+                            src="assets/images/avatar.jpg"
+                            alt="웃고 있는 수연^^">
+                </a>
+                <div class="site-header__controls">
+                    <!-- PC 기본: 가로 메뉴 -->
+                    <nav id="site-header-nav"
+                        class="site-header__nav"
+                        data-menu-state="closed"
+                        aria-label="주요 메뉴">
+                        <ul class="site-header__menu">
+                            <li> <!-- 상태용: 작업물 링크 (모바일 / PC 스크롤시 등장) -->
+                                <a class="site-header__work-link" href="#">
+                                    <span class="site-header__work-text">작업물 바로보기</span>
+                                    <span class="site-header__work-icon" aria-hidden="true"></span>
+                                </a>
+                            </li>
+                            <li><a class="site-header__menu-link" href="#">홈</a></li>
+                            <li><a class="site-header__menu-link" href="#">소개</a></li>
+                            <li><a class="site-header__menu-link" href="#">작업물</a></li>
+                            <li><a class="site-header__menu-link" href="#">기록</a></li>
+                            <li class="site-header__menu--contact"><a class="site-header__menu-link site-header__menu-link--contact" href="#">연락하기</a></li>
+                        </ul>
+                    </nav>
+                    <button class="site-header__menu-toggle toggle-button"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="site-header-nav"
+                            aria-label="메뉴 열기">
+                        <span class="toggle-icon" aria-hidden="true">
+                            <span class="toggle-icon__line toggle-icon__line--top"></span>
+                            <span class="toggle-icon__line toggle-icon__line--bottom"></span>
+                        </span>
+                    </button>
                 </div>
-                <!-- 메뉴 -->
-                <nav id="site-header-nav"
-                     class="site-header__nav"
-                     data-menu-state="closed"
-                     aria-label="주요 메뉴">
-                    <ul class="site-header__menu">
-                        <li><a class="site-header__menu-link" href="#">Home</a></li>
-                        <li><a class="site-header__menu-link" href="#">About</a></li>
-                        <li><a class="site-header__menu-link" href="#">Projects</a></li>
-                        <li><a class="site-header__menu-link" href="#">Blogs</a></li>
-                        <li><a class="site-header__menu-link site-header__menu-link--contact" href="#">Contact</a></li>
-                    </ul>
-                </nav>
-                <!-- 메뉴 토글 버튼 (1200 미만에서)-->
-                <button class="site-header__menu-toggle"
-                        type="button"
-                        aria-expanded="false"
-                        aria-controls="site-header-nav"
-                        aria-label="메뉴 열기">
-                        o
-                </button>
             </div>
         </div>
     </header>
@@ -202,8 +193,7 @@
     </main>
 
     <script src="js/cursor.js"></script>
-    <script src="js/header.js"></script>
-    <script src="js/home.js"></script>
-    <script src="js/main.js"></script>
+    <script type="module" src="js/home.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

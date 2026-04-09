@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+/* ========================================
+   Toggle Icon
+   - 왼쪽 기준으로 길어지면서
+   - 시각적으로 중앙 유지
+   - 길이 / 회전 타이밍 분리
+======================================== */
+
+.toggle-icon {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 14px;
+}
+
+/* ---------- 선 래퍼 ---------- */
+/* 닫힘 상태에서 중심 보정 */
+.toggle-icon__line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+
+    transform-origin: center center;
+
+    /* 회전 / 위치 이동은 조금 늦게 시작 */
+    transition:
+        transform 320ms cubic-bezier(0.25, 1, 0.5, 1) 60ms;
+}
+
+/* 위치 */
+.toggle-icon__line--top {
+    top: 2px;
+    transform: translateX(20%);
+}
+
+.toggle-icon__line--bottom {
+    bottom: 2px;
+    transform: translateX(20%);
+}
+
+/* ---------- 실제 선 ---------- */
+.toggle-icon__line::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--gray-50);
+
+    /* 왼쪽 기준 길이 */
+    transform-origin: left center;
+    transform: scaleX(0.6);
+
+    /* 길이는 먼저 반응 */
+    transition:
+        transform 220ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* ========================================
+   열림 (X)
+======================================== */
+
+.toggle-button[aria-expanded="true"] .toggle-icon__line--top {
+    transform: translateX(0) translateY(4px) rotate(45deg);
+}
+
+.toggle-button[aria-expanded="true"] .toggle-icon__line--bottom {
+    transform: translateX(0) translateY(-4px) rotate(-45deg);
+}
+
+.toggle-button[aria-expanded="true"] .toggle-icon__line::before {
+    transform: scaleX(1);
+}

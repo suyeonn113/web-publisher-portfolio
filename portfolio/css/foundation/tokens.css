@@ -11,10 +11,11 @@
     --white: #ffffff;
     --gray-50: #f7f7f5;
     --gray-100: #efefeb;
-    --gray-200: #ddddd7;
+    --gray-200: #DADADA;
     --gray-300: #c6c6bf;
     --gray-500: #7a7a73;
     --gray-700: #4f4f49;
+    --gray-800: #303030;
     --gray-900: #1f1f1b;
 
     --green-500: #44d16d;
@@ -83,17 +84,17 @@
     --color-background-elevated: var(--white);
 
     /* 텍스트 */
-    --color-text-primary: var(--gray-900);
-    --color-text-secondary: var(--gray-700);
+    --color-text: var(--gray-800);
+    --color-text-subtle: var(--gray-700);
+    --color-text-muted: var(--gray-500);
+    --color-text-inverse: var(--white);
 
     /* 테두리 */
+    --color-border-line: var(--gray-200);
     --color-border-subtle: rgba(31, 31, 27, 0.12);
 
     /* 액션 */
-    --color-action-primary: var(--gray-900);
-    --color-action-on-primary: var(--white);
-
-    --color-status-success: var(--green-500);
+    --color-status-active: var(--green-500);
 
 
     /* ---------- 타이포 ---------- */
