@@ -326,38 +326,38 @@
     /* ========================================
         애니메이션 (1200 이상)
     ======================================== */
-/* 1. 바(Bar) 설정 */
-.site-header__menu {
-    transition: gap var(--pc-bar-close) var(--ease-standard);
-}
-.site-header[data-header-state="nav"] .site-header__menu {
-    transition-duration: var(--pc-bar-open);
-}
+    /* 1. 바(Bar) 설정 */
+    .site-header__menu {
+        transition: gap var(--pc-bar-close) var(--ease-standard);
+    }
+    .site-header[data-header-state="nav"] .site-header__menu {
+        transition-duration: var(--pc-bar-open);
+    }
 
-/* [CASE 1] 메뉴가 사라지는 상황 (Work 상태로 전환 등) */
-.site-header[data-header-state="work"] .site-header__menu > li:not(:first-child),
-.site-header[data-header-state="nav"] .site-header__menu > li:first-child {
-    transition: 
-        opacity 0.15s ease-out, 
-        max-width var(--pc-bar-close) var(--ease-standard),
-        margin var(--pc-bar-close) var(--ease-standard),
-        padding var(--pc-bar-close) var(--ease-standard);
-}
+    /* [CASE 1] 메뉴가 사라지는 상황 (Work 상태로 전환 등) */
+    .site-header[data-header-state="work"] .site-header__menu > li:not(:first-child),
+    .site-header[data-header-state="nav"] .site-header__menu > li:first-child {
+        transition: 
+            opacity 0.15s ease-out, 
+            max-width var(--pc-bar-close) var(--ease-standard),
+            margin var(--pc-bar-close) var(--ease-standard),
+            padding var(--pc-bar-close) var(--ease-standard);
+    }
 
-/* [CASE 2] 메뉴가 나타나는 상황 (Nav 상태로 전환 등) */
-.site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child),
-.site-header[data-header-state="work"] .site-header__menu > li:first-child {
-    transition: 
-        max-width var(--pc-bar-open) var(--ease-standard),
-        margin var(--pc-bar-open) var(--ease-standard),
-        padding var(--pc-bar-open) var(--ease-standard),
-        opacity var(--pc-item-fade) ease;
-}
+    /* [CASE 2] 메뉴가 나타나는 상황 (Nav 상태로 전환 등) */
+    .site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child),
+    .site-header[data-header-state="work"] .site-header__menu > li:first-child {
+        transition: 
+            max-width var(--pc-bar-open) var(--ease-standard),
+            margin var(--pc-bar-open) var(--ease-standard),
+            padding var(--pc-bar-open) var(--ease-standard),
+            opacity var(--pc-item-fade) ease;
+    }
 
-/* Nav 상태일 때 열리는 시간 보정 */
-.site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child) {
-    transition-duration: var(--pc-bar-open);
-}
+    /* Nav 상태일 때 열리는 시간 보정 */
+    .site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child) {
+        transition-duration: var(--pc-bar-open);
+    }
 }
 
 
@@ -437,7 +437,7 @@
         애니메이션 (1200 미만)
     ======================================== */
 
-    /* 1. 바(Bar)와 메뉴 컨테이너: 형태 변화(패딩/갭/높이) */
+    /* 1. 바(Bar)와 메뉴 컨테이너 */
     .site-header__bar,
     .site-header__menu {
         transition: 
@@ -455,30 +455,28 @@
     }
 
     /* ----------------------------------------
-       [CASE 3] 메뉴가 열릴 때 (Open)
-       핵심: 바가 먼저 벌어지기 시작하고, 아주 살짝 뒤에 내용물 등장
+       [CASE 1] 메뉴가 열릴 때 (Open)
     ---------------------------------------- */
     .site-header__nav[data-menu-state="open"] .site-header__menu > li:not(:first-child) {
         transition-delay: var(--mo-delay-open);
     }
 
     /* ----------------------------------------
-       [CASE 4] 메뉴가 닫힐 때 (Closed)
-       핵심: 글자는 즉시 소멸, 워크링크는 바가 다 접힌 후 등장
+       [CASE 2] 메뉴가 닫힐 때 (Closed)
     ---------------------------------------- */
-    
+    .site-header__nav[data-menu-state="closed"] .site-header__bar,
+    .site-header__nav[data-menu-state="closed"] .site-header__menu {
+        transition: 
+            padding var(--mo-menu-duration) var(--ease-standard),
+            max-height 0s; 
+    }
     /* 일반 메뉴들: 즉시(0s) 아주 빠르게 소멸 */
     .site-header__nav[data-menu-state="closed"] .site-header__menu > li:not(:first-child) {
         transition-duration: var(--mo-fade-fast);
         transition-delay: 0s;
     }
+
     
-    /* 워크 링크(첫 번째 li): 메뉴가 다 접힌 타이밍에 맞춰서 등장 */
-    .site-header__nav[data-menu-state="closed"] .site-header__menu > li:first-child {
-        transition-delay: var(--mo-delay-closed-work);
-        transition-duration: var(--mo-delay-closed-work);
-        transition-timing-function: var(--ease-standard); 
-    }
 
 }
 
