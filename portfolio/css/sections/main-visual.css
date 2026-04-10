@@ -1,5 +1,75 @@
 @charset "utf-8";
 
+/* ========================================
+   Hero
+======================================== */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 25rem;
+    height: 100vh;
+}
+
+.hero__heading {
+    position: relative;
+}
+
+.hero__heading--left {
+    justify-self: end;
+}
+
+.hero__heading--right {
+    justify-self: start;
+}
+
+.hero__heading-title {
+    font-weight: 700;
+    line-height: 1;
+}
+
+.hero__heading--left .hero__heading-title {
+    font-size: 5rem;
+}
+
+.hero__heading--right .hero__heading-title {
+    font-size: 5rem;
+}
+
+.hero__heading-subtitle {
+    position: absolute;
+    width: max-content;
+    font-size: 1.5rem;
+}
+
+.hero__heading--left .hero__heading-subtitle {
+    bottom: 100%;
+    left: 0;
+}
+
+.hero__heading--right .hero__heading-subtitle {
+    top: 100%;
+    left: 0;
+
+    max-width: 250px;
+    line-height: 1.4;
+    white-space: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .skills-entry__title {
