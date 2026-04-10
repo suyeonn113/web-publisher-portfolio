@@ -7,10 +7,10 @@
     /* [PC용] 지속시간 */
     --pc-bar-open: 0.6s;       /* 열릴 때 바 속도 */
     --pc-bar-close: 0.35s;       /* 닫힐 때 바 속도 */
-    --pc-item-fade: 0.15s;      /* 글자 사라지는 속도 */
+    --pc-item-fade: 0.4s;      /* 글자 사라지는 속도 */
     
     /* [PC용] 지연시간 */
-    --pc-delay-stagger: 0.0s;   /* 나타날 때 글자 대기 시간 */
+    --pc-delay-stagger: 0.15s;   /* 나타날 때 글자 대기 시간 */
 
     /* [Mobile용] */
     --mo-menu-duration: 0.4s;
@@ -278,7 +278,6 @@
         align-items: center;
         overflow: hidden;
         white-space: nowrap;
-        will-change: transform, opacity;
     }
 
     .site-header[data-header-state="nav"] .site-header__menu > li:first-child {
@@ -327,48 +326,38 @@
     /* ========================================
         애니메이션 (1200 이상)
     ======================================== */
+/* 1. 바(Bar) 설정 */
+.site-header__menu {
+    transition: gap var(--pc-bar-close) var(--ease-standard);
+}
+.site-header[data-header-state="nav"] .site-header__menu {
+    transition-duration: var(--pc-bar-open);
+}
 
-    /* 1. 바(Bar) 설정: 상태에 따라 '시간'만 교체 */
-    .site-header__bar {
-        /* 기본적으로 모든 변화(width, padding)를 감지하도록 all 사용 */
-        transition: 
-            width var(--pc-bar-close) var(--ease-standard),
-            padding var(--pc-bar-close) var(--ease-standard),
-            gap var(--pc-bar-close) var(--ease-standard);
-    }
+/* [CASE 1] 메뉴가 사라지는 상황 (Work 상태로 전환 등) */
+.site-header[data-header-state="work"] .site-header__menu > li:not(:first-child),
+.site-header[data-header-state="nav"] .site-header__menu > li:first-child {
+    transition: 
+        opacity 0.15s ease-out, 
+        max-width var(--pc-bar-close) var(--ease-standard),
+        margin var(--pc-bar-close) var(--ease-standard),
+        padding var(--pc-bar-close) var(--ease-standard);
+}
 
-    /* 나타날 때 (Nav 상태) */
-    .site-header[data-header-state="nav"] .site-header__bar {
-        transition-duration: var(--pc-bar-open);
-    }
+/* [CASE 2] 메뉴가 나타나는 상황 (Nav 상태로 전환 등) */
+.site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child),
+.site-header[data-header-state="work"] .site-header__menu > li:first-child {
+    transition: 
+        max-width var(--pc-bar-open) var(--ease-standard),
+        margin var(--pc-bar-open) var(--ease-standard),
+        padding var(--pc-bar-open) var(--ease-standard),
+        opacity var(--pc-item-fade) ease;
+}
 
-    /* 닫힐 때 (Work 상태) - 기본값이 close이므로 명시하지 않아도 되지만 확실하게 기록 */
-    .site-header[data-header-state="work"] .site-header__bar {
-        transition-duration: var(--pc-bar-close);
-    }
-
-    /* ---------- li 제어  ---------- */
-    /* [CASE 1] 사라지는 아이템 (Work일 때 메뉴들 / Nav일 때 Work링크) */
-    .site-header[data-header-state="work"] .site-header__menu > li:not(:first-child),
-    .site-header[data-header-state="nav"] .site-header__menu > li:first-child {
-        transform: translateX(-20px);
-        transition: 
-            opacity var(--pc-item-fade) ease 0s,
-            max-width var(--pc-bar-close) var(--ease-standard) 0s,
-            margin var(--pc-bar-close) var(--ease-standard) 0s,
-            transform var(--pc-bar-close) var(--ease-out-expo),
-    }
-
-    /* [CASE 2] 나타나는 아이템 (Nav일 때 메뉴들 / Work일 때 Work링크) */
-    .site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child),
-    .site-header[data-header-state="work"] .site-header__menu > li:first-child {
-        transform: translateX(0);
-        transition: 
-            max-width var(--pc-bar-open) var(--ease-standard) 0s,
-            margin var(--pc-bar-open) var(--ease-standard) 0s,
-            transform var(--pc-bar-open) var(--ease-out-expo),
-            opacity var(--pc-bar-open) ease 0.1s;
-    }
+/* Nav 상태일 때 열리는 시간 보정 */
+.site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child) {
+    transition-duration: var(--pc-bar-open);
+}
 }
 
 
