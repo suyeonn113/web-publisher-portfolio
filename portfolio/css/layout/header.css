@@ -4,22 +4,30 @@
     --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     
-    /* [PC용] 지속시간 */
-    --pc-bar-open: 0.6s;       /* 열릴 때 바 속도 */
-    --pc-bar-close: 0.35s;       /* 닫힐 때 바 속도 */
-    --pc-item-fade: 0.4s;      /* 글자 사라지는 속도 */
-    
-    /* [PC용] 지연시간 */
-    --pc-delay-stagger: 0.15s;   /* 나타날 때 글자 대기 시간 */
+    /* [PC용] */
+    --pc-open-speed: 0.6s;       /* 열릴 때 바 속도 */
+    --pc-close-speed: 0.35s;       /* 닫힐 때 바 속도 */
+    --pc-item-show-speed: 0.4s;      /* 글자 사라지는 속도 */
 
     /* [Mobile용] */
-    --mo-menu-duration: 0.4s;
-    --mo-fade-fast: 0.2s;
+    --mo-open-speed: 0.4s;
+    --mo-close-speed: 0.5s;
+    --mo-item-fade-speed: 0.1s;
     --mo-delay-open: 0.1s;
     --mo-delay-closed-work: 0.2s;
 
+    /* [Hover용] */
     --hover-speed: 0.6s;
     --hover-ease: cubic-bezier(0.22, 1, 0.36, 1); /* 처음에 팍! 나가는 느낌 */
+}
+
+body.is-resizing *,
+body.is-resizing {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
 }
 
 /* ========================================
@@ -320,7 +328,7 @@
     }
 
     .site-header__menu-toggle {
-        display: none;
+        display: none !important;
     }
 
     /* ========================================
@@ -328,10 +336,10 @@
     ======================================== */
     /* 1. 바(Bar) 설정 */
     .site-header__menu {
-        transition: gap var(--pc-bar-close) var(--ease-standard);
+        transition: gap var(--pc-close-speed) var(--ease-standard);
     }
     .site-header[data-header-state="nav"] .site-header__menu {
-        transition-duration: var(--pc-bar-open);
+        transition-duration: var(--pc-open-speed);
     }
 
     /* [CASE 1] 메뉴가 사라지는 상황 (Work 상태로 전환 등) */
@@ -339,24 +347,24 @@
     .site-header[data-header-state="nav"] .site-header__menu > li:first-child {
         transition: 
             opacity 0.15s ease-out, 
-            max-width var(--pc-bar-close) var(--ease-standard),
-            margin var(--pc-bar-close) var(--ease-standard),
-            padding var(--pc-bar-close) var(--ease-standard);
+            max-width var(--pc-close-speed) var(--ease-standard),
+            margin var(--pc-close-speed) var(--ease-standard),
+            padding var(--pc-close-speed) var(--ease-standard);
     }
 
     /* [CASE 2] 메뉴가 나타나는 상황 (Nav 상태로 전환 등) */
     .site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child),
     .site-header[data-header-state="work"] .site-header__menu > li:first-child {
         transition: 
-            max-width var(--pc-bar-open) var(--ease-standard),
-            margin var(--pc-bar-open) var(--ease-standard),
-            padding var(--pc-bar-open) var(--ease-standard),
-            opacity var(--pc-item-fade) ease;
+            max-width var(--pc-open-speed) var(--ease-standard),
+            margin var(--pc-open-speed) var(--ease-standard),
+            padding var(--pc-open-speed) var(--ease-standard),
+            opacity var(--pc-item-show-speed) ease;
     }
 
     /* Nav 상태일 때 열리는 시간 보정 */
     .site-header[data-header-state="nav"] .site-header__menu > li:not(:first-child) {
-        transition-duration: var(--pc-bar-open);
+        transition-duration: var(--pc-open-speed);
     }
 }
 
@@ -380,7 +388,6 @@
     /* 2. 메뉴가 [닫혔을 때] 의 설정 */
     .site-header__nav[data-menu-state="closed"] .site-header__menu {
         gap: 0;
-        padding: 0;
     }
 
     .site-header__nav[data-menu-state="closed"] .site-header__menu > li:first-child {
@@ -391,8 +398,8 @@
 
     .site-header__nav[data-menu-state="closed"] .site-header__menu > li:not(:first-child) {
         opacity: 0;
-        visibility: hidden;
-        height: 0;
+        max-height: 0;
+
         padding: 0;
         overflow: hidden;
         pointer-events: none;
@@ -415,7 +422,7 @@
     .site-header__nav[data-menu-state="open"] .site-header__menu > li:not(:first-child) {
         opacity: 1;
         visibility: visible;
-        height: auto;
+        max-height: 100px;
         pointer-events: auto;
     }
 
@@ -424,9 +431,6 @@
     }
 
     .site-header__menu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         width: 2.5rem;
         height: 2.5rem;
         border-radius: var(--radius-full);
@@ -436,47 +440,50 @@
     /* ========================================
         애니메이션 (1200 미만)
     ======================================== */
-
-    /* 1. 바(Bar)와 메뉴 컨테이너 */
-    .site-header__bar,
-    .site-header__menu {
+    
+    /*  [CASE 1] 메뉴가 열릴 때 (Open)*/
+    .site-header__nav[data-menu-state="open"] .site-header__bar,
+    .site-header__nav[data-menu-state="open"] .site-header__menu {
         transition: 
-            padding var(--mo-menu-duration) var(--ease-standard),
-            gap var(--mo-menu-duration) var(--ease-standard),
-            max-height var(--mo-menu-duration) ease;
+            padding var(--mo-open-speed) var(--ease-standard),
+            gap var(--mo-open-speed) var(--ease-standard),
+            max-height var(--mo-open-speed) ease;
     }
 
-    /* 2. 리스트 아이템(li) 공통 설정 */
-    .site-header__menu > li {
-        transition: 
-            opacity var(--mo-fade-fast) ease, 
-            max-height var(--mo-menu-duration) var(--ease-standard),
-            visibility var(--mo-menu-duration);
+    .site-header__nav[data-menu-state="open"] .site-header__menu > li:first-child {
+        transition: opacity var(--mo-item-fade-speed) ease;
     }
 
-    /* ----------------------------------------
-       [CASE 1] 메뉴가 열릴 때 (Open)
-    ---------------------------------------- */
     .site-header__nav[data-menu-state="open"] .site-header__menu > li:not(:first-child) {
+        transition: 
+            opacity var(--mo-open-speed) ease,
+            max-height var(--mo-open-speed) var(--ease-standard);
         transition-delay: var(--mo-delay-open);
     }
 
-    /* ----------------------------------------
-       [CASE 2] 메뉴가 닫힐 때 (Closed)
-    ---------------------------------------- */
+    /* [CASE 2] 메뉴가 닫힐 때 (Closed) */
+    /* 1. 바와 메뉴 컨테이너: 여기가 '스르륵' 줄어드는 주인공 */
     .site-header__nav[data-menu-state="closed"] .site-header__bar,
     .site-header__nav[data-menu-state="closed"] .site-header__menu {
         transition: 
-            padding var(--mo-menu-duration) var(--ease-standard),
-            max-height 0s; 
+            padding var(--mo-close-speed) var(--ease-standard),
+            max-height var(--mo-close-speed) var(--ease-standard),
+            gap var(--mo-close-speed) var(--ease-standard); 
     }
-    /* 일반 메뉴들: 즉시(0s) 아주 빠르게 소멸 */
+
+    /* 2. 메뉴 아이템들 */
     .site-header__nav[data-menu-state="closed"] .site-header__menu > li:not(:first-child) {
-        transition-duration: var(--mo-fade-fast);
-        transition-delay: 0s;
+        transition: 
+            opacity 0s, 
+            max-height 0s, 
+            visibility 0s;
+        transition-delay: 0s; 
     }
 
-    
-
+    /* 3. 첫 번째 li (Work): 메뉴가 다 줄어든 뒤에 스윽 나타남 */
+    .site-header__nav[data-menu-state="closed"] .site-header__menu > li:first-child {
+        transition: opacity var(--mo-item-fade-speed) ease;
+        transition-delay: .3s;
+    }
 }
 

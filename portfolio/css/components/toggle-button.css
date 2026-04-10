@@ -1,10 +1,14 @@
 @charset "utf-8";
 
-@charset "utf-8";
-
 /* ========================================
    Toggle Icon - Common Base (뼈대)
 ======================================== */
+.toggle-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .toggle-icon {
     position: relative;
     display: inline-block;
@@ -28,6 +32,7 @@
     /* 길이는 먼저 반응하는 타이밍 유지 */
     transition: transform 220ms cubic-bezier(0.33, 1, 0.68, 1);
 }
+
 
 /* ========================================
    Toggle Button - Hamburger (헤더 전용 스타일)
@@ -70,4 +75,45 @@
 
 .toggle-button--hamburger[aria-expanded="true"] .toggle-icon__line::before {
     transform: scaleX(1);
+}
+
+
+
+/* ========================================
+   Toggle Button - Chevron (화살표 스타일)
+======================================== */
+
+/* 1. 크기 및 선 두께 설정 */
+.toggle-button--chevron .toggle-icon {
+    width: 16px;
+    height: 10px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-button--chevron .toggle-icon__line {
+    top: 50%;
+    height: 2px;
+    width: 10px; 
+    transition: transform 0.6s ease;
+}
+
+/* 2. 닫힘 상태 (∨ 모양) */
+.toggle-button--chevron .toggle-icon__line--left {
+    left: 0;
+    transform: rotate(45deg);
+}
+
+.toggle-button--chevron .toggle-icon__line--right {
+    right: 0;
+    left: auto;
+    transform: rotate(-45deg);
+}
+
+/* 3. 열림 상태 (∧ 모양) */
+.toggle-button--chevron[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+}
+/* 색상 및 기본 바 유지 */
+.toggle-button--chevron .toggle-icon__line::before {
+    transform-origin: center center;
 }
