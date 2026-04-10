@@ -6,7 +6,7 @@
    - 애니메이션 없이 상태만 제어
 ======================================== */
 
-import { updateToggleButton } from './components/toggle-button.js';
+import { updateToggleButton } from './utils/toggle.js';
 
 export function initSiteHeader() {
     /* ---------- DOM ---------- */
@@ -34,6 +34,7 @@ export function initSiteHeader() {
     /* ---------- 상태 ---------- */
     let lastScrollY = window.scrollY;
     let accumulatedDelta = 0;
+    let resizeTimer;
 
     /* ---------- 유틸 ---------- */
     function isDesktop() {
@@ -151,6 +152,8 @@ export function initSiteHeader() {
 
     /* ---------- 리사이즈 ---------- */
     function handleResize() {
+        document.body.classList.add('is-resizing');
+
         if (isDesktop()) {
             nav.dataset.menuState = 'closed';
             document.body.style.overflow = '';
@@ -166,6 +169,11 @@ export function initSiteHeader() {
 
         lastScrollY = window.scrollY;
         accumulatedDelta = 0;
+
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            document.body.classList.remove('is-resizing');
+        }, 200);
     }
 
     /* ---------- 토글 ---------- */

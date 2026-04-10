@@ -1,0 +1,73 @@
+@charset "utf-8";
+
+
+
+.skills-entry__title {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.skills-entry__toggle {
+    width: 1rem;
+    height: 1rem;
+}
+
+.toggle-button--chevron .toggle-icon__line::before {
+    background: #000;
+}
+
+.toggle-button--chevron[aria-expanded="true"] .toggle-icon__line::before {
+    background: #949494;
+}
+
+
+
+
+
+/* ========================================
+   Skills 애니메이션
+======================================== */
+
+:root {
+    /* 애니메이션 속도 조절*/
+    --sk-open-speed: 0.8s;   /* 열릴 때 속도 */
+    --sk-close-speed: 0.5s;  /* 닫힐 때 속도 */
+    --sk-max-height: 500px;  /* 서랍 최대 높이 */
+    --sk-stagger-delay: 0.1s; /* 글자 나타나는 지연 시간 */
+}
+
+/* --- 1. 서랍 (부모) --- */
+.skills-entry__body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height var(--sk-close-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- 2. 내용물 (자식) --- */
+.skills-entry__details {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(-20px);
+    opacity: 0;
+    /* 닫힐 때 설정 */
+    transition: 
+        clip-path var(--sk-close-speed) ease, 
+        transform var(--sk-close-speed) ease, 
+        opacity calc(var(--sk-close-speed) * 0.75) ease;
+}
+
+/* --- 3. 열림 상태 (Active) --- */
+.skills-entry__title:has(button[aria-expanded="true"]) + .skills-entry__body {
+    max-height: var(--sk-max-height);
+    transition: max-height var(--sk-open-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skills-entry__title:has(button[aria-expanded="true"]) + .skills-entry__body .skills-entry__details {
+    clip-path: inset(0 0 0% 0);
+    transform: translateY(0);
+    opacity: 1;
+    transition: 
+        clip-path var(--sk-open-speed) ease var(--sk-stagger-delay), 
+        transform calc(var(--sk-open-speed) * 0.8) ease var(--sk-stagger-delay), 
+        opacity calc(var(--sk-open-speed) * 0.8) ease var(--sk-stagger-delay);
+}

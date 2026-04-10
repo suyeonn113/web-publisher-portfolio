@@ -15,5 +15,4 @@
 @import url("./effects/surface.css");
 
 /* ---------- sections (home only) ---------- */
-@import url("./sections/hero.css");
-@import url("./sections/intro.css");
+@import url("./sections/main-visual.css");
