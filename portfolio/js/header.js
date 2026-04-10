@@ -65,6 +65,10 @@ export function initSiteHeader() {
         });
     }
 
+    function syncBodyScroll() {
+        document.body.style.overflow = isMobileMenuOpen() ? 'hidden' : '';
+    }
+
     /* ---------- 데스크톱 상태 ---------- */
     function applyDesktopState() {
         nav.dataset.menuState = 'closed';
@@ -95,11 +99,13 @@ export function initSiteHeader() {
     function openMobileMenu() {
         nav.dataset.menuState = 'open';
         applyMobileState();
+        syncBodyScroll();
     }
 
     function closeMobileMenu() {
         nav.dataset.menuState = 'closed';
         applyMobileState();
+        syncBodyScroll();
     }
 
     /* ---------- 스크롤 ---------- */
@@ -147,10 +153,15 @@ export function initSiteHeader() {
     function handleResize() {
         if (isDesktop()) {
             nav.dataset.menuState = 'closed';
+            document.body.style.overflow = '';
             applyDesktopState();
+            handleScroll();
         } else {
-            nav.dataset.menuState = 'closed';
-            applyMobileState();
+            if (!isMobileMenuOpen()) {
+                nav.dataset.menuState = 'closed';
+                applyMobileState();
+            }
+            syncBodyScroll();
         }
 
         lastScrollY = window.scrollY;
@@ -168,6 +179,27 @@ export function initSiteHeader() {
         }
     }
 
+    /* ---------- 메뉴 항목 클릭 ---------- */
+    function handleMenuClick(event) {
+        if (isDesktop()) return;
+
+        const clickedLink = event.target.closest('.site-header__menu-link');
+        if (!clickedLink) return;
+
+        closeMobileMenu();
+    }
+
+    /* ---------- ESC 닫기 ---------- */
+    function handleKeydown(event) {
+        if (isDesktop()) return;
+        if (!isMobileMenuOpen()) return;
+
+        if (event.key === 'Escape') {
+            closeMobileMenu();
+            menuToggle.focus();
+        }
+    }
+
     /* ---------- 초기 실행 ---------- */
     function init() {
         nav.dataset.menuState = 'closed';
@@ -175,14 +207,19 @@ export function initSiteHeader() {
         if (isDesktop()) {
             setHeaderState('nav');
             applyDesktopState();
+            document.body.style.overflow = '';
         } else {
             setHeaderState('work');
             applyMobileState();
+            syncBodyScroll();
         }
 
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleResize);
         menuToggle.addEventListener('click', handleToggleClick);
+        menuList.addEventListener('click', handleMenuClick);
+        window.addEventListener('keydown', handleKeydown);
+        
     }
 
     init();
