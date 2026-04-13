@@ -2,19 +2,37 @@
     Home
 ============================================================ */
 
-   import { updateToggleButton } from './utils/toggle.js'; 
-
-// 스킬 섹션 전용 로직
-const skillButtons = document.querySelectorAll('.skills-entry__toggle');
-
-skillButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        
-        updateToggleButton(button, !isExpanded, {
-            expandedLabel: '상세 내용 닫기',
-            collapsedLabel: '상세 내용 보기',
-            labelPrefix: '스킬'
-        });
-    });
+    import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
+   
+document.addEventListener('DOMContentLoaded', () => {
+    initHero();
 });
+
+
+function initHero() {
+  const tl = gsap.timeline();
+
+  tl.from(".hero__title", {
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power3.out"
+  })
+  .from(".hero__desc", {
+    y: 20,
+    opacity: 0,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.3")
+
+  // 잠깐 보여주고
+  .to({}, { duration: 1 })
+
+  // 다시 사라짐
+  .to(".hero__title, .hero__desc", {
+    y: -20,
+    opacity: 0,
+    duration: 0.6,
+    ease: "power2.in"
+  });
+}

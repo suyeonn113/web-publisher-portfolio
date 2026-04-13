@@ -8,11 +8,3 @@
 /* ---------- layout ---------- */
 @import url("./layout/header.css");
 
-/* ---------- components ---------- */
-@import url("./components/toggle-button.css");
-
-/* ---------- effects ---------- */
-@import url("./effects/surface.css");
-
-/* ---------- sections (home only) ---------- */
-@import url("./sections/main-visual.css");
