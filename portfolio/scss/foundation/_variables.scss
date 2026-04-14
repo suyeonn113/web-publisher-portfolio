@@ -1,13 +1,54 @@
 // Typography & Base
 $font-suit: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+
 $font-main: $font-suit;
+
 $base-line-height: 1.6;
 $reset-font-family: inherit;
 $base-font-size: 16px;
 
-// NEW: 공통 타이포 변수 (이걸 추가해야 에러가 안 나요!)
-$font-weight-bold: 700;
+// Font Weight
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-bold: 700;
+
+// Letter Spacing
+$ls-base: 0;
 $ls-tight: -0.02em;
+
+/* ============================================================
+   Typography Scale (Desktop First 기준)
+============================================================ */
+
+// Hero Title (가장 큰 강조 문구)
+$fs-hero-desktop: 80px;
+$fs-hero-laptop:  72px;
+$fs-hero-tablet:  56px;
+$fs-hero-mobile:  40px;
+
+// Section Title (각 섹션의 제목)
+$fs-title-desktop: 40px;
+$fs-title-tablet:  32px;
+$fs-title-mobile:  24px;
+
+// Sub Title / Large Body (소제목이나 강조 본문)
+$fs-lg-desktop: 24px;
+$fs-lg-tablet:  20px;
+$fs-lg-mobile:  18px;
+
+// Base Body (기본 본문)
+$fs-base: 16px; // 본문은 보통 가독성을 위해 16px 고정 혹은 15px/14px 정도로만 살짝 조절
+
+// Small Text (캡션, 부가 설명)
+$fs-sm-desktop: 14px;
+$fs-sm-mobile:  13px;
+
+// Extra Small (태그, 아주 작은 정보)
+$fs-xs: 12px;
+
+
+
+
 
 // Breakpoints
 $mobile: 480px;
@@ -19,9 +60,8 @@ $desktop: 1440px;
 $font-path: "../assets/fonts";
 
 // Layout & Z-index
-$hero-height: 100vh;
-$container-max: 1200px;
-$gutter: 20px;
+$container-max: 1440px;
+
 $z-index: (
   'header': 100,
   'modal': 1000,

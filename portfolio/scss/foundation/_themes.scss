@@ -17,3 +17,10 @@
   --color-scrollbar: #444444;
   --color-scrollbar-hover: #666666;
 }
+
+
+$text: var(--color-text);
+$bg: var(--color-bg);
+$focus: var(--color-focus);
+$scrollbar: var(--color-scrollbar);
+$scrollbar-hover: var(--color-scrollbar-hover);

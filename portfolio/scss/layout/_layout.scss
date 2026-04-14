@@ -1,5 +1,15 @@
 @use '../foundation' as *;
 
+:root {
+  --gutter: #{rem(20px)};
+
+  @include respond-to('tablet') {
+    --gutter: #{rem(16px)};
+  }
+}
+
+$gutter: var(--gutter);
+
 .wrap {
   width: 100%;
   min-height: 100vh;
@@ -11,25 +21,6 @@
   width: 100%;
   max-width: $desktop;
   margin: 0 auto;
-  padding: 0 rem(40);
-
-  @include respond-to('tablet') {
-    padding: 0 rem(24);
-  }
-
-  @include respond-to('mobile') {
-    padding: 0 rem(20);
-  }
+  padding: 0 $gutter;
 }
 
-.section {
-  padding: rem(140) 0;
-
-  @include respond-to('tablet') {
-    padding: rem(100) 0;
-  }
-
-  @include respond-to('mobile') {
-    padding: rem(100) 0;
-  }
-}

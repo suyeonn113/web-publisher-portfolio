@@ -1,5 +1,8 @@
-@use 'variables' as var;
-@use 'themes' as theme;
+@use 'variables' as *;
+@use 'themes' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
+
 
 /* ============================================================
    Mixins & Reset Fonts
@@ -58,7 +61,7 @@ table {
 ============================================================ */
 @font-face {
   font-family: "SUIT";
-  src: url("#{var.$font-path}/SUIT-Variable-woff2/SUIT-Variable.woff2") format("woff2");
+  src: url("#{$font-path}/SUIT-Variable-woff2/SUIT-Variable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -66,8 +69,8 @@ table {
 
 body {
   min-height: 100vh;
-  font-family: var.$font-suit;
-  line-height: var.$base-line-height;
+  font-family: $font-suit;
+  line-height: $base-line-height;
   color: var(--color-text);
   background-color: var(--color-bg); // 배경색 누락 방지
   text-rendering: optimizeSpeed;
@@ -79,7 +82,7 @@ body {
    Form Elements
 ============================================================ */
 button, input, select, textarea {
-  font-family: var.$reset-font-family; // inherit 적용
+  font-family: $reset-font-family; // inherit 적용
   color: inherit;
   @include clear-appearance;
 }

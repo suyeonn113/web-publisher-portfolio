@@ -1,6 +1,9 @@
 @use './variables' as *;
+@use "sass:math";
 
 @function rem($px) {
-  // 수치에서 단위(px)를 떼고 계산한 뒤 rem을 붙임
-  @return ($px / $base-font-size) * 1rem;
+  // $px가 '20px'라면 여기서 px를 떼고 20으로 만듦
+  $value: math.div($px, 1px); 
+  // 그 다음 16(기본값)으로 나누고 rem을 붙임
+  @return math.div($value, 16) * 1rem;
 }
