@@ -1,0 +1,147 @@
+[
+  {
+    "id": "GUIDE",
+    "description": "filterTags의 인덱스 순서: [0]카테고리, [1]환경, [2~]키워드",
+    "category_group": [
+      "Commercial", 
+      "Public", 
+      "Branded", 
+      "Promotion"
+    ],
+    "environment_group": [
+      "PC", 
+      "Mobile", 
+      "Responsive", 
+      "App"
+    ],
+    "keyword_group": {
+      "VisualMood": ["Minimal", "Dark", "Light", "Vintage", "Organic", "Futuristic", "Hand-drawn"],
+      "Layout": ["Image-centered", "Typo-centered", "Grid-based", "Experimental"],
+      "Tech": ["Animation", "Interaction", "3D-Assets", "Parallax", "Micro-interaction"],
+      "Feature": ["E-commerce", "Storytelling", "Responsive", "Editorial"]
+    },
+    "notice": "filterTags의 index 0은 카테고리, index 1부터는 키워드입니다."
+  },
+
+
+  {
+    "id": "p01",
+    "slug": "fragfarm-mobile-redesign",
+    
+    "Common" : {
+      "title": "FragFarm Mobile Redesign",
+      "year": "2026",
+      "mainTools": ["HTML", "CSS", "JavaScript", "Figma"],
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview" : {
+      "thumbnail": "https://via.placeholder.com/600x400/222/fff?text=FragFarm",
+      "filterTags": ["Commercial", "Mobile", "Minimal", "E-commerce"],
+      "shortOverview": ""
+    },
+
+    "details" : {
+      "mainVisual": "../assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  },
+
+
+  {
+    "id": "p02",
+    "slug": "fragfarm-mobile-redesign",
+    
+    "Common" : {
+      "title": "FragFarm Mobile Redesign",
+      "year": "2026",
+      "mainTools": ["HTML", "CSS", "JavaScript", "Figma"],
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview" : {
+      "thumbnail": "https://via.placeholder.com/600x400/222/fff?text=FragFarm",
+      "filterTags": ["Commercial", "Mobile", "Minimal", "E-commerce"],
+      "shortOverview": ""
+    },
+
+    "details" : {
+      "mainVisual": "../assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  }
+]

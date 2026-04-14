@@ -1,5 +1,5 @@
 @use 'variables' as var;
-@use 'theme' as theme;
+@use 'themes' as theme;
 
 /* ============================================================
    Mixins & Reset Fonts
@@ -58,7 +58,7 @@ table {
 ============================================================ */
 @font-face {
   font-family: "SUIT";
-  src: url("../../assets/fonts/SUIT-Variable-woff2/SUIT-Variable.woff2") format("woff2");
+  src: url("#{var.$font-path}/SUIT-Variable-woff2/SUIT-Variable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

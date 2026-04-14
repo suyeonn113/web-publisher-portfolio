@@ -1,11 +1,13 @@
-
 // Typography & Base
 $font-suit: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-
 $font-main: $font-suit;
 $base-line-height: 1.6;
 $reset-font-family: inherit;
 $base-font-size: 16px;
+
+// NEW: 공통 타이포 변수 (이걸 추가해야 에러가 안 나요!)
+$font-weight-bold: 700;
+$ls-tight: -0.02em;
 
 // Breakpoints
 $mobile: 480px;
@@ -13,7 +15,11 @@ $tablet: 768px;
 $laptop: 1024px;
 $desktop: 1440px;
 
+// Path
+$font-path: "../assets/fonts";
+
 // Layout & Z-index
+$hero-height: 100vh;
 $container-max: 1200px;
 $gutter: 20px;
 $z-index: (

@@ -1,65 +1,88 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>수연의 작업실</title>
-    <link rel="stylesheet" href="./css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수연의 작업실</title>
+  <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <!-- <header class="site-header">
-        <nav class="site-header__nav">
-            <ul class="site-header__menu">
-                <li><a class="site-header__link" href="#">HOME</a></li>
-                <li><a class="site-header__link" href="#">WORK</a></li>
-                <li><a class="site-header__link" href="#">LOG</a></li>
-                <li><a class="site-header__link" href="#">CONTACT</a></li>
-            </ul>
-        </nav>
-    </header> -->
+  <!-- <header class="site-header">
+    <nav class="site-header__nav">
+      <ul class="site-header__menu">
+        <li><a class="site-header__link" href="#">HOME</a></li>
+        <li><a class="site-header__link" href="#">WORK</a></li>
+        <li><a class="site-header__link" href="#">LOG</a></li>
+        <li><a class="site-header__link" href="#">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header> -->
 
-    <main id="main">
-        <!-- Hero -->
-        <section class="hero">
-            <h1 class="hero__title"></h1>
-            <video 
-                class="bg-video"
-                autoplay 
-                muted 
-                loop 
-                playsinline
-                >
-                <source src="assets/images/hero1.mp4" type="video/mp4">
-            </video>
-        </section>
+  <div class="video-background">
+    <video class="bg-video"
+           autoplay 
+            muted 
+            loop 
+            playsinline
+            poster="assets/images/hero.png">
+        <source src="assets/videos/hero.mp4" type="video/mp4">
+      </video>
+  </div>
 
-        <!-- Work -->
-        <section class="work">
-           <h1 class="work__title">WORK</h1>
-           <div class="work__slider-container">
-                <div class="work__cards-wrapper">
-                    <div class="work__card">
-                        <div class="work__card-inner">CARD 1</div>
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero__title"></h1>
+      
+    </section>
+
+    <!-- Work -->
+    <section class="work section" aria-labelledby="work-title">
+      <div class="container">
+        <header class="work__header">
+          <h2 id="work-title" class="work__title">WORKS</h2>
+          <a href="#" class="btn-more" aria-label="모든 프로젝트 보기">
+            <span>View All</span>
+          </a>
+        </header>
+        <div class="work__slider-container" role="region" aria-roledescription="carousel">
+          <div class="work__cards-wrapper">
+            <!-- Card Component Start-->
+              <article class="work__card">
+                <a href="#" class="work__card-inner">
+
+                  <figure class="work__img-box">
+                    <img src="" alt="프로젝트 명 메인 이미지">
+                    <div class="work__overlay"></div>
+                  </figure>
+
+                  <div class="work__info">
+                    <div class="work__info-top">
+                      <span class="work__date"></span>
+                      <span class="work__category"></span>
                     </div>
-                </div>
-                <div class="work__cards-wrapper">
-                    <div class="work__card">
-                        <div class="work__card-inner">CARD 2</div>
-                    </div>
-                </div>
-                <div class="work__cards-wrapper">
-                    <div class="work__card">
-                        <div class="work__card-inner">CARD 3</div>
-                    </div>
-                </div>
-           </div>
-           </div>
-           </div>
-        </section>
-    </main>
 
+                    <div class="work__info-middle">
+                      <h3 class="work__card-title"></h3>
+                    </div>
 
-    <!-- <script type="module" src="js/home.js"></script> -->
-    <script type="module" src="js/main.js"></script>
+                    <div class="work__info-bottom">
+                      <ul class="work__keywords" aria-label="프로젝트 키워드">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                      </ul>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <!-- Card Component End -->
+           </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
