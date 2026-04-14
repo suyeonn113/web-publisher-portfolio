@@ -1,0 +1,159 @@
+@use 'variables' as var;
+@use 'theme' as theme;
+
+/* ============================================================
+   Mixins & Reset Fonts
+============================================================ */
+// 폼 요소 초기화 믹스인
+@mixin clear-appearance {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   Standard Reset
+============================================================ */
+*, *::before, *::after { 
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0; 
+}
+
+html {
+  -webkit-text-size-adjust: 100%; // iOS 텍스트 크기 조정 방지
+  color-scheme: light dark;       // 시스템 테마 대응
+  &:focus-within { scroll-behavior: smooth; }
+}
+
+// 제목 및 기본 요소 여백 초기화
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img, picture, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ============================================================
+   Global Typography & Theme
+============================================================ */
+@font-face {
+  font-family: "SUIT";
+  src: url("../../assets/fonts/SUIT-Variable-woff2/SUIT-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var.$font-suit;
+  line-height: var.$base-line-height;
+  color: var(--color-text);
+  background-color: var(--color-bg); // 배경색 누락 방지
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   Form Elements
+============================================================ */
+button, input, select, textarea {
+  font-family: var.$reset-font-family; // inherit 적용
+  color: inherit;
+  @include clear-appearance;
+}
+
+button {
+  cursor: pointer;
+  &:disabled { cursor: default; }
+}
+
+input, textarea, select {
+  min-height: 2.25rem; 
+}
+
+// 웹킷 오토필(Autofill) 배경색 투명화 유지
+input:-webkit-autofill {
+  -webkit-text-fill-color: currentColor;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+// 검색창 X버튼 제거
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  @include clear-appearance;
+  display: none;
+}
+
+/* ============================================================
+   Accessibility & Interaction
+============================================================ */
+// Focus 스타일
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// 스크린 리더 전용
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// 애니메이션 제거 모드 (사용자 설정 존중)
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Custom Scrollbar
+============================================================ */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+  border-radius: 10px;
+  &:hover { background: var(--color-scrollbar-hover); }
+}

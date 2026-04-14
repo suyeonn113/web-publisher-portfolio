@@ -1,0 +1,35 @@
+@use '../foundation' as *;
+
+.wrap {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: $desktop;
+  margin: 0 auto;
+  padding: 0 rem(40);
+
+  @include respond-to('tablet') {
+    padding: 0 rem(24);
+  }
+
+  @include respond-to('mobile') {
+    padding: 0 rem(20);
+  }
+}
+
+.section {
+  padding: rem(140) 0;
+
+  @include respond-to('tablet') {
+    padding: rem(100) 0;
+  }
+
+  @include respond-to('mobile') {
+    padding: rem(100) 0;
+  }
+}

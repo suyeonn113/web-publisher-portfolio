@@ -4,98 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>수연의 작업실</title>
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <header class="site-header">
+    <!-- <header class="site-header">
         <nav class="site-header__nav">
             <ul class="site-header__menu">
                 <li><a class="site-header__link" href="#">HOME</a></li>
-                <li><a class="site-header__link" href="#">ABOUT</a></li>
-                <li><a class="site-header__link" href="#">PORTFOLIO</a></li>
-                <li><a class="site-header__link" href="#">BLOG</a></li>
+                <li><a class="site-header__link" href="#">WORK</a></li>
+                <li><a class="site-header__link" href="#">LOG</a></li>
                 <li><a class="site-header__link" href="#">CONTACT</a></li>
             </ul>
         </nav>
-    </header>
+    </header> -->
 
     <main id="main">
         <!-- Hero -->
         <section class="hero">
-            <h1 class="hero__title">안녕하세요</h1>
-            <p class="hero__desc">조용히 정리하고, 정확하게 구현합니다</p>
+            <h1 class="hero__title"></h1>
+            <video 
+                class="bg-video"
+                autoplay 
+                muted 
+                loop 
+                playsinline
+                >
+                <source src="assets/images/hero1.mp4" type="video/mp4">
+            </video>
         </section>
 
-        <!-- Skills -->
-        <section class="skills">
-            <div class="skills__inner">
-                <header class="skills__header">
-                    <p>Skills</p>
-                    <h2 class="skills__title" id="skills-title">
-                        <span class="skills__title-line" aria-hidden="true"></span>
-                        <span class="skills__title-text">
-                            <span>구조와 마크업</span>
-                            <span>스타일링과 UI</span>
-                            <span>반응형과 인터랙션</span>
-                            <span>유지보수와 확장성</span>
-                        </span>
-                    </h2>
-                    <p class="skills__intro">
-                        스크롤 기반 인터랙션과 카드 전환을 통해
-                        작업 흐름을 자연스럽게 보여주는 섹션입니다.
-                    </p>
-                </header>
-                <ul class="skills__list">
-                    <li class="skills__item">
-                        <article class="skills-card">
-                            <figure class="skills-card__media">
-                                <img src="assets/images/card-01.jpg" alt="프로젝트 카드 미리보기 이미지">
-                            </figure>
-                            <div class="skills-card__body">
-                                <p class="skills-card__desc">
-                                    정보 우선순위와 사용자 흐름을 기준으로 콘텐츠 구조를 정리합니다.
-                                </p>
-                            </div>
-                        </article>
-                    </li>
-                    <li class="skills__item">
-                        <article class="skills-card">
-                            <figure class="skills-card__media">
-                                <img src="assets/images/card-01.jpg" alt="프로젝트 카드 미리보기 이미지">
-                            </figure>
-                            <div class="skills-card__body">
-                                <p class="skills-card__desc">
-                                    정보 우선순위와 사용자 흐름을 기준으로 콘텐츠 구조를 정리합니다.
-                                </p>
-                            </div>
-                        </article>
-                    </li>
-                    <li class="skills__item">
-                        <article class="skills-card">
-                            <figure class="skills-card__media">
-                                <img src="assets/images/card-01.jpg" alt="프로젝트 카드 미리보기 이미지">
-                            </figure>
-                            <div class="skills-card__body">
-                                <p class="skills-card__desc">
-                                    정보 우선순위와 사용자 흐름을 기준으로 콘텐츠 구조를 정리합니다.
-                                </p>
-                            </div>
-                        </article>
-                    </li>
-                    <li class="skills__item">
-                        <article class="skills-card">
-                            <figure class="skills-card__media">
-                                <img src="assets/images/card-01.jpg" alt="프로젝트 카드 미리보기 이미지">
-                            </figure>
-                            <div class="skills-card__body">
-                                <p class="skills-card__desc">
-                                    정보 우선순위와 사용자 흐름을 기준으로 콘텐츠 구조를 정리합니다.
-                                </p>
-                            </div>
-                        </article>
-                    </li>
-                </ul>
-            </div>
+        <!-- Work -->
+        <section class="work">
+           <h1 class="work__title">WORK</h1>
+           <div class="work__slider-container">
+                <div class="work__cards-wrapper">
+                    <div class="work__card">
+                        <div class="work__card-inner">CARD 1</div>
+                    </div>
+                </div>
+                <div class="work__cards-wrapper">
+                    <div class="work__card">
+                        <div class="work__card-inner">CARD 2</div>
+                    </div>
+                </div>
+                <div class="work__cards-wrapper">
+                    <div class="work__card">
+                        <div class="work__card-inner">CARD 3</div>
+                    </div>
+                </div>
+           </div>
+           </div>
+           </div>
         </section>
     </main>
 

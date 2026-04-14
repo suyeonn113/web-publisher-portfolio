@@ -1,0 +1,23 @@
+
+// Typography & Base
+$font-suit: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+
+$font-main: $font-suit;
+$base-line-height: 1.6;
+$reset-font-family: inherit;
+$base-font-size: 16px;
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1440px;
+
+// Layout & Z-index
+$container-max: 1200px;
+$gutter: 20px;
+$z-index: (
+  'header': 100,
+  'modal': 1000,
+  'tooltip': 10
+);
