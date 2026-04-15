@@ -1,5 +1,52 @@
-@use './variables' as *;
+@use 'sass:map';
 @use "sass:math";
+@use './variables' as *;
+
+/* ============================================================
+   Getter Functions
+============================================================ */
+
+// 1. Typography 관련 추출
+@function get-font-config($type) {
+  @return map.get($font-settings, $type);
+}
+
+@function get-fs($type, $device: 'default') {
+  $config: get-font-config($type);
+  @return map.get($config, $device);
+}
+
+@function get-weight($name) {
+  @return map.get($font-weights, $name);
+}
+
+// 2. Spacing 관련 추출 (pad, gutter, gap)
+@function get-space($cat, $size) {
+  @return map.get(map.get($spacings, $cat), $size);
+}
+
+// 3. Radius 관련 추출
+@function get-rd($size) {
+  @return map.get($radii, $size);
+}
+
+// 4. Z-index 관련 추출
+@function get-z($name) {
+  @return map.get($z-indexes, $name);
+}
+
+// 5. Motion 관련 추출
+@function get-duration($name) {
+  @return map.get(map.get($motions, 'durations'), $name);
+}
+
+@function get-easing($name) {
+  @return map.get(map.get($motions, 'easings'), $name);
+}
+
+/* ============================================================
+   Rem Function
+============================================================ */
 
 @function rem($px) {
   // $px가 '20px'라면 여기서 px를 떼고 20으로 만듦

@@ -37,68 +37,7 @@
     },
 
     "preview" : {
-      "thumbnail": "https://via.placeholder.com/600x400/222/fff?text=FragFarm",
-      "filterTags": ["Commercial", "Mobile", "Minimal", "E-commerce"],
-      "shortOverview": ""
-    },
-
-    "details" : {
-      "mainVisual": "../assets/",
-      "overview": "",
-      "planning" : {
-        "problem": "",
-        "solution": ""
-      },
-
-      "designPoints" : [
-        {
-          "pointTitle": "",
-          "pointKeyword": "",
-          "pointDesc": "",
-          "pointImg": ""
-        },
-        {
-          "pointTitle": "",
-          "pointKeyword": "",
-          "pointDesc": "",
-          "pointImg": ""
-        },
-        {
-          "pointTitle": "",
-          "pointKeyword": "",
-          "pointDesc": "",
-          "pointImg": ""
-        },
-        {
-          "pointTitle": "",
-          "pointKeyword": "",
-          "pointDesc": "",
-          "pointImg": ""
-        },{
-          "pointTitle": "",
-          "pointKeyword": "",
-          "pointDesc": "",
-          "pointImg": ""
-        }
-      ]
-    }
-  },
-
-
-  {
-    "id": "p02",
-    "slug": "fragfarm-mobile-redesign",
-    
-    "Common" : {
-      "title": "FragFarm Mobile Redesign",
-      "year": "2026",
-      "mainTools": ["HTML", "CSS", "JavaScript", "Figma"],
-      "liveLink": "",
-      "githubLink": ""
-    },
-
-    "preview" : {
-      "thumbnail": "https://via.placeholder.com/600x400/222/fff?text=FragFarm",
+      "thumbnail": "assets/images/projects/p02-thumb.png",
       "filterTags": ["Commercial", "Mobile", "Minimal", "E-commerce"],
       "shortOverview": ""
     },

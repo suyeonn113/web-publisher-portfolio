@@ -1,0 +1,21 @@
+@use '../foundation' as *;
+
+.scroll-down {
+  font-size: get-fs('base', 'default');
+  color: $text;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.scroll-down__text {
+  text-transform: lowercase;
+}
+
+.scroll-down__icon {
+  display: inline-block;
+}

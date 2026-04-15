@@ -1,0 +1,22 @@
+@use '../foundation' as *;
+
+.cursor-satellite {
+  position: fixed;
+  width: 20px;      
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(2px); /* 살짝 투명한 글래스 감성 */
+  pointer-events: none;
+  z-index: 9999;
+
+  @include respond-to('mobile') {
+    display: none !important;
+  }
+
+  // 2. 물리적 터치 기기(태블릿 포함) 환경에서도 숨기기
+  @media (pointer: coarse) {
+    display: none !important;
+  }
+}

@@ -1,51 +1,62 @@
 @use '../foundation' as *;
+@use '../layout' as *;
+@use '../components' as *;
 
 .hero {
-  height: 100vh; 
-  @include flex-center(column);
-  background-color: var(--color-bg);
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+
   overflow: hidden;
 
-  &__container {
-    max-width: $container-max;
-    text-align: center;
-    margin: 0 auto;
-  }
+  background: url(../assets/images/hero/blob.png) no-repeat center center;
+  background-size: cover;
+}
 
-  &__title {
-    font-size: rem($fs-hero-desktop); 
-    font-weight: $fw-bold;
-    letter-spacing: $ls-tight;
+.hero__text-wrap {
+  text-align: center;
+  z-index: 10;
+
+  .main-title {
     color: $text;
-    line-height: 1.1;
+    cursor: default;
+    user-select: none;
 
-    @include respond-to('laptop') {
-      font-size: rem($fs-hero-laptop);
-    }
-
-    @include respond-to('tablet') {
-      font-size: rem($fs-hero-tablet);
-    }
-
-    @include respond-to('mobile') {
-      font-size: rem($fs-hero-mobile);
-    }
-
-    .hi {
-      display: inline-block; // GSAP transform 적용을 위해 필수
-      color: $focus;
-      will-change: transform;
-    }
-
-  }
-
-  &__subtitle {
-    margin-top: rem(24px);
-    font-size: rem(20px);
-    opacity: 0.7;
+    display: flex;          
+    justify-content: center;
+    align-items: center;
+    gap: get-space('gutter', 'lg');
     
-    @include respond-to('mobile') {
-      font-size: rem(16px);
+    height: max-content;
+
+    .word {
+      display: inline-flex;
     }
+
+    .word--simple, .word--me {
+      @include font-style('hero', 'bold', 'tight');
+    }
+    .word--hi {
+      @include font-style('hero-sub', 'medium', 'tight');
+    }
+    
+    .char, .dot {
+      display: inline-block;
+      will-change: transform;
+      transform-origin: center center;
+    }
+
   }
+}
+
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }

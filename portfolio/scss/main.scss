@@ -4,13 +4,13 @@
 @use 'foundation' as *;
 
 // Reset & Layout
-@use 'foundation/base';
-@use 'layout/header';
-@use 'layout/background';
+@use 'foundation' as *;
+@use 'layout' as *;
 
 // Components
+@use 'components' as *;
 
 // Sections
 @use 'sections/hero';
-@use 'sections/work'; 
+// @use 'sections/work'; 
 

@@ -1,6 +1,14 @@
 @use './variables' as *;
 @use './functions' as *;
 
+/* ============================================================
+   Layout & Responsive Mixins
+============================================================ */
+
+/**
+ * 반응형 미디어 쿼리
+ * @param $device - mobile, tablet, laptop, desktop
+ */
 @mixin respond-to($device) {
   @if $device == 'mobile' {
     @media (max-width: $mobile) { @content; }
@@ -13,10 +21,94 @@
   }
 }
 
+// 컨테이너 중앙 정렬 및 최대 너비
+@mixin container {
+  width: 100%;
+  max-width: $container-max;
+  margin: 0 auto;
+  @include pad('md'); // 기본 좌우 여백 적용
+}
 
-@mixin flex-center($direction: row) {
+
+
+/* ============================================================
+   Typography Mixins
+============================================================ */
+
+// 사용법: h1 { @include font-style('hero', 'bold', 'tight'); }
+
+/**
+ * 전용 폰트 스타일 시스템
+ * @param $type - hero, title, lg, base, sm, xs
+ * @param $weight - light, regular, medium, bold
+ * @param $ls - base, tight
+ */
+@mixin font-style($type, $weight: 'regular', $ls: 'base') {
+  $config: get-font-config($type);
+  
+  font-size: map-get($config, 'default');
+  font-weight: get-weight($weight);
+  letter-spacing: map-get($letter-spacings, $ls);
+  line-height: $base-line-height;
+  font-family: $font-main;
+
+  // 큰 글씨는 줄 간격을 좁게, 작은 글씨는 기본값을 적용
+  @if $type == 'hero' or $type == 'title' {
+    line-height: 1.1; // 풀스크린에서 텍스트가 덩어리감 있게 보임
+  } @else {
+    line-height: $base-line-height; // 본문용 1.6 적용
+  }
+
+  // 맵에 정의된 기기별 사이즈 자동 생성
+  @each $device, $size in $config {
+    @if $device != 'default' {
+      @include respond-to($device) {
+        font-size: $size;
+      }
+    }
+  }
+}
+
+
+/* ============================================================
+   Spacing & Shape Mixins
+============================================================ */
+
+// 내부 패딩
+@mixin pad($size) {
+  padding: get-space('pad', $size);
+}
+
+// 간격 (방향 지정 가능)
+@mixin gap($cat, $size, $direction: 'bottom') {
+  margin-#{$direction}: get-space($cat, $size);
+}
+
+// 곡률 적용
+@mixin rd($size) {
+  border-radius: get-rd($size);
+}
+
+// 중첩 곡률 (자식 요소용)
+@mixin nested-rd($outer-rd-key, $padding-key) {
+  border-radius: calc(#{get-rd($outer-rd-key)} - #{get-space('pad', $padding-key)});
+}
+
+
+/* ============================================================
+   Display & Alignment Mixins
+============================================================ */
+
+// Flexbox 레이아웃 헬퍼
+@mixin flex($justify: flex-start, $align: center, $direction: row, $wrap: nowrap) {
   display: flex;
   flex-direction: $direction;
-  justify-content: center;
-  align-items: center;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+// Flex 중앙 정렬 (가장 많이 쓰임)
+@mixin flex-center($direction: row) {
+  @include flex(center, center, $direction);
 }

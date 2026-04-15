@@ -7,49 +7,6 @@ $base-line-height: 1.6;
 $reset-font-family: inherit;
 $base-font-size: 16px;
 
-// Font Weight
-$fw-regular: 400;
-$fw-medium: 500;
-$fw-bold: 700;
-
-// Letter Spacing
-$ls-base: 0;
-$ls-tight: -0.02em;
-
-/* ============================================================
-   Typography Scale (Desktop First 기준)
-============================================================ */
-
-// Hero Title (가장 큰 강조 문구)
-$fs-hero-desktop: 80px;
-$fs-hero-laptop:  72px;
-$fs-hero-tablet:  56px;
-$fs-hero-mobile:  40px;
-
-// Section Title (각 섹션의 제목)
-$fs-title-desktop: 40px;
-$fs-title-tablet:  32px;
-$fs-title-mobile:  24px;
-
-// Sub Title / Large Body (소제목이나 강조 본문)
-$fs-lg-desktop: 24px;
-$fs-lg-tablet:  20px;
-$fs-lg-mobile:  18px;
-
-// Base Body (기본 본문)
-$fs-base: 16px; // 본문은 보통 가독성을 위해 16px 고정 혹은 15px/14px 정도로만 살짝 조절
-
-// Small Text (캡션, 부가 설명)
-$fs-sm-desktop: 14px;
-$fs-sm-mobile:  13px;
-
-// Extra Small (태그, 아주 작은 정보)
-$fs-xs: 12px;
-
-
-
-
-
 // Breakpoints
 $mobile: 480px;
 $tablet: 768px;
@@ -62,8 +19,138 @@ $font-path: "../assets/fonts";
 // Layout & Z-index
 $container-max: 1440px;
 
-$z-index: (
-  'header': 100,
-  'modal': 1000,
-  'tooltip': 10
+
+/* ============================================================
+   Typography Scale
+============================================================ */
+
+/* Font Size Scale (Desktop First) ----------------------- */
+$font-settings: (
+  'hero': (
+    'default': clamp(120px, 12vw, 200px),
+    'laptop':  clamp(60px, 10vw, 120px),
+    'mobile':  clamp(32px, 14vw, 60px)
+  ),
+  'hero-sub': (
+    'default': clamp(72px, 7vw, 120px),
+    'laptop':  clamp(48px, 6vw, 80px),
+    'mobile':  clamp(24px, 8vw, 40px)
+  ),
+  'title': (
+    'default': clamp(48px, 5vw, 64px),
+    'laptop':  clamp(36px, 4vw, 48px),
+    'mobile':  clamp(28px, 8vw, 36px)
+  ),
+  'lg': (
+    'default': 32px,
+    'tablet':  24px,
+    'mobile':  20px
+  ),
+  'base': (
+    'default': 18px,
+    'mobile':  16px
+  ),
+  'sm': (
+    'default': 15px,
+    'mobile':  14px
+  ),
+  'xs': (
+    'default': 13px
+  )
 );
+
+/* Font Weight ----------------------------------- */
+$font-weights: (
+  'light':   300,
+  'regular': 400,
+  'medium':  500,
+  'bold':    700
+);
+
+/* Letter Spacing --------------------------------- */
+$letter-spacings: (
+  'base':  0,
+  'tight': -0.02em
+);
+
+
+
+/* ============================================================
+   Spacing System (8pt Grid)
+============================================================ */
+
+$spacer: 8px;
+
+$spacings: (
+  // 내부 패딩
+  'pad': (
+    'xs': $spacer * 1, // 8px
+    'sm': $spacer * 2, // 16px
+    'md': $spacer * 3, // 24px
+    'lg': $spacer * 5  // 40px
+  ),
+  // 요소 사이 (Gutter)
+  'gutter': (
+    'sm': $spacer * 2, // 16px
+    'md': $spacer * 3, // 24px
+    'lg': $spacer * 4  // 32px
+  ),
+  // 큰 덩어리 사이 (Gap)
+  'gap': (
+    'sm': $spacer * 6,  // 48px
+    'md': $spacer * 10, // 80px
+    'lg': $spacer * 15  // 120px
+  )
+);
+
+
+
+/* ============================================================
+   Radius System 
+============================================================ */
+
+$radius-base: 8px;
+
+$radii: (
+  'xs': $radius-base * 0.5, // 4px
+  'sm': $radius-base,       // 8px
+  'md': $radius-base * 1.5, // 12px
+  'lg': $radius-base * 2.5, // 20px
+  'xl': $radius-base * 4    // 32px
+);
+
+
+
+/* ============================================================
+   Z-index System
+============================================================ */
+
+$z-indexes: (
+  'hide':      -1,    // 뒤로 숨기기
+  'base':       1,    // 기본 깊이
+  'dropdown':  100,   // 드롭다운, 팝오버
+  'header':    300,   // 상단 고정 바 (Sticky/Fixed)
+  'overlay':   400,   // 모달 배경 (Dim)
+  'modal':     500,   // 모달/팝업창
+  'toast':     1000   // 최상단 알림 메시지
+);
+
+
+
+/* ============================================================
+   Motion System
+============================================================ */
+$motions: (
+  'durations': (
+    'fast': 0.2s,
+    'base': 0.4s,
+    'slow': 0.6s
+  ),
+  'easings': (
+    'apple': cubic-bezier(0.25, 1, 0.5, 1),
+    'standard': cubic-bezier(0.4, 0, 0.2, 1)
+  )
+);
+
+// 기본 트랜지션 변수 (자주 쓰니까 유지)
+$tr-base: all map-get(map-get($motions, 'durations'), 'base') map-get(map-get($motions, 'easings'), 'apple');

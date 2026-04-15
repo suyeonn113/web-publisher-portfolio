@@ -21,25 +21,25 @@ export async function loadProjects() {
           .toLowerCase();
 
         return `
-          <article class="work__card ${filterClass}">
-            <a href="./project/${slug}.html" class="work__card-inner">
-              <figure class="work__img-box">
+          <article class="work__card card card--glass ${filterClass}">
+            <a href="#" class="card__inner">
+              <figure class="card__img-box">
                 <img src="${preview.thumbnail}" alt="${Common.title}" loading="lazy">
-                <div class="work__overlay"></div>
+                <div class="card__overlay"></div>
               </figure>
 
-              <div class="work__info">
-                <div class="work__info-top">
-                  <span class="work__date">${Common.year}</span>
-                  <span class="work__category">${category}</span>
+              <div class="card__info">
+                <div class="card__info-top">
+                  <span class="card__date">${Common.year}</span>
+                  <span class="card__category">${category}</span>
                 </div>
 
-                <div class="work__info-middle">
-                  <h3 class="work__card-title">${Common.title}</h3>
+                <div class="card__info-middle">
+                  <h3 class="card__title">${Common.title}</h3>
                 </div>
 
-                <div class="work__info-bottom">
-                  <ul class="work__keywords" aria-label="프로젝트 키워드">
+                <div class="card__info-bottom">
+                  <ul class="card__keywords" aria-label="프로젝트 키워드">
                     ${keywords.map(tag => `<li>#${tag}</li>`).join('')}
                   </ul>
                 </div>
