@@ -12,12 +12,10 @@ export const initWorkSlider = () => {
   
   if (cards.length === 0 || !container || !wrapper) return;
 
-  // 초기 설정
   const spacing = 1 / cards.length; 
-  let totalProgress = 0;   // 목표 위치
-  let currentProgress = 0; // 부드러운 이동을 위한 현재 위치 값
+  let totalProgress = 0;   
+  let currentProgress = 0; 
   
-  // 1. 카드를 중앙으로 모으고 3D 환경 설정
   gsap.set(cards, {
     position: "absolute",
     top: "50%",
@@ -28,17 +26,12 @@ export const initWorkSlider = () => {
     transformStyle: "preserve-3d"
   });
 
-  /**
-   * 실시간 위치 및 크기 갱신 함수
-   */
   const updateSlider = () => {
     const viewWidth = window.innerWidth;
     
-    // [크기 최적화] 화면 너비에 따라 회전 반경 조절
-    // xRadius가 너무 크면 카드가 양옆으로 너무 벌어집니다.
-    const xRadius = viewWidth > 1200 ? 450 : viewWidth * 0.35; 
-    // zRadius가 너무 크면 카드가 눈앞으로 너무 튀어나옵니다.
-    const zRadius = viewWidth > 1200 ? 300 : 200; 
+    // [보정 1] 카드가 너무 크지 않도록 반경 재조절
+    const xRadius = viewWidth > 1200 ? 400 : viewWidth * 0.35; 
+    const zRadius = viewWidth > 1200 ? 250 : 150; 
 
     cards.forEach((card, i) => {
       const startOffset = i * spacing;
@@ -49,22 +42,25 @@ export const initWorkSlider = () => {
       const z = Math.sin(angle) * zRadius; 
       const factor = Math.sin(angle); // 1(앞) ~ -1(뒤)
 
-      // [크기 최적화] scale 범위를 0.4(뒤) ~ 0.8(앞)로 설정하여 부담을 줄임
+      // [보정 2] 3장이 다 보이도록 autoAlpha와 opacity 수치 대폭 하향
+      // factor가 -0.9보다 클 때 보이게 하여, 뒤에 있는 카드도 필터링되지 않게 함
       gsap.set(card, {
         x: x,
         z: z,
-        scale: 0.4 + (factor + 1) * 0.2, 
+        // [보정 3] 너무 커지지 않게 scale 최대치를 0.7~0.8 정도로 제한
+        scale: 0.4 + (factor + 1) * 0.18, 
         zIndex: Math.round(factor * 100),
         
-        // [접근성] 뒤로 넘어간 카드는 투명하게 및 상호작용 차단
-        autoAlpha: factor > -0.5 ? 1 : 0, 
-        pointerEvents: factor > 0.6 ? "auto" : "none" 
+        // 시각적 노출 설정
+        autoAlpha: factor > -0.95 ? 1 : 0, // 거의 모든 각도에서 보이게 수정
+        opacity: factor > -0.7 ? 1 : 0.5,  // 뒤로 가면 반투명해지며 깊이감만 부여
+        pointerEvents: factor > 0.4 ? "auto" : "none" 
       });
 
-      // [접근성] 전면 카드만 탭 키 포커스 및 스크린 리더 허용
+      // [접근성] 전면 카드 위주로 포커스 유지
       const anchor = card.querySelector('a');
       if (anchor) {
-        if (factor > 0.8) {
+        if (factor > 0.5) { // 기준을 완화하여 옆에 살짝 걸친 카드도 클릭 가능하게 함
           anchor.removeAttribute('tabindex');
           card.setAttribute('aria-hidden', 'false');
         } else {
@@ -75,21 +71,17 @@ export const initWorkSlider = () => {
     });
   };
 
-  // 2. 매 프레임마다 화면을 다시 그려주는 루프
-  // 이게 있어야 totalProgress 변화가 화면에 반영됩니다.
   gsap.ticker.add(() => {
     currentProgress += (totalProgress - currentProgress) * 0.08;
     updateSlider();
   });
 
-  // 3. 네비게이션 버튼 이벤트
   const moveNext = () => { totalProgress -= spacing; };
   const movePrev = () => { totalProgress += spacing; };
 
   btnNext.addEventListener('click', moveNext);
   btnPrev.addEventListener('click', movePrev);
 
-  // 4. 드래그 인터랙션
   const dragProxy = document.createElement("div");
   Draggable.create(dragProxy, {
     type: "x",
@@ -103,12 +95,10 @@ export const initWorkSlider = () => {
     }
   });
 
-  // 5. [접근성] 키보드 제어 추가
   window.addEventListener('keydown', (e) => {
     if (e.key === "ArrowRight") moveNext();
     if (e.key === "ArrowLeft") movePrev();
   });
 
-  // 초기 렌더링
   updateSlider();
 };
