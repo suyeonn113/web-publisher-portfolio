@@ -1,26 +1,47 @@
 @use '../foundation' as *;
 
-:root {
-  --gutter: #{rem(20px)};
-
-  @include respond-to('tablet') {
-    --gutter: #{rem(16px)};
+// 섹션 상하 여백
+.section-py {
+  padding-top: get-space('gap', 'md');    // 80px
+  padding-bottom: get-space('gap', 'md'); // 80px
+  
+  @include respond-to('mobile') {
+    padding-top: get-space('gap', 'sm');    // 48px
+    padding-bottom: get-space('gap', 'sm');
   }
 }
 
-$gutter: var(--gutter);
-
-.wrap {
+// 풀스크린 섹션 패딩 (양옆 최소 여백만 확보)
+.l-fullspan {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  @include pad('md'); // 기본 24px 여백
+
+  @include respond-to('mobile') {
+    @include pad('sm'); // 모바일은 16px
+  }
 }
 
-.container {
+// 중앙 정렬이 필요한 섹션에만 부분적으로 사용
+.l-inner {
   width: 100%;
-  max-width: $desktop;
+  max-width: $container-max; // 1440px
   margin: 0 auto;
-  padding: 0 $gutter;
 }
 
+// 그리드 시스템 (반응형 포함)
+.l-grid {
+  display: grid;
+  gap: get-space('gutter', 'md'); // 24px
+  
+  // 3열 그리드 (데스크탑)
+  &--3 {
+    grid-template-columns: repeat(3, 1fr);
+    
+    @include respond-to('laptop') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include respond-to('mobile') {
+      grid-template-columns: 1fr;
+    }
+  }
+}

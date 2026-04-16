@@ -1,0 +1,178 @@
+@use '../foundation' as *;
+
+// Folder Widths
+$folder-w-desktop: 449px;
+$folder-w-laptop: 380px;
+$folder-w-tablet: 320px;
+$folder-w-mobile-max: 340px;
+$folder-ratio: 449 / 475;
+
+
+// Container
+.work__card.is-folder {
+  position: relative;
+  width: $folder-w-desktop;
+  aspect-ratio: $folder-ratio;
+
+  @include respond-to('laptop') {
+    width: $folder-w-laptop;
+  }
+
+  @include respond-to('tablet') {
+    width: $folder-w-tablet;
+  }
+
+  @include respond-to('mobile') {
+    width: 100%;
+    max-width: $folder-w-mobile-max; // 변수 적용
+    margin: 0 auto;
+  }
+
+  .work__card__inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+  }
+}
+
+
+// Back
+.folder__back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  width: 100%;
+  height: 90%;
+
+  border-radius: rem(31px);
+  background-color: $folder-back;
+}
+
+
+// Image
+.folder__img-box {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 2;
+  overflow: hidden;
+
+  width: 90%;
+  height: 50%;
+
+  border-radius: rem(20px);
+  background-color: #fff;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+
+// Front
+.folder__front-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+
+  width: 100%;
+  height: 70%;
+}
+
+.folder__front {
+  position: absolute;
+  inset: 0;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  & path {
+    fill:#000;
+  }
+}
+
+
+// Info
+.folder__info {
+  position: relative;
+  z-index: 4;
+
+  height: 100%;
+
+  padding: rem(30px);
+
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.folder__info-header {
+  .folder__title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+  }
+}
+
+
+.folder__info-meta {
+  margin-top: rem(5px);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .folder__year {
+    font-size: 16px;
+    color: #fff;
+  }
+
+  .folder__category-icons {
+    display: flex;
+    gap: 5px;
+
+    padding: 5px;
+
+    border-radius: 50px;
+    background: #ffffff;
+
+    & i {
+      color: $text-primary;
+    }
+  }
+}
+
+.folder__info-footer {
+  margin-top: auto;
+  
+  .folder__tech-list {
+    display: flex;
+    gap: 10px;
+
+    .tech-icon {
+      display: block;
+      width: 24px;
+      aspect-ratio: 1 / 1;
+      background-color: #ffffff;
+
+      /* 마스크 설정: SVG 모양대로 배경색만 보여줌 */
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+    }
+  }
+}
+
+
+

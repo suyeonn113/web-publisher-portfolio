@@ -1,49 +1,205 @@
 [
   {
-    "id": "GUIDE",
-    "description": "filterTags의 인덱스 순서: [0]카테고리, [1]환경, [2~]키워드",
-    "category_group": [
-      "Commercial", 
-      "Public", 
-      "Branded", 
-      "Promotion"
-    ],
-    "environment_group": [
-      "PC", 
-      "Mobile", 
-      "Responsive", 
-      "App"
-    ],
-    "keyword_group": {
-      "VisualMood": ["Minimal", "Dark", "Light", "Vintage", "Organic", "Futuristic", "Hand-drawn"],
-      "Layout": ["Image-centered", "Typo-centered", "Grid-based", "Experimental"],
-      "Tech": ["Animation", "Interaction", "3D-Assets", "Parallax", "Micro-interaction"],
-      "Feature": ["E-commerce", "Storytelling", "Responsive", "Editorial"]
-    },
-    "notice": "filterTags의 index 0은 카테고리, index 1부터는 키워드입니다."
+    "DATA_MASTER_GUIDE": {
+      "📌_필터_그룹_및_리스트": {
+        "1_Device_Group": [
+          "Responsive", "Mobile", "Tablet", "PC"
+        ],
+        "2_Type_Group": [
+          "Brand", 
+          "E-commerce",
+          "Promotion", 
+          "Personal", 
+          "Editorial",
+          "Public"
+        ],
+        "3_Style_Group": [
+          "분위기/감성", 
+          "Minimal", "Vintage", "Futuristic", "Luxury", "Vivid", "Elegant", "Playful", "Professional",
+          "비주얼/톤앤매너",
+          "Dark", "Light", "Monochrome", "Gradient", "Glassmorphism", "Neumorphism", "Retro", "Brutalism",
+          "레이아웃/타이포", 
+          "Clean", "Editorial", "Typography-focused", "Grid-based", "Magazine-style", "Full-screen",
+          "인터랙션 특징", 
+          "Interactive", "Parallax", "Micro-interaction", "Dynamic-scroll", "Horizontal-scroll", "3D-elements"
+        ]
+      },
+      "📌_추가_참고_리스트": {
+        "techStack_list": [
+          "HTML", 
+          "CSS", "SCSS", 
+          "JavaScript", 
+          "GSAP", "Lenis",
+          "PHP", "MySQL", 
+          "Figma", 
+          "jQuery", 
+          "React", 
+          "Lucide-Icons",
+          "github",
+          "git"
+        ],
+        "filter_all_keyword": "All"
+      }
+    }
   },
+
 
 
   {
     "id": "p01",
     "slug": "fragfarm-mobile-redesign",
     
-    "Common" : {
+    "Common": {
       "title": "FragFarm Mobile Redesign",
       "year": "2026",
-      "mainTools": ["HTML", "CSS", "JavaScript", "Figma"],
       "liveLink": "",
       "githubLink": ""
     },
 
-    "preview" : {
-      "thumbnail": "assets/images/projects/p02-thumb.png",
-      "filterTags": ["Commercial", "Mobile", "Minimal", "E-commerce"],
-      "shortOverview": ""
+    "preview": {
+      "thumbnail": "assets/images/projects/",
+      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      
+      "spec": {
+        "device": "Mobile",
+        "projectType": "E-commerce",
+        "keywords": ["Minimal", "Clean"], 
+        "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
+      }
     },
 
     "details" : {
-      "mainVisual": "../assets/",
+      "mainVisual": "assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "p02",
+    "slug": "fragfarm-mobile-redesign",
+    
+    "Common": {
+      "title": "FragFarm Mobile Redesign",
+      "year": "2026",
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview": {
+      "thumbnail": "assets/images/projects/",
+      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      
+      "spec": {
+        "device": "Mobile",
+        "projectType": "E-commerce",
+        "keywords": ["Minimal", "Clean"], 
+        "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
+      }
+    },
+
+    "details" : {
+      "mainVisual": "assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "p03",
+    "slug": "fragfarm-mobile-redesign",
+    
+    "Common": {
+      "title": "FragFarm Mobile Redesign",
+      "year": "2026",
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview": {
+      "thumbnail": "assets/images/projects/",
+      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      
+      "spec": {
+        "device": "Mobile",
+        "projectType": "E-commerce",
+        "keywords": ["Minimal", "Clean"], 
+        "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
+      }
+    },
+
+    "details" : {
+      "mainVisual": "assets/",
       "overview": "",
       "planning" : {
         "problem": "",
@@ -83,4 +239,5 @@
       ]
     }
   }
+  
 ]

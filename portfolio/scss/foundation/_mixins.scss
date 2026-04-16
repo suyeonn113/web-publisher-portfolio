@@ -84,6 +84,25 @@
   margin-#{$direction}: get-space($cat, $size);
 }
 
+// Flex 간격
+@mixin f-gap($cat, $size) {
+  gap: get-space($cat, $size);
+}
+
+// Grid 간격
+@mixin g-gap($row-cat, $row-size, $col-cat: null, $col-size: null) {
+  $row-val: get-space($row-cat, $row-size);
+  
+  @if ($col-cat and $col-size) {
+    // 가로, 세로 값이 다를 때 (예: gap: 48px 24px;)
+    $col-val: get-space($col-cat, $col-size);
+    gap: $row-val $col-val;
+  } @else {
+    // 가로, 세로 값이 같을 때 (예: gap: 24px;)
+    gap: $row-val;
+  }
+}
+
 // 곡률 적용
 @mixin rd($size) {
   border-radius: get-rd($size);

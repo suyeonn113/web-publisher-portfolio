@@ -46,33 +46,124 @@
    Display & Alignment Mixins
 ============================================================ */
 :root {
-  --color-text: #1a1a1a;
-  --color-bg: #f7faf9;
-  --color-text-light: #ffffff;
-  --color-text-muted: #666666;
-  --color-focus: #2d5a4c;
+  /* ==========================================================================
+      Text System
+      ========================================================================== */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4d4d4d;
+  --color-text-tertiary: #808080;
+  --color-text-disabled: #b3b3b3;
+  --color-text-inverse: #ffffff;
+  /* ==========================================================================
+      Background & Surface
+      ========================================================================== */
+  --color-bg-main: #f7faf9;
+  --color-bg-surface: #ffffff;
   --color-scrollbar: #cccccc;
   --color-scrollbar-hover: #999999;
-  --glass-bg: rgba(230, 245, 240, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-highlight: rgba(200, 235, 220, 0.8);
-  --glass-shadow: rgba(0, 0, 0, 0.05);
+  /* ==========================================================================
+      Accent System
+      ========================================================================== */
+  --color-point-primary: #2d5a4c;
+  --color-point-secondary: #5e8c7e;
+  --color-point-highlight: #ff6b6b;
+  --color-point-info: #3498db;
+  --color-point-success: #27ae60;
+  /* ==========================================================================
+      Card & Component (워크 카드 / 폴더 전용)
+      ========================================================================== */
+  --color-card-bg: #ffffff;
+  --color-folder-front: #fdfdfd;
+  --color-folder-back: #e8eee8;
+  --color-card-shadow: rgba(0, 0, 0, 0.05);
+  /* ==========================================================================
+      Icon & Interaction 
+      ========================================================================== */
+  --color-icon-base: var(--color-text-primary);
+  --color-icon-active: var(--color-point-primary);
+  /* ==========================================================================
+      Brand Colors
+      ========================================================================== */
+  --color-html: #E34F26;
+  --color-css: #1572B6;
+  --color-scss: #CC6699;
+  --color-js: #F7DF1E;
+  --color-gsap: #88CE02;
+  --color-lenis: #FF98A3;
+  --color-php: #777BB4;
+  --color-mysql: #4479A1;
+  --color-figma: #F24E1E;
+  --color-jquery: #0769AD;
+  --color-react: #61DAFB;
+  --color-java: #007396;
+  --color-github: #181717;
+  --color-git: #F05032;
 }
 
 [data-theme=dark] {
-  --color-text: #f5f5f5;
-  --color-bg: #0d1a15;
-  --color-text-light: #ffffff;
-  --color-text-muted: #666666;
-  --color-focus: #5dade2;
+  /* ==========================================================================
+      Text System
+      ========================================================================== */
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #b3b3b3;
+  --color-text-tertiary: #808080;
+  --color-text-disabled: #4d4d4d;
+  --color-text-inverse: #1a1a1a;
+  /* ==========================================================================
+    Background & Surface
+    ========================================================================== */
+  --color-bg-main: #0d1a15;
+  --color-bg-surface: #16241f;
   --color-scrollbar: #444444;
   --color-scrollbar-hover: #666666;
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-border: rgba(255, 255, 255, 0.9);
-  --glass-highlight: rgba(180, 255, 230, 0.4);
-  --glass-shadow: rgba(0, 0, 0, 0.08);
+  /* ==========================================================================
+    Accent System
+    ========================================================================== */
+  --color-point-primary: #4ecb99;
+  --color-point-secondary: #3a5a50;
+  --color-point-highlight: #ff8787;
+  --color-point-info: #5dade2;
+  --color-point-success: #2ecc71;
+  /* ==========================================================================
+    Card & Component (워크 카드 / 폴더 전용)
+    ========================================================================== */
+  --color-card-bg: #1c2c26;
+  --color-folder-front: #24362f;
+  --color-folder-back: #1a2521;
+  --color-card-shadow: rgba(0, 0, 0, 0.3);
+  /* ==========================================================================
+    Icon & Interaction 
+    ========================================================================== */
+  --color-icon-base: var(--color-text-primary);
+  --color-icon-active: var(--color-point-primary);
+  /* ==========================================================================
+    Brand Colors (다크모드 시인성 보정)
+    ========================================================================== */
+  --color-html: #ff5d38;
+  --color-css: #38a9ff;
+  --color-scss: #ff85c2;
+  --color-js: #f7df1e;
+  --color-gsap: #a3ff00;
+  --color-lenis: #ffb3bc;
+  --color-php: #a3a7e2;
+  --color-mysql: #5ea0d1;
+  --color-figma: #ff7043;
+  --color-jquery: #1e90ff;
+  --color-react: #61dafb;
+  --color-java: #33b5e5;
+  --color-github: #ffffff;
+  --color-git: #ff6e54;
 }
 
+/* ==========================================================================
+  SCSS Variable Mappings
+  ========================================================================== */
+/* 1. Text System */
+/* 2. Background & Surface */
+/* 3. Accent System (Point Colors) */
+/* 4. Card & Folder Component */
+/* 5. Icon & Interaction */
+/* 6. Brand Colors (Technology Stack) */
 /* ============================================================
    Mixins & Reset Fonts
 ============================================================ */
@@ -231,27 +322,49 @@ input[type=search]::-webkit-search-decoration {
   background: var(--color-scrollbar-hover);
 }
 
-:root {
-  --gutter: 1.25rem;
+.section-py {
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
-@media (max-width: 768px) {
-  :root {
-    --gutter: 1rem;
+@media (max-width: 480px) {
+  .section-py {
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
 }
 
-.wrap {
+.l-fullspan {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  padding: 24px;
+}
+@media (max-width: 480px) {
+  .l-fullspan {
+    padding: 16px;
+  }
 }
 
-.container {
+.l-inner {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 var(--gutter);
+}
+
+.l-grid {
+  display: grid;
+  gap: 24px;
+}
+.l-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 1024px) {
+  .l-grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .l-grid--3 {
+    grid-template-columns: 1fr;
+  }
 }
 
 .video-background {
@@ -319,7 +432,7 @@ input[type=search]::-webkit-search-decoration {
 
 .scroll-down {
   font-size: 18px;
-  color: var(--color-text);
+  color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -337,6 +450,142 @@ input[type=search]::-webkit-search-decoration {
   display: inline-block;
 }
 
+.work__card.is-folder {
+  position: relative;
+  width: 449px;
+  aspect-ratio: 0.9452631579;
+}
+@media (max-width: 1024px) {
+  .work__card.is-folder {
+    width: 380px;
+  }
+}
+@media (max-width: 768px) {
+  .work__card.is-folder {
+    width: 320px;
+  }
+}
+@media (max-width: 480px) {
+  .work__card.is-folder {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+}
+.work__card.is-folder .work__card__inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.folder__back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 90%;
+  border-radius: 1.9375rem;
+  background-color: var(--color-folder-back);
+}
+
+.folder__img-box {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 2;
+  overflow: hidden;
+  width: 90%;
+  height: 50%;
+  border-radius: 1.25rem;
+  background-color: #fff;
+}
+.folder__img-box img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.folder__front-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 70%;
+}
+
+.folder__front {
+  position: absolute;
+  inset: 0;
+}
+.folder__front svg {
+  width: 100%;
+  height: 100%;
+}
+.folder__front path {
+  fill: #000;
+}
+
+.folder__info {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  padding: 1.875rem;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.folder__info-header .folder__title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.folder__info-meta {
+  margin-top: 0.3125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.folder__info-meta .folder__year {
+  font-size: 16px;
+  color: #fff;
+}
+.folder__info-meta .folder__category-icons {
+  display: flex;
+  gap: 5px;
+  padding: 5px;
+  border-radius: 50px;
+  background: #ffffff;
+}
+.folder__info-meta .folder__category-icons i {
+  color: var(--color-text-primary);
+}
+
+.folder__info-footer {
+  margin-top: auto;
+}
+.folder__info-footer .folder__tech-list {
+  display: flex;
+  gap: 10px;
+}
+.folder__info-footer .folder__tech-list .tech-icon {
+  display: block;
+  width: 24px;
+  aspect-ratio: 1/1;
+  background-color: #ffffff;
+  /* 마스크 설정: SVG 모양대로 배경색만 보여줌 */
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
 .hero {
   position: relative;
   display: flex;
@@ -345,8 +594,6 @@ input[type=search]::-webkit-search-decoration {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: url(../assets/images/hero/blob.png) no-repeat center center;
-  background-size: cover;
 }
 
 .hero__text-wrap {
@@ -354,7 +601,7 @@ input[type=search]::-webkit-search-decoration {
   z-index: 10;
 }
 .hero__text-wrap .main-title {
-  color: var(--color-text);
+  color: var(--color-text-primary);
   cursor: default;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -362,7 +609,7 @@ input[type=search]::-webkit-search-decoration {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
   height: -moz-max-content;
   height: max-content;
 }
@@ -416,4 +663,48 @@ input[type=search]::-webkit-search-decoration {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.work__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 32px;
+}
+.work__header .work__title {
+  font-size: clamp(48px, 5vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.1;
+}
+@media (max-width: 1024px) {
+  .work__header .work__title {
+    font-size: clamp(36px, 4vw, 48px);
+  }
+}
+@media (max-width: 480px) {
+  .work__header .work__title {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+}
+.work__header .btn-more {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.6;
+}
+@media (max-width: 480px) {
+  .work__header .btn-more {
+    font-size: 16px;
+  }
+}
+
+.work__cards-wrapper {
+  display: flex;
+  gap: 24px;
 }/*# sourceMappingURL=main.css.map */

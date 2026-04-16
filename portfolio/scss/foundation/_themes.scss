@@ -1,87 +1,188 @@
 
 // Light mode
 :root {
-  --color-text: #1a1a1a;
-  --color-bg: #f7faf9;
+/* ==========================================================================
+    Text System
+    ========================================================================== */
+  --color-text-primary: #1a1a1a;    // 가장 중요한 제목, 본문 (Primary)
+  --color-text-secondary: #4d4d4d;  // 부제목, 카테고리 설명 (Secondary)
+  --color-text-tertiary: #808080;   // 연도, 메타 정보, 부가 설명 (Tertiary)
+  --color-text-disabled: #b3b3b3;   // 비활성 상태 또는 아주 사소한 캡션
+  --color-text-inverse: #ffffff;    // 어두운 배경 위에서의 대비색 (Contrast)
 
-  --color-text-light: #ffffff;
-  --color-text-muted: #666666;
 
-  --color-focus: #2d5a4c;
-
+/* ==========================================================================
+    Background & Surface
+    ========================================================================== */
+  --color-bg-main: #f7faf9;         // 페이지 메인 배경색
+  --color-bg-surface: #ffffff;      // 섹션이나 큰 컨테이너 배경
+  
   --color-scrollbar: #cccccc;
   --color-scrollbar-hover: #999999;
 
-  // Glassmorphism Green Variables
-  --glass-bg: rgba(230, 245, 240, 0.4); // 은은한 그린빛 베이스
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-highlight: rgba(200, 235, 220, 0.8);
-  --glass-shadow: rgba(0, 0, 0, 0.05);
+
+/* ==========================================================================
+    Accent System
+    ========================================================================== */
+  --color-point-primary: #2d5a4c;    // 메인 포인트 (현재의 Focus 컬러)
+  --color-point-secondary: #5e8c7e;  // 보조 포인트 (메인보다 채도가 낮거나 밝은)
+  --color-point-highlight: #ff6b6b;  // 하이라이트 (시선을 강하게 끌어야 하는 요소, 예: New 태그)
+  --color-point-info: #3498db;       // 정보성 포인트 (링크, 안내 등)
+  --color-point-success: #27ae60;    // 긍정적 인터랙션 (완료, 성공)
+
+
+/* ==========================================================================
+    Card & Component (워크 카드 / 폴더 전용)
+    ========================================================================== */
+  --color-card-bg: #ffffff;         // 기본 카드 배경
+  --color-folder-front: #fdfdfd;    // 폴더 앞면 (SVG 껍데기)
+  --color-folder-back: #e8eee8;     // 폴더 뒷면 (안쪽 면의 깊이감)
+  --color-card-shadow: rgba(0, 0, 0, 0.05);
+
+
+/* ==========================================================================
+    Icon & Interaction 
+    ========================================================================== */
+  --color-icon-base: var(--color-text-primary);       // 아이콘 기본 색상
+  --color-icon-active: var(--color-point-primary); // 아이콘 활성/호버 색상
+
+
+/* ==========================================================================
+    Brand Colors
+    ========================================================================== */
+  --color-html: #E34F26;          // HTML
+  --color-css: #1572B6;           // CSS
+  --color-scss: #CC6699;          // SCSS
+  --color-js: #F7DF1E;            // JavaScript
+  --color-gsap: #88CE02;          // GSAP
+  --color-lenis: #FF98A3;         // Lenis
+  --color-php: #777BB4;           // PHP
+  --color-mysql: #4479A1;         // MySQL
+  --color-figma: #F24E1E;         // Figma
+  --color-jquery: #0769AD;        // jQuery
+  --color-react: #61DAFB;         // React
+  --color-java: #007396;          // Java
+  --color-github: #181717;        // GitHub
+  --color-git: #F05032;           // Git
 }
+
 
 // 수정 예정
 // Dark mode
 [data-theme='dark'] {
-  --color-text: #f5f5f5;
-  --color-bg: #0d1a15;
+/* ==========================================================================
+    Text System
+    ========================================================================== */
+  --color-text-primary: #f5f5f5;    // 가장 중요한 제목, 본문 (Primary)
+  --color-text-secondary: #b3b3b3;  // 부제목, 카테고리 설명 (Secondary)
+  --color-text-tertiary: #808080;   // 연도, 메타 정보, 부가 설명 (Tertiary)
+  --color-text-disabled: #4d4d4d;   // 비활성 상태 또는 아주 사소한 캡션
+  --color-text-inverse: #1a1a1a;    // 밝은 배경 위에서의 대비색 (Contrast)
 
-  --color-text-light: #ffffff;
-  --color-text-muted: #666666;
-
-  --color-focus: #5dade2;
-
+  /* ==========================================================================
+    Background & Surface
+    ========================================================================== */
+  --color-bg-main: #0d1a15;         // 페이지 메인 배경색
+  --color-bg-surface: #16241f;      // 섹션이나 큰 컨테이너 배경
+  
   --color-scrollbar: #444444;
   --color-scrollbar-hover: #666666;
 
---glass-bg: rgba(255, 255, 255, 0.25); 
-  // 날카로운 유리 테두리를 위한 고휘도 화이트
-  --glass-border: rgba(255, 255, 255, 0.9);
-  // 내부에서 맺히는 맑은 민트빛 광채
-  --glass-highlight: rgba(180, 255, 230, 0.4);
-  // 유리 무게감을 잡아주는 은은한 그림자
-  --glass-shadow: rgba(0, 0, 0, 0.08);
+  /* ==========================================================================
+    Accent System
+    ========================================================================== */
+  --color-point-primary: #4ecb99;    // 메인 포인트 (다크모드용 조금 더 밝은 그린)
+  --color-point-secondary: #3a5a50;  // 보조 포인트 (차분한 딥 그린)
+  --color-point-highlight: #ff8787;  // 하이라이트 (시인성을 높인 핑크 레드)
+  --color-point-info: #5dade2;       // 정보성 포인트 (부드러운 블루)
+  --color-point-success: #2ecc71;    // 긍정적 인터랙션 (밝은 그린)
+
+  /* ==========================================================================
+    Card & Component (워크 카드 / 폴더 전용)
+    ========================================================================== */
+  --color-card-bg: #1c2c26;         // 기본 카드 배경
+  --color-folder-front: #24362f;    // 폴더 앞면 (SVG 껍데기)
+  --color-folder-back: #1a2521;     // 폴더 뒷면 (안쪽 면의 깊이감)
+  --color-card-shadow: rgba(0, 0, 0, 0.3);
+
+  /* ==========================================================================
+    Icon & Interaction 
+    ========================================================================== */
+  --color-icon-base: var(--color-text-primary);    // 아이콘 기본 색상
+  --color-icon-active: var(--color-point-primary); // 아이콘 활성/호버 색상
+
+  /* ==========================================================================
+    Brand Colors (다크모드 시인성 보정)
+    ========================================================================== */
+  --color-html: #ff5d38;            // HTML
+  --color-css: #38a9ff;             // CSS
+  --color-scss: #ff85c2;            // SCSS
+  --color-js: #f7df1e;              // JavaScript
+  --color-gsap: #a3ff00;            // GSAP
+  --color-lenis: #ffb3bc;           // Lenis
+  --color-php: #a3a7e2;             // PHP
+  --color-mysql: #5ea0d1;           // MySQL
+  --color-figma: #ff7043;           // Figma
+  --color-jquery: #1e90ff;          // jQuery
+  --color-react: #61dafb;           // React
+  --color-java: #33b5e5;            // Java
+  --color-github: #ffffff;          // GitHub
+  --color-git: #ff6e54;             // Git
 }
 
 
-@mixin soft-glassy {
-  // 배경 투명도와 블러 (사파리 대응 포함)
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  
-  // 둥근 모서리와 얇은 빛 반사 테두리
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  
-  // 외부 그림자와 내부 광택 (입체감)
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.05),
-    inset 0 0 15px rgba(255, 255, 255, 0.2);
-  
-  // 마우스 올렸을 때 살짝 뜨는 인터랙션
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-8px);
-    background: rgba(255, 255, 255, 0.45);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  }
-}
 
 
 
 
 
 
+/* ==========================================================================
+  SCSS Variable Mappings
+  ========================================================================== */
 
-$text: var(--color-text);
-$bg: var(--color-bg);
+/* 1. Text System */
+$text-primary:    var(--color-text-primary);    // 주요 제목 및 본문
+$text-secondary:  var(--color-text-secondary);  // 보조 설명 및 카테고리
+$text-tertiary:   var(--color-text-tertiary);   // 메타 정보 (연도 등)
+$text-disabled:   var(--color-text-disabled);   // 비활성 또는 캡션
+$text-inverse:    var(--color-text-inverse);    // 배경색 대비 반전 텍스트
 
-$text-light: var(--color-text-light);
-$text-muted: var(--color-text-muted);
+/* 2. Background & Surface */
+$bg-main:         var(--color-bg-main);         // 전체 페이지 배경
+$bg-surface:      var(--color-bg-surface);      // 컨테이너/섹션 배경
+$scrollbar:       var(--color-scrollbar);       // 스크롤바 기본
+$scrollbar-hover: var(--color-scrollbar-hover); // 스크롤바 호버
 
-$focus: var(--color-focus);
+/* 3. Accent System (Point Colors) */
+$point-primary:   var(--color-point-primary);   // 메인 포인트 (Focus)
+$point-secondary: var(--color-point-secondary); // 보조 포인트
+$point-highlight: var(--color-point-highlight); // 강조 (New, Best 등)
+$point-info:      var(--color-point-info);      // 정보/링크
+$point-success:   var(--color-point-success);   // 성공/완료
 
-$scrollbar: var(--color-scrollbar);
-$scrollbar-hover: var(--color-scrollbar-hover);
+/* 4. Card & Folder Component */
+$card-bg:         var(--color-card-bg);         // 일반 카드 배경
+$folder-front:    var(--color-folder-front);    // 폴더 앞면 (SVG)
+$folder-back:     var(--color-folder-back);     // 폴더 뒷면 (깊이감)
+$card-shadow:     var(--color-card-shadow);     // 카드 그림자
+
+/* 5. Icon & Interaction */
+$icon-base:       var(--color-icon-base);       // 아이콘 기본 색상
+$icon-active:     var(--color-icon-active);     // 아이콘 활성/호버 색상
+
+/* 6. Brand Colors (Technology Stack) */
+$html:            var(--color-html);
+$css:             var(--color-css);
+$scss:            var(--color-scss);
+$js:              var(--color-js);
+$gsap:            var(--color-gsap);
+$lenis:           var(--color-lenis);
+$php:             var(--color-php);
+$mysql:           var(--color-mysql);
+$figma:           var(--color-figma);
+$jquery:          var(--color-jquery);
+$react:           var(--color-react);
+$java:            var(--color-java);
+$github:          var(--color-github);
+$git:             var(--color-git);
