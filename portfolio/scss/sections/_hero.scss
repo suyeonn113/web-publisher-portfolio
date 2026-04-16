@@ -27,7 +27,7 @@
     display: flex;          
     justify-content: center;
     align-items: center;
-    gap: get-space('gutter', 'sm');
+    @include g-gap('gutter', 'sm');
     
     height: max-content;
 

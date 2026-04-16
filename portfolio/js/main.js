@@ -22,6 +22,9 @@ import { initScrollDownMotion } from "./animations/scrollDown.js";
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', async () => {
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
   // 기초 환경 설정
   initLenis();
   // 공통 UI 인터랙션

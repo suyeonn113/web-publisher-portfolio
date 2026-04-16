@@ -82,28 +82,44 @@ $letter-spacings: (
 $spacer: 8px;
 
 $spacings: (
-  // 내부 패딩
+  // 내부 패딩: 콘텐츠의 숨통을 틔워주는 안쪽 여백
   'pad': (
-    'xs': $spacer * 1, // 8px
-    'sm': $spacer * 2, // 16px
-    'md': $spacer * 3, // 24px
-    'lg': $spacer * 5  // 40px
+    'xs': ( 'default': 8px,  'laptop': 8px,  'tablet': 8px,  'mobile': 8px ),
+    'sm': ( 'default': 16px, 'laptop': 16px, 'tablet': 16px, 'mobile': 16px ),
+    'md': ( 'default': 32px, 'laptop': 32px, 'tablet': 24px, 'mobile': 20px ),
+    'lg': ( 'default': 64px, 'laptop': 56px, 'tablet': 48px, 'mobile': 40px )
   ),
-  // 요소 사이 (Gutter)
+
+  // 요소 사이 (Gutter): 버튼, 아이콘 등 인접 요소 간격
   'gutter': (
-    'sm': $spacer * 2, // 16px
-    'md': $spacer * 3, // 24px
-    'lg': $spacer * 4  // 32px
+    'sm': ( 'default': 16px, 'laptop': 16px, 'tablet': 16px, 'mobile': 12px ),
+    'md': ( 'default': 32px, 'laptop': 32px, 'tablet': 24px, 'mobile': 16px ),
+    'lg': ( 'default': 48px, 'laptop': 40px, 'tablet': 32px, 'mobile': 24px )
   ),
-  // 큰 덩어리 사이 (Gap)
+
+  // 큰 덩어리 사이 (Gap): 섹션 간격, 제목과 본문 사이
   'gap': (
-    'sm': $spacer * 6,  // 48px
-    'md': $spacer * 10, // 80px
-    'lg': $spacer * 15  // 120px
+    'sm': ( 'default': 64px,  'laptop': 56px, 'tablet': 48px, 'mobile': 40px ),
+    'md': ( 'default': 120px, 'laptop': 100px, 'tablet': 80px, 'mobile': 64px ),
+    'lg': ( 'default': 200px, 'laptop': 160px, 'tablet': 120px, 'mobile': 100px )
   )
 );
 
 
+/* ============================================================
+   Component Variables (버튼 및 인터랙션 요소)
+============================================================ */
+
+$btn-settings: (
+  'nav': (
+    'font-key': 'base',         // $font-settings의 'lg' (32px) 참조
+    'weight': 'medium',       // $font-weights의 'medium' 참조
+    'pad-y': 'xs',            // $spacings > 'pad' > 'xs' (8px) 참조
+    'pad-x': 'md',            // $spacings > 'pad' > 'md' (24px) 참조
+    'rd': 'xl'                // $radii의 'xl' (32px) 참조
+  ),
+  'min-size': 44px            // 웹 접근성(WCAG) 최소 터치 영역 기준
+);
 
 /* ============================================================
    Radius System 

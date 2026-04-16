@@ -71,47 +71,95 @@
 
 
 /* ============================================================
+   Component Variables (버튼 및 인터랙션 요소)
+============================================================ */
+
+@mixin btn-text-style($key) {
+  $conf: map-get($btn-settings, $key);
+  
+  @include flex-center;
+  // 접근성: 최소 44px 영역 확보는 시스템적으로 유지
+  min-width: map-get($btn-settings, 'min-size');
+  min-height: map-get($btn-settings, 'min-size');
+  
+  // [수정] 반응형 패딩 시스템으로 교체
+  @include responsive-spacing('padding-top', 'pad', map-get($conf, 'pad-y'));
+  @include responsive-spacing('padding-bottom', 'pad', map-get($conf, 'pad-y'));
+  @include responsive-spacing('padding-left', 'pad', map-get($conf, 'pad-x'));
+  @include responsive-spacing('padding-right', 'pad', map-get($conf, 'pad-x'));
+  
+  @include font-style(
+    map-get($conf, 'font-key'), 
+    map-get($conf, 'weight'), 
+    'tight'
+  );
+  
+  @include rd(map-get($conf, 'rd'));
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: $reset-font-family;
+  transition: $tr-base;
+}
+
+
+
+/* ============================================================
    Spacing & Shape Mixins
 ============================================================ */
 
+/**
+ * 반응형 수치 배포 내부 믹스인
+ * @param $property - padding, margin-bottom, gap 등
+ * @param $cat - pad, gutter, gap
+ * @param $size - xs, sm, md, lg
+ */
+@mixin responsive-spacing($property, $cat, $size) {
+  $config: map-get(map-get($spacings, $cat), $size);
+  
+  // 기본값(Desktop) 적용
+  #{$property}: map-get($config, 'default');
+
+  // 변수에 정의된 기기별(laptop, tablet, mobile) 수치 자동 생성
+  @each $device, $val in $config {
+    @if $device != 'default' {
+      @include respond-to($device) {
+        #{$property}: $val;
+      }
+    }
+  }
+}
+
 // 내부 패딩
 @mixin pad($size) {
-  padding: get-space('pad', $size);
+  @include responsive-spacing('padding', 'pad', $size);
 }
 
 // 간격 (방향 지정 가능)
 @mixin gap($cat, $size, $direction: 'bottom') {
-  margin-#{$direction}: get-space($cat, $size);
+  @include responsive-spacing('margin-#{$direction}', $cat, $size);
 }
 
 // Flex 간격
 @mixin f-gap($cat, $size) {
-  gap: get-space($cat, $size);
+  @include responsive-spacing('gap', $cat, $size);
 }
 
 // Grid 간격
 @mixin g-gap($row-cat, $row-size, $col-cat: null, $col-size: null) {
-  $row-val: get-space($row-cat, $row-size);
-  
   @if ($col-cat and $col-size) {
-    // 가로, 세로 값이 다를 때 (예: gap: 48px 24px;)
-    $col-val: get-space($col-cat, $col-size);
-    gap: $row-val $col-val;
+    // 가로/세로가 다를 경우 각각 반응형 적용
+    @include responsive-spacing('row-gap', $row-cat, $row-size);
+    @include responsive-spacing('column-gap', $col-cat, $col-size);
   } @else {
-    // 가로, 세로 값이 같을 때 (예: gap: 24px;)
-    gap: $row-val;
+    @include responsive-spacing('gap', $row-cat, $row-size);
   }
 }
-
 // 곡률 적용
 @mixin rd($size) {
   border-radius: get-rd($size);
 }
 
-// 중첩 곡률 (자식 요소용)
-@mixin nested-rd($outer-rd-key, $padding-key) {
-  border-radius: calc(#{get-rd($outer-rd-key)} - #{get-space('pad', $padding-key)});
-}
 
 
 /* ============================================================

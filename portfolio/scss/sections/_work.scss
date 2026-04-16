@@ -2,29 +2,85 @@
 @use '../layout' as *;
 @use '../components' as *;
 
+// 
+.work {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+// Header
 .work__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 
-  @include gap('gutter', 'lg', 'bottom');
-
   .work__title {
-    @include font-style('title', 'bold', 'tight')
+    @include font-style('title', 'bold', 'tight');
   }
 
   .btn-more {
-    @include font-style('base', 'light', 'tight')
+    @include font-style('base', 'light', 'tight');
   }
 }
 
 
-.work__cards-wrapper {
+// Container
+.work__container {
   display: flex;
-  @include f-gap('gutter', 'md')
+  flex-direction: column;
+  @include f-gap('gutter', 'lg');
+
+}
+.work__slider-container {
+  position: relative;
+
+  width: 100%;
+  height: 600px;
+
+  perspective: 2000px;
+  touch-action: none;
+  
+  display: flex; 
+  justify-content: center;
+  align-items: center;
 }
 
+.work__cards-wrapper {
+  position: absolute;
 
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.work__card {
+  position: absolute;
+  pointer-events: auto;
+  will-change: transform, opacity;
+}
+
+.work__nav-controls {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  @include g-gap('gutter', 'md');
+
+  width: max-content;
+  margin: 0 auto;
+
+  .work__nav-btn {
+    @include btn-text-style('nav');
+    width: 100%;
+
+    border: 1px solid #000;
+    &[disabled] {
+      cursor: not-allowed; // 접근성: 클릭 불가능함을 마우스 커서로 알림
+    }
+  }
+}
 
 

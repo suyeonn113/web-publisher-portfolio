@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>수연의 작업실</title>
   <link rel="stylesheet" href="./css/main.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <!-- <header class="site-header">
@@ -51,21 +52,36 @@
 
     <!-- Work -->
     <section class="work section-py l-fullspan" aria-labelledby="work-title">
-      <div class="container">
+      <div class="l-container">
         <header class="work__header">
           <h2 id="work-title" class="work__title">WORKS</h2>
-          <a href="#" class="btn-more" aria-label="모든 프로젝트 보기">
+          <a href="#" class="btn-more" aria-label="모든 작업물 보기">
             <span>View All</span>
           </a>
         </header>
-        <div class="work__slider-container" role="region" aria-roledescription="carousel">
-          <div class="work__cards-wrapper">
+        <div class="work__container work__slider-container" role="region" aria-roledescription="carousel">
+          <div id="work-list" class="work__cards-wrapper">
             <!-- Card Component Start-->
-              <div class="work__loading">
-                <span class="loading-text">Loading...</span>
-              </div>
-              <!-- Card Component End -->
-           </div>
+            <div class="work__loading">
+              <span class="loading-text">Loading...</span>
+            </div>
+            <!-- Card Component End -->
+          </div>
+
+          <div class="work__nav-controls">
+            <button class="work__nav-btn is-prev"
+                    type="button"
+                    aria-label="이전 작업물 보기"
+                    aria-controls="work-list">
+                    Prev
+            </button>
+            <button class="work__nav-btn is-next"
+                    type="button"
+                    aria-label="다음 작업물 보기"
+                    aria-controls="work-list">
+                    Next
+            </button>
+          </div>
         </div>
       </div>
     </section> 

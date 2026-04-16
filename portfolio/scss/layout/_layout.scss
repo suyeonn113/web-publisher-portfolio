@@ -2,23 +2,23 @@
 
 // 섹션 상하 여백
 .section-py {
-  padding-top: get-space('gap', 'md');    // 80px
-  padding-bottom: get-space('gap', 'md'); // 80px
-  
-  @include respond-to('mobile') {
-    padding-top: get-space('gap', 'sm');    // 48px
-    padding-bottom: get-space('gap', 'sm');
-  }
+  @include responsive-spacing('padding-top', 'gap', 'md');
+  @include responsive-spacing('padding-bottom', 'gap', 'md');
 }
 
 // 풀스크린 섹션 패딩 (양옆 최소 여백만 확보)
 .l-fullspan {
   width: 100%;
-  @include pad('md'); // 기본 24px 여백
+  @include pad('md');
+}
 
-  @include respond-to('mobile') {
-    @include pad('sm'); // 모바일은 16px
-  }
+.l-container {
+  display: flex;
+  flex-direction: column;
+  
+  @include f-gap('gutter', 'lg'); 
+
+  align-items: center; 
 }
 
 // 중앙 정렬이 필요한 섹션에만 부분적으로 사용
@@ -31,7 +31,7 @@
 // 그리드 시스템 (반응형 포함)
 .l-grid {
   display: grid;
-  gap: get-space('gutter', 'md'); // 24px
+  @include g-gap('gutter', 'md');
   
   // 3열 그리드 (데스크탑)
   &--3 {
@@ -40,8 +40,12 @@
     @include respond-to('laptop') {
       grid-template-columns: repeat(2, 1fr);
     }
+    
     @include respond-to('mobile') {
       grid-template-columns: 1fr;
     }
   }
 }
+
+
+
