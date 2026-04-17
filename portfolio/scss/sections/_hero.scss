@@ -29,14 +29,11 @@
     color: $text-primary;
     cursor: default;
     user-select: none;
-    overflow: hidden;
 
     display: flex;          
     justify-content: center;
     align-items: center;
     @include g-gap('gutter', 'sm');
-    
-    height: max-content;
 
     .word {
       display: inline-flex;

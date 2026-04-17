@@ -1035,7 +1035,6 @@ input[type=search]::-webkit-search-decoration {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1055,10 +1054,6 @@ input[type=search]::-webkit-search-decoration {
   .hero__text-wrap .main-title {
     gap: 12px;
   }
-}
-.hero__text-wrap .main-title {
-  height: -moz-max-content;
-  height: max-content;
 }
 .hero__text-wrap .main-title .word {
   display: inline-flex;
