@@ -134,7 +134,7 @@ export const initWorkSlider = () => {
           ? gsap.utils.interpolate(mode.liftY, 0, absDistance / 0.6)
           : 0;
 
-      const zIndex = 100 - Math.round(absDistance * 10);
+      const zIndex = 100 - Math.round(absDistance * 20);
 
       let opacity = 1;
 
@@ -151,11 +151,10 @@ export const initWorkSlider = () => {
         y,
         scale,
         force3D: true,
-        opacity,
+        opacity: opacity < 0.05 ? 0 : opacity,
         rotationY: 0,
         zIndex,
-        z: 0.01,
-        visibility: "visible"
+        z: 0.01
       });
     });
 
