@@ -91,7 +91,7 @@ export function initHeroText() {
         trigger: ".hero",
         start: "top top",
         // 조절 포인트 1: 스크롤 구간 늘리기
-        end: "+=200vh", 
+        end: "+=100vh", 
         scrub: 2.5,
       }
     });
