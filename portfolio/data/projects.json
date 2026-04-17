@@ -47,10 +47,10 @@
 
   {
     "id": "p01",
-    "slug": "fragfarm-mobile-redesign",
+    "slug": "fragfarm-mobile",
     
     "Common": {
-      "title": "FragFarm Mobile Redesign",
+      "title": "FragFarm Mobile",
       "year": "2026",
       "liveLink": "",
       "githubLink": ""
@@ -112,10 +112,10 @@
 
   {
     "id": "p02",
-    "slug": "fragfarm-mobile-redesign",
+    "slug": "seoul-youth-center",
     
     "Common": {
-      "title": "FragFarm Mobile Redesign",
+      "title": "Seoul Youth Center",
       "year": "2026",
       "liveLink": "",
       "githubLink": ""
@@ -180,7 +180,266 @@
     "slug": "fragfarm-mobile-redesign",
     
     "Common": {
-      "title": "FragFarm Mobile Redesign",
+      "title": "3",
+      "year": "2026",
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview": {
+      "thumbnail": "assets/images/projects/",
+      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      
+      "spec": {
+        "device": "Mobile",
+        "projectType": "E-commerce",
+        "keywords": ["Minimal", "Clean"], 
+        "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
+      }
+    },
+
+    "details" : {
+      "mainVisual": "assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "p04",
+    "slug": "fragfarm-mobile-redesign",
+    
+    "Common": {
+      "title": "4",
+      "year": "2026",
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview": {
+      "thumbnail": "assets/images/projects/",
+      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      
+      "spec": {
+        "device": "Mobile",
+        "projectType": "E-commerce",
+        "keywords": ["Minimal", "Clean"], 
+        "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
+      }
+    },
+
+    "details" : {
+      "mainVisual": "assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "p05",
+    "slug": "fragfarm-mobile-redesign",
+    
+    "Common": {
+      "title": "5",
+      "year": "2026",
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview": {
+      "thumbnail": "assets/images/projects/",
+      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      
+      "spec": {
+        "device": "Mobile",
+        "projectType": "E-commerce",
+        "keywords": ["Minimal", "Clean"], 
+        "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
+      }
+    },
+
+    "details" : {
+      "mainVisual": "assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  },
+
+  {
+    "id": "p06",
+    "slug": "fragfarm-mobile-redesign",
+    
+    "Common": {
+      "title": "6",
+      "year": "2026",
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview": {
+      "thumbnail": "assets/images/projects/",
+      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      
+      "spec": {
+        "device": "Mobile",
+        "projectType": "E-commerce",
+        "keywords": ["Minimal", "Clean"], 
+        "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
+      }
+    },
+
+    "details" : {
+      "mainVisual": "assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "p06",
+    "slug": "fragfarm-mobile-redesign",
+    
+    "Common": {
+      "title": "6",
       "year": "2026",
       "liveLink": "",
       "githubLink": ""
@@ -239,5 +498,4 @@
       ]
     }
   }
-  
 ]

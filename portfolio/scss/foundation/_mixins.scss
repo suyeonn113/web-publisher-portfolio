@@ -102,18 +102,37 @@
   transition: $tr-base;
 }
 
+/**
+ * 테크 아이콘 반응형 제어
+ * @param $prop - size (크기), gap (간격)
+ */
+@mixin icon-responsive($prop) {
+  $config: map-get($icon-settings, $prop);
+  $property: if($prop == 'size', 'width', 'gap');
+
+  // 기본값 적용
+  #{$property}: map-get($config, 'default');
+  @if $prop == 'size' { height: map-get($config, 'default'); }
+
+  // 기기별 자동 생성
+  @each $device, $val in $config {
+    @if $device != 'default' {
+      @include respond-to($device) {
+        #{$property}: $val;
+        @if $prop == 'size' { height: $val; }
+      }
+    }
+  }
+}
+
 
 
 /* ============================================================
    Spacing & Shape Mixins
 ============================================================ */
 
-/**
- * 반응형 수치 배포 내부 믹스인
- * @param $property - padding, margin-bottom, gap 등
- * @param $cat - pad, gutter, gap
- * @param $size - xs, sm, md, lg
- */
+/* 반응형 수치 배포 내부 믹스인 */
+
 @mixin responsive-spacing($property, $cat, $size) {
   $config: map-get(map-get($spacings, $cat), $size);
   
@@ -130,16 +149,40 @@
   }
 }
 
-// 내부 패딩
-@mixin pad($size) {
-  @include responsive-spacing('padding', 'pad', $size);
+// Margin
+@mixin mar($cat, $size, $direction: null) {
+  @if $direction == 'y' {
+    @include responsive-spacing('margin-top', $cat, $size);
+    @include responsive-spacing('margin-bottom', $cat, $size);
+  } @else if $direction == 'x' {
+    @include responsive-spacing('margin-left', $cat, $size);
+    @include responsive-spacing('margin-right', $cat, $size);
+  } @else if $direction {
+    @include responsive-spacing('margin-#{$direction}', $cat, $size);
+  } @else {
+    @include responsive-spacing('margin', $cat, $size);
+  }
+}
+
+// Padding
+@mixin pad($cat, $size, $direction: null) {
+  @if $direction == 'y' {
+    @include responsive-spacing('padding-top', $cat, $size);
+    @include responsive-spacing('padding-bottom', $cat, $size);
+  } @else if $direction == 'x' {
+    @include responsive-spacing('padding-left', $cat, $size);
+    @include responsive-spacing('padding-right', $cat, $size);
+  } @else if $direction {
+    @include responsive-spacing('padding-#{$direction}', $cat, $size);
+  } @else {
+    @include responsive-spacing('padding', $cat, $size);
+  }
 }
 
 // 간격 (방향 지정 가능)
 @mixin gap($cat, $size, $direction: 'bottom') {
-  @include responsive-spacing('margin-#{$direction}', $cat, $size);
+  @include mg($cat, $size, $direction);
 }
-
 // Flex 간격
 @mixin f-gap($cat, $size) {
   @include responsive-spacing('gap', $cat, $size);
@@ -175,7 +218,8 @@
   flex-wrap: $wrap;
 }
 
-// Flex 중앙 정렬 (가장 많이 쓰임)
-@mixin flex-center($direction: row) {
-  @include flex(center, center, $direction);
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

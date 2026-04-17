@@ -9,89 +9,205 @@ export const initWorkSlider = () => {
   const cards = gsap.utils.toArray('.work__card');
   const btnPrev = document.querySelector('.is-prev');
   const btnNext = document.querySelector('.is-next');
-  
-  if (cards.length === 0 || !container || !wrapper) return;
 
-  const spacing = 1 / cards.length; 
-  let totalProgress = 0;   
-  let currentProgress = 0; 
-  
+  if (!container || !wrapper || cards.length === 0) return;
+
+  const spacing = 1 / cards.length;
+  let currentProgress = 0;
+  let isAnimating = false;
+
+  gsap.set(wrapper, {
+    position: "relative"
+  });
+
   gsap.set(cards, {
     position: "absolute",
     top: "50%",
     left: "50%",
     xPercent: -50,
     yPercent: -50,
-    transformPerspective: 1200,
-    transformStyle: "preserve-3d"
+    willChange: "transform"
   });
 
-  const updateSlider = () => {
-    const viewWidth = window.innerWidth;
-    
-    // [보정 1] 카드가 너무 크지 않도록 반경 재조절
-    const xRadius = viewWidth > 1200 ? 400 : viewWidth * 0.35; 
-    const zRadius = viewWidth > 1200 ? 250 : 150; 
+  function getWrappedOffset(value) {
+    let wrapped = gsap.utils.wrap(-0.5, 0.5, value);
+    if (wrapped === -0.5) wrapped = 0.5;
+    return wrapped;
+  }
+
+  function getSliderMode() {
+    const width = window.innerWidth;
+
+    if (width >= 1440) {
+      return {
+        visibleCount: 5,
+        gapRatio: -0.02,
+        centerScale: 1,
+        sideScale: 0.8,
+        farScale: 0.76,
+        liftY: -20,
+        fadeOut: false,
+        dragFactor: 0.00055
+      };
+    }
+
+    if (width >= 768) {
+      return {
+        visibleCount: 3,
+        gapRatio: -0.01,
+        centerScale: 1,
+        sideScale: 0.84,
+        farScale: 0.78,
+        liftY: -12,
+        fadeOut: false,
+        dragFactor: 0.00065
+      };
+    }
+
+    return {
+      visibleCount: 1,
+      gapRatio: -0.1,
+      centerScale: 1,
+      sideScale: 0.72,
+      farScale: 0.64,
+      liftY: -6,
+      fadeOut: true,
+      dragFactor: 0.0009
+    };
+  }
+
+  function updateA11y(centerIndex) {
+    cards.forEach((card, i) => {
+      const isCurrent = i === centerIndex;
+      const focusable = card.querySelector('a, button');
+
+      card.setAttribute('aria-hidden', isCurrent ? 'false' : 'true');
+
+      if (focusable) {
+        focusable.setAttribute('tabindex', isCurrent ? '0' : '-1');
+      }
+
+      gsap.set(card, {
+        pointerEvents: isCurrent ? 'auto' : 'none'
+      });
+    });
+  }
+
+  function updateSlider(progress) {
+    currentProgress = progress;
+
+    const mode = getSliderMode();
+
+    const cardWidth = cards[0].offsetWidth;
+    const gap = cardWidth * mode.gapRatio;
+    const baseX = cardWidth + gap;
+
+    let closestIndex = 0;
+    let closestAbsOffset = Infinity;
 
     cards.forEach((card, i) => {
-      const startOffset = i * spacing;
-      const p = gsap.utils.wrap(0, 1, startOffset + currentProgress); 
-      
-      const angle = p * Math.PI * 2;
-      const x = Math.cos(angle) * xRadius; 
-      const z = Math.sin(angle) * zRadius; 
-      const factor = Math.sin(angle); // 1(앞) ~ -1(뒤)
+      const rawOffset = currentProgress + i * spacing;
+      const offset = getWrappedOffset(rawOffset);
+      const absOffset = Math.abs(offset);
 
-      // [보정 2] 3장이 다 보이도록 autoAlpha와 opacity 수치 대폭 하향
-      // factor가 -0.9보다 클 때 보이게 하여, 뒤에 있는 카드도 필터링되지 않게 함
-      gsap.set(card, {
-        x: x,
-        z: z,
-        // [보정 3] 너무 커지지 않게 scale 최대치를 0.7~0.8 정도로 제한
-        scale: 0.4 + (factor + 1) * 0.18, 
-        zIndex: Math.round(factor * 100),
-        
-        // 시각적 노출 설정
-        autoAlpha: factor > -0.95 ? 1 : 0, // 거의 모든 각도에서 보이게 수정
-        opacity: factor > -0.7 ? 1 : 0.5,  // 뒤로 가면 반투명해지며 깊이감만 부여
-        pointerEvents: factor > 0.4 ? "auto" : "none" 
-      });
+      if (absOffset < closestAbsOffset) {
+        closestAbsOffset = absOffset;
+        closestIndex = i;
+      }
 
-      // [접근성] 전면 카드 위주로 포커스 유지
-      const anchor = card.querySelector('a');
-      if (anchor) {
-        if (factor > 0.5) { // 기준을 완화하여 옆에 살짝 걸친 카드도 클릭 가능하게 함
-          anchor.removeAttribute('tabindex');
-          card.setAttribute('aria-hidden', 'false');
+      const distance = offset / spacing;
+      const absDistance = Math.abs(distance);
+
+      const x = distance * baseX;
+
+      const scale =
+        absDistance <= 1
+          ? gsap.utils.interpolate(mode.centerScale, mode.sideScale, absDistance)
+          : gsap.utils.interpolate(
+              mode.sideScale,
+              mode.farScale,
+              Math.min(absDistance - 1, 1)
+            );
+
+      const y =
+        absDistance < 0.6
+          ? gsap.utils.interpolate(mode.liftY, 0, absDistance / 0.6)
+          : 0;
+
+      const zIndex = 100 - Math.round(absDistance * 10);
+
+      let opacity = 1;
+
+      if (mode.fadeOut) {
+        if (absDistance <= 1) {
+          opacity = gsap.utils.interpolate(1, 0.28, absDistance);
         } else {
-          anchor.setAttribute('tabindex', '-1');
-          card.setAttribute('aria-hidden', 'true');
+          opacity = 0;
         }
       }
+
+      gsap.set(card, {
+        x,
+        y,
+        scale,
+        force3D: true,
+        opacity,
+        rotationY: 0,
+        zIndex,
+        z: 0.01,
+        visibility: "visible"
+      });
     });
-  };
 
-  gsap.ticker.add(() => {
-    currentProgress += (totalProgress - currentProgress) * 0.08;
-    updateSlider();
-  });
+    updateA11y(closestIndex);
+  }
 
-  const moveNext = () => { totalProgress -= spacing; };
-  const movePrev = () => { totalProgress += spacing; };
+  function animateTo(targetProgress) {
+    if (isAnimating) return;
 
-  btnNext.addEventListener('click', moveNext);
-  btnPrev.addEventListener('click', movePrev);
+    isAnimating = true;
 
-  const dragProxy = document.createElement("div");
-  Draggable.create(dragProxy, {
+    const proxy = { value: currentProgress };
+
+    gsap.to(proxy, {
+      value: targetProgress,
+      duration: 0.55,
+      ease: "power3.out",
+      onUpdate() {
+        updateSlider(proxy.value);
+      },
+      onComplete() {
+        currentProgress = targetProgress;
+        isAnimating = false;
+      }
+    });
+  }
+
+  function getSnappedProgress(progress) {
+    return Math.round(progress / spacing) * spacing;
+  }
+
+  const moveNext = () => animateTo(getSnappedProgress(currentProgress - spacing));
+  const movePrev = () => animateTo(getSnappedProgress(currentProgress + spacing));
+
+  if (btnNext) btnNext.addEventListener('click', moveNext);
+  if (btnPrev) btnPrev.addEventListener('click', movePrev);
+
+  Draggable.create(document.createElement("div"), {
     type: "x",
     trigger: container,
-    inertia: true,
-    onDrag: function() {
-      totalProgress += this.deltaX * 0.0006; 
+    inertia: false,
+    onPress() {
+      this.startProgress = currentProgress;
+      this.dragFactor = getSliderMode().dragFactor;
     },
-    onThrowUpdate: function() {
-      totalProgress += this.deltaX * 0.0006;
+    onDrag() {
+      const dragProgress = this.startProgress + this.x * this.dragFactor;
+      updateSlider(dragProgress);
+    },
+    onDragEnd() {
+      const snapped = getSnappedProgress(currentProgress);
+      animateTo(snapped);
     }
   });
 
@@ -100,5 +216,9 @@ export const initWorkSlider = () => {
     if (e.key === "ArrowLeft") movePrev();
   });
 
-  updateSlider();
+  window.addEventListener('resize', () => {
+    updateSlider(currentProgress);
+  });
+
+  updateSlider(0);
 };

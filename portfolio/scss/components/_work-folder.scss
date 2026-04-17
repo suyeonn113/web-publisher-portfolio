@@ -1,39 +1,70 @@
 @use '../foundation' as *;
 
-// Folder Widths
-$folder-w-desktop: 449px;
-$folder-w-laptop: 380px;
-$folder-w-tablet: 320px;
-$folder-w-mobile-max: 340px;
-$folder-ratio: 449 / 475;
 
+// Folder Widths
+$folder-min-width: 250px;
+$folder-preferred-width: 20vw;
+$folder-max-width: 800px;
+$folder-ratio: 413 / 373;
 
 // Container
 .work__card.is-folder {
   position: relative;
-  width: $folder-w-desktop;
+  perspective: 1000px;
+  
   aspect-ratio: $folder-ratio;
+  width: clamp(#{$folder-min-width}, #{$folder-preferred-width}, #{$folder-max-width});
 
-  @include respond-to('laptop') {
-    width: $folder-w-laptop;
-  }
-
-  @include respond-to('tablet') {
-    width: $folder-w-tablet;
-  }
-
-  @include respond-to('mobile') {
-    width: 100%;
-    max-width: $folder-w-mobile-max; // 변수 적용
-    margin: 0 auto;
-  }
-
-  .work__card__inner {
+  .work-card__inner {
     display: block;
     width: 100%;
     height: 100%;
+    position: absolute;
+  }
 
-    position: relative;
+  &:hover {
+    .folder__img-box {
+      // 30~40px 정도 위로 올리면 적당히 탭 위로 얼굴을 내밉니다
+      transform: translateY(-50px); 
+    }
+
+    .folder__front-container {
+      transform: translateY(10px) rotateX(15deg);
+      transition: $tr-base;
+    }
+
+    .svg-hover {
+      opacity: 1;
+    }
+
+    .folder__info {
+      color: $text-primary;
+    }
+
+    .folder__title {
+      @include font-style ('lg', 'extra-bold');
+    }
+
+    .folder__year {
+      @include font-style('sm', 'bold')
+    }
+
+    .tech-icon {
+    &.is-html { background-color: $html; }
+    &.is-css { background-color: $css; }
+    &.is-scss { background-color: $scss-color; }
+    &.is-javascript, &.is-js { background-color: $js; }
+    &.is-gsap { background-color: $gsap; }
+    &.is-lenis { background-color: $lenis; }
+    &.is-php { background-color: $php; }
+    &.is-mysql { background-color: $mysql; }
+    &.is-figma { background-color: $figma; }
+    &.is-jquery { background-color: $jquery; }
+    &.is-react { background-color: $react; }
+    &.is-java { background-color: $java; }
+    &.is-github { background-color: $github; }
+    &.is-git { background-color: $git; }
+  }
   }
 }
 
@@ -45,17 +76,19 @@ $folder-ratio: 449 / 475;
   z-index: 1;
 
   width: 100%;
-  height: 90%;
 
-  border-radius: rem(31px);
-  background-color: $folder-back;
+  svg {
+    position: absolute;
+    inset: 0;
+    transition: $tr-base;
+  }
 }
 
 
 // Image
 .folder__img-box {
   position: absolute;
-  top: 5%;
+  top: 10%;
   left: 5%;
   z-index: 2;
   overflow: hidden;
@@ -63,10 +96,12 @@ $folder-ratio: 449 / 475;
   width: 90%;
   height: 50%;
 
-  border-radius: rem(20px);
-  background-color: #fff;
+  border-radius: 5%;
+  background: #fff;
 
-  & img {
+  transition: $tr-elastic;
+
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -77,25 +112,26 @@ $folder-ratio: 449 / 475;
 // Front
 .folder__front-container {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 3;
 
   width: 100%;
-  height: 70%;
 }
 
 .folder__front {
   position: absolute;
   inset: 0;
-
-  & svg {
-    width: 100%;
-    height: 100%;
+  
+  svg {
+    position: absolute;
+    inset: 0;
   }
 
-  & path {
-    fill:#000;
+  .svg-hover {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
@@ -106,33 +142,36 @@ $folder-ratio: 449 / 475;
   z-index: 4;
 
   height: 100%;
+  aspect-ratio: 413 / 373;
 
-  padding: rem(30px);
+  @include pad('pad', 'md');
+  @include pad('gutter', 'md', 'bottom');
 
   display: flex;
   flex-direction: column;
-  color: #fff;
+  justify-content: flex-end;
+  @include f-gap('gutter', 'sm');
+
+  color: $text-inverse;
 }
 
 .folder__info-header {
   .folder__title {
-    font-size: 30px;
-    font-weight: bold;
-    color: #fff;
+    @include font-style ('lg', 'bold');
+    text-shadow: $shadow-soft;
+    white-space: nowrap;
   }
 }
 
-
 .folder__info-meta {
-  margin-top: rem(5px);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
 
+  text-shadow: $shadow-soft;
+
   .folder__year {
-    font-size: 16px;
-    color: #fff;
+    @include font-style('sm')
   }
 
   .folder__category-icons {
@@ -142,26 +181,22 @@ $folder-ratio: 449 / 475;
     padding: 5px;
 
     border-radius: 50px;
-    background: #ffffff;
-
-    & i {
-      color: $text-primary;
-    }
   }
 }
 
 .folder__info-footer {
-  margin-top: auto;
-  
   .folder__tech-list {
     display: flex;
-    gap: 10px;
+    width: max-content;
+    @include icon-responsive('gap');
 
     .tech-icon {
       display: block;
-      width: 24px;
-      aspect-ratio: 1 / 1;
-      background-color: #ffffff;
+      @include icon-responsive('size');
+      background-color: $text-inverse;
+
+      filter: drop-shadow($shadow-strong);
+      transition: filter $tr-base;
 
       /* 마스크 설정: SVG 모양대로 배경색만 보여줌 */
       -webkit-mask-size: contain;

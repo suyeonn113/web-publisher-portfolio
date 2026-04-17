@@ -9,8 +9,10 @@
    Spacing System (8pt Grid)
 ============================================================ */
 /* ============================================================
-   Component Variables (버튼 및 인터랙션 요소)
+   Component Variables 
 ============================================================ */
+/* Button System ----------------------- */
+/* Icon System ----------------------- */
 /* ============================================================
    Radius System 
 ============================================================ */
@@ -45,15 +47,14 @@
 /* ============================================================
    Component Variables (버튼 및 인터랙션 요소)
 ============================================================ */
+/**
+ * 테크 아이콘 반응형 제어
+ * @param $prop - size (크기), gap (간격)
+ */
 /* ============================================================
    Spacing & Shape Mixins
 ============================================================ */
-/**
- * 반응형 수치 배포 내부 믹스인
- * @param $property - padding, margin-bottom, gap 등
- * @param $cat - pad, gutter, gap
- * @param $size - xs, sm, md, lg
- */
+/* 반응형 수치 배포 내부 믹스인 */
 /* ============================================================
    Display & Alignment Mixins
 ============================================================ */
@@ -66,6 +67,8 @@
   --color-text-tertiary: #808080;
   --color-text-disabled: #b3b3b3;
   --color-text-inverse: #ffffff;
+  --shadow-text-soft: 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-text-strong: 0 2px 6px rgba(0,0,0,0.4);
   /* ==========================================================================
       Background & Surface
       ========================================================================== */
@@ -73,6 +76,18 @@
   --color-bg-surface: #ffffff;
   --color-scrollbar: #cccccc;
   --color-scrollbar-hover: #999999;
+  --overlay-bottom-soft: linear-gradient(
+    to top,
+    rgba(0,0,0,0.35) 0%,
+    rgba(0,0,0,0.1) 40%,
+    transparent 70%
+  );
+  --overlay-bottom-strong: linear-gradient(
+    to top,
+    rgba(0,0,0,0.45) 0%,
+    rgba(0,0,0,0.15) 40%,
+    transparent 70%
+  );
   /* ==========================================================================
       Accent System
       ========================================================================== */
@@ -82,17 +97,29 @@
   --color-point-info: #3498db;
   --color-point-success: #27ae60;
   /* ==========================================================================
-      Card & Component (워크 카드 / 폴더 전용)
-      ========================================================================== */
-  --color-card-bg: #ffffff;
-  --color-folder-front: #fdfdfd;
-  --color-folder-back: #e8eee8;
-  --color-card-shadow: rgba(0, 0, 0, 0.05);
+    Component 
+    ========================================================================== */
+  /* 글래스모피즘 베이스 */
+  --glass-bg: rgba(255, 255, 255, 0.5); /* 반투명 배경 */
+  --glass-border: rgba(255, 255, 255, 0.4); /* 유리 테두리 */
+  --glass-blur: 12px; /* 흐림 정도 */
+  /* 뉴모피즘 그림자 */
+  /* 바깥으로 튀어나온 느낌 (Outer Shadow) */
+  --nm-shadow-out:
+    6px 6px 15px rgba(0, 0, 0, 0.12), /* 어두운 그림자 */
+    -6px -6px 15px rgba(255, 255, 255, 0.7); /* 밝은 하이라이트 */
+  /* 안으로 들어간 느낌 (Inset Shadow - 클릭 시 사용) */
+  --nm-shadow-inset:
+    inset 4px 4px 8px rgba(0, 0, 0, 0.1),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+  /* 텍스트 및 상태값 */
+  --btn-hover-bg: rgba(255, 255, 255, 0.8);
   /* ==========================================================================
       Icon & Interaction 
       ========================================================================== */
   --color-icon-base: var(--color-text-primary);
   --color-icon-active: var(--color-point-primary);
+  --color-focus: var(--color-point-primary);
   /* ==========================================================================
       Brand Colors
       ========================================================================== */
@@ -137,17 +164,11 @@
   --color-point-info: #5dade2;
   --color-point-success: #2ecc71;
   /* ==========================================================================
-    Card & Component (워크 카드 / 폴더 전용)
-    ========================================================================== */
-  --color-card-bg: #1c2c26;
-  --color-folder-front: #24362f;
-  --color-folder-back: #1a2521;
-  --color-card-shadow: rgba(0, 0, 0, 0.3);
-  /* ==========================================================================
     Icon & Interaction 
     ========================================================================== */
   --color-icon-base: var(--color-text-primary);
   --color-icon-active: var(--color-point-primary);
+  --color-focus: var(--color-point-primary);
   /* ==========================================================================
     Brand Colors (다크모드 시인성 보정)
     ========================================================================== */
@@ -170,12 +191,12 @@
 /* ==========================================================================
   SCSS Variable Mappings
   ========================================================================== */
-/* 1. Text System */
-/* 2. Background & Surface */
-/* 3. Accent System (Point Colors) */
-/* 4. Card & Folder Component */
-/* 5. Icon & Interaction */
-/* 6. Brand Colors (Technology Stack) */
+/* Text System */
+/* Background & Surface */
+/* Accent System (Point Colors) */
+/* Component */
+/* Icon & Interaction */
+/* Brand Colors (Technology Stack) */
 /* ============================================================
    Mixins & Reset Fonts
 ============================================================ */
@@ -373,21 +394,21 @@ input[type=search]::-webkit-search-decoration {
 
 .l-fullspan {
   width: 100%;
-  padding: 32px;
+  padding: 28px;
 }
 @media (max-width: 1024px) {
-  .l-fullspan {
-    padding: 32px;
-  }
-}
-@media (max-width: 768px) {
   .l-fullspan {
     padding: 24px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .l-fullspan {
     padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .l-fullspan {
+    padding: 16px;
   }
 }
 
@@ -408,7 +429,7 @@ input[type=search]::-webkit-search-decoration {
 }
 @media (max-width: 480px) {
   .l-container {
-    gap: 24px;
+    gap: 20px;
   }
 }
 .l-container {
@@ -539,31 +560,106 @@ input[type=search]::-webkit-search-decoration {
 
 .work__card.is-folder {
   position: relative;
-  width: 449px;
-  aspect-ratio: 0.9452631579;
+  perspective: 1000px;
+  aspect-ratio: 1.1072386059;
+  width: clamp(250px, 20vw, 800px);
 }
-@media (max-width: 1024px) {
-  .work__card.is-folder {
-    width: 380px;
-  }
-}
-@media (max-width: 768px) {
-  .work__card.is-folder {
-    width: 320px;
-  }
-}
-@media (max-width: 480px) {
-  .work__card.is-folder {
-    width: 100%;
-    max-width: 340px;
-    margin: 0 auto;
-  }
-}
-.work__card.is-folder .work__card__inner {
+.work__card.is-folder .work-card__inner {
   display: block;
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
+}
+.work__card.is-folder:hover .folder__img-box {
+  transform: translateY(-50px);
+}
+.work__card.is-folder:hover .folder__front-container {
+  transform: translateY(10px) rotateX(15deg);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.work__card.is-folder:hover .svg-hover {
+  opacity: 1;
+}
+.work__card.is-folder:hover .folder__info {
+  color: var(--color-text-primary);
+}
+.work__card.is-folder:hover .folder__title {
+  font-size: clamp(22px, 1.8vw, 28px);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.6;
+}
+@media (max-width: 1024px) {
+  .work__card.is-folder:hover .folder__title {
+    font-size: clamp(20px, 1.8vw, 26px);
+  }
+}
+@media (max-width: 768px) {
+  .work__card.is-folder:hover .folder__title {
+    font-size: clamp(18px, 2.4vw, 22px);
+  }
+}
+@media (max-width: 480px) {
+  .work__card.is-folder:hover .folder__title {
+    font-size: clamp(17px, 3.8vw, 19px);
+  }
+}
+.work__card.is-folder:hover .folder__year {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.6;
+}
+@media (max-width: 480px) {
+  .work__card.is-folder:hover .folder__year {
+    font-size: 14px;
+  }
+}
+.work__card.is-folder:hover .tech-icon.is-html {
+  background-color: var(--color-html);
+}
+.work__card.is-folder:hover .tech-icon.is-css {
+  background-color: var(--color-css);
+}
+.work__card.is-folder:hover .tech-icon.is-scss {
+  background-color: var(--color-scss);
+}
+.work__card.is-folder:hover .tech-icon.is-javascript, .work__card.is-folder:hover .tech-icon.is-js {
+  background-color: var(--color-js);
+}
+.work__card.is-folder:hover .tech-icon.is-gsap {
+  background-color: var(--color-gsap);
+}
+.work__card.is-folder:hover .tech-icon.is-lenis {
+  background-color: var(--color-lenis);
+}
+.work__card.is-folder:hover .tech-icon.is-php {
+  background-color: var(--color-php);
+}
+.work__card.is-folder:hover .tech-icon.is-mysql {
+  background-color: var(--color-mysql);
+}
+.work__card.is-folder:hover .tech-icon.is-figma {
+  background-color: var(--color-figma);
+}
+.work__card.is-folder:hover .tech-icon.is-jquery {
+  background-color: var(--color-jquery);
+}
+.work__card.is-folder:hover .tech-icon.is-react {
+  background-color: var(--color-react);
+}
+.work__card.is-folder:hover .tech-icon.is-java {
+  background-color: var(--color-java);
+}
+.work__card.is-folder:hover .tech-icon.is-github {
+  background-color: var(--color-github);
+}
+.work__card.is-folder:hover .tech-icon.is-git {
+  background-color: var(--color-git);
 }
 
 .folder__back {
@@ -571,21 +667,24 @@ input[type=search]::-webkit-search-decoration {
   inset: 0;
   z-index: 1;
   width: 100%;
-  height: 90%;
-  border-radius: 1.9375rem;
-  background-color: var(--color-folder-back);
+}
+.folder__back svg {
+  position: absolute;
+  inset: 0;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .folder__img-box {
   position: absolute;
-  top: 5%;
+  top: 10%;
   left: 5%;
   z-index: 2;
   overflow: hidden;
   width: 90%;
   height: 50%;
-  border-radius: 1.25rem;
-  background-color: #fff;
+  border-radius: 5%;
+  background: #fff;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .folder__img-box img {
   width: 100%;
@@ -596,11 +695,9 @@ input[type=search]::-webkit-search-decoration {
 
 .folder__front-container {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 3;
   width: 100%;
-  height: 70%;
 }
 
 .folder__front {
@@ -608,62 +705,178 @@ input[type=search]::-webkit-search-decoration {
   inset: 0;
 }
 .folder__front svg {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
 }
-.folder__front path {
-  fill: #000;
+.folder__front .svg-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .folder__info {
   position: relative;
   z-index: 4;
   height: 100%;
-  padding: 1.875rem;
+  aspect-ratio: 413/373;
+  padding: 28px;
+}
+@media (max-width: 1024px) {
+  .folder__info {
+    padding: 24px;
+  }
+}
+@media (max-width: 768px) {
+  .folder__info {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .folder__info {
+    padding: 16px;
+  }
+}
+.folder__info {
+  padding-bottom: 32px;
+}
+@media (max-width: 1024px) {
+  .folder__info {
+    padding-bottom: 32px;
+  }
+}
+@media (max-width: 768px) {
+  .folder__info {
+    padding-bottom: 24px;
+  }
+}
+@media (max-width: 480px) {
+  .folder__info {
+    padding-bottom: 16px;
+  }
+}
+.folder__info {
   display: flex;
   flex-direction: column;
-  color: #fff;
+  justify-content: flex-end;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .folder__info {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .folder__info {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .folder__info {
+    gap: 12px;
+  }
+}
+.folder__info {
+  color: var(--color-text-inverse);
 }
 
 .folder__info-header .folder__title {
-  font-size: 30px;
-  font-weight: bold;
-  color: #fff;
+  font-size: clamp(22px, 1.8vw, 28px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.6;
+}
+@media (max-width: 1024px) {
+  .folder__info-header .folder__title {
+    font-size: clamp(20px, 1.8vw, 26px);
+  }
+}
+@media (max-width: 768px) {
+  .folder__info-header .folder__title {
+    font-size: clamp(18px, 2.4vw, 22px);
+  }
+}
+@media (max-width: 480px) {
+  .folder__info-header .folder__title {
+    font-size: clamp(17px, 3.8vw, 19px);
+  }
+}
+.folder__info-header .folder__title {
+  text-shadow: var(--shadow-text-soft-soft);
+  white-space: nowrap;
 }
 
 .folder__info-meta {
-  margin-top: 0.3125rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-shadow: var(--shadow-text-soft-soft);
 }
 .folder__info-meta .folder__year {
-  font-size: 16px;
-  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.6;
+}
+@media (max-width: 480px) {
+  .folder__info-meta .folder__year {
+    font-size: 14px;
+  }
 }
 .folder__info-meta .folder__category-icons {
   display: flex;
   gap: 5px;
   padding: 5px;
   border-radius: 50px;
-  background: #ffffff;
-}
-.folder__info-meta .folder__category-icons i {
-  color: var(--color-text-primary);
 }
 
-.folder__info-footer {
-  margin-top: auto;
-}
 .folder__info-footer .folder__tech-list {
   display: flex;
+  width: -moz-max-content;
+  width: max-content;
   gap: 10px;
+}
+@media (max-width: 768px) {
+  .folder__info-footer .folder__tech-list {
+    gap: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .folder__info-footer .folder__tech-list {
+    gap: 6px;
+  }
 }
 .folder__info-footer .folder__tech-list .tech-icon {
   display: block;
   width: 24px;
-  aspect-ratio: 1/1;
-  background-color: #ffffff;
+  height: 24px;
+}
+@media (max-width: 1024px) {
+  .folder__info-footer .folder__tech-list .tech-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .folder__info-footer .folder__tech-list .tech-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .folder__info-footer .folder__tech-list .tech-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+.folder__info-footer .folder__tech-list .tech-icon {
+  background-color: var(--color-text-inverse);
+  filter: drop-shadow(var(--shadow-text-strong));
+  transition: filter all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   /* 마스크 설정: SVG 모양대로 배경색만 보여줌 */
   -webkit-mask-size: contain;
   mask-size: contain;
@@ -671,6 +884,110 @@ input[type=search]::-webkit-search-decoration {
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
+}
+
+.btn {
+  /* 플렉스 중앙 정렬 (기존 믹스인 활용) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 글래스모피즘 스타일 */
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  /* 뉴모피즘 그림자 */
+  box-shadow: var(--nm-shadow-out);
+  /* 크기 및 간격 (기존 믹스인 활용) */
+  /* 타원형 둥근 모서리 */
+  padding-left: 28px;
+}
+@media (max-width: 1024px) {
+  .btn {
+    padding-left: 24px;
+  }
+}
+@media (max-width: 768px) {
+  .btn {
+    padding-left: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .btn {
+    padding-left: 16px;
+  }
+}
+.btn {
+  padding-right: 28px;
+}
+@media (max-width: 1024px) {
+  .btn {
+    padding-right: 24px;
+  }
+}
+@media (max-width: 768px) {
+  .btn {
+    padding-right: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .btn {
+    padding-right: 16px;
+  }
+}
+.btn {
+  /* 좌우 패딩 */
+  padding-top: 8px;
+}
+@media (max-width: 1024px) {
+  .btn {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 768px) {
+  .btn {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .btn {
+    padding-top: 8px;
+  }
+}
+.btn {
+  padding-bottom: 8px;
+}
+@media (max-width: 1024px) {
+  .btn {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 768px) {
+  .btn {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .btn {
+    padding-bottom: 8px;
+  }
+}
+.btn {
+  /* 상하 패딩 */
+  /* 기타 스타일 */
+  color: var(--color-text-primary);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+  /* 인터랙션 */
+}
+.btn:hover {
+  background: var(--btn-hover-bg);
+  transform: translateY(-2px); /* 살짝 떠오르는 느낌 */
+}
+.btn:active {
+  /* 클릭 시 안으로 푹 들어가는 뉴모피즘 효과 */
+  box-shadow: var(--nm-shadow-inset);
+  transform: translateY(0) scale(0.98); /* 살짝 눌리는 느낌 */
 }
 
 .hero {
@@ -831,15 +1148,18 @@ input[type=search]::-webkit-search-decoration {
 }
 @media (max-width: 480px) {
   .work__container {
-    gap: 24px;
+    gap: 20px;
   }
+}
+.work__container {
+  overflow: hidden;
 }
 
 .work__slider-container {
   position: relative;
   width: 100%;
-  height: 600px;
-  perspective: 2000px;
+  height: 37.5rem;
+  perspective: 1200px;
   touch-action: none;
   display: flex;
   justify-content: center;
@@ -851,16 +1171,18 @@ input[type=search]::-webkit-search-decoration {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  pointer-events: none;
 }
 
 .work__card {
   position: absolute;
   pointer-events: auto;
-  will-change: transform, opacity;
+  transform-origin: center center;
+  will-change: transform;
 }
 
 .work__nav-controls {
+  position: absolute;
+  bottom: 0.625rem;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
@@ -888,10 +1210,8 @@ input[type=search]::-webkit-search-decoration {
 }
 .work__nav-controls .work__nav-btn {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap;
   min-width: 44px;
   min-height: 44px;
   padding-top: 8px;
@@ -930,39 +1250,39 @@ input[type=search]::-webkit-search-decoration {
   }
 }
 .work__nav-controls .work__nav-btn {
-  padding-left: 32px;
+  padding-left: 28px;
 }
 @media (max-width: 1024px) {
-  .work__nav-controls .work__nav-btn {
-    padding-left: 32px;
-  }
-}
-@media (max-width: 768px) {
   .work__nav-controls .work__nav-btn {
     padding-left: 24px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .work__nav-controls .work__nav-btn {
     padding-left: 20px;
   }
 }
-.work__nav-controls .work__nav-btn {
-  padding-right: 32px;
-}
-@media (max-width: 1024px) {
+@media (max-width: 480px) {
   .work__nav-controls .work__nav-btn {
-    padding-right: 32px;
+    padding-left: 16px;
   }
 }
-@media (max-width: 768px) {
+.work__nav-controls .work__nav-btn {
+  padding-right: 28px;
+}
+@media (max-width: 1024px) {
   .work__nav-controls .work__nav-btn {
     padding-right: 24px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .work__nav-controls .work__nav-btn {
     padding-right: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .work__nav-controls .work__nav-btn {
+    padding-right: 16px;
   }
 }
 .work__nav-controls .work__nav-btn {
@@ -986,8 +1306,4 @@ input[type=search]::-webkit-search-decoration {
   font-family: inherit;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   width: 100%;
-  border: 1px solid #000;
-}
-.work__nav-controls .work__nav-btn[disabled] {
-  cursor: not-allowed;
 }/*# sourceMappingURL=main.css.map */

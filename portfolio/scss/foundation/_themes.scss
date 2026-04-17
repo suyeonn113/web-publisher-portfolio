@@ -10,6 +10,8 @@
   --color-text-disabled: #b3b3b3;   // 비활성 상태 또는 아주 사소한 캡션
   --color-text-inverse: #ffffff;    // 어두운 배경 위에서의 대비색 (Contrast)
 
+  --shadow-text-soft: 0 1px 4px rgba(0,0,0,0.3);
+  --shadow-text-strong: 0 2px 6px rgba(0,0,0,0.4);
 
 /* ==========================================================================
     Background & Surface
@@ -19,6 +21,20 @@
   
   --color-scrollbar: #cccccc;
   --color-scrollbar-hover: #999999;
+
+  --overlay-bottom-soft: linear-gradient(
+    to top,
+    rgba(0,0,0,0.35) 0%,
+    rgba(0,0,0,0.1) 40%,
+    transparent 70%
+  );
+
+  --overlay-bottom-strong: linear-gradient(
+    to top,
+    rgba(0,0,0,0.45) 0%,
+    rgba(0,0,0,0.15) 40%,
+    transparent 70%
+  );
 
 
 /* ==========================================================================
@@ -31,13 +47,27 @@
   --color-point-success: #27ae60;    // 긍정적 인터랙션 (완료, 성공)
 
 
-/* ==========================================================================
-    Card & Component (워크 카드 / 폴더 전용)
+  /* ==========================================================================
+    Component 
     ========================================================================== */
-  --color-card-bg: #ffffff;         // 기본 카드 배경
-  --color-folder-front: #fdfdfd;    // 폴더 앞면 (SVG 껍데기)
-  --color-folder-back: #e8eee8;     // 폴더 뒷면 (안쪽 면의 깊이감)
-  --color-card-shadow: rgba(0, 0, 0, 0.05);
+  /* 글래스모피즘 베이스 */
+  --glass-bg: rgba(255, 255, 255, 0.5);       /* 반투명 배경 */
+  --glass-border: rgba(255, 255, 255, 0.4);   /* 유리 테두리 */
+  --glass-blur: 12px;                           /* 흐림 정도 */
+
+  /* 뉴모피즘 그림자 */
+  /* 바깥으로 튀어나온 느낌 (Outer Shadow) */
+  --nm-shadow-out: 
+    6px 6px 15px rgba(0, 0, 0, 0.12),         /* 어두운 그림자 */
+    -6px -6px 15px rgba(255, 255, 255, 0.7);  /* 밝은 하이라이트 */
+
+  /* 안으로 들어간 느낌 (Inset Shadow - 클릭 시 사용) */
+  --nm-shadow-inset: 
+    inset 4px 4px 8px rgba(0, 0, 0, 0.1),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+
+  /* 텍스트 및 상태값 */
+  --btn-hover-bg: rgba(255, 255, 255, 0.8);
 
 
 /* ==========================================================================
@@ -46,6 +76,7 @@
   --color-icon-base: var(--color-text-primary);       // 아이콘 기본 색상
   --color-icon-active: var(--color-point-primary); // 아이콘 활성/호버 색상
 
+  --color-focus: var(--color-point-primary);
 
 /* ==========================================================================
     Brand Colors
@@ -97,19 +128,14 @@
   --color-point-info: #5dade2;       // 정보성 포인트 (부드러운 블루)
   --color-point-success: #2ecc71;    // 긍정적 인터랙션 (밝은 그린)
 
-  /* ==========================================================================
-    Card & Component (워크 카드 / 폴더 전용)
-    ========================================================================== */
-  --color-card-bg: #1c2c26;         // 기본 카드 배경
-  --color-folder-front: #24362f;    // 폴더 앞면 (SVG 껍데기)
-  --color-folder-back: #1a2521;     // 폴더 뒷면 (안쪽 면의 깊이감)
-  --color-card-shadow: rgba(0, 0, 0, 0.3);
 
   /* ==========================================================================
     Icon & Interaction 
     ========================================================================== */
   --color-icon-base: var(--color-text-primary);    // 아이콘 기본 색상
   --color-icon-active: var(--color-point-primary); // 아이콘 활성/호버 색상
+
+  --color-focus: var(--color-point-primary);
 
   /* ==========================================================================
     Brand Colors (다크모드 시인성 보정)
@@ -141,40 +167,49 @@
   SCSS Variable Mappings
   ========================================================================== */
 
-/* 1. Text System */
+/* Text System */
 $text-primary:    var(--color-text-primary);    // 주요 제목 및 본문
 $text-secondary:  var(--color-text-secondary);  // 보조 설명 및 카테고리
 $text-tertiary:   var(--color-text-tertiary);   // 메타 정보 (연도 등)
 $text-disabled:   var(--color-text-disabled);   // 비활성 또는 캡션
 $text-inverse:    var(--color-text-inverse);    // 배경색 대비 반전 텍스트
 
-/* 2. Background & Surface */
+$shadow-soft:     var(--shadow-text-soft-soft); // 부드러운 그림자
+$shadow-strong:   var(--shadow-text-strong);    // 강력한 그림자
+
+/* Background & Surface */
 $bg-main:         var(--color-bg-main);         // 전체 페이지 배경
 $bg-surface:      var(--color-bg-surface);      // 컨테이너/섹션 배경
 $scrollbar:       var(--color-scrollbar);       // 스크롤바 기본
 $scrollbar-hover: var(--color-scrollbar-hover); // 스크롤바 호버
 
-/* 3. Accent System (Point Colors) */
+$overlay-soft:    var(--overlay-bottom-soft);   // 부드러운 오버레이
+$overlay-strong:  var(--overlay-bottom-strong); // 강력한 오버레이
+
+/* Accent System (Point Colors) */
 $point-primary:   var(--color-point-primary);   // 메인 포인트 (Focus)
 $point-secondary: var(--color-point-secondary); // 보조 포인트
 $point-highlight: var(--color-point-highlight); // 강조 (New, Best 등)
 $point-info:      var(--color-point-info);      // 정보/링크
 $point-success:   var(--color-point-success);   // 성공/완료
 
-/* 4. Card & Folder Component */
-$card-bg:         var(--color-card-bg);         // 일반 카드 배경
-$folder-front:    var(--color-folder-front);    // 폴더 앞면 (SVG)
-$folder-back:     var(--color-folder-back);     // 폴더 뒷면 (깊이감)
-$card-shadow:     var(--color-card-shadow);     // 카드 그림자
+/* Component */
+$glass-bg:        var(--glass-bg);
+$glass-border:    var(--glass-border);
+$blur:            var(--glass-blur);
+$nm-shadow-out:   var(--nm-shadow-out);
+$nm-shadow-inset: var(--nm-shadow-inset);
+$hover-bg:        var(--btn-hover-bg);
+$active-scale:    var(--btn-active-scale);
 
-/* 5. Icon & Interaction */
+/* Icon & Interaction */
 $icon-base:       var(--color-icon-base);       // 아이콘 기본 색상
 $icon-active:     var(--color-icon-active);     // 아이콘 활성/호버 색상
 
-/* 6. Brand Colors (Technology Stack) */
+/* Brand Colors (Technology Stack) */
 $html:            var(--color-html);
 $css:             var(--color-css);
-$scss:            var(--color-scss);
+$scss-color:            var(--color-scss);
 $js:              var(--color-js);
 $gsap:            var(--color-gsap);
 $lenis:           var(--color-lenis);

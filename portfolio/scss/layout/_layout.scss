@@ -2,14 +2,13 @@
 
 // 섹션 상하 여백
 .section-py {
-  @include responsive-spacing('padding-top', 'gap', 'md');
-  @include responsive-spacing('padding-bottom', 'gap', 'md');
+  @include pad('gap', 'md', 'y');
 }
 
 // 풀스크린 섹션 패딩 (양옆 최소 여백만 확보)
 .l-fullspan {
   width: 100%;
-  @include pad('md');
+  @include pad('pad', 'md');
 }
 
 .l-container {
