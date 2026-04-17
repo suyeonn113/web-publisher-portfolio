@@ -118,7 +118,7 @@ $spacings: (
 /* Button System ----------------------- */
 $btn-settings: (
   'nav': (
-    'font-key': 'base',         // $font-settings의 'lg' (32px) 참조
+    'font-key': 'lg',         // $font-settings의 'lg' (32px) 참조
     'weight': 'medium',       // $font-weights의 'medium' 참조
     'pad-y': 'xs',            // $spacings > 'pad' > 'xs' (8px) 참조
     'pad-x': 'md',            // $spacings > 'pad' > 'md' (24px) 참조

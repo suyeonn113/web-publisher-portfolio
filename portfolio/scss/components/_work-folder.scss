@@ -39,6 +39,7 @@ $folder-ratio: 413 / 373;
 
     .folder__info {
       color: $text-primary;
+      @include pad('pad', 'md', 'bottom');
     }
 
     .folder__title {
@@ -76,11 +77,14 @@ $folder-ratio: 413 / 373;
   z-index: 1;
 
   width: 100%;
+  height: 100%;
 
   svg {
     position: absolute;
     inset: 0;
     transition: $tr-base;
+
+    overflow: visible !important;
   }
 }
 
@@ -132,6 +136,7 @@ $folder-ratio: 413 / 373;
     inset: 0;
     opacity: 0;
     pointer-events: none;
+    overflow: visible !important;
   }
 }
 

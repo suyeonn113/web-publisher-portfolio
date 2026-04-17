@@ -18,6 +18,7 @@ import { initWorkSlider } from './components/workSlider.js';
 // Animations
 import { initHeroText } from './animations/heroText.js';
 import { initScrollDownMotion } from "./animations/scrollDown.js";
+import { initWorkEntrance } from "./animations/workEntrance.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   initHeroText();
   initScrollDownMotion();
 
-
   // 데이터 로드 및 렌더링 (비동기)
   const isProjectLoaded = await loadProjects();
 
@@ -42,5 +42,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (isProjectLoaded) {
     initWorkSlider(); 
     ScrollTrigger.refresh();
+    initWorkEntrance();
   }
 });

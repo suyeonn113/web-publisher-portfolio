@@ -2,12 +2,15 @@
 @use '../layout' as *;
 @use '../components' as *;
 
-// 
 .work {
+  position: relative;
+  z-index: 2;
+  margin-top: 100vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 // Header
@@ -40,7 +43,8 @@
   overflow: hidden;
 
   width: 100%;
-  height: rem(600px);
+  height: clamp(rem(380px), 65vh, rem(600px));
+  @include pad('pad', 'xl', "bottom");
 
   perspective: 1200px;
   touch-action: none;
@@ -52,11 +56,9 @@
 
 .work__cards-wrapper {
   position: absolute;
-
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  overflow: visible !important;
 }
 
 .work__card {
@@ -68,12 +70,12 @@
 
 .work__nav-controls {
   position: absolute;
-  bottom: rem(10px);
+  bottom: 5%;
 
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  @include g-gap('gutter', 'md');
+  @include g-gap('gutter', 'lg');
 
   width: max-content;
   margin: 0 auto;

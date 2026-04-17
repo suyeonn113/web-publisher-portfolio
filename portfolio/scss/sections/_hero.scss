@@ -3,7 +3,10 @@
 @use '../components' as *;
 
 .hero {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
 
   display: flex;
   justify-content: center;
@@ -13,16 +16,20 @@
   height: 100vh;
 
   overflow: hidden;
+
+  background: $bg-main;
 }
 
 .hero__text-wrap {
   text-align: center;
   z-index: 10;
+  will-change: transform, opacity;
 
   .main-title {
     color: $text-primary;
     cursor: default;
     user-select: none;
+    overflow: hidden;
 
     display: flex;          
     justify-content: center;
@@ -56,4 +63,6 @@
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+  will-change: transform, opacity;
 }
+
