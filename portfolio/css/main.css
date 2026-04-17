@@ -1151,12 +1151,10 @@ input[type=search]::-webkit-search-decoration {
     gap: 20px;
   }
 }
-.work__container {
-  overflow: hidden;
-}
 
 .work__slider-container {
   position: relative;
+  overflow: hidden;
   width: 100%;
   height: 37.5rem;
   perspective: 1200px;
@@ -1171,6 +1169,7 @@ input[type=search]::-webkit-search-decoration {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
+  overflow: visible !important;
 }
 
 .work__card {
