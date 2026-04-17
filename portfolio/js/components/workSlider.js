@@ -27,9 +27,9 @@ export const initWorkSlider = () => {
   function getSliderMode() {
     const w = window.innerWidth;
     // 질문자님의 원본 데이터 그대로 유지
-    if (w >= 1440) return { visibleCount: 5, gapRatio: -0.02, centerScale: 1, sideScale: 0.8, farScale: 0.76, liftY: -20, fadeOut: false, dragFactor: 0.00055, isMobile: false };
-    if (w >= 768) return { visibleCount: 3, gapRatio: -0.01, centerScale: 1, sideScale: 0.84, farScale: 0.78, liftY: -12, fadeOut: false, dragFactor: 0.00065, isMobile: false };
-    return { visibleCount: 1, gapRatio: -0.04, centerScale: 1, sideScale: 0.82, farScale: 0.64, liftY: -6, fadeOut: false, dragFactor: 0.0009, isMobile: true };
+    if (w >= 1440) return { visibleCount: 5, gapRatio: -0.02, centerScale: 1, sideScale: 0.8, farScale: 0.76, liftY: -20, fadeOut: false, dragFactor: 0.0006, isMobile: false };
+    if (w >= 768) return { visibleCount: 3, gapRatio: -0.01, centerScale: 1, sideScale: 0.84, farScale: 0.78, liftY: -12, fadeOut: false, dragFactor: 0.0007, isMobile: false };
+    return { visibleCount: 1, gapRatio: -0.04, centerScale: 1, sideScale: 0.82, farScale: 0.64, liftY: -6, fadeOut: false, dragFactor: 0.0006, isMobile: true };
   }
 
   function updateA11y(centerIndex) {
