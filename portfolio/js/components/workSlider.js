@@ -27,9 +27,9 @@ export const initWorkSlider = () => {
   function getSliderMode() {
     const w = window.innerWidth;
     // 질문자님의 원본 데이터 그대로 유지
-    if (w >= 1440) return { visibleCount: 5, gapRatio: -0.02, centerScale: 1, sideScale: 0.8, farScale: 0.76, liftY: -20, fadeOut: false, dragFactor: 0.0006, isMobile: false };
-    if (w >= 768) return { visibleCount: 3, gapRatio: -0.01, centerScale: 1, sideScale: 0.84, farScale: 0.78, liftY: -12, fadeOut: false, dragFactor: 0.0007, isMobile: false };
-    return { visibleCount: 1, gapRatio: -0.04, centerScale: 1, sideScale: 0.82, farScale: 0.64, liftY: -6, fadeOut: false, dragFactor: 0.0006, isMobile: true };
+    if (w >= 1440) return { visibleCount: 5, gapRatio: -0.02, centerScale: 1, sideScale: 0.8, farScale: 0.76, liftY: -20, fadeOut: false, dragFactor: 0.00045, dragPreviewFactor: 1, isMobile: false };
+    if (w >= 768) return { visibleCount: 3, gapRatio: -0.01, centerScale: 1, sideScale: 0.84, farScale: 0.78, liftY: -12, fadeOut: false, dragFactor: 0.00038, dragPreviewFactor: 0.85, isMobile: false };
+    return { visibleCount: 1, gapRatio: -0.04, centerScale: 1, sideScale: 0.82, farScale: 0.64, liftY: -6, fadeOut: false, dragFactor: 0.00018, dragPreviewFactor: 0.35, isMobile: true };
   }
 
   function updateA11y(centerIndex) {
@@ -93,8 +93,8 @@ export const initWorkSlider = () => {
     isAnimating = true;
     gsap.to({ v: currentProgress }, {
       v: target,
-      duration: 0.55,
-      ease: "power3.out",
+      duration: 0.42,
+      ease: "power2.out",
       onUpdate: function() { updateSlider(this.targets()[0].v); },
       onComplete: () => {
         currentProgress = wrapProgress(target);
@@ -103,9 +103,10 @@ export const initWorkSlider = () => {
     });
   }
 
-  const snap = (p) => Math.round(p / spacing) * spacing;
-  const moveNext = () => animateTo(currentProgress - spacing);
-  const movePrev = () => animateTo(currentProgress + spacing);
+  const getSnappedProgress = () => Math.round(currentProgress / spacing) * spacing;
+
+  const moveNext = () => animateTo(getSnappedProgress() - spacing);
+  const movePrev = () => animateTo(getSnappedProgress() + spacing);
 
   btnNext?.addEventListener('click', moveNext);
   btnPrev?.addEventListener('click', movePrev);
@@ -113,9 +114,28 @@ export const initWorkSlider = () => {
   Draggable.create(document.createElement("div"), {
     trigger: container,
     type: "x",
-    onPress() { this.startP = currentProgress; this.f = getSliderMode().dragFactor; },
-    onDrag() { updateSlider(this.startP + this.x * this.f); },
-    onDragEnd() { animateTo(snap(currentProgress)); }
+    onPress() { 
+      this.startP = currentProgress; 
+      const mode = getSliderMode();
+      this.f = mode.dragFactor;
+      this.previewF = mode.dragPreviewFactor;
+    },
+    onDrag() { 
+      updateSlider(this.startP + this.x * this.f * this.previewF); 
+    },
+    onDragEnd() {
+      const movedX = this.x;
+      const threshold = window.innerWidth < 768 ? 55 : 60;
+      const base = getSnappedProgress();
+
+      if (movedX <= -threshold) {
+        animateTo(base - spacing);
+      } else if (movedX >= threshold) {
+        animateTo(base + spacing);
+      } else {
+        animateTo(base);
+      }
+    }
   });
 
   const onKey = (e) => {
