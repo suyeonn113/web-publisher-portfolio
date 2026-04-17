@@ -3,284 +3,162 @@ import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigge
 
 gsap.registerPlugin(ScrollTrigger);
 
-let heroFloatTick = null;
-
+/**
+ * 히어로 섹션 텍스트 애니메이션 컨트롤러
+ * 진입, 부유, 마우스 인터랙션, 스크롤 흩어짐 효과 포함
+ */
 export function initHeroText() {
-  const hero = document.querySelector(".hero");
-  const title = document.querySelector(".main-title");
-  const originalItems = document.querySelectorAll(".main-title .char, .main-title .dot");
+  const originalItems = document.querySelectorAll('.main-title .char, .main-title .dot');
+  if (!originalItems.length) return;
 
-  if (!hero || !title || !originalItems.length) return;
-
-  /* ============================================================
-      1. DOM 구조 재구성
-  ============================================================ */
-  originalItems.forEach((item) => {
-    if (item.parentElement?.classList.contains("float-wrap")) return;
-
-    const wrapper = document.createElement("span");
-    wrapper.className = "float-wrap";
-    wrapper.style.display = "inline-block";
-
+  // DOM 구조 재구성: 개별 글자에 부유 효과 전용 래퍼를 생성하여 애니메이션 계층 분리
+  originalItems.forEach(item => {
+    const wrapper = document.createElement('span');
+    wrapper.className = 'float-wrap';
+    wrapper.style.display = 'inline-block';
     item.parentNode.insertBefore(wrapper, item);
     wrapper.appendChild(item);
   });
 
-  const floatWrappers = document.querySelectorAll(".float-wrap");
-  const chars = document.querySelectorAll(".main-title .char, .main-title .dot");
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const floatWrappers = document.querySelectorAll('.float-wrap');
+  const chars = document.querySelectorAll('.main-title .char, .main-title .dot');
 
-  /* ============================================================
-      2. 중복 ticker / trigger 정리
-  ============================================================ */
-  if (heroFloatTick) {
-    gsap.ticker.remove(heroFloatTick);
-    heroFloatTick = null;
-  }
-
-  ScrollTrigger.getAll().forEach((trigger) => {
-    const triggerEl = trigger.vars?.trigger;
-    if (triggerEl === hero || triggerEl === ".hero") {
-      trigger.kill();
+  // 첫 진입 애니메이션: 글자들이 작게 시작해 튕기며 등장
+  gsap.fromTo(chars, 
+    { opacity: 0, scale: 0.5 }, 
+    { 
+      opacity: 1, 
+      scale: 1, 
+      y: 0, 
+      duration: 0.8, 
+      stagger: 0.05, 
+      ease: "back.out(1.7)",
+      onComplete: () => {
+        startFloating(floatWrappers);
+        initScatter(chars); // 등장 완료 후 스크롤 흩어짐 이벤트 활성화
+      }
     }
-  });
+  );
 
-  /* ============================================================
-      3. 상태 세팅
-  ============================================================ */
-  function setHeroHiddenState() {
-    gsap.set(chars, {
-      opacity: 0,
-      x: 0,
-      y: 0,
-      scale: 0.5,
-      rotation: 0,
-      clearProps: "filter"
-    });
-
-    gsap.set(floatWrappers, {
-      y: 0
-    });
-  }
-
-  function setHeroRestState() {
-    gsap.set(chars, {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      scale: 1,
-      rotation: 0,
-      clearProps: "filter"
-    });
-
-    gsap.set(floatWrappers, {
-      y: 0
-    });
-  }
-
-  function setHeroIntroStartState() {
-    gsap.set(chars, {
-      opacity: 0,
-      x: 0,
-      y: 0,
-      scale: 0.5,
-      rotation: 0,
-      clearProps: "filter"
-    });
-
-    gsap.set(floatWrappers, {
-      y: 0
-    });
-  }
-
-  function isPastHero() {
-    const heroBottom = hero.offsetTop + hero.offsetHeight;
-    return window.scrollY > heroBottom - 8;
-  }
-
-  /* ============================================================
-      4. 현재 위치 판단
-  ============================================================ */
-  const heroRect = hero.getBoundingClientRect();
-  const shouldPlayIntro = heroRect.top >= -40;
-  const pastHeroOnLoad = isPastHero();
-
-  if (pastHeroOnLoad) {
-    setHeroHiddenState();
-  } else if (shouldPlayIntro) {
-    setHeroIntroStartState();
-  } else {
-    setHeroRestState();
-  }
-
-  /* ============================================================
-      5. 부유 효과
-  ============================================================ */
+  // 부유 애니메이션: 각 글자가 서로 다른 속도와 진폭으로 공중에 떠 있는 효과
   function startFloating(wrappers) {
+    let amp = 0;
+    gsap.to({ value: 0 }, {
+      value: 1,
+      duration: 0.8,
+      ease: "power1.out",
+      onUpdate: function () { amp = this.targets()[0].value; }
+    });
+
     const configs = Array.from(wrappers).map(() => ({
       speed: gsap.utils.random(2.0, 3.0),
       phase: gsap.utils.random(0, Math.PI * 2),
-      amp: gsap.utils.random(2, 6)
+      amp: gsap.utils.random(2, 6) * gsap.utils.clamp(0.3, 1, window.innerWidth / 1200)
     }));
 
-    heroFloatTick = () => {
+    gsap.ticker.add(() => {
       const t = gsap.ticker.time;
-
       wrappers.forEach((el, i) => {
         const c = configs[i];
-        const y = Math.sin(t * c.speed + c.phase) * c.amp;
+        const y = Math.sin(t * c.speed + c.phase) * c.amp * amp;
         gsap.set(el, { y });
       });
-    };
-
-    gsap.ticker.add(heroFloatTick);
-  }
-
-  function stopFloating() {
-    if (heroFloatTick) {
-      gsap.ticker.remove(heroFloatTick);
-      heroFloatTick = null;
-    }
-  }
-
-  /* ============================================================
-      6. 인트로 애니메이션
-  ============================================================ */
-  const introTl = gsap.timeline({
-    paused: true,
-    onComplete: () => {
-      if (!heroFloatTick && !isPastHero()) {
-        startFloating(floatWrappers);
-      }
-    }
-  });
-
-  introTl.to(chars, {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    duration: 0.8,
-    stagger: 0.05,
-    ease: "back.out(1.7)"
-  });
-
-  /* ============================================================
-      7. 스크롤 흩어짐 효과
-  ============================================================ */
-  const scatterTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: hero,
-      start: "top top",
-      end: "bottom top",
-      scrub: 1.5,
-      invalidateOnRefresh: true,
-      onRefresh: (self) => {
-        if (isPastHero()) {
-          stopFloating();
-          setHeroHiddenState();
-          introTl.progress(1);
-          self.animation.progress(1);
-          return;
-        }
-
-        if (self.progress <= 0) {
-          if (shouldPlayIntro) {
-            setHeroIntroStartState();
-          } else {
-            setHeroRestState();
-          }
-          return;
-        }
-
-        setHeroRestState();
-        introTl.progress(1);
-
-        if (!heroFloatTick) {
-          startFloating(floatWrappers);
-        }
-      }
-    }
-  });
-
-  if (prefersReducedMotion) {
-    scatterTl.fromTo(
-      chars,
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        x: 0,
-        rotation: 0
-      },
-      {
-        y: -50,
-        opacity: 0,
-        stagger: 0.02,
-        ease: "none"
-      }
-    );
-  } else {
-    scatterTl.fromTo(
-      chars,
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        x: 0,
-        rotation: 0
-      },
-      {
-        x: () => (Math.random() - 0.5) * window.innerWidth,
-        y: () => (Math.random() - 1) * window.innerHeight * 0.7,
-        rotation: () => (Math.random() - 0.5) * 120,
-        scale: 0.5,
-        opacity: 0,
-        stagger: { amount: 0.8, from: "random" },
-        ease: "none"
-      }
-    );
-  }
-
-  /* ============================================================
-      8. 인트로 실행 여부 분기
-  ============================================================ */
-  if (pastHeroOnLoad) {
-    stopFloating();
-    introTl.progress(1);
-    scatterTl.progress(1);
-    setHeroHiddenState();
-  } else if (shouldPlayIntro) {
-    introTl.play();
-  } else {
-    introTl.progress(1);
-    startFloating(floatWrappers);
-  }
-
-  /* ============================================================
-      9. 스크롤 다운 힌트 퇴장
-  ============================================================ */
-  const scrollHint = document.querySelector(".scroll-down");
-
-  if (scrollHint) {
-    gsap.set(scrollHint, { autoAlpha: 1, y: 0 });
-
-    gsap.to(scrollHint, {
-      autoAlpha: 0,
-      y: 40,
-      ease: "none",
-      scrollTrigger: {
-        trigger: hero,
-        start: "top top",
-        end: "top+=180 top",
-        scrub: true,
-        invalidateOnRefresh: true,
-        onLeave: () => gsap.set(scrollHint, { autoAlpha: 0, y: 40 }),
-        onEnterBack: () => gsap.set(scrollHint, { autoAlpha: 1, y: 0 })
-      }
     });
   }
 
-  requestAnimationFrame(() => {
-    ScrollTrigger.refresh();
-  });
+  // 스크롤 흩어짐 애니메이션: 스크롤을 내리면 글자들이 사방으로 랜덤하게 흩뿌려짐
+  function initScatter(targets) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+          // 동작 줄이기 사용자: 어지러운 흩어짐 대신, 부드럽게 위로 살짝 올라가며 페이드아웃
+          gsap.to(targets, {
+            scrollTrigger: {
+              trigger: ".hero",
+              start: "top top",
+              end: "bottom top",
+              scrub: true, 
+            },
+            y: -30,
+            opacity: 0,
+            stagger: 0.05
+          });
+          return; // 아래의 화려한 흩어짐 로직은 실행하지 않음
+        }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        // 조절 포인트 1: 스크롤 구간 늘리기
+        end: "+=200vh", 
+        scrub: 2.5,
+      }
+    });
+
+    tl.to(targets, {
+      // 조절 포인트 2: 날아가는 반경 줄이기
+      x: () => (Math.random() - 0.5) * window.innerWidth * 1.2,
+      y: () => (Math.random() - 0.8) * window.innerHeight * 0.5,
+      
+      transformPerspective: 600,
+
+      // 조절 포인트 3: 회전값 낮추기
+      rotation: () => (Math.random() - 0.5) * 90, 
+      rotationX: () => (Math.random() - 0.5) * 160, 
+      rotationY: () => (Math.random() - 0.5) * 160,
+
+      scale: () => gsap.utils.random(0.5, 0.8),
+      filter: "blur(6px)",
+      opacity: 0,
+      stagger: {
+        // 조절 포인트 4: 시간차(stagger) 늘리기
+        amount: 1.2, 
+        from: "random"
+      },
+      // 조절 포인트 5: 타이밍 함수(Ease) 변경
+      ease: "sine.inOut" 
+    });
+  }
+
+  // 마우스 무브 인터랙션: 마우스가 가까워지면 글자가 확대되고 밀려나는 효과
+  const onMouseMove = (e) => {
+    const { clientX: mouseX, clientY: mouseY } = e;
+
+    chars.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const deltaX = mouseX - centerX;
+      const deltaY = mouseY - centerY;
+      const dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+
+      const maxDist = 350; 
+      const proximity = Math.max(0, 1 - dist / maxDist);
+      const magnify = Math.pow(proximity, 2); 
+
+      gsap.to(item, {
+        scale: 1 + magnify * 1.2,
+        y: (magnify * -40) + (deltaY * 0.3 * proximity),
+        x: deltaX * 0.3 * proximity, 
+        rotation: deltaX * 0.05 * proximity,
+        duration: 0.5,
+        ease: "power2.out",
+        overwrite: "auto" // 스크롤 애니메이션과 중첩 시 부드러운 전환을 유도
+      });
+    });
+  };
+
+  // 마우스가 화면을 벗어날 때 원래 위치로 복귀
+  const onMouseLeave = () => {
+    gsap.to(chars, {
+      scale: 1, y: 0, x: 0,
+      duration: 0.8,
+      ease: "elastic.out(1, 0.5)"
+    });
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseleave', onMouseLeave);
 }
