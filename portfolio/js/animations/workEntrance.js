@@ -80,7 +80,7 @@ export const initWorkEntrance = () => {
     [".work__header", ".work__nav-controls"],
     {
       opacity: 0,
-      y: isMobile ? 18 : 20
+      y: isMobile ? 18 : 28
     },
     {
       opacity: 1,
@@ -89,8 +89,8 @@ export const initWorkEntrance = () => {
       ease: "power2.out",
       scrollTrigger: {
         trigger: ".work",
-        start: isMobile ? "top 10%" : "top 70%",
-        end: isMobile ? "top 0%" : "top 55%",
+        start: isMobile ? "top 10%" : "top 10%",
+        end: isMobile ? "top 0%" : "top 0%",
         scrub: isMobile ? 2 : 1.2,
       }
     }
