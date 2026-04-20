@@ -5,12 +5,11 @@
 .work {
   position: relative;
   z-index: 2;
-  margin-top: 100vh;
+  margin-top: 100dvh;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
   min-height: 100dvh;
 }
 
@@ -47,7 +46,7 @@
   height: clamp(rem(380px), 65vh, rem(600px));
 
   perspective: 1200px;
-  touch-action: none;
+  touch-action: pan-y;
   
   display: flex; 
   justify-content: center;
@@ -73,7 +72,7 @@
   bottom: 10%;
   /* Desktop */
   @media (min-width: $desktop) {
-    bottom: 9%;
+    bottom: 6%;
   }
   @media (min-width: $desktop) and (max-height: 820px) {
     bottom: 1%;

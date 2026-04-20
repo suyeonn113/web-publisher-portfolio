@@ -29,7 +29,7 @@ export const initWorkSlider = () => {
     // 질문자님의 원본 데이터 그대로 유지
     if (w >= 1440) return { visibleCount: 5, gapRatio: -0.02, centerScale: 1, sideScale: 0.8, farScale: 0.76, liftY: -20, fadeOut: false, dragFactor: 0.00045, dragPreviewFactor: 1, isMobile: false };
     if (w >= 768) return { visibleCount: 3, gapRatio: -0.01, centerScale: 1, sideScale: 0.84, farScale: 0.78, liftY: -12, fadeOut: false, dragFactor: 0.00038, dragPreviewFactor: 0.85, isMobile: false };
-    return { visibleCount: 1, gapRatio: -0.04, centerScale: 1, sideScale: 0.82, farScale: 0.64, liftY: -6, fadeOut: false, dragFactor: 0.00018, dragPreviewFactor: 0.35, isMobile: true };
+    return { visibleCount: 1, gapRatio: -0.04, centerScale: 1, sideScale: 0.82, farScale: 0.64, liftY: -6, fadeOut: false, dragFactor: 0.00012, dragPreviewFactor: 0.2, isMobile: true };
   }
 
   function updateA11y(centerIndex) {
@@ -81,7 +81,7 @@ export const initWorkSlider = () => {
         scale,
         opacity: opacity < 0.05 ? 0 : opacity,
         zIndex: 100 - Math.round(absDist * 20),
-        force3D: true
+        force3D: false
       });
     });
 
@@ -114,20 +114,39 @@ export const initWorkSlider = () => {
   Draggable.create(document.createElement("div"), {
     trigger: container,
     type: "x",
-    minimumMovement: 10,
+    minimumMovement: 6,
 
-    onPress() { 
+    onPress(e) { 
       this.startP = currentProgress; 
       const mode = getSliderMode();
       this.f = mode.dragFactor;
       this.previewF = mode.dragPreviewFactor;
+      this.isHorizontalDrag = false;
+
+      const rect = container.getBoundingClientRect();
+      const hitRatio = window.innerWidth < 768 ? 0.7 : 0.75; // 모바일 60%, 태블릿 이상 75%
+      const hitWidth = rect.width * hitRatio;
+      const hitLeft = rect.left + ((rect.width - hitWidth) / 2);
+      const hitRight = hitLeft + hitWidth;
+
+      const pointerX = e?.clientX ?? this.pointerX;
+      this.canDrag = pointerX >= hitLeft && pointerX <= hitRight;
     },
     onDrag() { 
-      updateSlider(this.startP + this.x * this.f * this.previewF); 
+      if (!this.canDrag) return;
+
+      if (!this.isHorizontalDrag) {
+        if (Math.abs(this.x) < 12) return;
+        this.isHorizontalDrag = true;
+      }
+
+      updateSlider(this.startP + this.x * this.f * this.previewF);
     },
     onDragEnd() {
+      if (!this.canDrag || !this.isHorizontalDrag) return;
+
       const movedX = this.x;
-      const threshold = window.innerWidth < 768 ? 40 : 60;
+      const threshold = window.innerWidth < 768 ? 75 : 60;
       const base = getSnappedProgress();
 
       if (movedX <= -threshold) {

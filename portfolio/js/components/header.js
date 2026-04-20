@@ -17,7 +17,7 @@ export function renderHeader() {
     <header class="site-header l-fullspan">
       <nav class="site-header__nav">
         <ul class="site-header__menu">
-          <li><a class="site-header__link" href="#">HOME</a></li>
+          <li><a class="site-header__link" href="index.html">HOME</a></li>
           <li><a class="site-header__link" href="#">WORK</a></li>
           <li><a class="site-header__link" href="#">LOG</a></li>
           <li><a class="site-header__link" href="#">CONTACT</a></li>
