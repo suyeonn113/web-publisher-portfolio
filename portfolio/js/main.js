@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 데이터 로드 완료 후 특정 섹션 인터랙션 실행
   if (isProjectLoaded) {
     initWorkSlider(); 
-    ScrollTrigger.refresh();
     initWorkEntrance();
+    ScrollTrigger.refresh();
   }
 });

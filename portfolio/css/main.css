@@ -1020,6 +1020,7 @@ input[type=search]::-webkit-search-decoration {
   align-items: center;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: var(--color-bg-main);
 }
@@ -1122,6 +1123,7 @@ input[type=search]::-webkit-search-decoration {
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .work__header {
