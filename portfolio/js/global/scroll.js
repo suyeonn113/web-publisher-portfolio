@@ -39,7 +39,7 @@ export function initHomeScrollAssist(lenis) {
 
       if (isAutoScrolling) return;
 
-      if (isScrollingDown && self.progress > 0.72 && !hasSnappedToWork) {
+      if (isScrollingDown && self.progress > 0.9 && !hasSnappedToWork) {
         isAutoScrolling = true;
         hasSnappedToWork = true;
 
