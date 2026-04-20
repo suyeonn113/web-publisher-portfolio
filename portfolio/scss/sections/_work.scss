@@ -45,7 +45,6 @@
 
   width: 100%;
   height: clamp(rem(380px), 65vh, rem(600px));
-  @include pad('pad', 'xl', "bottom");
 
   perspective: 1200px;
   touch-action: none;
@@ -71,8 +70,39 @@
 
 .work__nav-controls {
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
+  /* Desktop */
+  @media (min-width: $desktop) {
+    bottom: 9%;
+  }
+  @media (min-width: $desktop) and (max-height: 820px) {
+    bottom: 1%;
+  }
 
+  /* Laptop */
+  @media (min-width: $laptop) and (max-width: ($desktop - 1)) {
+    bottom: 15%;
+  }
+  @media (min-width: $laptop) and (max-width: ($desktop - 1)) and (max-height: 820px) {
+    bottom: 6%;
+  }
+
+  /* Tablet */
+  @media (min-width: $tablet) and (max-width: ($laptop - 1)) {
+    bottom: 19%;
+  }
+  @media (min-width: $tablet) and (max-width: ($laptop - 1)) and (max-height: 800px) {
+    bottom: 8%;
+  }
+
+  /* Mobile */
+  @media (max-width: ($tablet - 1)) {
+    bottom: 19%;
+  }
+  @media (max-width: ($tablet - 1)) and (max-height: 740px) {
+    bottom: 10%;
+  }
+ 
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
@@ -80,6 +110,7 @@
 
   width: max-content;
   margin: 0 auto;
+  z-index: 5;
 
   .work__nav-btn {
     @include btn-text-style('nav');

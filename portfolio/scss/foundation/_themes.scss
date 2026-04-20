@@ -50,25 +50,13 @@
   /* ==========================================================================
     Component 
     ========================================================================== */
-  /* 글래스모피즘 베이스 */
-  --glass-bg: rgba(255, 255, 255, 0.5);       /* 반투명 배경 */
-  --glass-border: rgba(255, 255, 255, 0.4);   /* 유리 테두리 */
-  --glass-blur: 12px;                           /* 흐림 정도 */
 
-  /* 뉴모피즘 그림자 */
-  /* 바깥으로 튀어나온 느낌 (Outer Shadow) */
-  --nm-shadow-out: 
-    6px 6px 15px rgba(0, 0, 0, 0.12),         /* 어두운 그림자 */
-    -6px -6px 15px rgba(255, 255, 255, 0.7);  /* 밝은 하이라이트 */
+  --btn-text-color: #111111;
+  --btn-text-opacity: 0.4;
+  --btn-text-opacity-hover: 0.8;
+  --btn-letter-spacing: 0.04em;
 
-  /* 안으로 들어간 느낌 (Inset Shadow - 클릭 시 사용) */
-  --nm-shadow-inset: 
-    inset 4px 4px 8px rgba(0, 0, 0, 0.1),
-    inset -4px -4px 8px rgba(255, 255, 255, 0.7);
-
-  /* 텍스트 및 상태값 */
-  --btn-hover-bg: rgba(255, 255, 255, 0.8);
-
+  --btn-focus-outline: rgba(0, 0, 0, 0.2);
 
 /* ==========================================================================
     Icon & Interaction 
@@ -194,13 +182,11 @@ $point-info:      var(--color-point-info);      // 정보/링크
 $point-success:   var(--color-point-success);   // 성공/완료
 
 /* Component */
-$glass-bg:        var(--glass-bg);
-$glass-border:    var(--glass-border);
-$blur:            var(--glass-blur);
-$nm-shadow-out:   var(--nm-shadow-out);
-$nm-shadow-inset: var(--nm-shadow-inset);
-$hover-bg:        var(--btn-hover-bg);
-$active-scale:    var(--btn-active-scale);
+$btn-color:       var(--btn-text-color);
+$btn-opacity:     var(--btn-text-opacity);
+$btn-opacity-hover: var(--btn-text-opacity-hover);
+$btn-ls:          var(--btn-letter-spacing);
+$btn-focus-outline: var(--btn-focus-outline);
 
 /* Icon & Interaction */
 $icon-base:       var(--color-icon-base);       // 아이콘 기본 색상

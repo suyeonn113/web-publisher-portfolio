@@ -4,36 +4,11 @@ import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigge
 gsap.registerPlugin(ScrollTrigger);
 
 export function initHeroText(onIntroComplete) {
-  const titleContainer = document.querySelector('.main-title');
   const originalItems = document.querySelectorAll('.main-title .char, .main-title .dot');
   if (!originalItems.length) {
     if (typeof onIntroComplete === "function") onIntroComplete();
     return;
   }
-
-  // 새로고침 버그 강제 수정
-  const forceHideByScroll = () => {
-    if (window.scrollY > 700) {
-      titleContainer.classList.add('is-hidden');
-      titleContainer.style.display = 'none';
-    } else {
-      titleContainer.classList.remove('is-hidden');
-      titleContainer.style.display = 'block';
-    }
-  };
-
-  // 실행 시점 3단
-  forceHideByScroll(); 
-  window.addEventListener('scroll', forceHideByScroll);
-  window.addEventListener('load', forceHideByScroll);
-
-  originalItems.forEach(item => {
-    const wrapper = document.createElement('span');
-    wrapper.className = 'float-wrap';
-    wrapper.style.display = 'inline-block';
-    item.parentNode.insertBefore(wrapper, item);
-    wrapper.appendChild(item);
-  });
 
   const floatWrappers = document.querySelectorAll('.float-wrap');
   const chars = document.querySelectorAll('.main-title .char, .main-title .dot');
