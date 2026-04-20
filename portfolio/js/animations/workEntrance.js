@@ -90,7 +90,7 @@ export const initWorkEntrance = () => {
       scrollTrigger: {
         trigger: ".work",
         start: isMobile ? "top 10%" : "top 10%",
-        end: isMobile ? "top 0%" : "top 0%",
+        end: isMobile ? "top 5%" : "top 5%",
         scrub: isMobile ? 2 : 1.2,
       }
     }

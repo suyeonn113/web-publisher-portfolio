@@ -30,7 +30,8 @@ $container-max: 1440px;
 $font-settings: (
   'hero': (
     'default': clamp(120px, 12vw, 200px),
-    'laptop':  clamp(60px, 10vw, 120px),
+    'laptop':  clamp(60px, 12vw, 120px),
+    'tablet':  clamp(50px, 12vw, 90px),
     'mobile':  clamp(40px, 16vw, 70px)
   ),
   'hero-sub': (

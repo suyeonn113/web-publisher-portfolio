@@ -1,26 +1,104 @@
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
 
-export function initDirectionHeader() {
-  const header = document.querySelector('.site-header');
+gsap.registerPlugin(ScrollTrigger);
+
+/* ========================================
+   Header Component
+======================================== */
+
+function getPageType() {
+  return document.body.dataset.page || "";
+}
+
+/* 헤더 DOM 주입 */
+export function renderHeader() {
+  const headerHTML = `
+    <header class="site-header l-fullspan">
+      <nav class="site-header__nav">
+        <ul class="site-header__menu">
+          <li><a class="site-header__link" href="#">HOME</a></li>
+          <li><a class="site-header__link" href="#">WORK</a></li>
+          <li><a class="site-header__link" href="#">LOG</a></li>
+          <li><a class="site-header__link" href="#">CONTACT</a></li>
+        </ul>
+      </nav>
+    </header>
+  `;
+
+  document.body.insertAdjacentHTML("afterbegin", headerHTML);
+}
+
+/* 고정 상태 */
+export function initHeaderFixed() {
+  const header = document.querySelector(".site-header");
   if (!header) return;
 
-  const showAnim = gsap.to(header, {
-    yPercent: -100,
-    paused: true,
-    duration: 0.25,
-    ease: 'power2.out',
+  gsap.set(header, {
+    yPercent: 0,
+    autoAlpha: 1
   });
+}
+
+/* 초기 숨김 상태 */
+export function initHeaderState() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  gsap.set(header, {
+    yPercent: -100,
+    autoAlpha: 0
+  });
+}
+
+/* 첫 진입 */
+export function initHeaderEntrance() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  return gsap.to(header, {
+    yPercent: 0,
+    autoAlpha: 1,
+    duration: 0.6,
+    ease: "power2.out"
+  });
+}
+
+/* 스크롤 방향 반응 */
+export function initHeaderScroll() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  const pageType = getPageType();
+
+  if (pageType === "home") return;
+  // 페이지 추가
+
+  let lastY = window.scrollY;
 
   ScrollTrigger.create({
     start: 0,
-    end: 'max',
-    onUpdate: (self) => {
-      if (self.scroll() < 10) {
-        gsap.set(header, { yPercent: 0 });
-        return;
+    end: "max",
+    onUpdate: () => {
+      const currentY = window.scrollY;
+
+      if (currentY > lastY) {
+        gsap.to(header, {
+          yPercent: -100,
+          duration: 0.3,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
+      } else {
+        gsap.to(header, {
+          yPercent: 0,
+          duration: 0.3,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
       }
-    self.direction === -1 ? showAnim.reverse() : showAnim.play();
-    },  
+
+      lastY = currentY;
+    }
   });
 }

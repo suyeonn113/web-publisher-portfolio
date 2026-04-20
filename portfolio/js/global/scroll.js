@@ -17,3 +17,45 @@ export function initLenis() {
   gsap.ticker.lagSmoothing(0);
   return lenis;
 }
+
+export function initHomeScrollAssist(lenis) {
+  const hero = document.querySelector('.hero');
+  const work = document.querySelector('.work');
+
+  if (!lenis || !hero || !work) return;
+
+  let isAutoScrolling = false;
+  let hasSnappedToWork = false;
+  let lastScrollY = window.scrollY;
+
+  ScrollTrigger.create({
+    trigger: hero,
+    start: "top top",
+    end: "bottom 35%",
+    onUpdate: (self) => {
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY;
+      lastScrollY = currentScrollY;
+
+      if (isAutoScrolling) return;
+
+      if (isScrollingDown && self.progress > 0.72 && !hasSnappedToWork) {
+        isAutoScrolling = true;
+        hasSnappedToWork = true;
+
+        lenis.scrollTo(work, {
+          offset: 0,
+          duration: 1.1,
+          lock: true,
+          onComplete: () => {
+            isAutoScrolling = false;
+          }
+        });
+      }
+
+      if (self.progress < 0.2) {
+        hasSnappedToWork = false;
+      }
+    }
+  });
+}

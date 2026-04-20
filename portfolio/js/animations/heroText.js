@@ -3,10 +3,13 @@ import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigge
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function initHeroText() {
+export function initHeroText(onIntroComplete) {
   const titleContainer = document.querySelector('.main-title');
   const originalItems = document.querySelectorAll('.main-title .char, .main-title .dot');
-  if (!originalItems.length) return;
+  if (!originalItems.length) {
+    if (typeof onIntroComplete === "function") onIntroComplete();
+    return;
+  }
 
   // 새로고침 버그 강제 수정
   const forceHideByScroll = () => {
@@ -63,6 +66,10 @@ export function initHeroText() {
       onComplete: () => {
         startFloating(floatWrappers);
         initScatter(chars);
+
+        if (typeof onIntroComplete === "function") {
+          onIntroComplete();
+        }
       }
     }
   );

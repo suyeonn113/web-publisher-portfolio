@@ -36,7 +36,7 @@
     align-items: center;
     @include g-gap('gutter', 'sm');
 
-    @include respond-to('mobile') {
+    @include respond-to('tablet') {
       display: flex !important;
       flex-direction: column;
     }
