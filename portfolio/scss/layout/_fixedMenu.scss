@@ -1,0 +1,84 @@
+@use '../foundation' as *;
+
+.fixed-menu {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 100;
+
+  margin-top: -80px;
+  @include pad('gutter', 'md', 'right');
+
+  &:has(.js-fixed-btn[data-state="open"]) {
+    .fixed-menu__preview {
+      display: none !important;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    @include f-gap('gutter', 'sm');
+  }
+
+  &__btn {
+    width: max-content;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    // background: $point-primary;
+    // border: 1px solid $icon-focus;
+
+    @include pad('pad', 'xs');
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $tr-base;
+
+    &[data-state="open"] {
+      transform: rotate(45deg); // 열렸을 때 피드백
+      svg { color: $point-primary; }
+    }
+    
+    svg {
+      @include icon-responsive('size', 'lg');
+      stroke-width: 1px;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {color: $point-primary; }
+      }
+    }
+  }
+
+  &__panel {
+    position: absolute;
+    right: 60px;
+    bottom: 45%;
+    width: max-content;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: none; // 기본 숨김
+
+    &[data-state="open"] {
+      display: block;
+    
+    }
+  }
+
+  &__preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 150px;
+    height: auto;
+    @include rd('md');
+
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1000;
+    overflow: hidden;
+  }
+}

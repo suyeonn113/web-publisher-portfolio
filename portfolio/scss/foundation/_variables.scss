@@ -131,10 +131,23 @@ $btn-settings: (
 /* Icon System ----------------------- */
 $icon-settings: (
   'size': (
-    'default': 24px,
-    'laptop':  20px,
-    'tablet':  16px,
-    'mobile':  14px
+    'sm': (
+      'default': 24px,
+      'laptop': 20px,
+      'tablet': 16px,
+      'mobile': 14px
+    ),
+    'md': (
+      'default': 28px,
+      'laptop': 24px,
+      'tablet': 20px,
+      'mobile': 16px
+    ),
+    'lg': (
+      'default': 32px,
+      'tablet': 24px,
+      'mobile': 20px
+    )
   ),
   'gap': (
     'default': 10px,

@@ -106,15 +106,19 @@
  * 테크 아이콘 반응형 제어
  * @param $prop - size (크기), gap (간격)
  */
-@mixin icon-responsive($prop) {
+@mixin icon-responsive($prop, $variant: null) {
   $config: map-get($icon-settings, $prop);
+
+  // variant가 있으면 한 단계 더 들어감
+  @if $variant != null {
+    $config: map-get($config, $variant);
+  }
+
   $property: if($prop == 'size', 'width', 'gap');
 
-  // 기본값 적용
   #{$property}: map-get($config, 'default');
   @if $prop == 'size' { height: map-get($config, 'default'); }
 
-  // 기기별 자동 생성
   @each $device, $val in $config {
     @if $device != 'default' {
       @include respond-to($device) {

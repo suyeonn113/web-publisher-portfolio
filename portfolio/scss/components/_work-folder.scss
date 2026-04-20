@@ -200,7 +200,7 @@ $folder-ratio: 413 / 373;
 
     .tech-icon {
       display: block;
-      @include icon-responsive('size');
+      @include icon-responsive('size', 'sm');
       background-color: $text-inverse;
 
       filter: drop-shadow($shadow-strong);

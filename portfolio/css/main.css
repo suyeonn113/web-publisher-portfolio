@@ -91,25 +91,24 @@
   /* ==========================================================================
       Accent System
       ========================================================================== */
-  --color-point-primary: #2d5a4c;
-  --color-point-secondary: #5e8c7e;
+  --color-point-primary: #2d36b1;
+  --color-point-secondary: #517bb3;
   --color-point-highlight: #ff6b6b;
   --color-point-info: #3498db;
   --color-point-success: #27ae60;
   /* ==========================================================================
     Component 
     ========================================================================== */
-  --btn-text-color: #111111;
+  --btn-text-color: $text-primary;
   --btn-text-opacity: 0.4;
   --btn-text-opacity-hover: 0.8;
   --btn-letter-spacing: 0.04em;
-  --btn-focus-outline: rgba(0, 0, 0, 0.2);
   /* ==========================================================================
       Icon & Interaction 
       ========================================================================== */
   --color-icon-base: var(--color-text-primary);
   --color-icon-active: var(--color-point-primary);
-  --color-focus: var(--color-point-primary);
+  --color-icon-focus: var(--color-point-primary);
   /* ==========================================================================
       Brand Colors
       ========================================================================== */
@@ -245,8 +244,8 @@ body {
   min-height: 100vh;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
   line-height: 1.6;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-main);
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -297,8 +296,8 @@ input[type=search]::-webkit-search-decoration {
    Accessibility & Interaction
 ============================================================ */
 :focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-point-primary);
+  outline-offset: 3px;
   border-radius: 0.5rem;
 }
 
@@ -546,6 +545,139 @@ input[type=search]::-webkit-search-decoration {
   .site-header__link {
     font-size: 14px;
   }
+}
+
+.fixed-menu {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 100;
+  margin-top: -80px;
+  padding-right: 32px;
+}
+@media (max-width: 1024px) {
+  .fixed-menu {
+    padding-right: 32px;
+  }
+}
+@media (max-width: 768px) {
+  .fixed-menu {
+    padding-right: 24px;
+  }
+}
+@media (max-width: 480px) {
+  .fixed-menu {
+    padding-right: 16px;
+  }
+}
+.fixed-menu:has(.js-fixed-btn[data-state=open]) .fixed-menu__preview {
+  display: none !important;
+}
+.fixed-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .fixed-menu__list {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .fixed-menu__list {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .fixed-menu__list {
+    gap: 12px;
+  }
+}
+.fixed-menu__btn {
+  width: -moz-max-content;
+  width: max-content;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  padding: 8px;
+}
+@media (max-width: 1024px) {
+  .fixed-menu__btn {
+    padding: 8px;
+  }
+}
+@media (max-width: 768px) {
+  .fixed-menu__btn {
+    padding: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .fixed-menu__btn {
+    padding: 8px;
+  }
+}
+.fixed-menu__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.fixed-menu__btn[data-state=open] {
+  transform: rotate(45deg);
+}
+.fixed-menu__btn[data-state=open] svg {
+  color: var(--color-point-primary);
+}
+.fixed-menu__btn svg {
+  width: 32px;
+  height: 32px;
+}
+@media (max-width: 768px) {
+  .fixed-menu__btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+@media (max-width: 480px) {
+  .fixed-menu__btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+.fixed-menu__btn svg {
+  stroke-width: 1px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .fixed-menu__btn svg:hover {
+    color: var(--color-point-primary);
+  }
+}
+.fixed-menu__panel {
+  position: absolute;
+  right: 60px;
+  bottom: 45%;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.fixed-menu__panel[data-state=open] {
+  display: block;
+}
+.fixed-menu__preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 150px;
+  height: auto;
+  border-radius: 12px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1000;
+  overflow: hidden;
 }
 
 .cursor-satellite {
@@ -967,8 +1099,8 @@ input[type=search]::-webkit-search-decoration {
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--btn-focus-outline);
   outline-offset: 4px;
+  opacity: 1;
 }
 
 .hero {

@@ -71,8 +71,8 @@ body {
   min-height: 100vh;
   font-family: $font-suit;
   line-height: $base-line-height;
-  color: var(--color-text);
-  background-color: var(--color-bg); // 배경색 누락 방지
+  color: $text-primary;
+  background-color: $bg-main; // 배경색 누락 방지
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -114,8 +114,8 @@ input[type="search"]::-webkit-search-decoration {
 ============================================================ */
 // Focus 스타일
 :focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: 2px solid $point-primary;
+  outline-offset: 3px;
   border-radius: 0.5rem;
 }
 

@@ -17,6 +17,7 @@ import {
   initHeaderEntrance,
   initHeaderScroll
 } from "./components/header.js";
+import { renderFixedMenu, initFixedMenu } from "./components/fixedMenu.js";
 import { loadProjects } from './components/ProjectCardMain.js';
 import { initWorkSlider } from './components/workSlider.js';
 
@@ -36,10 +37,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 헤더 먼저 주입
   renderHeader();
+  renderFixedMenu();
+
   initHeaderState();
 
   // 공통 UI 인터랙션
   initCursor();
+  initFixedMenu(lenis);
 
   // 히어로 먼저 실행
   initHeroText(() => {

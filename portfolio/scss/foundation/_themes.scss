@@ -36,27 +36,23 @@
     transparent 70%
   );
 
-
 /* ==========================================================================
     Accent System
     ========================================================================== */
-  --color-point-primary: #2d5a4c;    // 메인 포인트 (현재의 Focus 컬러)
-  --color-point-secondary: #5e8c7e;  // 보조 포인트 (메인보다 채도가 낮거나 밝은)
+  --color-point-primary: #2d36b1;    // 메인 포인트 (현재의 Focus 컬러)
+  --color-point-secondary: #517bb3;  // 보조 포인트 (메인보다 채도가 낮거나 밝은)
   --color-point-highlight: #ff6b6b;  // 하이라이트 (시선을 강하게 끌어야 하는 요소, 예: New 태그)
   --color-point-info: #3498db;       // 정보성 포인트 (링크, 안내 등)
   --color-point-success: #27ae60;    // 긍정적 인터랙션 (완료, 성공)
-
 
   /* ==========================================================================
     Component 
     ========================================================================== */
 
-  --btn-text-color: #111111;
+  --btn-text-color: $text-primary;
   --btn-text-opacity: 0.4;
   --btn-text-opacity-hover: 0.8;
   --btn-letter-spacing: 0.04em;
-
-  --btn-focus-outline: rgba(0, 0, 0, 0.2);
 
 /* ==========================================================================
     Icon & Interaction 
@@ -64,7 +60,7 @@
   --color-icon-base: var(--color-text-primary);       // 아이콘 기본 색상
   --color-icon-active: var(--color-point-primary); // 아이콘 활성/호버 색상
 
-  --color-focus: var(--color-point-primary);
+  --color-icon-focus: var(--color-point-primary);
 
 /* ==========================================================================
     Brand Colors
@@ -186,11 +182,13 @@ $btn-color:       var(--btn-text-color);
 $btn-opacity:     var(--btn-text-opacity);
 $btn-opacity-hover: var(--btn-text-opacity-hover);
 $btn-ls:          var(--btn-letter-spacing);
-$btn-focus-outline: var(--btn-focus-outline);
+
 
 /* Icon & Interaction */
 $icon-base:       var(--color-icon-base);       // 아이콘 기본 색상
 $icon-active:     var(--color-icon-active);     // 아이콘 활성/호버 색상
+
+$icon-focus:      var(--color-icon-focus);
 
 /* Brand Colors (Technology Stack) */
 $html:            var(--color-html);
