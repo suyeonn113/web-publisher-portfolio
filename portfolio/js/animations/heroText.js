@@ -149,6 +149,7 @@ export function initHeroText() {
   }
 
   const onMouseMove = (e) => {
+    if (window.matchMedia("(max-width: 480px)").matches) return;
     const { clientX: mouseX, clientY: mouseY } = e;
 
     chars.forEach(item => {

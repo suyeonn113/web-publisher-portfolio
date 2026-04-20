@@ -114,6 +114,8 @@ export const initWorkSlider = () => {
   Draggable.create(document.createElement("div"), {
     trigger: container,
     type: "x",
+    minimumMovement: 10,
+
     onPress() { 
       this.startP = currentProgress; 
       const mode = getSliderMode();
@@ -125,7 +127,7 @@ export const initWorkSlider = () => {
     },
     onDragEnd() {
       const movedX = this.x;
-      const threshold = window.innerWidth < 768 ? 55 : 60;
+      const threshold = window.innerWidth < 768 ? 40 : 60;
       const base = getSnappedProgress();
 
       if (movedX <= -threshold) {

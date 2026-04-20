@@ -35,6 +35,11 @@
     align-items: center;
     @include g-gap('gutter', 'sm');
 
+    @include respond-to('mobile') {
+      display: flex !important;
+      flex-direction: column;
+    }
+
     .word {
       display: inline-flex;
     }
