@@ -35,7 +35,7 @@ export const initWorkEntrance = () => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".work",
-      start: "top 80%", 
+      start: "top 60%", 
       end: "top 10%",
       scrub: 4,
       toggleActions: "play none none reverse",
@@ -74,4 +74,19 @@ export const initWorkEntrance = () => {
       index * 0.1
     );
   });
+
+  tl.fromTo([".work__header", ".work__nav-controls"], 
+    { 
+      opacity: 0, 
+      y: 20 
+    }, 
+    { 
+      opacity: 1, 
+      y: 0, 
+      duration: 1, 
+      ease: "power2.out",
+      stagger: 0
+    }, 
+    ">0.5"
+  );
 };

@@ -4,8 +4,25 @@ import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigge
 gsap.registerPlugin(ScrollTrigger);
 
 export function initHeroText() {
+  const titleContainer = document.querySelector('.main-title');
   const originalItems = document.querySelectorAll('.main-title .char, .main-title .dot');
   if (!originalItems.length) return;
+
+  // 새로고침 버그 강제 수정
+  const forceHideByScroll = () => {
+    if (window.scrollY > 700) {
+      titleContainer.classList.add('is-hidden');
+      titleContainer.style.display = 'none';
+    } else {
+      titleContainer.classList.remove('is-hidden');
+      titleContainer.style.display = 'block';
+    }
+  };
+
+  // 실행 시점 3단
+  forceHideByScroll(); 
+  window.addEventListener('scroll', forceHideByScroll);
+  window.addEventListener('load', forceHideByScroll);
 
   originalItems.forEach(item => {
     const wrapper = document.createElement('span');
@@ -18,7 +35,7 @@ export function initHeroText() {
   const floatWrappers = document.querySelectorAll('.float-wrap');
   const chars = document.querySelectorAll('.main-title .char, .main-title .dot');
 
-  // ✅ scroll-down 힌트 페이드아웃 추가
+  // scroll-down 힌트 페이드아웃
   const scrollHint = document.querySelector('.hero__scroll-hint');
   if (scrollHint) {
     gsap.to(scrollHint, {
@@ -98,26 +115,37 @@ export function initHeroText() {
         trigger: ".hero",
         start: "top top",
         end: "+=100vh", 
-        scrub: 2.5,
+        scrub: 1.2,
+        invalidateOnRefresh: true
       }
     });
 
+    // 위치 이동
     tl.to(targets, {
-      x: () => (Math.random() - 0.5) * window.innerWidth * 1.2,
-      y: () => (Math.random() - 0.8) * window.innerHeight * 0.5,
-      transformPerspective: 600,
-      rotation: () => (Math.random() - 0.5) * 90, 
-      rotationX: () => (Math.random() - 0.5) * 160, 
-      rotationY: () => (Math.random() - 0.5) * 160,
-      scale: () => gsap.utils.random(0.5, 0.8),
-      filter: "blur(6px)",
-      opacity: 0,
+      x: () => (Math.random() - 0.5) * window.innerWidth * 2.5,
+      y: () => (Math.random() - 1.0) * window.innerHeight * 1.5,
+      rotation: () => (Math.random() - 0.5) * 180, 
+      scale: 0.2,
+      filter: "blur(4px)",
       stagger: {
-        amount: 1.2, 
+        amount: 1.5, 
+        from: "expo.out"
+      },
+      ease: "none",
+    }, 0); // 타임라인 시작점 0
+
+    // 투명도
+    tl.to(targets, {
+      opacity: 0,
+      color: "transparent",
+      visibility: "hidden",
+      immediateRender: false,
+      stagger: {
+        amount: 0.8,
         from: "random"
       },
-      ease: "sine.inOut" 
-    });
+      ease: "power1.in" 
+    }, 0.8);
   }
 
   const onMouseMove = (e) => {
@@ -132,7 +160,7 @@ export function initHeroText() {
       const deltaY = mouseY - centerY;
       const dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
 
-      const maxDist = 350; 
+      const maxDist = 200; 
       const proximity = Math.max(0, 1 - dist / maxDist);
       const magnify = Math.pow(proximity, 2); 
 
