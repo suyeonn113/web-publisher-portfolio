@@ -219,7 +219,7 @@ $visibleProducts = $productList['items'];
 
 <!-- <script src="<?= BASE_URL ?>/js/jquery-1.11.2.min.js"></script>
 <script src="<?= BASE_URL ?>/js/product-filter.js"></script> -->
-
+<script src="<?= BASE_URL ?>/js/header.js"></script>
 <script src="<?= BASE_URL ?>/js/product-page.js"></script>
 </body>
 </html>

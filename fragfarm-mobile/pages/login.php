@@ -88,6 +88,6 @@ $pageCss = 'login.css';
 
 <!-- JS -->
 <!-- <script src="<?= BASE_URL ?>/js/join.js"></script> -->
-
+<script src="<?= BASE_URL ?>/js/header.js"></script>
 </body>
 </html>

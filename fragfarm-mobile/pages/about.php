@@ -38,6 +38,7 @@ $pageCss = 'about.css';
 
     <!-- Chat Launcher -->
     <?php include __DIR__ . '/../includes/chat-launcher.php'; ?>
+  <script src="<?= BASE_URL ?>/js/header.js"></script>
 </div>
 </body>
 </html>

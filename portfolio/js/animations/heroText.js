@@ -96,8 +96,8 @@ export function initHeroText(onIntroComplete) {
       scrollTrigger: {
         trigger: ".hero",
         start: "top top",
-        end: "+=100vh", 
-        scrub: 1.2,
+        end: "+=200vh", 
+        scrub: 3,
         invalidateOnRefresh: true
       }
     });
@@ -111,10 +111,10 @@ export function initHeroText(onIntroComplete) {
       filter: "blur(4px)",
       stagger: {
         amount: 1.5, 
-        from: "expo.out"
+        from: "power1.in"
       },
-      ease: "none",
-    }, 0); // 타임라인 시작점 0
+      ease: "power1.in",
+    }, 0.8); // 타임라인 시작점 0
 
     // 투명도
     tl.to(targets, {
@@ -127,7 +127,7 @@ export function initHeroText(onIntroComplete) {
         from: "random"
       },
       ease: "power1.in" 
-    }, 0.8);
+    }, 2);
   }
 
   const onMouseMove = (e) => {

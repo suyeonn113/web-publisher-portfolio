@@ -293,6 +293,7 @@ $pageCss = 'join.css';
 
 <!-- JS -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="<?= BASE_URL ?>/js/header.js"></script>
 <script src="<?= BASE_URL ?>/js/join.js"></script>
 
 </body>

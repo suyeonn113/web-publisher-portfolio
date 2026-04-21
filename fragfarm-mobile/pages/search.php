@@ -68,6 +68,7 @@ $pageCss = 'search.css';
     <!-- Chat Launcher -->
     <?php include __DIR__ . '/../includes/chat-launcher.php'; ?>
 </div>
+<script src="<?= BASE_URL ?>/js/header.js"></script>
 <script src="<?= BASE_URL ?>/js/search.js"></script>
 </body>
 </html>
