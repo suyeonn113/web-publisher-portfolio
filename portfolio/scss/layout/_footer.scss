@@ -12,6 +12,13 @@ body[data-page="home"] .site-footer__inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .site-footer__contact {
+    order: 2;
+  }
+
+  .site-footer__copy {
+    order: 1;
+  }
 }
 
 .site-footer__contact {

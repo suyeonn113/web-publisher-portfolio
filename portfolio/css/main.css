@@ -667,6 +667,12 @@ body[data-page=home] .site-footer__inner {
   justify-content: space-between;
   align-items: center;
 }
+body[data-page=home] .site-footer__inner .site-footer__contact {
+  order: 2;
+}
+body[data-page=home] .site-footer__inner .site-footer__copy {
+  order: 1;
+}
 
 .site-footer__contact {
   display: flex;
