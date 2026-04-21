@@ -1,160 +1,155 @@
 @use 'sass:map';
 
-// Typography & Base
-$font-suit: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+/* ============================================================
+   Typography
+============================================================ */
 
+$font-suit: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 $font-main: $font-suit;
 
+$base-font-size: 16px;
 $base-line-height: 1.6;
 $reset-font-family: inherit;
-$base-font-size: 16px;
 
-// Breakpoints
+/* ============================================================
+   Breakpoints
+============================================================ */
+
 $mobile: 480px;
 $tablet: 768px;
 $laptop: 1024px;
 $desktop: 1440px;
 
-// Path
-$font-path: "../assets/fonts";
-
-// Layout & Z-index
-$container-max: 1440px;
-
-
 /* ============================================================
-   Typography Scale
+   Paths
 ============================================================ */
 
-/* Font Size Scale (Desktop First) ----------------------- */
+$font-path: "../assets/fonts";
+
+/* ============================================================
+   Layout
+============================================================ */
+
+$container-max: 1440px;
+
+/* ============================================================
+   Type Scale
+============================================================ */
+
 $font-sizes: (
   'hero': (
     'default': clamp(120px, 12vw, 200px),
-    'laptop':  clamp(60px, 12vw, 120px),
-    'tablet':  clamp(50px, 12vw, 90px),
-    'mobile':  clamp(40px, 16vw, 70px)
+    'laptop': clamp(60px, 12vw, 120px),
+    'tablet': clamp(50px, 12vw, 90px),
+    'mobile': clamp(40px, 16vw, 70px)
   ),
   'hero-sub': (
     'default': clamp(72px, 7vw, 120px),
-    'laptop':  clamp(48px, 6vw, 80px),
-    'mobile':  clamp(24px, 8vw, 40px)
+    'laptop': clamp(48px, 6vw, 80px),
+    'mobile': clamp(24px, 8vw, 40px)
   ),
   'title': (
     'default': clamp(48px, 5vw, 64px),
-    'laptop':  clamp(36px, 4vw, 48px),
-    'mobile':  clamp(28px, 8vw, 36px)
+    'laptop': clamp(36px, 4vw, 48px),
+    'mobile': clamp(28px, 8vw, 36px)
   ),
   'lg': (
     'default': clamp(22px, 1.8vw, 28px),
-    'laptop':  clamp(20px, 1.8vw, 26px),
-    'tablet':  clamp(18px, 2.4vw, 22px),
-    'mobile':  clamp(17px, 3.8vw, 19px)
+    'laptop': clamp(20px, 1.8vw, 26px),
+    'tablet': clamp(18px, 2.4vw, 22px),
+    'mobile': clamp(17px, 3.8vw, 19px)
   ),
   'base': (
     'default': 18px,
-    'mobile':  16px
+    'mobile': 16px
   ),
   'sm': (
     'default': 15px,
-    'mobile':  14px
+    'mobile': 14px
   ),
   'xs': (
     'default': 13px
   )
 );
 
-// Temporary alias for older helpers during migration.
+// Temporary alias for legacy helpers.
 $font-settings: $font-sizes;
 
-/* Font Weight ----------------------------------- */
+/* ============================================================
+   Type Tokens
+============================================================ */
+
 $font-weights: (
-  'light':   300,
+  'light': 300,
   'regular': 400,
-  'medium':  500,
-  'bold':    700,
+  'medium': 500,
+  'bold': 700,
   'extra-bold': 900
 );
 
-/* Letter Spacing --------------------------------- */
 $letter-spacings: (
-  'base':  0,
+  'base': 0,
   'tight': -0.02em
 );
 
-/* Line Height ------------------------------------ */
 $text-line-heights: (
   'base': $base-line-height,
   'tight': 1.1
 );
 
-
-
 /* ============================================================
-   Spacing System (8pt Grid)
+   Spacing
 ============================================================ */
 
-/* Usage guide
- - pad: inner space inside one box
- - gutter: tight space between nearby UI items
- - gap: large rhythm between blocks or sections
- - margin: exceptional positioning only
+/* Usage
+ - pad: inner spacing inside a component or section
+ - gutter: spacing between nearby UI elements
+ - gap: larger rhythm between blocks or sections
  */
 $spacer: 8px;
 
 $spacings: (
-  // pad: 내부 여백. 카드 안쪽, 섹션 좌우 패딩, 버튼 패딩
   'pad': (
-    'xs': ( 'default': 8px,  'laptop': 8px,  'tablet': 8px,  'mobile': 8px ),
+    'xs': ( 'default': 8px, 'laptop': 8px, 'tablet': 8px, 'mobile': 8px ),
     'sm': ( 'default': 16px, 'laptop': 14px, 'tablet': 12px, 'mobile': 12px ),
     'md': ( 'default': 28px, 'laptop': 24px, 'tablet': 20px, 'mobile': 16px ),
     'lg': ( 'default': 48px, 'laptop': 40px, 'tablet': 32px, 'mobile': 28px ),
     'xl': ( 'default': 96px, 'laptop': 80px, 'tablet': 64px, 'mobile': 48px )
   ),
-
-  // gutter: 가까운 요소 간격. 버튼 그룹, 메타 정보, 아이콘 묶음
   'gutter': (
     'sm': ( 'default': 16px, 'laptop': 16px, 'tablet': 16px, 'mobile': 12px ),
     'md': ( 'default': 32px, 'laptop': 32px, 'tablet': 24px, 'mobile': 16px ),
     'lg': ( 'default': 48px, 'laptop': 40px, 'tablet': 32px, 'mobile': 20px )
   ),
-
-  // gap: 큰 흐름 간격. 섹션 간격, 제목과 콘텐츠 블록 사이
   'gap': (
-    'sm': ( 'default': 64px,  'laptop': 56px, 'tablet': 48px, 'mobile': 40px ),
+    'sm': ( 'default': 64px, 'laptop': 56px, 'tablet': 48px, 'mobile': 40px ),
     'md': ( 'default': 120px, 'laptop': 100px, 'tablet': 80px, 'mobile': 64px ),
     'lg': ( 'default': 200px, 'laptop': 160px, 'tablet': 120px, 'mobile': 100px )
   )
 );
 
-/* Semantic spacing scale
- - inset: inner padding/inset space
- - cluster: tight space between nearby UI items
- - stack: larger block-to-block rhythm
- */
+/* Semantic aliases */
 $spaces: (
   'inset': map.get($spacings, 'pad'),
   'cluster': map.get($spacings, 'gutter'),
   'stack': map.get($spacings, 'gap')
 );
 
-
 /* ============================================================
-   Component Variables 
+   Component Tokens
 ============================================================ */
 
-/* Button System ----------------------- */
 $btn-settings: (
   'nav': (
-    'font-key': 'lg',         // $font-settings의 'lg' (32px) 참조
-    'weight': 'medium',       // $font-weights의 'medium' 참조
-    'pad-y': 'xs',            // $spacings > 'pad' > 'xs' (8px) 참조
-    'pad-x': 'md',            // $spacings > 'pad' > 'md' (24px) 참조
-    'rd': 'xl'                // $radii의 'xl' (32px) 참조
+    'font-key': 'lg',
+    'weight': 'medium',
+    'pad-y': 'xs',
+    'pad-x': 'md',
+    'rd': 'xl'
   ),
-  'min-size': 44px            // 웹 접근성(WCAG) 최소 터치 영역 기준
+  'min-size': 44px
 );
 
-/* Icon System ----------------------- */
 $icon-settings: (
   'size': (
     'sm': (
@@ -177,46 +172,43 @@ $icon-settings: (
   ),
   'gap': (
     'default': 10px,
-    'tablet':  8px,
-    'mobile':  6px
+    'tablet': 8px,
+    'mobile': 6px
   )
 );
 
 /* ============================================================
-   Radius System 
+   Radius
 ============================================================ */
 
 $radius-base: 8px;
 
 $radii: (
-  'xs': $radius-base * 0.5, // 4px
-  'sm': $radius-base,       // 8px
-  'md': $radius-base * 1.5, // 12px
-  'lg': $radius-base * 2.5, // 20px
-  'xl': $radius-base * 4    // 32px
+  'xs': $radius-base * 0.5,
+  'sm': $radius-base,
+  'md': $radius-base * 1.5,
+  'lg': $radius-base * 2.5,
+  'xl': $radius-base * 4
 );
 
-
-
 /* ============================================================
-   Z-index System
+   Z-index
 ============================================================ */
 
 $z-indexes: (
-  'hide':      -1,    // 뒤로 숨기기
-  'base':       1,    // 기본 깊이
-  'dropdown':  100,   // 드롭다운, 팝오버
-  'header':    300,   // 상단 고정 바 (Sticky/Fixed)
-  'overlay':   400,   // 모달 배경 (Dim)
-  'modal':     500,   // 모달/팝업창
-  'toast':     1000   // 최상단 알림 메시지
+  'hide': -1,
+  'base': 1,
+  'dropdown': 100,
+  'header': 300,
+  'overlay': 400,
+  'modal': 500,
+  'toast': 1000
 );
 
-
-
 /* ============================================================
-   Motion System
+   Motion
 ============================================================ */
+
 $motions: (
   'durations': (
     'fast': 0.2s,
@@ -230,6 +222,6 @@ $motions: (
   )
 );
 
-// 기본 트랜지션 변수 (자주 쓰니까 유지)
+// Common transition aliases.
 $tr-base: all map.get($motions, 'durations', 'base') map.get($motions, 'easings', 'apple');
 $tr-elastic: transform map.get($motions, 'durations', 'base') map.get($motions, 'easings', 'elastic');

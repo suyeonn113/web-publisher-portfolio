@@ -1,7 +1,7 @@
 @use './variables' as *;
 @use './functions' as *;
 
-/* Official project mixins
+/* Public mixins
  - respond-down: max-width responsive branching
  - space-pad: primary padding API
  - space-mar: exceptional margin API
@@ -11,22 +11,18 @@
  - icon-size / icon-gap: icon sizing helpers
  */
 
-/* Internal helper mixins
+/* Internal helpers
  - responsive-spacing: token-to-css output helper
  - pad / mar: temporary spacing compatibility aliases
  - btn-text-style: component-specific button helper
  - flex-center: tiny alignment helper
- - respond-to / f-gap / g-gap / icon-responsive / font-style: temporary compatibility aliases
+ - respond-to / f-gap / g-gap / icon-responsive / font-style: compatibility aliases
  */
 
 /* ============================================================
-   Layout & Responsive Mixins
+   Responsive
 ============================================================ */
 
-/**
- * 반응형 미디어 쿼리
- * @param $device - mobile, tablet, laptop, desktop
- */
 @mixin respond-down($device) {
   @if $device == 'mobile' {
     @media (max-width: $mobile) { @content; }
@@ -45,19 +41,10 @@
   }
 }
 
-// 컨테이너 중앙 정렬 및 최대 너비
 /* ============================================================
-   Typography Mixins
+   Typography
 ============================================================ */
 
-// 사용법: h1 { @include font-style('hero', 'bold', 'tight'); }
-
-/**
- * 전용 폰트 스타일 시스템
- * @param $type - hero, title, lg, base, sm, xs
- * @param $weight - light, regular, medium, bold
- * @param $ls - base, tight
- */
 @mixin text-size($type) {
   $config: get-text-size-config($type);
 
@@ -82,21 +69,19 @@
 
 @mixin font-style($type, $weight: 'regular', $ls: 'base') {
   $config: get-font-config($type);
-  
+
   font-size: map-get($config, 'default');
   font-weight: get-weight($weight);
   letter-spacing: map-get($letter-spacings, $ls);
   line-height: $base-line-height;
   font-family: $font-main;
 
-  // 큰 글씨는 줄 간격을 좁게, 작은 글씨는 기본값을 적용
   @if $type == 'hero' or $type == 'title' {
-    line-height: 1.1; // 풀스크린에서 텍스트가 덩어리감 있게 보임
+    line-height: 1.1;
   } @else {
-    line-height: $base-line-height; // 본문용 1.6 적용
+    line-height: $base-line-height;
   }
 
-  // 맵에 정의된 기기별 사이즈 자동 생성
   @each $device, $size in $config {
     @if $device != 'default' {
       @include respond-down($device) {
@@ -106,32 +91,29 @@
   }
 }
 
-
 /* ============================================================
-   Component Variables (버튼 및 인터랙션 요소)
+   Component Helpers
 ============================================================ */
 
 @mixin btn-text-style($key) {
   $conf: map-get($btn-settings, $key);
-  
+
   @include flex-center;
-  // 접근성: 최소 44px 영역 확보는 시스템적으로 유지
   min-width: map-get($btn-settings, 'min-size');
   min-height: map-get($btn-settings, 'min-size');
-  
-  // [수정] 반응형 패딩 시스템으로 교체
+
   @include responsive-spacing('padding-top', 'pad', map-get($conf, 'pad-y'));
   @include responsive-spacing('padding-bottom', 'pad', map-get($conf, 'pad-y'));
   @include responsive-spacing('padding-left', 'pad', map-get($conf, 'pad-x'));
   @include responsive-spacing('padding-right', 'pad', map-get($conf, 'pad-x'));
-  
+
   @include text-style(
-    map-get($conf, 'font-key'), 
-    map-get($conf, 'weight'), 
+    map-get($conf, 'font-key'),
+    map-get($conf, 'weight'),
     'tight',
     'base'
   );
-  
+
   @include rd(map-get($conf, 'rd'));
   cursor: pointer;
   background: none;
@@ -140,14 +122,9 @@
   transition: $tr-base;
 }
 
-/**
- * 테크 아이콘 반응형 제어
- * @param $prop - size (크기), gap (간격)
- */
 @mixin icon-responsive($prop, $variant: null) {
   $config: map-get($icon-settings, $prop);
 
-  // variant가 있으면 한 단계 더 들어감
   @if $variant != null {
     $config: map-get($config, $variant);
   }
@@ -175,21 +152,15 @@
   @include icon-responsive('gap');
 }
 
-
-
 /* ============================================================
-   Spacing & Shape Mixins
+   Spacing and Shape
 ============================================================ */
-
-/* 반응형 수치 배포 내부 믹스인 */
 
 @mixin responsive-spacing($property, $cat, $size) {
   $config: get-space($cat, $size);
-  
-  // 기본값(Desktop) 적용
+
   #{$property}: map-get($config, 'default');
 
-  // 변수에 정의된 기기별(laptop, tablet, mobile) 수치 자동 생성
   @each $device, $val in $config {
     @if $device != 'default' {
       @include respond-down($device) {
@@ -199,7 +170,6 @@
   }
 }
 
-// Margin
 // Prefer pad/gap first. Use this when one element needs positional correction.
 @mixin space-mar($cat, $size, $direction: null) {
   @if $direction == 'y' {
@@ -219,7 +189,6 @@
   @include space-mar($cat, $size, $direction);
 }
 
-// Padding
 // Primary spacing API for layout and component inner space.
 @mixin space-pad($cat, $size, $direction: null) {
   @if $direction == 'y' {
@@ -239,16 +208,14 @@
   @include space-pad($cat, $size, $direction);
 }
 
-// 간격 (방향 지정 가능)
-// Flex 간격
+// Flex gap helper.
 @mixin f-gap($cat, $size) {
   @include responsive-spacing('gap', $cat, $size);
 }
 
-// Grid 간격
+// Grid gap helper.
 @mixin g-gap($row-cat, $row-size, $col-cat: null, $col-size: null) {
   @if ($col-cat and $col-size) {
-    // 가로/세로가 다를 경우 각각 반응형 적용
     @include responsive-spacing('row-gap', $row-cat, $row-size);
     @include responsive-spacing('column-gap', $col-cat, $col-size);
   } @else {
@@ -259,18 +226,15 @@
 @mixin space-gap($row-cat, $row-size, $col-cat: null, $col-size: null) {
   @include g-gap($row-cat, $row-size, $col-cat, $col-size);
 }
-// 곡률 적용
+
 @mixin rd($size) {
   border-radius: get-rd($size);
 }
 
-
-
 /* ============================================================
-   Display & Alignment Mixins
+   Display and Alignment
 ============================================================ */
 
-// Flexbox 레이아웃 헬퍼
 @mixin flex-center {
   display: flex;
   justify-content: center;

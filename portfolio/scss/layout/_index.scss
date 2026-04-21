@@ -1,3 +1,9 @@
+/* Layout order
+ - layout: shared layout utilities
+ - background: ambient background layers
+ - header: top navigation
+ - fixedMenu: persistent quick menu
+ */
 @forward 'layout';
 @forward 'background';
 @forward 'header';

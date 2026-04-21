@@ -3,10 +3,9 @@
 @use './variables' as *;
 
 /* ============================================================
-   Getter Functions
+   Typography Helpers
 ============================================================ */
 
-// 1. Typography 관련 추출
 @function get-text-size-config($type) {
   @return map.get($font-sizes, $type);
 }
@@ -28,7 +27,10 @@
   @return map.get($font-weights, $name);
 }
 
-// 2. Spacing 관련 추출 (pad, gutter, gap)
+/* ============================================================
+   Spacing Helpers
+============================================================ */
+
 @function normalize-space-category($cat) {
   @if $cat == 'pad' { @return 'inset'; }
   @if $cat == 'gutter' { @return 'cluster'; }
@@ -41,17 +43,22 @@
   @return map.get(map.get($spaces, $resolved-cat), $size);
 }
 
-// 3. Radius 관련 추출
+/* ============================================================
+   Shape and Layer Helpers
+============================================================ */
+
 @function get-rd($size) {
   @return map.get($radii, $size);
 }
 
-// 4. Z-index 관련 추출
 @function get-z($name) {
   @return map.get($z-indexes, $name);
 }
 
-// 5. Motion 관련 추출
+/* ============================================================
+   Motion Helpers
+============================================================ */
+
 @function get-duration($name) {
   @return map.get(map.get($motions, 'durations'), $name);
 }
@@ -61,12 +68,10 @@
 }
 
 /* ============================================================
-   Rem Function
+   Unit Helpers
 ============================================================ */
 
 @function rem($px) {
-  // $px가 '20px'라면 여기서 px를 떼고 20으로 만듦
-  $value: math.div($px, 1px); 
-  // 그 다음 16(기본값)으로 나누고 rem을 붙임
+  $value: math.div($px, 1px);
   @return math.div($value, 16) * 1rem;
 }

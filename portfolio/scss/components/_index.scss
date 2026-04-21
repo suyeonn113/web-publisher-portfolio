@@ -1,3 +1,9 @@
+/* Component order
+ - cursor: global cursor treatment
+ - scroll-down: hero scroll hint
+ - work-folder: project card grouping
+ - btn: shared button styles
+ */
 @forward 'cursor';
 @forward 'scroll-down';
 @forward 'work-folder';

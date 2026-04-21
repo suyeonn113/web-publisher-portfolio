@@ -15,6 +15,11 @@
  - gap: large rhythm between blocks or sections
  - margin: exceptional positioning only
  */
+/* Semantic spacing scale
+ - inset: inner padding/inset space
+ - cluster: tight space between nearby UI items
+ - stack: larger block-to-block rhythm
+ */
 /* ============================================================
    Component Variables 
 ============================================================ */
@@ -37,7 +42,8 @@
 ============================================================ */
 /* Official project mixins
  - respond-down: max-width responsive branching
- - pad: primary padding API
+ - space-pad: primary padding API
+ - space-mar: exceptional margin API
  - space-gap: token-based gap output
  - text-size / text-style: typography output
  - rd: radius token output
@@ -45,7 +51,7 @@
  */
 /* Internal helper mixins
  - responsive-spacing: token-to-css output helper
- - mar: exceptional margin adjustment
+ - pad / mar: temporary spacing compatibility aliases
  - btn-text-style: component-specific button helper
  - flex-center: tiny alignment helper
  - respond-to / f-gap / g-gap / icon-responsive / font-style: temporary compatibility aliases

@@ -1,207 +1,172 @@
+/* ============================================================
+   Light Theme
+============================================================ */
 
-// Light mode
 :root {
-/* ==========================================================================
-    Text System
-    ========================================================================== */
-  --color-text-primary: #1a1a1a;    // 가장 중요한 제목, 본문 (Primary)
-  --color-text-secondary: #4d4d4d;  // 부제목, 카테고리 설명 (Secondary)
-  --color-text-tertiary: #808080;   // 연도, 메타 정보, 부가 설명 (Tertiary)
-  --color-text-disabled: #b3b3b3;   // 비활성 상태 또는 아주 사소한 캡션
-  --color-text-inverse: #ffffff;    // 어두운 배경 위에서의 대비색 (Contrast)
+  /* Text */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4d4d4d;
+  --color-text-tertiary: #808080;
+  --color-text-disabled: #b3b3b3;
+  --color-text-inverse: #ffffff;
 
-  --shadow-text-soft: 0 1px 4px rgba(0,0,0,0.3);
-  --shadow-text-strong: 0 2px 6px rgba(0,0,0,0.4);
+  --shadow-text-soft: 0 1px 4px rgba(0, 0, 0, 0.3);
+  --shadow-text-strong: 0 2px 6px rgba(0, 0, 0, 0.4);
 
-/* ==========================================================================
-    Background & Surface
-    ========================================================================== */
-  --color-bg-main: #f7faf9;         // 페이지 메인 배경색
-  --color-bg-surface: #ffffff;      // 섹션이나 큰 컨테이너 배경
-  
+  /* Background */
+  --color-bg-main: #f7faf9;
+  --color-bg-surface: #ffffff;
   --color-scrollbar: #cccccc;
   --color-scrollbar-hover: #999999;
 
   --overlay-bottom-soft: linear-gradient(
     to top,
-    rgba(0,0,0,0.35) 0%,
-    rgba(0,0,0,0.1) 40%,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.1) 40%,
     transparent 70%
   );
 
   --overlay-bottom-strong: linear-gradient(
     to top,
-    rgba(0,0,0,0.45) 0%,
-    rgba(0,0,0,0.15) 40%,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.15) 40%,
     transparent 70%
   );
 
-/* ==========================================================================
-    Accent System
-    ========================================================================== */
-  --color-point-primary: #2d36b1;    // 메인 포인트 (현재의 Focus 컬러)
-  --color-point-secondary: #517bb3;  // 보조 포인트 (메인보다 채도가 낮거나 밝은)
-  --color-point-highlight: #ff6b6b;  // 하이라이트 (시선을 강하게 끌어야 하는 요소, 예: New 태그)
-  --color-point-info: #3498db;       // 정보성 포인트 (링크, 안내 등)
-  --color-point-success: #27ae60;    // 긍정적 인터랙션 (완료, 성공)
+  /* Accent */
+  --color-point-primary: #2d36b1;
+  --color-point-secondary: #517bb3;
+  --color-point-highlight: #ff6b6b;
+  --color-point-info: #3498db;
+  --color-point-success: #27ae60;
 
-  /* ==========================================================================
-    Component 
-    ========================================================================== */
-
+  /* Component */
   --btn-text-color: $text-primary;
   --btn-text-opacity: 0.4;
   --btn-text-opacity-hover: 0.8;
   --btn-letter-spacing: 0.04em;
 
-/* ==========================================================================
-    Icon & Interaction 
-    ========================================================================== */
-  --color-icon-base: var(--color-text-primary);       // 아이콘 기본 색상
-  --color-icon-active: var(--color-point-primary); // 아이콘 활성/호버 색상
-
+  /* Icon and interaction */
+  --color-icon-base: var(--color-text-primary);
+  --color-icon-active: var(--color-point-primary);
   --color-icon-focus: var(--color-point-primary);
 
-/* ==========================================================================
-    Brand Colors
-    ========================================================================== */
-  --color-html: #E34F26;          // HTML
-  --color-css: #1572B6;           // CSS
-  --color-scss: #CC6699;          // SCSS
-  --color-js: #F7DF1E;            // JavaScript
-  --color-gsap: #88CE02;          // GSAP
-  --color-lenis: #FF98A3;         // Lenis
-  --color-php: #777BB4;           // PHP
-  --color-mysql: #4479A1;         // MySQL
-  --color-figma: #F24E1E;         // Figma
-  --color-jquery: #0769AD;        // jQuery
-  --color-react: #61DAFB;         // React
-  --color-java: #007396;          // Java
-  --color-github: #181717;        // GitHub
-  --color-git: #F05032;           // Git
+  /* Brand colors */
+  --color-html: #E34F26;
+  --color-css: #1572B6;
+  --color-scss: #CC6699;
+  --color-js: #F7DF1E;
+  --color-gsap: #88CE02;
+  --color-lenis: #FF98A3;
+  --color-php: #777BB4;
+  --color-mysql: #4479A1;
+  --color-figma: #F24E1E;
+  --color-jquery: #0769AD;
+  --color-react: #61DAFB;
+  --color-java: #007396;
+  --color-github: #181717;
+  --color-git: #F05032;
 }
 
+/* ============================================================
+   Dark Theme
+============================================================ */
 
-// 수정 예정
-// Dark mode
 [data-theme='dark'] {
-/* ==========================================================================
-    Text System
-    ========================================================================== */
-  --color-text-primary: #f5f5f5;    // 가장 중요한 제목, 본문 (Primary)
-  --color-text-secondary: #b3b3b3;  // 부제목, 카테고리 설명 (Secondary)
-  --color-text-tertiary: #808080;   // 연도, 메타 정보, 부가 설명 (Tertiary)
-  --color-text-disabled: #4d4d4d;   // 비활성 상태 또는 아주 사소한 캡션
-  --color-text-inverse: #1a1a1a;    // 밝은 배경 위에서의 대비색 (Contrast)
+  /* Text */
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #b3b3b3;
+  --color-text-tertiary: #808080;
+  --color-text-disabled: #4d4d4d;
+  --color-text-inverse: #1a1a1a;
 
-  /* ==========================================================================
-    Background & Surface
-    ========================================================================== */
-  --color-bg-main: #0d1a15;         // 페이지 메인 배경색
-  --color-bg-surface: #16241f;      // 섹션이나 큰 컨테이너 배경
-  
+  /* Background */
+  --color-bg-main: #0d1a15;
+  --color-bg-surface: #16241f;
   --color-scrollbar: #444444;
   --color-scrollbar-hover: #666666;
 
-  /* ==========================================================================
-    Accent System
-    ========================================================================== */
-  --color-point-primary: #4ecb99;    // 메인 포인트 (다크모드용 조금 더 밝은 그린)
-  --color-point-secondary: #3a5a50;  // 보조 포인트 (차분한 딥 그린)
-  --color-point-highlight: #ff8787;  // 하이라이트 (시인성을 높인 핑크 레드)
-  --color-point-info: #5dade2;       // 정보성 포인트 (부드러운 블루)
-  --color-point-success: #2ecc71;    // 긍정적 인터랙션 (밝은 그린)
+  /* Accent */
+  --color-point-primary: #4ecb99;
+  --color-point-secondary: #3a5a50;
+  --color-point-highlight: #ff8787;
+  --color-point-info: #5dade2;
+  --color-point-success: #2ecc71;
 
-
-  /* ==========================================================================
-    Icon & Interaction 
-    ========================================================================== */
-  --color-icon-base: var(--color-text-primary);    // 아이콘 기본 색상
-  --color-icon-active: var(--color-point-primary); // 아이콘 활성/호버 색상
-
+  /* Icon and interaction */
+  --color-icon-base: var(--color-text-primary);
+  --color-icon-active: var(--color-point-primary);
   --color-focus: var(--color-point-primary);
 
-  /* ==========================================================================
-    Brand Colors (다크모드 시인성 보정)
-    ========================================================================== */
-  --color-html: #ff5d38;            // HTML
-  --color-css: #38a9ff;             // CSS
-  --color-scss: #ff85c2;            // SCSS
-  --color-js: #f7df1e;              // JavaScript
-  --color-gsap: #a3ff00;            // GSAP
-  --color-lenis: #ffb3bc;           // Lenis
-  --color-php: #a3a7e2;             // PHP
-  --color-mysql: #5ea0d1;           // MySQL
-  --color-figma: #ff7043;           // Figma
-  --color-jquery: #1e90ff;          // jQuery
-  --color-react: #61dafb;           // React
-  --color-java: #33b5e5;            // Java
-  --color-github: #ffffff;          // GitHub
-  --color-git: #ff6e54;             // Git
+  /* Brand colors */
+  --color-html: #ff5d38;
+  --color-css: #38a9ff;
+  --color-scss: #ff85c2;
+  --color-js: #f7df1e;
+  --color-gsap: #a3ff00;
+  --color-lenis: #ffb3bc;
+  --color-php: #a3a7e2;
+  --color-mysql: #5ea0d1;
+  --color-figma: #ff7043;
+  --color-jquery: #1e90ff;
+  --color-react: #61dafb;
+  --color-java: #33b5e5;
+  --color-github: #ffffff;
+  --color-git: #ff6e54;
 }
 
+/* ============================================================
+   SCSS Token Mapping
+============================================================ */
 
+/* Text */
+$text-primary: var(--color-text-primary);
+$text-secondary: var(--color-text-secondary);
+$text-tertiary: var(--color-text-tertiary);
+$text-disabled: var(--color-text-disabled);
+$text-inverse: var(--color-text-inverse);
 
+$shadow-soft: var(--shadow-text-soft-soft);
+$shadow-strong: var(--shadow-text-strong);
 
+/* Background */
+$bg-main: var(--color-bg-main);
+$bg-surface: var(--color-bg-surface);
+$scrollbar: var(--color-scrollbar);
+$scrollbar-hover: var(--color-scrollbar-hover);
+$overlay-soft: var(--overlay-bottom-soft);
+$overlay-strong: var(--overlay-bottom-strong);
 
-
-
-
-/* ==========================================================================
-  SCSS Variable Mappings
-  ========================================================================== */
-
-/* Text System */
-$text-primary:    var(--color-text-primary);    // 주요 제목 및 본문
-$text-secondary:  var(--color-text-secondary);  // 보조 설명 및 카테고리
-$text-tertiary:   var(--color-text-tertiary);   // 메타 정보 (연도 등)
-$text-disabled:   var(--color-text-disabled);   // 비활성 또는 캡션
-$text-inverse:    var(--color-text-inverse);    // 배경색 대비 반전 텍스트
-
-$shadow-soft:     var(--shadow-text-soft-soft); // 부드러운 그림자
-$shadow-strong:   var(--shadow-text-strong);    // 강력한 그림자
-
-/* Background & Surface */
-$bg-main:         var(--color-bg-main);         // 전체 페이지 배경
-$bg-surface:      var(--color-bg-surface);      // 컨테이너/섹션 배경
-$scrollbar:       var(--color-scrollbar);       // 스크롤바 기본
-$scrollbar-hover: var(--color-scrollbar-hover); // 스크롤바 호버
-
-$overlay-soft:    var(--overlay-bottom-soft);   // 부드러운 오버레이
-$overlay-strong:  var(--overlay-bottom-strong); // 강력한 오버레이
-
-/* Accent System (Point Colors) */
-$point-primary:   var(--color-point-primary);   // 메인 포인트 (Focus)
-$point-secondary: var(--color-point-secondary); // 보조 포인트
-$point-highlight: var(--color-point-highlight); // 강조 (New, Best 등)
-$point-info:      var(--color-point-info);      // 정보/링크
-$point-success:   var(--color-point-success);   // 성공/완료
+/* Accent */
+$point-primary: var(--color-point-primary);
+$point-secondary: var(--color-point-secondary);
+$point-highlight: var(--color-point-highlight);
+$point-info: var(--color-point-info);
+$point-success: var(--color-point-success);
 
 /* Component */
-$btn-color:       var(--btn-text-color);
-$btn-opacity:     var(--btn-text-opacity);
+$btn-color: var(--btn-text-color);
+$btn-opacity: var(--btn-text-opacity);
 $btn-opacity-hover: var(--btn-text-opacity-hover);
-$btn-ls:          var(--btn-letter-spacing);
+$btn-ls: var(--btn-letter-spacing);
 
+/* Icon and interaction */
+$icon-base: var(--color-icon-base);
+$icon-active: var(--color-icon-active);
+$icon-focus: var(--color-icon-focus);
 
-/* Icon & Interaction */
-$icon-base:       var(--color-icon-base);       // 아이콘 기본 색상
-$icon-active:     var(--color-icon-active);     // 아이콘 활성/호버 색상
-
-$icon-focus:      var(--color-icon-focus);
-
-/* Brand Colors (Technology Stack) */
-$html:            var(--color-html);
-$css:             var(--color-css);
-$scss-color:            var(--color-scss);
-$js:              var(--color-js);
-$gsap:            var(--color-gsap);
-$lenis:           var(--color-lenis);
-$php:             var(--color-php);
-$mysql:           var(--color-mysql);
-$figma:           var(--color-figma);
-$jquery:          var(--color-jquery);
-$react:           var(--color-react);
-$java:            var(--color-java);
-$github:          var(--color-github);
-$git:             var(--color-git);
+/* Brand colors */
+$html: var(--color-html);
+$css: var(--color-css);
+$scss-color: var(--color-scss);
+$js: var(--color-js);
+$gsap: var(--color-gsap);
+$lenis: var(--color-lenis);
+$php: var(--color-php);
+$mysql: var(--color-mysql);
+$figma: var(--color-figma);
+$jquery: var(--color-jquery);
+$react: var(--color-react);
+$java: var(--color-java);
+$github: var(--color-github);
+$git: var(--color-git);
