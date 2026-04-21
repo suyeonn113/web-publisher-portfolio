@@ -4,47 +4,56 @@
 
 :root {
   /* Text */
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #4d4d4d;
-  --color-text-tertiary: #808080;
-  --color-text-disabled: #b3b3b3;
+  --color-text-primary: #1c1c1e;
+  --color-text-secondary: #636366;
+  --color-text-tertiary: #8e8e93;
+  --color-text-disabled: #c7c7cc;
   --color-text-inverse: #ffffff;
 
-  --shadow-text-soft: 0 1px 4px rgba(0, 0, 0, 0.3);
-  --shadow-text-strong: 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-text-soft: 0 1px 8px rgba(15, 23, 42, 0.16);
+  --shadow-text-strong: 0 4px 16px rgba(15, 23, 42, 0.22);
 
   /* Background */
-  --color-bg-main: #f7faf9;
+  --color-bg-main: #f3f6fb;
   --color-bg-surface: #ffffff;
-  --color-scrollbar: #cccccc;
-  --color-scrollbar-hover: #999999;
+  --color-bg-elevated: #fbfcff;
+  --color-bg-glass: rgba(255, 255, 255, 0.62);
+  --color-bg-glass-strong: rgba(255, 255, 255, 0.82);
+  --color-scrollbar: #c9d3e4;
+  --color-scrollbar-hover: #97a8c5;
+
+  --color-border-soft: rgba(15, 23, 42, 0.08);
+  --color-border-strong: rgba(10, 132, 255, 0.18);
+
+  --shadow-surface-soft: 0 12px 32px rgba(104, 128, 166, 0.14);
+  --shadow-surface-strong: 0 24px 60px rgba(38, 93, 176, 0.18);
 
   --overlay-bottom-soft: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.1) 40%,
-    transparent 70%
+    rgba(15, 23, 42, 0.32) 0%,
+    rgba(15, 23, 42, 0.08) 40%,
+    transparent 72%
   );
 
   --overlay-bottom-strong: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.45) 0%,
-    rgba(0, 0, 0, 0.15) 40%,
-    transparent 70%
+    rgba(15, 23, 42, 0.46) 0%,
+    rgba(15, 23, 42, 0.14) 42%,
+    transparent 72%
   );
 
   /* Accent */
-  --color-point-primary: #2d36b1;
-  --color-point-secondary: #517bb3;
-  --color-point-highlight: #ff6b6b;
-  --color-point-info: #3498db;
-  --color-point-success: #27ae60;
+  --color-point-primary: #0a84ff;
+  --color-point-secondary: #5ac8fa;
+  --color-point-highlight: #ff6482;
+  --color-point-info: #64d2ff;
+  --color-point-success: #30d158;
 
   /* Component */
-  --btn-text-color: $text-primary;
-  --btn-text-opacity: 0.4;
-  --btn-text-opacity-hover: 0.8;
-  --btn-letter-spacing: 0.04em;
+  --btn-text-color: var(--color-text-primary);
+  --btn-text-opacity: 0.52;
+  --btn-text-opacity-hover: 0.92;
+  --btn-letter-spacing: 0.03em;
 
   /* Icon and interaction */
   --color-icon-base: var(--color-text-primary);
@@ -74,45 +83,77 @@
 
 [data-theme='dark'] {
   /* Text */
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #b3b3b3;
-  --color-text-tertiary: #808080;
-  --color-text-disabled: #4d4d4d;
-  --color-text-inverse: #1a1a1a;
+  --color-text-primary: #f5f7ff;
+  --color-text-secondary: #c3cada;
+  --color-text-tertiary: #8d9ab3;
+  --color-text-disabled: #55637d;
+  --color-text-inverse: #08111f;
+
+  --shadow-text-soft: 0 1px 10px rgba(2, 6, 23, 0.44);
+  --shadow-text-strong: 0 8px 24px rgba(2, 6, 23, 0.54);
 
   /* Background */
-  --color-bg-main: #0d1a15;
-  --color-bg-surface: #16241f;
-  --color-scrollbar: #444444;
-  --color-scrollbar-hover: #666666;
+  --color-bg-main: #0a1220;
+  --color-bg-surface: #111b2d;
+  --color-bg-elevated: #162236;
+  --color-bg-glass: rgba(17, 27, 45, 0.62);
+  --color-bg-glass-strong: rgba(17, 27, 45, 0.84);
+  --color-scrollbar: #31415e;
+  --color-scrollbar-hover: #4b628a;
+
+  --color-border-soft: rgba(191, 219, 254, 0.12);
+  --color-border-strong: rgba(100, 210, 255, 0.28);
+
+  --shadow-surface-soft: 0 18px 42px rgba(2, 6, 23, 0.34);
+  --shadow-surface-strong: 0 28px 72px rgba(2, 6, 23, 0.48);
+
+  --overlay-bottom-soft: linear-gradient(
+    to top,
+    rgba(2, 6, 23, 0.42) 0%,
+    rgba(2, 6, 23, 0.16) 42%,
+    transparent 72%
+  );
+
+  --overlay-bottom-strong: linear-gradient(
+    to top,
+    rgba(2, 6, 23, 0.58) 0%,
+    rgba(2, 6, 23, 0.24) 44%,
+    transparent 72%
+  );
 
   /* Accent */
-  --color-point-primary: #4ecb99;
-  --color-point-secondary: #3a5a50;
-  --color-point-highlight: #ff8787;
-  --color-point-info: #5dade2;
-  --color-point-success: #2ecc71;
+  --color-point-primary: #0a84ff;
+  --color-point-secondary: #64d2ff;
+  --color-point-highlight: #ff7a96;
+  --color-point-info: #7dd3fc;
+  --color-point-success: #32d74b;
+
+  /* Component */
+  --btn-text-color: var(--color-text-primary);
+  --btn-text-opacity: 0.6;
+  --btn-text-opacity-hover: 0.96;
+  --btn-letter-spacing: 0.03em;
 
   /* Icon and interaction */
   --color-icon-base: var(--color-text-primary);
   --color-icon-active: var(--color-point-primary);
-  --color-focus: var(--color-point-primary);
+  --color-icon-focus: var(--color-point-primary);
 
   /* Brand colors */
-  --color-html: #ff5d38;
-  --color-css: #38a9ff;
-  --color-scss: #ff85c2;
+  --color-html: #ff6b4a;
+  --color-css: #4cb5ff;
+  --color-scss: #ff8fcb;
   --color-js: #f7df1e;
-  --color-gsap: #a3ff00;
-  --color-lenis: #ffb3bc;
-  --color-php: #a3a7e2;
-  --color-mysql: #5ea0d1;
-  --color-figma: #ff7043;
-  --color-jquery: #1e90ff;
-  --color-react: #61dafb;
-  --color-java: #33b5e5;
+  --color-gsap: #b5ff1f;
+  --color-lenis: #ffb3c3;
+  --color-php: #aeb5f4;
+  --color-mysql: #68a9d8;
+  --color-figma: #ff7a59;
+  --color-jquery: #4aa7ff;
+  --color-react: #76e4ff;
+  --color-java: #57c2ff;
   --color-github: #ffffff;
-  --color-git: #ff6e54;
+  --color-git: #ff7c63;
 }
 
 /* ============================================================
@@ -126,14 +167,24 @@ $text-tertiary: var(--color-text-tertiary);
 $text-disabled: var(--color-text-disabled);
 $text-inverse: var(--color-text-inverse);
 
-$shadow-soft: var(--shadow-text-soft-soft);
+$shadow-soft: var(--shadow-text-soft);
 $shadow-strong: var(--shadow-text-strong);
 
 /* Background */
 $bg-main: var(--color-bg-main);
 $bg-surface: var(--color-bg-surface);
+$bg-elevated: var(--color-bg-elevated);
+$bg-glass: var(--color-bg-glass);
+$bg-glass-strong: var(--color-bg-glass-strong);
 $scrollbar: var(--color-scrollbar);
 $scrollbar-hover: var(--color-scrollbar-hover);
+
+$border-soft: var(--color-border-soft);
+$border-strong: var(--color-border-strong);
+
+$shadow-surface-soft: var(--shadow-surface-soft);
+$shadow-surface-strong: var(--shadow-surface-strong);
+
 $overlay-soft: var(--overlay-bottom-soft);
 $overlay-strong: var(--overlay-bottom-strong);
 

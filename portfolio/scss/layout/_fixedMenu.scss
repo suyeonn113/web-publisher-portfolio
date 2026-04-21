@@ -18,17 +18,14 @@
   &__list {
     display: flex;
     flex-direction: column;
-  @include space-gap('cluster', 'sm');
+    @include space-gap('cluster', 'sm');
   }
 
   &__btn {
     width: max-content;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
-    // background: $point-primary;
-    // border: 1px solid $icon-focus;
-
-  @include space-pad('inset', 'xs');
+    @include space-pad('inset', 'xs');
 
     display: flex;
     align-items: center;
@@ -36,16 +33,21 @@
     transition: $tr-base;
 
     &[data-state="open"] {
-      transform: rotate(45deg); // 열렸을 때 피드백
-      svg { color: $point-primary; }
+      transform: rotate(45deg);
+
+      svg {
+        color: $point-primary;
+      }
     }
-    
+
     svg {
-  @include icon-size('lg');
+      @include icon-size('lg');
       stroke-width: 1px;
 
       @media (hover: hover) and (pointer: fine) {
-        &:hover {color: $point-primary; }
+        &:hover {
+          color: $point-primary;
+        }
       }
     }
   }
@@ -56,14 +58,15 @@
     bottom: 45%;
     width: max-content;
     padding: 1rem;
-    background: #fff;
+    background: $bg-glass-strong;
+    border: 1px solid $border-soft;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    display: none; // 기본 숨김
+    box-shadow: $shadow-surface-soft;
+    backdrop-filter: blur(18px);
+    display: none;
 
     &[data-state="open"] {
       display: block;
-    
     }
   }
 

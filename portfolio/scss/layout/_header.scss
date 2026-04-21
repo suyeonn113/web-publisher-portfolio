@@ -1,24 +1,24 @@
 @use '../foundation' as *;
 
 .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 
-    z-index: 1000;
+  z-index: 1000;
 }
 
 .site-header__menu {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
   @include space-gap('cluster', 'lg');
 
-    list-style: none;
+  list-style: none;
 }
 
 .site-header__link {
-    text-decoration: none;
-    color: #000;
-    @include text-style('sm', 'regular', 'base', 'base');
+  text-decoration: none;
+  color: $text-primary;
+  @include text-style('sm', 'regular', 'base', 'base');
 }

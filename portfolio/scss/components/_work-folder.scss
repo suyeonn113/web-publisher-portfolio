@@ -1,6 +1,5 @@
 @use '../foundation' as *;
 
-
 // Folder Widths
 $folder-min-width: 250px;
 $folder-preferred-width: 20vw;
@@ -11,7 +10,7 @@ $folder-ratio: 413 / 373;
 .work__card.is-folder {
   position: relative;
   perspective: 1000px;
-  
+
   aspect-ratio: $folder-ratio;
   width: clamp(#{$folder-min-width}, #{$folder-preferred-width}, #{$folder-max-width});
 
@@ -42,11 +41,11 @@ $folder-ratio: 413 / 373;
     }
 
     .folder__title {
-      @include font-style ('lg', 'extra-bold');
+      @include font-style('lg', 'extra-bold');
     }
 
     .folder__year {
-      @include text-style('sm', 'bold', 'base', 'base')
+      @include text-style('sm', 'bold', 'base', 'base');
     }
 
     .tech-icon {
@@ -70,8 +69,7 @@ $folder-ratio: 413 / 373;
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       .folder__img-box {
-        // 30~40px 정도 위로 올리면 적당히 탭 위로 얼굴을 내밉니다
-        transform: translateY(-50px); 
+        transform: translateY(-50px);
       }
 
       .folder__front-container {
@@ -85,15 +83,15 @@ $folder-ratio: 413 / 373;
 
       .folder__info {
         color: $text-primary;
-      @include space-pad('inset', 'md', 'bottom');
+        @include space-pad('inset', 'md', 'bottom');
       }
 
       .folder__title {
-        @include font-style ('lg', 'extra-bold');
+        @include font-style('lg', 'extra-bold');
       }
 
       .folder__year {
-      @include text-style('sm', 'bold', 'base', 'base')
+        @include text-style('sm', 'bold', 'base', 'base');
       }
 
       .tech-icon {
@@ -116,7 +114,6 @@ $folder-ratio: 413 / 373;
   }
 }
 
-
 // Back
 .folder__back {
   position: absolute;
@@ -131,11 +128,9 @@ $folder-ratio: 413 / 373;
     position: absolute;
     inset: 0;
     transition: $tr-base;
-
     overflow: visible !important;
   }
 }
-
 
 // Image
 .folder__img-box {
@@ -149,8 +144,9 @@ $folder-ratio: 413 / 373;
   height: 50%;
 
   border-radius: 5%;
-  background: #fff;
-
+  background: $bg-elevated;
+  border: 1px solid $border-soft;
+  box-shadow: $shadow-surface-soft;
   transition: $tr-elastic;
 
   img {
@@ -159,7 +155,6 @@ $folder-ratio: 413 / 373;
     object-fit: cover;
   }
 }
-
 
 // Front
 .folder__front-container {
@@ -173,7 +168,7 @@ $folder-ratio: 413 / 373;
 .folder__front {
   position: absolute;
   inset: 0;
-  
+
   svg {
     position: absolute;
     inset: 0;
@@ -187,7 +182,6 @@ $folder-ratio: 413 / 373;
     overflow: visible !important;
   }
 }
-
 
 // Info
 .folder__info {
@@ -210,7 +204,7 @@ $folder-ratio: 413 / 373;
 
 .folder__info-header {
   .folder__title {
-    @include font-style ('lg', 'bold');
+    @include font-style('lg', 'bold');
     text-shadow: $shadow-soft;
     white-space: nowrap;
   }
@@ -224,16 +218,17 @@ $folder-ratio: 413 / 373;
   text-shadow: $shadow-soft;
 
   .folder__year {
-    @include text-style('sm', 'regular', 'base', 'base')
+    @include text-style('sm', 'regular', 'base', 'base');
   }
 
   .folder__category-icons {
     display: flex;
     gap: 5px;
-
     padding: 5px;
-
     border-radius: 50px;
+    background: $bg-glass;
+    border: 1px solid $border-soft;
+    backdrop-filter: blur(14px);
   }
 }
 
@@ -247,11 +242,8 @@ $folder-ratio: 413 / 373;
       display: block;
       @include icon-size('sm');
       background-color: $text-inverse;
-
       filter: drop-shadow($shadow-strong);
-      transition: filter $tr-base;
-
-      /* 마스크 설정: SVG 모양대로 배경색만 보여줌 */
+      transition: $tr-base;
       -webkit-mask-size: contain;
       mask-size: contain;
       -webkit-mask-repeat: no-repeat;
@@ -261,6 +253,3 @@ $folder-ratio: 413 / 373;
     }
   }
 }
-
-
-

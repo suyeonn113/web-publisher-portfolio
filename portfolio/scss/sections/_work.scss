@@ -14,7 +14,7 @@
   overflow: hidden;
 
   background: $bg-main;
-  box-shadow: 0 -24px 80px rgba(15, 23, 42, 0.08);
+  box-shadow: $shadow-surface-strong;
   transform-origin: center top;
 }
 
@@ -34,7 +34,6 @@
   }
 }
 
-
 // Container
 .work__container {
   display: flex;
@@ -52,8 +51,8 @@
 
   perspective: 1200px;
   touch-action: pan-y;
-  
-  display: flex; 
+
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -75,38 +74,39 @@
 .work__nav-controls {
   position: absolute;
   bottom: 10%;
-  /* Desktop */
+
   @media (min-width: $desktop) {
     bottom: 6%;
   }
+
   @media (min-width: $desktop) and (max-height: 820px) {
     bottom: 1%;
   }
 
-  /* Laptop */
   @media (min-width: $laptop) and (max-width: ($desktop - 1)) {
     bottom: 15%;
   }
+
   @media (min-width: $laptop) and (max-width: ($desktop - 1)) and (max-height: 820px) {
     bottom: 6%;
   }
 
-  /* Tablet */
   @media (min-width: $tablet) and (max-width: ($laptop - 1)) {
     bottom: 19%;
   }
+
   @media (min-width: $tablet) and (max-width: ($laptop - 1)) and (max-height: 800px) {
     bottom: 8%;
   }
 
-  /* Mobile */
   @media (max-width: ($tablet - 1)) {
     bottom: 19%;
   }
+
   @media (max-width: ($tablet - 1)) and (max-height: 740px) {
     bottom: 10%;
   }
- 
+
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
@@ -121,4 +121,3 @@
     width: 100%;
   }
 }
-
