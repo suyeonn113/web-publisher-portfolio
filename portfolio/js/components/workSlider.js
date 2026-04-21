@@ -4,6 +4,20 @@ import { Draggable } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/Draggable.mi
 gsap.registerPlugin(Draggable);
 
 export function getSliderMode(width = window.innerWidth) {
+  if (width >= 1920) {
+    return {
+      visibleCount: 5,
+      gapRatio: -0.06,
+      centerScale: 1,
+      sideScale: 0.78,
+      farScale: 0.72,
+      liftY: -20,
+      fadeOut: false,
+      dragFactor: 0.00045,
+      dragPreviewFactor: 1,
+      isMobile: false
+    };
+  }
   if (width >= 1440) {
     return {
       visibleCount: 5,
@@ -55,7 +69,7 @@ export function getWorkCardLayout(cards, progress = 0, width = window.innerWidth
   const wrapProgress = gsap.utils.wrap(-0.5, 0.5);
   const mode = getSliderMode(width);
   const cardWidth = cards[0].offsetWidth;
-  const baseX = cardWidth + (cardWidth * mode.gapRatio);
+  const baseX = cardWidth * (1 + mode.gapRatio);
   const normalizedProgress = wrapProgress(progress);
 
   return cards.map((card, i) => {

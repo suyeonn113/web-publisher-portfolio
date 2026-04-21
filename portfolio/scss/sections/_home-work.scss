@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
 
   background: $bg-main;
   transform-origin: center top;
@@ -57,7 +56,6 @@
 // Slider
 .home-work__slider-container {
   position: relative;
-  overflow: hidden;
 
   width: 100%;
   height: clamp(rem(380px), 65vh, rem(600px));

@@ -27,17 +27,19 @@ $folder-ratio: 413 / 373;
 
 @mixin folder-active-state {
   .folder__img-box {
-    transform: translateY(-54px) scale(1.015);
+    top: 6%;
+    height: 58%;
+    transform: translateY(-42px);
   }
 
   .folder__overlay {
-    opacity: 0.18;
+    opacity: 0.12;
   }
 
   .folder__front-container {
     transform-origin: bottom center;
-    transform: translateY(4px) scaleY(0.97) rotateX(12deg);
-    transition: $tr-base;
+    transform: translateY(10px) scaleY(0.955) rotateX(14deg);
+    transition: transform 0.56s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .svg-hover {
@@ -156,8 +158,15 @@ $folder-ratio: 413 / 373;
     inset 0 -1px 0 var(--work-folder-image-inset-shadow),
     0 18px 36px var(--work-folder-image-shadow);
   backdrop-filter: blur(10px) saturate(1.04);
-  transition: $tr-elastic;
+
+  transform: translateY(0);
   transform-origin: center bottom;
+  transition:
+    top 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.52s cubic-bezier(0.22, 1, 0.36, 1);
 
   @media (hover: hover) and (pointer: fine) {
     .home-work__card.is-folder:hover & {
