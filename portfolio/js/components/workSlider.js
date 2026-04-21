@@ -98,6 +98,9 @@ export const initWorkSlider = () => {
   const spacing = 1 / cards.length;
   let currentProgress = 0;
   let isAnimating = false;
+  let resizeRaf = 0;
+  let lastViewportWidth = window.innerWidth;
+  let lastViewportHeight = window.innerHeight;
   const wrapProgress = gsap.utils.wrap(-0.5, 0.5);
 
   gsap.set(wrapper, { position: "relative" });
@@ -110,6 +113,15 @@ export const initWorkSlider = () => {
     willChange: "transform"
   });
 
+  const isTouchLikeDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  const clearTouchHover = (exceptCard = null) => {
+    cards.forEach((card) => {
+      if (card !== exceptCard) {
+        card.classList.remove('is-touch-hover');
+      }
+    });
+  };
+
   function updateA11y(centerIndex) {
     cards.forEach((card, i) => {
       const isCurrent = i === centerIndex;
@@ -118,6 +130,9 @@ export const initWorkSlider = () => {
       card.setAttribute('aria-hidden', !isCurrent);
       interactive.forEach((el) => el.setAttribute('tabindex', isCurrent ? '0' : '-1'));
       gsap.set(card, { pointerEvents: isCurrent ? 'auto' : 'none' });
+      if (!isCurrent) {
+        card.classList.remove('is-touch-hover');
+      }
     });
   }
 
@@ -174,6 +189,59 @@ export const initWorkSlider = () => {
 
   window.updateWorkSlider = updateSlider;
 
+  if (isTouchLikeDevice) {
+    cards.forEach((card) => {
+      const touchState = {
+        timer: null,
+        startX: 0,
+        startY: 0
+      };
+
+      const clearHoldTimer = () => {
+        if (touchState.timer) {
+          clearTimeout(touchState.timer);
+          touchState.timer = null;
+        }
+      };
+
+      const clearHoldState = () => {
+        clearHoldTimer();
+        card.classList.remove('is-touch-hover');
+      };
+
+      card.addEventListener('touchstart', (event) => {
+        if (card.getAttribute('aria-hidden') === 'true') return;
+
+        const touch = event.touches[0];
+        if (!touch) return;
+
+        clearTouchHover(card);
+        clearHoldState();
+        touchState.startX = touch.clientX;
+        touchState.startY = touch.clientY;
+
+        touchState.timer = setTimeout(() => {
+          card.classList.add('is-touch-hover');
+        }, 380);
+      }, { passive: true });
+
+      card.addEventListener('touchmove', (event) => {
+        const touch = event.touches[0];
+        if (!touch) return;
+
+        const movedX = touch.clientX - touchState.startX;
+        const movedY = touch.clientY - touchState.startY;
+
+        if (Math.hypot(movedX, movedY) > 12) {
+          clearHoldState();
+        }
+      }, { passive: true });
+
+      card.addEventListener('touchend', clearHoldState, { passive: true });
+      card.addEventListener('touchcancel', clearHoldState, { passive: true });
+    });
+  }
+
   Draggable.create(document.createElement("div"), {
     trigger: container,
     type: "x",
@@ -181,6 +249,8 @@ export const initWorkSlider = () => {
 
     onPress(e) {
       this.startP = currentProgress;
+      this.dragOriginX = this.x || 0;
+      clearTouchHover();
 
       const mode = getSliderMode();
       this.f = mode.dragFactor;
@@ -200,18 +270,23 @@ export const initWorkSlider = () => {
     onDrag() {
       if (!this.canDrag) return;
 
+      const dragDeltaX = this.x - this.dragOriginX;
+
       if (!this.isHorizontalDrag) {
-        if (Math.abs(this.x) < 12) return;
+        if (Math.abs(dragDeltaX) < 12) return;
         this.isHorizontalDrag = true;
       }
 
-      updateSlider(this.startP + this.x * this.f * this.previewF);
+      updateSlider(this.startP + dragDeltaX * this.f * this.previewF);
     },
 
     onDragEnd() {
+      const movedX = (this.x || 0) - (this.dragOriginX || 0);
+      gsap.set(this.target, { x: 0 });
+      this.update();
+
       if (!this.canDrag || !this.isHorizontalDrag) return;
 
-      const movedX = this.x;
       const threshold = window.innerWidth < 768 ? 75 : 60;
       const base = getSnappedProgress();
 
@@ -230,8 +305,34 @@ export const initWorkSlider = () => {
     if (e.key === "ArrowLeft") movePrev();
   };
 
+  const onResize = () => {
+    if (resizeRaf) {
+      cancelAnimationFrame(resizeRaf);
+    }
+
+    resizeRaf = requestAnimationFrame(() => {
+      resizeRaf = 0;
+
+      const nextWidth = window.innerWidth;
+      const nextHeight = window.innerHeight;
+      const widthChanged = Math.abs(nextWidth - lastViewportWidth) > 1;
+      const heightChanged = Math.abs(nextHeight - lastViewportHeight) > 1;
+      const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
+      // Ignore Mobile Safari-style toolbar resize noise when width stays the same.
+      if (isCoarsePointer && !widthChanged && heightChanged) {
+        lastViewportHeight = nextHeight;
+        return;
+      }
+
+      lastViewportWidth = nextWidth;
+      lastViewportHeight = nextHeight;
+      updateSlider(currentProgress);
+    });
+  };
+
   window.addEventListener('keydown', onKey);
-  window.addEventListener('resize', () => updateSlider(currentProgress));
+  window.addEventListener('resize', onResize);
 
   updateSlider(0);
 };

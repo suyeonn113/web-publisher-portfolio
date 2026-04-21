@@ -22,6 +22,51 @@ $folder-ratio: 413 / 373;
     position: absolute;
   }
 
+  &.is-touch-hover {
+    .folder__img-box {
+      transform: translateY(-50px);
+    }
+
+    .folder__front-container {
+      transform: translateY(10px) rotateX(15deg);
+      transition: $tr-base;
+    }
+
+    .svg-hover {
+      opacity: 1;
+    }
+
+    .folder__info {
+      color: $text-primary;
+      @include pad('pad', 'md', 'bottom');
+    }
+
+    .folder__title {
+      @include font-style ('lg', 'extra-bold');
+    }
+
+    .folder__year {
+      @include font-style('sm', 'bold')
+    }
+
+    .tech-icon {
+      &.is-html { background-color: $html; }
+      &.is-css { background-color: $css; }
+      &.is-scss { background-color: $scss-color; }
+      &.is-javascript, &.is-js { background-color: $js; }
+      &.is-gsap { background-color: $gsap; }
+      &.is-lenis { background-color: $lenis; }
+      &.is-php { background-color: $php; }
+      &.is-mysql { background-color: $mysql; }
+      &.is-figma { background-color: $figma; }
+      &.is-jquery { background-color: $jquery; }
+      &.is-react { background-color: $react; }
+      &.is-java { background-color: $java; }
+      &.is-github { background-color: $github; }
+      &.is-git { background-color: $git; }
+    }
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       .folder__img-box {

@@ -11,6 +11,8 @@ export const initWorkEntrance = () => {
   if (!cards.length) return;
 
   const isMobile = window.innerWidth < 768;
+  const prefersTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  const disableDirectionReverse = isMobile || prefersTouch;
   const cardData = getWorkCardLayout(cards, 0);
   const sortedByRight = [...cardData].sort((a, b) => b.x - a.x);
 
@@ -119,6 +121,13 @@ export const initWorkEntrance = () => {
       tl.play();
     },
     onUpdate: (self) => {
+      if (disableDirectionReverse) {
+        if (self.direction === 1 && tl.progress() === 0) {
+          tl.restart();
+        }
+        return;
+      }
+
       if (self.direction === -1) {
         tl.timeScale(1.15).reverse();
         return;
@@ -134,6 +143,12 @@ export const initWorkEntrance = () => {
       }
     },
     onLeaveBack: () => {
+      if (disableDirectionReverse) {
+        tl.pause(0);
+        resetEntranceState();
+        return;
+      }
+
       tl.timeScale(1.15).reverse();
     }
   });

@@ -12,6 +12,7 @@ export function initHeroText(onIntroComplete) {
 
   const floatWrappers = document.querySelectorAll('.float-wrap');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   let isPointerInteractive = false;
   let scatterProgress = 0;
 
@@ -53,7 +54,7 @@ export function initHeroText(onIntroComplete) {
       onComplete: () => {
         startFloating(floatWrappers, chars);
         initScatter(chars);
-        isPointerInteractive = !prefersReducedMotion;
+        isPointerInteractive = !prefersReducedMotion && canHover;
 
         if (typeof onIntroComplete === "function") {
           onIntroComplete();
@@ -232,7 +233,7 @@ export function initHeroText(onIntroComplete) {
   }
 
   const onMouseMove = (e) => {
-    if (!isPointerInteractive || scatterProgress > 0.08 || window.matchMedia("(max-width: 480px)").matches) {
+    if (!isPointerInteractive || scatterProgress > 0.08) {
       return;
     }
 
@@ -250,11 +251,11 @@ export function initHeroText(onIntroComplete) {
       const magnify = Math.pow(proximity, 1.6);
 
       gsap.to(item, {
-        scale: 1 + magnify * 0.42,
-        y: (magnify * -22) + (deltaY * 0.08 * proximity),
-        x: deltaX * 0.12 * proximity,
-        rotation: deltaX * 0.022 * proximity,
-        duration: 0.32,
+        scale: 1 + magnify * 0.54,
+        y: (magnify * -28) + (deltaY * 0.09 * proximity),
+        x: deltaX * 0.15 * proximity,
+        rotation: deltaX * 0.028 * proximity,
+        duration: 0.26,
         ease: "power3.out",
         overwrite: "auto"
       });

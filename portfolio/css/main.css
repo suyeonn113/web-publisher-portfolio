@@ -734,6 +734,78 @@ input[type=search]::-webkit-search-decoration {
   height: 100%;
   position: absolute;
 }
+.work__card.is-folder.is-touch-hover .folder__img-box {
+  transform: translateY(-50px);
+}
+.work__card.is-folder.is-touch-hover .folder__front-container {
+  transform: translateY(10px) rotateX(15deg);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.work__card.is-folder.is-touch-hover .svg-hover {
+  opacity: 1;
+}
+.work__card.is-folder.is-touch-hover .folder__info {
+  color: var(--color-text-primary);
+  padding-bottom: 28px;
+}
+.work__card.is-folder.is-touch-hover .folder__title {
+  font-size: clamp(22px, 1.8vw, 28px);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.6;
+}
+.work__card.is-folder.is-touch-hover .folder__year {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.6;
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-html {
+  background-color: var(--color-html);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-css {
+  background-color: var(--color-css);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-scss {
+  background-color: var(--color-scss);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-javascript, .work__card.is-folder.is-touch-hover .tech-icon.is-js {
+  background-color: var(--color-js);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-gsap {
+  background-color: var(--color-gsap);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-lenis {
+  background-color: var(--color-lenis);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-php {
+  background-color: var(--color-php);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-mysql {
+  background-color: var(--color-mysql);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-figma {
+  background-color: var(--color-figma);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-jquery {
+  background-color: var(--color-jquery);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-react {
+  background-color: var(--color-react);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-java {
+  background-color: var(--color-java);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-github {
+  background-color: var(--color-github);
+}
+.work__card.is-folder.is-touch-hover .tech-icon.is-git {
+  background-color: var(--color-git);
+}
 @media (hover: hover) and (pointer: fine) {
   .work__card.is-folder:hover .folder__img-box {
     transform: translateY(-50px);
