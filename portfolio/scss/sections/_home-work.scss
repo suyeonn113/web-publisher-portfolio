@@ -86,38 +86,38 @@
 
 .home-work__nav-controls {
   position: absolute;
-  bottom: 10%;
+  bottom: clamp(rem(56px), 12vh, rem(96px));
 
   @media (min-width: $desktop) {
-    bottom: 6%;
+    bottom: clamp(rem(32px), 6vh, rem(56px));
   }
 
   @media (min-width: $desktop) and (max-height: 820px) {
-    bottom: 1%;
+    bottom: clamp(rem(12px), 2.5vh, rem(24px));
   }
 
   @media (min-width: $laptop) and (max-width: ($desktop - 1)) {
-    bottom: 15%;
+    bottom: clamp(rem(72px), 15vh, rem(112px));
   }
 
   @media (min-width: $laptop) and (max-width: ($desktop - 1)) and (max-height: 820px) {
-    bottom: 6%;
+    bottom: clamp(rem(32px), 7vh, rem(56px));
   }
 
   @media (min-width: $tablet) and (max-width: ($laptop - 1)) {
-    bottom: 19%;
+    bottom: clamp(rem(80px), 18vh, rem(120px));
   }
 
   @media (min-width: $tablet) and (max-width: ($laptop - 1)) and (max-height: 800px) {
-    bottom: 8%;
+    bottom: clamp(rem(44px), 9vh, rem(68px));
   }
 
   @media (max-width: ($tablet - 1)) {
-    bottom: 19%;
+    bottom: clamp(rem(64px), 17vh, rem(100px));
   }
 
   @media (max-width: ($tablet - 1)) and (max-height: 740px) {
-    bottom: 10%;
+    bottom: clamp(rem(40px), 10vh, rem(64px));
   }
 
   display: grid;
