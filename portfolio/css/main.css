@@ -1751,6 +1751,7 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
   position: relative;
   z-index: 2;
   margin-top: 100dvh;
+  overflow: hidden;
   min-height: auto;
   display: flex;
   flex-direction: column;
