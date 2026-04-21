@@ -26,11 +26,11 @@
   width: 100%;
 
   .work__title {
-    @include font-style('title', 'bold', 'tight');
+    @include text-style('title', 'bold', 'tight', 'tight');
   }
 
   .btn-more {
-    @include font-style('base', 'light', 'tight');
+    @include text-style('base', 'light', 'tight', 'base');
   }
 }
 
@@ -39,7 +39,7 @@
 .work__container {
   display: flex;
   flex-direction: column;
-  @include f-gap('gutter', 'lg');
+  @include space-gap('gutter', 'lg');
 }
 
 // Slider
@@ -110,7 +110,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  @include g-gap('gutter', 'lg');
+  @include space-gap('gutter', 'lg');
 
   width: max-content;
   margin: 0 auto;

@@ -18,7 +18,7 @@
   &__list {
     display: flex;
     flex-direction: column;
-    @include f-gap('gutter', 'sm');
+  @include space-gap('gutter', 'sm');
   }
 
   &__btn {
@@ -41,7 +41,7 @@
     }
     
     svg {
-      @include icon-responsive('size', 'lg');
+  @include icon-size('lg');
       stroke-width: 1px;
 
       @media (hover: hover) and (pointer: fine) {

@@ -7,13 +7,21 @@
 ============================================================ */
 
 // 1. Typography 관련 추출
+@function get-text-size-config($type) {
+  @return map.get($font-sizes, $type);
+}
+
 @function get-font-config($type) {
-  @return map.get($font-settings, $type);
+  @return get-text-size-config($type);
 }
 
 @function get-fs($type, $device: 'default') {
-  $config: get-font-config($type);
+  $config: get-text-size-config($type);
   @return map.get($config, $device);
+}
+
+@function get-line-height($name) {
+  @return map.get($text-line-heights, $name);
 }
 
 @function get-weight($name) {
@@ -21,8 +29,16 @@
 }
 
 // 2. Spacing 관련 추출 (pad, gutter, gap)
+@function normalize-space-category($cat) {
+  @if $cat == 'pad' { @return 'inset'; }
+  @if $cat == 'gutter' { @return 'cluster'; }
+  @if $cat == 'gap' { @return 'stack'; }
+  @return $cat;
+}
+
 @function get-space($cat, $size) {
-  @return map.get(map.get($spacings, $cat), $size);
+  $resolved-cat: normalize-space-category($cat);
+  @return map.get(map.get($spaces, $resolved-cat), $size);
 }
 
 // 3. Radius 관련 추출

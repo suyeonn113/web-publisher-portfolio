@@ -27,7 +27,7 @@ $container-max: 1440px;
 ============================================================ */
 
 /* Font Size Scale (Desktop First) ----------------------- */
-$font-settings: (
+$font-sizes: (
   'hero': (
     'default': clamp(120px, 12vw, 200px),
     'laptop':  clamp(60px, 12vw, 120px),
@@ -63,6 +63,9 @@ $font-settings: (
   )
 );
 
+// Temporary alias for older helpers during migration.
+$font-settings: $font-sizes;
+
 /* Font Weight ----------------------------------- */
 $font-weights: (
   'light':   300,
@@ -78,16 +81,28 @@ $letter-spacings: (
   'tight': -0.02em
 );
 
+/* Line Height ------------------------------------ */
+$text-line-heights: (
+  'base': $base-line-height,
+  'tight': 1.1
+);
+
 
 
 /* ============================================================
    Spacing System (8pt Grid)
 ============================================================ */
 
+/* Usage guide
+ - pad: inner space inside one box
+ - gutter: tight space between nearby UI items
+ - gap: large rhythm between blocks or sections
+ - margin: exceptional positioning only
+ */
 $spacer: 8px;
 
 $spacings: (
-  // 내부 패딩: 콘텐츠의 숨통을 틔워주는 안쪽 여백
+  // pad: 내부 여백. 카드 안쪽, 섹션 좌우 패딩, 버튼 패딩
   'pad': (
     'xs': ( 'default': 8px,  'laptop': 8px,  'tablet': 8px,  'mobile': 8px ),
     'sm': ( 'default': 16px, 'laptop': 14px, 'tablet': 12px, 'mobile': 12px ),
@@ -96,19 +111,30 @@ $spacings: (
     'xl': ( 'default': 96px, 'laptop': 80px, 'tablet': 64px, 'mobile': 48px )
   ),
 
-  // 요소 사이 (Gutter): 버튼, 아이콘 등 인접 요소 간격
+  // gutter: 가까운 요소 간격. 버튼 그룹, 메타 정보, 아이콘 묶음
   'gutter': (
     'sm': ( 'default': 16px, 'laptop': 16px, 'tablet': 16px, 'mobile': 12px ),
     'md': ( 'default': 32px, 'laptop': 32px, 'tablet': 24px, 'mobile': 16px ),
     'lg': ( 'default': 48px, 'laptop': 40px, 'tablet': 32px, 'mobile': 20px )
   ),
 
-  // 큰 덩어리 사이 (Gap): 섹션 간격, 제목과 본문 사이
+  // gap: 큰 흐름 간격. 섹션 간격, 제목과 콘텐츠 블록 사이
   'gap': (
     'sm': ( 'default': 64px,  'laptop': 56px, 'tablet': 48px, 'mobile': 40px ),
     'md': ( 'default': 120px, 'laptop': 100px, 'tablet': 80px, 'mobile': 64px ),
     'lg': ( 'default': 200px, 'laptop': 160px, 'tablet': 120px, 'mobile': 100px )
   )
+);
+
+/* Semantic spacing scale
+ - inset: inner padding/inset space
+ - cluster: tight space between nearby UI items
+ - stack: larger block-to-block rhythm
+ */
+$spaces: (
+  'inset': map.get($spacings, 'pad'),
+  'cluster': map.get($spacings, 'gutter'),
+  'stack': map.get($spacings, 'gap')
 );
 
 

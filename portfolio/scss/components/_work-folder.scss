@@ -46,7 +46,7 @@ $folder-ratio: 413 / 373;
     }
 
     .folder__year {
-      @include font-style('sm', 'bold')
+      @include text-style('sm', 'bold', 'base', 'base')
     }
 
     .tech-icon {
@@ -93,7 +93,7 @@ $folder-ratio: 413 / 373;
       }
 
       .folder__year {
-        @include font-style('sm', 'bold')
+      @include text-style('sm', 'bold', 'base', 'base')
       }
 
       .tech-icon {
@@ -203,7 +203,7 @@ $folder-ratio: 413 / 373;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  @include f-gap('gutter', 'sm');
+  @include space-gap('gutter', 'sm');
 
   color: $text-inverse;
 }
@@ -224,7 +224,7 @@ $folder-ratio: 413 / 373;
   text-shadow: $shadow-soft;
 
   .folder__year {
-    @include font-style('sm')
+    @include text-style('sm', 'regular', 'base', 'base')
   }
 
   .folder__category-icons {
@@ -241,11 +241,11 @@ $folder-ratio: 413 / 373;
   .folder__tech-list {
     display: flex;
     width: max-content;
-    @include icon-responsive('gap');
+    @include icon-gap();
 
     .tech-icon {
       display: block;
-      @include icon-responsive('size', 'sm');
+      @include icon-size('sm');
       background-color: $text-inverse;
 
       filter: drop-shadow($shadow-strong);

@@ -5,9 +5,16 @@
 /* Font Size Scale (Desktop First) ----------------------- */
 /* Font Weight ----------------------------------- */
 /* Letter Spacing --------------------------------- */
+/* Line Height ------------------------------------ */
 /* ============================================================
    Spacing System (8pt Grid)
 ============================================================ */
+/* Usage guide
+ - pad: inner space inside one box
+ - gutter: tight space between nearby UI items
+ - gap: large rhythm between blocks or sections
+ - margin: exceptional positioning only
+ */
 /* ============================================================
    Component Variables 
 ============================================================ */
@@ -28,6 +35,21 @@
 /* ============================================================
    Rem Function
 ============================================================ */
+/* Official project mixins
+ - respond-down: max-width responsive branching
+ - pad: primary padding API
+ - space-gap: token-based gap output
+ - text-size / text-style: typography output
+ - rd: radius token output
+ - icon-size / icon-gap: icon sizing helpers
+ */
+/* Internal helper mixins
+ - responsive-spacing: token-to-css output helper
+ - mar: exceptional margin adjustment
+ - btn-text-style: component-specific button helper
+ - flex-center: tiny alignment helper
+ - respond-to / f-gap / g-gap / icon-responsive / font-style: temporary compatibility aliases
+ */
 /* ============================================================
    Layout & Responsive Mixins
 ============================================================ */
@@ -535,16 +557,17 @@ input[type=search]::-webkit-search-decoration {
   text-decoration: none;
   color: #000;
   font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  line-height: 1.6;
 }
 @media (max-width: 480px) {
   .site-header__link {
     font-size: 14px;
   }
+}
+.site-header__link {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 }
 
 .fixed-menu {
@@ -748,6 +771,21 @@ input[type=search]::-webkit-search-decoration {
   color: var(--color-text-primary);
   padding-bottom: 28px;
 }
+@media (max-width: 1024px) {
+  .work__card.is-folder.is-touch-hover .folder__info {
+    padding-bottom: 24px;
+  }
+}
+@media (max-width: 768px) {
+  .work__card.is-folder.is-touch-hover .folder__info {
+    padding-bottom: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .work__card.is-folder.is-touch-hover .folder__info {
+    padding-bottom: 16px;
+  }
+}
 .work__card.is-folder.is-touch-hover .folder__title {
   font-size: clamp(22px, 1.8vw, 28px);
   font-weight: 900;
@@ -756,13 +794,34 @@ input[type=search]::-webkit-search-decoration {
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
   line-height: 1.6;
 }
+@media (max-width: 1024px) {
+  .work__card.is-folder.is-touch-hover .folder__title {
+    font-size: clamp(20px, 1.8vw, 26px);
+  }
+}
+@media (max-width: 768px) {
+  .work__card.is-folder.is-touch-hover .folder__title {
+    font-size: clamp(18px, 2.4vw, 22px);
+  }
+}
+@media (max-width: 480px) {
+  .work__card.is-folder.is-touch-hover .folder__title {
+    font-size: clamp(17px, 3.8vw, 19px);
+  }
+}
 .work__card.is-folder.is-touch-hover .folder__year {
   font-size: 15px;
+}
+@media (max-width: 480px) {
+  .work__card.is-folder.is-touch-hover .folder__year {
+    font-size: 14px;
+  }
+}
+.work__card.is-folder.is-touch-hover .folder__year {
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  line-height: 1.6;
 }
 .work__card.is-folder.is-touch-hover .tech-icon.is-html {
   background-color: var(--color-html);
@@ -869,7 +928,6 @@ input[type=search]::-webkit-search-decoration {
     letter-spacing: 0;
     line-height: 1.6;
     font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-    line-height: 1.6;
   }
 }
 @media (hover: hover) and (pointer: fine) and (max-width: 480px) {
@@ -1080,16 +1138,17 @@ input[type=search]::-webkit-search-decoration {
 }
 .folder__info-meta .folder__year {
   font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  line-height: 1.6;
 }
 @media (max-width: 480px) {
   .folder__info-meta .folder__year {
     font-size: 14px;
   }
+}
+.folder__info-meta .folder__year {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 }
 .folder__info-meta .folder__category-icons {
   display: flex;
@@ -1230,11 +1289,6 @@ input[type=search]::-webkit-search-decoration {
 }
 .hero__text-wrap .main-title .word--simple, .hero__text-wrap .main-title .word--me {
   font-size: clamp(120px, 12vw, 200px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  line-height: 1.1;
 }
 @media (max-width: 1024px) {
   .hero__text-wrap .main-title .word--simple, .hero__text-wrap .main-title .word--me {
@@ -1251,13 +1305,14 @@ input[type=search]::-webkit-search-decoration {
     font-size: clamp(40px, 16vw, 70px);
   }
 }
+.hero__text-wrap .main-title .word--simple, .hero__text-wrap .main-title .word--me {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
 .hero__text-wrap .main-title .word--hi {
   font-size: clamp(72px, 7vw, 120px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  line-height: 1.6;
 }
 @media (max-width: 1024px) {
   .hero__text-wrap .main-title .word--hi {
@@ -1268,6 +1323,12 @@ input[type=search]::-webkit-search-decoration {
   .hero__text-wrap .main-title .word--hi {
     font-size: clamp(24px, 8vw, 40px);
   }
+}
+.hero__text-wrap .main-title .word--hi {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 }
 .hero__text-wrap .main-title .char, .hero__text-wrap .main-title .dot {
   display: inline-block;
@@ -1291,6 +1352,10 @@ input[type=search]::-webkit-search-decoration {
   flex-direction: column;
   justify-content: center;
   min-height: 100dvh;
+  overflow: hidden;
+  background: var(--color-bg-main);
+  box-shadow: 0 -24px 80px rgba(15, 23, 42, 0.08);
+  transform-origin: center top;
 }
 
 .work__header {
@@ -1301,11 +1366,6 @@ input[type=search]::-webkit-search-decoration {
 }
 .work__header .work__title {
   font-size: clamp(48px, 5vw, 64px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  line-height: 1.1;
 }
 @media (max-width: 1024px) {
   .work__header .work__title {
@@ -1317,18 +1377,25 @@ input[type=search]::-webkit-search-decoration {
     font-size: clamp(28px, 8vw, 36px);
   }
 }
+.work__header .work__title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
 .work__header .btn-more {
   font-size: 18px;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  line-height: 1.6;
 }
 @media (max-width: 480px) {
   .work__header .btn-more {
     font-size: 16px;
   }
+}
+.work__header .btn-more {
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 }
 
 .work__container {
@@ -1538,11 +1605,6 @@ input[type=search]::-webkit-search-decoration {
 }
 .work__nav-controls .work__nav-btn {
   font-size: clamp(22px, 1.8vw, 28px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  line-height: 1.6;
 }
 @media (max-width: 1024px) {
   .work__nav-controls .work__nav-btn {
@@ -1560,6 +1622,10 @@ input[type=search]::-webkit-search-decoration {
   }
 }
 .work__nav-controls .work__nav-btn {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
   border-radius: 32px;
   cursor: pointer;
   background: none;

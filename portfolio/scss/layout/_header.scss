@@ -12,7 +12,7 @@
 .site-header__menu {
     display: flex;
     justify-content: flex-end;
-    @include f-gap('gutter', 'lg');
+  @include space-gap('gutter', 'lg');
 
     list-style: none;
 }
@@ -20,5 +20,5 @@
 .site-header__link {
     text-decoration: none;
     color: #000;
-    @include font-style('sm', 'regular');
+    @include text-style('sm', 'regular', 'base', 'base');
 }

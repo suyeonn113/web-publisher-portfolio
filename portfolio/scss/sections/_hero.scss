@@ -32,9 +32,9 @@
     display: flex;          
     justify-content: center;
     align-items: center;
-    @include g-gap('gutter', 'sm');
+    @include space-gap('gutter', 'sm');
 
-    @include respond-to('tablet') {
+    @include respond-down('tablet') {
       display: flex !important;
       flex-direction: column;
     }
@@ -44,10 +44,10 @@
     }
 
     .word--simple, .word--me {
-      @include font-style('hero', 'bold', 'tight');
+      @include text-style('hero', 'bold', 'tight', 'tight');
     }
     .word--hi {
-      @include font-style('hero-sub', 'medium', 'tight');
+      @include text-style('hero-sub', 'medium', 'tight', 'base');
     }
     
     .char, .dot {

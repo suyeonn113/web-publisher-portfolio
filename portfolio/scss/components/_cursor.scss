@@ -11,7 +11,7 @@
   pointer-events: none;
   z-index: 9999;
 
-  @include respond-to('mobile') {
+  @include respond-down('mobile') {
     display: none !important;
   }
 
