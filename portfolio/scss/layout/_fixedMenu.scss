@@ -7,7 +7,7 @@
   z-index: 100;
 
   margin-top: -80px;
-  @include pad('gutter', 'md', 'right');
+  @include space-pad('cluster', 'md', 'right');
 
   &:has(.js-fixed-btn[data-state="open"]) {
     .fixed-menu__preview {
@@ -18,7 +18,7 @@
   &__list {
     display: flex;
     flex-direction: column;
-  @include space-gap('gutter', 'sm');
+  @include space-gap('cluster', 'sm');
   }
 
   &__btn {
@@ -28,7 +28,7 @@
     // background: $point-primary;
     // border: 1px solid $icon-focus;
 
-    @include pad('pad', 'xs');
+  @include space-pad('inset', 'xs');
 
     display: flex;
     align-items: center;

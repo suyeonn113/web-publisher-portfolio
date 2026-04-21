@@ -32,7 +32,7 @@
     display: flex;          
     justify-content: center;
     align-items: center;
-    @include space-gap('gutter', 'sm');
+    @include space-gap('cluster', 'sm');
 
     @include respond-down('tablet') {
       display: flex !important;

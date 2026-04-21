@@ -38,7 +38,7 @@ $folder-ratio: 413 / 373;
 
     .folder__info {
       color: $text-primary;
-      @include pad('pad', 'md', 'bottom');
+      @include space-pad('inset', 'md', 'bottom');
     }
 
     .folder__title {
@@ -85,7 +85,7 @@ $folder-ratio: 413 / 373;
 
       .folder__info {
         color: $text-primary;
-        @include pad('pad', 'md', 'bottom');
+      @include space-pad('inset', 'md', 'bottom');
       }
 
       .folder__title {
@@ -197,13 +197,13 @@ $folder-ratio: 413 / 373;
   height: 100%;
   aspect-ratio: 413 / 373;
 
-  @include pad('pad', 'md');
-  @include pad('gutter', 'md', 'bottom');
+  @include space-pad('inset', 'md');
+  @include space-pad('cluster', 'md', 'bottom');
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  @include space-gap('gutter', 'sm');
+  @include space-gap('cluster', 'sm');
 
   color: $text-inverse;
 }

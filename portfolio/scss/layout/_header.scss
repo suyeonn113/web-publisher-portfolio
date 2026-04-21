@@ -12,7 +12,7 @@
 .site-header__menu {
     display: flex;
     justify-content: flex-end;
-  @include space-gap('gutter', 'lg');
+  @include space-gap('cluster', 'lg');
 
     list-style: none;
 }

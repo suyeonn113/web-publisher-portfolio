@@ -201,7 +201,7 @@
 
 // Margin
 // Prefer pad/gap first. Use this when one element needs positional correction.
-@mixin mar($cat, $size, $direction: null) {
+@mixin space-mar($cat, $size, $direction: null) {
   @if $direction == 'y' {
     @include responsive-spacing('margin-top', $cat, $size);
     @include responsive-spacing('margin-bottom', $cat, $size);
@@ -215,9 +215,13 @@
   }
 }
 
+@mixin mar($cat, $size, $direction: null) {
+  @include space-mar($cat, $size, $direction);
+}
+
 // Padding
 // Primary spacing API for layout and component inner space.
-@mixin pad($cat, $size, $direction: null) {
+@mixin space-pad($cat, $size, $direction: null) {
   @if $direction == 'y' {
     @include responsive-spacing('padding-top', $cat, $size);
     @include responsive-spacing('padding-bottom', $cat, $size);
@@ -229,6 +233,10 @@
   } @else {
     @include responsive-spacing('padding', $cat, $size);
   }
+}
+
+@mixin pad($cat, $size, $direction: null) {
+  @include space-pad($cat, $size, $direction);
 }
 
 // 간격 (방향 지정 가능)

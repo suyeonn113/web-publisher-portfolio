@@ -39,7 +39,7 @@
 .work__container {
   display: flex;
   flex-direction: column;
-  @include space-gap('gutter', 'lg');
+  @include space-gap('cluster', 'lg');
 }
 
 // Slider
@@ -110,7 +110,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  @include space-gap('gutter', 'lg');
+  @include space-gap('cluster', 'lg');
 
   width: max-content;
   margin: 0 auto;
