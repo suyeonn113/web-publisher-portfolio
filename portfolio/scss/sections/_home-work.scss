@@ -7,14 +7,14 @@
   z-index: 2;
   margin-top: 100dvh;
 
+  min-height: auto;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100dvh;
   overflow: hidden;
 
   background: $bg-main;
-  box-shadow: $shadow-surface-strong;
   transform-origin: center top;
 }
 

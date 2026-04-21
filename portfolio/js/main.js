@@ -17,6 +17,7 @@ import {
   initHeaderEntrance,
   initHeaderScroll
 } from "./components/header.js";
+import { renderFooter } from "./components/footer.js";
 import { renderFixedMenu, initFixedMenu } from "./components/fixedMenu.js";
 import { loadProjects } from './components/ProjectCardMain.js';
 import { initWorkSlider } from './components/workSlider.js';
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 헤더 먼저 주입
   renderHeader();
+  renderFooter();
   renderFixedMenu();
 
   initHeaderState();

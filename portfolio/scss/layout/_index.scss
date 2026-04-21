@@ -2,9 +2,12 @@
  - layout: shared layout utilities
  - background: ambient background layers
  - header: top navigation
+ - footer: bottom footer
  - fixedMenu: persistent quick menu
  */
 @forward 'layout';
 @forward 'background';
 @forward 'header';
+@forward 'footer';
 @forward 'fixedMenu';
+

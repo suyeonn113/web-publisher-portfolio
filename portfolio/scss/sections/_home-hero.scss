@@ -3,7 +3,7 @@
 @use '../components' as *;
 
 .hero {
-  position: fixed;
+  position: relative;
   top: 0;
   z-index: 1;
 

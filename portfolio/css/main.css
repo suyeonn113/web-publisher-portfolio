@@ -1,145 +1,105 @@
 @charset "UTF-8";
 /* ============================================================
-   Typography Scale
+   Foundation
 ============================================================ */
-/* Font Size Scale (Desktop First) ----------------------- */
-/* Font Weight ----------------------------------- */
-/* Letter Spacing --------------------------------- */
-/* Line Height ------------------------------------ */
-/* ============================================================
-   Spacing System (8pt Grid)
-============================================================ */
-/* Usage guide
- - pad: inner space inside one box
- - gutter: tight space between nearby UI items
- - gap: large rhythm between blocks or sections
- - margin: exceptional positioning only
- */
-/* Semantic spacing scale
- - inset: inner padding/inset space
- - cluster: tight space between nearby UI items
- - stack: larger block-to-block rhythm
+/* Foundation order
+ - variables: raw tokens and system maps
+ - themes: CSS custom properties and SCSS token mapping
+ - functions: token lookup helpers
+ - mixins: output helpers
+ - base: reset and global styles
  */
 /* ============================================================
-   Component Variables 
-============================================================ */
-/* Button System ----------------------- */
-/* Icon System ----------------------- */
-/* ============================================================
-   Radius System 
+   Typography
 ============================================================ */
 /* ============================================================
-   Z-index System
+   Breakpoints
 ============================================================ */
 /* ============================================================
-   Motion System
+   Paths
 ============================================================ */
 /* ============================================================
-   Getter Functions
+   Layout
 ============================================================ */
 /* ============================================================
-   Rem Function
+   Type Scale
 ============================================================ */
-/* Official project mixins
- - respond-down: max-width responsive branching
- - space-pad: primary padding API
- - space-mar: exceptional margin API
- - space-gap: token-based gap output
- - text-size / text-style: typography output
- - rd: radius token output
- - icon-size / icon-gap: icon sizing helpers
+/* ============================================================
+   Type Tokens
+============================================================ */
+/* ============================================================
+   Spacing
+============================================================ */
+/* Usage
+ - pad: inner spacing inside a component or section
+ - gutter: spacing between nearby UI elements
+ - gap: larger rhythm between blocks or sections
  */
-/* Internal helper mixins
- - responsive-spacing: token-to-css output helper
- - pad / mar: temporary spacing compatibility aliases
- - btn-text-style: component-specific button helper
- - flex-center: tiny alignment helper
- - respond-to / f-gap / g-gap / icon-responsive / font-style: temporary compatibility aliases
- */
+/* Semantic aliases */
 /* ============================================================
-   Layout & Responsive Mixins
+   Component Tokens
 ============================================================ */
-/**
- * 반응형 미디어 쿼리
- * @param $device - mobile, tablet, laptop, desktop
- */
 /* ============================================================
-   Typography Mixins
+   Radius
 ============================================================ */
-/**
- * 전용 폰트 스타일 시스템
- * @param $type - hero, title, lg, base, sm, xs
- * @param $weight - light, regular, medium, bold
- * @param $ls - base, tight
- */
 /* ============================================================
-   Component Variables (버튼 및 인터랙션 요소)
+   Z-index
 ============================================================ */
-/**
- * 테크 아이콘 반응형 제어
- * @param $prop - size (크기), gap (간격)
- */
 /* ============================================================
-   Spacing & Shape Mixins
+   Motion
 ============================================================ */
-/* 반응형 수치 배포 내부 믹스인 */
 /* ============================================================
-   Display & Alignment Mixins
+   Light Theme
 ============================================================ */
 :root {
-  /* ==========================================================================
-      Text System
-      ========================================================================== */
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #4d4d4d;
-  --color-text-tertiary: #808080;
-  --color-text-disabled: #b3b3b3;
+  /* Text */
+  --color-text-primary: #1c1c1e;
+  --color-text-secondary: #636366;
+  --color-text-tertiary: #8e8e93;
+  --color-text-disabled: #c7c7cc;
   --color-text-inverse: #ffffff;
-  --shadow-text-soft: 0 1px 4px rgba(0,0,0,0.3);
-  --shadow-text-strong: 0 2px 6px rgba(0,0,0,0.4);
-  /* ==========================================================================
-      Background & Surface
-      ========================================================================== */
-  --color-bg-main: #f7faf9;
+  --shadow-text-soft: 0 1px 8px rgba(15, 23, 42, 0.16);
+  --shadow-text-strong: 0 4px 16px rgba(15, 23, 42, 0.22);
+  /* Background */
+  --color-bg-main: #f3f6fb;
   --color-bg-surface: #ffffff;
-  --color-scrollbar: #cccccc;
-  --color-scrollbar-hover: #999999;
+  --color-bg-elevated: #fbfcff;
+  --color-bg-glass: rgba(255, 255, 255, 0.62);
+  --color-bg-glass-strong: rgba(255, 255, 255, 0.82);
+  --color-scrollbar: #d1d5db;
+  --color-scrollbar-hover: #9ca3af;
+  --color-border-soft: rgba(15, 23, 42, 0.08);
+  --color-border-strong: rgba(10, 132, 255, 0.18);
+  --shadow-surface-soft: 0 12px 32px rgba(104, 128, 166, 0.14);
+  --shadow-surface-strong: 0 24px 60px rgba(38, 93, 176, 0.18);
   --overlay-bottom-soft: linear-gradient(
     to top,
-    rgba(0,0,0,0.35) 0%,
-    rgba(0,0,0,0.1) 40%,
-    transparent 70%
+    rgba(15, 23, 42, 0.32) 0%,
+    rgba(15, 23, 42, 0.08) 40%,
+    transparent 72%
   );
   --overlay-bottom-strong: linear-gradient(
     to top,
-    rgba(0,0,0,0.45) 0%,
-    rgba(0,0,0,0.15) 40%,
-    transparent 70%
+    rgba(15, 23, 42, 0.46) 0%,
+    rgba(15, 23, 42, 0.14) 42%,
+    transparent 72%
   );
-  /* ==========================================================================
-      Accent System
-      ========================================================================== */
-  --color-point-primary: #2d36b1;
-  --color-point-secondary: #517bb3;
-  --color-point-highlight: #ff6b6b;
-  --color-point-info: #3498db;
-  --color-point-success: #27ae60;
-  /* ==========================================================================
-    Component 
-    ========================================================================== */
-  --btn-text-color: $text-primary;
-  --btn-text-opacity: 0.4;
-  --btn-text-opacity-hover: 0.8;
-  --btn-letter-spacing: 0.04em;
-  /* ==========================================================================
-      Icon & Interaction 
-      ========================================================================== */
+  /* Accent */
+  --color-point-primary: #0a84ff;
+  --color-point-secondary: #5ac8fa;
+  --color-point-highlight: #ff6482;
+  --color-point-info: #64d2ff;
+  --color-point-success: #30d158;
+  /* Component */
+  --btn-text-color: var(--color-text-primary);
+  --btn-text-opacity: 0.52;
+  --btn-text-opacity-hover: 0.92;
+  --btn-letter-spacing: 0.03em;
+  /* Icon and interaction */
   --color-icon-base: var(--color-text-primary);
   --color-icon-active: var(--color-point-primary);
   --color-icon-focus: var(--color-point-primary);
-  /* ==========================================================================
-      Brand Colors
-      ========================================================================== */
+  /* Brand colors */
   --color-html: #E34F26;
   --color-css: #1572B6;
   --color-scss: #CC6699;
@@ -156,69 +116,155 @@
   --color-git: #F05032;
 }
 
+/* ============================================================
+   Dark Theme
+============================================================ */
 [data-theme=dark] {
-  /* ==========================================================================
-      Text System
-      ========================================================================== */
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #b3b3b3;
-  --color-text-tertiary: #808080;
-  --color-text-disabled: #4d4d4d;
-  --color-text-inverse: #1a1a1a;
-  /* ==========================================================================
-    Background & Surface
-    ========================================================================== */
-  --color-bg-main: #0d1a15;
-  --color-bg-surface: #16241f;
-  --color-scrollbar: #444444;
-  --color-scrollbar-hover: #666666;
-  /* ==========================================================================
-    Accent System
-    ========================================================================== */
-  --color-point-primary: #4ecb99;
-  --color-point-secondary: #3a5a50;
-  --color-point-highlight: #ff8787;
-  --color-point-info: #5dade2;
-  --color-point-success: #2ecc71;
-  /* ==========================================================================
-    Icon & Interaction 
-    ========================================================================== */
+  /* Text */
+  --color-text-primary: #f5f7ff;
+  --color-text-secondary: #c3cada;
+  --color-text-tertiary: #8d9ab3;
+  --color-text-disabled: #55637d;
+  --color-text-inverse: #08111f;
+  --shadow-text-soft: 0 1px 10px rgba(2, 6, 23, 0.44);
+  --shadow-text-strong: 0 8px 24px rgba(2, 6, 23, 0.54);
+  /* Background */
+  --color-bg-main: #0a1220;
+  --color-bg-surface: #111b2d;
+  --color-bg-elevated: #162236;
+  --color-bg-glass: rgba(17, 27, 45, 0.62);
+  --color-bg-glass-strong: rgba(17, 27, 45, 0.84);
+  --color-scrollbar: #4b5563;
+  --color-scrollbar-hover: #6b7280;
+  --color-border-soft: rgba(191, 219, 254, 0.12);
+  --color-border-strong: rgba(100, 210, 255, 0.28);
+  --shadow-surface-soft: 0 18px 42px rgba(2, 6, 23, 0.34);
+  --shadow-surface-strong: 0 28px 72px rgba(2, 6, 23, 0.48);
+  --overlay-bottom-soft: linear-gradient(
+    to top,
+    rgba(2, 6, 23, 0.42) 0%,
+    rgba(2, 6, 23, 0.16) 42%,
+    transparent 72%
+  );
+  --overlay-bottom-strong: linear-gradient(
+    to top,
+    rgba(2, 6, 23, 0.58) 0%,
+    rgba(2, 6, 23, 0.24) 44%,
+    transparent 72%
+  );
+  /* Accent */
+  --color-point-primary: #0a84ff;
+  --color-point-secondary: #64d2ff;
+  --color-point-highlight: #ff7a96;
+  --color-point-info: #7dd3fc;
+  --color-point-success: #32d74b;
+  /* Component */
+  --btn-text-color: var(--color-text-primary);
+  --btn-text-opacity: 0.6;
+  --btn-text-opacity-hover: 0.96;
+  --btn-letter-spacing: 0.03em;
+  /* Icon and interaction */
   --color-icon-base: var(--color-text-primary);
   --color-icon-active: var(--color-point-primary);
-  --color-focus: var(--color-point-primary);
-  /* ==========================================================================
-    Brand Colors (다크모드 시인성 보정)
-    ========================================================================== */
-  --color-html: #ff5d38;
-  --color-css: #38a9ff;
-  --color-scss: #ff85c2;
+  --color-icon-focus: var(--color-point-primary);
+  /* Brand colors */
+  --color-html: #ff6b4a;
+  --color-css: #4cb5ff;
+  --color-scss: #ff8fcb;
   --color-js: #f7df1e;
-  --color-gsap: #a3ff00;
-  --color-lenis: #ffb3bc;
-  --color-php: #a3a7e2;
-  --color-mysql: #5ea0d1;
-  --color-figma: #ff7043;
-  --color-jquery: #1e90ff;
-  --color-react: #61dafb;
-  --color-java: #33b5e5;
+  --color-gsap: #b5ff1f;
+  --color-lenis: #ffb3c3;
+  --color-php: #aeb5f4;
+  --color-mysql: #68a9d8;
+  --color-figma: #ff7a59;
+  --color-jquery: #4aa7ff;
+  --color-react: #76e4ff;
+  --color-java: #57c2ff;
   --color-github: #ffffff;
-  --color-git: #ff6e54;
+  --color-git: #ff7c63;
 }
 
-/* ==========================================================================
-  SCSS Variable Mappings
-  ========================================================================== */
-/* Text System */
-/* Background & Surface */
-/* Accent System (Point Colors) */
-/* Component */
-/* Icon & Interaction */
-/* Brand Colors (Technology Stack) */
 /* ============================================================
-   Mixins & Reset Fonts
+   SCSS Token Mapping
+============================================================ */
+/* Text */
+/* Background */
+/* Accent */
+/* Component */
+/* Icon and interaction */
+/* Brand colors */
+/* Foundation order
+ - variables: raw tokens and system maps
+ - themes: CSS custom properties and SCSS token mapping
+ - functions: token lookup helpers
+ - mixins: output helpers
+ - base: reset and global styles
+ */
+/* ============================================================
+   Typography Helpers
 ============================================================ */
 /* ============================================================
-   Standard Reset
+   Spacing Helpers
+============================================================ */
+/* ============================================================
+   Shape and Layer Helpers
+============================================================ */
+/* ============================================================
+   Motion Helpers
+============================================================ */
+/* ============================================================
+   Unit Helpers
+============================================================ */
+/* Foundation order
+ - variables: raw tokens and system maps
+ - themes: CSS custom properties and SCSS token mapping
+ - functions: token lookup helpers
+ - mixins: output helpers
+ - base: reset and global styles
+ */
+/* Public mixins
+ - respond-down: max-width responsive branching
+ - space-pad: primary padding API
+ - space-mar: exceptional margin API
+ - space-gap: token-based gap output
+ - text-size / text-style: typography output
+ - rd: radius token output
+ - icon-size / icon-gap: icon sizing helpers
+ */
+/* Internal helpers
+ - responsive-spacing: token-to-css output helper
+ - pad / mar: temporary spacing compatibility aliases
+ - btn-text-style: component-specific button helper
+ - flex-center: tiny alignment helper
+ - respond-to / f-gap / g-gap / icon-responsive / font-style: compatibility aliases
+ */
+/* ============================================================
+   Responsive
+============================================================ */
+/* ============================================================
+   Typography
+============================================================ */
+/* ============================================================
+   Component Helpers
+============================================================ */
+/* ============================================================
+   Spacing and Shape
+============================================================ */
+/* ============================================================
+   Display and Alignment
+============================================================ */
+/* Foundation order
+ - variables: raw tokens and system maps
+ - themes: CSS custom properties and SCSS token mapping
+ - functions: token lookup helpers
+ - mixins: output helpers
+ - base: reset and global styles
+ */
+/* ============================================================
+   Reset Helpers
+============================================================ */
+/* ============================================================
+   Base Reset
 ============================================================ */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -259,7 +305,7 @@ table {
 }
 
 /* ============================================================
-   Global Typography & Theme
+   Global Theme
 ============================================================ */
 @font-face {
   font-family: "SUIT";
@@ -321,7 +367,7 @@ input[type=search]::-webkit-search-decoration {
 }
 
 /* ============================================================
-   Accessibility & Interaction
+   Accessibility
 ============================================================ */
 :focus-visible {
   outline: 2px solid var(--color-point-primary);
@@ -357,7 +403,7 @@ input[type=search]::-webkit-search-decoration {
   }
 }
 /* ============================================================
-   Custom Scrollbar
+   Scrollbar
 ============================================================ */
 ::-webkit-scrollbar {
   width: 5px;
@@ -372,6 +418,19 @@ input[type=search]::-webkit-search-decoration {
   background: var(--color-scrollbar-hover);
 }
 
+/* ============================================================
+   Layout
+============================================================ */
+/* Layout order
+ - layout: shared layout utilities
+ - background: ambient background layers
+ - header: top navigation
+ - footer: bottom footer
+ - fixedMenu: persistent quick menu
+ */
+/* ============================================================
+   Foundation
+============================================================ */
 .section-py {
   padding-top: 120px;
 }
@@ -510,6 +569,9 @@ input[type=search]::-webkit-search-decoration {
   }
 }
 
+/* ============================================================
+   Foundation
+============================================================ */
 .video-background {
   position: fixed;
   top: 0;
@@ -527,6 +589,9 @@ input[type=search]::-webkit-search-decoration {
   display: block;
 }
 
+/* ============================================================
+   Foundation
+============================================================ */
 .site-header {
   position: fixed;
   top: 0;
@@ -561,7 +626,7 @@ input[type=search]::-webkit-search-decoration {
 
 .site-header__link {
   text-decoration: none;
-  color: #000;
+  color: var(--color-text-primary);
   font-size: 15px;
 }
 @media (max-width: 480px) {
@@ -576,6 +641,56 @@ input[type=search]::-webkit-search-decoration {
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 }
 
+/* ============================================================
+   Foundation
+============================================================ */
+.site-footer {
+  position: relative;
+  display: block;
+  font-size: 18px;
+}
+@media (max-width: 480px) {
+  .site-footer {
+    font-size: 16px;
+  }
+}
+.site-footer {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  z-index: 1000;
+}
+
+body[data-page=home] .site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-footer__contact {
+  display: flex;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .site-footer__contact {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .site-footer__contact {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .site-footer__contact {
+    gap: 12px;
+  }
+}
+
+/* ============================================================
+   Foundation
+============================================================ */
 .fixed-menu {
   position: fixed;
   right: 0;
@@ -687,9 +802,11 @@ input[type=search]::-webkit-search-decoration {
   width: -moz-max-content;
   width: max-content;
   padding: 1rem;
-  background: #fff;
+  background: var(--color-bg-glass-strong);
+  border: 1px solid var(--color-border-soft);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-surface-soft);
+  backdrop-filter: blur(18px);
   display: none;
 }
 .fixed-menu__panel[data-state=open] {
@@ -709,6 +826,18 @@ input[type=search]::-webkit-search-decoration {
   overflow: hidden;
 }
 
+/* ============================================================
+   Components
+============================================================ */
+/* Component order
+ - cursor: global cursor treatment
+ - scroll-down: hero scroll hint
+ - work-folder: project card grouping
+ - btn: shared button styles
+ */
+/* ============================================================
+   Foundation
+============================================================ */
 .cursor-satellite {
   position: fixed;
   width: 20px;
@@ -731,6 +860,9 @@ input[type=search]::-webkit-search-decoration {
   }
 }
 
+/* ============================================================
+   Foundation
+============================================================ */
 .scroll-down {
   font-size: 18px;
   color: var(--color-text-primary);
@@ -751,6 +883,9 @@ input[type=search]::-webkit-search-decoration {
   display: inline-block;
 }
 
+/* ============================================================
+   Foundation
+============================================================ */
 .work__card.is-folder {
   position: relative;
   perspective: 1000px;
@@ -1010,7 +1145,9 @@ input[type=search]::-webkit-search-decoration {
   width: 90%;
   height: 50%;
   border-radius: 5%;
-  background: #fff;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-soft);
+  box-shadow: var(--shadow-surface-soft);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .folder__img-box img {
@@ -1132,7 +1269,7 @@ input[type=search]::-webkit-search-decoration {
   }
 }
 .folder__info-header .folder__title {
-  text-shadow: var(--shadow-text-soft-soft);
+  text-shadow: var(--shadow-text-soft);
   white-space: nowrap;
 }
 
@@ -1140,7 +1277,7 @@ input[type=search]::-webkit-search-decoration {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-shadow: var(--shadow-text-soft-soft);
+  text-shadow: var(--shadow-text-soft);
 }
 .folder__info-meta .folder__year {
   font-size: 15px;
@@ -1161,6 +1298,9 @@ input[type=search]::-webkit-search-decoration {
   gap: 5px;
   padding: 5px;
   border-radius: 50px;
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border-soft);
+  backdrop-filter: blur(14px);
 }
 
 .folder__info-footer .folder__tech-list {
@@ -1205,8 +1345,7 @@ input[type=search]::-webkit-search-decoration {
 .folder__info-footer .folder__tech-list .tech-icon {
   background-color: var(--color-text-inverse);
   filter: drop-shadow(var(--shadow-text-strong));
-  transition: filter all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  /* 마스크 설정: SVG 모양대로 배경색만 보여줌 */
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
@@ -1215,6 +1354,9 @@ input[type=search]::-webkit-search-decoration {
   mask-position: center;
 }
 
+/* ============================================================
+   Foundation
+============================================================ */
 .btn {
   background: none;
   border: 0;
@@ -1240,8 +1382,20 @@ input[type=search]::-webkit-search-decoration {
   opacity: 1;
 }
 
+/* ============================================================
+   Sections
+============================================================ */
+/* ============================================================
+   Foundation
+============================================================ */
+/* ============================================================
+   Layout
+============================================================ */
+/* ============================================================
+   Components
+============================================================ */
 .hero {
-  position: fixed;
+  position: relative;
   top: 0;
   z-index: 1;
   display: flex;
@@ -1350,17 +1504,25 @@ input[type=search]::-webkit-search-decoration {
   will-change: transform, opacity;
 }
 
+/* ============================================================
+   Foundation
+============================================================ */
+/* ============================================================
+   Layout
+============================================================ */
+/* ============================================================
+   Components
+============================================================ */
 .work {
   position: relative;
   z-index: 2;
   margin-top: 100dvh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100dvh;
   overflow: hidden;
   background: var(--color-bg-main);
-  box-shadow: 0 -24px 80px rgba(15, 23, 42, 0.08);
   transform-origin: center top;
 }
 
@@ -1454,7 +1616,6 @@ input[type=search]::-webkit-search-decoration {
 .work__nav-controls {
   position: absolute;
   bottom: 10%;
-  /* Desktop */
 }
 @media (min-width: 1440px) {
   .work__nav-controls {
@@ -1466,9 +1627,6 @@ input[type=search]::-webkit-search-decoration {
     bottom: 1%;
   }
 }
-.work__nav-controls {
-  /* Laptop */
-}
 @media (min-width: 1024px) and (max-width: 1439px) {
   .work__nav-controls {
     bottom: 15%;
@@ -1479,9 +1637,6 @@ input[type=search]::-webkit-search-decoration {
     bottom: 6%;
   }
 }
-.work__nav-controls {
-  /* Tablet */
-}
 @media (min-width: 768px) and (max-width: 1023px) {
   .work__nav-controls {
     bottom: 19%;
@@ -1491,9 +1646,6 @@ input[type=search]::-webkit-search-decoration {
   .work__nav-controls {
     bottom: 8%;
   }
-}
-.work__nav-controls {
-  /* Mobile */
 }
 @media (max-width: 767px) {
   .work__nav-controls {
@@ -1639,4 +1791,11 @@ input[type=search]::-webkit-search-decoration {
   font-family: inherit;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   width: 100%;
-}/*# sourceMappingURL=main.css.map */
+}
+
+/* ============================================================
+   Pages
+============================================================ */
+/* ============================================================
+   Foundation
+============================================================ *//*# sourceMappingURL=main.css.map */
