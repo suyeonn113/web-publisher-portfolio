@@ -4,6 +4,7 @@ import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigge
 gsap.registerPlugin(ScrollTrigger);
 
 export function initHeroText(onIntroComplete) {
+  const hero = document.querySelector('.hero');
   const chars = Array.from(document.querySelectorAll('.main-title .char, .main-title .dot'));
   if (!chars.length) {
     if (typeof onIntroComplete === "function") onIntroComplete();
@@ -13,6 +14,7 @@ export function initHeroText(onIntroComplete) {
   const floatWrappers = document.querySelectorAll('.float-wrap');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const isTouchPointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   let isPointerInteractive = false;
   let scatterProgress = 0;
 
@@ -232,34 +234,35 @@ export function initHeroText(onIntroComplete) {
     }, 0.62);
   }
 
-  const onMouseMove = (e) => {
-    if (!isPointerInteractive || scatterProgress > 0.08) {
-      return;
-    }
-
-    const { clientX: mouseX, clientY: mouseY } = e;
-
+  const applyPointerReaction = (clientX, clientY, intensity = 1) => {
     chars.forEach((item) => {
       const rect = item.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      const deltaX = mouseX - centerX;
-      const deltaY = mouseY - centerY;
+      const deltaX = clientX - centerX;
+      const deltaY = clientY - centerY;
       const dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
       const maxDist = 180;
       const proximity = Math.max(0, 1 - dist / maxDist);
       const magnify = Math.pow(proximity, 1.6);
 
       gsap.to(item, {
-        scale: 1 + magnify * 0.54,
-        y: (magnify * -28) + (deltaY * 0.09 * proximity),
-        x: deltaX * 0.15 * proximity,
-        rotation: deltaX * 0.028 * proximity,
+        scale: 1 + magnify * 0.54 * intensity,
+        y: (magnify * -28 * intensity) + (deltaY * 0.09 * proximity * intensity),
+        x: deltaX * 0.15 * proximity * intensity,
+        rotation: deltaX * 0.028 * proximity * intensity,
         duration: 0.26,
         ease: "power3.out",
         overwrite: "auto"
       });
     });
+  };
+
+  const onMouseMove = (e) => {
+    if (!isPointerInteractive || scatterProgress > 0.08) {
+      return;
+    }
+    applyPointerReaction(e.clientX, e.clientY, 1);
   };
 
   const resetPointerState = () => {
@@ -281,4 +284,23 @@ export function initHeroText(onIntroComplete) {
 
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseleave', onMouseLeave);
+
+  if (hero && isTouchPointer && !prefersReducedMotion) {
+    const onTouchMove = (event) => {
+      if (scatterProgress > 0.08) return;
+
+      const touch = event.touches[0];
+      if (!touch) return;
+
+      applyPointerReaction(touch.clientX, touch.clientY, 0.58);
+    };
+
+    const onTouchEnd = () => {
+      resetPointerState();
+    };
+
+    hero.addEventListener('touchmove', onTouchMove, { passive: true });
+    hero.addEventListener('touchend', onTouchEnd, { passive: true });
+    hero.addEventListener('touchcancel', onTouchEnd, { passive: true });
+  }
 }
