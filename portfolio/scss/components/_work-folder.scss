@@ -64,7 +64,7 @@ $folder-ratio: 413 / 373;
 }
 
 // Container
-.work__card.is-folder {
+.home-work__card.is-folder {
   position: relative;
   perspective: 1000px;
 
@@ -160,7 +160,7 @@ $folder-ratio: 413 / 373;
   transform-origin: center bottom;
 
   @media (hover: hover) and (pointer: fine) {
-    .work__card.is-folder:hover & {
+    .home-work__card.is-folder:hover & {
       border-color: rgba(255, 255, 255, 0.26);
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.68),

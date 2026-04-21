@@ -2,7 +2,7 @@
 @use '../layout' as *;
 @use '../components' as *;
 
-.work {
+.home-work {
   position: relative;
   z-index: 2;
   margin-top: 100dvh;
@@ -19,13 +19,13 @@
 }
 
 // Header
-.work__header {
+.home-work__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 
-  .work__title {
+  .home-work__title {
     @include text-style('title', 'bold', 'tight', 'tight');
   }
 
@@ -35,14 +35,14 @@
 }
 
 // Container
-.work__container {
+.home-work__container {
   display: flex;
   flex-direction: column;
   @include space-gap('cluster', 'lg');
 }
 
 // Slider
-.work__slider-container {
+.home-work__slider-container {
   position: relative;
   overflow: hidden;
 
@@ -57,21 +57,21 @@
   align-items: center;
 }
 
-.work__cards-wrapper {
+.home-work__cards-wrapper {
   position: absolute;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
 }
 
-.work__card {
+.home-work__card {
   position: absolute;
   pointer-events: auto;
   transform-origin: center center;
   will-change: transform;
 }
 
-.work__nav-controls {
+.home-work__nav-controls {
   position: absolute;
   bottom: 10%;
 
@@ -116,7 +116,7 @@
   margin: 0 auto;
   z-index: 5;
 
-  .work__nav-btn {
+  .home-work__nav-btn {
     @include btn-text-style('nav');
     width: 100%;
   }

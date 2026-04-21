@@ -134,7 +134,7 @@ export async function loadProjects() {
   try {
     const response = await fetch('./data/projects.json');
     const data = await response.json();
-    const wrapper = document.querySelector('.work__cards-wrapper');
+    const wrapper = document.querySelector('.home-work__cards-wrapper');
 
     if (!wrapper) return false;
 
@@ -154,7 +154,7 @@ export async function loadProjects() {
           .join(' ');
 
         return `
-          <article class="work__card is-folder ${filterClass}">
+          <article class="home-work__card work__card is-folder ${filterClass}">
             <a href="#" class="work-card__inner" aria-label="${common.title} 상세 보기">
               <div class="folder__back" aria-hidden="true" focusable="false">
                 ${renderFolderBackSvg(svgIds)}

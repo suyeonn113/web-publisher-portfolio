@@ -5,9 +5,9 @@ import { getWorkCardLayout } from "../components/workSlider.js";
 gsap.registerPlugin(ScrollTrigger);
 
 export const initWorkEntrance = () => {
-  const cards = gsap.utils.toArray('.work__card');
-  const workSection = document.querySelector('.work');
-  const headerItems = [".work__header", ".work__nav-controls"];
+  const cards = gsap.utils.toArray('.home-work__card');
+  const workSection = document.querySelector('.home-work');
+  const headerItems = [".home-work__header", ".home-work__nav-controls"];
   if (!cards.length) return;
 
   const isMobile = window.innerWidth < 768;
@@ -111,7 +111,7 @@ export const initWorkEntrance = () => {
   }, "+=0.06");
 
   ScrollTrigger.create({
-    trigger: ".work",
+    trigger: ".home-work",
     start: isMobile ? "top 68%" : "top 72%",
     end: isMobile ? "top 8%" : "top 10%",
     onEnter: () => {

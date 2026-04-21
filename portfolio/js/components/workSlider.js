@@ -88,9 +88,9 @@ export function getWorkCardLayout(cards, progress = 0, width = window.innerWidth
 }
 
 export const initWorkSlider = () => {
-  const container = document.querySelector('.work__slider-container');
-  const wrapper = document.querySelector('.work__cards-wrapper');
-  const cards = gsap.utils.toArray('.work__card');
+  const container = document.querySelector('.home-work__slider-container');
+  const wrapper = document.querySelector('.home-work__cards-wrapper');
+  const cards = gsap.utils.toArray('.home-work__card');
   const [btnPrev, btnNext] = [document.querySelector('.is-prev'), document.querySelector('.is-next')];
 
   if (!container || !wrapper || !cards.length) return;

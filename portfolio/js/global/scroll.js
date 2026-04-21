@@ -20,7 +20,7 @@ export function initLenis() {
 
 export function initHomeScrollAssist(lenis) {
   const hero = document.querySelector('.hero');
-  const work = document.querySelector('.work');
+  const work = document.querySelector('.home-work');
 
   if (!lenis || !hero || !work) return;
 
