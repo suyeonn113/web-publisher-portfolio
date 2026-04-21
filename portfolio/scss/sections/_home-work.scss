@@ -26,11 +26,9 @@
 
   .home-work__title {
     @include text-style('title', 'bold', 'tight', 'tight');
-    color: #7f9fc4;
+    color: $text-secondary;
     letter-spacing: -0.04em;
-    text-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.58),
-      0 8px 18px rgba(139, 180, 224, 0.1);
+    text-shadow: $shadow-soft;
 
     @include respond-down('desktop') {
       font-size: clamp(rem(34px), 4vw, rem(46px));

@@ -48,21 +48,21 @@
     .word--simple, .word--me {
       @include text-style('hero', 'bold', 'tight', 'tight');
 
-      color: #8eb3da;
-      -webkit-text-stroke: 1px rgba(244, 250, 255, 0.78);
+      color: var(--home-hero-main-color);
+      -webkit-text-stroke: 1px var(--home-hero-stroke);
       text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.62),
-        0 10px 20px rgba(111, 151, 201, 0.18),
-        0 0 1px rgba(255, 255, 255, 0.65);
+        0 1px 0 var(--home-hero-highlight-soft),
+        0 10px 20px var(--home-hero-shadow-main),
+        0 0 1px var(--home-hero-highlight-thin);
     }
 
     .word--hi {
       @include text-style('hero-sub', 'medium', 'tight', 'base');
-      color: #6f93bb;
+      color: var(--home-hero-sub-color);
       letter-spacing: -0.04em;
       text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.5),
-        0 6px 14px rgba(121, 166, 214, 0.08);
+        0 1px 0 var(--home-hero-highlight-sub),
+        0 6px 14px var(--home-hero-shadow-sub);
     }
 
     .word--simple {
@@ -70,11 +70,11 @@
     }
 
     .word--me {
-      color: #86add8;
+      color: var(--home-hero-main-color-strong);
 
       .dot {
-        color: $point-highlight;
-        text-shadow: 0 0 18px rgba(255, 100, 130, 0.24);
+        color: var(--home-hero-dot-color);
+        text-shadow: 0 0 18px var(--home-hero-dot-glow);
       }
     }
 
