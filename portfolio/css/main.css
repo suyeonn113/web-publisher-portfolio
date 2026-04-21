@@ -53,10 +53,10 @@
 ============================================================ */
 :root {
   /* Text */
-  --color-text-primary: #1c1c1e;
-  --color-text-secondary: #636366;
-  --color-text-tertiary: #8e8e93;
-  --color-text-disabled: #c7c7cc;
+  --color-text-primary: #18202c;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748b;
+  --color-text-disabled: #94a3b8;
   --color-text-inverse: #ffffff;
   --shadow-text-soft: 0 1px 8px rgba(15, 23, 42, 0.16);
   --shadow-text-strong: 0 4px 16px rgba(15, 23, 42, 0.22);
@@ -135,8 +135,8 @@
   --color-point-success: #30d158;
   /* Component */
   --btn-text-color: var(--color-text-primary);
-  --btn-text-opacity: 0.52;
-  --btn-text-opacity-hover: 0.92;
+  --btn-text-opacity: 0.72;
+  --btn-text-opacity-hover: 0.96;
   --btn-letter-spacing: 0.03em;
   /* Icon and interaction */
   --color-icon-base: var(--color-text-primary);
@@ -409,6 +409,21 @@ body {
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-hover-tone=accent] {
+    transition: color 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
+  }
+  [data-hover-tone=accent] svg,
+  [data-hover-tone=accent] i,
+  [data-hover-tone=accent] .lucide {
+    transition: color 0.24s ease, stroke 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
+  }
+  [data-hover-tone=accent]:hover,
+  [data-hover-tone=accent]:focus-visible {
+    color: var(--color-point-primary);
+  }
 }
 
 /* ============================================================
@@ -881,11 +896,6 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
 }
 .fixed-menu__btn svg {
   stroke-width: 1px;
-}
-@media (hover: hover) and (pointer: fine) {
-  .fixed-menu__btn svg:hover {
-    color: var(--color-point-primary);
-  }
 }
 .fixed-menu__panel {
   position: absolute;
@@ -1625,6 +1635,8 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
 }
 .hero__text-wrap .main-title .word {
   display: inline-flex;
+  align-items: center;
+  position: relative;
 }
 .hero__text-wrap .main-title .word--simple, .hero__text-wrap .main-title .word--me {
   font-size: clamp(120px, 12vw, 200px);
@@ -1649,6 +1661,9 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
   letter-spacing: -0.02em;
   line-height: 1.1;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: #8eb3da;
+  -webkit-text-stroke: 1px rgba(244, 250, 255, 0.78);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.62), 0 10px 20px rgba(111, 151, 201, 0.18), 0 0 1px rgba(255, 255, 255, 0.65);
 }
 .hero__text-wrap .main-title .word--hi {
   font-size: clamp(72px, 7vw, 120px);
@@ -1665,9 +1680,21 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
 }
 .hero__text-wrap .main-title .word--hi {
   font-weight: 500;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: #6f93bb;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), 0 6px 14px rgba(121, 166, 214, 0.08);
+}
+.hero__text-wrap .main-title .word--simple {
+  transform: translateY(-0.02em);
+}
+.hero__text-wrap .main-title .word--me {
+  color: #86add8;
+}
+.hero__text-wrap .main-title .word--me .dot {
+  color: var(--color-point-highlight);
+  text-shadow: 0 0 18px rgba(255, 100, 130, 0.24);
 }
 .hero__text-wrap .main-title .char, .hero__text-wrap .main-title .dot {
   display: inline-block;
@@ -1729,6 +1756,19 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
   letter-spacing: -0.02em;
   line-height: 1.1;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: #7f9fc4;
+  letter-spacing: -0.04em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.58), 0 8px 18px rgba(139, 180, 224, 0.1);
+}
+@media (max-width: 1440px) {
+  .work__header .work__title {
+    font-size: clamp(34px, 4vw, 46px);
+  }
+}
+@media (max-width: 480px) {
+  .work__header .work__title {
+    font-size: clamp(26px, 8vw, 34px);
+  }
 }
 .work__header .btn-more {
   font-size: 18px;

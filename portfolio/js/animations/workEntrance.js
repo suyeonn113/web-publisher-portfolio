@@ -19,26 +19,28 @@ export const initWorkEntrance = () => {
   const resetEntranceState = () => {
     if (workSection) {
       gsap.set(workSection, {
-        yPercent: isMobile ? 12 : 8,
-        opacity: 0.96,
+        yPercent: isMobile ? 4 : 3,
+        opacity: 0,
         clipPath: isMobile
-          ? "inset(14% 0 0 0 round 28px 28px 0 0)"
-          : "inset(18% 0 0 0 round 40px 40px 0 0)"
+          ? "inset(6% 0 0 0 round 24px 24px 0 0)"
+          : "inset(8% 0 0 0 round 32px 32px 0 0)"
       });
     }
 
     gsap.set(headerItems, {
       opacity: 0,
-      y: isMobile ? 18 : 24
+      y: isMobile ? 12 : 16,
+      filter: "blur(8px)"
     });
 
     sortedByRight.forEach((data) => {
       gsap.set(data.el, {
-        x: data.x + (isMobile ? -180 : -300),
-        y: data.y + (isMobile ? 96 : 140),
-        scale: data.scale * 0.76,
-        rotation: isMobile ? -10 : -18,
+        x: data.x + (isMobile ? -28 : -42),
+        y: data.y + (isMobile ? 32 : 44),
+        scale: data.scale * 0.92,
+        rotation: isMobile ? -4 : -6,
         opacity: 0,
+        filter: "blur(14px)",
         zIndex: data.zIndex,
         force3D: true
       });
@@ -58,17 +60,18 @@ export const initWorkEntrance = () => {
     tl.fromTo(
       workSection,
       {
-        yPercent: isMobile ? 12 : 8,
-        opacity: 0.96,
+        yPercent: isMobile ? 4 : 3,
+        opacity: 0,
         clipPath: isMobile
-          ? "inset(14% 0 0 0 round 28px 28px 0 0)"
-          : "inset(18% 0 0 0 round 40px 40px 0 0)"
+          ? "inset(6% 0 0 0 round 24px 24px 0 0)"
+          : "inset(8% 0 0 0 round 32px 32px 0 0)"
       },
       {
         yPercent: 0,
         opacity: 1,
         clipPath: "inset(0% 0 0 0 round 0px 0px 0 0)",
-        duration: isMobile ? 0.48 : 0.56
+        duration: isMobile ? 0.54 : 0.62,
+        ease: "power2.out"
       }
     );
   }
@@ -77,11 +80,12 @@ export const initWorkEntrance = () => {
     tl.fromTo(
       data.el,
       {
-        x: data.x + (isMobile ? -180 : -300),
-        y: data.y + (isMobile ? 96 : 140),
-        scale: data.scale * 0.76,
-        rotation: isMobile ? -10 : -18,
-        opacity: 0
+        x: data.x + (isMobile ? -28 : -42),
+        y: data.y + (isMobile ? 32 : 44),
+        scale: data.scale * 0.92,
+        rotation: isMobile ? -4 : -6,
+        opacity: 0,
+        filter: "blur(14px)"
       },
       {
         x: data.x,
@@ -89,11 +93,12 @@ export const initWorkEntrance = () => {
         scale: data.scale,
         rotation: 0,
         opacity: 1,
+        filter: "blur(0px)",
         zIndex: data.zIndex,
-        duration: isMobile ? 0.42 : 0.5,
-        ease: "power3.out"
+        duration: isMobile ? 0.52 : 0.58,
+        ease: "power2.out"
       },
-      (workSection ? 0.1 : 0) + (index * (isMobile ? 0.045 : 0.055))
+      (workSection ? 0.12 : 0) + (index * (isMobile ? 0.05 : 0.06))
     );
   });
 
@@ -106,9 +111,10 @@ export const initWorkEntrance = () => {
   tl.to(headerItems, {
     opacity: 1,
     y: 0,
-    duration: 0.32,
+    filter: "blur(0px)",
+    duration: 0.36,
     stagger: 0.07
-  }, "+=0.06");
+  }, "+=0.02");
 
   ScrollTrigger.create({
     trigger: ".home-work",

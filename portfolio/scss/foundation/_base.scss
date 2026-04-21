@@ -82,6 +82,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  [data-hover-tone="accent"] {
+    transition: color 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
+  }
+
+  [data-hover-tone="accent"] svg,
+  [data-hover-tone="accent"] i,
+  [data-hover-tone="accent"] .lucide {
+    transition: color 0.24s ease, stroke 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
+  }
+
+  [data-hover-tone="accent"]:hover,
+  [data-hover-tone="accent"]:focus-visible {
+    color: $point-primary;
+  }
+}
+
 /* ============================================================
    Form Elements
 ============================================================ */

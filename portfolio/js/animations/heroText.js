@@ -16,7 +16,9 @@ export function initHeroText(onIntroComplete) {
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const isTouchPointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   let isPointerInteractive = false;
-  let scatterProgress = 0;
+  let pointerActive = false;
+  let pointerX = window.innerWidth / 2;
+  let pointerY = window.innerHeight / 2;
 
   const scrollHint = document.querySelector('.hero__scroll-hint');
   if (scrollHint) {
@@ -55,7 +57,7 @@ export function initHeroText(onIntroComplete) {
       ease: "power3.out",
       onComplete: () => {
         startFloating(floatWrappers, chars);
-        initScatter(chars);
+        initHeroExit(chars);
         isPointerInteractive = !prefersReducedMotion && canHover;
 
         if (typeof onIntroComplete === "function") {
@@ -79,7 +81,6 @@ export function initHeroText(onIntroComplete) {
 
       const configs = targets.map((_, index) => ({
         yAmp: gsap.utils.random(1.6, 2.6),
-        scaleAmp: gsap.utils.random(0.008, 0.018),
         speed: gsap.utils.random(1.4, 1.85),
         secondarySpeed: gsap.utils.random(2.15, 2.8),
         phase: gsap.utils.random(0, Math.PI * 2),
@@ -88,25 +89,38 @@ export function initHeroText(onIntroComplete) {
 
       gsap.ticker.add(() => {
         const t = gsap.ticker.time;
-        const floatStrength = gsap.utils.clamp(0, 1, 1 - (scatterProgress / 0.14));
 
         targets.forEach((target, index) => {
           const c = configs[index];
           const primary = Math.sin(t * c.speed + c.phase);
           const secondary = Math.sin(t * c.secondarySpeed + c.secondaryPhase) * 0.35;
           const yFloat = (primary + secondary) * c.yAmp;
-          const scaleFloat = 1 + ((((primary * 0.55) + secondary) * c.scaleAmp) * floatStrength);
+          const rect = target.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const deltaX = pointerX - centerX;
+          const deltaY = pointerY - centerY;
+          const dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+          const maxDist = 180;
+          const proximity = pointerActive ? Math.max(0, 1 - dist / maxDist) : 0;
+          const lift = Math.pow(proximity, 1.55);
+          const pointerScale = 1 + (lift * 0.16);
+          const pointerXShift = deltaX * 0.08 * proximity;
+          const pointerYShift = (deltaY * 0.05 * proximity) - (lift * 16);
+          const pointerRotate = deltaX * 0.015 * proximity;
 
           gsap.set(target, {
-            yPercent: yFloat * amp * floatStrength,
-            scale: scaleFloat
+            x: pointerXShift,
+            y: (yFloat * amp) + pointerYShift,
+            scale: pointerScale,
+            rotation: pointerRotate
           });
         });
       });
 
       const accentState = { active: false };
       const runAccent = () => {
-        if (accentState.active || scatterProgress > 0.08) return;
+        if (accentState.active) return;
         accentState.active = true;
 
         const accentCount = Math.min(3, Math.max(2, Math.round(targets.length / 6)));
@@ -119,16 +133,16 @@ export function initHeroText(onIntroComplete) {
           }
         })
           .to(picks, {
-            yPercent: "-=3.5",
-            scale: 1.035,
+            y: "-=3.5",
+            scale: "+=0.02",
             duration: 0.2,
             stagger: 0.04,
             ease: "power2.out",
             overwrite: false
           })
           .to(picks, {
-            yPercent: "+=3.5",
-            scale: 1,
+            y: "+=3.5",
+            scale: "-=0.02",
             duration: 0.3,
             stagger: 0.04,
             ease: "power2.inOut",
@@ -170,7 +184,7 @@ export function initHeroText(onIntroComplete) {
     });
   }
 
-  function initScatter(targets) {
+  function initHeroExit(targets) {
     if (prefersReducedMotion) {
       gsap.to(targets, {
         scrollTrigger: {
@@ -179,102 +193,71 @@ export function initHeroText(onIntroComplete) {
           end: "bottom top",
           scrub: true,
         },
-        y: -30,
+        y: -28,
         opacity: 0,
-        stagger: 0.05
+        stagger: 0.03
       });
       return;
     }
 
-    const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "+=160vh",
-          scrub: 1.45,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            scatterProgress = self.progress;
-
-          if (self.progress > 0.08 && isPointerInteractive) {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.15,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          if (self.progress > 0.12 && isPointerInteractive) {
             isPointerInteractive = false;
             resetPointerState();
           }
+          if (self.progress <= 0.12 && canHover) {
+            isPointerInteractive = true;
+          }
         }
       }
-    });
-
-    tl.to(targets, {
-      x: (index, target) => {
-        const itemIndex = Number(target.dataset.scatterIndex || index);
-        const center = (targets.length - 1) / 2;
-        return (itemIndex - center) * Math.min(window.innerWidth * 0.09, 72);
-      },
-      y: (index) => -(window.innerHeight * 0.18) - (index % 3) * 18,
-      rotation: (index) => (index % 2 === 0 ? -1 : 1) * (8 + index * 1.5),
-      scale: 0.78,
-      filter: "blur(1.5px)",
-      force3D: true,
-      stagger: {
-        amount: 0.28,
-        from: "center"
-      },
-      ease: "power2.out",
-    }, 0.16);
-
-    tl.to(targets, {
-      opacity: 0,
-      y: "-=36",
-      immediateRender: false,
-      stagger: {
-        amount: 0.24,
-        from: "end"
-      },
-      ease: "power1.in"
-    }, 0.62);
+    })
+      .to(targets, {
+        y: (index) => -18 - ((index % 3) * 8),
+        x: (index, target) => {
+          const itemIndex = Number(target.dataset.scatterIndex || index);
+          const center = (targets.length - 1) / 2;
+          return (itemIndex - center) * 10;
+        },
+        rotation: (index) => (index % 2 === 0 ? -1 : 1) * (2.4 + index * 0.35),
+        scale: 0.96,
+        filter: "blur(1.5px)",
+        opacity: 0.55,
+        stagger: {
+          amount: 0.18,
+          from: "center"
+        },
+        ease: "power1.out"
+      }, 0)
+      .to(targets, {
+        y: "-=20",
+        opacity: 0,
+        filter: "blur(5px)",
+        stagger: {
+          amount: 0.2,
+          from: "edges"
+        },
+        ease: "power1.inOut"
+      }, 0.42);
   }
 
-  const applyPointerReaction = (clientX, clientY, intensity = 1) => {
-    chars.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const deltaX = clientX - centerX;
-      const deltaY = clientY - centerY;
-      const dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-      const maxDist = 180;
-      const proximity = Math.max(0, 1 - dist / maxDist);
-      const magnify = Math.pow(proximity, 1.6);
-
-      gsap.to(item, {
-        scale: 1 + magnify * 0.54 * intensity,
-        y: (magnify * -28 * intensity) + (deltaY * 0.09 * proximity * intensity),
-        x: deltaX * 0.15 * proximity * intensity,
-        rotation: deltaX * 0.028 * proximity * intensity,
-        duration: 0.26,
-        ease: "power3.out",
-        overwrite: "auto"
-      });
-    });
-  };
-
   const onMouseMove = (e) => {
-    if (!isPointerInteractive || scatterProgress > 0.08) {
+    if (!isPointerInteractive) {
       return;
     }
-    applyPointerReaction(e.clientX, e.clientY, 1);
+    pointerActive = true;
+    pointerX = e.clientX;
+    pointerY = e.clientY;
   };
 
   const resetPointerState = () => {
-    gsap.to(chars, {
-      scale: 1,
-      y: 0,
-      x: 0,
-      rotation: 0,
-      duration: 0.42,
-      ease: "power2.out",
-      overwrite: "auto"
-    });
+    pointerActive = false;
   };
 
   const onMouseLeave = () => {
@@ -287,12 +270,14 @@ export function initHeroText(onIntroComplete) {
 
   if (hero && isTouchPointer && !prefersReducedMotion) {
     const onTouchMove = (event) => {
-      if (scatterProgress > 0.08) return;
+      if (!isPointerInteractive) return;
 
       const touch = event.touches[0];
       if (!touch) return;
 
-      applyPointerReaction(touch.clientX, touch.clientY, 0.58);
+      pointerActive = true;
+      pointerX = touch.clientX;
+      pointerY = touch.clientY;
     };
 
     const onTouchEnd = () => {

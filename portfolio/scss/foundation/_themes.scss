@@ -4,10 +4,10 @@
 
 :root {
   /* Text */
-  --color-text-primary: #1c1c1e;
-  --color-text-secondary: #636366;
-  --color-text-tertiary: #8e8e93;
-  --color-text-disabled: #c7c7cc;
+  --color-text-primary: #18202c;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748b;
+  --color-text-disabled: #94a3b8;
   --color-text-inverse: #ffffff;
 
   --shadow-text-soft: 0 1px 8px rgba(15, 23, 42, 0.16);
@@ -95,8 +95,8 @@
 
   /* Component */
   --btn-text-color: var(--color-text-primary);
-  --btn-text-opacity: 0.52;
-  --btn-text-opacity-hover: 0.92;
+  --btn-text-opacity: 0.72;
+  --btn-text-opacity-hover: 0.96;
   --btn-letter-spacing: 0.03em;
 
   /* Icon and interaction */

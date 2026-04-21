@@ -27,6 +27,19 @@
 
   .home-work__title {
     @include text-style('title', 'bold', 'tight', 'tight');
+    color: #7f9fc4;
+    letter-spacing: -0.04em;
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.58),
+      0 8px 18px rgba(139, 180, 224, 0.1);
+
+    @include respond-down('desktop') {
+      font-size: clamp(rem(34px), 4vw, rem(46px));
+    }
+
+    @include respond-down('mobile') {
+      font-size: clamp(rem(26px), 8vw, rem(34px));
+    }
   }
 
   .btn-more {
