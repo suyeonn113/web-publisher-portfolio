@@ -57,7 +57,7 @@
     },
 
     "preview": {
-      "thumbnail": "assets/images/projects/",
+      "thumbnail": "assets/images/projects/p01-thumb.jpg",
       "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
       
       "spec": {
