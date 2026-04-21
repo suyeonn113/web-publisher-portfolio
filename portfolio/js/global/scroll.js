@@ -31,7 +31,7 @@ export function initHomeScrollAssist(lenis) {
   ScrollTrigger.create({
     trigger: hero,
     start: "top top",
-    end: "bottom 35%",
+    end: "bottom 45%",
     onUpdate: (self) => {
       const currentScrollY = window.scrollY;
       const isScrollingDown = currentScrollY > lastScrollY;
@@ -39,13 +39,13 @@ export function initHomeScrollAssist(lenis) {
 
       if (isAutoScrolling) return;
 
-      if (isScrollingDown && self.progress > 0.9 && !hasSnappedToWork) {
+      if (isScrollingDown && self.progress > 0.78 && !hasSnappedToWork) {
         isAutoScrolling = true;
         hasSnappedToWork = true;
 
         lenis.scrollTo(work, {
           offset: 0,
-          duration: 1.1,
+          duration: 0.82,
           lock: true,
           onComplete: () => {
             isAutoScrolling = false;

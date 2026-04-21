@@ -1,98 +1,140 @@
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 import { ScrollTrigger } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
+import { getWorkCardLayout } from "../components/workSlider.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const initWorkEntrance = () => {
   const cards = gsap.utils.toArray('.work__card');
+  const workSection = document.querySelector('.work');
+  const headerItems = [".work__header", ".work__nav-controls"];
   if (!cards.length) return;
 
   const isMobile = window.innerWidth < 768;
-
-  const spacing = 1 / cards.length;
-  const wrapProgress = gsap.utils.wrap(-0.5, 0.5);
-  const cardWidth = cards[0].offsetWidth;
-  const baseX = cardWidth * 0.98; // 슬라이더의 gapRatio를 반영한 간격
-
-  // 각 카드의 최종 도착 x좌표를 미리 계산하여 객체 배열 생성
-  const cardData = cards.map((card, i) => {
-    const offset = wrapProgress(0 + i * spacing);
-    const dist = offset / spacing;
-    const absDist = Math.abs(dist);
-
-    return {
-      el: card,
-      x: dist * baseX,
-      scale: absDist <= 1 ? gsap.utils.interpolate(1, 0.8, absDist) : 0.76,
-      zIndex: 100 - Math.round(absDist * 20)
-    };
-  });
-
-  // 핵심: x 좌표가 큰 순서(오른쪽)대로 카드 정렬
+  const cardData = getWorkCardLayout(cards, 0);
   const sortedByRight = [...cardData].sort((a, b) => b.x - a.x);
 
-  // 초기 상태 숨김
-  gsap.set(cards, { opacity: 0 });
+  const resetEntranceState = () => {
+    if (workSection) {
+      gsap.set(workSection, {
+        yPercent: isMobile ? 12 : 8,
+        opacity: 0.96,
+        clipPath: isMobile
+          ? "inset(14% 0 0 0 round 28px 28px 0 0)"
+          : "inset(18% 0 0 0 round 40px 40px 0 0)"
+      });
+    }
+
+    gsap.set(headerItems, {
+      opacity: 0,
+      y: isMobile ? 18 : 24
+    });
+
+    sortedByRight.forEach((data) => {
+      gsap.set(data.el, {
+        x: data.x + (isMobile ? -180 : -300),
+        y: data.y + (isMobile ? 96 : 140),
+        scale: data.scale * 0.76,
+        rotation: isMobile ? -10 : -18,
+        opacity: 0,
+        zIndex: data.zIndex,
+        force3D: true
+      });
+    });
+  };
+
+  resetEntranceState();
 
   const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".work",
-      start: isMobile ? "top 50%" : "top 60%",
-      end: isMobile ? "top 5%" : "top 10%",
-      scrub: isMobile ? 9 : 7,
-      toggleActions: "play none none reverse",
+    paused: true,
+    defaults: {
+      ease: "power2.out"
     }
   });
 
-  // 오른쪽 끝 카드부터 순차적으로 등장
-  sortedByRight.forEach((data, index) => {
-    tl.fromTo(data.el, 
+  if (workSection) {
+    tl.fromTo(
+      workSection,
       {
-        x: isMobile ? "-100vw" : "-150vw", // 모바일은 진입 거리를 조금 단축
-        y: isMobile ? "70vh" : "100vh",   // 모바일은 시작 높이를 조금 상향
-        scale: 0.2,
-        rotation: isMobile ? -15 : -90,   // 모바일에서 "눕는 느낌"을 줄이기 위해 -45도로 완화
+        yPercent: isMobile ? 12 : 8,
+        opacity: 0.96,
+        clipPath: isMobile
+          ? "inset(14% 0 0 0 round 28px 28px 0 0)"
+          : "inset(18% 0 0 0 round 40px 40px 0 0)"
+      },
+      {
+        yPercent: 0,
+        opacity: 1,
+        clipPath: "inset(0% 0 0 0 round 0px 0px 0 0)",
+        duration: isMobile ? 0.48 : 0.56
+      }
+    );
+  }
+
+  sortedByRight.forEach((data, index) => {
+    tl.fromTo(
+      data.el,
+      {
+        x: data.x + (isMobile ? -180 : -300),
+        y: data.y + (isMobile ? 96 : 140),
+        scale: data.scale * 0.76,
+        rotation: isMobile ? -10 : -18,
         opacity: 0
       },
       {
-        x: data.x,   // 미리 계산된 슬라이더 자리로 안착
-        y: 0,
+        x: data.x,
+        y: data.y,
         scale: data.scale,
         rotation: 0,
         opacity: 1,
         zIndex: data.zIndex,
-        duration: isMobile ? 0.9 : 1.4,   // 모바일은 조금 더 쫀득하게 빠르게
-        ease: "power3.out",
-        onComplete: () => {
-          if (index === sortedByRight.length - 1) {
-            // 전역 또는 외부에서 접근 가능한 슬라이더 업데이트 함수 호출
-            if (typeof window.updateWorkSlider === 'function') {
-              window.updateWorkSlider(0);
-            }
-          }
-        }
-      }, 
-      index * (isMobile ? 0.05 : 0.1) // 모바일은 카드가 들어오는 간격을 살짝 더 촘촘하게
+        duration: isMobile ? 0.42 : 0.5,
+        ease: "power3.out"
+      },
+      (workSection ? 0.1 : 0) + (index * (isMobile ? 0.045 : 0.055))
     );
   });
 
-  gsap.fromTo(
-    [".work__header", ".work__nav-controls"],
-    {
-      opacity: 0,
-      y: isMobile ? 18 : 28
-    },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".work",
-        start: isMobile ? "top 10%" : "top 10%",
-        end: isMobile ? "top 5%" : "top 5%",
-        scrub: isMobile ? 2 : 1.2,
-      }
+  tl.add(() => {
+    if (typeof window.updateWorkSlider === 'function') {
+      window.updateWorkSlider(0);
     }
-  );
+  });
+
+  tl.to(headerItems, {
+    opacity: 1,
+    y: 0,
+    duration: 0.32,
+    stagger: 0.07
+  }, "+=0.06");
+
+  ScrollTrigger.create({
+    trigger: ".work",
+    start: isMobile ? "top 68%" : "top 72%",
+    end: isMobile ? "top 8%" : "top 10%",
+    onEnter: () => {
+      tl.restart();
+    },
+    onEnterBack: () => {
+      tl.play();
+    },
+    onUpdate: (self) => {
+      if (self.direction === -1) {
+        tl.timeScale(1.15).reverse();
+        return;
+      }
+
+      if (self.direction === 1) {
+        if (tl.progress() === 0) {
+          tl.restart();
+          return;
+        }
+
+        tl.timeScale(1.1).play();
+      }
+    },
+    onLeaveBack: () => {
+      tl.timeScale(1.15).reverse();
+    }
+  });
 };

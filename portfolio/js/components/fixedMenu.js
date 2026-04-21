@@ -7,7 +7,7 @@ import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 const MENU_ITEMS = [
   {
     id: 'about',
-    icon: 'user-round',
+    icon: 'user',
     title: '자기소개',
     content: '포트폴리오 정보입니다.',
     previewImg: 'assets/images/fixedMenu/preview-about.jpg'
