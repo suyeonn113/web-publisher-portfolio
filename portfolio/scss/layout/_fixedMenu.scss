@@ -1,19 +1,22 @@
 @use '../foundation' as *;
 
-.fixed-menu {
+.fixed-menu__anchor {
   position: fixed;
   right: 0;
   top: 50%;
-  z-index: 100;
-
-  margin-top: -80px;
-  @include space-pad('cluster', 'md', 'right');
+  z-index: 1000;
+  transform: translateY(-50%);
 
   &:has(.js-fixed-btn[data-state="open"]) {
-    .fixed-menu__preview {
+    ~ .fixed-menu__preview {
       display: none !important;
     }
   }
+}
+
+.fixed-menu {
+  position: relative;
+  @include space-pad('cluster', 'md', 'right');
 
   &__list {
     display: flex;
@@ -22,7 +25,7 @@
   }
 
   &__btn {
-    width: max-content;
+    width: fit-content;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     @include space-pad('inset', 'xs');
@@ -30,11 +33,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: $tr-base;
+    transition: $tr-elastic;
 
     &[data-state="open"] {
-      transform: rotate(45deg);
-
+      transform: translateY(-2px) scale(1.1);
       svg {
         color: $point-primary;
       }
@@ -46,21 +48,36 @@
     }
   }
 
+  &__item {
+    position: relative;
+  }
+
   &__panel {
     position: absolute;
-    right: 60px;
-    bottom: 45%;
+    top: 50%;
+    right: calc(100% + 12px);
+    
     width: max-content;
-    padding: 1rem;
+    @include space-pad('inset', 'sm');
+
     background: $bg-glass-strong;
     border: 1px solid $border-soft;
     border-radius: 12px;
     box-shadow: $shadow-surface-soft;
     backdrop-filter: blur(18px);
-    display: none;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(8px);
+    transition: $tr-base;
 
     &[data-state="open"] {
-      display: block;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+
+      transform: translateY(-50%) translateX(0);
     }
   }
 
@@ -77,5 +94,60 @@
     opacity: 0;
     z-index: 1000;
     overflow: hidden;
+  }
+}
+
+.fixed-menu__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  @include space-gap('cluster', 'sm');
+
+  max-width: clamp(28ch, 32ch, 36ch);
+
+  .fixed-menu__desc {
+    @include font-style('sm', 'regular');
+    color: $text-secondary;
+    white-space: pre-line;
+    word-break: keep-all;
+  }
+
+  .fixed-menu__cta {
+    @include flex-center;
+    @include font-style('xs', 'medium', 'tight');
+    @include space-pad('pad', 'xs', 'y');
+    @include space-pad('pad', 'sm', 'x');
+    @include rd('xl');
+
+    min-height: map-get($btn-settings, 'min-size');
+
+    color: $text-primary;
+    background: $bg-glass;
+    border: 1px solid $border-soft;
+
+    transition: $tr-base;
+
+    @media (hover: hover) {
+      &:hover {
+        transform: translateY(-2px);
+        background: $bg-glass-strong;
+        border-color: $border-strong;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  @include respond-down('tablet') {
+    .fixed-menu__content {
+      max-width: 100%;
+    }
+
+    .fixed-menu__cta {
+      width: 100%;
+      justify-content: center;
+    }
   }
 }

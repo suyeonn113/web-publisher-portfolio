@@ -9,52 +9,81 @@ const MENU_ITEMS = [
     id: 'about',
     icon: 'user',
     title: '자기소개',
-    content: '포트폴리오 정보입니다.',
+    content: 
+    `구조를 먼저 설계하고, 그 위에 인터랙션을 쌓는 퍼블리셔입니다.
+    복잡한 기능도 단순한 구조로 풀어내는 과정을 중요하게 생각합니다.  
+    사용자가 자연스럽게 흐름을 따라갈 수 있는 UI를 만드는 데 집중합니다.
+    직접 구현하며 구조를 이해하고,  
+    지속적으로 개선해 나가는 작업을 이어가고 있습니다.`,
     previewImg: 'assets/images/fixedMenu/preview-about.jpg'
   },
   {
     id: 'resume',
     icon: 'file-down',
-    title: '이력서 다운로드',
-    content: 'PDF 형식의 이력서를 다운로드할 수 있습니다.',
-    previewImg: 'assets/images/fixedMenu/preview-resume.jpg'
+    title: '이력서',
+    content: `프로젝트 경험과 기술 스택을 정리한 PDF 이력서입니다. 
+              새 탭에서 내용을 확인한 후 저장할 수 있습니다.`,
+    previewImg: 'assets/images/fixedMenu/preview-resume.jpg',
+    cta: {
+      label: '이력서 PDF 보기',
+      href: '/assets/files/resume.pdf',
+      target: '_blank'
+    }
   },
   {
-    id: 'github',
-    icon: 'git-fork',
-    title: '깃허브 링크',
-    content: 'GitHub 바로가기',
-    previewImg: 'assets/images/fixedMenu/preview-github.jpg'
+    id: 'contact',
+    icon: 'mail',
+    title: '연락하기',
+    content: `작업이나 협업에 관심 있으시다면 연락 주세요.
+              메일을 보내주시면 확인 후 답변드리겠습니다.`,
+    previewImg: 'assets/images/fixedMenu/preview-contact.jpg',
+    cta: {
+      label: '연락하기',
+      href: 'mailto:suyeonn113@naver.com'
+    }
   }
 ];
 
 export function renderFixedMenu() {
   const menuHTML = `
-    <nav class="fixed-menu" aria-label="퀵 메뉴">
-      <ul class="fixed-menu__list">
-        ${MENU_ITEMS.map(item => `
-          <li class="fixed-menu__item">
-            <button type="button" 
-                    class="fixed-menu__btn js-fixed-btn" 
-                    data-id="${item.id}"
-                    data-img="${item.previewImg}"
-                    data-title="${item.title}"
-                    data-state="closed"
-                    aria-expanded="false"
-                    aria-label="${item.title}"
-                    aria-controls="panel-${item.id}">
-              <i data-lucide="${item.icon}" aria-hidden="true"></i>
-            </button>
-            <div id="panel-${item.id}" class="fixed-menu__panel" data-state="closed">
-              <div class="fixed-menu__content">${item.content}</div>
-            </div>
-          </li>
-        `).join('')}
-      </ul>
-      <div class="fixed-menu__preview js-fixed-preview" aria-hidden="true">
-        <img src="" alt="" class="fixed-menu__preview-img">
-      </div>
-    </nav>
+    <div class="fixed-menu__anchor">
+      <nav class="fixed-menu" aria-label="퀵 메뉴">
+        <ul class="fixed-menu__list">
+          ${MENU_ITEMS.map(item => `
+            <li class="fixed-menu__item">
+              <button type="button" 
+                      class="fixed-menu__btn js-fixed-btn" 
+                      data-id="${item.id}"
+                      data-img="${item.previewImg}"
+                      data-title="${item.title}"
+                      data-state="closed"
+                      aria-expanded="false"
+                      aria-label="${item.title}"
+                      aria-controls="panel-${item.id}">
+                <i data-lucide="${item.icon}" aria-hidden="true"></i>
+              </button>
+              <div id="panel-${item.id}" class="fixed-menu__panel" data-state="closed">
+                <div class="fixed-menu__content">
+                  <p class="fixed-menu__desc">${item.content}</p>
+                  ${item.cta ? `
+                    <a class="fixed-menu__cta"
+                       href="${item.cta.href}"
+                       target="${item.cta.target || ''}"
+                       rel="noopener"
+                       onclick="event.stopPropagation()">
+                      ${item.cta.label}
+                    </a>
+                  ` : ''}
+                </div>
+              </div>
+            </li>
+          `).join('')}
+        </ul>
+      </nav>
+    </div>
+    <div class="fixed-menu__preview js-fixed-preview" aria-hidden="true">
+      <img src="" alt="" class="fixed-menu__preview-img">
+    </div>
   `;
 
   document.body.insertAdjacentHTML("beforeend", menuHTML);
