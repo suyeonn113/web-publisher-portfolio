@@ -4,12 +4,12 @@
   position: relative;
   display: block;
   @include text-style('base');
-
   z-index: 1000;
 }
 
-body[data-page="home"] .site-footer__inner {
+.site-footer__inner {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   .site-footer__contact { order: 2; }
@@ -18,5 +18,6 @@ body[data-page="home"] .site-footer__inner {
 
 .site-footer__contact {
   display: flex;
+  justify-content: end;
   @include space-gap('cluster', 'sm');
 }

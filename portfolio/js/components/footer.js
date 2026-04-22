@@ -10,7 +10,7 @@ export function renderFooter() {
           <a href="mailto:suyeonn113@naver.com" class="site-footer__link">email</a>
           <a href="https://github.com/suyeonn113" target="_blank" class="site-footer__link">github</a>
         </nav>
-        <p class="site-footer__copy">© ${new Date().getFullYear()} suyeon</p>
+        <p class="site-footer__copy"><small>© ${new Date().getFullYear()} suyeon</small></p>
       </div>
     </footer>
   `;
