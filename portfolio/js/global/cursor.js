@@ -12,8 +12,8 @@ export function initCursor() {
 
   // Initial State
   gsap.set(cursor, {
-    xPercent: 250,
-    yPercent: 200,
+    xPercent: 100,
+    yPercent: 80,
     position: 'fixed',
     top: 0,
     left: 0,
@@ -37,16 +37,16 @@ export function initCursor() {
   
   targets.forEach(el => {
     el.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-hover');
       gsap.to(cursor, { 
         scale: 1.5, 
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
         duration: 0.3 
       });
     });
     el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-hover');
       gsap.to(cursor, { 
         scale: 1, 
-        backgroundColor: 'rgba(0, 0, 0, 0.1)', 
         duration: 0.3 
       });
     });
