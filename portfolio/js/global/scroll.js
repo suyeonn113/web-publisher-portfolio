@@ -3,6 +3,11 @@ import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
 
 export function initLenis() {
+  // Disable Lenis on mobile for better performance
+  if (window.innerWidth <= 768) {
+    return null;
+  }
+
   const lenis = new Lenis({
     duration: 0.8,
     easing: (t) => 1 - Math.pow(1 - t, 3),
@@ -44,7 +49,7 @@ export function initHomeScrollAssist(lenis) {
         hasSnappedToWork = true;
 
         lenis.scrollTo(work, {
-          offset: 0,
+          offset: - (window.innerHeight - work.clientHeight) / 2,
           duration: 0.82,
           lock: true,
           onComplete: () => {

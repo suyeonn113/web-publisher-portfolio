@@ -54,7 +54,7 @@
 :root {
   /* Text */
   --color-text-primary: #18202c;
-  --color-text-secondary: #475569;
+  --color-text-secondary: #3e5e8d;
   --color-text-tertiary: #64748b;
   --color-text-disabled: #94a3b8;
   --color-text-inverse: #ffffff;
@@ -1646,6 +1646,13 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
   align-items: center;
   width: 100%;
   height: 100dvh;
+}
+@media (max-width: 480px) {
+  .hero {
+    height: 98dvh;
+  }
+}
+.hero {
   overflow: hidden;
 }
 
@@ -1814,7 +1821,14 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
   position: relative;
   z-index: 2;
   overflow: hidden;
-  min-height: auto;
+  min-height: 90dvh;
+}
+@media (max-width: 480px) {
+  .home-work {
+    min-height: 85dvh;
+  }
+}
+.home-work {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1848,16 +1862,6 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
   color: var(--color-text-secondary);
   letter-spacing: -0.04em;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-@media (max-width: 1440px) {
-  .home-work__header .home-work__title {
-    font-size: clamp(2.125rem, 4vw, 2.875rem);
-  }
-}
-@media (max-width: 480px) {
-  .home-work__header .home-work__title {
-    font-size: clamp(1.625rem, 8vw, 2.125rem);
-  }
 }
 .home-work__header .btn-more {
   font-size: 18px;
@@ -1900,7 +1904,7 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
 .home-work__slider-container {
   position: relative;
   width: 100%;
-  height: clamp(23.75rem, 65vh, 37.5rem);
+  height: clamp(23.75rem, 45vh, 37.5rem);
   perspective: 1200px;
   touch-action: pan-y;
   display: flex;
@@ -1924,46 +1928,46 @@ body[data-page=home] .site-footer__inner .site-footer__copy {
 
 .home-work__nav-controls {
   position: absolute;
-  bottom: clamp(3.5rem, 12vh, 6rem);
+  bottom: clamp(1.25rem, 12vh, 2.5rem);
 }
 @media (min-width: 1440px) {
   .home-work__nav-controls {
-    bottom: clamp(2rem, 6vh, 3.5rem);
+    bottom: clamp(-1.5rem, -2vh, 0.375rem);
   }
 }
 @media (min-width: 1440px) and (max-height: 820px) {
   .home-work__nav-controls {
-    bottom: clamp(0.75rem, 2.5vh, 1.5rem);
+    bottom: clamp(-1.75rem, -2.5vh, 0.125rem);
   }
 }
 @media (min-width: 1024px) and (max-width: 1439px) {
   .home-work__nav-controls {
-    bottom: clamp(4.5rem, 15vh, 7rem);
+    bottom: clamp(0.5rem, 1.2vh, 1.5rem);
   }
 }
 @media (min-width: 1024px) and (max-width: 1439px) and (max-height: 820px) {
   .home-work__nav-controls {
-    bottom: clamp(2rem, 7vh, 3.5rem);
+    bottom: clamp(0.75rem, 1.8vh, 1.75rem);
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .home-work__nav-controls {
-    bottom: clamp(5rem, 18vh, 7.5rem);
+    bottom: clamp(1rem, 2.2vh, 2rem);
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) and (max-height: 800px) {
   .home-work__nav-controls {
-    bottom: clamp(2.75rem, 9vh, 4.25rem);
+    bottom: clamp(1.25rem, 2.6vh, 2.25rem);
   }
 }
 @media (max-width: 767px) {
   .home-work__nav-controls {
-    bottom: clamp(4rem, 17vh, 6.25rem);
+    bottom: clamp(1.5rem, 3vh, 2.5rem);
   }
 }
 @media (max-width: 767px) and (max-height: 740px) {
   .home-work__nav-controls {
-    bottom: clamp(2.5rem, 10vh, 4rem);
+    bottom: clamp(1.75rem, 3.5vh, 2.75rem);
   }
 }
 .home-work__nav-controls {

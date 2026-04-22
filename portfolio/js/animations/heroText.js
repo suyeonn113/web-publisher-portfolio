@@ -68,7 +68,13 @@ export function initHeroText(onIntroComplete) {
   );
 
   function startFloating(wrappers, targets) {
+    // Disable floating animations on touch devices for performance
+    if (isTouchPointer) return;
+
     if (!wrappers.length) {
+      // Disable floating animations on touch devices for performance
+      if (isTouchPointer) return;
+
       let amp = 0;
       gsap.to({ value: 0 }, {
         value: 1,

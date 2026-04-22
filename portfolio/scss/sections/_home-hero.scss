@@ -13,6 +13,9 @@
 
   width: 100%;
   height: 100dvh;
+  @include respond-down('mobile') {
+    height: 98dvh;
+  }
 
   overflow: hidden;
 }

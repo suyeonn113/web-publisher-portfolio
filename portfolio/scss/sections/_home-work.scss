@@ -7,7 +7,10 @@
   z-index: 2;
   overflow: hidden;
 
-  min-height: auto;
+  min-height: 90dvh;
+  @include respond-down('mobile') {
+    min-height: 85dvh;
+  }
 
   display: flex;
   flex-direction: column;
@@ -28,14 +31,6 @@
     color: $text-secondary;
     letter-spacing: -0.04em;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-
-    @include respond-down('desktop') {
-      font-size: clamp(rem(34px), 4vw, rem(46px));
-    }
-
-    @include respond-down('mobile') {
-      font-size: clamp(rem(26px), 8vw, rem(34px));
-    }
   }
 
   .btn-more {
@@ -57,7 +52,7 @@
   position: relative;
 
   width: 100%;
-  height: clamp(rem(380px), 65vh, rem(600px));
+  height: clamp(rem(380px), 45vh, rem(600px));
 
   perspective: 1200px;
   touch-action: pan-y;
@@ -83,38 +78,38 @@
 
 .home-work__nav-controls {
   position: absolute;
-  bottom: clamp(rem(56px), 12vh, rem(96px));
+  bottom: clamp(rem(20px), 12vh, rem(40px));
 
   @media (min-width: $desktop) {
-    bottom: clamp(rem(32px), 6vh, rem(56px));
+    bottom: clamp(rem(-24px), -2vh, rem(6px));
   }
 
   @media (min-width: $desktop) and (max-height: 820px) {
-    bottom: clamp(rem(12px), 2.5vh, rem(24px));
+    bottom: clamp(rem(-28px), -2.5vh, rem(2px));
   }
 
   @media (min-width: $laptop) and (max-width: ($desktop - 1)) {
-    bottom: clamp(rem(72px), 15vh, rem(112px));
+    bottom: clamp(rem(8px), 1.2vh, rem(24px));
   }
 
   @media (min-width: $laptop) and (max-width: ($desktop - 1)) and (max-height: 820px) {
-    bottom: clamp(rem(32px), 7vh, rem(56px));
+    bottom: clamp(rem(12px), 1.8vh, rem(28px));
   }
 
   @media (min-width: $tablet) and (max-width: ($laptop - 1)) {
-    bottom: clamp(rem(80px), 18vh, rem(120px));
+    bottom: clamp(rem(16px), 2.2vh, rem(32px));
   }
 
   @media (min-width: $tablet) and (max-width: ($laptop - 1)) and (max-height: 800px) {
-    bottom: clamp(rem(44px), 9vh, rem(68px));
+    bottom: clamp(rem(20px), 2.6vh, rem(36px));
   }
 
   @media (max-width: ($tablet - 1)) {
-    bottom: clamp(rem(64px), 17vh, rem(100px));
+    bottom: clamp(rem(24px), 3vh, rem(40px));
   }
 
   @media (max-width: ($tablet - 1)) and (max-height: 740px) {
-    bottom: clamp(rem(40px), 10vh, rem(64px));
+    bottom: clamp(rem(28px), 3.5vh, rem(44px));
   }
 
   display: grid;
