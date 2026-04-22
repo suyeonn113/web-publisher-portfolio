@@ -2816,6 +2816,7 @@ input[type=search]::-webkit-search-decoration {
 
 .work-page__list {
   display: grid;
+  position: relative;
   grid-template-columns: minmax(0, 1fr);
   min-width: 0;
   list-style: none;
@@ -2859,6 +2860,14 @@ input[type=search]::-webkit-search-decoration {
 .work-page__empty {
   min-width: 0;
   list-style: none;
+}
+
+.work-page__item {
+  transform-origin: 50% 50%;
+  will-change: transform, opacity, filter;
+}
+.work-page__item[aria-hidden=true] {
+  pointer-events: none;
 }
 
 .work-page__loading,

@@ -2,7 +2,11 @@
    Work Card List
 ======================================== */
 
+import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
+import Flip from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/Flip/+esm";
 import { initInteractiveTone } from '../global/hoverTone.js';
+
+gsap.registerPlugin(Flip);
 
 /* ========================================
    Selector / State
@@ -11,14 +15,16 @@ const SELECTOR = {
   list: '#work-list',
   count: '.work-page__count',
   sort: '#work-sort',
-  filterBtn: '.work-page__filter-btn'
+  filterBtn: '.work-page__filter-btn',
+  empty: '.work-page__empty'
 };
 
 const state = {
   projects: [],
   filtered: [],
   filters: { device: null, type: null },
-  sort: 'latest'
+  sort: 'latest',
+  elements: new Map()
 };
 
 /* ========================================
@@ -28,8 +34,8 @@ const normalize = (v = '') => String(v).trim().toLowerCase();
 
 const getYear = (date = '') => (date.match(/\d{4}/)?.[0] || '');
 
-const getMeta = (p) => {
-  const spec = p?.preview?.spec || {};
+const getMeta = (project) => {
+  const spec = project?.preview?.spec || {};
   return [spec.device, spec.projectType, ...(spec.keywords || [])].filter(Boolean);
 };
 
@@ -39,14 +45,13 @@ const getMeta = (p) => {
 function applyState() {
   let list = [...state.projects];
 
-  // filter
-  list = list.filter(p => {
-    const d = state.filters.device;
-    const t = state.filters.type;
-    return (!d || p._device === d) && (!t || p._type === t);
+  list = list.filter((project) => {
+    const device = state.filters.device;
+    const type = state.filters.type;
+
+    return (!device || project._device === device) && (!type || project._type === type);
   });
 
-  // sort
   if (state.sort === 'name') {
     list.sort((a, b) => a._title.localeCompare(b._title));
   } else if (state.sort === 'featured') {
@@ -57,7 +62,7 @@ function applyState() {
 
   state.filtered = list;
   syncFilterButtons();
-  render(list);
+  updateList(list);
 }
 
 function syncFilterButtons() {
@@ -74,35 +79,113 @@ function syncFilterButtons() {
    Render
 ======================================== */
 function render(list = []) {
-  const el = document.querySelector(SELECTOR.list);
-  if (!el) return;
+  const listEl = document.querySelector(SELECTOR.list);
+  if (!listEl) return;
 
-  el.innerHTML = list.length
-    ? list.map(cardMarkup).join('')
-    : `<li class="work-page__empty">No projects</li>`;
+  const cardsMarkup = list.map((project) => cardMarkup(project)).join('');
+  listEl.innerHTML = `${cardsMarkup}<li class="work-page__empty" hidden>No projects</li>`;
 
-  document.querySelector(SELECTOR.count).textContent = list.length;
+  state.elements.clear();
+  listEl.querySelectorAll('.work-page__item').forEach((item) => {
+    state.elements.set(item.dataset.projectId, item);
+  });
 
+  updateCount(list.length);
+  toggleEmptyState(!list.length);
   initInteractiveTone();
 }
 
-function cardMarkup(p) {
-  const title = p.Common.title;
-  const year = p._year;
-  const thumb = p.preview.thumbnail;
+function updateList(list = []) {
+  const listEl = document.querySelector(SELECTOR.list);
+  if (!listEl) return;
+
+  if (!state.elements.size) {
+    render(list);
+    return;
+  }
+
+  const cards = state.projects
+    .map((project) => state.elements.get(project.id))
+    .filter(Boolean);
+  const nextIds = new Set(list.map((project) => project.id));
+  const flipState = Flip.getState(cards);
+
+  list.forEach((project) => {
+    const card = state.elements.get(project.id);
+    if (card) {
+      listEl.appendChild(card);
+    }
+  });
+
+  cards.forEach((card) => {
+    const isVisible = nextIds.has(card.dataset.projectId);
+    card.style.display = isVisible ? '' : 'none';
+    card.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+  });
+
+  updateCount(list.length);
+  toggleEmptyState(!list.length);
+
+  Flip.from(flipState, {
+    duration: 0.72,
+    ease: 'power2.inOut',
+    absolute: true,
+    scale: true,
+    stagger: 0.045,
+    prune: true,
+    onEnter: (elements) => gsap.fromTo(
+      elements,
+      { autoAlpha: 0, scale: 0.88, filter: 'blur(16px)' },
+      {
+        autoAlpha: 1,
+        scale: 1,
+        filter: 'blur(0px)',
+        duration: 0.62,
+        ease: 'power2.out',
+        clearProps: 'filter'
+      }
+    ),
+    onLeave: (elements) => gsap.to(elements, {
+      autoAlpha: 0,
+      scale: 0.88,
+      filter: 'blur(16px)',
+      duration: 0.42,
+      ease: 'power2.in'
+    })
+  });
+}
+
+function updateCount(count) {
+  const countEl = document.querySelector(SELECTOR.count);
+  if (countEl) {
+    countEl.textContent = count;
+  }
+}
+
+function toggleEmptyState(isEmpty) {
+  const emptyEl = document.querySelector(SELECTOR.empty);
+  if (!emptyEl) return;
+
+  emptyEl.hidden = !isEmpty;
+}
+
+function cardMarkup(project) {
+  const title = project.Common.title;
+  const year = project._year;
+  const thumb = project.preview.thumbnail;
+  const detailHref = `./work-detail.html?project=${project.slug || project.id}`;
+  const previewAlt = `${title} preview`;
 
   return `
-    <li class="work-page__item">
+    <li class="work-page__item" data-project-id="${project.id}">
       <article class="work-card">
-        <a href="./work-detail.html?project=${p.slug || p.id}" class="work-card__link">
-          <img src="${thumb}" alt="${title} 미리보기" loading="lazy">
-          
+        <a href="${detailHref}" class="work-card__link">
+          <img src="${thumb}" alt="${previewAlt}" loading="lazy">
           <div class="work-card__body">
             <h3 class="work-card__title">${title}</h3>
             <p class="work-card__year">${year}</p>
-
             <ul class="work-card__meta">
-              ${getMeta(p).map(m => `<li>${m}</li>`).join('')}
+              ${getMeta(project).map((meta) => `<li>${meta}</li>`).join('')}
             </ul>
           </div>
         </a>
@@ -115,18 +198,16 @@ function cardMarkup(p) {
    Event
 ======================================== */
 function bindEvents() {
-  // filter
-  document.querySelectorAll(SELECTOR.filterBtn).forEach(btn => {
+  document.querySelectorAll(SELECTOR.filterBtn).forEach((btn) => {
     btn.addEventListener('click', () => {
-      const g = btn.dataset.filterGroup;
-      const v = normalize(btn.dataset.filterValue);
+      const group = btn.dataset.filterGroup;
+      const value = normalize(btn.dataset.filterValue);
 
-      state.filters[g] = state.filters[g] === v ? null : v;
+      state.filters[group] = state.filters[group] === value ? null : value;
       applyState();
     });
   });
 
-  // sort
   document.querySelector(SELECTOR.sort)?.addEventListener('change', (e) => {
     state.sort = e.target.value;
     applyState();
@@ -137,21 +218,21 @@ function bindEvents() {
    Init
 ======================================== */
 export async function loadWorkCardList() {
-  const res = await fetch('./data/projects.json');
-  const data = await res.json();
+  const response = await fetch('./data/projects.json');
+  const data = await response.json();
 
-  // 최소 정규화
   state.projects = data
-    .filter(p => p?.Common && p?.preview)
-    .map(p => ({
-      ...p,
-      _title: p.Common.title,
-      _year: getYear(p.Common.date),
-      _device: normalize(p.preview.spec?.device),
-      _type: normalize(p.preview.spec?.projectType),
-      _featuredOrder: p.preview.featuredOrder ?? 999
+    .filter((project) => project?.Common && project?.preview)
+    .map((project) => ({
+      ...project,
+      _title: project.Common.title,
+      _year: getYear(project.Common.date),
+      _device: normalize(project.preview.spec?.device),
+      _type: normalize(project.preview.spec?.projectType),
+      _featuredOrder: project.preview.featuredOrder ?? 999
     }));
 
+  render(state.projects);
   bindEvents();
   applyState();
 
