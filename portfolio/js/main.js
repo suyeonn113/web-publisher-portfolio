@@ -10,6 +10,7 @@ import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigge
 import { initLenis, initHomeScrollAssist } from './global/scroll.js';
 import { initCursor } from './global/cursor.js';
 import { initInteractiveTone } from './global/hoverTone.js';
+import { initTheme } from "./global/theme.js";
 
 // Components
 import {
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderFooter();
   renderFixedMenu();
 
+  initTheme();
   initHeaderState();
 
   // 공통 UI 인터랙션

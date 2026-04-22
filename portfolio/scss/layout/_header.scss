@@ -22,3 +22,8 @@
   color: $text-primary;
   @include text-style('sm', 'regular', 'base', 'base');
 }
+
+.site-header__theme-toggle svg {
+  @include icon-size('lg');
+  stroke-width: 1px;
+}

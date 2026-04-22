@@ -11,6 +11,11 @@ function getPageType() {
   return document.body.dataset.page || "";
 }
 
+function createHeaderIcons() {
+  if (!window.lucide) return;
+  window.lucide.createIcons();
+}
+
 /* 헤더 DOM 주입 */
 export function renderHeader() {
   const headerHTML = `
@@ -21,12 +26,22 @@ export function renderHeader() {
           <li><a class="site-header__link" href="work.html">WORK</a></li>
           <li><a class="site-header__link" href="#">LOG</a></li>
           <li><a class="site-header__link" href="#">CONTACT</a></li>
+          <li>
+            <button type="button"
+                    class="site-header__theme-toggle"
+                    aria-label="다크모드 전환"
+                    aria-pressed="false">
+              <i data-lucide="moon" aria-hidden="true"></i>
+              <span class="visually-hidden">다크모드 전환</span>
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
   `;
 
   document.body.insertAdjacentHTML("afterbegin", headerHTML);
+  createHeaderIcons();
 }
 
 /* 고정 상태 */
