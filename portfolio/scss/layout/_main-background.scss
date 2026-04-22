@@ -1,0 +1,13 @@
+#main {
+  background:
+    radial-gradient(circle at 50% 14%, var(--main-bg-highlight) 0%, transparent 40%),
+    linear-gradient(
+      180deg,
+      var(--main-bg-top) 0%,
+      var(--main-bg-upper-mid) 24%,
+      var(--main-bg-center) 48%,
+      var(--main-bg-center) 72%,
+      var(--main-bg-lower-mid) 88%,
+      var(--main-bg-bottom) 100%
+    );
+}

@@ -127,10 +127,12 @@
   --work-folder-meta-icon-shadow: rgba(255, 255, 255, 0.44);
   --work-folder-tech-base: rgba(34, 42, 56, 0.82);
   --work-folder-tech-shadow: rgba(255, 255, 255, 0.3);
-  /* Home hero Background */
-  --home-hero-bg-overlay-top: #f7fbff;
-  --home-hero-bg-overlay-mid: #eef5fc;
-  --home-hero-bg-overlay-bottom: #e3eef9;
+  /* Main background */
+  --main-bg-top: #f7fbff;
+  --main-bg-upper-mid: #eef5fc;
+  --main-bg-center: #e4eef9;
+  --main-bg-lower-mid: #eaf2fb;
+  --main-bg-bottom: #f3f6fb;
   /* Home hero Word */
   --home-hero-sub-gradient-start: #64b5f6;
   --home-hero-sub-gradient-mid: #90caf9;
@@ -147,12 +149,7 @@
   --home-hero-shadow-sub: rgba(3, 169, 244, 0.08);
   --home-hero-dot-color: #ff5c8d;
   --home-hero-dot-glow: rgba(255, 92, 141, 0.35);
-  /* Home work Background */
-  --home-work-bg-top: #e3eef9;
-  --home-work-bg-mid: #eef5fc;
-  --home-work-bg-bottom: #f3f6fb;
-  /* Home background highlight */
-  --home-bg-highlight: rgba(255, 255, 255, 0.78);
+  --main-bg-highlight: rgba(255, 255, 255, 0.78);
   /* Accent */
   --color-point-primary: #007AFF;
   --color-point-highlight: #ff6482;
@@ -184,6 +181,7 @@
   --work-filter-selected-hover-shadow:
     0 14px 28px rgba(43, 109, 189, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  --work-empty-bg: rgba(17, 17, 17, 0.04);
   --cursor-bg: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.55) 0%,
@@ -301,10 +299,12 @@
   --work-folder-meta-icon-shadow: rgba(2, 6, 23, 0.4);
   --work-folder-tech-base: rgba(234, 245, 255, 0.92);
   --work-folder-tech-shadow: rgba(8, 20, 43, 0.32);
-  /* Home hero Background */
-  --home-hero-bg-overlay-top: #101a2a;
-  --home-hero-bg-overlay-mid: #162437;
-  --home-hero-bg-overlay-bottom: #1d3048;
+  /* Main background */
+  --main-bg-top: #101a2a;
+  --main-bg-upper-mid: #172538;
+  --main-bg-center: #1d3048;
+  --main-bg-lower-mid: #18283c;
+  --main-bg-bottom: #0a1220;
   /* Home hero Word */
   --home-hero-sub-gradient-start: #1e3a8a;
   --home-hero-sub-gradient-mid: #1e40af;
@@ -321,12 +321,7 @@
   --home-hero-shadow-sub: rgba(0, 0, 0, 0.2);
   --home-hero-dot-color: #ff5c8d;
   --home-hero-dot-glow: rgba(255, 92, 141, 0.5);
-  /* Home work Background */
-  --home-work-bg-top: #1d3048;
-  --home-work-bg-mid: #192738;
-  --home-work-bg-bottom: #0a1220;
-  /* Home background highlight */
-  --home-bg-highlight: rgba(255, 255, 255, 0.08);
+  --main-bg-highlight: rgba(255, 255, 255, 0.08);
   /* Accent */
   --color-point-primary: #005FCC;
   --color-point-highlight: #ff7a96;
@@ -358,6 +353,7 @@
   --work-filter-selected-hover-shadow:
     0 18px 34px rgba(0, 18, 46, 0.42),
     inset 0 1px 0 rgba(219, 238, 255, 0.22);
+  --work-empty-bg: rgba(241, 245, 249, 0.08);
   --cursor-bg: linear-gradient(
     135deg,
     rgba(255,255,255,0.35) 0%,
@@ -665,6 +661,7 @@ input[type=search]::-webkit-search-decoration {
 ============================================================ */
 /* Layout order
  - layout: shared layout utilities
+ - main-background: shared page background
  - header: top navigation
  - footer: bottom footer
  - fixedMenu: persistent quick menu
@@ -808,6 +805,10 @@ input[type=search]::-webkit-search-decoration {
   .l-grid--3 {
     grid-template-columns: 1fr;
   }
+}
+
+#main {
+  background: radial-gradient(circle at 50% 14%, var(--main-bg-highlight) 0%, transparent 40%), linear-gradient(180deg, var(--main-bg-top) 0%, var(--main-bg-upper-mid) 24%, var(--main-bg-center) 48%, var(--main-bg-center) 72%, var(--main-bg-lower-mid) 88%, var(--main-bg-bottom) 100%);
 }
 
 /* ============================================================
@@ -2242,7 +2243,7 @@ input[type=search]::-webkit-search-decoration {
 }
 @media (min-width: 1440px) and (max-height: 820px) {
   .home-work__nav-controls {
-    bottom: clamp(-1.75rem, -2.5vh, 0.125rem);
+    bottom: clamp(-1.5rem, -2.2vh, 0.375rem);
   }
 }
 @media (min-width: 1024px) and (max-width: 1439px) {
@@ -2418,16 +2419,6 @@ input[type=search]::-webkit-search-decoration {
 /* ============================================================
    Pages
 ============================================================ */
-/* ============================================================
-   Foundation
-============================================================ */
-/* ============================================================
-   Home Page - Main Background
-============================================================ */
-#main {
-  background: radial-gradient(circle at 50% 14%, var(--home-bg-highlight) 0%, transparent 34%), linear-gradient(180deg, var(--home-hero-bg-overlay-top) 0%, var(--home-hero-bg-overlay-mid) 52%, var(--home-hero-bg-overlay-bottom) 64%, var(--home-work-bg-top) 64%, var(--home-work-bg-mid) 84%, var(--home-work-bg-bottom) 100%);
-}
-
 /* ============================================================
    Foundation
 ============================================================ */
@@ -2926,7 +2917,7 @@ input[type=search]::-webkit-search-decoration {
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
   text-align: center;
   color: var(--color-text-tertiary);
-  background: var(--color-bg-glass);
+  background: var(--work-empty-bg);
 }
 
 .work-card {
@@ -3134,7 +3125,4 @@ input[type=search]::-webkit-search-decoration {
   .work-page__select {
     width: 100%;
   }
-}
-.work-page__empty {
-  background: var(--work-empty-bg);
 }/*# sourceMappingURL=main.css.map */

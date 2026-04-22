@@ -86,10 +86,12 @@
   --work-folder-tech-base: rgba(34, 42, 56, 0.82);
   --work-folder-tech-shadow: rgba(255, 255, 255, 0.3);
 
-  /* Home hero Background */
-  --home-hero-bg-overlay-top: #f7fbff;
-  --home-hero-bg-overlay-mid: #eef5fc;
-  --home-hero-bg-overlay-bottom: #e3eef9;
+  /* Main background */
+  --main-bg-top: #f7fbff;
+  --main-bg-upper-mid: #eef5fc;
+  --main-bg-center: #e4eef9;
+  --main-bg-lower-mid: #eaf2fb;
+  --main-bg-bottom: #f3f6fb;
 
   /* Home hero Word */
   --home-hero-sub-gradient-start: #64b5f6;
@@ -108,13 +110,7 @@
   --home-hero-dot-color: #ff5c8d;
   --home-hero-dot-glow: rgba(255, 92, 141, 0.35);
 
-  /* Home work Background */
-  --home-work-bg-top: #e3eef9;
-  --home-work-bg-mid: #eef5fc;
-  --home-work-bg-bottom: #f3f6fb;
-
-  /* Home background highlight */
-  --home-bg-highlight: rgba(255, 255, 255, 0.78);
+  --main-bg-highlight: rgba(255, 255, 255, 0.78);
 
   /* Accent */
   --color-point-primary: #007AFF;
@@ -280,10 +276,12 @@
   --work-folder-tech-base: rgba(234, 245, 255, 0.92);
   --work-folder-tech-shadow: rgba(8, 20, 43, 0.32);
 
-  /* Home hero Background */
-  --home-hero-bg-overlay-top: #101a2a;
-  --home-hero-bg-overlay-mid: #162437;
-  --home-hero-bg-overlay-bottom: #1d3048;
+  /* Main background */
+  --main-bg-top: #101a2a;
+  --main-bg-upper-mid: #172538;
+  --main-bg-center: #1d3048;
+  --main-bg-lower-mid: #18283c;
+  --main-bg-bottom: #0a1220;
 
   /* Home hero Word */
   --home-hero-sub-gradient-start: #1e3a8a;
@@ -302,13 +300,7 @@
   --home-hero-dot-color: #ff5c8d;
   --home-hero-dot-glow: rgba(255, 92, 141, 0.5);
 
-  /* Home work Background */
-  --home-work-bg-top: #1d3048;
-  --home-work-bg-mid: #192738;
-  --home-work-bg-bottom: #0a1220;
-
-  /* Home background highlight */
-  --home-bg-highlight: rgba(255, 255, 255, 0.08);
+  --main-bg-highlight: rgba(255, 255, 255, 0.08);
 
   /* Accent */
   --color-point-primary: #005FCC;

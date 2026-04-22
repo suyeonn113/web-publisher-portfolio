@@ -88,7 +88,7 @@
   }
 
   @media (min-width: $desktop) and (max-height: 820px) {
-    bottom: clamp(rem(-28px), -2.5vh, rem(2px));
+    bottom: clamp(rem(-24px), -2.2vh, rem(6px));
   }
 
   @media (min-width: $laptop) and (max-width: ($desktop - 1)) {
