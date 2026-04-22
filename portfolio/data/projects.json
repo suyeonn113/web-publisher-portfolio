@@ -58,6 +58,8 @@
 
     "preview": {
       "thumbnail": "assets/images/projects/p01-thumb.jpg",
+      "featured": false,
+      "featuredOrder": 2,
       "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
       
       "spec": {
@@ -188,11 +190,11 @@
 
     "preview": {
       "thumbnail": "assets/images/projects/",
-      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      "filterTags": [ "Responsive", "Public", "Minimal", "Clean"],
       
       "spec": {
-        "device": "Mobile",
-        "projectType": "E-commerce",
+        "device": "Responsive",
+        "projectType": "Public",
         "keywords": ["Minimal", "Clean"], 
         "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
       }
@@ -253,11 +255,11 @@
 
     "preview": {
       "thumbnail": "assets/images/projects/",
-      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      "filterTags": [ "Responsive", "Public", "Minimal", "Clean"],
       
       "spec": {
-        "device": "Mobile",
-        "projectType": "E-commerce",
+        "device": "Responsive",
+        "projectType": "Public",
         "keywords": ["Minimal", "Clean"], 
         "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
       }
@@ -318,11 +320,11 @@
 
     "preview": {
       "thumbnail": "assets/images/projects/",
-      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      "filterTags": [ "PC", "Personal", "Minimal", "Clean"],
       
       "spec": {
-        "device": "Mobile",
-        "projectType": "E-commerce",
+        "device": "PC",
+        "projectType": "Personal",
         "keywords": ["Minimal", "Clean"], 
         "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
       }
@@ -383,11 +385,11 @@
 
     "preview": {
       "thumbnail": "assets/images/projects/",
-      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      "filterTags": [ "PC", "Personal", "Minimal", "Clean"],
       
       "spec": {
-        "device": "Mobile",
-        "projectType": "E-commerce",
+        "device": "PC",
+        "projectType": "Personal",
         "keywords": ["Minimal", "Clean"], 
         "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
       }
@@ -435,11 +437,11 @@
     }
   },
   {
-    "id": "p06",
-    "slug": "fragfarm-mobile-redesign",
+    "id": "p07",
+    "slug": "brand-concept-archive",
     
     "Common": {
-      "title": "6",
+      "title": "7",
       "date": "2026-04",
       "liveLink": "",
       "githubLink": ""
@@ -447,11 +449,75 @@
 
     "preview": {
       "thumbnail": "assets/images/projects/",
-      "filterTags": [ "Mobile", "E-commerce", "Minimal", "Clean"],
+      "filterTags": [ "Responsive", "Brand", "Minimal", "Clean"],
       
       "spec": {
-        "device": "Mobile",
-        "projectType": "E-commerce",
+        "device": "Responsive",
+        "projectType": "Brand",
+        "keywords": ["Minimal", "Clean"], 
+        "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
+      }
+    },
+
+    "details" : {
+      "mainVisual": "assets/",
+      "overview": "",
+      "planning" : {
+        "problem": "",
+        "solution": ""
+      },
+
+      "designPoints" : [
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },
+        {
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        },{
+          "pointTitle": "",
+          "pointKeyword": "",
+          "pointDesc": "",
+          "pointImg": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "p08",
+    "slug": "brand-showcase-pc",
+    
+    "Common": {
+      "title": "8",
+      "date": "2026-04",
+      "liveLink": "",
+      "githubLink": ""
+    },
+
+    "preview": {
+      "thumbnail": "assets/images/projects/",
+      "filterTags": [ "PC", "Brand", "Minimal", "Clean"],
+      
+      "spec": {
+        "device": "PC",
+        "projectType": "Brand",
         "keywords": ["Minimal", "Clean"], 
         "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"]
       }
