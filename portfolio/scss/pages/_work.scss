@@ -9,7 +9,7 @@
   flex-direction: column;
   width: 100%;
   min-width: 0;
-  @include f-gap('gap', 'sm');
+  @include f-gap('cluster', 'lg');
 }
 
 .work-page__header,
@@ -20,11 +20,15 @@
   min-width: 0;
 }
 
+.work-page__header {
+  @include pad('pad', 'lg', 'top');
+}
+
 .work-page__heading {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  @include f-gap('gutter', 'sm');
+  @include f-gap('gutter', 'md');
 }
 
 .work-page__title,
@@ -34,9 +38,19 @@
   margin: 0;
 }
 
+.work-page__title {
+  @include text-style('title', 'bold', 'tight', 'tight');
+  color: $text-primary;
+}
+
 .work-page__desc {
   max-width: rem(720px);
   @include text-style('base');
+  color: $text-secondary;
+}
+
+.work-page__status {
+  @include text-style('sm', 'medium');
   color: $text-secondary;
 }
 
@@ -44,7 +58,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  @include f-gap('gutter', 'md');
+  @include f-gap('gutter', 'lg');
 }
 
 .work-page__filters {
@@ -52,14 +66,14 @@
   flex-wrap: wrap;
   align-items: flex-start;
   min-width: 0;
-  @include f-gap('gutter', 'md');
+  @include f-gap('gutter', 'lg');
 }
 
 .work-page__filter-set {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  @include f-gap('gutter', 'sm');
+  @include f-gap('gutter', 'md');
 }
 
 .work-page__filter-title {
@@ -72,7 +86,7 @@
   flex-wrap: wrap;
   align-items: center;
   min-width: 0;
-  @include f-gap('gutter', 'sm');
+  @include f-gap('gutter', 'md');
 }
 
 .work-page__filter-btn {
@@ -90,7 +104,7 @@
   background: $bg-glass-strong;
   color: $text-primary;
   cursor: pointer;
-  box-shadow: var(--shadow-surface-soft);
+  box-shadow: $work-filter-control-shadow;
   transition:
     transform get-duration('fast') get-easing('apple'),
     background-color get-duration('fast') get-easing('apple'),
@@ -111,7 +125,7 @@
       transform: translateY(rem(-2px));
       border-color: $border-strong;
       color: $point-primary;
-      box-shadow: var(--shadow-surface-soft);
+      box-shadow: $work-filter-control-shadow;
     }
 
     &[aria-pressed='true']:hover {
@@ -132,22 +146,37 @@
 }
 
 .work-page__select {
+  appearance: none;
   width: 100%;
   min-width: 0;
   min-height: rem(48px);
   @include pad('pad', 'sm', 'x');
+  @include pad('pad', 'xs', 'y');
   @include rd('xl');
   @include text-style('sm', 'medium');
   border: 1px solid $border-soft;
-  background: $bg-surface;
+  background: $bg-glass-strong;
   color: $text-primary;
+  box-shadow: $work-filter-control-shadow;
+  transition:
+    border-color get-duration('fast') get-easing('apple'),
+    color get-duration('fast') get-easing('apple'),
+    box-shadow get-duration('fast') get-easing('apple'),
+    background-color get-duration('fast') get-easing('apple');
+
+  &:focus-visible {
+    outline: none;
+    border-color: $border-strong;
+    color: $point-primary;
+    box-shadow: $work-filter-control-shadow;
+  }
 }
 
 .work-page__body {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  @include f-gap('gutter', 'md');
+  @include f-gap('gap', 'sm');
 }
 
 .work-page__list-wrap {
@@ -162,7 +191,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  @include g-gap('gutter', 'md');
+  @include g-gap('gutter', 'lg');
 
   @media (min-width: $tablet) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -196,6 +225,10 @@
 .work-page__loading,
 .work-page__empty {
   grid-column: 1 / -1;
+}
+
+.work-page__loading {
+  @include pad('pad', 'lg', 'y');
 }
 
 .work-page__empty {
@@ -244,10 +277,9 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  justify-content: space-between;
   min-width: 0;
   @include pad('pad', 'md');
-  @include f-gap('gutter', 'sm');
+  @include f-gap('gutter', 'md');
 }
 
 .work-card__title,
@@ -274,18 +306,19 @@
   list-style: none;
   padding: 0;
   @include f-gap('gutter', 'sm');
+  margin-top: auto;
 }
 
 .work-card__meta li {
   position: relative;
   min-width: 0;
-  @include text-style('sm', 'medium');
+  @include text-style('xs', 'medium');
   color: $text-secondary;
 
   &:not(:last-child)::after {
     content: '\00B7';
     display: inline-block;
-    margin-left: rem(8px);
+    @include mar('pad', 'xs', 'left');
     color: $text-disabled;
   }
 }
@@ -322,11 +355,13 @@
 
   .work-page__filters {
     flex: 1 1 auto;
+    align-items: flex-end;
   }
 
   .work-page__sort {
-    flex: 0 0 rem(180px);
+    flex: 0 0 rem(220px);
     width: auto;
+    align-self: flex-end;
   }
 
   .work-page__select {
