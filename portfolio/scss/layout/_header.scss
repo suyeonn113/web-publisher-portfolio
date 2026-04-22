@@ -11,6 +11,7 @@
 
 .site-header__menu {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   @include space-gap('cluster', 'lg');
 
@@ -23,7 +24,10 @@
   @include text-style('sm', 'regular', 'base', 'base');
 }
 
-.site-header__theme-toggle svg {
-  @include icon-size('lg');
-  stroke-width: 1px;
+.site-header__theme-toggle {
+  display: block;
+  & svg {
+    @include icon-size('md');
+    stroke-width: 1px;
+  }
 }
