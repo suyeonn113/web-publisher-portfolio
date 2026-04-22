@@ -4,15 +4,17 @@
   background: none;
   border: 0;
   padding: 0;
-  color: $btn-color;
+  color: $text-primary;
   opacity: $btn-opacity;
   letter-spacing: $btn-ls;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
   cursor: pointer;
 }
 
 .btn:hover {
   opacity: $btn-opacity-hover;
+  color: $point-primary;
   transform: translateY(-2px);
 }
 

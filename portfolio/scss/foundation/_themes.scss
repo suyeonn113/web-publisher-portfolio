@@ -86,31 +86,46 @@
   --work-folder-tech-base: rgba(34, 42, 56, 0.82);
   --work-folder-tech-shadow: rgba(255, 255, 255, 0.3);
 
+  /* Home hero Background */
+  --home-hero-bg-overlay-top: #f7fbff;
+  --home-hero-bg-overlay-mid: #eef5fc;
+  --home-hero-bg-overlay-bottom: #e3eef9;
+
   /* Home hero Word */
-  --home-hero-sub-color: #2f6fb8;
-  --home-hero-main-color: #548ac4;
-  --home-hero-main-color-strong: #548ac4;
-  --home-hero-stroke: rgba(244, 250, 255, 0.78);
-  --home-hero-highlight-soft: rgba(255, 255, 255, 0.62);
-  --home-hero-highlight-sub: rgba(255, 255, 255, 0.5);
-  --home-hero-highlight-thin: rgba(255, 255, 255, 0.65);
-  --home-hero-shadow-main: rgba(111, 151, 201, 0.18);
-  --home-hero-shadow-sub: rgba(121, 166, 214, 0.08);
-  --home-hero-dot-color: var(--color-point-highlight);
-  --home-hero-dot-glow: rgba(255, 100, 130, 0.24);
+  --home-hero-sub-gradient-start: #4a7a9a;
+  --home-hero-sub-gradient-mid: #6a9aba;
+  --home-hero-sub-gradient-end: #a0c8da;
+  --home-hero-main-gradient-start: #2a5a8a;
+  --home-hero-main-gradient-mid: #4a7aaa;
+  --home-hero-main-gradient-end: #f5fbff;
+  --home-hero-main-strong-start: #2a5a8a;
+  --home-hero-main-strong-mid: #4a7aaa;
+  --home-hero-main-strong-end: #dfeeff;
+  --home-hero-sheen: rgba(255, 255, 255, 0.02);
+  --home-hero-edge-highlight: rgba(255, 255, 255, 0.04);
+  --home-hero-shadow-main: rgba(15, 23, 42, 0.1);
+  --home-hero-shadow-sub: rgba(15, 23, 42, 0.05);
+  --home-hero-dot-color: #f38d96;
+  --home-hero-dot-glow: rgba(243, 141, 150, 0.1);
+
+  /* Home work Background */
+  --home-work-bg-top: #e3eef9;
+  --home-work-bg-mid: #eef5fc;
+  --home-work-bg-bottom: #f3f6fb;
+
+  /* Home background highlight */
+  --home-bg-highlight: rgba(255, 255, 255, 0.78);
 
   /* Accent */
-  --color-point-primary: #0a84ff;
-  --color-point-secondary: #5ac8fa;
+  --color-point-primary: #007AFF;
   --color-point-highlight: #ff6482;
-  --color-point-info: #64d2ff;
   --color-point-success: #30d158;
 
   /* Component */
   --btn-text-color: var(--color-text-primary);
-  --btn-text-opacity: 0.72;
-  --btn-text-opacity-hover: 0.96;
-  --btn-letter-spacing: 0.03em;
+  --btn-text-opacity: 1;
+  --btn-text-opacity-hover: 1;
+  --btn-letter-spacing: 0.01em;
 
   /* Icon and interaction */
   --color-icon-base: var(--color-text-primary);
@@ -222,31 +237,46 @@
   --work-folder-tech-base: rgba(234, 245, 255, 0.92);
   --work-folder-tech-shadow: rgba(8, 20, 43, 0.32);
 
+  /* Home hero Background */
+  --home-hero-bg-overlay-top: #101a2a;
+  --home-hero-bg-overlay-mid: #162437;
+  --home-hero-bg-overlay-bottom: #1d3048;
+
   /* Home hero Word */
-  --home-hero-sub-color: #6f9ecf;
-  --home-hero-main-color: #7fb0e6;
-  --home-hero-main-color-strong: #8ab8ec;
-  --home-hero-stroke: rgba(210, 230, 255, 0.38);
-  --home-hero-highlight-soft: rgba(255, 255, 255, 0.12);
-  --home-hero-highlight-sub: rgba(255, 255, 255, 0.08);
-  --home-hero-highlight-thin: rgba(255, 255, 255, 0.18);
-  --home-hero-shadow-main: rgba(5, 12, 28, 0.55);
-  --home-hero-shadow-sub: rgba(5, 12, 28, 0.4);
-  --home-hero-dot-color: var(--color-point-highlight);
-  --home-hero-dot-glow: rgba(255, 122, 150, 0.32);
+  --home-hero-sub-gradient-start: #5a8aaa;
+  --home-hero-sub-gradient-mid: #7aacca;
+  --home-hero-sub-gradient-end: #b0d8ea;
+  --home-hero-main-gradient-start: #3a6a9a;
+  --home-hero-main-gradient-mid: #5a8aba;
+  --home-hero-main-gradient-end: #f5ffff;
+  --home-hero-main-strong-start: #3a6a9a;
+  --home-hero-main-strong-mid: #5a8aba;
+  --home-hero-main-strong-end: #dfffff;
+  --home-hero-sheen: rgba(255, 255, 255, 0.02);
+  --home-hero-edge-highlight: rgba(255, 255, 255, 0.04);
+  --home-hero-shadow-main: rgba(2, 6, 23, 0.16);
+  --home-hero-shadow-sub: rgba(2, 6, 23, 0.08);
+  --home-hero-dot-color: #ff98a8;
+  --home-hero-dot-glow: rgba(255, 152, 168, 0.1);
+
+  /* Home work Background */
+  --home-work-bg-top: #1d3048;
+  --home-work-bg-mid: #192738;
+  --home-work-bg-bottom: #0a1220;
+
+  /* Home background highlight */
+  --home-bg-highlight: rgba(255, 255, 255, 0.08);
 
   /* Accent */
-  --color-point-primary: #0a84ff;
-  --color-point-secondary: #64d2ff;
+  --color-point-primary: #007AFF;
   --color-point-highlight: #ff7a96;
-  --color-point-info: #7dd3fc;
   --color-point-success: #32d74b;
 
   /* Component */
   --btn-text-color: var(--color-text-primary);
-  --btn-text-opacity: 0.6;
-  --btn-text-opacity-hover: 0.96;
-  --btn-letter-spacing: 0.03em;
+  --btn-text-opacity: 1;
+  --btn-text-opacity-hover: 1;
+  --btn-letter-spacing: 0.01em;
 
   /* Icon and interaction */
   --color-icon-base: var(--color-text-primary);
@@ -304,9 +334,9 @@ $overlay-strong: var(--overlay-bottom-strong);
 
 /* Accent */
 $point-primary: var(--color-point-primary);
-$point-secondary: var(--color-point-secondary);
+$point-secondary: var(--color-point-primary);
 $point-highlight: var(--color-point-highlight);
-$point-info: var(--color-point-info);
+$point-info: var(--color-point-primary);
 $point-success: var(--color-point-success);
 
 /* Component */
