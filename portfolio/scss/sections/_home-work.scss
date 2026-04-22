@@ -30,13 +30,16 @@
     @include text-style('title', 'bold', 'tight', 'tight');
     color: $text-secondary;
     letter-spacing: -0.04em;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-shadow: $btn-shadow;
   }
 
   .btn-more {
     @include text-style('base', 'light', 'tight', 'base');
     color: $text-secondary;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    &:hover{
+      color: $point-primary;
+    }
+    text-shadow: $btn-shadow;
   }
 }
 
@@ -125,5 +128,8 @@
     @include btn-text-style('nav');
     width: 100%;
     color: $text-secondary;
+    &:hover{
+      color: $point-primary;
+    }
   }
 }

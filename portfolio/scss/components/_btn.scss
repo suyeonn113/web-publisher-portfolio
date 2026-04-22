@@ -7,7 +7,7 @@
   color: $text-primary;
   opacity: $btn-opacity;
   letter-spacing: $btn-ls;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-shadow: $btn-shadow;
   transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
   cursor: pointer;
 }

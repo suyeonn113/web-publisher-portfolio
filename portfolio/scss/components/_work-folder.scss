@@ -39,7 +39,7 @@ $folder-ratio: 413 / 373;
   .folder__front-container {
     transform-origin: bottom center;
     transform: translateY(10px) scaleY(0.955) rotateX(14deg);
-    transition: transform 0.56s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: $tr-elastic;
   }
 
   .svg-hover {
@@ -330,7 +330,7 @@ $folder-ratio: 413 / 373;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 14px;
 
   @media (max-width: $tablet) {
     gap: 10px;
