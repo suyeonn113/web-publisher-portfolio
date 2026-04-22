@@ -34,6 +34,23 @@ html {
   }
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
 // Reset default block spacing.
 body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
   margin: 0;

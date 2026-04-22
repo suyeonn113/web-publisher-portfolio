@@ -7,7 +7,7 @@ import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
 
 // Global
-import { initLenis, initHomeScrollAssist } from './global/scroll.js';
+import { initLenis, initHomeScrollAssist, initScrollStability } from './global/scroll.js';
 import { initCursor } from './global/cursor.js';
 import { initInteractiveTone } from './global/hoverTone.js';
 import { initTheme } from "./global/theme.js";
@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const lenis = initLenis();
+  initScrollStability(lenis);
 
   renderHeader();
   renderFooter();
