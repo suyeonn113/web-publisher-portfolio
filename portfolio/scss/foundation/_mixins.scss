@@ -35,6 +35,18 @@
   }
 }
 
+@mixin respond-up($device) {
+  @if $device == 'mobile' {
+    @media (min-width: $mobile) { @content; }
+  } @else if $device == 'tablet' {
+    @media (min-width: $tablet) { @content; }
+  } @else if $device == 'laptop' {
+    @media (min-width: $laptop) { @content; }
+  } @else if $device == 'desktop' {
+    @media (min-width: $desktop) { @content; }
+  }
+}
+
 @mixin respond-to($device) {
   @include respond-down($device) {
     @content;

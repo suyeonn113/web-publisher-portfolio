@@ -1,7 +1,7 @@
 [
   {
     "DATA_MASTER_GUIDE": {
-      "📌_필터_그룹_및_리스트": {
+      "필터_그룹_및_리스트": {
         "1_Device_Group": [
           "Responsive", "Mobile", "Tablet", "PC"
         ],
@@ -24,7 +24,7 @@
           "Interactive", "Parallax", "Micro-interaction", "Dynamic-scroll", "Horizontal-scroll", "3D-elements"
         ]
       },
-      "📌_추가_참고_리스트": {
+      "추가_참고_리스트": {
         "techStack_list": [
           "HTML", 
           "CSS", "SCSS", 
@@ -51,7 +51,7 @@
     
     "Common": {
       "title": "FragFarm Mobile",
-      "year": "2026",
+      "date": "2026-04",
       "liveLink": "",
       "githubLink": ""
     },
@@ -116,7 +116,7 @@
     
     "Common": {
       "title": "Seoul Youth Center",
-      "year": "2026",
+      "date": "2026-04",
       "liveLink": "",
       "githubLink": ""
     },
@@ -181,7 +181,7 @@
     
     "Common": {
       "title": "3",
-      "year": "2026",
+      "date": "2026-04",
       "liveLink": "",
       "githubLink": ""
     },
@@ -246,7 +246,7 @@
     
     "Common": {
       "title": "4",
-      "year": "2026",
+      "date": "2026-04",
       "liveLink": "",
       "githubLink": ""
     },
@@ -311,7 +311,7 @@
     
     "Common": {
       "title": "5",
-      "year": "2026",
+      "date": "2026-04",
       "liveLink": "",
       "githubLink": ""
     },
@@ -376,7 +376,7 @@
     
     "Common": {
       "title": "6",
-      "year": "2026",
+      "date": "2026-04",
       "liveLink": "",
       "githubLink": ""
     },
@@ -440,7 +440,7 @@
     
     "Common": {
       "title": "6",
-      "year": "2026",
+      "date": "2026-04",
       "liveLink": "",
       "githubLink": ""
     },

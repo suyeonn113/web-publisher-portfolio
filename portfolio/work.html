@@ -9,8 +9,213 @@
 </head>
 <body data-page="work">
   <main id="main">
-    <!--  -->
-    <section class="l-fullspan">
+    <section class="work-page section-py l-fullspan" aria-labelledby="work-page-title">
+      <div class="work-page__inner inner">
+        <!-- Header -->
+        <header class="work-page__header">
+          <div class="work-page__heading">
+            <h1 id="work-page-title" class="work-page__title">WORKS</h1>
+            <p class="work-page__desc">
+              프로젝트를 유형과 디바이스 기준으로 탐색할 수 있는 워크 아카이브입니다.
+            </p>
+          </div>
+        </header>
+
+        <!-- Controls -->
+        <section class="work-page__controls" aria-labelledby="work-page-controls-title">
+          <h2 id="work-page-controls-title" class="visually-hidden">작업물 탐색 옵션</h2>
+
+          <div class="work-page__filters" aria-label="작업물 필터">
+            <!-- All -->
+            <div class="work-page__filter-set work-page__filter-set--reset">
+              <p class="work-page__filter-title">View</p>
+              <div class="work-page__filter-group" role="toolbar" aria-label="전체 보기">
+                <button type="button"
+                        class="work-page__filter-btn is-active"
+                        data-filter-group="all"
+                        data-filter-value="all"
+                        aria-pressed="true">
+                  All
+                </button>
+              </div>
+            </div>
+
+            <!-- Device Filter -->
+            <div class="work-page__filter-set">
+              <p id="work-page-device-filter-title" class="work-page__filter-title">Device</p>
+              <div class="work-page__filter-group"
+                  role="toolbar"
+                  aria-labelledby="work-page-device-filter-title">
+                <button type="button"
+                        class="work-page__filter-btn"
+                        data-filter-group="device"
+                        data-filter-value="mobile"
+                        aria-pressed="false">
+                  Mobile
+                </button>
+                <button type="button"
+                        class="work-page__filter-btn"
+                        data-filter-group="device"
+                        data-filter-value="responsive"
+                        aria-pressed="false">
+                  Responsive
+                </button>
+                <button type="button"
+                        class="work-page__filter-btn"
+                        data-filter-group="device"
+                        data-filter-value="pc"
+                        aria-pressed="false">
+                  PC
+                </button>
+              </div>
+            </div>
+
+            <!-- Type Filter -->
+            <div class="work-page__filter-set">
+              <p id="work-page-type-filter-title" class="work-page__filter-title">Type</p>
+              <div class="work-page__filter-group"
+                  role="toolbar"
+                  aria-labelledby="work-page-type-filter-title">
+                <button type="button"
+                        class="work-page__filter-btn"
+                        data-filter-group="type"
+                        data-filter-value="e-commerce"
+                        aria-pressed="false">
+                  E-commerce
+                </button>
+                <button type="button"
+                        class="work-page__filter-btn"
+                        data-filter-group="type"
+                        data-filter-value="public"
+                        aria-pressed="false">
+                  Public
+                </button>
+                <button type="button"
+                        class="work-page__filter-btn"
+                        data-filter-group="type"
+                        data-filter-value="personal"
+                        aria-pressed="false">
+                  Personal
+                </button>
+                <button type="button"
+                        class="work-page__filter-btn"
+                        data-filter-group="type"
+                        data-filter-value="brand"
+                        aria-pressed="false">
+                  Brand
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sort -->
+          <div class="work-page__sort">
+            <label class="work-page__sort-label visually-hidden" for="work-sort">
+              정렬 방식
+            </label>
+            <select id="work-sort" class="work-page__select" name="sort">
+              <option value="latest">Latest</option>
+              <option value="name">Name</option>
+              <option value="featured">Featured</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Results -->
+        <section class="work-page__body" aria-labelledby="work-page-list-title">
+          <div class="work-page__body-header">
+            <h2 id="work-page-list-title" class="visually-hidden">작업물 목록</h2>
+            <p class="work-page__status" aria-live="polite">
+              총 <span class="work-page__count">3</span>개의 작업물이 있습니다.
+            </p>
+          </div>
+
+          <div class="work-page__list-wrap">
+            <ul id="work-list" class="work-page__list" aria-label="작업물 목록">
+              <li class="work-page__item"
+                  data-device="mobile"
+                  data-type="e-commerce"
+                  data-year="2026"
+                  data-name="fragfarm mobile"
+                  data-featured="true">
+                <article class="work-card">
+                  <a href="#" class="work-card__link">
+                    <div class="work-card__thumb">
+                      <img src="./assets/images/projects/p01-thumb.jpg"
+                          alt="프래그팜 모바일 프로젝트 미리보기">
+                    </div>
+                    <div class="work-card__body">
+                      <p class="work-card__meta">Mobile · E-commerce</p>
+                      <h3 class="work-card__title">FragFarm Mobile</h3>
+                      <p class="work-card__desc">
+                        모바일 중심 쇼핑 경험과 상태 기반 상품 탐색 흐름을 정리한 프로젝트
+                      </p>
+                      <ul class="work-card__tags" aria-label="스타일 키워드">
+                        <li class="work-card__tag">Minimal</li>
+                        <li class="work-card__tag">Clean</li>
+                      </ul>
+                    </div>
+                  </a>
+                </article>
+              </li>
+
+              <li class="work-page__item"
+                  data-device="responsive"
+                  data-type="public"
+                  data-year="2026"
+                  data-name="seoul youth center"
+                  data-featured="true">
+                <article class="work-card">
+                  <a href="#" class="work-card__link">
+                    <div class="work-card__thumb">
+                      <img src="./assets/images/projects/p02-thumb.jpg"
+                          alt="시립서울청소년센터 프로젝트 미리보기">
+                    </div>
+                    <div class="work-card__body">
+                      <p class="work-card__meta">Responsive · Public</p>
+                      <h3 class="work-card__title">Seoul Youth Center</h3>
+                      <p class="work-card__desc">
+                        정보 구조, 접근성, 반응형 대응을 중심으로 설계한 공공기관 웹 프로젝트
+                      </p>
+                      <ul class="work-card__tags" aria-label="스타일 키워드">
+                        <li class="work-card__tag">Professional</li>
+                        <li class="work-card__tag">Clean</li>
+                      </ul>
+                    </div>
+                  </a>
+                </article>
+              </li>
+
+              <li class="work-page__item"
+                  data-device="responsive"
+                  data-type="personal"
+                  data-year="2026"
+                  data-name="portfolio"
+                  data-featured="false">
+                <article class="work-card">
+                  <a href="#" class="work-card__link">
+                    <div class="work-card__thumb">
+                      <img src="./assets/images/projects/p03-thumb.jpg"
+                          alt="포트폴리오 프로젝트 미리보기">
+                    </div>
+                    <div class="work-card__body">
+                      <p class="work-card__meta">Responsive · Personal</p>
+                      <h3 class="work-card__title">Portfolio</h3>
+                      <p class="work-card__desc">
+                        비주얼 인터랙션과 워크 아카이브 흐름을 중심으로 구성한 개인 포트폴리오
+                      </p>
+                      <ul class="work-card__tags" aria-label="스타일 키워드">
+                        <li class="work-card__tag">Interactive</li>
+                        <li class="work-card__tag">Minimal</li>
+                      </ul>
+                    </div>
+                  </a>
+                </article>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
     </section>
   </main>
   <script type="module" src="js/main.js"></script>
