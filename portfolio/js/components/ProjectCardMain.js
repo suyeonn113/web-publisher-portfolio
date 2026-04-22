@@ -177,7 +177,7 @@ export async function loadProjects() {
                   </div>
 
                   <div class="folder__info-meta">
-                    <span class="folder__year">${common.year || ''}</span>
+                    <span class="folder__year">${(common.date || '').split('-')[0]}</span>
                     <div class="folder__category-icons">
                       <i data-lucide="${dIcon}"></i>
                       <i data-lucide="${tIcon}"></i>
