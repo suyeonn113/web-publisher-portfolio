@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수연의 작업실</title>
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-page="project-detail">
+  <main id="main">
+    <div class="project-detail" data-page-root>
+
+      <!-- ========================================
+          HERO
+      ========================================= -->
+      <section class="project-hero" data-section="hero" data-gsap-target="section">
+        <div class="project-hero__inner">
+
+          <!-- 텍스트 -->
+          <div class="project-hero__body" data-gsap-target="hero-copy">
+            <p class="project-hero__label" data-field="meta.label"></p>
+
+            <h1 class="project-hero__title" data-field="meta.title"></h1>
+
+            <div class="project-hero__description" data-field="hero.description"></div>
+
+            <ul class="project-hero__tags" data-field="hero.tags"></ul>
+
+            <dl class="project-meta">
+              <div>
+                <dt>기간</dt>
+                <dd data-field="meta.dateRange"></dd>
+              </div>
+              <div>
+                <dt>역할</dt>
+                <dd data-field="meta.role"></dd>
+              </div>
+              <div>
+                <dt>형태</dt>
+                <dd data-field="meta.projectType"></dd>
+              </div>
+              <div>
+                <dt>스케일</dt>
+                <dd data-field="meta.projectScale"></dd>
+              </div>
+            </dl>
+
+            <div class="project-hero__actions">
+              <a href="#" class="btn" data-field="meta.liveLink" data-link-type="live">
+                사이트 바로가기
+              </a>
+            </div>
+          </div>
+
+          <!-- 비주얼 -->
+          <div class="project-hero__visual" data-gsap-target="hero-visual">
+            <div data-field="hero.visuals"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================
+          SUMMARY
+      ========================================= -->
+      <section class="project-summary" data-section="summary" data-gsap-target="section">
+        <h2 class="section-title">SUMMARY</h2>
+
+        <div class="project-summary__grid">
+          <article>
+            <h3>프로젝트 요약</h3>
+            <p data-field="summary.overview"></p>
+          </article>
+
+          <article>
+            <h3>주요 역할</h3>
+            <p data-field="summary.role"></p>
+          </article>
+
+          <article>
+            <h3>기술</h3>
+            <p data-field="summary.tech"></p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ========================================
+          CASE LIST
+      ========================================= -->
+      <section class="project-case-list" data-section="case-list" data-gsap-target="section">
+        <h2 class="section-title">CASE LIST</h2>
+
+        <div class="case-list" role="tablist" data-field="caseList"></div>
+      </section>
+
+      <!-- ========================================
+          CASE DETAIL
+      ========================================= -->
+      <section class="project-case-detail" data-section="case-detail" data-gsap-target="section">
+        <h2 class="section-title">CASE DETAIL</h2>
+
+        <article class="case-detail" data-case-detail>
+
+          <h3 data-field="caseDetail.title"></h3>
+
+          <div class="case-detail__layout">
+
+            <!-- steps -->
+            <ol class="case-steps" data-field="caseDetail.steps"></ol>
+
+            <!-- text -->
+            <div class="case-detail__content">
+              <section>
+                <h4>문제</h4>
+                <p data-field="caseDetail.problem"></p>
+              </section>
+
+              <section>
+                <h4>해결</h4>
+                <p data-field="caseDetail.solution"></p>
+              </section>
+
+              <section>
+                <h4>구현</h4>
+                <ul data-field="caseDetail.implementation"></ul>
+              </section>
+
+              <section>
+                <h4>핵심</h4>
+                <p data-field="caseDetail.keyPoint"></p>
+              </section>
+            </div>
+
+          </div>
+        </article>
+      </section>
+
+      <!-- ========================================
+          HIGHLIGHTS
+      ========================================= -->
+      <section class="project-highlights" data-section="highlights" data-gsap-target="section">
+        <h2 class="section-title">HIGHLIGHTS</h2>
+
+        <div class="highlight-list" data-field="highlights"></div>
+      </section>
+
+      <!-- ========================================
+          ETC
+      ========================================= -->
+      <section class="project-etc" data-section="etc" data-gsap-target="section">
+        <h2 class="section-title">ETC</h2>
+
+        <div class="project-etc__grid">
+          <div>
+            <h3>배포</h3>
+            <p data-field="etc.deployment"></p>
+          </div>
+
+          <div>
+            <h3>도구</h3>
+            <p data-field="etc.tools"></p>
+          </div>
+
+          <div>
+            <h3>기여</h3>
+            <p data-field="etc.contribution"></p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========================================
+        TEMPLATE
+    ========================================= -->
+
+    <!-- hero tag -->
+    <template id="tpl-hero-tag">
+      <li class="project-hero__tag"></li>
+    </template>
+
+    <!-- hero description -->
+    <template id="tpl-hero-desc">
+      <p class="project-hero__desc-line"></p>
+    </template>
+
+    <!-- case item -->
+    <template id="tpl-case-item">
+      <button class="case-item" role="tab" aria-selected="false">
+        <span class="case-item__title"></span>
+        <span class="case-item__summary"></span>
+      </button>
+    </template>
+
+    <!-- case step -->
+    <template id="tpl-case-step">
+      <li>
+        <figure>
+          <img src="" alt="" loading="lazy">
+          <figcaption></figcaption>
+        </figure>
+      </li>
+    </template>
+
+    <!-- highlight -->
+    <template id="tpl-highlight">
+      <article>
+        <h3></h3>
+        <p></p>
+      </article>
+    </template>
+
+    <!-- hero visual -->
+    <template id="tpl-hero-visual">
+      <figure>
+        <img src="" alt="">
+      </figure>
+    </template>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

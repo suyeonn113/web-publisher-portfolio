@@ -132,36 +132,37 @@ function renderTechStackIcons(techStack = []) {
 
 export async function loadProjects() {
   try {
-    const response = await fetch('./data/projects.json');
+    const response = await fetch('./data/projects-index.json');
     const data = await response.json();
+    const projects = Array.isArray(data) ? data : data?.projects;
     const wrapper = document.querySelector('.home-work__cards-wrapper');
 
     if (!wrapper) return false;
+    if (!Array.isArray(projects)) {
+      throw new TypeError('projects-index.json must contain a projects array.');
+    }
 
-    const folderHTML = data
-      .filter((project) => !project.DATA_MASTER_GUIDE)
+    const folderHTML = projects
       .map((project, index) => {
         const id = project.id || '';
-        const common = project.Common || {};
-        const preview = project.preview || {};
-        const spec = preview.spec || {};
+        const detailHref = `./project-detail.html?slug=${project.slug || project.id || ''}`;
         const svgIds = createSvgIds(id, index);
 
-        const dIcon = deviceIcons[spec.device] || 'monitor';
-        const tIcon = typeIcons[spec.projectType] || 'briefcase';
-        const filterClass = (preview.filterTags || [])
+        const dIcon = deviceIcons[project.device] || 'monitor';
+        const tIcon = typeIcons[project.projectType] || 'briefcase';
+        const filterClass = [project.device, project.projectType, ...(project.keywords || [])]
           .map((tag) => tag.trim().toLowerCase())
           .join(' ');
 
         return `
           <article class="home-work__card work__card is-folder ${filterClass}">
-            <a href="#" class="work-card__inner" aria-label="${common.title} 상세 보기">
+            <a href="${detailHref}" class="work-card__inner" aria-label="${project.title} ?곸꽭 蹂닿린">
               <div class="folder__back" aria-hidden="true" focusable="false">
                 ${renderFolderBackSvg(svgIds)}
               </div>
 
               <figure class="folder__img-box">
-                <img src="${preview.thumbnail || ''}" alt="" loading="lazy">
+                <img src="${project.thumbnail || ''}" alt="" loading="lazy">
                 <div class="folder__overlay"></div>
               </figure>
 
@@ -173,11 +174,11 @@ export async function loadProjects() {
 
                 <div class="folder__info">
                   <div class="folder__info-header">
-                    <h3 class="folder__title">${common.title || 'Untitled'}</h3>
+                    <h3 class="folder__title">${project.title || 'Untitled'}</h3>
                   </div>
 
                   <div class="folder__info-meta">
-                    <span class="folder__year">${(common.date || '').split('-')[0]}</span>
+                    <span class="folder__year">${(project.date || '').split('-')[0]}</span>
                     <div class="folder__category-icons">
                       <i data-lucide="${dIcon}"></i>
                       <i data-lucide="${tIcon}"></i>
@@ -185,8 +186,8 @@ export async function loadProjects() {
                   </div>
 
                   <div class="folder__info-footer">
-                    <ul class="folder__tech-list" aria-label="사용 기술">
-                      ${renderTechStackIcons(spec.techStack || [])}
+                    <ul class="folder__tech-list" aria-label="?ъ슜 湲곗닠">
+                      ${renderTechStackIcons(project.techStack || [])}
                     </ul>
                   </div>
                 </div>
@@ -210,3 +211,4 @@ export async function loadProjects() {
     return false;
   }
 }
+

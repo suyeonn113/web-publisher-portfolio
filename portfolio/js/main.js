@@ -24,6 +24,7 @@ import { renderFixedMenu, initFixedMenu } from "./components/fixedMenu.js";
 import { loadProjects } from './components/ProjectCardMain.js';
 import { loadWorkCardList } from './components/WorkCardList.js';
 import { initWorkSlider } from './components/workSlider.js';
+import { loadProjectDetail } from './components/ProjectDetail.js';
 
 // Animations
 import { initHeroText } from './animations/heroText.js';
@@ -78,4 +79,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       ScrollTrigger.refresh();
     }
   }
+
+  if (page === 'project-detail') {
+    const isProjectDetailLoaded = await loadProjectDetail();
+
+    if (isProjectDetailLoaded) {
+      ScrollTrigger.refresh();
+    }
+  }
+
 });

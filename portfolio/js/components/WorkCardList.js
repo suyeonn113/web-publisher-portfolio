@@ -35,8 +35,7 @@ const normalize = (v = '') => String(v).trim().toLowerCase();
 const getYear = (date = '') => (date.match(/\d{4}/)?.[0] || '');
 
 const getMeta = (project) => {
-  const spec = project?.preview?.spec || {};
-  return [spec.device, spec.projectType, ...(spec.keywords || [])].filter(Boolean);
+  return [project.device, project.projectType, ...(project.keywords || [])].filter(Boolean);
 };
 
 /* ========================================
@@ -57,7 +56,7 @@ function applyState() {
   } else if (state.sort === 'featured') {
     list.sort((a, b) => a._featuredOrder - b._featuredOrder);
   } else {
-    list.sort((a, b) => b.Common.date.localeCompare(a.Common.date));
+    list.sort((a, b) => b.date.localeCompare(a.date));
   }
 
   state.filtered = list;
@@ -170,10 +169,10 @@ function toggleEmptyState(isEmpty) {
 }
 
 function cardMarkup(project) {
-  const title = project.Common.title;
+  const title = project.title;
   const year = project._year;
-  const thumb = project.preview.thumbnail;
-  const detailHref = `./work-detail.html?project=${project.slug || project.id}`;
+  const thumb = project.thumbnail;
+  const detailHref = `./project-detail.html?slug=${project.slug || project.id}`;
   const previewAlt = `${title} preview`;
 
   return `
@@ -218,18 +217,22 @@ function bindEvents() {
    Init
 ======================================== */
 export async function loadWorkCardList() {
-  const response = await fetch('./data/projects.json');
+  const response = await fetch('./data/projects-index.json');
   const data = await response.json();
+  const projects = Array.isArray(data) ? data : data?.projects;
 
-  state.projects = data
-    .filter((project) => project?.Common && project?.preview)
+  if (!Array.isArray(projects)) {
+    throw new TypeError('projects-index.json must contain a projects array.');
+  }
+
+  state.projects = projects
     .map((project) => ({
       ...project,
-      _title: project.Common.title,
-      _year: getYear(project.Common.date),
-      _device: normalize(project.preview.spec?.device),
-      _type: normalize(project.preview.spec?.projectType),
-      _featuredOrder: project.preview.featuredOrder ?? 999
+      _title: project.title,
+      _year: getYear(project.date),
+      _device: normalize(project.device),
+      _type: normalize(project.projectType),
+      _featuredOrder: project.featuredOrder ?? 999
     }));
 
   render(state.projects);
@@ -238,3 +241,4 @@ export async function loadWorkCardList() {
 
   return true;
 }
+

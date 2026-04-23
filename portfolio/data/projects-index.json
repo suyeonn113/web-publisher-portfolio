@@ -1,0 +1,158 @@
+﻿{
+  "guide": {
+    "note": "목록 UI는 projects만 읽고, guide는 작성 참고용입니다.",
+    "summary": {
+      "id": "고유 ID",
+      "slug": "상세 연결용 슬러그",
+      "title": "목록에 보일 제목",
+      "date": "YYYY-MM",
+      "thumbnail": "목록 썸네일 경로",
+      "device": ["Mobile", "Tablet", "PC", "Responsive", "Desktop"],
+      "projectType": ["Brand", "E-commerce", "Promotion", "Personal", "Editorial", "Public", "Commercial"],
+      "keywords": "목록 메타용 키워드 배열",
+      "techStack": "아이콘 표시용 기술 배열",
+      "featuredOrder": "Featured 정렬 순서"
+    },
+    "keywordExamples": [
+      "Minimal",
+      "Clean",
+      "Editorial",
+      "Grid-based",
+      "Interactive",
+      "Parallax",
+      "Dark",
+      "Light"
+    ],
+    "techStackExamples": [
+      "HTML",
+      "CSS",
+      "SCSS",
+      "JavaScript",
+      "GSAP",
+      "Lenis",
+      "PHP",
+      "MySQL",
+      "Figma",
+      "jQuery",
+      "React",
+      "Lucide-Icons",
+      "github",
+      "git"
+    ]
+  },
+
+
+
+  "projects": [
+    {
+      "id": "p01",
+      "slug": "fragfarm-mobile",
+      "title": "FragFarm Mobile",
+      "date": "2026-04",
+      "thumbnail": "assets/images/projects/p01-thumb.jpg",
+      "device": "Mobile",
+      "projectType": "E-commerce",
+      "keywords": ["Minimal", "Clean"],
+      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "featuredOrder": 2
+    },
+
+
+    {
+      "id": "p02",
+      "slug": "seoul-youth-center",
+      "title": "Seoul Youth Center",
+      "date": "2026-04",
+      "thumbnail": "assets/images/projects/",
+      "device": "Mobile",
+      "projectType": "E-commerce",
+      "keywords": ["Minimal", "Clean"],
+      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "featuredOrder": 999
+    },
+
+
+    {
+      "id": "p03",
+      "slug": "fragfarm-mobile-redesign",
+      "title": "3",
+      "date": "2026-04",
+      "thumbnail": "assets/images/projects/",
+      "device": "Responsive",
+      "projectType": "Public",
+      "keywords": ["Minimal", "Clean"],
+      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "featuredOrder": 999
+    },
+
+
+    {
+      "id": "p04",
+      "slug": "fragfarm-mobile-redesign",
+      "title": "4",
+      "date": "2026-04",
+      "thumbnail": "assets/images/projects/",
+      "device": "Responsive",
+      "projectType": "Public",
+      "keywords": ["Minimal", "Clean"],
+      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "featuredOrder": 999
+    },
+
+
+    {
+      "id": "p05",
+      "slug": "fragfarm-mobile-redesign",
+      "title": "5",
+      "date": "2026-04",
+      "thumbnail": "assets/images/projects/",
+      "device": "PC",
+      "projectType": "Personal",
+      "keywords": ["Minimal", "Clean"],
+      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "featuredOrder": 999
+    },
+
+    
+    {
+      "id": "p06",
+      "slug": "fragfarm-mobile-redesign",
+      "title": "6",
+      "date": "2026-04",
+      "thumbnail": "assets/images/projects/",
+      "device": "PC",
+      "projectType": "Personal",
+      "keywords": ["Minimal", "Clean"],
+      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "featuredOrder": 999
+    },
+
+
+    {
+      "id": "p07",
+      "slug": "brand-concept-archive",
+      "title": "7",
+      "date": "2026-04",
+      "thumbnail": "assets/images/projects/",
+      "device": "Responsive",
+      "projectType": "Brand",
+      "keywords": ["Minimal", "Clean"],
+      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "featuredOrder": 999
+    },
+
+    
+    {
+      "id": "p08",
+      "slug": "brand-showcase-pc",
+      "title": "8",
+      "date": "2026-04",
+      "thumbnail": "assets/images/projects/",
+      "device": "PC",
+      "projectType": "Brand",
+      "keywords": ["Minimal", "Clean"],
+      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "featuredOrder": 999
+    }
+  ]
+}
