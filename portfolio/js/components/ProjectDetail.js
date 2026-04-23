@@ -182,7 +182,11 @@ function renderCaseSteps(caseItem, root) {
 
   container.innerHTML = '';
 
-  caseItem.steps?.forEach((step) => {
+  const steps = caseItem.steps || [];
+  const stepCount = Math.min(Math.max(steps.length, 1), 4);
+  container.dataset.stepCount = String(stepCount);
+
+  steps.forEach((step) => {
     const node = template.content.cloneNode(true);
     const image = node.querySelector('img');
     const caption = node.querySelector('figcaption');

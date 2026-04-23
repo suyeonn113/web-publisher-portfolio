@@ -31,7 +31,7 @@ body[data-page='project-detail'] {
 
   .section-title {
     @include text-style('sm', 'bold', 'tight', 'tight');
-    color: $text-secondary;
+    color: $point-primary;
     @include mar('gutter', 'md', 'bottom');
   }
 
@@ -41,19 +41,18 @@ body[data-page='project-detail'] {
     @include rd('lg');
     @include text-style('base', 'medium');
     color: $text-secondary;
-    background: $bg-glass-strong;
-    border: 1px solid $border-soft;
-    box-shadow: $shadow-surface-soft;
+    background: $detail-panel-bg;
+    border: 1px solid $detail-panel-border;
+    box-shadow: $detail-panel-shadow;
+    backdrop-filter: $detail-panel-backdrop;
   }
 
-  .project-summary__grid article,
-  .case-detail,
-  .highlight-list > article,
-  .project-etc__grid > div {
+  .case-detail {
     @include rd('lg');
-    border: 1px solid $border-soft;
-    background: $bg-glass-strong;
-    box-shadow: $shadow-surface-soft;
+    border: 1px solid $detail-panel-border;
+    background: $detail-panel-bg;
+    box-shadow: $detail-panel-shadow;
+    backdrop-filter: $detail-panel-backdrop;
   }
 
   .project-summary__grid h3,
@@ -82,11 +81,6 @@ body[data-page='project-detail'] {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     @include g-gap('gutter', 'lg');
-    @include pad('pad', 'lg');
-    @include rd('lg');
-    border: 1px solid $border-soft;
-    background: $bg-glass-strong;
-    box-shadow: $shadow-surface-soft;
   }
 
   .project-hero__body {
@@ -104,8 +98,9 @@ body[data-page='project-detail'] {
     @include rd('xl');
     @include text-style('xs', 'bold');
     color: $text-secondary;
-    background: $bg-surface;
-    border: 1px solid $border-soft;
+    background: $detail-panel-bg;
+    border: 1px solid var(--work-folder-hover-radial-end);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
   }
 
   .project-hero__title {
@@ -138,14 +133,17 @@ body[data-page='project-detail'] {
     @include rd('xl');
     @include text-style('xs', 'medium');
     color: $text-primary;
-    background: $bg-surface;
-    border: 1px solid $border-soft;
+    background: $detail-panel-bg;
+    border: 1px solid var(--work-folder-hover-radial-end);;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
   }
 
   .project-meta {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     @include g-gap('gutter', 'md');
+    @include pad('pad', 'md', 'top');
+    border-top: 1px solid $border-soft;
   }
 
   .project-meta > div {
@@ -181,10 +179,15 @@ body[data-page='project-detail'] {
     @include pad('pad', 'md', 'x');
     @include rd('xl');
     @include text-style('sm', 'medium');
-    border: 1px solid $border-soft;
-    background: $bg-surface;
-    box-shadow: $work-filter-control-shadow;
+    border: 1px solid var(--work-folder-hover-radial-end);
+    background: $detail-panel-bg;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
     text-shadow: none;
+
+    &:hover {
+      background: $work-folder-gradient-hover;
+      border: 1px solid $border-strong;
+    }
   }
 
   .project-hero__visual {
@@ -207,9 +210,10 @@ body[data-page='project-detail'] {
     flex: 0 1 auto;
     overflow: hidden;
     @include rd('md');
-    border: 1px solid $border-soft;
-    background: $bg-surface;
-    box-shadow: $shadow-surface-soft;
+    border: 1px solid $detail-panel-border;
+    background: $detail-panel-bg;
+    box-shadow: $detail-panel-shadow;
+    backdrop-filter: $detail-panel-backdrop;
   }
 
   .project-hero__device img {
@@ -251,9 +255,9 @@ body[data-page='project-detail'] {
     justify-content: flex-start;
     min-width: 0;
     height: 100%;
-    min-height: rem(176px);
-    @include pad('pad', 'md');
+    @include pad('pad', 'sm', 'top');
     @include f-gap('gutter', 'md');
+    border-top: 1px solid $border-soft;
   }
 
   .project-summary__grid h3 {
@@ -270,60 +274,62 @@ body[data-page='project-detail'] {
 
   .case-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     @include g-gap('gutter', 'md');
   }
 
   .case-item {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     justify-content: flex-start;
     width: 100%;
-    min-height: rem(176px);
+    min-height: rem(64px);
     @include pad('pad', 'md');
     @include f-gap('gutter', 'md');
-    @include rd('lg');
+    @include rd('md');
     border: 1px solid $border-soft;
-    background: $bg-glass-strong;
-    box-shadow: $shadow-surface-soft;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
     text-align: left;
     transition:
       transform get-duration('fast') get-easing('apple'),
       border-color get-duration('fast') get-easing('apple'),
       color get-duration('fast') get-easing('apple'),
-      box-shadow get-duration('fast') get-easing('apple'),
       background-color get-duration('fast') get-easing('apple');
   }
 
   .case-item.is-active,
   .case-item[aria-selected='true'] {
-    border-color: $work-filter-selected-border;
-    background: $work-filter-selected-bg;
-    box-shadow: $work-filter-selected-shadow;
+    border-color: $border-strong;
+    background: $work-folder-gradient-active;
+    box-shadow: none;
   }
 
   .case-item__title {
-    @include text-style('base', 'bold', 'tight');
+    @include text-style('sm', 'bold', 'tight');
     color: $text-primary;
+    word-break: keep-all;
   }
 
   .case-item__summary {
-    @include text-style('sm');
+    @include text-style('xs');
     color: $text-secondary;
   }
 
   @media (hover: hover) and (pointer: fine) {
     .case-item:hover {
-      transform: translateY(rem(-2px));
+      transform: translateY(rem(-1px));
       border-color: $border-strong;
-      box-shadow: $shadow-surface-strong;
+      background: var(--work-folder-image-depth-bottom);
     }
   }
 
   .case-item:focus-visible {
     outline: none;
     border-color: $border-strong;
+    background: var(--work-folder-image-depth-bottom);
   }
 
   /* ========================================
@@ -352,25 +358,32 @@ body[data-page='project-detail'] {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     @include g-gap('gutter', 'sm');
+    align-content: start;
+    align-items: start;
+    grid-auto-rows: max-content;
   }
 
   .case-steps li {
     min-width: 0;
+    align-self: start;
   }
 
   .case-steps figure {
     display: flex;
     flex-direction: column;
-    height: 100%;
     overflow: hidden;
     @include rd('md');
-    border: 1px solid $border-soft;
-    background: $bg-surface;
+    border: 1px solid $detail-panel-border;
+    background: $detail-panel-bg;
+    box-shadow: $detail-panel-shadow;
+    backdrop-filter: $detail-panel-backdrop;
+    max-height: rem(320px);
   }
 
   .case-steps img {
     width: 100%;
-    aspect-ratio: 3 / 5;
+    height: auto;
+    max-height: rem(240px);
     object-fit: cover;
     background: $bg-main;
   }
@@ -382,10 +395,35 @@ body[data-page='project-detail'] {
     border-top: 1px solid $border-soft;
   }
 
+  .case-steps[data-step-count='1'] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case-steps[data-step-count='1'] li {
+    max-width: rem(420px);
+    justify-self: center;
+  }
+
+  .case-steps[data-step-count='2'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case-steps[data-step-count='3'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case-steps[data-step-count='3'] li:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .case-steps[data-step-count='4'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .case-detail__content {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    @include g-gap('gutter', 'md');
+    @include g-gap('gutter', 'lg');
   }
 
   .case-detail__content section {
@@ -393,10 +431,8 @@ body[data-page='project-detail'] {
     flex-direction: column;
     min-width: 0;
     @include f-gap('gutter', 'sm');
-    @include pad('pad', 'md');
-    @include rd('md');
-    background: $bg-surface;
-    border: 1px solid $border-soft;
+    @include pad('pad', 'sm', 'top');
+    border-top: 1px solid $border-soft;
   }
 
   .case-detail__content h4 {
@@ -423,12 +459,12 @@ body[data-page='project-detail'] {
   .case-detail__implementation-item::before {
     content: '';
     position: absolute;
-    top: 0.8em;
+    top: 0.6em;
     left: 0;
-    width: rem(6px);
-    height: rem(6px);
+    width: rem(5px);
+    height: rem(5px);
     @include rd('xl');
-    background: $point-primary;
+    background: var(--home-hero-main-strong-mid);
   }
 
   /* ========================================
@@ -439,17 +475,32 @@ body[data-page='project-detail'] {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     @include g-gap('gutter', 'md');
+    counter-reset: highlight;
   }
 
   .highlight-list > article {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     min-width: 0;
     height: 100%;
-    min-height: rem(176px);
-    @include pad('pad', 'md');
+    @include pad('pad', 'sm', 'top');
+    @include pad('pad', 'lg', 'left');
     @include f-gap('gutter', 'md');
+    border-top: 1px solid $border-soft;
+  }
+
+  .highlight-list > article::before {
+    counter-increment: highlight;
+    content: counter(highlight, decimal-leading-zero);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-50%);
+    @include text-style('xs', 'bold');
+    color: $text-tertiary;
+    letter-spacing: 0.12em;
   }
 
   .highlight-list h3 {
@@ -466,7 +517,7 @@ body[data-page='project-detail'] {
 
   .project-etc__grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     @include g-gap('gutter', 'md');
   }
 
@@ -476,9 +527,9 @@ body[data-page='project-detail'] {
     justify-content: flex-start;
     min-width: 0;
     height: 100%;
-    min-height: rem(176px);
-    @include pad('pad', 'md');
+    @include pad('pad', 'sm', 'top');
     @include f-gap('gutter', 'md');
+    border-top: 1px solid $border-soft;
   }
 
   .project-etc__grid h3 {
@@ -504,15 +555,39 @@ body[data-page='project-detail'] {
     }
 
     .case-list {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
     .case-steps {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
+    .case-steps[data-step-count='1'] {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .case-steps[data-step-count='2'] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .case-steps[data-step-count='3'] {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .case-steps[data-step-count='3'] li:first-child {
+      grid-column: auto;
+    }
+
+    .case-steps[data-step-count='4'] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .highlight-list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-etc__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
@@ -522,7 +597,7 @@ body[data-page='project-detail'] {
     }
 
     .project-hero__visual > div {
-      justify-content: flex-end;
+      justify-content: center;
     }
 
     .project-hero__device--pc {
@@ -530,7 +605,7 @@ body[data-page='project-detail'] {
     }
 
     .case-list {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
     .case-detail__layout {
@@ -539,7 +614,7 @@ body[data-page='project-detail'] {
     }
 
     .highlight-list {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
   }

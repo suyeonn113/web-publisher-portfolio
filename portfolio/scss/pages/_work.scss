@@ -87,7 +87,7 @@
   flex-wrap: wrap;
   align-items: center;
   min-width: 0;
-  @include f-gap('gutter', 'md');
+  @include f-gap('gutter', 'sm');
 }
 
 .work-page__filter-btn {
@@ -106,7 +106,7 @@
   background: $bg-glass-strong;
   color: $text-primary;
   cursor: pointer;
-  box-shadow: $work-filter-control-shadow;
+  box-shadow: var(--work-filter-control-shadow);
   transition:
     transform get-duration('fast') get-easing('apple'),
     background-color get-duration('fast') get-easing('apple'),
@@ -116,26 +116,26 @@
 
   &[aria-pressed='true'] {
     transform: translateY(rem(-1px));
-    border-color: $work-filter-selected-border;
-    background: $work-filter-selected-bg;
-    color: $work-filter-selected-text;
-    box-shadow: $work-filter-selected-shadow;
+    border-color: var(--work-folder-hover-radial-end);
+    background: var(--work-folder-hover-radial-start);
+    color: var(--work-folder-text);
+    box-shadow: 0 10px 24px var(--work-folder-shadow);
   }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       transform: translateY(rem(-2px));
-      border-color: $border-strong;
-      color: $point-primary;
-      box-shadow: $work-filter-control-shadow;
+      border-color: var(--work-folder-hover-radial-end);
+      color: var(--work-folder-text);
+      box-shadow: var(--work-filter-control-shadow);
     }
 
     &[aria-pressed='true']:hover {
       transform: translateY(rem(-2px));
-      border-color: $work-filter-selected-hover-border;
-      background: $work-filter-selected-hover-bg;
-      color: $work-filter-selected-hover-text;
-      box-shadow: $work-filter-selected-hover-shadow;
+      border-color: var(--work-folder-hover-radial-end);
+      background: var(--work-folder-hover-radial-start);
+      color: var(--work-folder-text);
+      box-shadow: 0 14px 28px var(--work-folder-shadow);
     }
   }
 }
@@ -277,7 +277,7 @@
 .work-card__link > img {
   display: block;
   width: 100%;
-  aspect-ratio: 1.78 / 1;
+  aspect-ratio: 1.71 / 1;
   object-fit: cover;
   overflow: hidden;
   background: $bg-glass;
@@ -290,28 +290,23 @@
   position: absolute;
   left: rem(24px);
   right: rem(24px);
-  bottom: rem(24px);
+  bottom: rem(20px);
   z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   min-width: 0;
   min-height: 0;
-  max-width: min(30rem, calc(100% - #{rem(48px)}));
-  padding: rem(20px) rem(22px);
+  max-width: min(32rem, calc(100% - #{rem(48px)}));
+  padding: 0;
   gap: rem(10px);
-  border-radius: rem(20px);
-  border: 1px solid $border-soft;
-  background: linear-gradient(180deg, $bg-glass-strong 0%, $bg-glass 100%);
-  box-shadow: $shadow-surface-soft, inset 0 1px 0 var(--work-folder-image-inset-highlight);
-  backdrop-filter: blur(18px) saturate(1.08);
+  transition: transform get-duration('base') get-easing('apple');
 
   @include respond-down('laptop') {
     left: rem(20px);
     right: rem(20px);
-    bottom: rem(20px);
-    max-width: min(26rem, calc(100% - #{rem(40px)}));
-    padding: rem(18px) rem(20px);
+    bottom: rem(18px);
+    max-width: min(28rem, calc(100% - #{rem(40px)}));
   }
 
   @include respond-down('tablet') {
@@ -319,7 +314,6 @@
     right: rem(16px);
     bottom: rem(16px);
     max-width: calc(100% - #{rem(32px)});
-    padding: rem(16px) rem(18px);
     gap: rem(8px);
   }
 
@@ -328,7 +322,6 @@
     right: rem(14px);
     bottom: rem(14px);
     max-width: calc(100% - #{rem(28px)});
-    padding: rem(14px) rem(16px);
   }
 }
 
@@ -393,9 +386,21 @@
     filter: saturate(1.06) contrast(1.04);
   }
 
+  .work-card__link:hover .work-card__title {
+    color: var(--color-point-primary); // 이미 있는 포인트 컬러
+  }
+
+  .work-card__link:hover .work-card__year,
+  .work-card__link:hover .work-card__meta li {
+    color: var(--work-folder-text); // 메타를 본문 색으로 살짝 끌어올림
+  }
+
+  .work-card__link:hover .work-card__meta li {
+    background: rgba(255, 255, 255, 0.2); // 기존 glass 톤 유지하면서만 변화
+  }
+
   .work-card__link:hover .work-card__body {
-    border-color: $border-strong;
-    background: linear-gradient(180deg, $bg-glass-strong 0%, rgba(255, 255, 255, 0.1) 100%);
+    transform: translateY(rem(-2px));
   }
 }
 
