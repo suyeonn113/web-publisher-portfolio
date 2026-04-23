@@ -2625,21 +2625,21 @@ input[type=search]::-webkit-search-decoration {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  gap: 32px;
+  gap: 16px;
 }
 @media (max-width: 1024px) {
   .work-page__filter-set {
-    gap: 32px;
+    gap: 16px;
   }
 }
 @media (max-width: 768px) {
   .work-page__filter-set {
-    gap: 24px;
+    gap: 16px;
   }
 }
 @media (max-width: 480px) {
   .work-page__filter-set {
-    gap: 16px;
+    gap: 12px;
   }
 }
 
