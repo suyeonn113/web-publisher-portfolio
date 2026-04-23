@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.lucide.createIcons();
   }
 
-  const lenis = initLenis();
+  const lenis = initLenis(page);
   initScrollStability(lenis);
 
   renderHeader();

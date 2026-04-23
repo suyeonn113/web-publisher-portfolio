@@ -2,9 +2,13 @@ import Lenis from 'https://cdn.jsdelivr.net/npm/lenis@1.3.11/+esm';
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
 
-export function initLenis() {
-  // Disable Lenis on mobile for better performance
-  if (window.innerWidth <= 768) {
+export function initLenis(page = '') {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isDesktopViewport = window.innerWidth > 768;
+  const shouldUseSmoothScroll = page === 'home';
+
+  // Keep native scrolling outside home to reduce scroll jank.
+  if (!isDesktopViewport || prefersReducedMotion || !shouldUseSmoothScroll) {
     return null;
   }
 

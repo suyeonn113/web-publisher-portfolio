@@ -11,8 +11,6 @@ export const initWorkEntrance = () => {
   if (!cards.length) return;
 
   const isMobile = window.innerWidth < 768;
-  const prefersTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-  const disableDirectionReverse = isMobile || prefersTouch;
   const cardData = getWorkCardLayout(cards, 0);
   const sortedByRight = [...cardData].sort((a, b) => b.x - a.x);
 
@@ -20,17 +18,13 @@ export const initWorkEntrance = () => {
     if (workSection) {
       gsap.set(workSection, {
         yPercent: isMobile ? 4 : 3,
-        opacity: 0,
-        clipPath: isMobile
-          ? "inset(6% 0 0 0 round 24px 24px 0 0)"
-          : "inset(8% 0 0 0 round 32px 32px 0 0)"
+        autoAlpha: 0
       });
     }
 
     gsap.set(headerItems, {
-      opacity: 0,
-      y: isMobile ? 12 : 16,
-      filter: "blur(8px)"
+      autoAlpha: 0,
+      y: isMobile ? 12 : 16
     });
 
     sortedByRight.forEach((data) => {
@@ -39,8 +33,7 @@ export const initWorkEntrance = () => {
         y: data.y + (isMobile ? 32 : 44),
         scale: data.scale * 0.92,
         rotation: isMobile ? -4 : -6,
-        opacity: 0,
-        filter: "blur(14px)",
+        autoAlpha: 0,
         zIndex: data.zIndex,
         force3D: true
       });
@@ -61,15 +54,11 @@ export const initWorkEntrance = () => {
       workSection,
       {
         yPercent: isMobile ? 4 : 3,
-        opacity: 0,
-        clipPath: isMobile
-          ? "inset(6% 0 0 0 round 24px 24px 0 0)"
-          : "inset(8% 0 0 0 round 32px 32px 0 0)"
+        autoAlpha: 0
       },
       {
         yPercent: 0,
-        opacity: 1,
-        clipPath: "inset(0% 0 0 0 round 0px 0px 0 0)",
+        autoAlpha: 1,
         duration: isMobile ? 0.54 : 0.62,
         ease: "power2.out"
       }
@@ -84,16 +73,14 @@ export const initWorkEntrance = () => {
         y: data.y + (isMobile ? 32 : 44),
         scale: data.scale * 0.92,
         rotation: isMobile ? -4 : -6,
-        opacity: 0,
-        filter: "blur(14px)"
+        autoAlpha: 0
       },
       {
         x: data.x,
         y: data.y,
         scale: data.scale,
         rotation: 0,
-        opacity: 1,
-        filter: "blur(0px)",
+        autoAlpha: 1,
         zIndex: data.zIndex,
         duration: isMobile ? 0.52 : 0.58,
         ease: "power2.out"
@@ -109,9 +96,8 @@ export const initWorkEntrance = () => {
   });
 
   tl.to(headerItems, {
-    opacity: 1,
+    autoAlpha: 1,
     y: 0,
-    filter: "blur(0px)",
     duration: 0.36,
     stagger: 0.07
   }, "+=0.02");
@@ -124,38 +110,11 @@ export const initWorkEntrance = () => {
       tl.restart();
     },
     onEnterBack: () => {
-      tl.play();
-    },
-    onUpdate: (self) => {
-      if (disableDirectionReverse) {
-        if (self.direction === 1 && tl.progress() === 0) {
-          tl.restart();
-        }
-        return;
-      }
-
-      if (self.direction === -1) {
-        tl.timeScale(1.15).reverse();
-        return;
-      }
-
-      if (self.direction === 1) {
-        if (tl.progress() === 0) {
-          tl.restart();
-          return;
-        }
-
-        tl.timeScale(1.1).play();
-      }
+      tl.play(0);
     },
     onLeaveBack: () => {
-      if (disableDirectionReverse) {
-        tl.pause(0);
-        resetEntranceState();
-        return;
-      }
-
-      tl.timeScale(1.15).reverse();
+      tl.pause(0);
+      resetEntranceState();
     }
   });
 };

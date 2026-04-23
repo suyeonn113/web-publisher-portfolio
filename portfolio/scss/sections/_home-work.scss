@@ -30,7 +30,7 @@
     @include text-style('title', 'bold', 'tight', 'tight');
     color: $text-secondary;
     letter-spacing: -0.04em;
-    text-shadow: $btn-shadow;
+    text-shadow: $shadow-soft;
   }
 
   .btn-more {
@@ -39,7 +39,7 @@
     &:hover{
       color: $point-primary;
     }
-    text-shadow: $btn-shadow;
+    text-shadow: $shadow-soft;
   }
 }
 

@@ -1,28 +1,108 @@
 @use '../foundation' as *;
 
-.btn {
-  background: none;
-  border: 0;
-  padding: 0;
-  color: $text-primary;
-  opacity: $btn-opacity;
-  letter-spacing: $btn-ls;
-  text-shadow: $btn-shadow;
-  transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+body[data-page='work'] .btn,
+body[data-page='project-detail'] .btn {
+  --btn-local-bg: #{$button-surface-bg};
+  --btn-local-bg-hover: #{$button-surface-bg-hover};
+  --btn-local-bg-active: #{$button-surface-bg-active};
+  --btn-local-border: #{$button-border};
+  --btn-local-border-hover: #{$button-border-hover};
+  --btn-local-border-active: #{$button-border-active};
+  --btn-local-shadow: #{$button-shadow};
+  --btn-local-shadow-hover: #{$button-shadow-hover};
+  --btn-local-shadow-active: #{$button-shadow-active};
+  --btn-local-text: #{$button-text};
+  --btn-local-text-hover: #{$button-text-hover};
+  --btn-local-text-active: #{$button-text-active};
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(8px);
+  min-width: map-get($btn-settings, 'min-size');
+  min-height: map-get($btn-settings, 'min-size');
+  @include pad('pad', 'xs', 'y');
+  @include pad('pad', 'sm', 'x');
+  @include rd('xl');
+  @include text-style('sm', 'medium');
+
+  border: $button-border-width solid var(--btn-local-border);
+  background: var(--btn-local-bg);
+  color: var(--btn-local-text);
+  letter-spacing: $button-letter-spacing;
+  text-decoration: none;
+  box-shadow: var(--btn-local-shadow);
+  backdrop-filter: $button-backdrop;
+  -webkit-backdrop-filter: $button-backdrop;
+  transition:
+    transform get-duration('fast') get-easing('apple'),
+    background get-duration('fast') get-easing('apple'),
+    border-color get-duration('fast') get-easing('apple'),
+    color get-duration('fast') get-easing('apple'),
+    box-shadow get-duration('fast') get-easing('apple');
   cursor: pointer;
 }
 
-.btn:hover {
-  opacity: $btn-opacity-hover;
-  color: $point-primary;
-  transform: translateY(-2px);
+body[data-page='work'] .btn:is(.is-active, [aria-pressed='true'], [aria-selected='true'], [aria-current='page']),
+body[data-page='project-detail'] .btn:is(.is-active, [aria-pressed='true'], [aria-selected='true'], [aria-current='page']) {
+  transform: translateY(rem(-1px));
+  background: var(--btn-local-bg-active);
+  border-color: var(--btn-local-border-active);
+  color: var(--btn-local-text-active);
+  box-shadow: var(--btn-local-shadow-active);
 }
 
-.btn:active {
+@media (hover: hover) and (pointer: fine) {
+  body[data-page='work'] .btn:hover,
+  body[data-page='project-detail'] .btn:hover {
+    transform: translateY(rem(-2px));
+    background: var(--btn-local-bg-hover);
+    border-color: var(--btn-local-border-hover);
+    color: var(--btn-local-text-hover);
+    box-shadow: var(--btn-local-shadow-hover);
+  }
+
+  body[data-page='work'] .btn:is(.is-active, [aria-pressed='true'], [aria-selected='true'], [aria-current='page']):hover,
+  body[data-page='project-detail'] .btn:is(.is-active, [aria-pressed='true'], [aria-selected='true'], [aria-current='page']):hover {
+    background: var(--btn-local-bg-active);
+    border-color: var(--btn-local-border-active);
+    color: var(--btn-local-text-active);
+    box-shadow: var(--btn-local-shadow-active);
+  }
+}
+
+body[data-page='work'] .btn:active,
+body[data-page='project-detail'] .btn:active {
   transform: translateY(0);
 }
 
-.btn:focus-visible {
-  outline-offset: 4px;
-  opacity: 1;
+body[data-page='work'] .btn:focus-visible,
+body[data-page='project-detail'] .btn:focus-visible {
+  outline: rem(2px) solid $point-primary;
+  outline-offset: rem(4px);
+}
+
+body[data-page='work'] .btn--compact,
+body[data-page='project-detail'] .btn--compact {
+  min-height: rem(36px);
+  @include pad('pad', 'xs', 'y');
+  padding-inline: rem(11.2px);
+  @include text-style('xs', 'medium');
+}
+
+body[data-page='work'] .btn--wide,
+body[data-page='project-detail'] .btn--wide {
+  @include pad('pad', 'md', 'x');
+}
+
+body[data-page='work'] .btn--block,
+body[data-page='project-detail'] .btn--block {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+body[data-page='work'] .btn--surface,
+body[data-page='project-detail'] .btn--surface {
+  --btn-local-bg: #{$detail-panel-bg};
+  --btn-local-bg-hover: #{$button-surface-bg-hover};
 }

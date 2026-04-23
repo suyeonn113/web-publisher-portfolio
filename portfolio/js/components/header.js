@@ -90,21 +90,30 @@ export function initHeaderScroll() {
   // 페이지 추가
 
   let lastY = window.scrollY;
+  let isHidden = false;
 
   ScrollTrigger.create({
     start: 0,
     end: "max",
     onUpdate: () => {
       const currentY = window.scrollY;
+      const isScrollingDown = currentY > lastY;
+      const hasMovedEnough = Math.abs(currentY - lastY) > 6;
 
-      if (currentY > lastY) {
+      if (!hasMovedEnough) {
+        return;
+      }
+
+      if (isScrollingDown && !isHidden) {
+        isHidden = true;
         gsap.to(header, {
           yPercent: -100,
           duration: 0.3,
           ease: "power2.out",
           overwrite: "auto"
         });
-      } else {
+      } else if (!isScrollingDown && isHidden) {
+        isHidden = false;
         gsap.to(header, {
           yPercent: 0,
           duration: 0.3,

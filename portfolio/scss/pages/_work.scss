@@ -79,7 +79,7 @@
 
 .work-page__filter-title {
   @include text-style('sm', 'medium');
-  color: $text-secondary;
+  color: $text-tertiary;
 }
 
 .work-page__filter-group {
@@ -91,53 +91,8 @@
 }
 
 .work-page__filter-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   flex: 0 0 auto;
-  min-width: rem(44px);
-  min-height: rem(44px);
-  @include pad('pad', 'sm', 'x');
-  @include pad('pad', 'xs', 'y');
-  @include rd('xl');
   @include text-style('sm', 'medium');
-
-  border: 1px solid $border-soft;
-  background: $bg-glass-strong;
-  color: $text-primary;
-  cursor: pointer;
-  box-shadow: var(--work-filter-control-shadow);
-  transition:
-    transform get-duration('fast') get-easing('apple'),
-    background-color get-duration('fast') get-easing('apple'),
-    border-color get-duration('fast') get-easing('apple'),
-    color get-duration('fast') get-easing('apple'),
-    box-shadow get-duration('fast') get-easing('apple');
-
-  &[aria-pressed='true'] {
-    transform: translateY(rem(-1px));
-    border-color: var(--work-folder-hover-radial-end);
-    background: var(--work-folder-hover-radial-start);
-    color: var(--work-folder-text);
-    box-shadow: 0 10px 24px var(--work-folder-shadow);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      transform: translateY(rem(-2px));
-      border-color: var(--work-folder-hover-radial-end);
-      color: var(--work-folder-text);
-      box-shadow: var(--work-filter-control-shadow);
-    }
-
-    &[aria-pressed='true']:hover {
-      transform: translateY(rem(-2px));
-      border-color: var(--work-folder-hover-radial-end);
-      background: var(--work-folder-hover-radial-start);
-      color: var(--work-folder-text);
-      box-shadow: 0 14px 28px var(--work-folder-shadow);
-    }
-  }
 }
 
 .work-page__sort {
@@ -156,21 +111,24 @@
   @include pad('pad', 'xs', 'y');
   @include rd('xl');
   @include text-style('sm', 'medium');
-  border: 1px solid $border-soft;
-  background: $bg-glass-strong;
+  border: $button-border-width solid $button-border;
+  background: $button-surface-bg;
   color: $text-primary;
-  box-shadow: $work-filter-control-shadow;
+  box-shadow: $button-shadow;
+  backdrop-filter: $button-backdrop;
+  -webkit-backdrop-filter: $button-backdrop;
   transition:
     border-color get-duration('fast') get-easing('apple'),
     color get-duration('fast') get-easing('apple'),
     box-shadow get-duration('fast') get-easing('apple'),
-    background-color get-duration('fast') get-easing('apple');
+    background get-duration('fast') get-easing('apple');
 
   &:focus-visible {
     outline: none;
-    border-color: $border-strong;
-    color: $point-primary;
-    box-shadow: $work-filter-control-shadow;
+    border-color: $button-border-active;
+    color: $button-text-active;
+    background: $button-surface-bg-active;
+    box-shadow: $button-shadow-active;
   }
 }
 
@@ -269,7 +227,7 @@
   inset: 0;
   z-index: 1;
   background:
-    $overlay-strong,
+    $overlay-soft,
     linear-gradient(135deg, var(--work-folder-gloss-top) 0%, var(--work-folder-gloss-bottom) 38%);
   pointer-events: none;
 }
@@ -281,6 +239,8 @@
   object-fit: cover;
   overflow: hidden;
   background: $bg-glass;
+  transform: scale(1.015);
+  filter: saturate(1.03) contrast(1.02);
   transition:
     transform get-duration('slow') get-easing('apple'),
     filter get-duration('base') get-easing('apple');
@@ -341,7 +301,8 @@
 .work-card__year {
   @include text-style('sm', 'medium');
   line-height: 1.3;
-  color: var(--work-folder-meta-icon-color);
+  color: $card-meta-text;
+  opacity: $card-meta-text-opacity;
 }
 
 .work-card__meta {
@@ -363,12 +324,15 @@
   min-width: 0;
   @include text-style('xs', 'medium');
   line-height: 1.2;
-  color: var(--work-folder-meta-icon-color);
-  padding: rem(7.2px) rem(11.2px);
+  color: $card-meta-text;
+  padding: rem(6px) rem(10px);
   border-radius: rem(999px);
-  border: 1px solid var(--work-folder-image-border);
-  background: $bg-glass;
-  box-shadow: inset 0 1px 0 var(--work-folder-image-inset-highlight);
+  border: $chip-border-width solid $card-meta-chip-border;
+  background: $card-meta-chip-bg;
+  box-shadow: $card-meta-chip-shadow;
+  backdrop-filter: $chip-backdrop;
+  -webkit-backdrop-filter: $chip-backdrop;
+  opacity: $card-meta-text-opacity;
 
   &::after {
     content: none !important;
@@ -382,8 +346,8 @@
   }
 
   .work-card__link:hover > img {
-    transform: scale(1.05);
-    filter: saturate(1.06) contrast(1.04);
+    transform: scale(1.07);
+    filter: saturate(1.1) contrast(1.06);
   }
 
   .work-card__link:hover .work-card__title {
@@ -392,11 +356,14 @@
 
   .work-card__link:hover .work-card__year,
   .work-card__link:hover .work-card__meta li {
-    color: var(--work-folder-text); // 메타를 본문 색으로 살짝 끌어올림
+    color: $card-meta-text-hover; // 메타를 본문 색으로 살짝 끌어올림
+    opacity: $card-meta-text-opacity-hover;
   }
 
   .work-card__link:hover .work-card__meta li {
-    background: rgba(255, 255, 255, 0.2); // 기존 glass 톤 유지하면서만 변화
+    background: $card-meta-chip-bg-hover;
+    border-color: $card-meta-chip-border-hover;
+    box-shadow: $card-meta-chip-shadow-hover;
   }
 
   .work-card__link:hover .work-card__body {

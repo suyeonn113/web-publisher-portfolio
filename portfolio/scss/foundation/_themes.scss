@@ -86,17 +86,6 @@
   --work-folder-tech-base: rgba(34, 42, 56, 0.82);
   --work-folder-tech-shadow: rgba(255, 255, 255, 0.3);
 
-  --work-folder-gradient-active: linear-gradient(
-    180deg,
-    var(--work-folder-hover-radial-start),
-    var(--work-folder-hover-radial-end)
-  );
-  --work-folder-gradient-hover: linear-gradient(
-    180deg,
-    var(--work-folder-highlight-soft),
-    var(--work-folder-hover-radial-start)
-  );
-
   /* Main background */
   --main-bg-top: #f7fbff;
   --main-bg-upper-mid: #eef5fc;
@@ -128,17 +117,61 @@
   --color-point-highlight: #ff6482;
   --color-point-success: #30d158;
 
-  /* Component */
-  --btn-text-color: var(--color-text-primary);
-  --btn-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  --btn-text-opacity: 1;
-  --btn-text-opacity-hover: 1;
-  --btn-letter-spacing: 0.01em;
+  /* ============================================================
+     Component
+  ============================================================ */
 
-  /* Work filter */
-  --work-filter-control-shadow:
-    0 8px 18px rgba(104, 128, 166, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.56);
+  /* Button */
+  --button-text: var(--color-text-primary);
+  --button-text-hover: var(--work-folder-text);
+  --button-text-active: var(--work-folder-text);
+  --button-letter-spacing: 0.01em;
+  --button-border-width: 1px;
+  --button-backdrop: blur(12px) saturate(1.06);
+  --button-surface-bg: var(--color-bg-glass);
+  --button-surface-bg-hover: rgba(255, 255, 255, 0.2);
+  --button-surface-bg-active: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(184, 231, 255, 0.34) 34%,
+    rgba(89, 158, 255, 0.18) 68%,
+    rgba(255, 255, 255, 0.16) 100%
+  );
+  --button-border: var(--work-folder-image-border);
+  --button-border-hover: rgba(89, 154, 255, 0.34);
+  --button-border-active: var(--cursor-border-hover);
+  --button-shadow:
+    inset 0 1px 0 var(--work-folder-image-inset-highlight);
+  --button-shadow-hover:
+    inset 0 1px 0 rgba(255, 255, 255, 0.66);
+  --button-shadow-active:
+    0 12px 30px rgba(104, 169, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  /* Chip */
+  --chip-text: var(--color-text-primary);
+  --chip-border-width: 1px;
+  --chip-backdrop: blur(12px) saturate(1.06);
+  --chip-surface-bg: var(--color-bg-glass);
+  --chip-border: var(--work-folder-image-border);
+  --chip-shadow:
+    inset 0 1px 0 var(--work-folder-image-inset-highlight);
+
+  /* Card */
+  --card-meta-text: var(--work-folder-meta-icon-color);
+  --card-meta-text-hover: var(--work-folder-text);
+  --card-meta-text-opacity: 0.88;
+  --card-meta-text-opacity-hover: 1;
+  --card-meta-chip-bg: rgba(255, 255, 255, 0.1);
+  --card-meta-chip-bg-hover: rgba(255, 255, 255, 0.14);
+  --card-meta-chip-border: rgba(255, 255, 255, 0.08);
+  --card-meta-chip-border-hover: rgba(255, 255, 255, 0.14);
+  --card-meta-chip-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  --card-meta-chip-shadow-hover:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+
+  /* Panel */
   --work-empty-bg: rgba(17, 17, 17, 0.04);
   --detail-panel-bg: linear-gradient(
     180deg,
@@ -159,7 +192,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.54);
   --detail-panel-backdrop: blur(22px) saturate(1.12);
 
-  // Cursor
+  /* Cursor */
   --cursor-bg: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.55) 0%,
@@ -288,17 +321,6 @@
   --work-folder-tech-base: rgba(234, 245, 255, 0.92);
   --work-folder-tech-shadow: rgba(8, 20, 43, 0.32);
 
-  --work-folder-gradient-active: linear-gradient(
-    180deg,
-    var(--work-folder-hover-radial-start),
-    var(--work-folder-hover-radial-end)
-  );
-  --work-folder-gradient-hover: linear-gradient(
-    180deg,
-    var(--work-folder-highlight-soft),
-    var(--work-folder-hover-radial-start)
-  );
-
   /* Main background */
   --main-bg-top: #101a2a;
   --main-bg-upper-mid: #172538;
@@ -330,17 +352,61 @@
   --color-point-highlight: #ff7a96;
   --color-point-success: #32d74b;
 
-  /* Component */
-  --btn-text-color: var(--color-text-primary);
-  --btn-text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-  --btn-text-opacity: 1;
-  --btn-text-opacity-hover: 1;
-  --btn-letter-spacing: 0.01em;
+  /* ============================================================
+     Component
+  ============================================================ */
 
-  /* Work filter */
-  --work-filter-control-shadow:
-    0 10px 22px rgba(2, 6, 23, 0.22),
-    inset 0 1px 0 rgba(236, 244, 255, 0.06);
+  /* Button */
+  --button-text: var(--color-text-primary);
+  --button-text-hover: var(--work-folder-text);
+  --button-text-active: var(--work-folder-text);
+  --button-letter-spacing: 0.01em;
+  --button-border-width: 1px;
+  --button-backdrop: blur(12px) saturate(1.08);
+  --button-surface-bg: rgba(47, 70, 101, 0.32);
+  --button-surface-bg-hover: rgba(176, 192, 221, 0.16);
+  --button-surface-bg-active: linear-gradient(
+    135deg,
+    rgba(232, 245, 255, 0.18) 0%,
+    rgba(126, 193, 238, 0.3) 34%,
+    rgba(56, 109, 187, 0.4) 68%,
+    rgba(17, 27, 45, 0.3) 100%
+  );
+  --button-border: var(--work-folder-image-border);
+  --button-border-hover: rgba(120, 210, 255, 0.32);
+  --button-border-active: rgba(120, 210, 255, 0.42);
+  --button-shadow:
+    inset 0 1px 0 var(--work-folder-image-inset-highlight);
+  --button-shadow-hover:
+    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+  --button-shadow-active:
+    0 14px 32px rgba(2, 6, 23, 0.24),
+    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+
+  /* Chip */
+  --chip-text: var(--color-text-primary);
+  --chip-border-width: 1px;
+  --chip-backdrop: blur(12px) saturate(1.08);
+  --chip-surface-bg: rgba(47, 70, 101, 0.32);
+  --chip-border: var(--work-folder-image-border);
+  --chip-shadow:
+    inset 0 1px 0 var(--work-folder-image-inset-highlight);
+
+  /* Card */
+  --card-meta-text: var(--work-folder-meta-icon-color);
+  --card-meta-text-hover: var(--work-folder-text);
+  --card-meta-text-opacity: 0.88;
+  --card-meta-text-opacity-hover: 1;
+  --card-meta-chip-bg: rgba(47, 70, 101, 0.22);
+  --card-meta-chip-bg-hover: rgba(176, 192, 221, 0.16);
+  --card-meta-chip-border: rgba(218, 238, 255, 0.08);
+  --card-meta-chip-border-hover: rgba(218, 238, 255, 0.14);
+  --card-meta-chip-shadow:
+    inset 0 1px 0 rgba(232, 245, 255, 0.14);
+  --card-meta-chip-shadow-hover:
+    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+
+  /* Panel */
   --work-empty-bg: rgba(241, 245, 249, 0.08);
   --detail-panel-bg: linear-gradient(
     180deg,
@@ -361,7 +427,7 @@
     inset 0 1px 0 rgba(226, 238, 255, 0.12);
   --detail-panel-backdrop: blur(22px) saturate(1.1);
 
-  // Cursor
+  /* Cursor */
   --cursor-bg: linear-gradient(
     135deg,
     rgba(255,255,255,0.35) 0%,
@@ -440,13 +506,48 @@ $point-highlight: var(--color-point-highlight);
 $point-info: var(--color-point-primary);
 $point-success: var(--color-point-success);
 
-/* Component */
-$btn-color: var(--btn-text-color);
-$btn-shadow: var(--btn-text-shadow);
-$btn-opacity: var(--btn-text-opacity);
-$btn-opacity-hover: var(--btn-text-opacity-hover);
-$btn-ls: var(--btn-letter-spacing);
-$work-filter-control-shadow: var(--work-filter-control-shadow);
+/* ============================================================
+   Component
+============================================================ */
+
+/* Button */
+$button-text: var(--button-text);
+$button-text-hover: var(--button-text-hover);
+$button-text-active: var(--button-text-active);
+$button-letter-spacing: var(--button-letter-spacing);
+$button-border-width: var(--button-border-width);
+$button-backdrop: var(--button-backdrop);
+$button-surface-bg: var(--button-surface-bg);
+$button-surface-bg-hover: var(--button-surface-bg-hover);
+$button-surface-bg-active: var(--button-surface-bg-active);
+$button-border: var(--button-border);
+$button-border-hover: var(--button-border-hover);
+$button-border-active: var(--button-border-active);
+$button-shadow: var(--button-shadow);
+$button-shadow-hover: var(--button-shadow-hover);
+$button-shadow-active: var(--button-shadow-active);
+
+/* Chip */
+$chip-text: var(--chip-text);
+$chip-border-width: var(--chip-border-width);
+$chip-backdrop: var(--chip-backdrop);
+$chip-surface-bg: var(--chip-surface-bg);
+$chip-border: var(--chip-border);
+$chip-shadow: var(--chip-shadow);
+
+/* Card */
+$card-meta-text: var(--card-meta-text);
+$card-meta-text-hover: var(--card-meta-text-hover);
+$card-meta-text-opacity: var(--card-meta-text-opacity);
+$card-meta-text-opacity-hover: var(--card-meta-text-opacity-hover);
+$card-meta-chip-bg: var(--card-meta-chip-bg);
+$card-meta-chip-bg-hover: var(--card-meta-chip-bg-hover);
+$card-meta-chip-border: var(--card-meta-chip-border);
+$card-meta-chip-border-hover: var(--card-meta-chip-border-hover);
+$card-meta-chip-shadow: var(--card-meta-chip-shadow);
+$card-meta-chip-shadow-hover: var(--card-meta-chip-shadow-hover);
+
+/* Panel */
 $work-empty-bg: var(--work-empty-bg);
 $detail-panel-bg: var(--detail-panel-bg);
 $detail-panel-bg-strong: var(--detail-panel-bg-strong);
@@ -454,9 +555,6 @@ $detail-panel-border: var(--detail-panel-border);
 $detail-panel-shadow: var(--detail-panel-shadow);
 $detail-panel-shadow-hover: var(--detail-panel-shadow-hover);
 $detail-panel-backdrop: var(--detail-panel-backdrop);
-
-$work-folder-gradient-active: var(--work-folder-gradient-active);
-$work-folder-gradient-hover: var(--work-folder-gradient-hover);
 
 /* Icon and interaction */
 $icon-base: var(--color-icon-base);
