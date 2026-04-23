@@ -15,6 +15,7 @@ import { initTheme } from "./global/theme.js";
 // Components
 import {
   renderHeader,
+  initHeaderFixed,
   initHeaderState,
   initHeaderEntrance,
   initHeaderScroll
@@ -48,16 +49,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderFixedMenu();
 
   initTheme();
-  initHeaderState();
+
+  if (page === 'home') {
+    initHeaderState();
+  } else {
+    initHeaderFixed();
+    initHeaderScroll();
+  }
 
   initCursor();
   initInteractiveTone();
   initFixedMenu(lenis);
 
-  initHeroText(() => {
-    initHeaderEntrance();
-    initHeaderScroll();
-  });
+  if (page === 'home') {
+    initHeroText(() => {
+      initHeaderEntrance();
+      initHeaderScroll();
+    });
+  }
 
   initScrollDownMotion();
 

@@ -189,7 +189,7 @@ function renderCaseSteps(caseItem, root) {
 
     if (image) {
       image.src = step.image || '';
-      image.alt = step.label || '';
+      image.alt = step.alt || step.label || '';
     }
 
     if (caption) {

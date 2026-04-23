@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* ============================================================
    Foundation
 ============================================================ */
@@ -2448,6 +2447,7 @@ input[type=search]::-webkit-search-decoration {
   flex-direction: column;
   width: 100%;
   min-width: 0;
+  margin: 0 auto;
   gap: 48px;
 }
 @media (max-width: 1024px) {
@@ -2580,21 +2580,21 @@ input[type=search]::-webkit-search-decoration {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 48px;
+  gap: 32px;
 }
 @media (max-width: 1024px) {
-  .work-page__controls {
-    gap: 40px;
-  }
-}
-@media (max-width: 768px) {
   .work-page__controls {
     gap: 32px;
   }
 }
+@media (max-width: 768px) {
+  .work-page__controls {
+    gap: 24px;
+  }
+}
 @media (max-width: 480px) {
   .work-page__controls {
-    gap: 20px;
+    gap: 16px;
   }
 }
 
@@ -2603,21 +2603,21 @@ input[type=search]::-webkit-search-decoration {
   flex-wrap: wrap;
   align-items: flex-start;
   min-width: 0;
-  gap: 48px;
+  gap: 32px;
 }
 @media (max-width: 1024px) {
-  .work-page__filters {
-    gap: 40px;
-  }
-}
-@media (max-width: 768px) {
   .work-page__filters {
     gap: 32px;
   }
 }
+@media (max-width: 768px) {
+  .work-page__filters {
+    gap: 24px;
+  }
+}
 @media (max-width: 480px) {
   .work-page__filters {
-    gap: 20px;
+    gap: 16px;
   }
 }
 
@@ -2950,21 +2950,21 @@ input[type=search]::-webkit-search-decoration {
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 48px;
+  gap: 32px;
 }
 @media (max-width: 1024px) {
-  .work-page__list {
-    gap: 40px;
-  }
-}
-@media (max-width: 768px) {
   .work-page__list {
     gap: 32px;
   }
 }
+@media (max-width: 768px) {
+  .work-page__list {
+    gap: 24px;
+  }
+}
 @media (max-width: 480px) {
   .work-page__list {
-    gap: 20px;
+    gap: 16px;
   }
 }
 @media (min-width: 768px) {
@@ -3083,23 +3083,32 @@ input[type=search]::-webkit-search-decoration {
 
 .work-card__link {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: block;
   min-width: 0;
   height: 100%;
   overflow: hidden;
-  border-radius: 20px;
-  background: var(--color-bg-surface);
+  border-radius: 1.5rem;
+  background: transparent;
+  border: 1px solid var(--work-folder-image-border);
   text-decoration: none;
   color: inherit;
   box-shadow: var(--shadow-surface-soft);
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+.work-card__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--overlay-bottom-strong), linear-gradient(135deg, var(--work-folder-gloss-top) 0%, var(--work-folder-gloss-bottom) 38%);
+  pointer-events: none;
+}
+
 .work-card__link > img {
   display: block;
   width: 100%;
-  aspect-ratio: 1.6/1;
+  aspect-ratio: 1.78/1;
   -o-object-fit: cover;
      object-fit: cover;
   overflow: hidden;
@@ -3108,43 +3117,51 @@ input[type=search]::-webkit-search-decoration {
 }
 
 .work-card__body {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 2;
   display: flex;
-  flex: 1 1 auto;
   flex-direction: column;
+  justify-content: flex-end;
   min-width: 0;
-  padding: 28px;
+  min-height: 0;
+  max-width: min(30rem, 100% - 3rem);
+  padding: 1.25rem 1.375rem;
+  gap: 0.625rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-border-soft);
+  background: linear-gradient(180deg, var(--color-bg-glass-strong) 0%, var(--color-bg-glass) 100%);
+  box-shadow: var(--shadow-surface-soft), inset 0 1px 0 var(--work-folder-image-inset-highlight);
+  backdrop-filter: blur(18px) saturate(1.08);
 }
 @media (max-width: 1024px) {
   .work-card__body {
-    padding: 24px;
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    max-width: min(26rem, 100% - 2.5rem);
+    padding: 1.125rem 1.25rem;
   }
 }
 @media (max-width: 768px) {
   .work-card__body {
-    padding: 20px;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: calc(100% - 2rem);
+    padding: 1rem 1.125rem;
+    gap: 0.5rem;
   }
 }
 @media (max-width: 480px) {
   .work-card__body {
-    padding: 16px;
-  }
-}
-.work-card__body {
-  gap: 32px;
-}
-@media (max-width: 1024px) {
-  .work-card__body {
-    gap: 32px;
-  }
-}
-@media (max-width: 768px) {
-  .work-card__body {
-    gap: 24px;
-  }
-}
-@media (max-width: 480px) {
-  .work-card__body {
-    gap: 16px;
+    left: 0.875rem;
+    right: 0.875rem;
+    bottom: 0.875rem;
+    max-width: calc(100% - 1.75rem);
+    padding: 0.875rem 1rem;
   }
 }
 
@@ -3173,11 +3190,13 @@ input[type=search]::-webkit-search-decoration {
   }
 }
 .work-card__title {
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  color: var(--color-text-primary);
+  line-height: 1.18;
+  color: var(--work-folder-text);
+  text-shadow: 0 0.25rem 1.125rem var(--work-folder-title-shadow);
 }
 
 .work-card__year {
@@ -3193,7 +3212,8 @@ input[type=search]::-webkit-search-decoration {
   letter-spacing: 0;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  color: var(--color-text-tertiary);
+  line-height: 1.3;
+  color: var(--work-folder-meta-icon-color);
 }
 
 .work-card__meta {
@@ -3203,59 +3223,32 @@ input[type=search]::-webkit-search-decoration {
   min-width: 0;
   list-style: none;
   padding: 0;
-  gap: 16px;
-}
-@media (max-width: 1024px) {
-  .work-card__meta {
-    gap: 16px;
-  }
-}
-@media (max-width: 768px) {
-  .work-card__meta {
-    gap: 16px;
-  }
+  gap: 0.5rem;
+  margin-top: 0.125rem;
 }
 @media (max-width: 480px) {
   .work-card__meta {
-    gap: 12px;
+    gap: 0.375rem;
   }
-}
-.work-card__meta {
-  margin-top: auto;
 }
 
 .work-card__meta li {
-  position: relative;
   min-width: 0;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  color: var(--color-text-secondary);
+  line-height: 1.2;
+  color: var(--work-folder-meta-icon-color);
+  padding: 0.45rem 0.7rem;
+  border-radius: 62.4375rem;
+  border: 1px solid var(--work-folder-image-border);
+  background: var(--color-bg-glass);
+  box-shadow: inset 0 1px 0 var(--work-folder-image-inset-highlight);
 }
-.work-card__meta li:not(:last-child)::after {
-  content: "·";
-  display: inline-block;
-  margin-left: 8px;
-}
-@media (max-width: 1024px) {
-  .work-card__meta li:not(:last-child)::after {
-    margin-left: 8px;
-  }
-}
-@media (max-width: 768px) {
-  .work-card__meta li:not(:last-child)::after {
-    margin-left: 8px;
-  }
-}
-@media (max-width: 480px) {
-  .work-card__meta li:not(:last-child)::after {
-    margin-left: 8px;
-  }
-}
-.work-card__meta li:not(:last-child)::after {
-  color: var(--color-text-disabled);
+.work-card__meta li::after {
+  content: none !important;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -3264,8 +3257,12 @@ input[type=search]::-webkit-search-decoration {
     box-shadow: var(--shadow-surface-strong);
   }
   .work-card__link:hover > img {
-    transform: scale(1.04);
-    filter: saturate(1.02) contrast(1.02);
+    transform: scale(1.05);
+    filter: saturate(1.06) contrast(1.04);
+  }
+  .work-card__link:hover .work-card__body {
+    border-color: var(--color-border-strong);
+    background: linear-gradient(180deg, var(--color-bg-glass-strong) 0%, rgba(255, 255, 255, 0.1) 100%);
   }
 }
 .work-card__link:focus-visible {
@@ -3295,5 +3292,1509 @@ input[type=search]::-webkit-search-decoration {
   }
   .work-page__select {
     width: 100%;
+  }
+}
+/* ============================================================
+   Foundation
+============================================================ */
+body[data-page=project-detail] .project-detail {
+  width: 100%;
+  padding-top: 120px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-detail {
+    padding-top: 100px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-detail {
+    padding-top: 80px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-detail {
+    padding-top: 64px;
+  }
+}
+body[data-page=project-detail] .project-detail {
+  padding-bottom: 120px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-detail {
+    padding-bottom: 100px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-detail {
+    padding-bottom: 80px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-detail {
+    padding-bottom: 64px;
+  }
+}
+body[data-page=project-detail] .project-detail {
+  padding-left: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-detail {
+    padding-left: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-detail {
+    padding-left: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-detail {
+    padding-left: 16px;
+  }
+}
+body[data-page=project-detail] .project-detail {
+  padding-right: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-detail {
+    padding-right: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-detail {
+    padding-right: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-detail {
+    padding-right: 16px;
+  }
+}
+body[data-page=project-detail] .project-detail > section + section {
+  margin-top: 64px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-detail > section + section {
+    margin-top: 56px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-detail > section + section {
+    margin-top: 48px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-detail > section + section {
+    margin-top: 40px;
+  }
+}
+body[data-page=project-detail] .project-hero,
+body[data-page=project-detail] .project-summary,
+body[data-page=project-detail] .project-case-list,
+body[data-page=project-detail] .project-case-detail,
+body[data-page=project-detail] .project-highlights,
+body[data-page=project-detail] .project-etc {
+  width: 100%;
+}
+body[data-page=project-detail] .project-hero__inner,
+body[data-page=project-detail] .project-summary,
+body[data-page=project-detail] .project-case-list,
+body[data-page=project-detail] .project-case-detail,
+body[data-page=project-detail] .project-highlights,
+body[data-page=project-detail] .project-etc {
+  margin: 0 auto;
+}
+body[data-page=project-detail] .section-title {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .section-title {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .section-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+  margin-bottom: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .section-title {
+    margin-bottom: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .section-title {
+    margin-bottom: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .section-title {
+    margin-bottom: 16px;
+  }
+}
+body[data-page=project-detail] .project-detail__error {
+  margin: 0 auto;
+  padding: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-detail__error {
+    padding: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-detail__error {
+    padding: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-detail__error {
+    padding: 28px;
+  }
+}
+body[data-page=project-detail] .project-detail__error {
+  border-radius: 20px;
+  font-size: 18px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-detail__error {
+    font-size: 16px;
+  }
+}
+body[data-page=project-detail] .project-detail__error {
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-glass-strong);
+  border: 1px solid var(--color-border-soft);
+  box-shadow: var(--shadow-surface-soft);
+}
+body[data-page=project-detail] .project-summary__grid article,
+body[data-page=project-detail] .case-detail,
+body[data-page=project-detail] .highlight-list > article,
+body[data-page=project-detail] .project-etc__grid > div {
+  border-radius: 20px;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-bg-glass-strong);
+  box-shadow: var(--shadow-surface-soft);
+}
+body[data-page=project-detail] .project-summary__grid h3,
+body[data-page=project-detail] .case-detail h3,
+body[data-page=project-detail] .case-detail h4,
+body[data-page=project-detail] .highlight-list h3,
+body[data-page=project-detail] .project-etc__grid h3 {
+  margin: 0;
+  color: var(--color-text-primary);
+}
+body[data-page=project-detail] .project-summary__grid p,
+body[data-page=project-detail] .case-detail p,
+body[data-page=project-detail] .case-detail li,
+body[data-page=project-detail] .highlight-list p,
+body[data-page=project-detail] .project-etc__grid p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+body[data-page=project-detail] {
+  /* ========================================
+      HERO
+  ========================================= */
+}
+body[data-page=project-detail] .project-hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__inner {
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__inner {
+    gap: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__inner {
+    gap: 20px;
+  }
+}
+body[data-page=project-detail] .project-hero__inner {
+  padding: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__inner {
+    padding: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__inner {
+    padding: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__inner {
+    padding: 28px;
+  }
+}
+body[data-page=project-detail] .project-hero__inner {
+  border-radius: 20px;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-bg-glass-strong);
+  box-shadow: var(--shadow-surface-soft);
+}
+body[data-page=project-detail] .project-hero__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__body {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__body {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__body {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .project-hero__label {
+  display: inline-flex;
+  align-self: flex-start;
+  padding-top: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-top: 8px;
+  }
+}
+body[data-page=project-detail] .project-hero__label {
+  padding-bottom: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-bottom: 8px;
+  }
+}
+body[data-page=project-detail] .project-hero__label {
+  padding-left: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-left: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-left: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-left: 12px;
+  }
+}
+body[data-page=project-detail] .project-hero__label {
+  padding-right: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-right: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-right: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__label {
+    padding-right: 12px;
+  }
+}
+body[data-page=project-detail] .project-hero__label {
+  border-radius: 32px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-soft);
+}
+body[data-page=project-detail] .project-hero__title {
+  font-size: clamp(48px, 5vw, 64px);
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__title {
+    font-size: clamp(36px, 4vw, 48px);
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__title {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+}
+body[data-page=project-detail] .project-hero__title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-primary);
+}
+body[data-page=project-detail] .project-hero__description {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__description {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__description {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__description {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .project-hero__desc-line {
+  font-size: 18px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__desc-line {
+    font-size: 16px;
+  }
+}
+body[data-page=project-detail] .project-hero__desc-line {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+}
+body[data-page=project-detail] .project-hero__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__tags {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__tags {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__tags {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .project-hero__tag {
+  display: inline-flex;
+  align-items: center;
+  padding-top: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-top: 8px;
+  }
+}
+body[data-page=project-detail] .project-hero__tag {
+  padding-bottom: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-bottom: 8px;
+  }
+}
+body[data-page=project-detail] .project-hero__tag {
+  padding-left: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-left: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-left: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-left: 12px;
+  }
+}
+body[data-page=project-detail] .project-hero__tag {
+  padding-right: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-right: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-right: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__tag {
+    padding-right: 12px;
+  }
+}
+body[data-page=project-detail] .project-hero__tag {
+  border-radius: 32px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-primary);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-soft);
+}
+body[data-page=project-detail] .project-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-meta {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-meta {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-meta {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .project-meta > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-meta > div {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-meta > div {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-meta > div {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .project-meta dt {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-tertiary);
+}
+body[data-page=project-detail] .project-meta dd {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-meta dd {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .project-meta dd {
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-primary);
+}
+body[data-page=project-detail] .project-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__actions {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__actions {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__actions {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .project-hero__actions .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  padding-top: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-top: 8px;
+  }
+}
+body[data-page=project-detail] .project-hero__actions .btn {
+  padding-bottom: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-bottom: 8px;
+  }
+}
+body[data-page=project-detail] .project-hero__actions .btn {
+  padding-left: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-left: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-left: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-left: 16px;
+  }
+}
+body[data-page=project-detail] .project-hero__actions .btn {
+  padding-right: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-right: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-right: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    padding-right: 16px;
+  }
+}
+body[data-page=project-detail] .project-hero__actions .btn {
+  border-radius: 32px;
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__actions .btn {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .project-hero__actions .btn {
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-bg-surface);
+  box-shadow: var(--work-filter-control-shadow);
+  text-shadow: none;
+}
+body[data-page=project-detail] .project-hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+body[data-page=project-detail] .project-hero__visual > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-hero__visual > div {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-hero__visual > div {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-hero__visual > div {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .project-hero__device {
+  flex: 0 1 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-surface-soft);
+}
+body[data-page=project-detail] .project-hero__device img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body[data-page=project-detail] .project-hero__device--mobile {
+  width: clamp(10rem, 42vw, 17.5rem);
+  aspect-ratio: 9/18;
+}
+body[data-page=project-detail] .project-hero__device--tablet {
+  width: clamp(13.75rem, 48vw, 32.5rem);
+  aspect-ratio: 4/3;
+}
+body[data-page=project-detail] .project-hero__device--pc {
+  width: 100%;
+  max-width: 45rem;
+  aspect-ratio: 16/10;
+}
+body[data-page=project-detail] {
+  /* ========================================
+      SUMMARY
+  ========================================= */
+}
+body[data-page=project-detail] .project-summary__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-summary__grid {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-summary__grid {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-summary__grid {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .project-summary__grid article {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+  height: 100%;
+  min-height: 11rem;
+  padding: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-summary__grid article {
+    padding: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-summary__grid article {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-summary__grid article {
+    padding: 16px;
+  }
+}
+body[data-page=project-detail] .project-summary__grid article {
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-summary__grid article {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-summary__grid article {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-summary__grid article {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .project-summary__grid h3 {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-summary__grid h3 {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .project-summary__grid h3 {
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] .project-summary__grid p {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-summary__grid p {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .project-summary__grid p {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] {
+  /* ========================================
+      CASE LIST
+  ========================================= */
+}
+body[data-page=project-detail] .case-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-list {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-list {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-list {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .case-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 11rem;
+  padding: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-item {
+    padding: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-item {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-item {
+    padding: 16px;
+  }
+}
+body[data-page=project-detail] .case-item {
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-item {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-item {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-item {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .case-item {
+  border-radius: 20px;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-bg-glass-strong);
+  box-shadow: var(--shadow-surface-soft);
+  text-align: left;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s cubic-bezier(0.25, 1, 0.5, 1), color 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+body[data-page=project-detail] .case-item.is-active,
+body[data-page=project-detail] .case-item[aria-selected=true] {
+  border-color: var(--work-filter-selected-border);
+  background: var(--work-filter-selected-bg);
+  box-shadow: var(--work-filter-selected-shadow);
+}
+body[data-page=project-detail] .case-item__title {
+  font-size: 18px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-item__title {
+    font-size: 16px;
+  }
+}
+body[data-page=project-detail] .case-item__title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-primary);
+}
+body[data-page=project-detail] .case-item__summary {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-item__summary {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .case-item__summary {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+}
+@media (hover: hover) and (pointer: fine) {
+  body[data-page=project-detail] .case-item:hover {
+    transform: translateY(-0.125rem);
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-surface-strong);
+  }
+}
+body[data-page=project-detail] .case-item:focus-visible {
+  outline: none;
+  border-color: var(--color-border-strong);
+}
+body[data-page=project-detail] {
+  /* ========================================
+      CASE DETAIL
+  ========================================= */
+}
+body[data-page=project-detail] .case-detail {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail {
+    padding: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail {
+    padding: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail {
+    padding: 28px;
+  }
+}
+body[data-page=project-detail] .case-detail {
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .case-detail > h3 {
+  font-size: clamp(22px, 1.8vw, 28px);
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail > h3 {
+    font-size: clamp(20px, 1.8vw, 26px);
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail > h3 {
+    font-size: clamp(18px, 2.4vw, 22px);
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail > h3 {
+    font-size: clamp(17px, 3.8vw, 19px);
+  }
+}
+body[data-page=project-detail] .case-detail > h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] .case-detail__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail__layout {
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail__layout {
+    gap: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail__layout {
+    gap: 20px;
+  }
+}
+body[data-page=project-detail] .case-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-steps {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-steps {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-steps {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-steps li {
+  min-width: 0;
+}
+body[data-page=project-detail] .case-steps figure {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--color-border-soft);
+  background: var(--color-bg-surface);
+}
+body[data-page=project-detail] .case-steps img {
+  width: 100%;
+  aspect-ratio: 3/5;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background: var(--color-bg-main);
+}
+body[data-page=project-detail] .case-steps figcaption {
+  padding: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-steps figcaption {
+    padding: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-steps figcaption {
+    padding: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-steps figcaption {
+    padding: 12px;
+  }
+}
+body[data-page=project-detail] .case-steps figcaption {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border-soft);
+}
+body[data-page=project-detail] .case-detail__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail__content {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail__content {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail__content {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .case-detail__content section {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail__content section {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail__content section {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail__content section {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-detail__content section {
+  padding: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail__content section {
+    padding: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail__content section {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail__content section {
+    padding: 16px;
+  }
+}
+body[data-page=project-detail] .case-detail__content section {
+  border-radius: 12px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-soft);
+}
+body[data-page=project-detail] .case-detail__content h4 {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail__content h4 {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .case-detail__content h4 {
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+}
+body[data-page=project-detail] .case-detail__content p,
+body[data-page=project-detail] .case-detail__implementation-item {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail__content p,
+  body[data-page=project-detail] .case-detail__implementation-item {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .case-detail__content p,
+body[data-page=project-detail] .case-detail__implementation-item {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] .case-detail__content ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail__content ul {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail__content ul {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail__content ul {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-detail__implementation-item {
+  position: relative;
+  padding-left: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-detail__implementation-item {
+    padding-left: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-detail__implementation-item {
+    padding-left: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-detail__implementation-item {
+    padding-left: 12px;
+  }
+}
+body[data-page=project-detail] .case-detail__implementation-item::before {
+  content: "";
+  position: absolute;
+  top: 0.8em;
+  left: 0;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 32px;
+  background: var(--color-point-primary);
+}
+body[data-page=project-detail] {
+  /* ========================================
+      HIGHLIGHTS
+  ========================================= */
+}
+body[data-page=project-detail] .highlight-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .highlight-list {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-list {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-list {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .highlight-list > article {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+  height: 100%;
+  min-height: 11rem;
+  padding: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .highlight-list > article {
+    padding: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-list > article {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-list > article {
+    padding: 16px;
+  }
+}
+body[data-page=project-detail] .highlight-list > article {
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .highlight-list > article {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-list > article {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-list > article {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .highlight-list h3 {
+  font-size: 18px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-list h3 {
+    font-size: 16px;
+  }
+}
+body[data-page=project-detail] .highlight-list h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] .highlight-list p {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-list p {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .highlight-list p {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] {
+  /* ========================================
+      ETC
+  ========================================= */
+}
+body[data-page=project-detail] .project-etc__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-etc__grid {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-etc__grid {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-etc__grid {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .project-etc__grid > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+  height: 100%;
+  min-height: 11rem;
+  padding: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-etc__grid > div {
+    padding: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-etc__grid > div {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-etc__grid > div {
+    padding: 16px;
+  }
+}
+body[data-page=project-detail] .project-etc__grid > div {
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-etc__grid > div {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-etc__grid > div {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-etc__grid > div {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .project-etc__grid h3 {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-etc__grid h3 {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .project-etc__grid h3 {
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] .project-etc__grid p {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-etc__grid p {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .project-etc__grid p {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+@media (min-width: 768px) {
+  body[data-page=project-detail] .project-hero__inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+  }
+  body[data-page=project-detail] .project-meta {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  body[data-page=project-detail] .project-summary__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  body[data-page=project-detail] .case-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  body[data-page=project-detail] .case-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  body[data-page=project-detail] .highlight-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1440px) {
+  body[data-page=project-detail] .project-hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  }
+  body[data-page=project-detail] .project-hero__visual > div {
+    justify-content: flex-end;
+  }
+  body[data-page=project-detail] .project-hero__device--pc {
+    max-width: 50rem;
+  }
+  body[data-page=project-detail] .case-list {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  body[data-page=project-detail] .case-detail__layout {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    align-items: start;
+  }
+  body[data-page=project-detail] .highlight-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }/*# sourceMappingURL=main.css.map */

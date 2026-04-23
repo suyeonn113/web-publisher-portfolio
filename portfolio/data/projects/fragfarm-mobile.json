@@ -80,18 +80,22 @@
       "steps": [
         {
           "label": "메인 진입",
+          "alt": "Fragfarm 모바일 메인 화면에서 신상품과 세일 섹션이 보이는 화면",
           "image": "assets/images/projects/fragfarm/detail/case01-step01.png"
         },
         {
           "label": "상품 섹션 탐색",
+          "alt": "메인 화면에서 상품 섹션 카드와 탐색 영역이 보이는 화면",
           "image": "assets/images/projects/fragfarm/detail/case01-step02.png"
         },
         {
           "label": "목록 페이지 이동",
+          "alt": "상품 목록 페이지로 이동해 여러 상품 카드가 표시된 화면",
           "image": "assets/images/projects/fragfarm/detail/case01-step03.png"
         },
         {
           "label": "상품 확인",
+          "alt": "상품 상세 확인 단계로 이어지는 모바일 상품 화면",
           "image": "assets/images/projects/fragfarm/detail/case01-step04.png"
         }
       ],
@@ -113,18 +117,22 @@
       "steps": [
         {
           "label": "카테고리 선택",
+          "alt": "상품 리스트 화면에서 카테고리 선택 상태가 보이는 화면",
           "image": "assets/images/projects/fragfarm/detail/case02-step01.png"
         },
         {
           "label": "정렬 기준 선택",
+          "alt": "상품 목록 화면에서 정렬 기준 옵션을 선택하는 화면",
           "image": "assets/images/projects/fragfarm/detail/case02-step02.png"
         },
         {
           "label": "상품 카드 탐색",
+          "alt": "상품 카드가 여러 개 배치된 목록 화면을 탐색하는 모습",
           "image": "assets/images/projects/fragfarm/detail/case02-step03.png"
         },
         {
           "label": "페이지 이동",
+          "alt": "상품 목록에서 다음 페이지로 이동하는 화면",
           "image": "assets/images/projects/fragfarm/detail/case02-step04.png"
         }
       ],
@@ -146,18 +154,22 @@
       "steps": [
         {
           "label": "로그인 진입",
+          "alt": "Fragfarm 모바일 로그인 화면에서 입력 폼이 보이는 상태",
           "image": "assets/images/projects/fragfarm/detail/case03-step01.png"
         },
         {
           "label": "회원가입 이동",
+          "alt": "로그인 화면에서 회원가입 화면으로 이동하는 흐름을 보여주는 화면",
           "image": "assets/images/projects/fragfarm/detail/case03-step02.png"
         },
         {
           "label": "정보 입력",
+          "alt": "회원가입 화면에서 사용자 정보를 입력하는 폼 화면",
           "image": "assets/images/projects/fragfarm/detail/case03-step03.png"
         },
         {
           "label": "약관 동의 / 가입 완료",
+          "alt": "회원가입 과정에서 약관 동의와 가입 완료 단계가 보이는 화면",
           "image": "assets/images/projects/fragfarm/detail/case03-step04.png"
         }
       ],
@@ -179,10 +191,12 @@
       "steps": [
         {
           "label": "메인 ABOUT 섹션",
+          "alt": "메인 화면의 ABOUT 섹션에서 브랜드 소개 콘텐츠가 보이는 화면",
           "image": "assets/images/projects/fragfarm/detail/case04-step01.png"
         },
         {
           "label": "about 페이지 이동",
+          "alt": "브랜드 소개용 about 페이지로 이동한 화면",
           "image": "assets/images/projects/fragfarm/detail/case04-step02.png"
         }
       ],

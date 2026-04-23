@@ -1,0 +1,546 @@
+@use '../foundation' as *;
+
+body[data-page='project-detail'] {
+  .project-detail {
+    width: 100%;
+    @include pad('gap', 'md', 'y');
+    @include pad('pad', 'md', 'x');
+  }
+
+  .project-detail > section + section {
+    @include mar('gap', 'sm', 'top');
+  }
+
+  .project-hero,
+  .project-summary,
+  .project-case-list,
+  .project-case-detail,
+  .project-highlights,
+  .project-etc {
+    width: 100%;
+  }
+
+  .project-hero__inner,
+  .project-summary,
+  .project-case-list,
+  .project-case-detail,
+  .project-highlights,
+  .project-etc {
+    margin: 0 auto;
+  }
+
+  .section-title {
+    @include text-style('sm', 'bold', 'tight', 'tight');
+    color: $text-secondary;
+    @include mar('gutter', 'md', 'bottom');
+  }
+
+  .project-detail__error {
+    margin: 0 auto;
+    @include pad('pad', 'lg');
+    @include rd('lg');
+    @include text-style('base', 'medium');
+    color: $text-secondary;
+    background: $bg-glass-strong;
+    border: 1px solid $border-soft;
+    box-shadow: $shadow-surface-soft;
+  }
+
+  .project-summary__grid article,
+  .case-detail,
+  .highlight-list > article,
+  .project-etc__grid > div {
+    @include rd('lg');
+    border: 1px solid $border-soft;
+    background: $bg-glass-strong;
+    box-shadow: $shadow-surface-soft;
+  }
+
+  .project-summary__grid h3,
+  .case-detail h3,
+  .case-detail h4,
+  .highlight-list h3,
+  .project-etc__grid h3 {
+    margin: 0;
+    color: $text-primary;
+  }
+
+  .project-summary__grid p,
+  .case-detail p,
+  .case-detail li,
+  .highlight-list p,
+  .project-etc__grid p {
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  /* ========================================
+      HERO
+  ========================================= */
+
+  .project-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    @include g-gap('gutter', 'lg');
+    @include pad('pad', 'lg');
+    @include rd('lg');
+    border: 1px solid $border-soft;
+    background: $bg-glass-strong;
+    box-shadow: $shadow-surface-soft;
+  }
+
+  .project-hero__body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    @include f-gap('gutter', 'md');
+  }
+
+  .project-hero__label {
+    display: inline-flex;
+    align-self: flex-start;
+    @include pad('pad', 'xs', 'y');
+    @include pad('pad', 'sm', 'x');
+    @include rd('xl');
+    @include text-style('xs', 'bold');
+    color: $text-secondary;
+    background: $bg-surface;
+    border: 1px solid $border-soft;
+  }
+
+  .project-hero__title {
+    @include text-style('title', 'bold', 'tight', 'tight');
+    color: $text-primary;
+  }
+
+  .project-hero__description {
+    display: flex;
+    flex-direction: column;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .project-hero__desc-line {
+    @include text-style('base');
+    color: $text-secondary;
+  }
+
+  .project-hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .project-hero__tag {
+    display: inline-flex;
+    align-items: center;
+    @include pad('pad', 'xs', 'y');
+    @include pad('pad', 'sm', 'x');
+    @include rd('xl');
+    @include text-style('xs', 'medium');
+    color: $text-primary;
+    background: $bg-surface;
+    border: 1px solid $border-soft;
+  }
+
+  .project-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include g-gap('gutter', 'md');
+  }
+
+  .project-meta > div {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .project-meta dt {
+    @include text-style('xs', 'bold');
+    color: $text-tertiary;
+  }
+
+  .project-meta dd {
+    @include text-style('sm', 'medium');
+    color: $text-primary;
+  }
+
+  .project-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .project-hero__actions .btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: map-get($btn-settings, 'min-size');
+    @include pad('pad', 'xs', 'y');
+    @include pad('pad', 'md', 'x');
+    @include rd('xl');
+    @include text-style('sm', 'medium');
+    border: 1px solid $border-soft;
+    background: $bg-surface;
+    box-shadow: $work-filter-control-shadow;
+    text-shadow: none;
+  }
+
+  .project-hero__visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .project-hero__visual > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    @include f-gap('gutter', 'md');
+  }
+
+  .project-hero__device {
+    flex: 0 1 auto;
+    overflow: hidden;
+    @include rd('md');
+    border: 1px solid $border-soft;
+    background: $bg-surface;
+    box-shadow: $shadow-surface-soft;
+  }
+
+  .project-hero__device img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-hero__device--mobile {
+    width: clamp(rem(160px), 42vw, rem(280px));
+    aspect-ratio: 9 / 18;
+  }
+
+  .project-hero__device--tablet {
+    width: clamp(rem(220px), 48vw, rem(520px));
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-hero__device--pc {
+    width: 100%;
+    max-width: rem(720px);
+    aspect-ratio: 16 / 10;
+  }
+
+  /* ========================================
+      SUMMARY
+  ========================================= */
+
+  .project-summary__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    @include g-gap('gutter', 'md');
+  }
+
+  .project-summary__grid article {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 0;
+    height: 100%;
+    min-height: rem(176px);
+    @include pad('pad', 'md');
+    @include f-gap('gutter', 'md');
+  }
+
+  .project-summary__grid h3 {
+    @include text-style('sm', 'bold');
+  }
+
+  .project-summary__grid p {
+    @include text-style('sm');
+  }
+
+  /* ========================================
+      CASE LIST
+  ========================================= */
+
+  .case-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include g-gap('gutter', 'md');
+  }
+
+  .case-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: rem(176px);
+    @include pad('pad', 'md');
+    @include f-gap('gutter', 'md');
+    @include rd('lg');
+    border: 1px solid $border-soft;
+    background: $bg-glass-strong;
+    box-shadow: $shadow-surface-soft;
+    text-align: left;
+    transition:
+      transform get-duration('fast') get-easing('apple'),
+      border-color get-duration('fast') get-easing('apple'),
+      color get-duration('fast') get-easing('apple'),
+      box-shadow get-duration('fast') get-easing('apple'),
+      background-color get-duration('fast') get-easing('apple');
+  }
+
+  .case-item.is-active,
+  .case-item[aria-selected='true'] {
+    border-color: $work-filter-selected-border;
+    background: $work-filter-selected-bg;
+    box-shadow: $work-filter-selected-shadow;
+  }
+
+  .case-item__title {
+    @include text-style('base', 'bold', 'tight');
+    color: $text-primary;
+  }
+
+  .case-item__summary {
+    @include text-style('sm');
+    color: $text-secondary;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .case-item:hover {
+      transform: translateY(rem(-2px));
+      border-color: $border-strong;
+      box-shadow: $shadow-surface-strong;
+    }
+  }
+
+  .case-item:focus-visible {
+    outline: none;
+    border-color: $border-strong;
+  }
+
+  /* ========================================
+      CASE DETAIL
+  ========================================= */
+
+  .case-detail {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    @include pad('pad', 'lg');
+    @include f-gap('gutter', 'md');
+  }
+
+  .case-detail > h3 {
+    @include text-style('lg', 'bold', 'tight');
+  }
+
+  .case-detail__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    @include g-gap('gutter', 'lg');
+  }
+
+  .case-steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include g-gap('gutter', 'sm');
+  }
+
+  .case-steps li {
+    min-width: 0;
+  }
+
+  .case-steps figure {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    @include rd('md');
+    border: 1px solid $border-soft;
+    background: $bg-surface;
+  }
+
+  .case-steps img {
+    width: 100%;
+    aspect-ratio: 3 / 5;
+    object-fit: cover;
+    background: $bg-main;
+  }
+
+  .case-steps figcaption {
+    @include pad('pad', 'sm');
+    @include text-style('xs', 'medium');
+    color: $text-secondary;
+    border-top: 1px solid $border-soft;
+  }
+
+  .case-detail__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    @include g-gap('gutter', 'md');
+  }
+
+  .case-detail__content section {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    @include f-gap('gutter', 'sm');
+    @include pad('pad', 'md');
+    @include rd('md');
+    background: $bg-surface;
+    border: 1px solid $border-soft;
+  }
+
+  .case-detail__content h4 {
+    @include text-style('sm', 'bold');
+    color: $text-secondary;
+  }
+
+  .case-detail__content p,
+  .case-detail__implementation-item {
+    @include text-style('sm');
+  }
+
+  .case-detail__content ul {
+    display: flex;
+    flex-direction: column;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .case-detail__implementation-item {
+    position: relative;
+    @include pad('pad', 'sm', 'left');
+  }
+
+  .case-detail__implementation-item::before {
+    content: '';
+    position: absolute;
+    top: 0.8em;
+    left: 0;
+    width: rem(6px);
+    height: rem(6px);
+    @include rd('xl');
+    background: $point-primary;
+  }
+
+  /* ========================================
+      HIGHLIGHTS
+  ========================================= */
+
+  .highlight-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    @include g-gap('gutter', 'md');
+  }
+
+  .highlight-list > article {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 0;
+    height: 100%;
+    min-height: rem(176px);
+    @include pad('pad', 'md');
+    @include f-gap('gutter', 'md');
+  }
+
+  .highlight-list h3 {
+    @include text-style('base', 'bold', 'tight');
+  }
+
+  .highlight-list p {
+    @include text-style('sm');
+  }
+
+  /* ========================================
+      ETC
+  ========================================= */
+
+  .project-etc__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    @include g-gap('gutter', 'md');
+  }
+
+  .project-etc__grid > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 0;
+    height: 100%;
+    min-height: rem(176px);
+    @include pad('pad', 'md');
+    @include f-gap('gutter', 'md');
+  }
+
+  .project-etc__grid h3 {
+    @include text-style('sm', 'bold');
+  }
+
+  .project-etc__grid p {
+    @include text-style('sm');
+  }
+
+  @media (min-width: $tablet) {
+    .project-hero__inner {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      align-items: center;
+    }
+
+    .project-meta {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .project-summary__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .case-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .case-steps {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .highlight-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: $desktop) {
+    .project-hero__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    }
+
+    .project-hero__visual > div {
+      justify-content: flex-end;
+    }
+
+    .project-hero__device--pc {
+      max-width: rem(800px);
+    }
+
+    .case-list {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .case-detail__layout {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+      align-items: start;
+    }
+
+    .highlight-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+  }
+}
