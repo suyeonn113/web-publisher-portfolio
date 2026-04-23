@@ -22,7 +22,7 @@
 }
 
 .work-page__header {
-  @include pad('pad', 'lg', 'top');
+  @include responsive-spacing('padding-top', 'page-offset', 'header');
 }
 
 .work-page__heading {

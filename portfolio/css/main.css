@@ -155,7 +155,7 @@
   --color-point-success: #30d158;
   /* ============================================================
      Component
-  ============================================================ */
+   ============================================================ */
   /* Button */
   --button-text: var(--color-text-primary);
   --button-text-hover: var(--work-folder-text);
@@ -2818,21 +2818,21 @@ body[data-page=project-detail] .btn--surface {
 }
 
 .work-page__header {
-  padding-top: 48px;
+  padding-top: 64px;
 }
 @media (max-width: 1024px) {
   .work-page__header {
-    padding-top: 40px;
+    padding-top: 54px;
   }
 }
 @media (max-width: 768px) {
   .work-page__header {
-    padding-top: 32px;
+    padding-top: 52px;
   }
 }
 @media (max-width: 480px) {
   .work-page__header {
-    padding-top: 28px;
+    padding-top: 60px;
   }
 }
 
