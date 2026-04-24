@@ -106,8 +106,18 @@
       ========================================= -->
       <section class="project-highlights" data-section="highlights" data-gsap-target="section">
         <div class="project-section-transition__frame" data-section-transition-frame>
-          <h2 class="section-title">HIGHLIGHTS</h2>
-          <div class="highlight-list" data-field="highlights"></div>
+          <div class="project-highlights__container">
+            <div class="project-highlights__header">
+              <h2 class="section-title">HIGHLIGHTS</h2>
+            </div>
+            <div class="project-highlights__body">
+              <div class="highlight-list" data-field="highlights"></div>
+              <article class="highlight-display" data-highlight-display aria-live="polite">
+                <h3 class="highlight-display__title" data-highlight-title></h3>
+                <p class="highlight-display__text" data-highlight-description></p>
+              </article>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -223,10 +233,7 @@
       </template>
 
       <template id="tpl-highlight">
-        <article>
-          <h3></h3>
-          <p></p>
-        </article>
+        <button class="highlight-chip" type="button"></button>
       </template>
 
       <template id="tpl-hero-visual">

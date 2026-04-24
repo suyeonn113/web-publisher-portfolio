@@ -5415,134 +5415,325 @@ body[data-page=project-detail] {
       HIGHLIGHTS
   ========================================= */
 }
-body[data-page=project-detail] .highlight-list {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 32px;
+body[data-page=project-detail] .project-highlights__container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 28px;
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .highlight-list {
-    gap: 32px;
+  body[data-page=project-detail] .project-highlights__container {
+    padding-top: 24px;
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .highlight-list {
-    gap: 24px;
+  body[data-page=project-detail] .project-highlights__container {
+    padding-top: 20px;
   }
 }
 @media (max-width: 480px) {
+  body[data-page=project-detail] .project-highlights__container {
+    padding-top: 16px;
+  }
+}
+body[data-page=project-detail] .project-highlights__container {
+  padding-bottom: 28px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-highlights__container {
+    padding-bottom: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-highlights__container {
+    padding-bottom: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-highlights__container {
+    padding-bottom: 16px;
+  }
+}
+body[data-page=project-detail] .project-highlights__header .section-title {
+  margin-bottom: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-highlights__header .section-title {
+    margin-bottom: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-highlights__header .section-title {
+    margin-bottom: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-highlights__header .section-title {
+    margin-bottom: 16px;
+  }
+}
+body[data-page=project-detail] .project-highlights__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-highlights__body {
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-highlights__body {
+    gap: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-highlights__body {
+    gap: 20px;
+  }
+}
+body[data-page=project-detail] .highlight-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
   body[data-page=project-detail] .highlight-list {
     gap: 16px;
   }
 }
-body[data-page=project-detail] .highlight-list {
-  counter-reset: highlight;
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-list {
+    gap: 12px;
+  }
 }
-body[data-page=project-detail] .highlight-list > article {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-list {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .highlight-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 0;
-  height: 100%;
   padding-top: 16px;
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .highlight-list > article {
+  body[data-page=project-detail] .highlight-chip {
     padding-top: 14px;
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .highlight-list > article {
+  body[data-page=project-detail] .highlight-chip {
     padding-top: 12px;
   }
 }
 @media (max-width: 480px) {
-  body[data-page=project-detail] .highlight-list > article {
+  body[data-page=project-detail] .highlight-chip {
     padding-top: 12px;
   }
 }
-body[data-page=project-detail] .highlight-list > article {
-  padding-left: 48px;
+body[data-page=project-detail] .highlight-chip {
+  padding-bottom: 16px;
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .highlight-list > article {
-    padding-left: 40px;
+  body[data-page=project-detail] .highlight-chip {
+    padding-bottom: 14px;
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .highlight-list > article {
-    padding-left: 32px;
+  body[data-page=project-detail] .highlight-chip {
+    padding-bottom: 12px;
   }
 }
 @media (max-width: 480px) {
-  body[data-page=project-detail] .highlight-list > article {
-    padding-left: 28px;
+  body[data-page=project-detail] .highlight-chip {
+    padding-bottom: 12px;
   }
 }
-body[data-page=project-detail] .highlight-list > article {
-  gap: 32px;
+body[data-page=project-detail] .highlight-chip {
+  padding-left: 24px;
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .highlight-list > article {
+  body[data-page=project-detail] .highlight-chip {
+    padding-left: 20px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-chip {
+    padding-left: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-chip {
+    padding-left: 14px;
+  }
+}
+body[data-page=project-detail] .highlight-chip {
+  padding-right: 24px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .highlight-chip {
+    padding-right: 20px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-chip {
+    padding-right: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-chip {
+    padding-right: 14px;
+  }
+}
+body[data-page=project-detail] .highlight-chip {
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid var(--color-border-soft);
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-chip {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .highlight-chip:is(:hover, :focus-visible),
+body[data-page=project-detail] .highlight-chip.is-active {
+  color: var(--color-text-primary);
+  background: var(--color-bg-glass);
+  border-color: rgba(89, 154, 255, 0.34);
+  box-shadow: inset 0 1px 0 var(--work-folder-image-inset-highlight);
+  -webkit-backdrop-filter: blur(12px) saturate(1.06);
+          backdrop-filter: blur(12px) saturate(1.06);
+  outline: none;
+}
+body[data-page=project-detail] .highlight-display {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  max-width: 60rem;
+  min-height: clamp(16.25rem, 42vh, 30rem);
+  gap: 32px;
+  padding: 24px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.24) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow: 0 18px 44px rgba(104, 128, 166, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  -webkit-backdrop-filter: blur(22px) saturate(1.12);
+          backdrop-filter: blur(22px) saturate(1.12);
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .highlight-display {
     gap: 32px;
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .highlight-list > article {
+  body[data-page=project-detail] .highlight-display {
     gap: 24px;
   }
 }
 @media (max-width: 480px) {
-  body[data-page=project-detail] .highlight-list > article {
+  body[data-page=project-detail] .highlight-display {
     gap: 16px;
   }
 }
-body[data-page=project-detail] .highlight-list > article {
-  border-top: 1px solid var(--color-border-soft);
+body[data-page=project-detail] .highlight-display__title {
+  font-size: clamp(22px, 1.8vw, 28px);
 }
-body[data-page=project-detail] .highlight-list > article::before {
-  counter-increment: highlight;
-  content: counter(highlight, decimal-leading-zero);
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(-50%);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  color: var(--color-text-tertiary);
-  letter-spacing: 0.12em;
-}
-body[data-page=project-detail] .highlight-list h3 {
-  font-size: 18px;
-}
-@media (max-width: 480px) {
-  body[data-page=project-detail] .highlight-list h3 {
-    font-size: 16px;
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .highlight-display__title {
+    font-size: clamp(20px, 1.8vw, 26px);
   }
 }
-body[data-page=project-detail] .highlight-list h3 {
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-display__title {
+    font-size: clamp(18px, 2.4vw, 22px);
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-display__title {
+    font-size: clamp(17px, 3.8vw, 19px);
+  }
+}
+body[data-page=project-detail] .highlight-display__title {
   font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-primary);
+  word-break: keep-all;
+  overflow: hidden;
+}
+body[data-page=project-detail] .highlight-display__text {
+  max-width: 47.5rem;
+  font-size: clamp(22px, 1.8vw, 28px);
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .highlight-display__text {
+    font-size: clamp(20px, 1.8vw, 26px);
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-display__text {
+    font-size: clamp(18px, 2.4vw, 22px);
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-display__text {
+    font-size: clamp(17px, 3.8vw, 19px);
+  }
+}
+body[data-page=project-detail] .highlight-display__text {
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
-body[data-page=project-detail] .highlight-list p {
-  font-size: 18px;
+body[data-page=project-detail] .highlight-display__title .split-line-mask,
+body[data-page=project-detail] .highlight-display__text .split-line-mask {
+  overflow: hidden;
+  display: block;
 }
-@media (max-width: 480px) {
-  body[data-page=project-detail] .highlight-list p {
-    font-size: 16px;
+body[data-page=project-detail] .highlight-display__text .split-line-mask + .split-line-mask {
+  margin-top: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .highlight-display__text .split-line-mask + .split-line-mask {
+    margin-top: 8px;
   }
 }
-body[data-page=project-detail] .highlight-list p {
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+@media (max-width: 768px) {
+  body[data-page=project-detail] .highlight-display__text .split-line-mask + .split-line-mask {
+    margin-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .highlight-display__text .split-line-mask + .split-line-mask {
+    margin-top: 8px;
+  }
+}
+body[data-page=project-detail] .highlight-display__title .split-line,
+body[data-page=project-detail] .highlight-display__text .split-line {
+  display: block;
+  will-change: transform;
 }
 body[data-page=project-detail] {
   /* ========================================
@@ -5652,8 +5843,15 @@ body[data-page=project-detail] .project-etc__grid p {
   body[data-page=project-detail] .project-cases__layout {
     grid-template-columns: minmax(13.75rem, 16.25rem) minmax(0, 1fr);
   }
+  body[data-page=project-detail] .project-highlights__body {
+    grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr);
+  }
   body[data-page=project-detail] .highlight-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex-direction: column;
+    align-items: stretch;
+  }
+  body[data-page=project-detail] .highlight-display {
+    min-height: clamp(18.75rem, 48vh, 35rem);
   }
   body[data-page=project-detail] .project-etc__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -5684,8 +5882,8 @@ body[data-page=project-detail] .project-etc__grid p {
   body[data-page=project-detail] .case-steps[data-step-count="1"] li {
     max-width: 100%;
   }
-  body[data-page=project-detail] .highlight-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  body[data-page=project-detail] .highlight-display {
+    min-height: clamp(20rem, 50vh, 38.75rem);
   }
 }
 @media (max-width: 768px) {
@@ -5728,6 +5926,11 @@ body[data-page=project-detail] .project-etc__grid p {
   }
   body[data-page=project-detail] .case-panel {
     scroll-margin-top: 5.5rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-page=project-detail] .highlight-display {
+    min-height: auto;
   }
 }
 body[data-page=project-detail] {

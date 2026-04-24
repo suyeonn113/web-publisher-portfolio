@@ -360,6 +360,72 @@ function splitTextToLines(element) {
   return element.querySelectorAll('.split-line');
 }
 
+function resetSplitLineMarkup(element) {
+  if (!element) return;
+
+  const originalText = element.dataset.originalText || element.textContent || '';
+  element.textContent = originalText;
+}
+
+function splitTextToLinesWithReset(element) {
+  if (!element) return [];
+
+  const originalText = (element.dataset.originalText || element.textContent || '').trim();
+  element.dataset.originalText = originalText;
+
+  if (!originalText) {
+    element.textContent = '';
+    return [];
+  }
+
+  const words = originalText.split(/\s+/);
+
+  element.innerHTML = words
+    .map((word) => `<span class="split-word" style="display:inline-block;white-space:pre">${word} </span>`)
+    .join('');
+
+  const wordElements = Array.from(element.querySelectorAll('.split-word'));
+  const lines = [];
+  let currentLine = [];
+  let currentY = null;
+
+  wordElements.forEach((wordElement) => {
+    const nextY = Math.round(wordElement.getBoundingClientRect().top);
+
+    if (currentY === null) {
+      currentY = nextY;
+    }
+
+    if (nextY !== currentY) {
+      lines.push(currentLine);
+      currentLine = [];
+      currentY = nextY;
+    }
+
+    currentLine.push(wordElement);
+  });
+
+  if (currentLine.length) {
+    lines.push(currentLine);
+  }
+
+  element.innerHTML = '';
+
+  lines.forEach((lineWords) => {
+    const mask = document.createElement('div');
+    mask.className = 'split-line-mask';
+
+    const inner = document.createElement('div');
+    inner.className = 'split-line';
+
+    lineWords.forEach((wordElement) => inner.appendChild(wordElement));
+    mask.appendChild(inner);
+    element.appendChild(mask);
+  });
+
+  return Array.from(element.querySelectorAll('.split-line'));
+}
+
 function initSummaryScrollAnimation(root) {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
@@ -437,6 +503,91 @@ function initSummaryScrollAnimation(root) {
       tl.set(block, { autoAlpha: 0 }, start + 1);
     }
   });
+}
+
+function initHighlightInteractiveAnimation(project, root) {
+  const items = Array.isArray(project.highlights) ? project.highlights : [];
+  const buttons = Array.from(root.querySelectorAll('.highlight-chip'));
+  const title = root.querySelector('[data-highlight-title]');
+  const description = root.querySelector('[data-highlight-description]');
+
+  if (!buttons.length || !title || !description || !items.length) return null;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let activeIndex = 0;
+  let animation = null;
+
+  const setActiveButton = (nextIndex) => {
+    buttons.forEach((button, index) => {
+      const isActive = index === nextIndex;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+
+  const animateCurrentText = () => {
+    const titleLines = splitTextToLinesWithReset(title);
+    const textLines = splitTextToLinesWithReset(description);
+    const allLines = [...titleLines, ...textLines];
+
+    gsap.set(allLines, { yPercent: 112 });
+
+    animation = gsap.timeline();
+    animation.to(titleLines, {
+      yPercent: 0,
+      duration: 0.36,
+      ease: 'power3.out'
+    });
+    animation.to(textLines, {
+      yPercent: 0,
+      duration: 0.54,
+      ease: 'power3.out',
+      stagger: 0.05
+    }, 0.08);
+  };
+
+  const renderActiveItem = (nextIndex, options = {}) => {
+    const { immediate = false } = options;
+    const item = items[nextIndex];
+    if (!item) return;
+
+    activeIndex = nextIndex;
+    setActiveButton(nextIndex);
+
+    if (animation) {
+      animation.kill();
+      animation = null;
+    }
+
+    resetSplitLineMarkup(title);
+    resetSplitLineMarkup(description);
+    title.textContent = item.title || '';
+    description.textContent = item.description || '';
+
+    if (immediate || prefersReducedMotion) return;
+
+    animateCurrentText();
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const nextIndex = Number(button.dataset.highlightIndex || 0);
+      if (nextIndex === activeIndex) return;
+      renderActiveItem(nextIndex);
+    });
+  });
+
+  renderActiveItem(0, { immediate: prefersReducedMotion });
+  document.fonts?.ready?.then(() => {
+    if (prefersReducedMotion) return;
+    renderActiveItem(activeIndex);
+  });
+
+  return () => {
+    if (animation) animation.kill();
+    resetSplitLineMarkup(title);
+    resetSplitLineMarkup(description);
+  };
 }
 
 function renderCaseSteps(caseItem, container, root) {
@@ -817,21 +968,31 @@ function stepGallery(state, direction) {
 function renderHighlights(project, root) {
   const container = root.querySelector('[data-field="highlights"]');
   const template = root.querySelector('#tpl-highlight');
+  const displayTitle = root.querySelector('[data-highlight-title]');
+  const displayDescription = root.querySelector('[data-highlight-description]');
+  const items = Array.isArray(project.highlights) ? project.highlights : [];
 
-  if (!container || !template) return;
+  if (!container || !template || !displayTitle || !displayDescription) return;
 
   container.innerHTML = '';
 
-  project.highlights?.forEach((item) => {
+  items.forEach((item, index) => {
     const node = template.content.cloneNode(true);
-    const title = node.querySelector('h3');
-    const text = node.querySelector('p');
+    const button = node.querySelector('.highlight-chip');
 
-    if (title) title.textContent = item.title || '';
-    if (text) text.textContent = item.description || '';
+    if (button) {
+      button.textContent = item.title || '';
+      button.dataset.highlightIndex = String(index);
+      button.classList.toggle('is-active', index === 0);
+      button.setAttribute('aria-pressed', String(index === 0));
+    }
 
     container.appendChild(node);
   });
+
+  const firstItem = items[0] || { title: '', description: '' };
+  displayTitle.textContent = firstItem.title || '';
+  displayDescription.textContent = firstItem.description || '';
 }
 
 function renderEtc(project, root) {
@@ -1065,6 +1226,7 @@ export async function loadProjectDetail() {
     renderProjectDetail(project, root, state);
     bindCaseEvents(root, state);
     initSummaryScrollAnimation(root);
+    initHighlightInteractiveAnimation(project, root);
     initCaseScrollSync(root, state);
     initProjectPageTransitions(root);
 
