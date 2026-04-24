@@ -989,6 +989,66 @@ body[data-page='project-detail'] {
       scroll-margin-top: rem(88px);
     }
   }
+  /* ========================================
+    Section Skip Navigation
+  ======================================== */
+
+  .project-section-skip {
+    position: fixed;
+    right: rem(24px);
+    bottom: rem(36px);
+    z-index: get-z('header');
+
+    &[data-direction='up'] {
+      bottom: rem(64px);
+    }
+
+    display: inline-flex;
+    align-items: center;
+    @include f-gap('cluster', 'xs');
+
+    @include pad('pad', 'xs', 'y');
+    @include pad('pad', 'sm', 'x');
+
+    color: $text-tertiary;
+
+    @include text-style('xs', 'bold', 'tight');
+
+    cursor: pointer;
+
+    transition: $tr-base;
+
+    &:hover,
+    &:focus-visible {
+      color: $point-primary;
+      transform: translateY(rem(-2px));
+    }
+
+    &:focus-visible {
+      outline: rem(2px) solid $point-primary;
+      outline-offset: rem(4px);
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    &__arrow {
+      transform: translateY(rem(1px));
+    }
+
+    @include respond-down('tablet') {
+      right: rem(16px);
+      bottom: rem(20px);
+
+      &[data-direction='up'] {
+        bottom: rem(52px);
+      }
+    }
+  }
+
+  
+
 
   /* ========================================
       CASES REFINED

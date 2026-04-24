@@ -5895,6 +5895,145 @@ body[data-page=project-detail] .project-etc__grid p {
 }
 body[data-page=project-detail] {
   /* ========================================
+    Section Skip Navigation
+  ======================================== */
+}
+body[data-page=project-detail] .project-section-skip {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 2.25rem;
+  z-index: 300;
+}
+body[data-page=project-detail] .project-section-skip[data-direction=up] {
+  bottom: 4rem;
+}
+body[data-page=project-detail] .project-section-skip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-section-skip {
+    gap: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-section-skip {
+    gap: 6px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-section-skip {
+    gap: 4px;
+  }
+}
+body[data-page=project-detail] .project-section-skip {
+  padding-top: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-top: 8px;
+  }
+}
+body[data-page=project-detail] .project-section-skip {
+  padding-bottom: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-bottom: 8px;
+  }
+}
+body[data-page=project-detail] .project-section-skip {
+  padding-left: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-left: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-left: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-left: 12px;
+  }
+}
+body[data-page=project-detail] .project-section-skip {
+  padding-right: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-right: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-right: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-section-skip {
+    padding-right: 12px;
+  }
+}
+body[data-page=project-detail] .project-section-skip {
+  color: var(--color-text-tertiary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+body[data-page=project-detail] .project-section-skip:hover, body[data-page=project-detail] .project-section-skip:focus-visible {
+  color: var(--color-point-primary);
+  transform: translateY(-0.125rem);
+}
+body[data-page=project-detail] .project-section-skip:focus-visible {
+  outline: 0.125rem solid var(--color-point-primary);
+  outline-offset: 0.25rem;
+}
+body[data-page=project-detail] .project-section-skip[hidden] {
+  display: none;
+}
+body[data-page=project-detail] .project-section-skip__arrow {
+  transform: translateY(0.0625rem);
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-section-skip {
+    right: 1rem;
+    bottom: 1.25rem;
+  }
+  body[data-page=project-detail] .project-section-skip[data-direction=up] {
+    bottom: 3.25rem;
+  }
+}
+body[data-page=project-detail] {
+  /* ========================================
       CASES REFINED
   ========================================= */
 }

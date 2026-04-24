@@ -5,6 +5,7 @@
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
 import { initProjectPageTransitions } from "./ProjectPageTransitions.js";
+import { initProjectSectionNavigator } from "./ProjectSectionNavigator.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -561,7 +562,7 @@ function initHighlightInteractiveAnimation(project, root) {
 
     resetSplitLineMarkup(title);
     resetSplitLineMarkup(description);
-    
+
     title.dataset.originalText = item.title || '';
     description.dataset.originalText = item.description || '';
 
@@ -1233,6 +1234,7 @@ export async function loadProjectDetail() {
     initHighlightInteractiveAnimation(project, root);
     initCaseScrollSync(root, state);
     initProjectPageTransitions(root);
+    initProjectSectionNavigator(root);
 
     return true;
   } catch (error) {
