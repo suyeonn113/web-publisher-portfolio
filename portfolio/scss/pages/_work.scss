@@ -325,12 +325,12 @@
   }
 
   .work-card__link:hover .work-card__title {
-    color: var(--color-point-primary); // 이미 있는 포인트 컬러
+    color: $point-primary;
   }
 
   .work-card__link:hover .work-card__year,
   .work-card__link:hover .work-card__meta li {
-    color: $card-meta-text-hover; // 메타를 본문 색으로 살짝 끌어올림
+    color: $card-meta-text-hover;
     opacity: $card-meta-text-opacity-hover;
   }
 

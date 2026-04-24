@@ -395,7 +395,7 @@ body[data-page='project-detail'] {
     width: rem(8px);
     height: rem(8px);
     @include rd('xl');
-    background: rgba(15, 23, 42, 0.14);
+    background: $border-soft;
     transition: $tr-base;
   }
 
@@ -410,7 +410,7 @@ body[data-page='project-detail'] {
 
   .case-item:is(.is-active, [aria-pressed='true'])::after {
     background: var(--home-hero-main-strong-mid);
-    box-shadow: 0 0 rem(12px) rgba(3, 169, 244, 0.24);
+    box-shadow: 0 0 rem(12px) $button-border-active;
   }
 
   .case-item__title {
@@ -663,7 +663,7 @@ body[data-page='project-detail'] {
   }
 
   .case-step__button:focus-visible .case-step__visual {
-    box-shadow: 0 0 0 rem(3px) rgba(3, 169, 244, 0.16);
+    box-shadow: 0 0 0 rem(3px) $border-strong;
   }
 
   .case-gallery-modal {

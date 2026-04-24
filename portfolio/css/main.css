@@ -3699,6 +3699,7 @@ body[data-page=project-detail] .project-summary,
 body[data-page=project-detail] .project-cases,
 body[data-page=project-detail] .project-highlights,
 body[data-page=project-detail] .project-etc {
+  position: relative;
   width: 100%;
 }
 body[data-page=project-detail] .project-hero__inner,
@@ -3777,6 +3778,12 @@ body[data-page=project-detail] .project-detail__error {
   border: 1px solid var(--detail-panel-border);
   box-shadow: var(--detail-panel-shadow);
   backdrop-filter: var(--detail-panel-backdrop);
+}
+body[data-page=project-detail] .project-section-transition__frame {
+  position: relative;
+  width: 100%;
+  transform-origin: 50% 0%;
+  backface-visibility: hidden;
 }
 body[data-page=project-detail] .case-panel {
   border-radius: 20px;
@@ -4596,7 +4603,7 @@ body[data-page=project-detail] .case-item::after {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 32px;
-  background: rgba(15, 23, 42, 0.14);
+  background: var(--color-border-soft);
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 body[data-page=project-detail] .case-item:is(:hover, :focus-visible) {
@@ -4608,7 +4615,7 @@ body[data-page=project-detail] .case-item:is(.is-active, [aria-pressed=true]) {
 }
 body[data-page=project-detail] .case-item:is(.is-active, [aria-pressed=true])::after {
   background: var(--home-hero-main-strong-mid);
-  box-shadow: 0 0 0.75rem rgba(3, 169, 244, 0.24);
+  box-shadow: 0 0 0.75rem var(--button-border-active);
 }
 body[data-page=project-detail] .case-item__title {
   font-size: 15px;
@@ -5089,7 +5096,7 @@ body[data-page=project-detail] .case-step__button:focus-visible {
   outline: none;
 }
 body[data-page=project-detail] .case-step__button:focus-visible .case-step__visual {
-  box-shadow: 0 0 0 0.1875rem rgba(3, 169, 244, 0.16);
+  box-shadow: 0 0 0 0.1875rem var(--color-border-strong);
 }
 body[data-page=project-detail] .case-gallery-modal {
   position: fixed;
