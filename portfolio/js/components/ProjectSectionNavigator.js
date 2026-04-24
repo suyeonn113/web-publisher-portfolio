@@ -135,12 +135,22 @@ export function initProjectSectionNavigator(root) {
     const section = getSection(root, item.current);
     if (!section) return;
 
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+    const handleEnter = () => {
+      if (isMobile && item.current === 'cases') {
+        updateSkipButton(button, null);
+        return;
+      }
+      updateSkipButton(button, item);
+    };
+
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: item.current === 'etc' ? 'top bottom' : 'top center',
       end: item.current === 'etc' ? 'bottom bottom' : 'bottom center',
-      onEnter: () => updateSkipButton(button, item),
-      onEnterBack: () => updateSkipButton(button, item)
+      onEnter: handleEnter,
+      onEnterBack: handleEnter
     });
 
     triggers.push(trigger);

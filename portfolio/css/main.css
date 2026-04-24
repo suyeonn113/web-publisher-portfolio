@@ -4611,7 +4611,7 @@ body[data-page=project-detail] .case-item:is(:hover, :focus-visible) {
   outline: none;
 }
 body[data-page=project-detail] .case-item:is(.is-active, [aria-pressed=true]) {
-  color: var(--color-text-primary);
+  color: var(--button-text-active);
 }
 body[data-page=project-detail] .case-item:is(.is-active, [aria-pressed=true])::after {
   background: var(--home-hero-main-strong-mid);
@@ -4685,6 +4685,42 @@ body[data-page=project-detail] .project-cases-mobile-nav {
   bottom: 1.25rem;
   z-index: 300;
   width: min(85vw, 45rem);
+  padding-left: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    padding-left: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    padding-left: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    padding-left: 28px;
+  }
+}
+body[data-page=project-detail] .project-cases-mobile-nav {
+  padding-right: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    padding-right: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    padding-right: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    padding-right: 28px;
+  }
+}
+body[data-page=project-detail] .project-cases-mobile-nav {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -4697,6 +4733,68 @@ body[data-page=project-detail] .project-cases-mobile-nav.is-visible {
   pointer-events: auto;
   transform: translate(-50%, 0);
 }
+body[data-page=project-detail] .project-cases-mobile-nav__inner {
+  padding: 8px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding: 8px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding: 8px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding: 8px;
+  }
+}
+body[data-page=project-detail] .project-cases-mobile-nav__inner {
+  padding-left: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding-left: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding-left: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding-left: 28px;
+  }
+}
+body[data-page=project-detail] .project-cases-mobile-nav__inner {
+  padding-right: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding-right: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding-right: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__inner {
+    padding-right: 28px;
+  }
+}
+body[data-page=project-detail] .project-cases-mobile-nav__inner {
+  border-radius: 32px;
+  background: var(--detail-panel-bg-strong);
+  border: 1px solid var(--detail-panel-border);
+  box-shadow: var(--detail-panel-shadow);
+  backdrop-filter: var(--detail-panel-backdrop);
+  -webkit-backdrop-filter: var(--detail-panel-backdrop);
+}
 body[data-page=project-detail] .project-cases-mobile-nav__track {
   display: flex;
   align-items: center;
@@ -4704,21 +4802,21 @@ body[data-page=project-detail] .project-cases-mobile-nav__track {
   justify-content: space-between;
   min-width: 100%;
   scrollbar-width: none;
-  gap: 16px;
+  gap: 32px;
 }
 @media (max-width: 1024px) {
   body[data-page=project-detail] .project-cases-mobile-nav__track {
-    gap: 16px;
+    gap: 32px;
   }
 }
 @media (max-width: 768px) {
   body[data-page=project-detail] .project-cases-mobile-nav__track {
-    gap: 16px;
+    gap: 24px;
   }
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .project-cases-mobile-nav__track {
-    gap: 12px;
+    gap: 16px;
   }
 }
 body[data-page=project-detail] .project-cases-mobile-nav__track::-webkit-scrollbar {

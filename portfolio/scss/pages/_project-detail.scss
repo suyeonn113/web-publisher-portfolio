@@ -405,7 +405,7 @@ body[data-page='project-detail'] {
   }
 
   .case-item:is(.is-active, [aria-pressed='true']) {
-    color: $text-primary;
+    color: $button-text-active;
   }
 
   .case-item:is(.is-active, [aria-pressed='true'])::after {
@@ -425,7 +425,6 @@ body[data-page='project-detail'] {
     max-width: max-content;
     justify-content: center;
     min-width: max-content;
-    
   }
 
   .case-item--island::after {
@@ -451,7 +450,10 @@ body[data-page='project-detail'] {
     left: 50%;
     bottom: rem(20px);
     z-index: get-z('header');
+    
     width: min(85vw, rem(720px));
+    @include pad('pad', 'lg', 'x');
+
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -466,15 +468,16 @@ body[data-page='project-detail'] {
     transform: translate(-50%, 0);
   }
 
-  // .project-cases-mobile-nav__inner {
-  //   @include pad('pad', 'xs');
-  //   @include rd('xl');
-  //   background: $detail-panel-bg-strong;
-  //   border: 1px solid $detail-panel-border;
-  //   box-shadow: $detail-panel-shadow;
-  //   backdrop-filter: $detail-panel-backdrop;
-  //   -webkit-backdrop-filter: $detail-panel-backdrop;
-  // }
+  .project-cases-mobile-nav__inner {
+    @include pad('pad', 'xs');
+    @include pad('pad', 'lg', 'x');
+    @include rd('xl');
+    background: $detail-panel-bg-strong;
+    border: 1px solid $detail-panel-border;
+    box-shadow: $detail-panel-shadow;
+    backdrop-filter: $detail-panel-backdrop;
+    -webkit-backdrop-filter: $detail-panel-backdrop;
+  }
 
   .project-cases-mobile-nav__track {
     display: flex;
@@ -483,7 +486,7 @@ body[data-page='project-detail'] {
     justify-content: space-between;
     min-width: 100%;
     scrollbar-width: none;
-    @include f-gap('gutter', 'sm');
+    @include f-gap('gutter', 'md');
   }
 
   .project-cases-mobile-nav__track::-webkit-scrollbar {
