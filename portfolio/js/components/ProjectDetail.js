@@ -306,6 +306,138 @@ function renderSummary(project, root) {
   setText('[data-field="summary.tech"]', project.summary?.tech, root);
 }
 
+function splitTextToLines(element) {
+  // 현재 텍스트를 단어 단위로 쪼갠 뒤
+  // 렌더링 기준으로 같은 Y좌표인 단어들을 한 라인으로 묶음
+  const text = element.textContent.trim();
+  const words = text.split(/\s+/);
+
+  // 단어를 span으로 감싸서 DOM에 삽입
+  element.innerHTML = words
+    .map((w) => `<span class="split-word" style="display:inline-block;white-space:pre">${w} </span>`)
+    .join('');
+
+  const wordEls = Array.from(element.querySelectorAll('.split-word'));
+  const lines = [];
+  let currentLine = [];
+  let currentY = null;
+
+  wordEls.forEach((wordEl) => {
+    const y = Math.round(wordEl.getBoundingClientRect().top);
+
+    if (currentY === null) {
+      currentY = y;
+    }
+
+    if (y !== currentY) {
+      lines.push(currentLine);
+      currentLine = [];
+      currentY = y;
+    }
+
+    currentLine.push(wordEl);
+  });
+
+  if (currentLine.length) lines.push(currentLine);
+
+  // 라인별로 래퍼 div로 묶기 (마스크 역할)
+  element.innerHTML = '';
+  lines.forEach((lineWords) => {
+    const mask = document.createElement('div');
+    mask.className = 'split-line-mask';
+    mask.style.cssText = 'overflow:hidden; display:block;';
+
+    const inner = document.createElement('div');
+    inner.className = 'split-line';
+    inner.style.cssText = 'display:block;';
+
+    lineWords.forEach((w) => inner.appendChild(w));
+    mask.appendChild(inner);
+    element.appendChild(mask);
+  });
+
+  return element.querySelectorAll('.split-line');
+}
+
+function initSummaryScrollAnimation(root) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const section = root.querySelector('.project-summary');
+  const blocks = gsap.utils.toArray('.project-summary__block', root);
+
+  if (!section || !blocks.length) return;
+
+  const blockLineMap = blocks.map((block) => {
+    const label = block.querySelector('.project-summary__label');
+    const text = block.querySelector('.project-summary__text');
+
+    const labelLines = label ? Array.from(splitTextToLines(label)) : [];
+    const textLines = text ? Array.from(splitTextToLines(text)) : [];
+
+    return {
+      block,
+      labelLines,
+      textLines,
+      allLines: [...labelLines, ...textLines]
+    };
+  });
+
+  gsap.set(blocks, { autoAlpha: 0 });
+  gsap.set(blockLineMap.flatMap((item) => item.allLines), { yPercent: 110 });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top',
+      end: () => `+=${blocks.length * window.innerHeight}`,
+      pin: true,
+      scrub: 0.8,
+      anticipatePin: 1,
+      invalidateOnRefresh: true
+    }
+  });
+
+  blockLineMap.forEach(({ block, labelLines, textLines, allLines }, index) => {
+    const start = index;
+
+    tl.set(block, { autoAlpha: 1 }, start);
+
+    tl.to(labelLines, {
+      yPercent: 0,
+      duration: 0.32,
+      ease: 'power3.out'
+    }, start);
+
+    tl.to(textLines, {
+      yPercent: 0,
+      duration: 0.52,
+      ease: 'power3.out',
+      stagger: 0.055
+    }, start + 0.18);
+
+    if (index < blockLineMap.length - 1) {
+      tl.to(textLines, {
+        yPercent: -110,
+        duration: 0.34,
+        ease: 'power2.in',
+        stagger: {
+          each: 0.035,
+          from: 'end'
+        }
+      }, start + 0.72);
+
+      tl.to(labelLines, {
+        yPercent: -110,
+        duration: 0.26,
+        ease: 'power2.in'
+      }, start + 0.82);
+
+      tl.set(block, { autoAlpha: 0 }, start + 1);
+    }
+  });
+}
+
 function renderCaseSteps(caseItem, container, root) {
   const template = root.querySelector('#tpl-case-step');
 
@@ -402,7 +534,7 @@ function renderCaseListItems(project, container, template, selectedId, options =
       button.classList.toggle('is-active', isActive);
 
       if (isIsland) {
-        button.classList.add('case-item--island', 'btn', 'btn--compact');
+        button.classList.add('case-item--island', 'btn--compact');
       }
     }
 
@@ -931,6 +1063,7 @@ export async function loadProjectDetail() {
 
     renderProjectDetail(project, root, state);
     bindCaseEvents(root, state);
+    initSummaryScrollAnimation(root);
     initCaseScrollSync(root, state);
 
     return true;

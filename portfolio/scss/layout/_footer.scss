@@ -4,7 +4,7 @@
   position: relative;
   display: block;
   @include text-style('base');
-  z-index: 1000;
+  z-index: get-z('toast');
 }
 
 .site-footer__inner {

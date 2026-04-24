@@ -55,20 +55,24 @@
           SUMMARY
       ========================================= -->
       <section class="project-summary" data-section="summary" data-gsap-target="section">
-        <h2 class="section-title">SUMMARY</h2>
-        <div class="project-summary__grid">
-          <article>
-            <h3>프로젝트 요약</h3>
-            <p data-field="summary.overview"></p>
-          </article>
-          <article>
-            <h3>주요 역할</h3>
-            <p data-field="summary.role"></p>
-          </article>
-          <article>
-            <h3>기술</h3>
-            <p data-field="summary.tech"></p>
-          </article>
+        <div class="project-summary__container">
+          <div class="project-summary__header">
+            <h2 class="section-title">SUMMARY</h2>
+          </div>
+          <div class="project-summary__content">
+            <div class="project-summary__block" data-summary-index="0">
+              <h3 class="project-summary__label">프로젝트 요약</h3>
+              <p class="project-summary__text" data-field="summary.overview"></p>
+            </div>
+            <div class="project-summary__block" data-summary-index="1">
+              <h3 class="project-summary__label">주요 역할</h3>
+              <p class="project-summary__text" data-field="summary.role"></p>
+            </div>
+            <div class="project-summary__block" data-summary-index="2">
+              <h3 class="project-summary__label">기술</h3>
+              <p class="project-summary__text" data-field="summary.tech"></p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -106,20 +110,20 @@
       ========================================= -->
       <section class="project-etc" data-section="etc" data-gsap-target="section">
         <h2 class="section-title">ETC</h2>
-        <div class="project-etc__grid">
-          <div>
+          <div class="project-etc__grid">
+            <div>
             <h3>배포</h3>
             <p data-field="etc.deployment"></p>
           </div>
-          <div>
+            <div>
             <h3>도구</h3>
             <p data-field="etc.tools"></p>
           </div>
-          <div>
+            <div>
             <h3>기여</h3>
             <p data-field="etc.contribution"></p>
+            </div>
           </div>
-        </div>
       </section>
 
       <!-- ========================================

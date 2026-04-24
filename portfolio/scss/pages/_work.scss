@@ -32,13 +32,6 @@
   @include f-gap('gutter', 'md');
 }
 
-.work-page__title,
-.work-page__desc,
-.work-page__status,
-.work-page__filter-title {
-  margin: 0;
-}
-
 .work-page__title {
   @include text-style('title', 'bold', 'tight', 'tight');
   color: $text-primary;
@@ -103,7 +96,6 @@
 }
 
 .work-page__select {
-  appearance: none;
   width: 100%;
   min-width: 0;
   min-height: rem(48px);
@@ -148,20 +140,17 @@
   position: relative;
   grid-template-columns: minmax(0, 1fr);
   min-width: 0;
-  list-style: none;
-  padding: 0;
-  margin: 0;
   @include g-gap('gutter', 'md');
 
-  @media (min-width: $tablet) {
+  @include respond-up('tablet') {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (min-width: $laptop) {
+  @include respond-up('laptop') {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  @media (min-width: $desktop) {
+  @include respond-up('desktop') {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
@@ -170,7 +159,6 @@
 .work-page__loading,
 .work-page__empty {
   min-width: 0;
-  list-style: none;
 }
 
 .work-page__item {
@@ -210,11 +198,9 @@
   min-width: 0;
   height: 100%;
   overflow: hidden;
-  border-radius: rem(24px);
+  @include rd('xl');
   background: transparent;
   border: 1px solid var(--work-folder-image-border);
-  text-decoration: none;
-  color: inherit;
   box-shadow: var(--shadow-surface-soft);
   transition:
     transform get-duration('base') get-easing('apple'),
@@ -225,7 +211,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: get-z('base');
   background:
     $overlay-soft,
     linear-gradient(135deg, var(--work-folder-gloss-top) 0%, var(--work-folder-gloss-bottom) 38%);
@@ -233,14 +219,10 @@
 }
 
 .work-card__link > img {
-  display: block;
   width: 100%;
   aspect-ratio: 1.71 / 1;
   object-fit: cover;
-  overflow: hidden;
   background: $bg-glass;
-  transform: scale(1.015);
-  filter: saturate(1.03) contrast(1.02);
   transition:
     transform get-duration('slow') get-easing('apple'),
     filter get-duration('base') get-easing('apple');
@@ -251,15 +233,13 @@
   left: rem(24px);
   right: rem(24px);
   bottom: rem(20px);
-  z-index: 2;
+  z-index: get-z('base');
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-width: 0;
-  min-height: 0;
   max-width: min(32rem, calc(100% - #{rem(48px)}));
   padding: 0;
-  gap: rem(10px);
+  @include icon-gap;
   transition: transform get-duration('base') get-easing('apple');
 
   @include respond-down('laptop') {
@@ -274,7 +254,7 @@
     right: rem(16px);
     bottom: rem(16px);
     max-width: calc(100% - #{rem(32px)});
-    gap: rem(8px);
+    @include f-gap('pad', 'xs');
   }
 
   @include respond-down('mobile') {
@@ -283,12 +263,6 @@
     bottom: rem(14px);
     max-width: calc(100% - #{rem(28px)});
   }
-}
-
-.work-card__title,
-.work-card__year,
-.work-card__meta {
-  margin: 0;
 }
 
 .work-card__title {
@@ -316,7 +290,7 @@
   margin-top: rem(2px);
 
   @include respond-down('mobile') {
-    gap: rem(6px);
+    @include f-gap('pad', 'xs');
   }
 }
 
@@ -326,7 +300,7 @@
   line-height: 1.2;
   color: $card-meta-text;
   padding: rem(6px) rem(10px);
-  border-radius: rem(999px);
+  @include rd('xl');
   border: $chip-border-width solid $card-meta-chip-border;
   background: $card-meta-chip-bg;
   box-shadow: $card-meta-chip-shadow;
@@ -382,7 +356,7 @@
   }
 }
 
-@media (min-width: $laptop) {
+@include respond-up('laptop') {
   .work-page__controls {
     flex-direction: row;
     justify-content: space-between;
@@ -398,9 +372,5 @@
     flex: 0 0 rem(220px);
     width: auto;
     align-self: flex-end;
-  }
-
-  .work-page__select {
-    width: 100%;
   }
 }

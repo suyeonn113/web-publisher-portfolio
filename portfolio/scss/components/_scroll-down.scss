@@ -1,12 +1,11 @@
 @use '../foundation' as *;
 
 .scroll-down {
-  font-size: get-fs('base', 'default');
+  @include text-size('base');
   color: $text-primary;
 
-  display: flex;
+  @include flex-center;
   flex-direction: column;
-  align-items: center;
 
   pointer-events: none;
   user-select: none;

@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
 
-  z-index: 1000;
+  z-index: get-z('toast');
 }
 
 .site-header__menu {
@@ -21,7 +21,7 @@
 .site-header__link {
   text-decoration: none;
   color: $text-primary;
-  @include text-style('sm', 'regular', 'base', 'base');
+  @include text-style('sm');
 }
 
 .site-header__theme-toggle {

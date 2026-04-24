@@ -20,19 +20,17 @@
   align-items: center; 
 }
 
-// 중앙 정렬이 필요한 섹션에만 부분적으로 사용
 .l-inner {
   width: 100%;
-  max-width: $container-max; // 1440px
+  max-width: $container-max;
   margin: 0 auto;
 }
 
-// 그리드 시스템 (반응형 포함)
+
 .l-grid {
   display: grid;
   @include space-gap('cluster', 'md');
   
-  // 3열 그리드 (데스크탑)
   &--3 {
     grid-template-columns: repeat(3, 1fr);
     

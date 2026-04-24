@@ -367,7 +367,7 @@ $folder-ratio: 413 / 373;
   text-shadow: 0 2px 8px var(--work-folder-meta-shadow);
 
   .folder__year {
-    @include text-style('sm', 'regular', 'base', 'base');
+    @include text-style('sm', 'regular');
     line-height: 1;
     flex-shrink: 0;
   }

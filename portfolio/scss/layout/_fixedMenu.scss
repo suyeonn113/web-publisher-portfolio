@@ -4,7 +4,7 @@
   position: fixed;
   right: 0;
   top: 50%;
-  z-index: 1000;
+  z-index: get-z('toast');
   transform: translateY(-50%);
 
   &:has(.js-fixed-btn[data-state="open"]) {
@@ -30,9 +30,7 @@
     border-radius: 50%;
     @include space-pad('inset', 'xs');
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     transition: $tr-elastic;
 
     &[data-state="open"] {
@@ -62,7 +60,7 @@
 
     background: $bg-glass-strong;
     border: 1px solid $border-soft;
-    border-radius: 12px;
+    @include rd('md');
     box-shadow: $shadow-surface-soft;
     backdrop-filter: blur(18px);
     
@@ -92,7 +90,7 @@
 
     pointer-events: none;
     opacity: 0;
-    z-index: 1000;
+    z-index: get-z('toast');
     overflow: hidden;
   }
 }
@@ -106,7 +104,7 @@
   max-width: clamp(28ch, 32ch, 36ch);
 
   .fixed-menu__desc {
-    @include font-style('sm', 'regular');
+    @include text-style('sm', 'regular');
     color: $text-secondary;
     white-space: pre-line;
     word-break: keep-all;
@@ -114,7 +112,7 @@
 
   .fixed-menu__cta {
     @include flex-center;
-    @include font-style('xs', 'medium', 'tight');
+    @include text-style('xs', 'medium', 'tight');
     @include space-pad('pad', 'xs', 'y');
     @include space-pad('pad', 'sm', 'x');
     @include rd('xl');

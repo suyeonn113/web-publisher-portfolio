@@ -18,7 +18,7 @@ body[data-page='project-detail'] .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: rem(8px);
+  @include space-gap('cluster', 'xs');
   min-width: map-get($btn-settings, 'min-size');
   min-height: map-get($btn-settings, 'min-size');
   @include pad('pad', 'xs', 'y');

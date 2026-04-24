@@ -2,8 +2,7 @@
 
 .cursor-satellite {
   position: fixed;
-  width: 18px;
-  height: 18px;
+  @include icon-size('sm');
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
