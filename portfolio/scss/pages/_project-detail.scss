@@ -16,6 +16,7 @@ body[data-page='project-detail'] {
   .project-cases,
   .project-highlights,
   .project-etc {
+    position: relative;
     width: 100%;
   }
 
@@ -43,6 +44,13 @@ body[data-page='project-detail'] {
     border: 1px solid $detail-panel-border;
     box-shadow: $detail-panel-shadow;
     backdrop-filter: $detail-panel-backdrop;
+  }
+
+  .project-section-transition__frame {
+    position: relative;
+    width: 100%;
+    transform-origin: 50% 0%;
+    backface-visibility: hidden;
   }
 
   .case-panel {

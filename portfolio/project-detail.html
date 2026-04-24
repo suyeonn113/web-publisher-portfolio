@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>수연의 작업실</title>
+  <title>Project Detail</title>
   <link rel="stylesheet" href="./css/main.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -15,38 +15,40 @@
           HERO
       ========================================= -->
       <section class="project-hero" data-section="hero" data-gsap-target="section">
-        <div class="project-hero__inner">
-          <div class="project-hero__body" data-gsap-target="hero-copy">
-            <p class="project-hero__label" data-field="meta.label"></p>
-            <h1 class="project-hero__title" data-field="meta.title"></h1>
-            <div class="project-hero__description" data-field="hero.description"></div>
-            <ul class="project-hero__tags" data-field="hero.tags"></ul>
-            <dl class="project-meta">
-              <div>
-                <dt>기간</dt>
-                <dd data-field="meta.dateRange"></dd>
+        <div class="project-section-transition__frame" data-section-transition-frame>
+          <div class="project-hero__inner">
+            <div class="project-hero__body" data-gsap-target="hero-copy">
+              <p class="project-hero__label" data-field="meta.label"></p>
+              <h1 class="project-hero__title" data-field="meta.title"></h1>
+              <div class="project-hero__description" data-field="hero.description"></div>
+              <ul class="project-hero__tags" data-field="hero.tags"></ul>
+              <dl class="project-meta">
+                <div>
+                  <dt>Period</dt>
+                  <dd data-field="meta.dateRange"></dd>
+                </div>
+                <div>
+                  <dt>Role</dt>
+                  <dd data-field="meta.role"></dd>
+                </div>
+                <div>
+                  <dt>Type</dt>
+                  <dd data-field="meta.projectType"></dd>
+                </div>
+                <div>
+                  <dt>Scale</dt>
+                  <dd data-field="meta.projectScale"></dd>
+                </div>
+              </dl>
+              <div class="project-hero__actions">
+                <a href="#" class="btn btn--wide btn--surface" data-field="meta.liveLink" data-link-type="live">
+                  Visit Site
+                </a>
               </div>
-              <div>
-                <dt>역할</dt>
-                <dd data-field="meta.role"></dd>
-              </div>
-              <div>
-                <dt>형태</dt>
-                <dd data-field="meta.projectType"></dd>
-              </div>
-              <div>
-                <dt>규모</dt>
-                <dd data-field="meta.projectScale"></dd>
-              </div>
-            </dl>
-            <div class="project-hero__actions">
-              <a href="#" class="btn btn--wide btn--surface" data-field="meta.liveLink" data-link-type="live">
-                사이트 바로가기
-              </a>
             </div>
-          </div>
-          <div class="project-hero__visual" data-gsap-target="hero-visual">
-            <div data-field="hero.visuals"></div>
+            <div class="project-hero__visual" data-gsap-target="hero-visual">
+              <div data-field="hero.visuals"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -55,22 +57,24 @@
           SUMMARY
       ========================================= -->
       <section class="project-summary" data-section="summary" data-gsap-target="section">
-        <div class="project-summary__container">
-          <div class="project-summary__header">
-            <h2 class="section-title">SUMMARY</h2>
-          </div>
-          <div class="project-summary__content">
-            <div class="project-summary__block" data-summary-index="0">
-              <h3 class="project-summary__label">프로젝트 요약</h3>
-              <p class="project-summary__text" data-field="summary.overview"></p>
+        <div class="project-section-transition__frame" data-section-transition-frame>
+          <div class="project-summary__container">
+            <div class="project-summary__header">
+              <h2 class="section-title">SUMMARY</h2>
             </div>
-            <div class="project-summary__block" data-summary-index="1">
-              <h3 class="project-summary__label">주요 역할</h3>
-              <p class="project-summary__text" data-field="summary.role"></p>
-            </div>
-            <div class="project-summary__block" data-summary-index="2">
-              <h3 class="project-summary__label">기술</h3>
-              <p class="project-summary__text" data-field="summary.tech"></p>
+            <div class="project-summary__content">
+              <div class="project-summary__block" data-summary-index="0">
+                <h3 class="project-summary__label">Overview</h3>
+                <p class="project-summary__text" data-field="summary.overview"></p>
+              </div>
+              <div class="project-summary__block" data-summary-index="1">
+                <h3 class="project-summary__label">Core Role</h3>
+                <p class="project-summary__text" data-field="summary.role"></p>
+              </div>
+              <div class="project-summary__block" data-summary-index="2">
+                <h3 class="project-summary__label">Tech Stack</h3>
+                <p class="project-summary__text" data-field="summary.tech"></p>
+              </div>
             </div>
           </div>
         </div>
@@ -89,7 +93,7 @@
             </div>
           </aside>
           <div class="project-cases__content" data-field="casePanels"></div>
-        </div>
+          </div>
         <div class="project-cases-mobile-nav" data-case-island aria-hidden="true">
           <div class="project-cases-mobile-nav__inner">
             <div class="project-cases-mobile-nav__track" data-field="caseListMobile"></div>
@@ -101,29 +105,33 @@
           HIGHLIGHTS
       ========================================= -->
       <section class="project-highlights" data-section="highlights" data-gsap-target="section">
-        <h2 class="section-title">HIGHLIGHTS</h2>
-        <div class="highlight-list" data-field="highlights"></div>
+        <div class="project-section-transition__frame" data-section-transition-frame>
+          <h2 class="section-title">HIGHLIGHTS</h2>
+          <div class="highlight-list" data-field="highlights"></div>
+        </div>
       </section>
 
       <!-- ========================================
           ETC
       ========================================= -->
       <section class="project-etc" data-section="etc" data-gsap-target="section">
-        <h2 class="section-title">ETC</h2>
+        <div class="project-section-transition__frame" data-section-transition-frame>
+          <h2 class="section-title">ETC</h2>
           <div class="project-etc__grid">
             <div>
-            <h3>배포</h3>
-            <p data-field="etc.deployment"></p>
-          </div>
+              <h3>Deployment</h3>
+              <p data-field="etc.deployment"></p>
+            </div>
             <div>
-            <h3>도구</h3>
-            <p data-field="etc.tools"></p>
-          </div>
+              <h3>Tools</h3>
+              <p data-field="etc.tools"></p>
+            </div>
             <div>
-            <h3>기여</h3>
-            <p data-field="etc.contribution"></p>
+              <h3>Contribution</h3>
+              <p data-field="etc.contribution"></p>
             </div>
           </div>
+        </div>
       </section>
 
       <!-- ========================================
@@ -152,19 +160,19 @@
           <div class="case-panel__layout">
             <div class="case-panel__content">
               <section>
-                <h4>문제</h4>
+                <h4>Problem</h4>
                 <p class="case-panel__problem"></p>
               </section>
               <section>
-                <h4>해결</h4>
+                <h4>Solution</h4>
                 <p class="case-panel__solution"></p>
               </section>
               <section>
-                <h4>구현</h4>
+                <h4>Implementation</h4>
                 <ul class="case-panel__implementation"></ul>
               </section>
               <section>
-                <h4>포인트</h4>
+                <h4>Insight</h4>
                 <p class="case-panel__key-point"></p>
               </section>
             </div>
@@ -199,9 +207,9 @@
             <div class="case-gallery-modal__chrome">
               <p class="case-gallery-modal__eyebrow">Key Flow Preview</p>
               <div class="case-gallery-modal__actions">
-                <button class="case-gallery-modal__nav" type="button" data-gallery-prev aria-label="이전 이미지">Prev</button>
-                <button class="case-gallery-modal__nav" type="button" data-gallery-next aria-label="다음 이미지">Next</button>
-                <button class="case-gallery-modal__close" type="button" data-gallery-close aria-label="이미지 닫기">Close</button>
+                <button class="case-gallery-modal__nav" type="button" data-gallery-prev aria-label="Previous image">Prev</button>
+                <button class="case-gallery-modal__nav" type="button" data-gallery-next aria-label="Next image">Next</button>
+                <button class="case-gallery-modal__close" type="button" data-gallery-close aria-label="Close image">Close</button>
               </div>
             </div>
             <figure class="case-gallery-modal__figure">

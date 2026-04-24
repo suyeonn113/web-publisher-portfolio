@@ -4,6 +4,7 @@
 
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
+import { initProjectPageTransitions } from "./ProjectPageTransitions.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1065,6 +1066,7 @@ export async function loadProjectDetail() {
     bindCaseEvents(root, state);
     initSummaryScrollAnimation(root);
     initCaseScrollSync(root, state);
+    initProjectPageTransitions(root);
 
     return true;
   } catch (error) {
