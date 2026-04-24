@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>조수연 프로젝트</title>
+  <title>수연의 작업실</title>
   <link rel="stylesheet" href="./css/main.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -170,12 +170,44 @@
       </template>
 
       <template id="tpl-case-step">
-        <li>
-          <figure>
-            <img src="" alt="" loading="lazy">
-            <figcaption></figcaption>
-          </figure>
+        <li class="case-step">
+          <button class="case-step__button" type="button" aria-haspopup="dialog">
+            <figure class="case-step__figure">
+              <span class="case-step__visual">
+                <img src="" alt="" loading="lazy">
+              </span>
+              <figcaption></figcaption>
+            </figure>
+          </button>
         </li>
+      </template>
+
+      <template id="tpl-case-gallery-modal">
+        <div class="case-gallery-modal" hidden>
+          <div class="case-gallery-modal__backdrop" data-gallery-close></div>
+          <div
+            class="case-gallery-modal__dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Key flow image viewer"
+            tabindex="-1"
+          >
+            <div class="case-gallery-modal__chrome">
+              <p class="case-gallery-modal__eyebrow">Key Flow Preview</p>
+              <div class="case-gallery-modal__actions">
+                <button class="case-gallery-modal__nav" type="button" data-gallery-prev aria-label="이전 이미지">Prev</button>
+                <button class="case-gallery-modal__nav" type="button" data-gallery-next aria-label="다음 이미지">Next</button>
+                <button class="case-gallery-modal__close" type="button" data-gallery-close aria-label="이미지 닫기">Close</button>
+              </div>
+            </div>
+            <figure class="case-gallery-modal__figure">
+              <div class="case-gallery-modal__media" data-gallery-media>
+                <img class="case-gallery-modal__image" data-gallery-image src="" alt="">
+              </div>
+              <figcaption class="case-gallery-modal__caption" data-gallery-caption></figcaption>
+            </figure>
+          </div>
+        </div>
       </template>
 
       <template id="tpl-highlight">

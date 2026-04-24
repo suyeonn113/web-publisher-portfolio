@@ -5381,8 +5381,223 @@ body[data-page=project-detail] .case-panel__layout {
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .case-panel__layout {
-    gap: 24px;
+body[data-page=project-detail] .case-panel__layout {
+  gap: 24px;
+}
+}
+
+body[data-page=project-detail] .case-steps {
+  grid-template-columns: minmax(0, 1fr);
+}
+body[data-page=project-detail] .case-step__button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+body[data-page=project-detail] .case-step__figure {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  gap: 4px;
+}
+body[data-page=project-detail] .case-step__visual {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  max-height: clamp(132px, 18vw, 220px);
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+body[data-page=project-detail] .case-steps[data-gallery-layout=landscape-grid] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+body[data-page=project-detail] .case-steps[data-gallery-layout=portrait-grid] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+body[data-page=project-detail] .case-steps[data-gallery-layout=feature-stack] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+body[data-page=project-detail] .case-steps[data-gallery-layout=feature-stack] .case-step.is-featured {
+  grid-column: 1/-1;
+}
+body[data-page=project-detail] .case-steps[data-gallery-layout=feature-stack] .case-step:not(.is-featured) .case-step__visual {
+  max-height: clamp(124px, 16vw, 200px);
+}
+body[data-page=project-detail] .case-steps[data-gallery-layout=single] .case-step__visual,
+body[data-page=project-detail] .case-steps[data-gallery-layout=single-portrait] .case-step__visual,
+body[data-page=project-detail] .case-steps[data-gallery-layout=feature-stack] .case-step.is-featured .case-step__visual {
+  max-height: clamp(180px, 24vw, 280px);
+}
+body[data-page=project-detail] .case-steps img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: transparent;
+  vertical-align: top;
+}
+body[data-page=project-detail] .case-steps figcaption {
+  font-size: clamp(0.75rem, 0.7045rem + 0.1942vw, 0.875rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  transition: color 0.35s ease, transform 0.35s ease;
+}
+body[data-page=project-detail] .case-step__button:is(:hover, :focus-visible) .case-step__visual {
+  transform: translateY(-2px) scale(1.01);
+  opacity: 0.96;
+}
+body[data-page=project-detail] .case-step__button:is(:hover, :focus-visible) figcaption {
+  color: var(--text-primary);
+  transform: translateX(4px);
+}
+body[data-page=project-detail] .case-step__button:focus-visible {
+  outline: none;
+}
+body[data-page=project-detail] .case-step__button:focus-visible .case-step__visual {
+  box-shadow: 0 0 0 3px rgba(3, 169, 244, 0.16);
+}
+body[data-page=project-detail] .case-gallery-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+body[data-page=project-detail] .case-gallery-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+body[data-page=project-detail] .case-gallery-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.68);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+body[data-page=project-detail] .case-gallery-modal__dialog {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(1120px, 100%);
+  max-height: calc(100vh - 48px);
+  padding: 16px;
+  gap: 12px;
+  border-radius: 20px;
+  background: rgba(248, 250, 252, 0.96);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+}
+body[data-page=project-detail] .case-gallery-modal__chrome,
+body[data-page=project-detail] .case-gallery-modal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+body[data-page=project-detail] .case-gallery-modal__actions {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+body[data-page=project-detail] .case-gallery-modal__eyebrow {
+  font-size: clamp(0.6875rem, 0.642rem + 0.1942vw, 0.8125rem);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-tertiary);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+body[data-page=project-detail] .case-gallery-modal__nav,
+body[data-page=project-detail] .case-gallery-modal__close {
+  padding: 6px 10px;
+  border-radius: 32px;
+  font-size: clamp(0.6875rem, 0.642rem + 0.1942vw, 0.8125rem);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+body[data-page=project-detail] .case-gallery-modal__nav:is(:hover, :focus-visible),
+body[data-page=project-detail] .case-gallery-modal__close:is(:hover, :focus-visible) {
+  border-color: rgba(15, 23, 42, 0.18);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  outline: none;
+}
+body[data-page=project-detail] .case-gallery-modal__figure {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: 8px;
+}
+body[data-page=project-detail] .case-gallery-modal__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: min(720px, 68vh);
+  padding: 6px;
+  overflow: hidden;
+}
+body[data-page=project-detail] .case-gallery-modal__image {
+  width: 100%;
+  height: 100%;
+  min-height: min(680px, 62vh);
+  object-fit: contain;
+}
+body[data-page=project-detail] .case-gallery-modal__caption {
+  font-size: clamp(0.875rem, 0.8295rem + 0.1942vw, 1rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+body[data-page=project-detail] .case-gallery-modal__proxy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform-origin: center center;
+}
+body[data-page=project-detail].is-case-gallery-open {
+  overflow: hidden;
+}
+@media (min-width: 1440px) {
+  body[data-page=project-detail] .case-steps[data-gallery-layout=portrait-grid] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  body[data-page=project-detail] .case-steps[data-gallery-layout=single] .case-step__visual,
+  body[data-page=project-detail] .case-steps[data-gallery-layout=single-portrait] .case-step__visual,
+  body[data-page=project-detail] .case-steps[data-gallery-layout=feature-stack] .case-step.is-featured .case-step__visual {
+    max-height: clamp(140px, 42vw, 220px);
+  }
+  body[data-page=project-detail] .case-gallery-modal {
+    padding: 8px;
+  }
+  body[data-page=project-detail] .case-gallery-modal__dialog {
+    max-height: calc(100vh - 16px);
+    padding: 16px;
+  }
+  body[data-page=project-detail] .case-gallery-modal__chrome {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  body[data-page=project-detail] .case-gallery-modal__media {
+    min-height: min(420px, 52vh);
+  }
+  body[data-page=project-detail] .case-gallery-modal__image {
+    min-height: min(380px, 48vh);
   }
 }
 body[data-page=project-detail] .case-panel__content {

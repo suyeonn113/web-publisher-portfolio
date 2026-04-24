@@ -7,6 +7,9 @@ import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigge
 
 gsap.registerPlugin(ScrollTrigger);
 
+const SQUARE_RATIO_MIN = 0.85;
+const SQUARE_RATIO_MAX = 1.15;
+
 function getProjectSlug() {
   const params = new URLSearchParams(window.location.search);
   return params.get('slug') || 'fragfarm-mobile';
@@ -35,13 +38,157 @@ function formatRole(role) {
   return role.join(', ');
 }
 
-function normalizeProject(project) {
-  const caseMetaMap = new Map((project.caseList || []).map((item) => [item.id, item]));
-  const cases = (project.caseDetail || []).map((item, index) => ({
-    ...caseMetaMap.get(item.id),
-    ...item,
-    order: index + 1
-  }));
+function loadImageSource(src) {
+  return new Promise((resolve) => {
+    if (!src) {
+      resolve(false);
+      return;
+    }
+
+    const image = new Image();
+    const finalize = () => resolve(true);
+
+    image.addEventListener('load', finalize, { once: true });
+    image.addEventListener('error', () => resolve(false), { once: true });
+    image.src = src;
+
+    if (image.complete) {
+      resolve(true);
+    }
+  });
+}
+
+function classifyImageRatio(width, height) {
+  if (!width || !height) return 'landscape';
+
+  const ratio = width / height;
+  if (ratio >= SQUARE_RATIO_MIN && ratio <= SQUARE_RATIO_MAX) return 'square';
+  return ratio > 1 ? 'landscape' : 'portrait';
+}
+
+function loadImageMeta(src) {
+  return new Promise((resolve) => {
+    if (!src) {
+      resolve({
+        width: 0,
+        height: 0,
+        ratioType: 'landscape'
+      });
+      return;
+    }
+
+    const image = new Image();
+
+    image.addEventListener('load', () => {
+      resolve({
+        width: image.naturalWidth || 0,
+        height: image.naturalHeight || 0,
+        ratioType: classifyImageRatio(image.naturalWidth || 0, image.naturalHeight || 0)
+      });
+    }, { once: true });
+
+    image.addEventListener('error', () => {
+      resolve({
+        width: 0,
+        height: 0,
+        ratioType: 'landscape'
+      });
+    }, { once: true });
+
+    image.src = src;
+  });
+}
+
+function getCaseGalleryLayout(steps) {
+  const safeSteps = Array.isArray(steps) ? steps : [];
+  const count = safeSteps.length;
+  const ratioTypes = new Set(safeSteps.map((step) => step.ratioType));
+  const allPortraitLike = count > 0 && safeSteps.every((step) => step.ratioType !== 'landscape');
+  const isMixedRatio = ratioTypes.size > 1;
+  const hasOddCount = count % 2 === 1;
+  const featuredIndex = Math.max(safeSteps.findIndex((step) => step.ratioType === 'landscape'), 0);
+
+  if (count <= 1) {
+    return {
+      type: safeSteps[0]?.ratioType === 'portrait' ? 'single-portrait' : 'single',
+      featuredIndex
+    };
+  }
+
+  if (isMixedRatio || hasOddCount || count >= 5) {
+    return {
+      type: 'feature-stack',
+      featuredIndex
+    };
+  }
+
+  if (allPortraitLike) {
+    return {
+      type: 'portrait-grid',
+      featuredIndex: 0
+    };
+  }
+
+  return {
+    type: 'landscape-grid',
+    featuredIndex: 0
+  };
+}
+
+async function decorateCaseSteps(steps = []) {
+  const resolvedSteps = await Promise.all(
+    steps.map(async (step, index) => {
+      const meta = await loadImageMeta(step.image);
+      return {
+        ...step,
+        ...meta,
+        originalIndex: index
+      };
+    })
+  );
+
+  const layout = getCaseGalleryLayout(resolvedSteps);
+  const orderedSteps = [...resolvedSteps];
+
+  if (layout.type === 'feature-stack') {
+    const [featuredStep] = orderedSteps.splice(layout.featuredIndex, 1);
+    if (featuredStep) {
+      orderedSteps.unshift(featuredStep);
+    }
+  }
+
+  return {
+    items: orderedSteps.map((step, index) => ({
+      ...step,
+      isFeatured: index === 0 && layout.type === 'feature-stack'
+    })),
+    totalCount: resolvedSteps.length,
+    layout
+  };
+}
+
+async function normalizeProject(project) {
+  const rawCases = Array.isArray(project.keyFlows) && project.keyFlows.length
+    ? project.keyFlows
+    : (project.caseDetail || []).map((item) => {
+        const meta = (project.caseList || []).find((caseItem) => caseItem.id === item.id);
+        return {
+          ...meta,
+          ...item
+        };
+      });
+
+  const cases = await Promise.all(
+    rawCases.map(async (item, index) => {
+      const gallery = await decorateCaseSteps(item.steps || []);
+
+      return {
+        ...item,
+        order: index + 1,
+        gallery
+      };
+    })
+  );
 
   return {
     ...project,
@@ -159,21 +306,53 @@ function renderSummary(project, root) {
   setText('[data-field="summary.tech"]', project.summary?.tech, root);
 }
 
-function renderCaseSteps(steps, container, root) {
+function renderCaseSteps(caseItem, container, root) {
   const template = root.querySelector('#tpl-case-step');
 
   if (!container || !template) return;
 
   container.innerHTML = '';
 
-  const safeSteps = Array.isArray(steps) ? steps : [];
-  const stepCount = Math.min(Math.max(safeSteps.length, 1), 4);
-  container.dataset.stepCount = String(stepCount);
+  const gallery = caseItem?.gallery || {
+    items: [],
+    totalCount: 0,
+    layout: { type: 'single', featuredIndex: 0 }
+  };
+  const safeSteps = gallery.items;
 
-  safeSteps.forEach((step) => {
+  container.dataset.stepCount = String(Math.min(Math.max(gallery.totalCount || safeSteps.length, 1), 6));
+  container.dataset.galleryLayout = gallery.layout?.type || 'single';
+  container.dataset.hasFeatured = String(safeSteps.some((step) => step.isFeatured));
+
+  safeSteps.forEach((step, visualIndex) => {
     const node = template.content.cloneNode(true);
+    const listItem = node.querySelector('.case-step');
+    const button = node.querySelector('.case-step__button');
+    const figure = node.querySelector('.case-step__figure');
+    const visual = node.querySelector('.case-step__visual');
     const image = node.querySelector('img');
     const caption = node.querySelector('figcaption');
+
+    if (listItem) {
+      listItem.dataset.ratio = step.ratioType || 'landscape';
+      listItem.classList.toggle('is-featured', Boolean(step.isFeatured));
+    }
+
+    if (button) {
+      button.dataset.caseId = caseItem.id || '';
+      button.dataset.galleryIndex = String(visualIndex);
+      button.dataset.originalIndex = String(step.originalIndex ?? visualIndex);
+      button.dataset.caption = step.label || '';
+      button.setAttribute('aria-label', `${step.label || '이미지'} 크게 보기`);
+    }
+
+    if (figure) {
+      figure.dataset.ratio = step.ratioType || 'landscape';
+    }
+
+    if (visual) {
+      visual.dataset.ratio = step.ratioType || 'landscape';
+    }
 
     if (image) {
       image.src = step.image || '';
@@ -283,10 +462,223 @@ function renderCasePanels(project, root) {
     if (keyPoint) keyPoint.textContent = item.keyPoint || '';
 
     renderCaseImplementation(item.implementation, implementation);
-    renderCaseSteps(item.steps, steps, root);
+    renderCaseSteps(item, steps, root);
 
     container.appendChild(node);
   });
+}
+
+function createGalleryModal(root, state) {
+  const template = root.querySelector('#tpl-case-gallery-modal');
+  if (!template) return null;
+
+  const fragment = template.content.cloneNode(true);
+  const modal = fragment.querySelector('.case-gallery-modal');
+
+  if (!modal) return null;
+
+  root.appendChild(fragment);
+  state.galleryModal = {
+    root: root.querySelector('.case-gallery-modal'),
+    media: root.querySelector('[data-gallery-media]'),
+    image: root.querySelector('[data-gallery-image]'),
+    caption: root.querySelector('[data-gallery-caption]'),
+    dialog: root.querySelector('.case-gallery-modal__dialog')
+  };
+
+  return state.galleryModal;
+}
+
+function getGalleryButtons(root, caseId) {
+  return Array.from(root.querySelectorAll(`.case-panel[data-case-id="${caseId}"] .case-step__button`));
+}
+
+function getGalleryButtonMeta(button) {
+  if (!button) return null;
+
+  const image = button.querySelector('img');
+  return {
+    src: image?.currentSrc || image?.src || '',
+    alt: image?.alt || '',
+    caption: button.dataset.caption || ''
+  };
+}
+
+function syncModalImage(button, state) {
+  const modalState = state.galleryModal;
+  const meta = getGalleryButtonMeta(button);
+  if (!modalState?.image || !meta) return;
+
+  modalState.image.src = meta.src;
+  modalState.image.alt = meta.alt;
+
+  if (modalState.caption) {
+    modalState.caption.textContent = meta.caption;
+  }
+}
+
+async function prepareModalImage(button, state) {
+  const meta = getGalleryButtonMeta(button);
+  const modalState = state.galleryModal;
+  if (!modalState?.image || !meta) return null;
+
+  await loadImageSource(meta.src);
+
+  modalState.image.src = meta.src;
+  modalState.image.alt = meta.alt;
+
+  if (modalState.caption) {
+    modalState.caption.textContent = meta.caption;
+  }
+
+  return meta;
+}
+
+async function animateModalImageChange(button, state) {
+  const modalState = state.galleryModal;
+  const nextMeta = getGalleryButtonMeta(button);
+  if (!modalState?.image || !nextMeta) return;
+
+  await loadImageSource(nextMeta.src);
+
+  gsap.to(modalState.image, {
+    autoAlpha: 0,
+    scale: 0.985,
+    duration: 0.16,
+    ease: 'power2.out',
+    onComplete: () => {
+      modalState.image.src = nextMeta.src;
+      modalState.image.alt = nextMeta.alt;
+
+      if (modalState.caption) {
+        modalState.caption.textContent = nextMeta.caption;
+      }
+
+      gsap.fromTo(modalState.image, {
+        autoAlpha: 0,
+        scale: 1.015
+      }, {
+        autoAlpha: 1,
+        scale: 1,
+        duration: 0.24,
+        ease: 'power2.out'
+      });
+    }
+  });
+}
+
+function animateModalOpen(button, state) {
+  const modalState = state.galleryModal;
+  const targetImage = modalState?.image;
+  if (!button || !targetImage) return;
+
+  gsap.killTweensOf(targetImage);
+  gsap.set(targetImage, {
+    autoAlpha: 0,
+    scale: 0.985
+  });
+
+  gsap.to(targetImage, {
+    autoAlpha: 1,
+    scale: 1,
+    duration: 0.24,
+    ease: 'power2.out'
+  });
+}
+
+function animateModalClose(state) {
+  const modalState = state.galleryModal;
+  const modalImage = modalState?.image;
+  const modalRoot = modalState?.root;
+
+  if (!modalRoot || modalRoot.hidden) return;
+
+  gsap.killTweensOf([modalRoot, modalImage]);
+
+  if (!modalImage) {
+    closeGalleryModal(state, { skipMotion: true });
+    return;
+  }
+
+  gsap.to(modalImage, {
+    autoAlpha: 0,
+    scale: 0.985,
+    duration: 0.16,
+    ease: 'power2.in'
+  });
+
+  gsap.to(modalRoot, {
+    autoAlpha: 0,
+    duration: 0.18,
+    ease: 'power2.out',
+    onComplete: () => {
+      closeGalleryModal(state, { skipMotion: true });
+      gsap.set(modalRoot, { clearProps: 'opacity,visibility' });
+    }
+  });
+}
+
+function updateGalleryModal(button, state) {
+  const modalState = state.galleryModal;
+  if (!button || !modalState) return;
+
+  const caseId = button.dataset.caseId || '';
+  const galleryButtons = getGalleryButtons(document, caseId);
+  const currentIndex = galleryButtons.findIndex((item) => item === button);
+
+  state.activeGalleryButton = button;
+  state.activeGalleryCaseId = caseId;
+  state.activeGalleryIndex = currentIndex >= 0 ? currentIndex : 0;
+}
+
+async function openGalleryModal(button, state) {
+  const modalState = state.galleryModal;
+  if (!button || !modalState?.root) return;
+
+  updateGalleryModal(button, state);
+  await prepareModalImage(button, state);
+
+  modalState.root.hidden = false;
+  document.body.classList.add('is-case-gallery-open');
+  modalState.root.classList.add('is-open');
+  gsap.set(modalState.root, { autoAlpha: 1 });
+  animateModalOpen(button, state);
+  modalState.dialog?.focus();
+}
+
+function closeGalleryModal(state, options = {}) {
+  const { skipMotion = false, deferHide = false } = options;
+  const modalState = state.galleryModal;
+  if (!modalState?.root || modalState.root.hidden) return;
+
+  modalState.root.classList.remove('is-open');
+  document.body.classList.remove('is-case-gallery-open');
+
+  if (deferHide) return;
+
+  window.setTimeout(() => {
+    if (!skipMotion && modalState.root.classList.contains('is-open')) return;
+    modalState.root.hidden = true;
+    if (modalState.image) {
+      gsap.set(modalState.image, { clearProps: 'all' });
+    }
+    state.activeGalleryButton?.focus();
+  }, 220);
+}
+
+function stepGallery(state, direction) {
+  const caseId = state.activeGalleryCaseId;
+  if (!caseId) return;
+
+  const buttons = getGalleryButtons(document, caseId);
+  if (!buttons.length) return;
+
+  const nextIndex = (state.activeGalleryIndex + direction + buttons.length) % buttons.length;
+  const nextButton = buttons[nextIndex];
+  if (!nextButton) return;
+
+  updateGalleryModal(nextButton, state);
+  animateModalImageChange(nextButton, state);
 }
 
 function renderHighlights(project, root) {
@@ -367,13 +759,51 @@ function scrollToCase(caseId) {
 function bindCaseEvents(root, state) {
   root.addEventListener('click', (event) => {
     const button = event.target.closest('.case-item');
-    if (!button || !root.contains(button)) return;
+    if (button && root.contains(button)) {
+      const caseId = button.dataset.caseId;
+      if (!caseId) return;
 
-    const caseId = button.dataset.caseId;
-    if (!caseId) return;
+      setActiveCase(root, caseId, state);
+      scrollToCase(caseId);
+      return;
+    }
 
-    setActiveCase(root, caseId, state);
-    scrollToCase(caseId);
+    const galleryButton = event.target.closest('.case-step__button');
+    if (galleryButton && root.contains(galleryButton)) {
+      openGalleryModal(galleryButton, state);
+      return;
+    }
+
+    if (event.target.closest('[data-gallery-close]')) {
+      animateModalClose(state);
+    }
+  });
+
+  root.addEventListener('keydown', (event) => {
+    if (state.galleryModal?.root?.hidden) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      animateModalClose(state);
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      stepGallery(state, 1);
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      stepGallery(state, -1);
+    }
+  });
+
+  root.querySelector('[data-gallery-prev]')?.addEventListener('click', () => {
+    stepGallery(state, -1);
+  });
+
+  root.querySelector('[data-gallery-next]')?.addEventListener('click', () => {
+    stepGallery(state, 1);
   });
 }
 
@@ -455,6 +885,7 @@ function renderProjectDetail(project, root, state) {
   renderCasePanels(project, root);
   renderHighlights(project, root);
   renderEtc(project, root);
+  createGalleryModal(root, state);
 }
 
 function syncIslandFocus(root, caseId) {
@@ -490,7 +921,7 @@ export async function loadProjectDetail() {
 
   try {
     const rawProject = await fetchProjectData();
-    const project = normalizeProject(rawProject);
+    const project = await normalizeProject(rawProject);
 
     const state = {
       selectedCaseId: project.cases?.[0]?.id || '',
