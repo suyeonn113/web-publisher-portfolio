@@ -383,7 +383,7 @@ body[data-page='project-detail'] {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    @include text-style('sm', 'medium');
+    @include text-style('base', 'medium');
     color: $text-secondary;
     text-align: left;
     cursor: pointer;
@@ -414,7 +414,7 @@ body[data-page='project-detail'] {
   }
 
   .case-item__title {
-    @include text-style('sm', 'bold', 'tight');
+    @include text-style('base', 'bold', 'tight');
     color: currentColor;
     word-break: keep-all;
   }
@@ -538,13 +538,13 @@ body[data-page='project-detail'] {
   }
 
   .case-panel__content h4 {
-    @include text-style('sm', 'bold');
+    @include text-style('base', 'bold');
     color: $text-secondary;
   }
 
   .case-panel__content p,
   .case-panel__implementation-item {
-    @include text-style('sm');
+    @include text-style('base');
   }
 
   .case-panel__content ul {
@@ -772,7 +772,7 @@ body[data-page='project-detail'] {
   }
 
   .case-gallery-modal__caption {
-    @include text-style('sm', 'medium');
+    @include text-style('base', 'medium');
     color: $text-secondary;
   }
 
@@ -821,7 +821,7 @@ body[data-page='project-detail'] {
   }
 
   .highlight-list p {
-    @include text-style('sm');
+    @include text-style('base');
   }
 
   /* ========================================
@@ -846,11 +846,11 @@ body[data-page='project-detail'] {
   }
 
   .project-etc__grid h3 {
-    @include text-style('sm', 'bold');
+    @include text-style('base', 'bold');
   }
 
   .project-etc__grid p {
-    @include text-style('sm');
+    @include text-style('base');
   }
 
   @include respond-up('tablet') {

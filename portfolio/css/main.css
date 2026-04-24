@@ -4581,11 +4581,11 @@ body[data-page=project-detail] .case-item {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  font-size: 15px;
+  font-size: 18px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .case-item {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 body[data-page=project-detail] .case-item {
@@ -4618,11 +4618,11 @@ body[data-page=project-detail] .case-item:is(.is-active, [aria-pressed=true])::a
   box-shadow: 0 0 0.75rem var(--button-border-active);
 }
 body[data-page=project-detail] .case-item__title {
-  font-size: 15px;
+  font-size: 18px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .case-item__title {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 body[data-page=project-detail] .case-item__title {
@@ -4903,11 +4903,11 @@ body[data-page=project-detail] .case-panel__content section {
   border-top: 1px solid var(--color-border-soft);
 }
 body[data-page=project-detail] .case-panel__content h4 {
-  font-size: 15px;
+  font-size: 18px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .case-panel__content h4 {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 body[data-page=project-detail] .case-panel__content h4 {
@@ -4919,12 +4919,12 @@ body[data-page=project-detail] .case-panel__content h4 {
 }
 body[data-page=project-detail] .case-panel__content p,
 body[data-page=project-detail] .case-panel__implementation-item {
-  font-size: 15px;
+  font-size: 18px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .case-panel__content p,
   body[data-page=project-detail] .case-panel__implementation-item {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 body[data-page=project-detail] .case-panel__content p,
@@ -5393,11 +5393,11 @@ body[data-page=project-detail] .case-gallery-modal__proxy {
   transform-origin: center center;
 }
 body[data-page=project-detail] .case-gallery-modal__caption {
-  font-size: 15px;
+  font-size: 18px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .case-gallery-modal__caption {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 body[data-page=project-detail] .case-gallery-modal__caption {
@@ -5531,11 +5531,11 @@ body[data-page=project-detail] .highlight-list h3 {
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 }
 body[data-page=project-detail] .highlight-list p {
-  font-size: 15px;
+  font-size: 18px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .highlight-list p {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 body[data-page=project-detail] .highlight-list p {
@@ -5614,11 +5614,11 @@ body[data-page=project-detail] .project-etc__grid > div {
   border-top: 1px solid var(--color-border-soft);
 }
 body[data-page=project-detail] .project-etc__grid h3 {
-  font-size: 15px;
+  font-size: 18px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .project-etc__grid h3 {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 body[data-page=project-detail] .project-etc__grid h3 {
@@ -5628,11 +5628,11 @@ body[data-page=project-detail] .project-etc__grid h3 {
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 }
 body[data-page=project-detail] .project-etc__grid p {
-  font-size: 15px;
+  font-size: 18px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .project-etc__grid p {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 body[data-page=project-detail] .project-etc__grid p {
