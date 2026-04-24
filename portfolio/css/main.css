@@ -155,7 +155,7 @@
   --color-point-success: #30d158;
   /* ============================================================
      Component
-   ============================================================ */
+  ============================================================ */
   /* Button */
   --button-text: var(--color-text-primary);
   --button-text-hover: var(--work-folder-text);
@@ -3641,16 +3641,14 @@ body[data-page=project-detail] .project-detail > section + section {
 }
 body[data-page=project-detail] .project-hero,
 body[data-page=project-detail] .project-summary,
-body[data-page=project-detail] .project-case-list,
-body[data-page=project-detail] .project-case-detail,
+body[data-page=project-detail] .project-cases,
 body[data-page=project-detail] .project-highlights,
 body[data-page=project-detail] .project-etc {
   width: 100%;
 }
 body[data-page=project-detail] .project-hero__inner,
 body[data-page=project-detail] .project-summary,
-body[data-page=project-detail] .project-case-list,
-body[data-page=project-detail] .project-case-detail,
+body[data-page=project-detail] .project-cases,
 body[data-page=project-detail] .project-highlights,
 body[data-page=project-detail] .project-etc {
   margin: 0 auto;
@@ -3725,24 +3723,25 @@ body[data-page=project-detail] .project-detail__error {
   box-shadow: var(--detail-panel-shadow);
   backdrop-filter: var(--detail-panel-backdrop);
 }
-body[data-page=project-detail] .case-detail {
+body[data-page=project-detail] .case-panel {
   border-radius: 20px;
   border: 1px solid var(--detail-panel-border);
   background: var(--detail-panel-bg);
   box-shadow: var(--detail-panel-shadow);
   backdrop-filter: var(--detail-panel-backdrop);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 body[data-page=project-detail] .project-summary__grid h3,
-body[data-page=project-detail] .case-detail h3,
-body[data-page=project-detail] .case-detail h4,
+body[data-page=project-detail] .case-panel h3,
+body[data-page=project-detail] .case-panel h4,
 body[data-page=project-detail] .highlight-list h3,
 body[data-page=project-detail] .project-etc__grid h3 {
   margin: 0;
   color: var(--color-text-primary);
 }
 body[data-page=project-detail] .project-summary__grid p,
-body[data-page=project-detail] .case-detail p,
-body[data-page=project-detail] .case-detail li,
+body[data-page=project-detail] .case-panel p,
+body[data-page=project-detail] .case-panel li,
 body[data-page=project-detail] .highlight-list p,
 body[data-page=project-detail] .project-etc__grid p {
   margin: 0;
@@ -4283,33 +4282,87 @@ body[data-page=project-detail] .project-summary__grid p {
 }
 body[data-page=project-detail] {
   /* ========================================
-      CASE LIST
+      CASES
   ========================================= */
 }
-body[data-page=project-detail] .case-list {
+body[data-page=project-detail] .project-cases__layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 48px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases__layout {
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases__layout {
+    gap: 32px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases__layout {
+    gap: 20px;
+  }
+}
+body[data-page=project-detail] .project-cases__nav {
+  min-width: 0;
+}
+body[data-page=project-detail] .project-cases__nav-inner {
+  display: flex;
+  flex-direction: column;
   gap: 32px;
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .case-list {
+  body[data-page=project-detail] .project-cases__nav-inner {
     gap: 32px;
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .case-list {
+  body[data-page=project-detail] .project-cases__nav-inner {
     gap: 24px;
   }
 }
 @media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases__nav-inner {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .project-cases__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+body[data-page=project-detail] .case-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
   body[data-page=project-detail] .case-list {
     gap: 16px;
   }
 }
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-list {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-list {
+    gap: 12px;
+  }
+}
 body[data-page=project-detail] .case-item {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   min-height: 4rem;
   padding: 28px;
@@ -4330,26 +4383,51 @@ body[data-page=project-detail] .case-item {
   }
 }
 body[data-page=project-detail] .case-item {
-  gap: 32px;
-}
-@media (max-width: 1024px) {
-  body[data-page=project-detail] .case-item {
-    gap: 32px;
-  }
-}
-@media (max-width: 768px) {
-  body[data-page=project-detail] .case-item {
-    gap: 24px;
-  }
+  border-radius: 12px;
+  font-size: 15px;
 }
 @media (max-width: 480px) {
   body[data-page=project-detail] .case-item {
-    gap: 16px;
+    font-size: 14px;
   }
 }
 body[data-page=project-detail] .case-item {
-  border-radius: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
   text-align: left;
+  background: transparent;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+body[data-page=project-detail] .case-item::after {
+  content: "";
+  flex: 0 0 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 32px;
+  background: rgba(15, 23, 42, 0.14);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+body[data-page=project-detail] .case-item:is(:hover, :focus-visible) {
+  color: var(--color-text-primary);
+  border-color: var(--button-border-hover);
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.44);
+  outline: none;
+}
+body[data-page=project-detail] .case-item:is(.is-active, [aria-pressed=true]) {
+  color: var(--color-text-primary);
+  border-color: var(--button-border-active);
+  background: var(--button-surface-bg-active);
+  box-shadow: var(--button-shadow-active);
+}
+body[data-page=project-detail] .case-item:is(.is-active, [aria-pressed=true])::after {
+  background: var(--home-hero-main-strong-mid);
+  box-shadow: 0 0 0.75rem rgba(3, 169, 244, 0.24);
 }
 body[data-page=project-detail] .case-item__title {
   font-size: 15px;
@@ -4364,112 +4442,291 @@ body[data-page=project-detail] .case-item__title {
   letter-spacing: -0.02em;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  color: var(--color-text-primary);
+  color: currentColor;
   word-break: keep-all;
 }
-body[data-page=project-detail] .case-item__summary {
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  color: var(--color-text-secondary);
+body[data-page=project-detail] .project-cases__content {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
 }
-body[data-page=project-detail] .case-item.btn {
-  justify-content: flex-start;
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 56px;
+  }
 }
-body[data-page=project-detail] .case-item.btn:is(.is-active, [aria-selected=true]) {
-  --btn-local-bg-active: var(--button-surface-bg-active);
-  --btn-local-border-active: var(--button-border-active);
-  --btn-local-shadow-active: var(--button-shadow-active);
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 48px;
+  }
 }
-body[data-page=project-detail] {
-  /* ========================================
-      CASE DETAIL
-  ========================================= */
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 40px;
+  }
 }
-body[data-page=project-detail] .case-detail {
+body[data-page=project-detail] .case-panel {
   display: flex;
   flex-direction: column;
   min-width: 0;
   padding: 48px;
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail {
+  body[data-page=project-detail] .case-panel {
     padding: 40px;
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail {
+  body[data-page=project-detail] .case-panel {
     padding: 32px;
   }
 }
 @media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail {
+  body[data-page=project-detail] .case-panel {
     padding: 28px;
   }
 }
-body[data-page=project-detail] .case-detail {
+body[data-page=project-detail] .case-panel {
   gap: 32px;
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail {
+  body[data-page=project-detail] .case-panel {
     gap: 32px;
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail {
+  body[data-page=project-detail] .case-panel {
     gap: 24px;
   }
 }
 @media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail {
+  body[data-page=project-detail] .case-panel {
     gap: 16px;
   }
 }
-body[data-page=project-detail] .case-detail > h3 {
+body[data-page=project-detail] .case-panel {
+  scroll-margin-top: 7.5rem;
+}
+body[data-page=project-detail] .case-panel.is-active {
+  border-color: var(--button-border-active);
+  box-shadow: var(--detail-panel-shadow-hover);
+}
+body[data-page=project-detail] .case-panel__heading {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-panel__heading {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-panel__heading {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__heading {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-panel__index {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-point-primary);
+  letter-spacing: 0.16em;
+}
+body[data-page=project-detail] .case-panel__title {
   font-size: clamp(22px, 1.8vw, 28px);
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail > h3 {
+  body[data-page=project-detail] .case-panel__title {
     font-size: clamp(20px, 1.8vw, 26px);
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail > h3 {
+  body[data-page=project-detail] .case-panel__title {
     font-size: clamp(18px, 2.4vw, 22px);
   }
 }
 @media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail > h3 {
+  body[data-page=project-detail] .case-panel__title {
     font-size: clamp(17px, 3.8vw, 19px);
   }
 }
-body[data-page=project-detail] .case-detail > h3 {
+body[data-page=project-detail] .case-panel__title {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
 }
-body[data-page=project-detail] .case-detail__layout {
+body[data-page=project-detail] .case-panel__layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 48px;
 }
 @media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail__layout {
+  body[data-page=project-detail] .case-panel__layout {
     gap: 40px;
   }
 }
 @media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail__layout {
+  body[data-page=project-detail] .case-panel__layout {
     gap: 32px;
   }
 }
 @media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail__layout {
+  body[data-page=project-detail] .case-panel__layout {
     gap: 20px;
   }
+}
+body[data-page=project-detail] .case-panel__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-panel__content {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-panel__content {
+    gap: 24px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__content {
+    gap: 16px;
+  }
+}
+body[data-page=project-detail] .case-panel__content section {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-panel__content section {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-panel__content section {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__content section {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-panel__content section {
+  padding-top: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-panel__content section {
+    padding-top: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-panel__content section {
+    padding-top: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__content section {
+    padding-top: 12px;
+  }
+}
+body[data-page=project-detail] .case-panel__content section {
+  border-top: 1px solid var(--color-border-soft);
+}
+body[data-page=project-detail] .case-panel__content h4 {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__content h4 {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .case-panel__content h4 {
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-secondary);
+}
+body[data-page=project-detail] .case-panel__content p,
+body[data-page=project-detail] .case-panel__implementation-item {
+  font-size: 15px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__content p,
+  body[data-page=project-detail] .case-panel__implementation-item {
+    font-size: 14px;
+  }
+}
+body[data-page=project-detail] .case-panel__content p,
+body[data-page=project-detail] .case-panel__implementation-item {
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] .case-panel__content ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-panel__content ul {
+    gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-panel__content ul {
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__content ul {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-panel__implementation-item {
+  position: relative;
+  padding-left: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-panel__implementation-item {
+    padding-left: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-panel__implementation-item {
+    padding-left: 12px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__implementation-item {
+    padding-left: 12px;
+  }
+}
+body[data-page=project-detail] .case-panel__implementation-item::before {
+  content: "";
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border-radius: 32px;
+  background: var(--home-hero-main-strong-mid);
 }
 body[data-page=project-detail] .case-steps {
   display: grid;
@@ -4506,15 +4763,15 @@ body[data-page=project-detail] .case-steps figure {
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid var(--detail-panel-border);
-  background: var(--detail-panel-bg);
-  box-shadow: var(--detail-panel-shadow);
+  background: rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36);
   backdrop-filter: var(--detail-panel-backdrop);
-  max-height: 20rem;
+  min-height: 100%;
 }
 body[data-page=project-detail] .case-steps img {
   width: 100%;
   height: auto;
-  max-height: 15rem;
+  max-height: 11.25rem;
   -o-object-fit: cover;
      object-fit: cover;
   background: var(--color-bg-main);
@@ -4550,163 +4807,10 @@ body[data-page=project-detail] .case-steps[data-step-count="1"] {
   grid-template-columns: minmax(0, 1fr);
 }
 body[data-page=project-detail] .case-steps[data-step-count="1"] li {
-  max-width: 26.25rem;
-  justify-self: center;
-}
-body[data-page=project-detail] .case-steps[data-step-count="2"] {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-body[data-page=project-detail] .case-steps[data-step-count="3"] {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 22.5rem;
 }
 body[data-page=project-detail] .case-steps[data-step-count="3"] li:first-child {
   grid-column: 1/-1;
-}
-body[data-page=project-detail] .case-steps[data-step-count="4"] {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-body[data-page=project-detail] .case-detail__content {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 48px;
-}
-@media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail__content {
-    gap: 40px;
-  }
-}
-@media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail__content {
-    gap: 32px;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail__content {
-    gap: 20px;
-  }
-}
-body[data-page=project-detail] .case-detail__content section {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  gap: 16px;
-}
-@media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail__content section {
-    gap: 16px;
-  }
-}
-@media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail__content section {
-    gap: 16px;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail__content section {
-    gap: 12px;
-  }
-}
-body[data-page=project-detail] .case-detail__content section {
-  padding-top: 16px;
-}
-@media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail__content section {
-    padding-top: 14px;
-  }
-}
-@media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail__content section {
-    padding-top: 12px;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail__content section {
-    padding-top: 12px;
-  }
-}
-body[data-page=project-detail] .case-detail__content section {
-  border-top: 1px solid var(--color-border-soft);
-}
-body[data-page=project-detail] .case-detail__content h4 {
-  font-size: 15px;
-}
-@media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail__content h4 {
-    font-size: 14px;
-  }
-}
-body[data-page=project-detail] .case-detail__content h4 {
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  color: var(--color-text-secondary);
-}
-body[data-page=project-detail] .case-detail__content p,
-body[data-page=project-detail] .case-detail__implementation-item {
-  font-size: 15px;
-}
-@media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail__content p,
-  body[data-page=project-detail] .case-detail__implementation-item {
-    font-size: 14px;
-  }
-}
-body[data-page=project-detail] .case-detail__content p,
-body[data-page=project-detail] .case-detail__implementation-item {
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-}
-body[data-page=project-detail] .case-detail__content ul {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-@media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail__content ul {
-    gap: 16px;
-  }
-}
-@media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail__content ul {
-    gap: 16px;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail__content ul {
-    gap: 12px;
-  }
-}
-body[data-page=project-detail] .case-detail__implementation-item {
-  position: relative;
-  padding-left: 16px;
-}
-@media (max-width: 1024px) {
-  body[data-page=project-detail] .case-detail__implementation-item {
-    padding-left: 14px;
-  }
-}
-@media (max-width: 768px) {
-  body[data-page=project-detail] .case-detail__implementation-item {
-    padding-left: 12px;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page=project-detail] .case-detail__implementation-item {
-    padding-left: 12px;
-  }
-}
-body[data-page=project-detail] .case-detail__implementation-item::before {
-  content: "";
-  position: absolute;
-  top: 0.6em;
-  left: 0;
-  width: 0.3125rem;
-  height: 0.3125rem;
-  border-radius: 32px;
-  background: var(--home-hero-main-strong-mid);
 }
 body[data-page=project-detail] {
   /* ========================================
@@ -4950,26 +5054,8 @@ body[data-page=project-detail] .project-etc__grid p {
   body[data-page=project-detail] .project-summary__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  body[data-page=project-detail] .case-list {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-  body[data-page=project-detail] .case-steps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-  body[data-page=project-detail] .case-steps[data-step-count="1"] {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  body[data-page=project-detail] .case-steps[data-step-count="2"] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  body[data-page=project-detail] .case-steps[data-step-count="3"] {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  body[data-page=project-detail] .case-steps[data-step-count="3"] li:first-child {
-    grid-column: auto;
-  }
-  body[data-page=project-detail] .case-steps[data-step-count="4"] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  body[data-page=project-detail] .project-cases__layout {
+    grid-template-columns: minmax(13.75rem, 16.25rem) minmax(0, 1fr);
   }
   body[data-page=project-detail] .highlight-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4988,14 +5074,356 @@ body[data-page=project-detail] .project-etc__grid p {
   body[data-page=project-detail] .project-hero__device--pc {
     max-width: 50rem;
   }
-  body[data-page=project-detail] .case-list {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  body[data-page=project-detail] .project-cases__layout {
+    grid-template-columns: minmax(16.25rem, 20rem) minmax(0, 1fr);
+    -moz-column-gap: clamp(4rem, 7vw, 7.5rem);
+         column-gap: clamp(4rem, 7vw, 7.5rem);
   }
-  body[data-page=project-detail] .case-detail__layout {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  body[data-page=project-detail] .case-panel__layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(15rem, 0.72fr);
     align-items: start;
+  }
+  body[data-page=project-detail] .case-steps[data-step-count="1"] li {
+    max-width: 100%;
   }
   body[data-page=project-detail] .highlight-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-}/*# sourceMappingURL=main.css.map */
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases__eyebrow {
+    display: none;
+  }
+  body[data-page=project-detail] .case-list {
+    overflow-x: auto;
+    flex-direction: row;
+    padding-bottom: 0.25rem;
+    scrollbar-width: none;
+  }
+  body[data-page=project-detail] .case-list::-webkit-scrollbar {
+    display: none;
+  }
+  body[data-page=project-detail] .case-item {
+    flex: 0 0 auto;
+    min-width: -moz-max-content;
+    min-width: max-content;
+    min-height: 3.25rem;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
+@media (max-width: 768px) and (max-width: 1024px) {
+  body[data-page=project-detail] .case-item {
+    padding-left: 14px;
+  }
+}
+@media (max-width: 768px) and (max-width: 768px) {
+  body[data-page=project-detail] .case-item {
+    padding-left: 12px;
+  }
+}
+@media (max-width: 768px) and (max-width: 480px) {
+  body[data-page=project-detail] .case-item {
+    padding-left: 12px;
+  }
+}
+@media (max-width: 768px) and (max-width: 1024px) {
+  body[data-page=project-detail] .case-item {
+    padding-right: 14px;
+  }
+}
+@media (max-width: 768px) and (max-width: 768px) {
+  body[data-page=project-detail] .case-item {
+    padding-right: 12px;
+  }
+}
+@media (max-width: 768px) and (max-width: 480px) {
+  body[data-page=project-detail] .case-item {
+    padding-right: 12px;
+  }
+}
+@media (max-width: 768px) and (max-width: 1024px) {
+  body[data-page=project-detail] .case-item {
+    padding-top: 14px;
+  }
+}
+@media (max-width: 768px) and (max-width: 768px) {
+  body[data-page=project-detail] .case-item {
+    padding-top: 12px;
+  }
+}
+@media (max-width: 768px) and (max-width: 480px) {
+  body[data-page=project-detail] .case-item {
+    padding-top: 12px;
+  }
+}
+@media (max-width: 768px) and (max-width: 1024px) {
+  body[data-page=project-detail] .case-item {
+    padding-bottom: 14px;
+  }
+}
+@media (max-width: 768px) and (max-width: 768px) {
+  body[data-page=project-detail] .case-item {
+    padding-bottom: 12px;
+  }
+}
+@media (max-width: 768px) and (max-width: 480px) {
+  body[data-page=project-detail] .case-item {
+    padding-bottom: 12px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 48px;
+  }
+}
+@media (max-width: 768px) and (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) and (max-width: 768px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) and (max-width: 480px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  body[data-page=project-detail] .case-steps[data-step-count="1"] li,
+  body[data-page=project-detail] .case-steps[data-step-count="3"] li:first-child {
+    max-width: 100%;
+    grid-column: auto;
+  }
+  body[data-page=project-detail] .case-panel {
+    scroll-margin-top: 5.5rem;
+  }
+}
+body[data-page=project-detail] .project-cases-mobile-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  z-index: 250;
+  width: min(85vw, 45rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 1rem);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+body[data-page=project-detail] .project-cases-mobile-nav.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+body[data-page=project-detail] .project-cases-mobile-nav__inner {
+  padding: 8px;
+  border-radius: 32px;
+  background: var(--detail-panel-bg-strong);
+  border: 1px solid var(--detail-panel-border);
+  box-shadow: var(--detail-panel-shadow);
+  backdrop-filter: var(--detail-panel-backdrop);
+  -webkit-backdrop-filter: var(--detail-panel-backdrop);
+}
+body[data-page=project-detail] .project-cases-mobile-nav__track {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  justify-content: space-between;
+  min-width: 100%;
+  scrollbar-width: none;
+  gap: 16px;
+}
+body[data-page=project-detail] .project-cases-mobile-nav__track::-webkit-scrollbar {
+  display: none;
+}
+body[data-page=project-detail] .case-item--island {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: max-content;
+  justify-content: center;
+  min-width: max-content;
+  min-height: 2.25rem;
+  padding-inline: 11.2px;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+body[data-page=project-detail] .case-item--island::after {
+  display: none;
+}
+body[data-page=project-detail] .case-item--island .case-item__title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.6;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+}
+body[data-page=project-detail] .case-item--island:is(.is-active, [aria-pressed=true]) .case-item__title {
+  font-weight: 700;
+}
+@media (min-width: 768px) {
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases__nav {
+    display: none;
+  }
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    width: min(85vw, 45rem);
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__track {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-item {
+  min-height: auto;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  justify-content: flex-start;
+  gap: 16px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-item {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-item:is(:hover, :focus-visible) {
+  color: var(--color-text-primary);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+body[data-page=project-detail] .case-item:is(.is-active, [aria-pressed=true]) {
+  color: var(--color-point-primary);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+body[data-page=project-detail] .case-item__title {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+body[data-page=project-detail] .case-item--island {
+  min-height: auto;
+  padding-inline: 0;
+}
+body[data-page=project-detail] .project-cases__content {
+  gap: 120px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 100px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases__content {
+    gap: 64px;
+  }
+}
+body[data-page=project-detail] .project-cases-mobile-nav__inner {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+body[data-page=project-detail] .project-cases-mobile-nav__track {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__track {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases-mobile-nav__track {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+body[data-page=project-detail] .case-panel {
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+body[data-page=project-detail] .case-panel.is-active {
+  border: none;
+  box-shadow: none;
+}
+body[data-page=project-detail] .case-panel__layout {
+  gap: 32px;
+}
+@media (max-width: 1024px) {
+  body[data-page=project-detail] .case-panel__layout {
+    gap: 32px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .case-panel__layout {
+    gap: 24px;
+  }
+}
+body[data-page=project-detail] .case-panel__content {
+  gap: 16px;
+}
+@media (max-width: 480px) {
+  body[data-page=project-detail] .case-panel__content {
+    gap: 12px;
+  }
+}
+body[data-page=project-detail] .case-panel__content section:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+body[data-page=project-detail] .case-steps figure {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+body[data-page=project-detail] .case-steps figcaption {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  border-top: none;
+}
+@media (min-width: 1440px) {
+  body[data-page=project-detail] .case-panel__layout {
+    grid-template-columns: minmax(0, 1.28fr) minmax(13.75rem, 0.72fr);
+    align-items: start;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=project-detail] .project-cases-mobile-nav {
+    width: min(85vw, 45rem);
+  }
+  body[data-page=project-detail] .project-cases-mobile-nav__track {
+    gap: 18px;
+  }
+  body[data-page=project-detail] .case-item--island {
+    gap: 16px;
+  }
+}
+/*# sourceMappingURL=main.css.map */

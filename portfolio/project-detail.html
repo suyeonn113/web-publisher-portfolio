@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>수연의 작업실</title>
+  <title>조수연 프로젝트</title>
   <link rel="stylesheet" href="./css/main.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -16,7 +16,6 @@
       ========================================= -->
       <section class="project-hero" data-section="hero" data-gsap-target="section">
         <div class="project-hero__inner">
-          <!-- text -->
           <div class="project-hero__body" data-gsap-target="hero-copy">
             <p class="project-hero__label" data-field="meta.label"></p>
             <h1 class="project-hero__title" data-field="meta.title"></h1>
@@ -36,7 +35,7 @@
                 <dd data-field="meta.projectType"></dd>
               </div>
               <div>
-                <dt>스케일</dt>
+                <dt>규모</dt>
                 <dd data-field="meta.projectScale"></dd>
               </div>
             </dl>
@@ -46,7 +45,6 @@
               </a>
             </div>
           </div>
-          <!-- visual -->
           <div class="project-hero__visual" data-gsap-target="hero-visual">
             <div data-field="hero.visuals"></div>
           </div>
@@ -75,44 +73,24 @@
       </section>
 
       <!-- ========================================
-          CASE LIST
+          CASES
       ========================================= -->
-      <section class="project-case-list" data-section="case-list" data-gsap-target="section">
-        <h2 class="section-title">CASE LIST</h2>
-        <div class="case-list" role="tablist" data-field="caseList"></div>
-      </section>
-
-      <!-- ========================================
-          CASE DETAIL
-      ========================================= -->
-      <section class="project-case-detail" data-section="case-detail" data-gsap-target="section">
-        <h2 class="section-title">CASE DETAIL</h2>
-        <article class="case-detail" data-case-detail>
-          <h3 data-field="caseDetail.title"></h3>
-          <div class="case-detail__layout">
-            <!-- steps -->
-            <ol class="case-steps" data-field="caseDetail.steps"></ol>
-            <!-- text -->
-            <div class="case-detail__content">
-              <section>
-                <h4>문제</h4>
-                <p data-field="caseDetail.problem"></p>
-              </section>
-              <section>
-                <h4>해결</h4>
-                <p data-field="caseDetail.solution"></p>
-              </section>
-              <section>
-                <h4>구현</h4>
-                <ul data-field="caseDetail.implementation"></ul>
-              </section>
-              <section>
-                <h4>핵심</h4>
-                <p data-field="caseDetail.keyPoint"></p>
-              </section>
+      <section class="project-cases" data-section="cases" data-gsap-target="section">
+        <h2 class="section-title">KEY FLOWS</h2>
+        <div class="project-cases__layout">
+          <aside class="project-cases__nav" aria-label="Case navigation">
+            <div class="project-cases__nav-inner">
+              <p class="project-cases__eyebrow">Flow Index</p>
+              <div class="case-list" data-field="caseList"></div>
             </div>
+          </aside>
+          <div class="project-cases__content" data-field="casePanels"></div>
+        </div>
+        <div class="project-cases-mobile-nav" data-case-island aria-hidden="true">
+          <div class="project-cases-mobile-nav__inner">
+            <div class="project-cases-mobile-nav__track" data-field="caseListMobile"></div>
           </div>
-        </article>
+        </div>
       </section>
 
       <!-- ========================================
@@ -147,22 +125,50 @@
       <!-- ========================================
           TEMPLATE
       ========================================= -->
-      <!-- hero tag -->
       <template id="tpl-hero-tag">
         <li class="project-hero__tag"></li>
       </template>
-      <!-- hero description -->
+
       <template id="tpl-hero-desc">
         <p class="project-hero__desc-line"></p>
       </template>
-      <!-- case item -->
+
       <template id="tpl-case-item">
-        <button class="case-item btn btn--block" role="tab" aria-selected="false">
+        <button class="case-item" type="button" aria-pressed="false">
           <span class="case-item__title"></span>
-          <span class="case-item__summary"></span>
         </button>
       </template>
-      <!-- case step -->
+
+      <template id="tpl-case-panel">
+        <article class="case-panel">
+          <div class="case-panel__heading">
+            <p class="case-panel__index"></p>
+            <h3 class="case-panel__title"></h3>
+          </div>
+          <div class="case-panel__layout">
+            <div class="case-panel__content">
+              <section>
+                <h4>문제</h4>
+                <p class="case-panel__problem"></p>
+              </section>
+              <section>
+                <h4>해결</h4>
+                <p class="case-panel__solution"></p>
+              </section>
+              <section>
+                <h4>구현</h4>
+                <ul class="case-panel__implementation"></ul>
+              </section>
+              <section>
+                <h4>포인트</h4>
+                <p class="case-panel__key-point"></p>
+              </section>
+            </div>
+            <ol class="case-steps"></ol>
+          </div>
+        </article>
+      </template>
+
       <template id="tpl-case-step">
         <li>
           <figure>
@@ -171,14 +177,14 @@
           </figure>
         </li>
       </template>
-      <!-- highlight -->
+
       <template id="tpl-highlight">
         <article>
           <h3></h3>
           <p></p>
         </article>
       </template>
-      <!-- hero visual -->
+
       <template id="tpl-hero-visual">
         <figure>
           <img src="" alt="">

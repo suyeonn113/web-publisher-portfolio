@@ -13,8 +13,7 @@ body[data-page='project-detail'] {
 
   .project-hero,
   .project-summary,
-  .project-case-list,
-  .project-case-detail,
+  .project-cases,
   .project-highlights,
   .project-etc {
     width: 100%;
@@ -22,8 +21,7 @@ body[data-page='project-detail'] {
 
   .project-hero__inner,
   .project-summary,
-  .project-case-list,
-  .project-case-detail,
+  .project-cases,
   .project-highlights,
   .project-etc {
     margin: 0 auto;
@@ -47,17 +45,18 @@ body[data-page='project-detail'] {
     backdrop-filter: $detail-panel-backdrop;
   }
 
-  .case-detail {
+  .case-panel {
     @include rd('lg');
     border: 1px solid $detail-panel-border;
     background: $detail-panel-bg;
     box-shadow: $detail-panel-shadow;
     backdrop-filter: $detail-panel-backdrop;
+    transition: $tr-base;
   }
 
   .project-summary__grid h3,
-  .case-detail h3,
-  .case-detail h4,
+  .case-panel h3,
+  .case-panel h4,
   .highlight-list h3,
   .project-etc__grid h3 {
     margin: 0;
@@ -65,8 +64,8 @@ body[data-page='project-detail'] {
   }
 
   .project-summary__grid p,
-  .case-detail p,
-  .case-detail li,
+  .case-panel p,
+  .case-panel li,
   .highlight-list p,
   .project-etc__grid p {
     margin: 0;
@@ -251,68 +250,249 @@ body[data-page='project-detail'] {
   }
 
   /* ========================================
-      CASE LIST
+      CASES
   ========================================= */
 
-  .case-list {
+  .project-cases__layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    @include g-gap('gutter', 'md');
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    @include g-gap('gutter', 'lg');
+  }
+
+  .project-cases__nav {
+    min-width: 0;
+  }
+
+  .project-cases__nav-inner {
+    display: flex;
+    flex-direction: column;
+    @include f-gap('gutter', 'md');
+  }
+
+  .project-cases__eyebrow {
+    @include text-style('xs', 'bold');
+    color: $text-tertiary;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .case-list {
+    display: flex;
+    flex-direction: column;
+    @include f-gap('gutter', 'sm');
   }
 
   .case-item {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     min-height: rem(64px);
     @include pad('pad', 'md');
-    @include f-gap('gutter', 'md');
     @include rd('md');
+    @include text-style('sm', 'medium');
+    color: $text-secondary;
     text-align: left;
+    background: transparent;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    transition: $tr-base;
+    cursor: pointer;
+  }
+
+  .case-item::after {
+    content: '';
+    flex: 0 0 rem(8px);
+    width: rem(8px);
+    height: rem(8px);
+    @include rd('xl');
+    background: rgba(15, 23, 42, 0.14);
+    transition: $tr-base;
+  }
+
+  .case-item:is(:hover, :focus-visible) {
+    color: $text-primary;
+    border-color: $button-border-hover;
+    background: rgba(255, 255, 255, 0.28);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.44);
+    outline: none;
+  }
+
+  .case-item:is(.is-active, [aria-pressed='true']) {
+    color: $text-primary;
+    border-color: $button-border-active;
+    background: $button-surface-bg-active;
+    box-shadow: $button-shadow-active;
+  }
+
+  .case-item:is(.is-active, [aria-pressed='true'])::after {
+    background: var(--home-hero-main-strong-mid);
+    box-shadow: 0 0 rem(12px) rgba(3, 169, 244, 0.24);
   }
 
   .case-item__title {
     @include text-style('sm', 'bold', 'tight');
-    color: $text-primary;
+    color: currentColor;
     word-break: keep-all;
   }
 
-  .case-item__summary {
-    @include text-style('xs');
-    color: $text-secondary;
+  .case-item--island {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: max-content;
+    justify-content: center;
+    min-width: max-content;
+    min-height: rem(36px);
+    padding-inline: rem(11.2px);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
   }
 
-  .case-item.btn {
-    justify-content: flex-start;
+  .case-item--island::after {
+    display: none;
   }
 
-  .case-item.btn:is(.is-active, [aria-selected='true']) {
-    --btn-local-bg-active: #{$button-surface-bg-active};
-    --btn-local-border-active: #{$button-border-active};
-    --btn-local-shadow-active: #{$button-shadow-active};
+  .case-item--island .case-item__title {
+    @include text-style('xs', 'medium');
   }
 
-  /* ========================================
-      CASE DETAIL
-  ========================================= */
+  .case-item--island:is(.is-active, [aria-pressed='true']) .case-item__title {
+    @include text-style('xs', 'bold');
+  }
 
-  .case-detail {
+  .project-cases__content {
+    display: flex;
+    flex-direction: column;
+    @include f-gap('gap', 'sm');
+  }
+
+  .project-cases-mobile-nav {
+    position: fixed;
+    left: 50%;
+    bottom: rem(20px);
+    z-index: 250;
+    width: min(85vw, rem(720px));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, rem(16px));
+    transition: $tr-base;
+  }
+
+  .project-cases-mobile-nav.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+
+  .project-cases-mobile-nav__inner {
+    @include pad('pad', 'xs');
+    @include rd('xl');
+    background: $detail-panel-bg-strong;
+    border: 1px solid $detail-panel-border;
+    box-shadow: $detail-panel-shadow;
+    backdrop-filter: $detail-panel-backdrop;
+    -webkit-backdrop-filter: $detail-panel-backdrop;
+  }
+
+  .project-cases-mobile-nav__track {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    justify-content: space-between;
+    min-width: 100%;
+    scrollbar-width: none;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .project-cases-mobile-nav__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case-panel {
     display: flex;
     flex-direction: column;
     min-width: 0;
     @include pad('pad', 'lg');
     @include f-gap('gutter', 'md');
+    scroll-margin-top: rem(120px);
   }
 
-  .case-detail > h3 {
+  .case-panel.is-active {
+    border-color: $button-border-active;
+    box-shadow: $detail-panel-shadow-hover;
+  }
+
+  .case-panel__heading {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .case-panel__index {
+    @include text-style('xs', 'bold');
+    color: $point-primary;
+    letter-spacing: 0.16em;
+  }
+
+  .case-panel__title {
     @include text-style('lg', 'bold', 'tight');
   }
 
-  .case-detail__layout {
+  .case-panel__layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     @include g-gap('gutter', 'lg');
+  }
+
+  .case-panel__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    @include g-gap('gutter', 'md');
+  }
+
+  .case-panel__content section {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    @include f-gap('gutter', 'sm');
+    @include pad('pad', 'sm', 'top');
+    border-top: 1px solid $border-soft;
+  }
+
+  .case-panel__content h4 {
+    @include text-style('sm', 'bold');
+    color: $text-secondary;
+  }
+
+  .case-panel__content p,
+  .case-panel__implementation-item {
+    @include text-style('sm');
+  }
+
+  .case-panel__content ul {
+    display: flex;
+    flex-direction: column;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .case-panel__implementation-item {
+    position: relative;
+    @include pad('pad', 'sm', 'left');
+  }
+
+  .case-panel__implementation-item::before {
+    content: '';
+    position: absolute;
+    top: 0.6em;
+    left: 0;
+    width: rem(5px);
+    height: rem(5px);
+    @include rd('xl');
+    background: var(--home-hero-main-strong-mid);
   }
 
   .case-steps {
@@ -335,16 +515,16 @@ body[data-page='project-detail'] {
     overflow: hidden;
     @include rd('md');
     border: 1px solid $detail-panel-border;
-    background: $detail-panel-bg;
-    box-shadow: $detail-panel-shadow;
+    background: rgba(255, 255, 255, 0.24);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36);
     backdrop-filter: $detail-panel-backdrop;
-    max-height: rem(320px);
+    min-height: 100%;
   }
 
   .case-steps img {
     width: 100%;
     height: auto;
-    max-height: rem(240px);
+    max-height: rem(180px);
     object-fit: cover;
     background: $bg-main;
   }
@@ -361,71 +541,11 @@ body[data-page='project-detail'] {
   }
 
   .case-steps[data-step-count='1'] li {
-    max-width: rem(420px);
-    justify-self: center;
-  }
-
-  .case-steps[data-step-count='2'] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .case-steps[data-step-count='3'] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: rem(360px);
   }
 
   .case-steps[data-step-count='3'] li:first-child {
     grid-column: 1 / -1;
-  }
-
-  .case-steps[data-step-count='4'] {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .case-detail__content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    @include g-gap('gutter', 'lg');
-  }
-
-  .case-detail__content section {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    @include f-gap('gutter', 'sm');
-    @include pad('pad', 'sm', 'top');
-    border-top: 1px solid $border-soft;
-  }
-
-  .case-detail__content h4 {
-    @include text-style('sm', 'bold');
-    color: $text-secondary;
-  }
-
-  .case-detail__content p,
-  .case-detail__implementation-item {
-    @include text-style('sm');
-  }
-
-  .case-detail__content ul {
-    display: flex;
-    flex-direction: column;
-    @include f-gap('gutter', 'sm');
-  }
-
-  .case-detail__implementation-item {
-    position: relative;
-    @include pad('pad', 'sm', 'left');
-  }
-
-  .case-detail__implementation-item::before {
-    content: '';
-    position: absolute;
-    top: 0.6em;
-    left: 0;
-    width: rem(5px);
-    height: rem(5px);
-    @include rd('xl');
-    background: var(--home-hero-main-strong-mid);
   }
 
   /* ========================================
@@ -515,32 +635,8 @@ body[data-page='project-detail'] {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .case-list {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    .case-steps {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .case-steps[data-step-count='1'] {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .case-steps[data-step-count='2'] {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .case-steps[data-step-count='3'] {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .case-steps[data-step-count='3'] li:first-child {
-      grid-column: auto;
-    }
-
-    .case-steps[data-step-count='4'] {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .project-cases__layout {
+      grid-template-columns: minmax(rem(220px), rem(260px)) minmax(0, 1fr);
     }
 
     .highlight-list {
@@ -549,6 +645,10 @@ body[data-page='project-detail'] {
 
     .project-etc__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .project-cases-mobile-nav {
+      display: none;
     }
   }
 
@@ -565,18 +665,183 @@ body[data-page='project-detail'] {
       max-width: rem(800px);
     }
 
-    .case-list {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .project-cases__layout {
+      grid-template-columns: minmax(rem(260px), rem(320px)) minmax(0, 1fr);
+      column-gap: clamp(rem(64px), 7vw, rem(120px));
     }
 
-    .case-detail__layout {
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    .case-panel__layout {
+      grid-template-columns: minmax(0, 1.15fr) minmax(rem(240px), 0.72fr);
       align-items: start;
+    }
+
+    .case-steps[data-step-count='1'] li {
+      max-width: 100%;
     }
 
     .highlight-list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+  }
 
+  @media (max-width: $tablet) {
+    .project-cases__eyebrow {
+      display: none;
+    }
+
+    .project-cases__nav {
+      display: none;
+    }
+
+    .project-cases__content {
+      @include f-gap('gutter', 'lg');
+    }
+
+    .project-cases-mobile-nav {
+      width: min(85vw, rem(720px));
+    }
+
+    .case-steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .case-steps[data-step-count='1'] li,
+    .case-steps[data-step-count='3'] li:first-child {
+      max-width: 100%;
+      grid-column: auto;
+    }
+
+    .case-panel {
+      scroll-margin-top: rem(88px);
+    }
+  }
+
+  /* ========================================
+      CASES REFINED
+  ========================================= */
+
+  .case-item {
+    min-height: auto;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    justify-content: flex-start;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .case-item:is(:hover, :focus-visible) {
+    color: $text-primary;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .case-item:is(.is-active, [aria-pressed='true']) {
+    color: $point-primary;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .case-item::after {
+    flex: 0 0 rem(8px);
+  }
+
+  .case-item__title {
+    transition: $tr-base;
+  }
+
+  .case-item--island {
+    min-height: auto;
+    padding-inline: 0;
+  }
+
+  .project-cases__content {
+    @include f-gap('gap', 'md');
+  }
+
+  .project-cases-mobile-nav__inner {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .project-cases-mobile-nav__track {
+    @include pad('pad', 'xs', 'x');
+  }
+
+  .case-panel {
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .case-panel.is-active {
+    border: none;
+    box-shadow: none;
+  }
+
+  .case-panel__layout {
+    @include g-gap('gutter', 'md');
+  }
+
+  .case-panel__content {
+    @include g-gap('gutter', 'sm');
+  }
+
+  .case-panel__content section:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .case-steps figure {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .case-steps figcaption {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    border-top: none;
+  }
+
+  @media (min-width: $desktop) {
+    .case-panel__layout {
+      grid-template-columns: minmax(0, 1.28fr) minmax(rem(220px), 0.72fr);
+      align-items: start;
+    }
+  }
+
+  @media (max-width: $tablet) {
+    .project-cases__content {
+      @include f-gap('gap', 'sm');
+    }
+
+    .project-cases-mobile-nav {
+      width: min(calc(100vw - rem(16px)), rem(720px));
+    }
+
+    .project-cases-mobile-nav__track {
+      gap: rem(18px);
+    }
+
+    .case-item--island {
+      @include f-gap('gutter', 'sm');
+    }
+
+    .case-panel__layout {
+      gap: rem(24px);
+    }
   }
 }
