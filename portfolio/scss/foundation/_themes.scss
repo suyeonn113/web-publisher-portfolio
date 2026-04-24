@@ -123,8 +123,8 @@
 
   /* Button */
   --button-text: var(--color-text-primary);
-  --button-text-hover: var(--work-folder-text);
-  --button-text-active: var(--work-folder-text);
+  --button-text-hover: var(--color-point-primary);
+  --button-text-active: var(--color-point-primary);
   --button-letter-spacing: 0.01em;
   --button-border-width: 1px;
   --button-backdrop: blur(12px) saturate(1.06);
@@ -358,8 +358,8 @@
 
   /* Button */
   --button-text: var(--color-text-primary);
-  --button-text-hover: var(--work-folder-text);
-  --button-text-active: var(--work-folder-text);
+  --button-text-hover: var(--color-point-primary);
+  --button-text-active: var(--color-point-primary);
   --button-letter-spacing: 0.01em;
   --button-border-width: 1px;
   --button-backdrop: blur(12px) saturate(1.08);

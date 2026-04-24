@@ -561,6 +561,10 @@ function initHighlightInteractiveAnimation(project, root) {
 
     resetSplitLineMarkup(title);
     resetSplitLineMarkup(description);
+    
+    title.dataset.originalText = item.title || '';
+    description.dataset.originalText = item.description || '';
+
     title.textContent = item.title || '';
     description.textContent = item.description || '';
 

@@ -800,61 +800,44 @@ body[data-page='project-detail'] {
   }
 
   .project-highlights__body {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    align-items: start;
-    @include g-gap('gutter', 'lg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include f-gap('gutter', 'lg');
   }
 
   .highlight-list {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: rem(1080px);
     @include f-gap('gutter', 'sm');
   }
 
   .highlight-chip {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
-    @include pad('pad', 'sm', 'y');
-    @include pad('pad', 'md', 'x');
-    @include rd('xl');
-    @include text-style('sm', 'bold');
-    color: $text-secondary;
-    background: transparent;
-    border: 1px solid $border-soft;
-    transition: $tr-base;
-    cursor: pointer;
-  }
+    flex: 0 1 auto;
+    white-space: normal;
+    text-align: center;
 
-  .highlight-chip:is(:hover, :focus-visible),
-  .highlight-chip.is-active {
-    color: $text-primary;
-    background: $chip-surface-bg;
-    border-color: $button-border-hover;
-    box-shadow: $chip-shadow;
-    backdrop-filter: $chip-backdrop;
-    -webkit-backdrop-filter: $chip-backdrop;
-    outline: none;
+    @include text-style('sm', 'medium');
+    @include pad('pad', 'xs', 'y');
+    @include pad('pad', 'md', 'x');
   }
+   
 
   .highlight-display {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     min-width: 0;
     max-width: rem(960px);
-    min-height: clamp(rem(260px), 42vh, rem(480px));
+    min-height: auto;
     @include f-gap('gutter', 'md');
-    @include pad('pad', 'md');
-    @include rd('lg');
-    background: $detail-panel-bg;
-    border: 1px solid $detail-panel-border;
-    box-shadow: $detail-panel-shadow;
-    backdrop-filter: $detail-panel-backdrop;
+    text-align: center;
   }
 
   .highlight-display__title {
@@ -862,14 +845,16 @@ body[data-page='project-detail'] {
     color: $text-primary;
     word-break: keep-all;
     overflow: hidden;
+    text-align: center;
   }
 
   .highlight-display__text {
     max-width: rem(760px);
-    @include text-style('lg', 'medium', 'tight');
+    @include text-style('base', 'medium', 'tight');
     color: $text-secondary;
     word-break: keep-all;
     overflow-wrap: break-word;
+    text-align: center;
   }
 
   .highlight-display__title .split-line-mask,
@@ -931,17 +916,8 @@ body[data-page='project-detail'] {
       grid-template-columns: minmax(rem(220px), rem(260px)) minmax(0, 1fr);
     }
 
-    .project-highlights__body {
-      grid-template-columns: minmax(rem(240px), rem(320px)) minmax(0, 1fr);
-    }
-
-    .highlight-list {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
     .highlight-display {
-      min-height: clamp(rem(300px), 48vh, rem(560px));
+      max-width: rem(1040px);
     }
 
     .project-etc__grid {
@@ -980,9 +956,6 @@ body[data-page='project-detail'] {
       max-width: 100%;
     }
 
-    .highlight-display {
-      min-height: clamp(rem(320px), 50vh, rem(620px));
-    }
   }
 
   @include respond-down('tablet') {
@@ -1014,12 +987,6 @@ body[data-page='project-detail'] {
 
     .case-panel {
       scroll-margin-top: rem(88px);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .highlight-display {
-      min-height: auto;
     }
   }
 
