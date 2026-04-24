@@ -109,8 +109,15 @@ export const initWorkEntrance = () => {
     onEnter: () => {
       tl.restart();
     },
+    onUpdate: (self) => {
+      if (self.direction === -1) {
+        tl.reverse();
+      } else if (self.direction === 1 && tl.progress() < 1) {
+        tl.play();
+      }
+    },
     onEnterBack: () => {
-      tl.play(0);
+      tl.play();
     },
     onLeaveBack: () => {
       tl.pause(0);
