@@ -88,6 +88,16 @@ table {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Syne';
+  src: url('../../assets/fonts/Syne/Syne-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+$font-point: "Syne", sans-serif;
+
 body {
   min-height: 100vh;
   font-family: $font-suit;
@@ -101,13 +111,13 @@ body {
 
 @media (hover: hover) and (pointer: fine) {
   [data-hover-tone="accent"] {
-    transition: color 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
+    transition: $tr-base;
   }
 
   [data-hover-tone="accent"] svg,
   [data-hover-tone="accent"] i,
   [data-hover-tone="accent"] .lucide {
-    transition: color 0.24s ease, stroke 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
+    transition: $tr-base;
   }
 
   [data-hover-tone="accent"]:hover,

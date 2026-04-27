@@ -1,12 +1,10 @@
 /* Layout order
  - layout: shared layout utilities
- - main-background: shared page background
  - header: top navigation
  - footer: bottom footer
  - fixedMenu: persistent quick menu
  */
 @forward 'layout';
-@forward 'main-background';
 @forward 'header';
 @forward 'footer';
 @forward 'fixedMenu';

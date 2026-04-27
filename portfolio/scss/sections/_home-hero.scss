@@ -24,20 +24,24 @@
   will-change: transform, opacity;
 }
 
+.hero__text-wrap .hero__roof {
+  position: relative;
+  top: clamp(4px, 2vw, 20px);
+  width: 100%;
+  aspect-ratio: 22 / 9;
+}
+
 .hero__text-wrap .main-title {
   color: $text-primary;
   cursor: default;
   user-select: none;
 
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  @include flex-center;
+  flex-direction: column;
   @include space-gap('cluster', 'sm');
 
   @include respond-down('tablet') {
     display: flex !important;
-    flex-direction: column;
-    align-items: center;
     gap: 4px;
   }
 }
@@ -48,64 +52,71 @@
   position: relative;
 }
 
-.hero__text-wrap .main-title .word--simple,
-.hero__text-wrap .main-title .word--me {
-  @include text-style('hero', 'bold', 'tight', 'tight');
-  filter: drop-shadow(0 1px 0 var(--home-hero-edge-highlight)) drop-shadow(0 3px 8px var(--home-hero-shadow-main));
-
-  .char,
-  .dot {
-    background-image:
-      linear-gradient(180deg, var(--home-hero-sheen) 0%, transparent 16%),
-      linear-gradient(135deg, var(--home-hero-main-gradient-start) 0%, var(--home-hero-main-gradient-mid) 86%, var(--home-hero-main-gradient-end) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    text-shadow: none;
-  }
+.hero__text-wrap .main-title .word--suyeon,
+.hero__text-wrap .main-title .word--workroom {
+  @include text-style('hero', 'semi-bold', 'tight', 'tight');
+  font-family: $font-point;
 }
 
-.hero__text-wrap .main-title .word--hi {
-  @include text-style('hero-sub', 'medium', 'tight', 'base');
-  filter: drop-shadow(0 1px 0 var(--home-hero-edge-highlight)) drop-shadow(0 2px 6px var(--home-hero-shadow-sub));
-  letter-spacing: -0.04em;
-  transform: translateY(-0.08em);
-
-  .char {
-    background-image:
-      linear-gradient(180deg, var(--home-hero-sheen) 0%, transparent 16%),
-      linear-gradient(135deg, var(--home-hero-sub-gradient-start) 0%, var(--home-hero-sub-gradient-mid) 86%, var(--home-hero-sub-gradient-end) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    text-shadow: none;
-  }
-}
-
-.hero__text-wrap .main-title .word--simple {
+.hero__text-wrap .main-title .word--suyeon {
   transform: translateY(-0.01em);
 }
 
-.hero__text-wrap .main-title .word--me .char {
-  background-image:
-    linear-gradient(180deg, var(--home-hero-sheen) 0%, transparent 16%),
-    linear-gradient(135deg, var(--home-hero-main-strong-start) 0%, var(--home-hero-main-strong-mid) 86%, var(--home-hero-main-strong-end) 100%);
-}
-
-.hero__text-wrap .main-title .word--me .dot {
-  color: var(--home-hero-dot-color);
-  background-image: none;
-  -webkit-text-fill-color: currentColor;
-  text-shadow: 0 1px 0 var(--home-hero-edge-highlight), 0 0 8px var(--home-hero-dot-glow);
-}
-
-.hero__text-wrap .main-title .char,
-.hero__text-wrap .main-title .dot {
+.hero__text-wrap .main-title .char{
   display: inline-block;
   will-change: transform;
   transform-origin: center center;
+}
+
+/* 1줄 */
+.main-title .word--suyeon {
+  letter-spacing: -0.065em;
+  transform: translateX(0.06em) rotate(-0.8deg);
+}
+
+/* 2줄 */
+.main-title .word--workroom {
+  margin-top: 0.1em;
+  letter-spacing: -0.075em;
+  transform: translateX(-0.04em) rotate(0.8deg);
+}
+
+/* SUYEON'S */
+.main-title .word--suyeon .char:nth-child(2) {
+  transform: translateY(0.07em) rotate(-3.5deg);
+}
+
+.main-title .word--suyeon .char:nth-child(3) {
+  transform: translateY(-0.06em) rotate(2.8deg);
+}
+
+.main-title .word--suyeon .char:nth-child(7) {
+  transform: translateY(-0.085em) rotate(8deg);
+}
+
+.main-title .word--suyeon .char:nth-child(8) {
+  transform: translateY(0.06em) rotate(-2.8deg);
+}
+
+/* WORKROOM */
+.main-title .word--workroom .char:nth-child(1) {
+  transform: translateY(0.05em) rotate(-2.2deg);
+}
+
+.main-title .word--workroom .char:nth-child(3) {
+  transform: translateY(-0.07em) rotate(3.5deg);
+}
+
+.main-title .word--workroom .char:nth-child(4) {
+  transform: translateY(0.06em) rotate(-2.8deg);
+}
+
+.main-title .word--workroom .char:nth-child(5) {
+  transform: translateY(-0.05em) rotate(2.5deg);
+}
+
+.main-title .word--workroom .char:nth-child(8) {
+  transform: translateY(0.07em) rotate(2.5deg);
 }
 
 .hero__scroll-hint {

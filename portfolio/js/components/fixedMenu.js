@@ -10,11 +10,9 @@ const MENU_ITEMS = [
     icon: 'user',
     title: '자기소개',
     content: 
-    `구조를 먼저 설계하고, 그 위에 인터랙션을 쌓는 퍼블리셔입니다.
-    복잡한 기능도 단순한 구조로 풀어내는 과정을 중요하게 생각합니다.  
-    사용자가 자연스럽게 흐름을 따라갈 수 있는 UI를 만드는 데 집중합니다.
-    직접 구현하며 구조를 이해하고,  
-    지속적으로 개선해 나가는 작업을 이어가고 있습니다.`,
+    `안녕하세요, 경험을 만드는 웹 퍼블리셔 수연입니다.
+    시각적인 매력과 자연스러운 흐름이 공존하는 경험을 만들고 싶습니다.
+    그 안에서 구조적인 설계와 접근성, 오래 사용할 수 있는 UI를 고민합니다.`,
     previewImg: 'assets/images/fixedMenu/preview-about.jpg'
   },
   {
@@ -23,7 +21,7 @@ const MENU_ITEMS = [
     title: '이력서',
     content: `프로젝트 경험과 기술 스택을 정리한 PDF 이력서입니다. 
               새 탭에서 내용을 확인한 후 저장할 수 있습니다.`,
-    previewImg: 'assets/images/fixedMenu/preview-resume.jpg',
+    previewImg: 'assets/images/fixedMenu/preview-resume.png',
     cta: {
       label: '이력서 PDF 보기',
       href: '/assets/files/resume.pdf',
@@ -195,9 +193,12 @@ export function initFixedMenu(lenis) {
       });
 
       btn.addEventListener('mousemove', (e) => {
+        const previewWidth = preview.offsetWidth || 180;
+        const previewHeight = preview.offsetHeight || 120;
+
         gsap.to(preview, {
-          x: e.clientX - 200,
-          y: e.clientY - 50,
+          x: e.clientX - previewWidth - 40,
+          y: e.clientY - previewHeight / 2,
           duration: 0.5,
           ease: "power3.out",
           overwrite: "auto"

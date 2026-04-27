@@ -21,13 +21,19 @@
 .site-header__link {
   text-decoration: none;
   color: $text-primary;
-  @include text-style('sm');
+  @include text-style('sm', 'bold');
 }
 
 .site-header__theme-toggle {
   display: block;
   & svg {
     @include icon-size('md');
-    stroke-width: 1px;
+    stroke-width: 1.5px;
+    transition: $tr-base;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover svg {
+      stroke: $point-primary;
+    }
   }
 }

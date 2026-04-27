@@ -76,17 +76,35 @@ body[data-page='contact'] {
 
   .contact-card__link:hover,
   .contact-card__link:focus-visible {
-    border-color: $border-strong;
+    border-color: var(--button-border-hover);
+    background: var(--cursor-bg);
+    .contact-card__bottom svg {
+      stroke: var(--color-point-primary);
+      animation: contact-arrow-nudge 1.2s ease-in-out infinite;
+    }
+  }
+
+  @keyframes contact-arrow-nudge {
+    0%,
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    50% {
+      transform: translateX(6px);
+      opacity: 0.7;
+    }
   }
 
   .contact-card__icon {
     @include flex-center;
-    width: rem(84px);
-    aspect-ratio: 1;
+    @include pad('pad', 'lg', 'top');
+    width: fit-content;
+    color: $text-primary;
   }
 
-  .contact-card__icon svg,
-  .contact-card__icon img {
+  .contact-card__icon svg {
     width: rem(34px);
     height: rem(34px);
   }
@@ -112,6 +130,7 @@ body[data-page='contact'] {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transform: translateX(0);
   }
 
   .contact-card__bottom span {
