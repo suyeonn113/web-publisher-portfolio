@@ -2,6 +2,8 @@
 
 .work-page {
   width: 100%;
+  @include responsive-spacing('padding-top', 'page-offset', 'header');
+  @include pad('gap', 'md', 'bottom');
 }
 
 .work-page__inner {
@@ -19,10 +21,6 @@
 .work-page__list-wrap {
   width: 100%;
   min-width: 0;
-}
-
-.work-page__header {
-  @include responsive-spacing('padding-top', 'page-offset', 'header');
 }
 
 .work-page__heading {

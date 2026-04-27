@@ -136,10 +136,10 @@ $spaces: (
   'stack': map.get($spacings, 'gap'),
   'page-offset': (
     'header': (
-      'default': map.get(map.get(map.get($spacings, 'pad'), 'lg'), 'default') + map.get(map.get(map.get($spacings, 'pad'), 'sm'), 'default'),
-      'laptop': map.get(map.get(map.get($spacings, 'pad'), 'lg'), 'laptop') + map.get(map.get(map.get($spacings, 'pad'), 'sm'), 'laptop'),
-      'tablet': map.get(map.get(map.get($spacings, 'pad'), 'lg'), 'tablet') + map.get(map.get(map.get($spacings, 'pad'), 'md'), 'tablet'),
-      'mobile': map.get(map.get(map.get($spacings, 'pad'), 'xl'), 'mobile') + map.get(map.get(map.get($spacings, 'pad'), 'sm'), 'mobile')
+      'default': map.get(map.get(map.get($spacings, 'pad'), 'xl'), 'default') + map.get(map.get(map.get($spacings, 'pad'), 'lg'), 'default'),
+      'laptop': map.get(map.get(map.get($spacings, 'pad'), 'xl'), 'laptop') + map.get(map.get(map.get($spacings, 'pad'), 'lg'), 'laptop'),
+      'tablet': map.get(map.get(map.get($spacings, 'pad'), 'xl'), 'tablet') + map.get(map.get(map.get($spacings, 'pad'), 'lg'), 'tablet'),
+      'mobile': map.get(map.get(map.get($spacings, 'pad'), 'xl'), 'mobile') + map.get(map.get(map.get($spacings, 'pad'), 'lg'), 'mobile')
     )
   )
 );

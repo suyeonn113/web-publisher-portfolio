@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   renderHeader();
   renderFooter();
-  renderFixedMenu();
+  if (page !== 'contact') {
+    renderFixedMenu();
+  }
 
   initTheme();
 
@@ -59,7 +61,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   initCursor();
   initInteractiveTone();
-  initFixedMenu(lenis);
+  if (page !== 'contact') {
+    initFixedMenu(lenis);
+  }
 
   if (page === 'home') {
     initHeroText(() => {

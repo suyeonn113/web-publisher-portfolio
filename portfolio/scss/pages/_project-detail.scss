@@ -3,7 +3,8 @@
 body[data-page='project-detail'] {
   .project-detail {
     width: 100%;
-    @include pad('gap', 'md', 'y');
+    @include responsive-spacing('padding-top', 'page-offset', 'header');
+    @include pad('gap', 'md', 'bottom');
     @include pad('pad', 'md', 'x');
   }
 
