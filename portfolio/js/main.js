@@ -21,7 +21,6 @@ import {
   initHeaderScroll
 } from "./components/header.js";
 import { renderFooter } from "./components/footer.js";
-import { renderFixedMenu, initFixedMenu } from "./components/fixedMenu.js";
 import { loadProjects } from './components/ProjectCardMain.js';
 import { loadWorkCardList } from './components/WorkCardList.js';
 import { initWorkSlider } from './components/workSlider.js';
@@ -29,7 +28,6 @@ import { loadProjectDetail } from './components/ProjectDetail.js';
 
 // Animations
 import { initHeroText } from './animations/heroText.js';
-import { initScrollDownMotion } from "./animations/scrollDown.js";
 import { initWorkEntrance } from "./animations/workEntrance.js";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -46,9 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   renderHeader();
   renderFooter();
-  if (page !== 'contact') {
-    renderFixedMenu();
-  }
 
   initTheme();
 
@@ -61,9 +56,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   initCursor();
   initInteractiveTone();
-  if (page !== 'contact') {
-    initFixedMenu(lenis);
-  }
 
   if (page === 'home') {
     initHeroText(() => {
@@ -71,8 +63,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       initHeaderScroll();
     });
   }
-
-  initScrollDownMotion();
 
   if (page === 'home') {
     const isProjectLoaded = await loadProjects();

@@ -2,9 +2,7 @@
  - layout: shared layout utilities
  - header: top navigation
  - footer: bottom footer
- - fixedMenu: persistent quick menu
  */
 @forward 'layout';
 @forward 'header';
 @forward 'footer';
-@forward 'fixedMenu';
