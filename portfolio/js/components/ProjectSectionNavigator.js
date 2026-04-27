@@ -11,11 +11,11 @@ gsap.registerPlugin(ScrollTrigger);
 const SKIP_ITEMS = [
   {
     current: 'summary',
-    next: 'cases',
+    next: 'key-flows',
     label: 'Skip Key Flows'
   },
   {
-    current: 'cases',
+    current: 'key-flows',
     next: 'highlights',
     label: 'Skip Highlights'
   },
@@ -138,7 +138,7 @@ export function initProjectSectionNavigator(root) {
     const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
     const handleEnter = () => {
-      if (isMobile && item.current === 'cases') {
+      if (isMobile && item.current === 'key-flows') {
         updateSkipButton(button, null);
         return;
       }

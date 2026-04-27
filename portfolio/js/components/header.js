@@ -24,8 +24,8 @@ export function renderHeader() {
         <ul class="site-header__menu">
           <li><a class="site-header__link" href="index.html">HOME</a></li>
           <li><a class="site-header__link" href="work.html">WORK</a></li>
-          <li><a class="site-header__link" href="#">LOG</a></li>
-          <li><a class="site-header__link" href="#">CONTACT</a></li>
+          <li><a class="site-header__link" href="log.html">LOG</a></li>
+          <li><a class="site-header__link" href="contact.html">CONTACT</a></li>
           <li>
             <button type="button"
                     class="site-header__theme-toggle"

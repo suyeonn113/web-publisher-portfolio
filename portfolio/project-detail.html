@@ -81,22 +81,22 @@
       </section>
 
       <!-- ========================================
-          CASES
+          KEY FLOWS
       ========================================= -->
-      <section class="project-cases" data-section="cases" data-gsap-target="section">
+      <section class="project-key-flows" data-section="key-flows" data-gsap-target="section">
         <h2 class="section-title">KEY FLOWS</h2>
-        <div class="project-cases__layout">
-          <aside class="project-cases__nav" aria-label="Case navigation">
-            <div class="project-cases__nav-inner">
-              <p class="project-cases__eyebrow">Flow Index</p>
-              <div class="case-list" data-field="caseList"></div>
+        <div class="project-key-flows__layout">
+          <aside class="project-key-flows__nav" aria-label="Key flow navigation">
+            <div class="project-key-flows__nav-inner">
+              <p class="project-key-flows__eyebrow">Flow Index</p>
+              <div class="flow-list" data-field="flowList"></div>
             </div>
           </aside>
-          <div class="project-cases__content" data-field="casePanels"></div>
+          <div class="project-key-flows__content" data-field="flowPanels"></div>
           </div>
-        <div class="project-cases-mobile-nav" data-case-island aria-hidden="true">
-          <div class="project-cases-mobile-nav__inner">
-            <div class="project-cases-mobile-nav__track" data-field="caseListMobile"></div>
+        <div class="project-key-flows-mobile-nav" data-flow-island aria-hidden="true">
+          <div class="project-key-flows-mobile-nav__inner">
+            <div class="project-key-flows-mobile-nav__track" data-field="flowListMobile"></div>
           </div>
         </div>
       </section>
@@ -155,47 +155,47 @@
         <p class="project-hero__desc-line"></p>
       </template>
 
-      <template id="tpl-case-item">
-        <button class="case-item" type="button" aria-pressed="false">
-          <span class="case-item__title"></span>
+      <template id="tpl-flow-item">
+        <button class="flow-item" type="button" aria-pressed="false">
+          <span class="flow-item__title"></span>
         </button>
       </template>
 
-      <template id="tpl-case-panel">
-        <article class="case-panel">
-          <div class="case-panel__heading">
-            <p class="case-panel__index"></p>
-            <h3 class="case-panel__title"></h3>
+      <template id="tpl-flow-panel">
+        <article class="flow-panel">
+          <div class="flow-panel__heading">
+            <p class="flow-panel__index"></p>
+            <h3 class="flow-panel__title"></h3>
           </div>
-          <div class="case-panel__layout">
-            <div class="case-panel__content">
+          <div class="flow-panel__layout">
+            <div class="flow-panel__content">
               <section>
                 <h4>Problem</h4>
-                <p class="case-panel__problem"></p>
+                <p class="flow-panel__problem"></p>
               </section>
               <section>
                 <h4>Solution</h4>
-                <p class="case-panel__solution"></p>
+                <p class="flow-panel__solution"></p>
               </section>
               <section>
                 <h4>Implementation</h4>
-                <ul class="case-panel__implementation"></ul>
+                <ul class="flow-panel__implementation"></ul>
               </section>
               <section>
                 <h4>Insight</h4>
-                <p class="case-panel__key-point"></p>
+                <p class="flow-panel__key-point"></p>
               </section>
             </div>
-            <ol class="case-steps"></ol>
+            <ol class="flow-steps"></ol>
           </div>
         </article>
       </template>
 
-      <template id="tpl-case-step">
-        <li class="case-step">
-          <button class="case-step__button" type="button" aria-haspopup="dialog">
-            <figure class="case-step__figure">
-              <span class="case-step__visual">
+      <template id="tpl-flow-step">
+        <li class="flow-step">
+          <button class="flow-step__button" type="button" aria-haspopup="dialog">
+            <figure class="flow-step__figure">
+              <span class="flow-step__visual">
                 <img src="" alt="" loading="lazy">
               </span>
               <figcaption></figcaption>
@@ -204,29 +204,29 @@
         </li>
       </template>
 
-      <template id="tpl-case-gallery-modal">
-        <div class="case-gallery-modal" hidden>
-          <div class="case-gallery-modal__backdrop" data-gallery-close></div>
+      <template id="tpl-flow-gallery-modal">
+        <div class="flow-gallery-modal" hidden>
+          <div class="flow-gallery-modal__backdrop" data-gallery-close></div>
           <div
-            class="case-gallery-modal__dialog"
+            class="flow-gallery-modal__dialog"
             role="dialog"
             aria-modal="true"
             aria-label="Key flow image viewer"
             tabindex="-1"
           >
-            <div class="case-gallery-modal__chrome">
-              <p class="case-gallery-modal__eyebrow">Key Flow Preview</p>
-              <div class="case-gallery-modal__actions">
-                <button class="case-gallery-modal__nav" type="button" data-gallery-prev aria-label="Previous image">Prev</button>
-                <button class="case-gallery-modal__nav" type="button" data-gallery-next aria-label="Next image">Next</button>
-                <button class="case-gallery-modal__close" type="button" data-gallery-close aria-label="Close image">Close</button>
+            <div class="flow-gallery-modal__chrome">
+              <p class="flow-gallery-modal__eyebrow">Key Flow Preview</p>
+              <div class="flow-gallery-modal__actions">
+                <button class="flow-gallery-modal__nav" type="button" data-gallery-prev aria-label="Previous image">Prev</button>
+                <button class="flow-gallery-modal__nav" type="button" data-gallery-next aria-label="Next image">Next</button>
+                <button class="flow-gallery-modal__close" type="button" data-gallery-close aria-label="Close image">Close</button>
               </div>
             </div>
-            <figure class="case-gallery-modal__figure">
-              <div class="case-gallery-modal__media" data-gallery-media>
-                <img class="case-gallery-modal__image" data-gallery-image src="" alt="">
+            <figure class="flow-gallery-modal__figure">
+              <div class="flow-gallery-modal__media" data-gallery-media>
+                <img class="flow-gallery-modal__image" data-gallery-image src="" alt="">
               </div>
-              <figcaption class="case-gallery-modal__caption" data-gallery-caption></figcaption>
+              <figcaption class="flow-gallery-modal__caption" data-gallery-caption></figcaption>
             </figure>
           </div>
         </div>

@@ -13,7 +13,7 @@ body[data-page='project-detail'] {
 
   .project-hero,
   .project-summary,
-  .project-cases,
+  .project-key-flows,
   .project-highlights,
   .project-etc {
     position: relative;
@@ -22,7 +22,7 @@ body[data-page='project-detail'] {
 
   .project-hero__inner,
   .project-summary,
-  .project-cases,
+  .project-key-flows,
   .project-highlights,
   .project-etc {
     margin: 0 auto;
@@ -53,20 +53,20 @@ body[data-page='project-detail'] {
     backface-visibility: hidden;
   }
 
-  .case-panel {
+  .flow-panel {
     @include rd('lg');
     transition: $tr-base;
   }
 
-  .case-panel h3,
-  .case-panel h4,
+  .flow-panel h3,
+  .flow-panel h4,
   .highlight-list h3,
   .project-etc__grid h3 {
     color: $text-primary;
   }
 
-  .case-panel p,
-  .case-panel li,
+  .flow-panel p,
+  .flow-panel li,
   .highlight-list p,
   .project-etc__grid p {
     color: $text-secondary;
@@ -345,40 +345,40 @@ body[data-page='project-detail'] {
   }
 
   /* ========================================
-      CASES
+      KEY FLOWS
   ========================================= */
 
-  .project-cases__layout {
+  .project-key-flows__layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
     @include g-gap('gutter', 'lg');
   }
 
-  .project-cases__nav {
+  .project-key-flows__nav {
     min-width: 0;
   }
 
-  .project-cases__nav-inner {
+  .project-key-flows__nav-inner {
     display: flex;
     flex-direction: column;
     @include f-gap('gutter', 'md');
   }
 
-  .project-cases__eyebrow {
+  .project-key-flows__eyebrow {
     @include text-style('xs', 'bold');
     color: $text-tertiary;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
-  .case-list {
+  .flow-list {
     display: flex;
     flex-direction: column;
     @include f-gap('gutter', 'sm');
   }
 
-  .case-item {
+  .flow-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -389,7 +389,7 @@ body[data-page='project-detail'] {
     cursor: pointer;
   }
 
-  .case-item::after {
+  .flow-item::after {
     content: '';
     flex: 0 0 rem(8px);
     width: rem(8px);
@@ -399,27 +399,27 @@ body[data-page='project-detail'] {
     transition: $tr-base;
   }
 
-  .case-item:is(:hover, :focus-visible) {
+  .flow-item:is(:hover, :focus-visible) {
     color: $text-primary;
     outline: none;
   }
 
-  .case-item:is(.is-active, [aria-pressed='true']) {
+  .flow-item:is(.is-active, [aria-pressed='true']) {
     color: $button-text-active;
   }
 
-  .case-item:is(.is-active, [aria-pressed='true'])::after {
+  .flow-item:is(.is-active, [aria-pressed='true'])::after {
     background: var(--home-hero-main-strong-mid);
     box-shadow: 0 0 rem(12px) $button-border-active;
   }
 
-  .case-item__title {
+  .flow-item__title {
     @include text-style('base', 'bold', 'tight');
     color: currentColor;
     word-break: keep-all;
   }
 
-  .case-item--island {
+  .flow-item--island {
     flex: 0 0 auto;
     width: auto;
     max-width: max-content;
@@ -427,25 +427,25 @@ body[data-page='project-detail'] {
     min-width: max-content;
   }
 
-  .case-item--island::after {
+  .flow-item--island::after {
     display: none;
   }
 
-  .case-item--island .case-item__title {
+  .flow-item--island .flow-item__title {
     @include text-style('xs', 'medium');
   }
 
-  .case-item--island:is(.is-active, [aria-pressed='true']) .case-item__title {
+  .flow-item--island:is(.is-active, [aria-pressed='true']) .flow-item__title {
     @include text-style('xs', 'bold');
   }
 
-  .project-cases__content {
+  .project-key-flows__content {
     display: flex;
     flex-direction: column;
     @include f-gap('gap', 'sm');
   }
 
-  .project-cases-mobile-nav {
+  .project-key-flows-mobile-nav {
     position: fixed;
     left: 50%;
     bottom: rem(20px);
@@ -461,14 +461,14 @@ body[data-page='project-detail'] {
     transition: $tr-base;
   }
 
-  .project-cases-mobile-nav.is-visible {
+  .project-key-flows-mobile-nav.is-visible {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: translate(-50%, 0);
   }
 
-  .project-cases-mobile-nav__inner {
+  .project-key-flows-mobile-nav__inner {
     @include pad('pad', 'xs');
     @include pad('pad', 'lg', 'x');
     @include rd('xl');
@@ -479,7 +479,7 @@ body[data-page='project-detail'] {
     -webkit-backdrop-filter: $detail-panel-backdrop;
   }
 
-  .project-cases-mobile-nav__track {
+  .project-key-flows-mobile-nav__track {
     display: flex;
     align-items: center;
     overflow-x: auto;
@@ -489,11 +489,11 @@ body[data-page='project-detail'] {
     @include f-gap('gutter', 'md');
   }
 
-  .project-cases-mobile-nav__track::-webkit-scrollbar {
+  .project-key-flows-mobile-nav__track::-webkit-scrollbar {
     display: none;
   }
 
-  .case-panel {
+  .flow-panel {
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -502,36 +502,36 @@ body[data-page='project-detail'] {
     scroll-margin-top: rem(120px);
   }
 
-  .case-panel__heading {
+  .flow-panel__heading {
     display: flex;
     flex-direction: column;
     min-width: 0;
     @include f-gap('gutter', 'sm');
   }
 
-  .case-panel__index {
+  .flow-panel__index {
     @include text-style('xs', 'bold');
     color: $point-primary;
     letter-spacing: 0.16em;
   }
 
-  .case-panel__title {
+  .flow-panel__title {
     @include text-style('lg', 'bold', 'tight');
   }
 
-  .case-panel__layout {
+  .flow-panel__layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     @include g-gap('gutter', 'lg');
   }
 
-  .case-panel__content {
+  .flow-panel__content {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     @include g-gap('gutter', 'md');
   }
 
-  .case-panel__content section {
+  .flow-panel__content section {
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -540,28 +540,28 @@ body[data-page='project-detail'] {
     border-top: 1px solid $border-soft;
   }
 
-  .case-panel__content h4 {
+  .flow-panel__content h4 {
     @include text-style('base', 'bold');
     color: $text-secondary;
   }
 
-  .case-panel__content p,
-  .case-panel__implementation-item {
+  .flow-panel__content p,
+  .flow-panel__implementation-item {
     @include text-style('base');
   }
 
-  .case-panel__content ul {
+  .flow-panel__content ul {
     display: flex;
     flex-direction: column;
     @include f-gap('gutter', 'sm');
   }
 
-  .case-panel__implementation-item {
+  .flow-panel__implementation-item {
     position: relative;
     @include pad('pad', 'sm', 'left');
   }
 
-  .case-panel__implementation-item::before {
+  .flow-panel__implementation-item::before {
     content: '';
     position: absolute;
     top: 0.6em;
@@ -572,7 +572,7 @@ body[data-page='project-detail'] {
     background: var(--home-hero-main-strong-mid);
   }
 
-  .case-steps {
+  .flow-steps {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     @include g-gap('gutter', 'sm');
@@ -581,12 +581,12 @@ body[data-page='project-detail'] {
     grid-auto-rows: max-content;
   }
 
-  .case-steps li {
+  .flow-steps li {
     min-width: 0;
     align-self: start;
   }
 
-  .case-step__button {
+  .flow-step__button {
     display: block;
     width: 100%;
     text-align: left;
@@ -594,14 +594,14 @@ body[data-page='project-detail'] {
     transition: $tr-base;
   }
 
-  .case-step__figure {
+  .flow-step__figure {
     display: flex;
     flex-direction: column;
     min-height: 100%;
     @include f-gap('gutter', 'sm');
   }
 
-  .case-step__visual {
+  .flow-step__visual {
     display: block;
     overflow: hidden;
     width: 100%;
@@ -610,33 +610,33 @@ body[data-page='project-detail'] {
                 opacity get-duration('fast') get-easing('standard');
   }
 
-  .case-steps[data-gallery-layout='landscape-grid'] {
+  .flow-steps[data-gallery-layout='landscape-grid'] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .case-steps[data-gallery-layout='portrait-grid'] {
+  .flow-steps[data-gallery-layout='portrait-grid'] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .case-steps[data-gallery-layout='feature-stack'] {
+  .flow-steps[data-gallery-layout='feature-stack'] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .case-steps[data-gallery-layout='feature-stack'] .case-step.is-featured {
+  .flow-steps[data-gallery-layout='feature-stack'] .flow-step.is-featured {
     grid-column: 1 / -1;
   }
 
-  .case-steps[data-gallery-layout='feature-stack'] .case-step:not(.is-featured) .case-step__visual {
+  .flow-steps[data-gallery-layout='feature-stack'] .flow-step:not(.is-featured) .flow-step__visual {
     max-height: clamp(rem(124px), 16vw, rem(200px));
   }
 
-  .case-steps[data-gallery-layout='single'] .case-step__visual,
-  .case-steps[data-gallery-layout='single-portrait'] .case-step__visual,
-  .case-steps[data-gallery-layout='feature-stack'] .case-step.is-featured .case-step__visual {
+  .flow-steps[data-gallery-layout='single'] .flow-step__visual,
+  .flow-steps[data-gallery-layout='single-portrait'] .flow-step__visual,
+  .flow-steps[data-gallery-layout='feature-stack'] .flow-step.is-featured .flow-step__visual {
     max-height: clamp(rem(180px), 24vw, rem(280px));
   }
 
-  .case-steps img {
+  .flow-steps img {
     width: 100%;
     height: auto;
     object-fit: contain;
@@ -644,32 +644,32 @@ body[data-page='project-detail'] {
     vertical-align: top;
   }
 
-  .case-steps figcaption {
+  .flow-steps figcaption {
     @include text-style('xs', 'medium');
     color: $text-secondary;
     transition: color get-duration('base') get-easing('standard'),
                 transform get-duration('base') get-easing('standard');
   }
 
-  .case-step__button:is(:hover, :focus-visible) .case-step__visual {
+  .flow-step__button:is(:hover, :focus-visible) .flow-step__visual {
     transform: translateY(rem(-2px)) scale(1.01);
     opacity: 0.96;
   }
 
-  .case-step__button:is(:hover, :focus-visible) figcaption {
+  .flow-step__button:is(:hover, :focus-visible) figcaption {
     color: $text-primary;
     transform: translateX(rem(4px));
   }
 
-  .case-step__button:focus-visible {
+  .flow-step__button:focus-visible {
     outline: none;
   }
 
-  .case-step__button:focus-visible .case-step__visual {
+  .flow-step__button:focus-visible .flow-step__visual {
     box-shadow: 0 0 0 rem(3px) $border-strong;
   }
 
-  .case-gallery-modal {
+  .flow-gallery-modal {
     position: fixed;
     inset: 0;
     z-index: get-z('modal');
@@ -680,19 +680,19 @@ body[data-page='project-detail'] {
     transition: opacity get-duration('fast') get-easing('standard');
   }
 
-  .case-gallery-modal.is-open {
+  .flow-gallery-modal.is-open {
     opacity: 1;
     pointer-events: auto;
   }
 
-  .case-gallery-modal__backdrop {
+  .flow-gallery-modal__backdrop {
     position: absolute;
     inset: 0;
     background: rgba(15, 23, 42, 0.68);
     backdrop-filter: blur(rem(16px));
   }
 
-  .case-gallery-modal__dialog {
+  .flow-gallery-modal__dialog {
     position: relative;
     z-index: get-z('base');
     display: flex;
@@ -707,28 +707,28 @@ body[data-page='project-detail'] {
     backdrop-filter: $detail-panel-backdrop;
   }
 
-  .case-gallery-modal__chrome,
-  .case-gallery-modal__actions {
+  .flow-gallery-modal__chrome,
+  .flow-gallery-modal__actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
     @include f-gap('gutter', 'sm');
   }
 
-  .case-gallery-modal__actions {
+  .flow-gallery-modal__actions {
     justify-content: flex-end;
     flex-wrap: wrap;
   }
 
-  .case-gallery-modal__eyebrow {
+  .flow-gallery-modal__eyebrow {
     @include text-style('xs', 'bold');
     color: $text-tertiary;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
 
-  .case-gallery-modal__nav,
-  .case-gallery-modal__close {
+  .flow-gallery-modal__nav,
+  .flow-gallery-modal__close {
     @include pad('pad', 'xs', 'y');
     @include pad('pad', 'sm', 'x');
     @include rd('xl');
@@ -740,46 +740,46 @@ body[data-page='project-detail'] {
     cursor: pointer;
   }
 
-  .case-gallery-modal__nav:is(:hover, :focus-visible),
-  .case-gallery-modal__close:is(:hover, :focus-visible) {
+  .flow-gallery-modal__nav:is(:hover, :focus-visible),
+  .flow-gallery-modal__close:is(:hover, :focus-visible) {
     border-color: $button-border-hover;
     box-shadow: $button-shadow-hover;
     outline: none;
   }
 
-  .case-gallery-modal__figure {
+  .flow-gallery-modal__figure {
     display: flex;
     flex-direction: column;
     min-height: 0;
     @include f-gap('gutter', 'sm');
   }
 
-  .case-gallery-modal__media {
+  .flow-gallery-modal__media {
     @include flex-center;
     min-height: min(rem(720px), 68vh);
     @include pad('pad', 'xs');
     overflow: hidden;
   }
 
-  .case-gallery-modal__image {
+  .flow-gallery-modal__image {
     width: 100%;
     height: 100%;
     min-height: min(rem(680px), 62vh);
     object-fit: contain;
   }
 
-  .case-gallery-modal__proxy {
+  .flow-gallery-modal__proxy {
     @include flex-center;
     overflow: hidden;
     transform-origin: center center;
   }
 
-  .case-gallery-modal__caption {
+  .flow-gallery-modal__caption {
     @include text-style('base', 'medium');
     color: $text-secondary;
   }
 
-  &.is-case-gallery-open {
+  &.is-flow-gallery-open {
     overflow: hidden;
   }
 
@@ -915,7 +915,7 @@ body[data-page='project-detail'] {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .project-cases__layout {
+    .project-key-flows__layout {
       grid-template-columns: minmax(rem(220px), rem(260px)) minmax(0, 1fr);
     }
 
@@ -927,7 +927,7 @@ body[data-page='project-detail'] {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .project-cases-mobile-nav {
+    .project-key-flows-mobile-nav {
       display: none;
     }
   }
@@ -945,50 +945,50 @@ body[data-page='project-detail'] {
       max-width: rem(800px);
     }
 
-    .project-cases__layout {
+    .project-key-flows__layout {
       grid-template-columns: minmax(rem(260px), rem(320px)) minmax(0, 1fr);
       column-gap: clamp(rem(64px), 7vw, rem(120px));
     }
 
-    .case-panel__layout {
+    .flow-panel__layout {
       grid-template-columns: minmax(0, 1.15fr) minmax(rem(240px), 0.72fr);
       align-items: start;
     }
 
-    .case-steps[data-step-count='1'] li {
+    .flow-steps[data-step-count='1'] li {
       max-width: 100%;
     }
 
   }
 
   @include respond-down('tablet') {
-    .project-cases__eyebrow {
+    .project-key-flows__eyebrow {
       display: none;
     }
 
-    .project-cases__nav {
+    .project-key-flows__nav {
       display: none;
     }
 
-    .project-cases__content {
+    .project-key-flows__content {
       @include f-gap('gutter', 'lg');
     }
 
-    .project-cases-mobile-nav {
+    .project-key-flows-mobile-nav {
       width: min(85vw, rem(720px));
     }
 
-    .case-steps {
+    .flow-steps {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .case-steps[data-step-count='1'] li,
-    .case-steps[data-step-count='3'] li:first-child {
+    .flow-steps[data-step-count='1'] li,
+    .flow-steps[data-step-count='3'] li:first-child {
       max-width: 100%;
       grid-column: auto;
     }
 
-    .case-panel {
+    .flow-panel {
       scroll-margin-top: rem(88px);
     }
   }
@@ -1054,107 +1054,107 @@ body[data-page='project-detail'] {
 
 
   /* ========================================
-      CASES REFINED
+      KEY FLOWS REFINED
   ========================================= */
 
-  .case-item {
+  .flow-item {
     justify-content: flex-start;
     @include f-gap('gutter', 'sm');
   }
 
-  .case-item::after {
+  .flow-item::after {
     flex: 0 0 rem(8px);
   }
 
-  .case-item__title {
+  .flow-item__title {
     transition: $tr-base;
   }
 
-  .case-item--island {
+  .flow-item--island {
     min-height: auto;
     padding-inline: 0;
   }
 
-  .project-cases__content {
+  .project-key-flows__content {
     @include f-gap('gap', 'md');
   }
 
-  .project-cases-mobile-nav__track {
+  .project-key-flows-mobile-nav__track {
     @include pad('pad', 'xs', 'x');
   }
 
-  .case-panel__layout {
+  .flow-panel__layout {
     @include g-gap('gutter', 'md');
   }
 
-  .case-panel__content {
+  .flow-panel__content {
     @include g-gap('gutter', 'sm');
   }
 
-  .case-panel__content section:first-child {
+  .flow-panel__content section:first-child {
     padding-top: 0;
     border-top: none;
   }
 
-  .case-steps figcaption {
+  .flow-steps figcaption {
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
   }
 
   @media (min-width: $desktop) {
-    .case-panel__layout {
+    .flow-panel__layout {
       grid-template-columns: minmax(0, 1.28fr) minmax(rem(220px), 0.72fr);
       align-items: start;
     }
 
-    .case-steps[data-gallery-layout='portrait-grid'] {
+    .flow-steps[data-gallery-layout='portrait-grid'] {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
   @media (max-width: $tablet) {
-    .project-cases__content {
+    .project-key-flows__content {
       @include f-gap('gap', 'sm');
     }
 
-    .project-cases-mobile-nav {
+    .project-key-flows-mobile-nav {
       width: min(calc(100vw - rem(16px)), rem(720px));
     }
 
-    .case-item--island {
+    .flow-item--island {
       @include f-gap('gutter', 'sm');
     }
 
-    .case-panel__layout {
+    .flow-panel__layout {
       @include g-gap('gutter', 'md');
     }
 
-    .case-steps[data-gallery-layout='single'] .case-step__visual,
-    .case-steps[data-gallery-layout='single-portrait'] .case-step__visual,
-    .case-steps[data-gallery-layout='feature-stack'] .case-step.is-featured .case-step__visual {
+    .flow-steps[data-gallery-layout='single'] .flow-step__visual,
+    .flow-steps[data-gallery-layout='single-portrait'] .flow-step__visual,
+    .flow-steps[data-gallery-layout='feature-stack'] .flow-step.is-featured .flow-step__visual {
       max-height: clamp(rem(140px), 42vw, rem(220px));
     }
 
-    .case-gallery-modal {
+    .flow-gallery-modal {
       @include pad('pad', 'xs');
     }
 
-    .case-gallery-modal__dialog {
+    .flow-gallery-modal__dialog {
       max-height: calc(100vh - rem(16px));
       @include pad('pad', 'sm');
     }
 
-    .case-gallery-modal__chrome {
+    .flow-gallery-modal__chrome {
       align-items: flex-start;
       flex-direction: column;
     }
 
-    .case-gallery-modal__media {
+    .flow-gallery-modal__media {
       min-height: min(rem(420px), 52vh);
     }
 
-    .case-gallery-modal__image {
+    .flow-gallery-modal__image {
       min-height: min(rem(380px), 48vh);
     }
   }

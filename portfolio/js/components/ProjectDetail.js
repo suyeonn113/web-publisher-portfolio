@@ -101,7 +101,7 @@ function loadImageMeta(src) {
   });
 }
 
-function getCaseGalleryLayout(steps) {
+function getFlowGalleryLayout(steps) {
   const safeSteps = Array.isArray(steps) ? steps : [];
   const count = safeSteps.length;
   const ratioTypes = new Set(safeSteps.map((step) => step.ratioType));
@@ -137,7 +137,7 @@ function getCaseGalleryLayout(steps) {
   };
 }
 
-async function decorateCaseSteps(steps = []) {
+async function decorateFlowSteps(steps = []) {
   const resolvedSteps = await Promise.all(
     steps.map(async (step, index) => {
       const meta = await loadImageMeta(step.image);
@@ -149,7 +149,7 @@ async function decorateCaseSteps(steps = []) {
     })
   );
 
-  const layout = getCaseGalleryLayout(resolvedSteps);
+  const layout = getFlowGalleryLayout(resolvedSteps);
   const orderedSteps = [...resolvedSteps];
 
   if (layout.type === 'feature-stack') {
@@ -170,19 +170,11 @@ async function decorateCaseSteps(steps = []) {
 }
 
 async function normalizeProject(project) {
-  const rawCases = Array.isArray(project.keyFlows) && project.keyFlows.length
-    ? project.keyFlows
-    : (project.caseDetail || []).map((item) => {
-        const meta = (project.caseList || []).find((caseItem) => caseItem.id === item.id);
-        return {
-          ...meta,
-          ...item
-        };
-      });
+  const rawFlows = Array.isArray(project.keyFlows) ? project.keyFlows : [];
 
-  const cases = await Promise.all(
-    rawCases.map(async (item, index) => {
-      const gallery = await decorateCaseSteps(item.steps || []);
+  const flows = await Promise.all(
+    rawFlows.map(async (item, index) => {
+      const gallery = await decorateFlowSteps(item.steps || []);
 
       return {
         ...item,
@@ -194,7 +186,7 @@ async function normalizeProject(project) {
 
   return {
     ...project,
-    cases,
+    flows,
     meta: {
       ...project.meta,
       dateRange: formatDateRange(project.meta?.dateStart, project.meta?.dateEnd),
@@ -595,14 +587,14 @@ function initHighlightInteractiveAnimation(project, root) {
   };
 }
 
-function renderCaseSteps(caseItem, container, root) {
-  const template = root.querySelector('#tpl-case-step');
+function renderFlowSteps(flowItem, container, root) {
+  const template = root.querySelector('#tpl-flow-step');
 
   if (!container || !template) return;
 
   container.innerHTML = '';
 
-  const gallery = caseItem?.gallery || {
+  const gallery = flowItem?.gallery || {
     items: [],
     totalCount: 0,
     layout: { type: 'single', featuredIndex: 0 }
@@ -615,10 +607,10 @@ function renderCaseSteps(caseItem, container, root) {
 
   safeSteps.forEach((step, visualIndex) => {
     const node = template.content.cloneNode(true);
-    const listItem = node.querySelector('.case-step');
-    const button = node.querySelector('.case-step__button');
-    const figure = node.querySelector('.case-step__figure');
-    const visual = node.querySelector('.case-step__visual');
+    const listItem = node.querySelector('.flow-step');
+    const button = node.querySelector('.flow-step__button');
+    const figure = node.querySelector('.flow-step__figure');
+    const visual = node.querySelector('.flow-step__visual');
     const image = node.querySelector('img');
     const caption = node.querySelector('figcaption');
 
@@ -628,7 +620,7 @@ function renderCaseSteps(caseItem, container, root) {
     }
 
     if (button) {
-      button.dataset.caseId = caseItem.id || '';
+      button.dataset.flowId = flowItem.id || '';
       button.dataset.galleryIndex = String(visualIndex);
       button.dataset.originalIndex = String(step.originalIndex ?? visualIndex);
       button.dataset.caption = step.label || '';
@@ -656,42 +648,42 @@ function renderCaseSteps(caseItem, container, root) {
   });
 }
 
-function renderCaseImplementation(items, container) {
+function renderFlowImplementation(items, container) {
   if (!container) return;
 
   container.innerHTML = '';
 
   (items || []).forEach((text) => {
     const item = document.createElement('li');
-    item.className = 'case-panel__implementation-item';
+    item.className = 'flow-panel__implementation-item';
     item.textContent = text;
     container.appendChild(item);
   });
 }
 
-function renderCaseListItems(project, container, template, selectedId, options = {}) {
+function renderFlowListItems(project, container, template, selectedId, options = {}) {
   const { isIsland = false } = options;
 
   if (!container || !template) return;
 
   container.innerHTML = '';
 
-  project.cases.forEach((item) => {
+  project.flows.forEach((item) => {
     const node = template.content.cloneNode(true);
-    const button = node.querySelector('.case-item');
-    const title = node.querySelector('.case-item__title');
+    const button = node.querySelector('.flow-item');
+    const title = node.querySelector('.flow-item__title');
 
     if (button) {
-      const panelId = `case-panel-${item.id}`;
+      const panelId = `flow-panel-${item.id}`;
       const isActive = item.id === selectedId;
 
-      button.dataset.caseId = item.id;
+      button.dataset.flowId = item.id;
       button.setAttribute('aria-pressed', String(isActive));
       button.setAttribute('aria-controls', panelId);
       button.classList.toggle('is-active', isActive);
 
       if (isIsland) {
-        button.classList.add('case-item--island', 'btn--compact');
+        button.classList.add('flow-item--island', 'btn--compact');
       }
     }
 
@@ -703,42 +695,42 @@ function renderCaseListItems(project, container, template, selectedId, options =
   });
 }
 
-function renderCaseList(project, root, selectedId) {
-  const container = root.querySelector('[data-field="caseList"]');
-  const template = root.querySelector('#tpl-case-item');
+function renderFlowList(project, root, selectedId) {
+  const container = root.querySelector('[data-field="flowList"]');
+  const template = root.querySelector('#tpl-flow-item');
 
-  renderCaseListItems(project, container, template, selectedId);
+  renderFlowListItems(project, container, template, selectedId);
 }
 
-function renderCaseIslandList(project, root, selectedId) {
-  const container = root.querySelector('[data-field="caseListMobile"]');
-  const template = root.querySelector('#tpl-case-item');
+function renderFlowIslandList(project, root, selectedId) {
+  const container = root.querySelector('[data-field="flowListMobile"]');
+  const template = root.querySelector('#tpl-flow-item');
 
-  renderCaseListItems(project, container, template, selectedId, { isIsland: true });
+  renderFlowListItems(project, container, template, selectedId, { isIsland: true });
 }
 
-function renderCasePanels(project, root) {
-  const container = root.querySelector('[data-field="casePanels"]');
-  const template = root.querySelector('#tpl-case-panel');
+function renderFlowPanels(project, root) {
+  const container = root.querySelector('[data-field="flowPanels"]');
+  const template = root.querySelector('#tpl-flow-panel');
 
   if (!container || !template) return;
 
   container.innerHTML = '';
 
-  project.cases.forEach((item) => {
+  project.flows.forEach((item) => {
     const node = template.content.cloneNode(true);
-    const panel = node.querySelector('.case-panel');
-    const index = node.querySelector('.case-panel__index');
-    const title = node.querySelector('.case-panel__title');
-    const problem = node.querySelector('.case-panel__problem');
-    const solution = node.querySelector('.case-panel__solution');
-    const keyPoint = node.querySelector('.case-panel__key-point');
-    const implementation = node.querySelector('.case-panel__implementation');
-    const steps = node.querySelector('.case-steps');
+    const panel = node.querySelector('.flow-panel');
+    const index = node.querySelector('.flow-panel__index');
+    const title = node.querySelector('.flow-panel__title');
+    const problem = node.querySelector('.flow-panel__problem');
+    const solution = node.querySelector('.flow-panel__solution');
+    const keyPoint = node.querySelector('.flow-panel__key-point');
+    const implementation = node.querySelector('.flow-panel__implementation');
+    const steps = node.querySelector('.flow-steps');
 
     if (panel) {
-      panel.id = `case-panel-${item.id}`;
-      panel.dataset.caseId = item.id;
+      panel.id = `flow-panel-${item.id}`;
+      panel.dataset.flowId = item.id;
     }
 
     if (index) {
@@ -750,36 +742,36 @@ function renderCasePanels(project, root) {
     if (solution) solution.textContent = item.solution || '';
     if (keyPoint) keyPoint.textContent = item.keyPoint || '';
 
-    renderCaseImplementation(item.implementation, implementation);
-    renderCaseSteps(item, steps, root);
+    renderFlowImplementation(item.implementation, implementation);
+    renderFlowSteps(item, steps, root);
 
     container.appendChild(node);
   });
 }
 
 function createGalleryModal(root, state) {
-  const template = root.querySelector('#tpl-case-gallery-modal');
+  const template = root.querySelector('#tpl-flow-gallery-modal');
   if (!template) return null;
 
   const fragment = template.content.cloneNode(true);
-  const modal = fragment.querySelector('.case-gallery-modal');
+  const modal = fragment.querySelector('.flow-gallery-modal');
 
   if (!modal) return null;
 
   root.appendChild(fragment);
   state.galleryModal = {
-    root: root.querySelector('.case-gallery-modal'),
+    root: root.querySelector('.flow-gallery-modal'),
     media: root.querySelector('[data-gallery-media]'),
     image: root.querySelector('[data-gallery-image]'),
     caption: root.querySelector('[data-gallery-caption]'),
-    dialog: root.querySelector('.case-gallery-modal__dialog')
+    dialog: root.querySelector('.flow-gallery-modal__dialog')
   };
 
   return state.galleryModal;
 }
 
-function getGalleryButtons(root, caseId) {
-  return Array.from(root.querySelectorAll(`.case-panel[data-case-id="${caseId}"] .case-step__button`));
+function getGalleryButtons(root, flowId) {
+  return Array.from(root.querySelectorAll(`.flow-panel[data-flow-id="${flowId}"] .flow-step__button`));
 }
 
 function getGalleryButtonMeta(button) {
@@ -911,12 +903,12 @@ function updateGalleryModal(button, state) {
   const modalState = state.galleryModal;
   if (!button || !modalState) return;
 
-  const caseId = button.dataset.caseId || '';
-  const galleryButtons = getGalleryButtons(document, caseId);
+  const flowId = button.dataset.flowId || '';
+  const galleryButtons = getGalleryButtons(document, flowId);
   const currentIndex = galleryButtons.findIndex((item) => item === button);
 
   state.activeGalleryButton = button;
-  state.activeGalleryCaseId = caseId;
+  state.activeGalleryFlowId = flowId;
   state.activeGalleryIndex = currentIndex >= 0 ? currentIndex : 0;
 }
 
@@ -928,7 +920,7 @@ async function openGalleryModal(button, state) {
   await prepareModalImage(button, state);
 
   modalState.root.hidden = false;
-  document.body.classList.add('is-case-gallery-open');
+  document.body.classList.add('is-flow-gallery-open');
   modalState.root.classList.add('is-open');
   gsap.set(modalState.root, { autoAlpha: 1 });
   animateModalOpen(button, state);
@@ -941,7 +933,7 @@ function closeGalleryModal(state, options = {}) {
   if (!modalState?.root || modalState.root.hidden) return;
 
   modalState.root.classList.remove('is-open');
-  document.body.classList.remove('is-case-gallery-open');
+  document.body.classList.remove('is-flow-gallery-open');
 
   if (deferHide) return;
 
@@ -956,10 +948,10 @@ function closeGalleryModal(state, options = {}) {
 }
 
 function stepGallery(state, direction) {
-  const caseId = state.activeGalleryCaseId;
-  if (!caseId) return;
+  const flowId = state.activeGalleryFlowId;
+  if (!flowId) return;
 
-  const buttons = getGalleryButtons(document, caseId);
+  const buttons = getGalleryButtons(document, flowId);
   if (!buttons.length) return;
 
   const nextIndex = (state.activeGalleryIndex + direction + buttons.length) % buttons.length;
@@ -1017,37 +1009,37 @@ function renderMeta(project, root) {
   setLink('[data-link-type="live"]', project.meta?.liveLink, root);
 }
 
-function setActiveCase(root, caseId, state) {
-  if (!caseId) return;
+function setActiveFlow(root, flowId, state) {
+  if (!flowId) return;
 
-  state.selectedCaseId = caseId;
+  state.selectedFlowId = flowId;
 
-  root.querySelectorAll('.case-item').forEach((button) => {
-    const isActive = button.dataset.caseId === caseId;
+  root.querySelectorAll('.flow-item').forEach((button) => {
+    const isActive = button.dataset.flowId === flowId;
     button.classList.toggle('is-active', isActive);
     button.setAttribute('aria-pressed', String(isActive));
   });
 
-  root.querySelectorAll('.case-panel').forEach((panel) => {
-    panel.classList.toggle('is-active', panel.dataset.caseId === caseId);
+  root.querySelectorAll('.flow-panel').forEach((panel) => {
+    panel.classList.toggle('is-active', panel.dataset.flowId === flowId);
   });
 
-  syncIslandFocus(root, caseId);
+  syncIslandFocus(root, flowId);
 }
 
-function getCaseScrollOffset() {
+function getFlowScrollOffset() {
   if (window.innerWidth >= 1440) return 120;
   if (window.innerWidth >= 768) return 104;
   return 88;
 }
 
-function scrollToCase(caseId) {
-  const panel = document.getElementById(`case-panel-${caseId}`);
+function scrollToFlow(flowId) {
+  const panel = document.getElementById(`flow-panel-${flowId}`);
   if (!panel) return;
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const absoluteTop = panel.getBoundingClientRect().top + window.pageYOffset;
-  const top = Math.max(absoluteTop - getCaseScrollOffset(), 0);
+  const top = Math.max(absoluteTop - getFlowScrollOffset(), 0);
 
   window.scrollTo({
     top,
@@ -1055,19 +1047,19 @@ function scrollToCase(caseId) {
   });
 }
 
-function bindCaseEvents(root, state) {
+function bindFlowEvents(root, state) {
   root.addEventListener('click', (event) => {
-    const button = event.target.closest('.case-item');
+    const button = event.target.closest('.flow-item');
     if (button && root.contains(button)) {
-      const caseId = button.dataset.caseId;
-      if (!caseId) return;
+      const flowId = button.dataset.flowId;
+      if (!flowId) return;
 
-      setActiveCase(root, caseId, state);
-      scrollToCase(caseId);
+      setActiveFlow(root, flowId, state);
+      scrollToFlow(flowId);
       return;
     }
 
-    const galleryButton = event.target.closest('.case-step__button');
+    const galleryButton = event.target.closest('.flow-step__button');
     if (galleryButton && root.contains(galleryButton)) {
       openGalleryModal(galleryButton, state);
       return;
@@ -1106,21 +1098,21 @@ function bindCaseEvents(root, state) {
   });
 }
 
-function initCaseScrollSync(root, state) {
-  const section = root.querySelector('.project-cases');
-  const nav = root.querySelector('.project-cases__nav-inner');
-  const island = root.querySelector('[data-case-island]');
-  const panels = gsap.utils.toArray('.case-panel', root);
+function initFlowScrollSync(root, state) {
+  const section = root.querySelector('.project-key-flows');
+  const nav = root.querySelector('.project-key-flows__nav-inner');
+  const island = root.querySelector('[data-flow-island]');
+  const panels = gsap.utils.toArray('.flow-panel', root);
 
   if (!section || !nav || !panels.length) return;
 
   const media = gsap.matchMedia();
-  state.caseMatchMedia = media;
+  state.flowMatchMedia = media;
 
   media.add('(min-width: 768px)', () => {
     const pinTrigger = ScrollTrigger.create({
       trigger: section,
-      start: () => `top top+=${getCaseScrollOffset()}`,
+      start: () => `top top+=${getFlowScrollOffset()}`,
       end: () => `bottom bottom-=${32}`,
       pin: nav,
       pinSpacing: false,
@@ -1140,36 +1132,36 @@ function initCaseScrollSync(root, state) {
       trigger: section,
       start: () => `top bottom-=${96}`,
       end: 'bottom bottom',
-      onEnter: () => toggleCaseIsland(island, true),
-      onEnterBack: () => toggleCaseIsland(island, true),
-      onLeave: () => toggleCaseIsland(island, false),
-      onLeaveBack: () => toggleCaseIsland(island, false)
+      onEnter: () => toggleFlowIsland(island, true),
+      onEnterBack: () => toggleFlowIsland(island, true),
+      onLeave: () => toggleFlowIsland(island, false),
+      onLeaveBack: () => toggleFlowIsland(island, false)
     });
 
     return () => {
-      toggleCaseIsland(island, false);
+      toggleFlowIsland(island, false);
       islandTrigger.kill();
     };
   });
 
   panels.forEach((panel) => {
-    const caseId = panel.dataset.caseId;
-    if (!caseId) return;
+    const flowId = panel.dataset.flowId;
+    if (!flowId) return;
 
     const trigger = ScrollTrigger.create({
       trigger: panel,
       start: 'top center',
       end: 'bottom center',
-      onEnter: () => setActiveCase(root, caseId, state),
-      onEnterBack: () => setActiveCase(root, caseId, state)
+      onEnter: () => setActiveFlow(root, flowId, state),
+      onEnterBack: () => setActiveFlow(root, flowId, state)
     });
 
-    state.caseTriggers.push(trigger);
+    state.flowTriggers.push(trigger);
   });
 
-  const firstCaseId = panels[0]?.dataset.caseId;
-  if (firstCaseId) {
-    setActiveCase(root, firstCaseId, state);
+  const firstFlowId = panels[0]?.dataset.flowId;
+  if (firstFlowId) {
+    setActiveFlow(root, firstFlowId, state);
   }
 }
 
@@ -1179,17 +1171,17 @@ function renderProjectDetail(project, root, state) {
   renderHeroTags(project, root);
   renderHeroVisuals(project, root);
   renderSummary(project, root);
-  renderCaseList(project, root, state.selectedCaseId);
-  renderCaseIslandList(project, root, state.selectedCaseId);
-  renderCasePanels(project, root);
+  renderFlowList(project, root, state.selectedFlowId);
+  renderFlowIslandList(project, root, state.selectedFlowId);
+  renderFlowPanels(project, root);
   renderHighlights(project, root);
   renderEtc(project, root);
   createGalleryModal(root, state);
 }
 
-function syncIslandFocus(root, caseId) {
-  const track = root.querySelector('[data-field="caseListMobile"]');
-  const islandButton = root.querySelector(`[data-field="caseListMobile"] .case-item[data-case-id="${caseId}"]`);
+function syncIslandFocus(root, flowId) {
+  const track = root.querySelector('[data-field="flowListMobile"]');
+  const islandButton = root.querySelector(`[data-field="flowListMobile"] .flow-item[data-flow-id="${flowId}"]`);
   if (!track || !islandButton) return;
 
   const maxScrollLeft = Math.max(track.scrollWidth - track.clientWidth, 0);
@@ -1209,7 +1201,7 @@ function syncIslandFocus(root, caseId) {
   });
 }
 
-function toggleCaseIsland(island, isVisible) {
+function toggleFlowIsland(island, isVisible) {
   island.classList.toggle('is-visible', isVisible);
   island.setAttribute('aria-hidden', String(!isVisible));
 }
@@ -1223,16 +1215,16 @@ export async function loadProjectDetail() {
     const project = await normalizeProject(rawProject);
 
     const state = {
-      selectedCaseId: project.cases?.[0]?.id || '',
-      caseTriggers: [],
-      caseMatchMedia: null
+      selectedFlowId: project.flows?.[0]?.id || '',
+      flowTriggers: [],
+      flowMatchMedia: null
     };
 
     renderProjectDetail(project, root, state);
-    bindCaseEvents(root, state);
+    bindFlowEvents(root, state);
     initSummaryScrollAnimation(root);
     initHighlightInteractiveAnimation(project, root);
-    initCaseScrollSync(root, state);
+    initFlowScrollSync(root, state);
     initProjectPageTransitions(root);
     initProjectSectionNavigator(root);
 
