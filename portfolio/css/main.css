@@ -6392,4 +6392,57 @@ body[data-page=project-detail] .flow-steps figcaption {
   body[data-page=project-detail] .flow-gallery-modal__image {
     min-height: min(23.75rem, 48vh);
   }
+}
+body[data-page=log] .log-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding-left: 28px;
+  padding-right: 28px;
+  text-align: center;
+}
+@media (max-width: 1024px) {
+  body[data-page=log] .log-page {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=log] .log-page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=log] .log-page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+body[data-page=log] .log-page__message {
+  margin: 0;
+  font-size: clamp(22px, 1.8vw, 28px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.1;
+  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  color: var(--color-text-primary);
+  white-space: pre-line;
+}
+@media (max-width: 1024px) {
+  body[data-page=log] .log-page__message {
+    font-size: clamp(20px, 1.8vw, 26px);
+  }
+}
+@media (max-width: 768px) {
+  body[data-page=log] .log-page__message {
+    font-size: clamp(18px, 2.4vw, 22px);
+  }
+}
+@media (max-width: 480px) {
+  body[data-page=log] .log-page__message {
+    font-size: clamp(17px, 3.8vw, 19px);
+  }
 }/*# sourceMappingURL=main.css.map */
