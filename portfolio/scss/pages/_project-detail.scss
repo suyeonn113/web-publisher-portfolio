@@ -178,6 +178,7 @@ body[data-page='project-detail'] {
   }
 
   .project-hero__visual > div {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
@@ -187,35 +188,74 @@ body[data-page='project-detail'] {
   }
 
   .project-hero__device {
+    position: relative;
     flex: 0 1 auto;
-    overflow: hidden;
-    @include rd('md');
-    border: 1px solid $detail-panel-border;
-    background: $detail-panel-bg;
-    box-shadow: $detail-panel-shadow;
-    backdrop-filter: $detail-panel-backdrop;
   }
 
-  .project-hero__device img {
+  .project-hero__screen {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    background: #000;
+  }
+
+  .project-hero__capture {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
+  .project-hero__frame {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+  }
+
   .project-hero__device--mobile {
-    width: clamp(rem(160px), 42vw, rem(280px));
-    aspect-ratio: 9 / 18;
+    width: clamp(rem(260px), 34vw, rem(400px));
+  }
+
+  .project-hero__device--mobile .project-hero__screen {
+    top: 6.4%; // 화면 시작점 조금 내림
+    left: 5%;
+    width: 90%;
+    aspect-ratio: 0.48;
+    border-radius: 0 0 35px 35px; // 아래만 라운드
+    background-color: $bg-main;
+  }
+
+  .project-hero__device--mobile .project-hero__capture {
+    object-fit: cover;
+    object-position: top;
+    transform: translateY(rem(10px));
   }
 
   .project-hero__device--tablet {
-    width: clamp(rem(220px), 48vw, rem(520px));
-    aspect-ratio: 4 / 3;
+    width: clamp(rem(260px), 38vw, rem(480px));
+  }
+
+  .project-hero__device--tablet .project-hero__screen {
+    top: 8.8%;
+    left: 7.2%;
+    width: 85.6%;
+    height: 82.4%;
+    border-radius: 2.2%;
   }
 
   .project-hero__device--pc {
-    width: 100%;
-    max-width: rem(720px);
-    aspect-ratio: 16 / 10;
+    width: clamp(rem(360px), 52vw, rem(720px));
+  }
+
+  .project-hero__device--pc .project-hero__screen {
+    top: 7.4%;
+    left: 4%;
+    width: 92%;
+    height: 65.8%;
+    border-radius: 0.3%;
   }
 
   /* ========================================
@@ -931,7 +971,7 @@ body[data-page='project-detail'] {
 
   @include respond-up('desktop') {
     .project-hero__inner {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
     }
 
     .project-hero__visual > div {

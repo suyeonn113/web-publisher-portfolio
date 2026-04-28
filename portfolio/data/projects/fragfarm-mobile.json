@@ -22,7 +22,7 @@
     "tags": ["PHP", "JavaScript", "CSS", "Responsive UI"],
     "visuals": {
       "mobile": {
-        "src": "assets/images/projects/fragfarm/detail/hero-mobile.png",
+        "screen": "assets/images/projects/fragfarm/main-mokup.png",
         "alt": "Fragfarm Mobile 메인 화면"
       }
     }

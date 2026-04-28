@@ -22,11 +22,11 @@
   text-align: center;
   z-index: get-z('dropdown');
   will-change: transform, opacity;
-  transform: translateY(-5vh);
+  transform: translateY(-1vh);
 }
 
 .hero__text-wrap .hero__roof {
-  transform: translateY(1vh);
+  transform: translateY(2vh);
   width: 100%;
   aspect-ratio: 22 / 9;
 }

@@ -12,6 +12,25 @@ gsap.registerPlugin(ScrollTrigger);
 const SQUARE_RATIO_MIN = 0.85;
 const SQUARE_RATIO_MAX = 1.15;
 
+/* ========================================
+   Device Frame Assets
+======================================== */
+
+const DEVICE_FRAMES = {
+  mobile: {
+    frame: "assets/images/devices/iPhone17_White.png"
+  },
+
+  tablet: {
+    frame: "assets/images/devices/iPadPro11_Silver.png"
+  },
+
+  pc: {
+    frame: "assets/images/devices/iMac.png"
+    // frame: "assets/images/devices/MacbookPro15_Silver.png"
+  }
+};
+
 function getProjectSlug() {
   const params = new URLSearchParams(window.location.search);
   return params.get('slug') || 'fragfarm-mobile';
@@ -275,20 +294,32 @@ function renderHeroVisuals(project, root) {
 
   frames.forEach((frame) => {
     const visual = visuals[frame];
-    if (!visual) return;
+    const device = DEVICE_FRAMES[frame];
+
+    if (!visual || !device) return;
 
     const node = template.content.cloneNode(true);
     const figure = node.querySelector('figure');
-    const image = node.querySelector('img');
 
-    if (figure) {
-      figure.classList.add('project-hero__device', `project-hero__device--${frame}`);
-    }
+    if (!figure) return;
 
-    if (image) {
-      image.src = visual.src || '';
-      image.alt = visual.alt || '';
-    }
+    figure.classList.add('project-hero__device', `project-hero__device--${frame}`);
+    figure.innerHTML = `
+      <div class="project-hero__screen">
+        <img
+          class="project-hero__capture"
+          src="${visual.screen || ''}"
+          alt="${visual.alt || ''}"
+        >
+      </div>
+
+      <img
+        class="project-hero__frame"
+        src="${device.frame}"
+        alt=""
+        aria-hidden="true"
+      >
+    `;
 
     container.appendChild(node);
   });

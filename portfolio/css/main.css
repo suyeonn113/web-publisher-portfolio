@@ -1302,11 +1302,11 @@ input[type=search]::-webkit-search-decoration {
   text-align: center;
   z-index: 100;
   will-change: transform, opacity;
-  transform: translateY(-5vh);
+  transform: translateY(-1vh);
 }
 
 .hero__text-wrap .hero__roof {
-  transform: translateY(1vh);
+  transform: translateY(2vh);
   width: 100%;
   aspect-ratio: 22/9;
 }
@@ -1577,23 +1577,6 @@ input[type=search]::-webkit-search-decoration {
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
   font-family: "Londrina Solid", sans-serif;
   color: var(--color-text-primary);
-}
-
-.work-page__desc {
-  max-width: 45rem;
-  font-size: 18px;
-}
-@media (max-width: 480px) {
-  .work-page__desc {
-    font-size: 16px;
-  }
-}
-.work-page__desc {
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
-  font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-  color: var(--color-text-secondary);
 }
 
 .work-page__status {
@@ -1875,9 +1858,9 @@ input[type=search]::-webkit-search-decoration {
 }
 
 .work-page__list {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   position: relative;
-  grid-template-columns: minmax(0, 1fr);
   min-width: 0;
   gap: 32px;
 }
@@ -1896,21 +1879,6 @@ input[type=search]::-webkit-search-decoration {
     gap: 16px;
   }
 }
-@media (min-width: 768px) {
-  .work-page__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (min-width: 1024px) {
-  .work-page__list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-@media (min-width: 1440px) {
-  .work-page__list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
 
 .work-page__item,
 .work-page__loading,
@@ -1924,11 +1892,6 @@ input[type=search]::-webkit-search-decoration {
 }
 .work-page__item[aria-hidden=true] {
   pointer-events: none;
-}
-
-.work-page__loading,
-.work-page__empty {
-  grid-column: 1/-1;
 }
 
 .work-page__loading {
@@ -2001,7 +1964,6 @@ input[type=search]::-webkit-search-decoration {
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
   text-align: center;
   color: var(--color-text-tertiary);
-  background: var(--work-empty-bg);
 }
 
 .work-card {
@@ -2012,11 +1974,8 @@ input[type=search]::-webkit-search-decoration {
   position: relative;
   display: block;
   min-width: 0;
-  height: 100%;
+  height: auto;
   overflow: hidden;
-  background: var(--work-card-bg);
-  border: 1px solid var(--work-card-border);
-  box-shadow: var(--work-card-shadow);
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -2027,15 +1986,6 @@ input[type=search]::-webkit-search-decoration {
   z-index: 1;
   background: var(--work-card-gloss);
   pointer-events: none;
-}
-
-.work-card__link > img {
-  width: 100%;
-  aspect-ratio: 1.71/1;
-  -o-object-fit: cover;
-     object-fit: cover;
-  background: var(--work-card-bg);
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .work-card__body {
@@ -2049,19 +1999,6 @@ input[type=search]::-webkit-search-decoration {
   justify-content: flex-end;
   max-width: min(32rem, 100% - 3rem);
   padding: 0;
-  gap: 10px;
-}
-@media (max-width: 768px) {
-  .work-card__body {
-    gap: 8px;
-  }
-}
-@media (max-width: 480px) {
-  .work-card__body {
-    gap: 6px;
-  }
-}
-.work-card__body {
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 @media (max-width: 1024px) {
@@ -2902,6 +2839,7 @@ body[data-page=project-detail] .project-hero__visual {
   min-width: 0;
 }
 body[data-page=project-detail] .project-hero__visual > div {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -2925,32 +2863,67 @@ body[data-page=project-detail] .project-hero__visual > div {
   }
 }
 body[data-page=project-detail] .project-hero__device {
+  position: relative;
   flex: 0 1 auto;
-  overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid var(--detail-panel-border);
-  background: var(--detail-panel-bg);
-  box-shadow: var(--detail-panel-shadow);
-  backdrop-filter: var(--detail-panel-backdrop);
 }
-body[data-page=project-detail] .project-hero__device img {
+body[data-page=project-detail] .project-hero__screen {
+  position: absolute;
+  overflow: hidden;
+  z-index: 1;
+  background: #000;
+}
+body[data-page=project-detail] .project-hero__capture {
+  display: block;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
+body[data-page=project-detail] .project-hero__frame {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
 body[data-page=project-detail] .project-hero__device--mobile {
-  width: clamp(10rem, 42vw, 17.5rem);
-  aspect-ratio: 9/18;
+  width: clamp(16.25rem, 34vw, 25rem);
+}
+body[data-page=project-detail] .project-hero__device--mobile .project-hero__screen {
+  top: 6.4%;
+  left: 5%;
+  width: 90%;
+  aspect-ratio: 0.48;
+  border-radius: 0 0 35px 35px;
+  background-color: var(--color-bg-main);
+}
+body[data-page=project-detail] .project-hero__device--mobile .project-hero__capture {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  transform: translateY(0.625rem);
 }
 body[data-page=project-detail] .project-hero__device--tablet {
-  width: clamp(13.75rem, 48vw, 32.5rem);
-  aspect-ratio: 4/3;
+  width: clamp(16.25rem, 38vw, 30rem);
+}
+body[data-page=project-detail] .project-hero__device--tablet .project-hero__screen {
+  top: 8.8%;
+  left: 7.2%;
+  width: 85.6%;
+  height: 82.4%;
+  border-radius: 2.2%;
 }
 body[data-page=project-detail] .project-hero__device--pc {
-  width: 100%;
-  max-width: 45rem;
-  aspect-ratio: 16/10;
+  width: clamp(22.5rem, 52vw, 45rem);
+}
+body[data-page=project-detail] .project-hero__device--pc .project-hero__screen {
+  top: 7.4%;
+  left: 4%;
+  width: 92%;
+  height: 65.8%;
+  border-radius: 0.3%;
 }
 body[data-page=project-detail] {
   /* ========================================
@@ -4639,7 +4612,7 @@ body[data-page=project-detail] .project-etc__grid p {
 }
 @media (min-width: 1440px) {
   body[data-page=project-detail] .project-hero__inner {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
   }
   body[data-page=project-detail] .project-hero__visual > div {
     justify-content: center;
