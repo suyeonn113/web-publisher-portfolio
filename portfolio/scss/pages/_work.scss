@@ -32,7 +32,9 @@
 
 .work-page__title {
   @include text-style('title', 'bold', 'tight', 'tight');
+  font-family: $font-point;
   color: $text-primary;
+  
 }
 
 .work-page__desc {
@@ -99,26 +101,26 @@
   min-height: rem(48px);
   @include pad('pad', 'sm', 'x');
   @include pad('pad', 'xs', 'y');
-  @include rd('xl');
   @include text-style('sm', 'medium');
-  border: $button-border-width solid $button-border;
-  background: $button-surface-bg;
-  color: $text-primary;
-  box-shadow: $button-shadow;
-  backdrop-filter: $button-backdrop;
-  -webkit-backdrop-filter: $button-backdrop;
-  transition:
-    border-color get-duration('fast') get-easing('apple'),
-    color get-duration('fast') get-easing('apple'),
-    box-shadow get-duration('fast') get-easing('apple'),
-    background get-duration('fast') get-easing('apple');
 
-  &:focus-visible {
-    outline: none;
-    border-color: $button-border-active;
-    color: $button-text-active;
-    background: $button-surface-bg-active;
-    box-shadow: $button-shadow-active;
+  color: var(--button-text);
+  background: var(--button-surface-bg);
+  border: var(--button-border-width) solid var(--button-border);
+  box-shadow: var(--button-shadow);
+
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+
+  transition: $tr-base;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: var(--button-surface-bg-hover);
+      border-color: var(--button-border-hover);
+      color: var(--button-text-hover);
+      box-shadow: var(--button-shadow-hover);
+    }
   }
 }
 
@@ -179,11 +181,10 @@
 
 .work-page__empty {
   @include pad('pad', 'lg');
-  @include rd('lg');
   @include text-style('base', 'medium');
   text-align: center;
   color: $text-tertiary;
-  background: $work-empty-bg;
+  background: var(--work-empty-bg);
 }
 
 .work-card {
@@ -196,13 +197,10 @@
   min-width: 0;
   height: 100%;
   overflow: hidden;
-  @include rd('xl');
-  background: transparent;
-  border: 1px solid var(--work-folder-image-border);
-  box-shadow: var(--shadow-surface-soft);
-  transition:
-    transform get-duration('base') get-easing('apple'),
-    box-shadow get-duration('base') get-easing('apple');
+  background: var(--work-card-bg);
+  border: 1px solid var(--work-card-border);
+  box-shadow: var(--work-card-shadow);
+  transition: $tr-base;
 }
 
 .work-card__link::before {
@@ -210,9 +208,7 @@
   position: absolute;
   inset: 0;
   z-index: get-z('base');
-  background:
-    $overlay-soft,
-    linear-gradient(135deg, var(--work-folder-gloss-top) 0%, var(--work-folder-gloss-bottom) 38%);
+  background: var(--work-card-gloss);
   pointer-events: none;
 }
 
@@ -220,10 +216,8 @@
   width: 100%;
   aspect-ratio: 1.71 / 1;
   object-fit: cover;
-  background: $bg-glass;
-  transition:
-    transform get-duration('slow') get-easing('apple'),
-    filter get-duration('base') get-easing('apple');
+  background: var(--work-card-bg);
+  transition: $tr-base;
 }
 
 .work-card__body {
@@ -238,7 +232,7 @@
   max-width: min(32rem, calc(100% - #{rem(48px)}));
   padding: 0;
   @include icon-gap;
-  transition: transform get-duration('base') get-easing('apple');
+  transition: $tr-base;
 
   @include respond-down('laptop') {
     left: rem(20px);
@@ -266,21 +260,21 @@
 .work-card__title {
   @include text-style('lg', 'bold', 'tight');
   line-height: 1.18;
-  color: var(--work-folder-text);
-  text-shadow: 0 rem(4px) rem(18px) var(--work-folder-title-shadow);
+  color: var(--work-card-title);
+  text-shadow: 0 rem(4px) rem(18px) var(--work-card-title-shadow);
 }
 
 .work-card__year {
   @include text-style('sm', 'medium');
   line-height: 1.3;
-  color: $card-meta-text;
-  opacity: $card-meta-text-opacity;
+  color: var(--work-card-meta);
+  opacity: var(--work-card-meta-opacity);
 }
 
 .work-card__meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   min-width: 0;
   list-style: none;
   padding: 0;
@@ -296,15 +290,14 @@
   min-width: 0;
   @include text-style('xs', 'medium');
   line-height: 1.2;
-  color: $card-meta-text;
-  padding: rem(6px) rem(10px);
-  @include rd('xl');
-  border: $chip-border-width solid $card-meta-chip-border;
-  background: $card-meta-chip-bg;
-  box-shadow: $card-meta-chip-shadow;
-  backdrop-filter: $chip-backdrop;
-  -webkit-backdrop-filter: $chip-backdrop;
-  opacity: $card-meta-text-opacity;
+  // color: var(--work-card-meta);
+  // padding: rem(6px) rem(10px);
+  // border: var(--chip-border-width) solid var(--work-card-chip-border);
+  // background: var(--work-card-chip-bg);
+  // box-shadow: var(--work-card-chip-shadow);
+  // backdrop-filter: var(--chip-backdrop);
+  // -webkit-backdrop-filter: var(--chip-backdrop);
+  // opacity: var(--work-card-meta-opacity);
 
   &::after {
     content: none !important;
@@ -314,7 +307,7 @@
 @media (hover: hover) and (pointer: fine) {
   .work-card__link:hover {
     transform: translateY(rem(-6px));
-    box-shadow: var(--shadow-surface-strong);
+    box-shadow: var(--work-card-shadow-hover);
   }
 
   .work-card__link:hover > img {
@@ -323,29 +316,24 @@
   }
 
   .work-card__link:hover .work-card__title {
-    color: $point-primary;
+    color: var(--work-card-title-hover);
   }
 
   .work-card__link:hover .work-card__year,
   .work-card__link:hover .work-card__meta li {
-    color: $card-meta-text-hover;
-    opacity: $card-meta-text-opacity-hover;
+    color: var(--work-card-meta-hover);
+    opacity: var(--work-card-meta-opacity-hover);
   }
 
   .work-card__link:hover .work-card__meta li {
-    background: $card-meta-chip-bg-hover;
-    border-color: $card-meta-chip-border-hover;
-    box-shadow: $card-meta-chip-shadow-hover;
+    background: var(--work-card-chip-bg-hover);
+    border-color: var(--work-card-chip-border-hover);
+    box-shadow: var(--work-card-chip-shadow-hover);
   }
 
   .work-card__link:hover .work-card__body {
     transform: translateY(rem(-2px));
   }
-}
-
-.work-card__link:focus-visible {
-  outline: rem(2px) solid $point-primary;
-  outline-offset: rem(4px);
 }
 
 @include respond-down('tablet') {

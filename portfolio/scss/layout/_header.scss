@@ -21,7 +21,8 @@
 .site-header__link {
   text-decoration: none;
   color: $text-primary;
-  @include text-style('sm', 'bold');
+  @include text-style('base', 'bold', 'wide');
+  font-family: $font-point;
 }
 
 .site-header__theme-toggle {

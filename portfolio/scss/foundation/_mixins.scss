@@ -1,24 +1,6 @@
 @use './variables' as *;
 @use './functions' as *;
 
-/* Public mixins
- - respond-down: max-width responsive branching
- - space-pad: primary padding API
- - space-mar: exceptional margin API
- - space-gap: token-based gap output
- - text-size / text-style: typography output
- - rd: radius token output
- - icon-size / icon-gap: icon sizing helpers
- */
-
-/* Internal helpers
- - responsive-spacing: token-to-css output helper
- - pad / mar: temporary spacing compatibility aliases
- - btn-text-style: component-specific button helper
- - flex-center: tiny alignment helper
- - respond-to / f-gap / g-gap / icon-responsive / font-style: compatibility aliases
- */
-
 /* ============================================================
    Responsive
 ============================================================ */

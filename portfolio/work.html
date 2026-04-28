@@ -8,7 +8,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body data-page="work">
-  <main id="main">
+  <main id="main" class="transition-main" data-page="work">
     <section class="work-page l-fullspan" aria-labelledby="work-page-title">
       <div class="work-page__inner inner">
         <!-- Header -->
@@ -129,6 +129,11 @@
       </div>
     </section>
   </main>
+  
+  <div class="door-transition" aria-hidden="true">
+    <div class="door-transition__panel"></div>
+  </div>
+
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

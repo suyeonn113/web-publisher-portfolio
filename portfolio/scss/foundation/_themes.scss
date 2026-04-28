@@ -15,37 +15,10 @@
 
   /* Background */
   --color-bg-main: #FCFCFC;
-  --color-bg-surface: #ffffff;
-  --color-bg-elevated: #fbfcff;
-  --color-bg-glass: rgba(255, 255, 255, 0.62);
-  --color-bg-glass-strong: rgba(255, 255, 255, 0.82);
-  --color-scrollbar: #d1d5db;
-  --color-scrollbar-hover: #9ca3af;
-
-  --color-border-soft: rgba(15, 23, 42, 0.08);
-  --color-border-strong: rgba(10, 132, 255, 0.18);
-
-  --shadow-surface-soft: 0 12px 32px rgba(104, 128, 166, 0.14);
-  --shadow-surface-strong: 0 24px 60px rgba(38, 93, 176, 0.18);
-
-  --overlay-bottom-soft: linear-gradient(
-    to top,
-    rgba(15, 23, 42, 0.32) 0%,
-    rgba(15, 23, 42, 0.08) 40%,
-    transparent 72%
-  );
-
-  --overlay-bottom-strong: linear-gradient(
-    to top,
-    rgba(15, 23, 42, 0.46) 0%,
-    rgba(15, 23, 42, 0.14) 42%,
-    transparent 72%
-  );
-
-  --main-bg-highlight: rgba(255, 255, 255, 0.78);
+  --color-bg-door: #050505;
 
   /* Accent */
-  --color-point-primary: #007AFF;
+  --color-point-primary: #54a050;
   --color-point-highlight: #ff6482;
   --color-point-success: #30d158;
 
@@ -54,57 +27,107 @@
   ============================================================ */
 
   /* Button */
-  --button-text: var(--color-text-primary);
-  --button-text-hover: var(--color-point-primary);
-  --button-text-active: var(--color-point-primary);
+  --button-text: var(--color-text-secondary);
+  --button-text-hover: #9A6A2C;
+  --button-text-active: var(--color-text-inverse);
   --button-letter-spacing: 0.01em;
   --button-border-width: 1px;
-  --button-backdrop: blur(12px) saturate(1.06);
-  --button-surface-bg: var(--color-bg-glass);
-  --button-surface-bg-hover: rgba(255, 255, 255, 0.2);
-  --button-surface-bg-active: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.62) 0%,
-    rgba(184, 231, 255, 0.34) 34%,
-    rgba(89, 158, 255, 0.18) 68%,
-    rgba(255, 255, 255, 0.16) 100%
-  );
-  --button-border: var(--work-folder-image-border);
-  --button-border-hover: rgba(89, 154, 255, 0.34);
-  --button-border-active: var(--cursor-border-hover);
+
+  --button-surface-bg: rgba(255, 255, 255, 0.42);
+  --button-surface-bg-hover: rgba(255, 244, 214, 0.78);
+  --button-surface-bg-active: var(--color-text-primary);
+
+  --button-border: rgba(24, 32, 44, 0.08);
+  --button-border-hover: rgba(255, 208, 122, 0.38);
+  --button-border-active: rgba(255, 190, 92, 0.52);
+
   --button-shadow:
-    inset 0 1px 0 var(--work-folder-image-inset-highlight);
+    inset 0 1px 0 rgba(255,255,255,0.55);
+
   --button-shadow-hover:
-    inset 0 1px 0 rgba(255, 255, 255, 0.66);
+    inset 0 1px 0 rgba(255,255,255,0.72),
+    0 8px 20px rgba(255, 210, 120, 0.08);
+
   --button-shadow-active:
-    0 12px 30px rgba(104, 169, 255, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    inset 0 1px 0 rgba(255,255,255,0.78),
+    0 10px 24px rgba(255, 210, 120, 0.14);
+
+  --button-focus-ring: rgba(255, 208, 122, 0.45);
+
+  --button-light-dot-bg: rgba(255, 255, 255, 0.95);
+  --button-light-dot-shadow-soft: 
+    0 0 6px rgba(255, 255, 255, 0.75);
+  --button-light-dot-shadow-warm: 
+    0 0 14px rgba(255, 226, 138, 0.42);
 
   /* Chip */
-  --chip-text: var(--color-text-primary);
-  --chip-border-width: 1px;
-  --chip-backdrop: blur(12px) saturate(1.06);
-  --chip-surface-bg: var(--color-bg-glass);
-  --chip-border: var(--work-folder-image-border);
-  --chip-shadow:
-    inset 0 1px 0 var(--work-folder-image-inset-highlight);
+  --chip-text: var(--color-text-secondary);
+  --chip-text-hover: var(--color-text-primary);
+  --chip-text-active: #8B5E1A;
 
-  /* Card */
-  --card-meta-text: var(--work-folder-meta-icon-color);
-  --card-meta-text-hover: var(--work-folder-text);
-  --card-meta-text-opacity: 0.88;
-  --card-meta-text-opacity-hover: 1;
-  --card-meta-chip-bg: rgba(255, 255, 255, 0.1);
-  --card-meta-chip-bg-hover: rgba(255, 255, 255, 0.14);
-  --card-meta-chip-border: rgba(255, 255, 255, 0.08);
-  --card-meta-chip-border-hover: rgba(255, 255, 255, 0.14);
-  --card-meta-chip-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  --card-meta-chip-shadow-hover:
-    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  --chip-border-width: 1px;
+
+  --chip-surface-bg: rgba(255, 255, 255, 0.38);
+  --chip-surface-bg-hover: rgba(255, 248, 228, 0.56);
+  --chip-surface-bg-active: linear-gradient(
+    135deg,
+    rgba(255, 248, 228, 0.78) 0%,
+    rgba(255, 232, 184, 0.48) 100%
+  );
+
+  --chip-border: rgba(24, 32, 44, 0.08);
+  --chip-border-hover: rgba(255, 205, 112, 0.32);
+  --chip-border-active: rgba(255, 190, 92, 0.46);
+
+  --chip-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.52);
+  --chip-shadow-hover:
+    inset 0 1px 0 rgba(255, 255, 255, 0.68),
+    0 6px 16px rgba(255, 210, 120, 0.06);
+  --chip-shadow-active:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 8px 20px rgba(255, 210, 120, 0.1);
+
+
+  /* Work Card */
+  --work-card-bg: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(245, 247, 250, 0.34) 100%
+  );
+  --work-card-border: rgba(24, 32, 44, 0.08);
+  --work-card-shadow: var(--shadow-surface-soft);
+  --work-card-shadow-hover: var(--shadow-surface-strong);
+
+  --work-card-gloss: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.04) 38%
+  );
+
+  --work-card-title: var(--color-text-primary);
+  --work-card-title-hover: #FFF4D6;
+  --work-card-title-shadow: rgba(15, 23, 42, 0.34);
+
+  --work-card-meta: rgba(255, 255, 255, 0.82);
+  --work-card-meta-hover: rgba(255, 248, 228, 0.95);
+  --work-card-meta-opacity: 0.82;
+  --work-card-meta-opacity-hover: 1;
+
+  --work-card-chip-bg: rgba(255, 255, 255, 0.14);
+  --work-card-chip-bg-hover: rgba(255, 244, 214, 0.22);
+  --work-card-chip-border: rgba(255, 255, 255, 0.22);
+  --work-card-chip-border-hover: rgba(255, 208, 122, 0.42);
+  --work-card-chip-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  --work-card-chip-shadow-hover:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 8px 18px rgba(255, 210, 120, 0.1);
+
 
   /* Panel */
   --work-empty-bg: rgba(17, 17, 17, 0.04);
+
   --detail-panel-bg: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.52) 0%,
@@ -125,28 +148,9 @@
   --detail-panel-backdrop: blur(22px) saturate(1.12);
 
   /* Cursor */
-  --cursor-bg: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(129, 212, 250, 0.18) 38%,
-    rgba(187, 222, 251, 0.06) 60%,
-    transparent 78%
-  );
-  --cursor-border: rgba(79, 195, 247, 0.32);
-  --cursor-bg-hover: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.6) 0%,
-    rgba(79, 195, 247, 0.22) 38%,
-    rgba(33, 150, 243, 0.10) 60%,
-    transparent 78%
-  );
-  --cursor-border-hover: rgba(3, 169, 244, 0.34);
-  --cursor-shadow-inset: rgba(255, 255, 255, 0.3);
-
-  /* Icon and interaction */
-  --color-icon-base: var(--color-text-primary);
-  --color-icon-active: var(--color-point-primary);
-  --color-icon-focus: var(--color-point-primary);
+  --cursor-key: var(--color-bg-door);
+  --cursor-key-hover: #FFD76A;
+  --cursor-key-hover-glow: rgba(255, 215, 106, 0.35);
 
   /* Brand colors */
   --color-html: #E34F26;
@@ -374,23 +378,6 @@ $point-success: var(--color-point-success);
    Component
 ============================================================ */
 
-/* Button */
-$button-text: var(--button-text);
-$button-text-hover: var(--button-text-hover);
-$button-text-active: var(--button-text-active);
-$button-letter-spacing: var(--button-letter-spacing);
-$button-border-width: var(--button-border-width);
-$button-backdrop: var(--button-backdrop);
-$button-surface-bg: var(--button-surface-bg);
-$button-surface-bg-hover: var(--button-surface-bg-hover);
-$button-surface-bg-active: var(--button-surface-bg-active);
-$button-border: var(--button-border);
-$button-border-hover: var(--button-border-hover);
-$button-border-active: var(--button-border-active);
-$button-shadow: var(--button-shadow);
-$button-shadow-hover: var(--button-shadow-hover);
-$button-shadow-active: var(--button-shadow-active);
-
 /* Chip */
 $chip-text: var(--chip-text);
 $chip-border-width: var(--chip-border-width);
@@ -399,17 +386,6 @@ $chip-surface-bg: var(--chip-surface-bg);
 $chip-border: var(--chip-border);
 $chip-shadow: var(--chip-shadow);
 
-/* Card */
-$card-meta-text: var(--card-meta-text);
-$card-meta-text-hover: var(--card-meta-text-hover);
-$card-meta-text-opacity: var(--card-meta-text-opacity);
-$card-meta-text-opacity-hover: var(--card-meta-text-opacity-hover);
-$card-meta-chip-bg: var(--card-meta-chip-bg);
-$card-meta-chip-bg-hover: var(--card-meta-chip-bg-hover);
-$card-meta-chip-border: var(--card-meta-chip-border);
-$card-meta-chip-border-hover: var(--card-meta-chip-border-hover);
-$card-meta-chip-shadow: var(--card-meta-chip-shadow);
-$card-meta-chip-shadow-hover: var(--card-meta-chip-shadow-hover);
 
 /* Panel */
 $work-empty-bg: var(--work-empty-bg);
@@ -419,11 +395,6 @@ $detail-panel-border: var(--detail-panel-border);
 $detail-panel-shadow: var(--detail-panel-shadow);
 $detail-panel-shadow-hover: var(--detail-panel-shadow-hover);
 $detail-panel-backdrop: var(--detail-panel-backdrop);
-
-/* Icon and interaction */
-$icon-base: var(--color-icon-base);
-$icon-active: var(--color-icon-active);
-$icon-focus: var(--color-icon-focus);
 
 /* Brand colors */
 $html: var(--color-html);

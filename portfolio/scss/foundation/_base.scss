@@ -90,13 +90,29 @@ table {
 
 @font-face {
   font-family: 'Syne';
-  src: url('../../assets/fonts/Syne/Syne-VariableFont_wght.ttf') format('truetype');
+  src: url('#{$font-path}/Syne/Syne-VariableFont_wght.ttf') format('truetype');
   font-weight: 400 800;
   font-style: normal;
   font-display: swap;
 }
 
-$font-point: "Syne", sans-serif;
+@font-face {
+  font-family: 'Londrina Solid';
+  src: url('#{$font-path}/Londrina_Solid/LondrinaSolid-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Londrina Solid';
+  src: url('#{$font-path}/Londrina_Solid/LondrinaSolid-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+$font-point: "Londrina Solid", sans-serif;
 
 body {
   min-height: 100vh;
@@ -168,7 +184,6 @@ input[type="search"]::-webkit-search-decoration {
 :focus-visible {
   outline: 2px solid $point-primary;
   outline-offset: 3px;
-  border-radius: 0.5rem;
 }
 
 :focus:not(:focus-visible) {
@@ -218,4 +233,25 @@ input[type="search"]::-webkit-search-decoration {
   &:hover {
     background: var(--color-scrollbar-hover);
   }
+}
+
+/* ============================================================
+   Door Transition
+============================================================ */
+
+.door-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.door-transition__panel {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-door);
+  transform: scaleX(0);
+  transform-origin: right center;
+  will-change: transform;
 }

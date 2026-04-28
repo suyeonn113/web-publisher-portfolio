@@ -38,7 +38,7 @@ body[data-page='project-detail'] {
   .project-detail__error {
     margin: 0 auto;
     @include pad('pad', 'lg');
-    @include rd('lg');
+
     @include text-style('base', 'medium');
     color: $text-secondary;
     background: $detail-panel-bg;
@@ -406,12 +406,11 @@ body[data-page='project-detail'] {
   }
 
   .flow-item:is(.is-active, [aria-pressed='true']) {
-    color: $button-text-active;
+    color: $text-primary;
   }
 
   .flow-item:is(.is-active, [aria-pressed='true'])::after {
     background: var(--home-hero-main-strong-mid);
-    box-shadow: 0 0 rem(12px) $button-border-active;
   }
 
   .flow-item__title {
@@ -735,16 +734,13 @@ body[data-page='project-detail'] {
     @include rd('xl');
     @include text-style('xs', 'bold');
     color: $text-primary;
-    background: $button-surface-bg;
-    border: $button-border-width solid $button-border;
     transition: $tr-base;
     cursor: pointer;
   }
 
   .flow-gallery-modal__nav:is(:hover, :focus-visible),
   .flow-gallery-modal__close:is(:hover, :focus-visible) {
-    border-color: $button-border-hover;
-    box-shadow: $button-shadow-hover;
+
     outline: none;
   }
 

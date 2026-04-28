@@ -8,12 +8,17 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body data-page="log">
-  <main id="main" class="log-page">
+  <main id="main" class="log-page transition-main" data-page="log">
     <p class="log-page__message">
       Coming Soon
       LOG is under construction.
     </p>
   </main>
+  
+  <div class="door-transition" aria-hidden="true">
+    <div class="door-transition__panel"></div>
+  </div>
+
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

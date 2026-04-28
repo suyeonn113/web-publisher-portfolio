@@ -11,6 +11,7 @@ import { initLenis, initHomeScrollAssist, initScrollStability } from './global/s
 import { initCursor } from './global/cursor.js';
 import { initInteractiveTone } from './global/hoverTone.js';
 import { initTheme } from "./global/theme.js";
+import { initDoorTransition } from './global/doorTransition.js';
 
 // Components
 import {
@@ -21,7 +22,6 @@ import {
   initHeaderScroll
 } from "./components/header.js";
 import { renderFooter } from "./components/footer.js";
-import { loadProjects } from './components/ProjectCardMain.js';
 import { loadWorkCardList } from './components/WorkCardList.js';
 import { initWorkSlider } from './components/workSlider.js';
 import { loadProjectDetail } from './components/ProjectDetail.js';
@@ -32,18 +32,13 @@ import { initWorkEntrance } from "./animations/workEntrance.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const page = document.body?.dataset.page || '';
+async function initPage() {
+  const page = document.querySelector('#main')?.dataset.page || document.body?.dataset.page || '';
+  document.body.dataset.page = page;
 
   if (window.lucide) {
     window.lucide.createIcons();
   }
-
-  const lenis = initLenis(page);
-  initScrollStability(lenis);
-
-  renderHeader();
-  renderFooter();
 
   initTheme();
 
@@ -62,17 +57,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       initHeaderEntrance();
       initHeaderScroll();
     });
-  }
 
-  if (page === 'home') {
-    const isProjectLoaded = await loadProjects();
-
-    if (isProjectLoaded) {
-      initWorkSlider();
-      initWorkEntrance();
-      initHomeScrollAssist(lenis);
-      ScrollTrigger.refresh();
-    }
+    initWorkSlider();
+    initWorkEntrance();
+    initHomeScrollAssist(window.lenis);
+    ScrollTrigger.refresh();
   }
 
   if (page === 'work') {
@@ -90,5 +79,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       ScrollTrigger.refresh();
     }
   }
+}
 
+document.addEventListener('DOMContentLoaded', async () => {
+  const page = document.body?.dataset.page || '';
+
+  const lenis = initLenis(page);
+  window.lenis = lenis;
+
+  initScrollStability(lenis);
+
+  renderHeader();
+  renderFooter();
+
+  await initPage();
+
+  initDoorTransition(initPage);
 });

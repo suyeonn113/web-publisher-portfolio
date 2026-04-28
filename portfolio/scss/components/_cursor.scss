@@ -2,25 +2,17 @@
 
 .cursor-satellite {
   position: fixed;
-  @include icon-size('sm');
-  border-radius: 50%;
+  width: rem(32px);
+  aspect-ratio: 1 / 1;
   pointer-events: none;
   z-index: 9999;
-
-  background: var(--cursor-bg);
-  border: 1px solid var(--cursor-border);
-
-  box-shadow:
-    0 0 0 1px var(--cursor-shadow-inset) inset;
-
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  color: var(--cursor-key);
 
   transition: $tr-base;
 
   &.is-hover {
-    background: var(--cursor-bg-hover);
-    border-color: var(--cursor-border-hover);
+    color: var(--cursor-key-hover);
+    filter: drop-shadow(0 0 10px var(--cursor-key-hover-glow));
   }
 
   @include respond-down('mobile') {
@@ -30,4 +22,14 @@
   @media (pointer: coarse) {
     display: none !important;
   }
+}
+
+.key-cursor {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+
+  transform-box: fill-box;
+  transform-origin: 25% 50%;
 }

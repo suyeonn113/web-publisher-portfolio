@@ -8,7 +8,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body data-page="contact">
-  <main id="main" class="contact-page">
+  <main id="main" class="contact-page transition-main" data-page="contact">
     <section class="contact-hero l-fullspan" aria-labelledby="contact-title">
       <div class="contact-hero__inner">
         <header class="contact-hero__header">
@@ -89,6 +89,11 @@
       </div>
     </section>
   </main>
+  
+  <div class="door-transition" aria-hidden="true">
+    <div class="door-transition__panel"></div>
+  </div>
+
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
