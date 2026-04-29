@@ -229,7 +229,9 @@ body[data-page="work"] {
 
 /* Card */
 .work-card {
+  position: relative;
   height: 100%;
+  overflow: visible;
 }
 
 .work-card__link {
@@ -290,8 +292,15 @@ body[data-page="work"] {
 /* Card Content Position Override */
 .work-page__item[data-project-id="p01"] {
   .work-card__body {
+    max-width: 65%;
     bottom: clamp(9%, 7vw, 11%);
     left: 22%;
+  }
+}
+
+.work-page__item[data-project-id="p02"] {
+  .work-card__body {
+    bottom: clamp(1%, 3vw, 7%);
   }
 }
 /* END - Card Content Position Override */
@@ -321,54 +330,67 @@ body[data-page="work"] {
   @include text-style('xs', 'medium', 'wide');
   color: $text-primary;
 
-  @include respond-down('mobile') {
-    @include f-gap('pad', 'xs');
-  }
-
   .work-card__meta li {
     flex: 0 0 auto;
     min-width: 0;
-
-    &:not(:last-child)::after {
-      content: "·";
-      display: inline-block;
-      margin-left: rem(8px);
-      color: currentColor;
-      opacity: 0.55;
-    }
   }
 }
 
 /* Hover Effects */
+@keyframes workPinDrop {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + #{rem(34px)}), rem(-36px)) rotate(18deg) scale(0.86);
+  }
+
+  64% {
+    opacity: 1;
+    transform: translate(calc(-50% - #{rem(5px)}), rem(5px)) rotate(-5deg) scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) rotate(0deg) scale(1);
+  }
+}
+
+.work-page__filter-btn::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 56.5%;
+  width: rem(36px);
+  aspect-ratio: 1;
+  background: url("../assets/images/work-hover.png") center / contain no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  transform: translate(-50%) rotate(18deg) scale(0.86);
+}
+
+.work-card::before {
+  content: "";
+  position: absolute;
+  top: -6.5%;
+  left: 56.5%;
+  width: 13%;
+  aspect-ratio: 1;
+  background: url("../assets/images/work-hover.png") center / contain no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  transform: translate(-50%) rotate(18deg) scale(0.86);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .work-card__link:hover {
-    transform: translateY(rem(-6px));
+    transform: translateY(rem(-20px));
     box-shadow: var(--work-card-shadow-hover);
   }
 
-  .work-card__link:hover > img {
-    transform: scale(1.07);
-    filter: saturate(1.1) contrast(1.06);
-  }
-
-  .work-card__link:hover .work-card__title {
-    color: var(--work-card-title-hover);
-  }
-
-  .work-card__link:hover .work-card__year,
-  .work-card__link:hover .work-card__meta li {
-    color: var(--work-card-meta-hover);
-    opacity: var(--work-card-meta-opacity-hover);
-  }
-
-  .work-card__link:hover .work-card__meta li {
-    background: var(--work-card-chip-bg-hover);
-    border-color: var(--work-card-chip-border-hover);
-    box-shadow: var(--work-card-chip-shadow-hover);
-  }
-
-  .work-card__link:hover .work-card__body {
-    transform: translateY(rem(-2px));
+  .work-page__filter-btn:hover::before,
+  .work-card:hover::before {
+    animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
   }
 }
 

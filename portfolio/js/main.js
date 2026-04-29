@@ -8,7 +8,7 @@ import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigge
 
 // Global
 import { initLenis, initHomeScrollAssist, initScrollStability } from './global/scroll.js';
-import { initCursor } from './global/cursor.js';
+import { initCursor, destroyCursor } from './global/keyCursor.js';
 import { initInteractiveTone } from './global/hoverTone.js';
 import { initTheme } from "./global/theme.js";
 import { initDoorTransition } from './global/doorTransition.js';
@@ -49,7 +49,12 @@ async function initPage() {
     initHeaderScroll();
   }
 
-  initCursor();
+  if (page === 'home') {
+    initCursor();
+  } else {
+    destroyCursor();
+  }
+
   initInteractiveTone();
 
   if (page === 'home') {

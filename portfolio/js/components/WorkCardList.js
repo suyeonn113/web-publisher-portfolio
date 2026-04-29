@@ -23,7 +23,7 @@ const state = {
   projects: [],
   filtered: [],
   filters: { device: null, type: null },
-  sort: 'latest',
+  sort: 'featured',
   elements: new Map()
 };
 
@@ -241,4 +241,3 @@ export async function loadWorkCardList() {
 
   return true;
 }
-

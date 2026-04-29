@@ -99,19 +99,31 @@ function handleMouseEnter() {
     });
 
     gsap.to(keyIcon, {
-      scale: 1.8,
+      scale: getKeyHoleScale(),
       duration: 0.2,
       ease: "power2.out"
     });
 
     gsap.to(keyIcon, {
       rotate: 180,
-      x: 12,
+      x: getKeyHoleX(),
       duration: 0.35,
       ease: "power2.inOut",
       transformOrigin: "50% 50%"
     });
   }
+}
+
+function getKeyHoleScale() {
+  if (window.matchMedia("(max-width: 768px)").matches) return 1.95;
+  if (window.matchMedia("(max-width: 1024px)").matches) return 2.25;
+  return 3;
+}
+
+function getKeyHoleX() {
+  if (window.matchMedia("(max-width: 768px)").matches) return 9;
+  if (window.matchMedia("(max-width: 1024px)").matches) return 16;
+  return 25;
 }
 
 function handleMouseLeave() {
@@ -244,6 +256,8 @@ function handleMouseMove(e) {
 }
 
 export function initCursor() {
+  if (document.body?.dataset.page !== "home") return;
+
   const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -254,4 +268,27 @@ export function initCursor() {
 
   window.removeEventListener("mousemove", handleMouseMove);
   window.addEventListener("mousemove", handleMouseMove);
+}
+
+export function destroyCursor() {
+  window.removeEventListener("mousemove", handleMouseMove);
+
+  hoverTargets.forEach((el) => {
+    el.removeEventListener("mouseenter", handleMouseEnter);
+    el.removeEventListener("mouseleave", handleMouseLeave);
+    el.removeEventListener("click", resetCursorHover);
+  });
+
+  if (cursor) {
+    gsap.killTweensOf(cursor);
+    gsap.killTweensOf(keyIcon);
+    cursor.remove();
+  }
+
+  cursor = null;
+  keyIcon = null;
+  hasMoved = false;
+  lastX = 0;
+  lastY = 0;
+  hoverTargets = [];
 }
