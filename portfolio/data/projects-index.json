@@ -1,4 +1,4 @@
-﻿{
+{
   "guide": {
     "note": "목록 UI는 projects만 읽고, guide는 작성 참고용입니다.",
     "summary": {
@@ -81,8 +81,8 @@
 
     {
       "id": "p04",
-      "slug": "react",
-      "title": "4",
+      "slug": "airline",
+      "title": "Airline",
       "date": "2026-05",
       "thumbnail": "assets/images/projects/thumb/p04-thumb.png",
       "device": "PC",

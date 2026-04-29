@@ -51,6 +51,10 @@
   @return map.get($radii, $size);
 }
 
+@function get-device-rd($size) {
+  @return map.get($device-radii, $size);
+}
+
 @function get-z($name) {
   @return map.get($z-indexes, $name);
 }

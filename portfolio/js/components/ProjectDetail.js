@@ -31,6 +31,12 @@ const DEVICE_FRAMES = {
   }
 };
 
+const HERO_FRAME_ORDER = {
+  mobile: ['mobile'],
+  responsive: ['pc', 'tablet', 'mobile'],
+  pc: ['pc']
+};
+
 function getProjectSlug() {
   const params = new URLSearchParams(window.location.search);
   return params.get('slug') || 'fragfarm-mobile';
@@ -268,15 +274,7 @@ function renderHeroTags(project, root) {
 function getHeroFrames(project) {
   const mode = project.meta?.projectMode;
   const visuals = project.hero?.visuals || {};
-  let frames = [];
-
-  if (mode === 'mobile') {
-    frames = ['mobile'];
-  } else if (mode === 'responsive') {
-    frames = ['mobile', 'tablet', 'pc'];
-  } else if (mode === 'pc') {
-    frames = ['pc'];
-  }
+  const frames = HERO_FRAME_ORDER[mode] || Object.keys(visuals);
 
   return frames.filter((frame) => visuals[frame]);
 }
@@ -291,6 +289,10 @@ function renderHeroVisuals(project, root) {
 
   const frames = getHeroFrames(project);
   const visuals = project.hero?.visuals || {};
+  const mode = project.meta?.projectMode || 'default';
+
+  container.dataset.projectMode = mode;
+  container.classList.toggle('project-hero__visual-grid--responsive', mode === 'responsive');
 
   frames.forEach((frame) => {
     const visual = visuals[frame];
