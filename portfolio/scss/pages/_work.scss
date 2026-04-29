@@ -116,12 +116,28 @@ body[data-page="work"] {
   flex-wrap: wrap;
   align-items: center;
   min-width: 0;
-  @include f-gap('gutter', 'sm');
+  @include f-gap('gutter', 'lg');
 }
 
 .work-page__filter-btn {
   flex: 0 0 auto;
+  position: relative;
+  overflow: visible;
   @include text-style('sm', 'medium');
+}
+
+.work-filter__paper {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+
+  width: 300%;
+  max-width: none;
+  height: auto;
+
+  transform: translate(-50%, -50%);
+  z-index: get-z('hide');
+  pointer-events: none;
 }
 
 .work-page__sort {
@@ -199,6 +215,7 @@ body[data-page="work"] {
   }
 }
 
+/* Loading */
 .work-page__loading {
   @include pad('pad', 'lg', 'y');
 }
@@ -224,13 +241,13 @@ body[data-page="work"] {
   transition: $tr-base;
 }
 
-.work-card__link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: get-z('base');
-  background: var(--work-card-gloss);
-  pointer-events: none;
+.work-card__image {
+  width: clamp(rem(300px), 23vw, rem(430px));
+  
+  @include respond-down('mobile') {
+    width: 100%;
+    max-height: rem(520px);
+  }
 }
 
 .work-card__body {
@@ -239,11 +256,12 @@ body[data-page="work"] {
   right: rem(24px);
   bottom: rem(20px);
   z-index: get-z('base');
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
   max-width: min(32rem, calc(100% - #{rem(48px)}));
-  padding: 0;
   transition: $tr-base;
 
   @include respond-down('laptop') {
@@ -258,7 +276,7 @@ body[data-page="work"] {
     right: rem(16px);
     bottom: rem(16px);
     max-width: calc(100% - #{rem(32px)});
-    @include f-gap('pad', 'xs');
+    @include f-gap('gutter', 'xs');
   }
 
   @include respond-down('mobile') {
@@ -269,18 +287,24 @@ body[data-page="work"] {
   }
 }
 
+/* Card Content Position Override */
+.work-page__item[data-project-id="p01"] {
+  .work-card__body {
+    bottom: clamp(9%, 7vw, 11%);
+    left: 22%;
+  }
+}
+/* END - Card Content Position Override */
+
 .work-card__title {
-  @include text-style('lg', 'bold', 'tight');
+  @include text-style('lg', 'extra-bold', 'tight');
   line-height: 1.18;
-  color: var(--work-card-title);
-  text-shadow: 0 rem(4px) rem(18px) var(--work-card-title-shadow);
+  color: $text-primary;
 }
 
 .work-card__year {
-  @include text-style('sm', 'medium');
-  line-height: 1.3;
-  color: var(--work-card-meta);
-  opacity: var(--work-card-meta-opacity);
+  @include text-style('xs', 'medium', 'wide');
+  color: $text-primary;
 }
 
 .work-card__meta {
@@ -288,25 +312,34 @@ body[data-page="work"] {
   flex-wrap: wrap;
   align-items: flex-start;
   min-width: 0;
-  list-style: none;
-  padding: 0;
-  gap: rem(8px);
-  margin-top: rem(2px);
+  max-width: 100%;
+  height: 1.4em;
+
+  @include f-gap('gutter', 'xs');
+  overflow: hidden;
+
+  @include text-style('xs', 'medium', 'wide');
+  color: $text-primary;
 
   @include respond-down('mobile') {
     @include f-gap('pad', 'xs');
   }
-}
 
-.work-card__meta li {
-  min-width: 0;
-  @include text-style('xs', 'medium');
-  line-height: 1.2;
-  &::after {
-    content: none !important;
+  .work-card__meta li {
+    flex: 0 0 auto;
+    min-width: 0;
+
+    &:not(:last-child)::after {
+      content: "·";
+      display: inline-block;
+      margin-left: rem(8px);
+      color: currentColor;
+      opacity: 0.55;
+    }
   }
 }
 
+/* Hover Effects */
 @media (hover: hover) and (pointer: fine) {
   .work-card__link:hover {
     transform: translateY(rem(-6px));
