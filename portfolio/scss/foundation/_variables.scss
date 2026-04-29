@@ -229,6 +229,6 @@ $motions: (
   )
 );
 
-// Common transition aliases.
+/* Common transition aliases */
 $tr-base: all map.get($motions, 'durations', 'base') map.get($motions, 'easings', 'apple');
 $tr-elastic: transform map.get($motions, 'durations', 'base') map.get($motions, 'easings', 'elastic');

@@ -48,6 +48,7 @@
 /* ============================================================
    Motion
 ============================================================ */
+/* Common transition aliases */
 /* ============================================================
    Light Theme
 ============================================================ */
@@ -63,6 +64,7 @@
   /* Background */
   --color-bg-main: #FCFCFC;
   --color-bg-door: #050505;
+  --color-bg-work: #e2e1dd;
   /* Accent */
   --color-point-primary: #54a050;
   --color-point-highlight: #ff6482;
@@ -1123,20 +1125,6 @@ input[type=search]::-webkit-search-decoration {
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   cursor: pointer;
 }
-.btn::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 0.75rem;
-  width: 0.375rem;
-  height: 0.375rem;
-  background: var(--button-light-dot-bg);
-  box-shadow: var(--button-light-dot-shadow-soft), var(--button-light-dot-shadow-warm);
-  opacity: 0;
-  transform: translateY(-50%) scale(0.6);
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  pointer-events: none;
-}
 .btn:is(.is-active,
 [aria-pressed=true],
 [aria-selected=true],
@@ -1153,11 +1141,6 @@ input[type=search]::-webkit-search-decoration {
     border-color: var(--button-border-hover);
     color: var(--button-text-hover);
     box-shadow: var(--button-shadow-hover);
-    padding-right: 1.75rem;
-  }
-  .btn:hover::after, .btn:focus-visible::after {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
   }
   .btn:is(.is-active,
   [aria-pressed=true],
@@ -1214,11 +1197,6 @@ input[type=search]::-webkit-search-decoration {
   letter-spacing: 0;
   line-height: 1.6;
   font-family: "SUIT", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-}
-.btn--compact::after {
-  right: 0.625rem;
-  width: 0.3125rem;
-  height: 0.3125rem;
 }
 
 .btn--wide {
@@ -1290,7 +1268,7 @@ input[type=search]::-webkit-search-decoration {
 }
 @media (max-width: 480px) {
   .hero {
-    height: 98dvh;
+    height: 100dvh;
   }
 }
 .hero {
@@ -1465,6 +1443,26 @@ input[type=search]::-webkit-search-decoration {
 /* ============================================================
    Foundation
 ============================================================ */
+body[data-page=work] {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-bg-work);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 100% 3px;
+}
+body[data-page=work]::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: url(#noiseFilter);
+  opacity: 0.04;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .work-page {
   width: 100%;
   padding-top: 96px;
@@ -1501,6 +1499,24 @@ input[type=search]::-webkit-search-decoration {
   .work-page {
     padding-bottom: 64px;
   }
+}
+
+.work-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: url(#noiseFilter);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.work-page__inner {
+  position: relative;
+  z-index: 1;
 }
 
 .work-page__inner {
@@ -1831,6 +1847,9 @@ input[type=search]::-webkit-search-decoration {
   }
 }
 
+/* ============================================================
+   Result
+============================================================ */
 .work-page__body {
   display: flex;
   flex-direction: column;
@@ -1966,6 +1985,7 @@ input[type=search]::-webkit-search-decoration {
   color: var(--color-text-tertiary);
 }
 
+/* Card */
 .work-card {
   height: 100%;
 }

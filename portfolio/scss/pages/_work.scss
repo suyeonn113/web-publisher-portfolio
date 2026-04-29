@@ -1,9 +1,51 @@
 @use '../foundation' as *;
 
+body[data-page="work"] {
+  position: relative;
+  min-height: 100vh;
+  background: $bg-work;
+  // Pattern
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px); 
+  background-size: 100% 3px;
+  
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    filter: url(#noiseFilter);
+    opacity: 0.04;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
 .work-page {
   width: 100%;
   @include responsive-spacing('padding-top', 'page-offset', 'header');
   @include pad('gap', 'md', 'bottom');
+}
+
+.work-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  filter: url(#noiseFilter);
+  
+  opacity: 0.4; 
+  
+  pointer-events: none;
+  z-index: 0;
+}
+
+.work-page__inner {
+  position: relative;
+  z-index: 1;
 }
 
 .work-page__inner {
@@ -119,8 +161,9 @@
 }
 
 
-
-
+/* ============================================================
+   Result
+============================================================ */
 
 .work-page__body {
   display: flex;
@@ -167,6 +210,7 @@
   color: $text-tertiary;
 }
 
+/* Card */
 .work-card {
   height: 100%;
 }
@@ -258,15 +302,6 @@
   min-width: 0;
   @include text-style('xs', 'medium');
   line-height: 1.2;
-  // color: var(--work-card-meta);
-  // padding: rem(6px) rem(10px);
-  // border: var(--chip-border-width) solid var(--work-card-chip-border);
-  // background: var(--work-card-chip-bg);
-  // box-shadow: var(--work-card-chip-shadow);
-  // backdrop-filter: var(--chip-backdrop);
-  // -webkit-backdrop-filter: var(--chip-backdrop);
-  // opacity: var(--work-card-meta-opacity);
-
   &::after {
     content: none !important;
   }

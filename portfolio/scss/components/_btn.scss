@@ -27,26 +27,6 @@
 
   cursor: pointer;
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: rem(12px);
-
-    width: rem(6px);
-    height: rem(6px);
-
-    background: var(--button-light-dot-bg);
-    box-shadow:
-      var(--button-light-dot-shadow-soft),
-      var(--button-light-dot-shadow-warm);
-
-    opacity: 0;
-    transform: translateY(-50%) scale(0.6);
-    transition: $tr-base;
-    pointer-events: none;
-  }
-
   &:is(
     .is-active,
     [aria-pressed='true'],
@@ -66,13 +46,6 @@
       border-color: var(--button-border-hover);
       color: var(--button-text-hover);
       box-shadow: var(--button-shadow-hover);
-
-      padding-right: rem(28px);
-
-      &::after {
-        opacity: 1;
-        transform: translateY(-50%) scale(1);
-      }
     }
 
     &:is(
@@ -94,12 +67,6 @@
   @include pad('pad', 'xs', 'y');
   padding-inline: rem(12px);
   @include text-style('xs', 'medium');
-
-  &::after {
-    right: rem(10px);
-    width: rem(5px);
-    height: rem(5px);
-  }
 }
 
 .btn--wide {

@@ -250,7 +250,7 @@ input[type="search"]::-webkit-search-decoration {
 .door-transition__panel {
   position: absolute;
   inset: 0;
-  background: var(--color-bg-door);
+  background: $bg-door;
   transform: scaleX(0);
   transform-origin: right center;
   will-change: transform;

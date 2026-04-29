@@ -179,7 +179,7 @@ function cardMarkup(project) {
     <li class="work-page__item" data-project-id="${project.id}">
       <article class="work-card">
         <a href="${detailHref}" class="work-card__link">
-          <img src="${thumb}" alt="${previewAlt}" loading="lazy">
+          <img class="work-card__image" src="${thumb}" alt="${previewAlt}" loading="lazy">
           <div class="work-card__body">
             <h3 class="work-card__title">${title}</h3>
             <p class="work-card__year">${year}</p>

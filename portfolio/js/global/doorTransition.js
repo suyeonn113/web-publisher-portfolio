@@ -2,6 +2,7 @@ import Swup from "https://cdn.jsdelivr.net/npm/swup@4/+esm";
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 
 let swup = null;
+let historyNavigationDirection = null;
 
 function getPage() {
   return document.body?.dataset.page || '';
@@ -19,9 +20,42 @@ function getOrigin(direction) {
   return direction === 'backward' ? 'left center' : 'right center';
 }
 
+function normalizeDirection(direction) {
+  if (direction === 'back' || direction === 'backward' || direction === 'backwards') {
+    return 'backward';
+  }
+
+  if (direction === 'forward' || direction === 'forwards') {
+    return 'forward';
+  }
+
+  return '';
+}
+
 function getDirection(visit) {
   const trigger = visit?.trigger?.el;
-  return trigger?.dataset?.transitionDirection || 'forward';
+  const swupDirection = visit?.history?.direction || visit?.to?.history?.direction;
+  const cachedDirection = visit?.meta?.doorDirection;
+
+  if (cachedDirection) {
+    return cachedDirection;
+  }
+
+  const direction =
+    normalizeDirection(trigger?.dataset?.transitionDirection) ||
+    normalizeDirection(swupDirection) ||
+    historyNavigationDirection ||
+    'forward';
+
+  if (visit?.meta) {
+    visit.meta.doorDirection = direction;
+  }
+
+  if (historyNavigationDirection) {
+    historyNavigationDirection = null;
+  }
+
+  return direction;
 }
 
 function closeDoor(direction = 'forward') {
@@ -96,9 +130,14 @@ export function initDoorTransition(onPageView) {
     transformOrigin: 'right center'
   });
 
+  window.addEventListener('popstate', () => {
+    historyNavigationDirection = 'backward';
+  });
+
   swup = new Swup({
     containers: ['#main'],
     animationSelector: false,
+    animateHistoryBrowsing: true,
     linkSelector: `
       a[href]:not([target="_blank"]):not([download]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"]):not([href^="javascript:"])
     `

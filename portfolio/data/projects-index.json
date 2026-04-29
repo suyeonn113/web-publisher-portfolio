@@ -7,22 +7,18 @@
       "title": "목록에 보일 제목",
       "date": "YYYY-MM",
       "thumbnail": "목록 썸네일 경로",
-      "device": ["Mobile", "Tablet", "PC", "Responsive", "Desktop"],
-      "projectType": ["Brand", "E-commerce", "Promotion", "Personal", "Editorial", "Public", "Commercial"],
+      "device":      ["Mobile",  
+                      "PC", 
+                      "Responsive"],
+      "projectType": ["Brand", 
+                      "E-commerce", 
+                      "Personal", 
+                      "Editorial", 
+                      "Public"],
       "keywords": "목록 메타용 키워드 배열",
       "techStack": "아이콘 표시용 기술 배열",
       "featuredOrder": "Featured 정렬 순서"
     },
-    "keywordExamples": [
-      "Minimal",
-      "Clean",
-      "Editorial",
-      "Grid-based",
-      "Interactive",
-      "Parallax",
-      "Dark",
-      "Light"
-    ],
     "techStackExamples": [
       "HTML",
       "CSS",
@@ -48,12 +44,11 @@
       "id": "p01",
       "slug": "fragfarm-mobile",
       "title": "FragFarm Mobile",
-      "date": "2026-04",
+      "date": "2026-02",
       "thumbnail": "assets/images/projects/thumb/p01-thumb.png",
       "device": "Mobile",
       "projectType": "E-commerce",
-      "keywords": ["Minimal", "Clean"],
-      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
+      "keywords": ["Minimal", "Mono-Tone"],
       "featuredOrder": 2
     },
 
@@ -62,83 +57,51 @@
       "id": "p02",
       "slug": "seoul-youth-center",
       "title": "Seoul Youth Center",
-      "date": "2026-04",
+      "date": "2026-03",
       "thumbnail": "assets/images/projects/thumb/p02-thumb.png",
-      "device": "Mobile",
-      "projectType": "E-commerce",
-      "keywords": ["Minimal", "Clean"],
-      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
-      "featuredOrder": 999
+      "device": "Responsive",
+      "projectType": "Public",
+      "keywords": ["A11y", "Grid-System", "Standard"],
+      "featuredOrder": 1
     },
 
 
     {
       "id": "p03",
-      "slug": "fragfarm-mobile-redesign",
-      "title": "3",
+      "slug": "portfolio",
+      "title": "Portfolio",
       "date": "2026-04",
       "thumbnail": "assets/images/projects/thumb/p03-thumb.png",
       "device": "Responsive",
-      "projectType": "Public",
-      "keywords": ["Minimal", "Clean"],
-      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
-      "featuredOrder": 999
+      "projectType": "Personal",
+      "keywords": ["Editorial", "Interactive"],
+      "featuredOrder": 3
     },
 
 
     {
       "id": "p04",
-      "slug": "fragfarm-mobile-redesign",
+      "slug": "react",
       "title": "4",
-      "date": "2026-04",
+      "date": "2026-05",
       "thumbnail": "assets/images/projects/thumb/p04-thumb.png",
-      "device": "Responsive",
-      "projectType": "Public",
-      "keywords": ["Minimal", "Clean"],
-      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
-      "featuredOrder": 999
+      "device": "PC",
+      "projectType": "Brand",
+      "keywords": ["Impactful", "Modern"],
+      "featuredOrder": 4
     },
 
 
     {
       "id": "p05",
-      "slug": "fragfarm-mobile-redesign",
+      "slug": "team-project",
       "title": "5",
-      "date": "2026-04",
+      "date": "2026-05",
       "thumbnail": "assets/images/projects/thumb/p05-thumb.png",
-      "device": "PC",
-      "projectType": "Personal",
-      "keywords": ["Minimal", "Clean"],
-      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
-      "featuredOrder": 999
-    },
-
-    
-    {
-      "id": "p06",
-      "slug": "fragfarm-mobile-redesign",
-      "title": "6",
-      "date": "2026-04",
-      "thumbnail": "assets/images/projects/thumb/p06-thumb.png",
-      "device": "PC",
-      "projectType": "Personal",
-      "keywords": ["Minimal", "Clean"],
-      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
-      "featuredOrder": 999
-    },
-
-
-    {
-      "id": "p07",
-      "slug": "brand-concept-archive",
-      "title": "7",
-      "date": "2026-04",
-      "thumbnail": "assets/images/projects/thumb/p07-thumb.png",
       "device": "Responsive",
       "projectType": "Brand",
-      "keywords": ["Minimal", "Clean"],
-      "techStack": ["HTML", "CSS", "JavaScript", "PHP", "Figma", "github"],
-      "featuredOrder": 999
+      "keywords": ["Keyword", "Keyword"],
+      "featuredOrder": 5
     }
   ]
 }

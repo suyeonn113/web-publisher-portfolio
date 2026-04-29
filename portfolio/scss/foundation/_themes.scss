@@ -16,6 +16,7 @@
   /* Background */
   --color-bg-main: #FCFCFC;
   --color-bg-door: #050505;
+  --color-bg-work: #e2e1dd;
 
   /* Accent */
   --color-point-primary: #54a050;
@@ -351,12 +352,8 @@ $shadow-strong: var(--shadow-text-strong);
 
 /* Background */
 $bg-main: var(--color-bg-main);
-$bg-surface: var(--color-bg-surface);
-$bg-elevated: var(--color-bg-elevated);
-$bg-glass: var(--color-bg-glass);
-$bg-glass-strong: var(--color-bg-glass-strong);
-$scrollbar: var(--color-scrollbar);
-$scrollbar-hover: var(--color-scrollbar-hover);
+$bg-door: var(--color-bg-door);
+$bg-work: var(--color-bg-work);
 
 $border-soft: var(--color-border-soft);
 $border-strong: var(--color-border-strong);
