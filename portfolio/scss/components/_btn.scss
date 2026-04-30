@@ -21,8 +21,6 @@
   color: var(--button-text);
 
   letter-spacing: var(--button-letter-spacing);
-  text-decoration: none;
-  box-shadow: var(--button-shadow);
   transition: $tr-base;
 
   cursor: pointer;
@@ -36,7 +34,6 @@
     background: var(--button-surface-bg-active);
     border-color: var(--button-border-active);
     color: var(--button-text-active);
-    box-shadow: var(--button-shadow-active);
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -54,30 +51,9 @@
       [aria-selected='true'],
       [aria-current='page']
     ):hover {
-      background: var(--button-surface-bg-active);
-      border-color: var(--button-border-active);
-      color: var(--button-text-active);
-      box-shadow: var(--button-shadow-active);
+      background: var(--button-surface-bg-hover);
+      border-color: var(--button-border-hover);
+      color: var(--button-text-hover);
     }
   }
-}
-
-.btn--compact {
-  min-height: rem(36px);
-  @include pad('pad', 'xs', 'y');
-  padding-inline: rem(12px);
-  @include text-style('xs', 'medium');
-}
-
-.btn--wide {
-  @include pad('pad', 'md', 'x');
-}
-
-.btn--block {
-  width: 100%;
-  justify-content: flex-start;
-}
-
-.btn--surface {
-  background: var(--detail-panel-bg);
 }

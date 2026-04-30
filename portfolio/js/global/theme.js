@@ -57,6 +57,9 @@ export function initTheme() {
 
   const toggleButton = document.querySelector('.site-header__theme-toggle');
   if (!toggleButton) return;
+  if (toggleButton.dataset.themeBound === 'true') return;
+
+  toggleButton.dataset.themeBound = 'true';
 
   toggleButton.addEventListener('click', () => {
     const nextTheme =

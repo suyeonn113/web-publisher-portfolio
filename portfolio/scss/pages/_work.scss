@@ -6,7 +6,7 @@ body[data-page="work"] {
   background: $bg-work;
   // Pattern
   background-image: 
-    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px); 
+    linear-gradient(var(--work-bg-line) 1px, transparent 1px); 
   background-size: 100% 3px;
   
   &::before {
@@ -299,9 +299,22 @@ body[data-page="work"] {
 }
 
 .work-page__item[data-project-id="p02"] {
+  .work-card__image {
+    width: clamp(rem(300px), 21vw, rem(430px));
+  }
   .work-card__body {
     left: 7%;
     bottom: clamp(1%, 8vw, 4%);
+  }
+}
+
+.work-page__item[data-project-id="p03"] {
+  .work-card__image {
+    width: clamp(rem(490px), 35vw, rem(700px));
+  }
+  .work-card__body {
+    left: 5%;
+    bottom: clamp(50%, 17.5vw, 55%);
   }
 }
 /* END - Card Content Position Override */
@@ -309,12 +322,12 @@ body[data-page="work"] {
 .work-card__title {
   @include text-style('lg', 'extra-bold', 'tight');
   line-height: 1.18;
-  color: $text-primary;
+  color: var(--work-card-title);
 }
 
 .work-card__year {
   @include text-style('xs', 'medium', 'wide');
-  color: $text-primary;
+  color: var(--work-card-title);
 }
 
 .work-card__meta {
@@ -329,7 +342,7 @@ body[data-page="work"] {
   overflow: hidden;
 
   @include text-style('xs', 'medium', 'wide');
-  color: $text-primary;
+  color: var(--work-card-title);
 
   .work-card__meta li {
     flex: 0 0 auto;
@@ -372,9 +385,9 @@ body[data-page="work"] {
 .work-card::before {
   content: "";
   position: absolute;
-  top: -6.5%;
-  left: 56.5%;
-  width: 13%;
+  top: clamp(rem(-38px), -2.5vw, rem(-40px));
+  left: clamp(56%, 58vw, 58%);
+  width: rem(52px);
   aspect-ratio: 1;
   background: url("../assets/images/work-hover.png") center / contain no-repeat;
   opacity: 0;
@@ -396,11 +409,10 @@ body[data-page="work"] {
 
 @media (hover: hover) and (pointer: fine) {
   .work-card__link:hover {
-    transform: translateY(rem(-20px));
+    transform: translateY(rem(-18px));
     @include respond-down('mobile') {
       transform: translateY(0px);
     }
-    box-shadow: var(--work-card-shadow-hover);
   }
 
   .work-page__filter-btn:hover::before,

@@ -37,6 +37,29 @@ const HERO_FRAME_ORDER = {
   pc: ['pc']
 };
 
+const TOOL_ICON_BASE = '/portfolio/assets/icons/tech';
+
+const TOOL_ICON_MAP = {
+  css: { icon: 'css', color: 'var(--color-css)' },
+  figma: { icon: 'figma', color: 'var(--color-figma)' },
+  git: { icon: 'git', color: 'var(--color-git)' },
+  github: { icon: 'github', color: 'var(--color-github)' },
+  gsap: { icon: 'gsap', color: 'var(--color-gsap)' },
+  html: { icon: 'html', color: 'var(--color-html)' },
+  java: { icon: 'java', color: 'var(--color-java)' },
+  javascript: { icon: 'javascript', color: 'var(--color-js)' },
+  js: { icon: 'javascript', color: 'var(--color-js)' },
+  jquery: { icon: 'jquery', color: 'var(--color-jquery)' },
+  lenis: { icon: 'lenis', color: 'var(--color-lenis)' },
+  mysql: { icon: 'mysql', color: 'var(--color-mysql)' },
+  php: { icon: 'php', color: 'var(--color-php)' },
+  react: { icon: 'react', color: 'var(--color-react)' },
+  scss: { icon: 'scss', color: 'var(--color-scss)' },
+  vscode: { icon: null, color: 'var(--color-text-secondary)' },
+  'vs code': { icon: null, color: 'var(--color-text-secondary)' },
+  filezilla: { icon: null, color: 'var(--color-text-secondary)' }
+};
+
 function getProjectSlug() {
   const params = new URLSearchParams(window.location.search);
   return params.get('slug') || 'fragfarm-mobile';
@@ -1025,9 +1048,62 @@ function renderHighlights(project, root) {
   displayDescription.textContent = firstItem.description || '';
 }
 
+function normalizeToolName(tool = '') {
+  return String(tool).trim().toLowerCase();
+}
+
+function getToolItems(value = '') {
+  if (Array.isArray(value)) return value.filter(Boolean);
+
+  return String(value)
+    .split(',')
+    .map((tool) => tool.trim())
+    .filter(Boolean);
+}
+
+function renderEtcTools(project, root) {
+  const container = root.querySelector('[data-field="etc.tools"]');
+  if (!container) return;
+
+  const tools = getToolItems(project.etc?.tools);
+  container.textContent = '';
+
+  if (!tools.length) return;
+
+  const list = document.createElement('span');
+  list.className = 'project-tools';
+  list.setAttribute('role', 'list');
+
+  tools.forEach((tool) => {
+    const key = normalizeToolName(tool);
+    const meta = TOOL_ICON_MAP[key];
+    const item = document.createElement('span');
+    item.className = 'project-tools__item';
+    item.setAttribute('role', 'listitem');
+
+    if (meta?.icon) {
+      const icon = document.createElement('span');
+      icon.className = 'project-tools__icon';
+      icon.style.setProperty('--tool-icon', `url("${TOOL_ICON_BASE}/${meta.icon}.svg")`);
+      icon.style.setProperty('--tool-color', meta.color);
+      icon.setAttribute('aria-hidden', 'true');
+      item.setAttribute('aria-label', tool);
+      item.title = tool;
+      item.appendChild(icon);
+    } else {
+      item.classList.add('project-tools__item--text');
+      item.textContent = tool;
+    }
+
+    list.appendChild(item);
+  });
+
+  container.appendChild(list);
+}
+
 function renderEtc(project, root) {
   setText('[data-field="etc.deployment"]', project.etc?.deployment, root);
-  setText('[data-field="etc.tools"]', project.etc?.tools, root);
+  renderEtcTools(project, root);
   setText('[data-field="etc.contribution"]', project.etc?.contribution, root);
 }
 

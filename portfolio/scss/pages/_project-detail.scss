@@ -462,7 +462,7 @@ body[data-page='project-detail'] {
     justify-content: space-between;
     width: 100%;
     @include text-style('base', 'medium');
-    color: $text-secondary;
+    color: $text-tertiary;
     text-align: left;
     cursor: pointer;
   }
@@ -472,21 +472,23 @@ body[data-page='project-detail'] {
     flex: 0 0 rem(8px);
     width: rem(8px);
     height: rem(8px);
-    background: $border-soft;
+    border-radius: 999px;
+    background: var(--color-text-disabled);
     transition: $tr-base;
   }
 
   .flow-item:is(:hover, :focus-visible) {
-    color: $text-primary;
+    color: var(--color-text-secondary);
     outline: none;
   }
 
   .flow-item:is(.is-active, [aria-pressed='true']) {
-    color: $text-primary;
+    color: var(--color-point-primary);
   }
 
   .flow-item:is(.is-active, [aria-pressed='true'])::after {
-    background: var(--home-hero-main-strong-mid);
+    background: var(--color-point-primary);
+    box-shadow: var(--shadow-glow);
   }
 
   .flow-item__title {
@@ -972,6 +974,32 @@ body[data-page='project-detail'] {
 
   .project-etc__grid p {
     @include text-style('base');
+  }
+
+  .project-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    @include f-gap('gutter', 'sm');
+  }
+
+  .project-tools__item {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .project-tools__icon {
+    display: inline-block;
+    width: rem(28px);
+    aspect-ratio: 1;
+    background-color: var(--tool-color, currentColor);
+    mask: var(--tool-icon) center / contain no-repeat;
+    -webkit-mask: var(--tool-icon) center / contain no-repeat;
+  }
+
+  .project-tools__item--text {
+    color: $text-secondary;
   }
 
   @include respond-up('tablet') {
