@@ -27,6 +27,8 @@ const state = {
   elements: new Map()
 };
 
+let workPinObserver = null;
+
 /* ========================================
    Utils
 ======================================== */
@@ -168,6 +170,26 @@ function toggleEmptyState(isEmpty) {
   emptyEl.hidden = !isEmpty;
 }
 
+function initMobileWorkPinObserver() {
+  if (workPinObserver) {
+    workPinObserver.disconnect();
+    workPinObserver = null;
+  }
+
+  const cards = document.querySelectorAll('.work-card');
+  if (!cards.length) return;
+
+  workPinObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('is-active', entry.isIntersecting);
+    });
+  }, {
+    threshold: 0.55
+  });
+
+  cards.forEach((card) => workPinObserver.observe(card));
+}
+
 function cardMarkup(project) {
   const title = project.title;
   const year = project._year;
@@ -238,6 +260,7 @@ export async function loadWorkCardList() {
   render(state.projects);
   bindEvents();
   applyState();
+  initMobileWorkPinObserver();
 
   return true;
 }

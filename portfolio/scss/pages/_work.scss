@@ -245,13 +245,13 @@ body[data-page="work"] {
 
 .work-card__image {
   width: clamp(rem(300px), 23vw, rem(430px));
-  
   @include respond-down('mobile') {
     width: 100%;
     max-height: rem(520px);
   }
 }
 
+/* BASE - Card Content Position */
 .work-card__body {
   position: absolute;
   left: rem(24px);
@@ -300,7 +300,8 @@ body[data-page="work"] {
 
 .work-page__item[data-project-id="p02"] {
   .work-card__body {
-    bottom: clamp(1%, 3vw, 7%);
+    left: 7%;
+    bottom: clamp(1%, 8vw, 4%);
   }
 }
 /* END - Card Content Position Override */
@@ -382,9 +383,23 @@ body[data-page="work"] {
   transform: translate(-50%) rotate(18deg) scale(0.86);
 }
 
+.work-page__filter-btn[aria-pressed=true]::before {
+  animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
+}
+
+@include respond-down('mobile') {
+  .work-card.is-active::before {
+    top: rem(-15px);
+    animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .work-card__link:hover {
     transform: translateY(rem(-20px));
+    @include respond-down('mobile') {
+      transform: translateY(0px);
+    }
     box-shadow: var(--work-card-shadow-hover);
   }
 

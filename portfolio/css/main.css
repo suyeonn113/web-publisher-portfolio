@@ -202,40 +202,40 @@
   --color-text-tertiary: #94a3b8;
   --color-text-disabled: #475569;
   --color-text-inverse: #0f172a;
-  --shadow-text-soft: 0 1px 10px rgba(2, 6, 23, 0.44);
-  --shadow-text-strong: 0 8px 24px rgba(2, 6, 23, 0.54);
+  --shadow-text-soft: 0 1px 10px rgba(0, 0, 0, 0.42);
+  --shadow-text-strong: 0 8px 24px rgba(0, 0, 0, 0.54);
   /* Background */
-  --color-bg-main: #0a1220;
-  --color-bg-surface: #111b2d;
-  --color-bg-elevated: #162236;
-  --color-bg-glass: rgba(17, 27, 45, 0.62);
-  --color-bg-glass-strong: rgba(17, 27, 45, 0.84);
-  --color-scrollbar: #4b5563;
-  --color-scrollbar-hover: #6b7280;
-  --color-border-soft: rgba(191, 219, 254, 0.12);
-  --color-border-strong: rgba(100, 210, 255, 0.28);
-  --shadow-surface-soft: 0 18px 42px rgba(2, 6, 23, 0.34);
-  --shadow-surface-strong: 0 28px 72px rgba(2, 6, 23, 0.48);
+  --color-bg-main: #1f1f1d;
+  --color-bg-door: #050505;
+  --color-bg-work: #242422;
+  --color-bg-surface: #292927;
+  --color-bg-elevated: #333330;
+  --color-bg-glass: rgba(36, 36, 34, 0.66);
+  --color-bg-glass-strong: rgba(31, 31, 29, 0.86);
+  --color-scrollbar: #5a5852;
+  --color-scrollbar-hover: #747168;
+  --color-border-soft: rgba(245, 242, 232, 0.12);
+  --color-border-strong: rgba(245, 242, 232, 0.28);
+  --shadow-surface-soft: 0 18px 42px rgba(0, 0, 0, 0.34);
+  --shadow-surface-strong: 0 28px 72px rgba(0, 0, 0, 0.5);
   --overlay-bottom-soft: linear-gradient(
     to top,
-    rgba(2, 6, 23, 0.42) 0%,
-    rgba(2, 6, 23, 0.16) 42%,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.16) 42%,
     transparent 72%
   );
   --overlay-bottom-strong: linear-gradient(
     to top,
-    rgba(2, 6, 23, 0.58) 0%,
-    rgba(2, 6, 23, 0.24) 44%,
+    rgba(0, 0, 0, 0.58) 0%,
+    rgba(0, 0, 0, 0.24) 44%,
     transparent 72%
   );
   --main-bg-highlight: rgba(255, 255, 255, 0.08);
   /* Accent */
-  --color-point-primary: #4DA3FF;
+  --color-point-primary: #d8d2c4;
   --color-point-highlight: #ff7a96;
   --color-point-success: #32d74b;
-  /* ============================================================
-     Component
-  ============================================================ */
+  /* ---------------- Component ---------------- */
   /* Button */
   --button-text: var(--color-text-primary);
   --button-text-hover: var(--color-point-primary);
@@ -243,71 +243,112 @@
   --button-letter-spacing: 0.01em;
   --button-border-width: 1px;
   --button-backdrop: blur(12px) saturate(1.08);
-  --button-surface-bg: rgba(47, 70, 101, 0.32);
-  --button-surface-bg-hover: rgba(176, 192, 221, 0.16);
+  --button-surface-bg: rgba(245, 242, 232, 0.08);
+  --button-surface-bg-hover: rgba(245, 242, 232, 0.14);
   --button-surface-bg-active: linear-gradient(
     135deg,
-    rgba(232, 245, 255, 0.18) 0%,
-    rgba(126, 193, 238, 0.3) 34%,
-    rgba(56, 109, 187, 0.4) 68%,
-    rgba(17, 27, 45, 0.3) 100%
+    rgba(245, 242, 232, 0.18) 0%,
+    rgba(189, 181, 164, 0.22) 42%,
+    rgba(58, 58, 54, 0.44) 100%
   );
-  --button-border: var(--work-folder-image-border);
-  --button-border-hover: rgba(120, 210, 255, 0.32);
-  --button-border-active: rgba(120, 210, 255, 0.42);
+  --button-border: rgba(245, 242, 232, 0.12);
+  --button-border-hover: rgba(245, 242, 232, 0.28);
+  --button-border-active: rgba(245, 242, 232, 0.38);
   --button-shadow:
-    inset 0 1px 0 var(--work-folder-image-inset-highlight);
+    inset 0 1px 0 rgba(245, 242, 232, 0.12);
   --button-shadow-hover:
-    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+    inset 0 1px 0 rgba(245, 242, 232, 0.18);
   --button-shadow-active:
-    0 14px 32px rgba(2, 6, 23, 0.24),
-    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+    0 14px 32px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(245, 242, 232, 0.22);
+  --button-focus-ring: rgba(216, 210, 196, 0.5);
+  --button-light-dot-bg: rgba(245, 242, 232, 0.95);
+  --button-light-dot-shadow-soft:
+    0 0 8px rgba(245, 242, 232, 0.36);
+  --button-light-dot-shadow-warm:
+    0 0 16px rgba(216, 210, 196, 0.28);
   /* Chip */
   --chip-text: var(--color-text-primary);
+  --chip-text-hover: var(--color-point-primary);
+  --chip-text-active: var(--color-point-primary);
   --chip-border-width: 1px;
   --chip-backdrop: blur(12px) saturate(1.08);
-  --chip-surface-bg: rgba(47, 70, 101, 0.32);
-  --chip-border: var(--work-folder-image-border);
+  --chip-surface-bg: rgba(245, 242, 232, 0.08);
+  --chip-surface-bg-hover: rgba(245, 242, 232, 0.14);
+  --chip-surface-bg-active: linear-gradient(
+    135deg,
+    rgba(245, 242, 232, 0.18) 0%,
+    rgba(189, 181, 164, 0.22) 52%,
+    rgba(58, 58, 54, 0.4) 100%
+  );
+  --chip-border: rgba(245, 242, 232, 0.12);
+  --chip-border-hover: rgba(245, 242, 232, 0.26);
+  --chip-border-active: rgba(245, 242, 232, 0.38);
   --chip-shadow:
-    inset 0 1px 0 var(--work-folder-image-inset-highlight);
-  /* Card */
-  --card-meta-text: var(--work-folder-meta-icon-color);
-  --card-meta-text-hover: var(--work-folder-text);
-  --card-meta-text-opacity: 0.88;
-  --card-meta-text-opacity-hover: 1;
-  --card-meta-chip-bg: rgba(47, 70, 101, 0.22);
-  --card-meta-chip-bg-hover: rgba(176, 192, 221, 0.16);
-  --card-meta-chip-border: rgba(218, 238, 255, 0.08);
-  --card-meta-chip-border-hover: rgba(218, 238, 255, 0.14);
-  --card-meta-chip-shadow:
-    inset 0 1px 0 rgba(232, 245, 255, 0.14);
-  --card-meta-chip-shadow-hover:
-    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+    inset 0 1px 0 rgba(245, 242, 232, 0.12);
+  --chip-shadow-hover:
+    inset 0 1px 0 rgba(245, 242, 232, 0.18);
+  --chip-shadow-active:
+    0 14px 32px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(245, 242, 232, 0.22);
+  /* Work Card */
+  --work-card-bg: linear-gradient(
+    180deg,
+    rgba(36, 36, 34, 0.78) 0%,
+    rgba(31, 31, 29, 0.5) 100%
+  );
+  --work-card-border: rgba(245, 242, 232, 0.13);
+  --work-card-shadow: var(--shadow-surface-soft);
+  --work-card-shadow-hover: var(--shadow-surface-strong);
+  --work-card-gloss: linear-gradient(
+    135deg,
+    rgba(245, 242, 232, 0.14) 0%,
+    rgba(245, 242, 232, 0.03) 38%
+  );
+  --work-card-title: var(--color-text-primary);
+  --work-card-title-hover: #f5f2e8;
+  --work-card-title-shadow: rgba(0, 0, 0, 0.56);
+  --work-card-meta: rgba(245, 242, 232, 0.78);
+  --work-card-meta-hover: rgba(245, 242, 232, 0.95);
+  --work-card-meta-opacity: 0.88;
+  --work-card-meta-opacity-hover: 1;
+  --work-card-chip-bg: rgba(245, 242, 232, 0.08);
+  --work-card-chip-bg-hover: rgba(245, 242, 232, 0.14);
+  --work-card-chip-border: rgba(245, 242, 232, 0.12);
+  --work-card-chip-border-hover: rgba(245, 242, 232, 0.26);
+  --work-card-chip-shadow:
+    inset 0 1px 0 rgba(245, 242, 232, 0.12);
+  --work-card-chip-shadow-hover:
+    inset 0 1px 0 rgba(245, 242, 232, 0.18),
+    0 8px 18px rgba(0, 0, 0, 0.2);
   /* Panel */
   --work-empty-bg: rgba(241, 245, 249, 0.08);
   --detail-panel-bg: linear-gradient(
     180deg,
-    rgba(17, 27, 45, 0.58) 0%,
-    rgba(17, 27, 45, 0.34) 100%
+    rgba(36, 36, 34, 0.62) 0%,
+    rgba(31, 31, 29, 0.38) 100%
   );
   --detail-panel-bg-strong: linear-gradient(
     180deg,
-    rgba(24, 39, 63, 0.76) 0%,
-    rgba(17, 27, 45, 0.48) 100%
+    rgba(49, 49, 46, 0.78) 0%,
+    rgba(31, 31, 29, 0.54) 100%
   );
-  --detail-panel-border: rgba(191, 219, 254, 0.18);
+  --detail-panel-border: rgba(245, 242, 232, 0.16);
   --detail-panel-shadow:
-    0 24px 58px rgba(2, 6, 23, 0.3),
-    inset 0 1px 0 rgba(226, 238, 255, 0.08);
+    0 24px 58px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(245, 242, 232, 0.08);
   --detail-panel-shadow-hover:
-    0 28px 72px rgba(2, 6, 23, 0.38),
-    inset 0 1px 0 rgba(226, 238, 255, 0.12);
+    0 28px 72px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(245, 242, 232, 0.12);
   --detail-panel-backdrop: blur(22px) saturate(1.1);
   /* Cursor */
+  --cursor-key: var(--color-text-primary);
+  --cursor-key-hover: #FFD76A;
+  --cursor-key-hover-glow: rgba(255, 215, 106, 0.42);
   --cursor-bg: linear-gradient(
     135deg,
-    rgba(255,255,255,0.35) 0%,
-    rgba(255,255,255,0.05) 40%,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
     transparent 60%
   );
   --cursor-border: rgba(255, 255, 255, 0.4);
@@ -337,7 +378,7 @@
   --color-jquery: #2F8FE0;
   --color-react: #4FD4E8;
   --color-java: #3FA9E0;
-  --color-github: #24292F;
+  --color-github: #f1f5f9;
   --color-git: #E35C47;
 }
 
@@ -346,12 +387,14 @@
 ============================================================ */
 /* Text */
 /* Background */
+/* Border / Shadow */
 /* Accent */
-/* ============================================================
-   Component
-============================================================ */
+/* ---------------- Component ---------------- */
+/* Button */
 /* Chip */
+/* Work Card */
 /* Panel */
+/* Cursor */
 /* Brand colors */
 /* Foundation order
  - variables: raw tokens and system maps
@@ -2026,6 +2069,7 @@ body[data-page=work]::before {
   }
 }
 
+/* BASE - Card Content Position */
 .work-card__body {
   position: absolute;
   left: 1.5rem;
@@ -2087,7 +2131,8 @@ body[data-page=work]::before {
 }
 
 .work-page__item[data-project-id=p02] .work-card__body {
-  bottom: clamp(1%, 3vw, 7%);
+  left: 7%;
+  bottom: clamp(1%, 8vw, 4%);
 }
 
 /* END - Card Content Position Override */
@@ -2208,11 +2253,28 @@ body[data-page=work]::before {
   transform: translate(-50%) rotate(18deg) scale(0.86);
 }
 
+.work-page__filter-btn[aria-pressed=true]::before {
+  animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
+}
+
+@media (max-width: 480px) {
+  .work-card.is-active::before {
+    top: -0.9375rem;
+    animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
+  }
+}
 @media (hover: hover) and (pointer: fine) {
   .work-card__link:hover {
     transform: translateY(-1.25rem);
     box-shadow: var(--work-card-shadow-hover);
   }
+}
+@media (hover: hover) and (pointer: fine) and (max-width: 480px) {
+  .work-card__link:hover {
+    transform: translateY(0px);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
   .work-page__filter-btn:hover::before,
   .work-card:hover::before {
     animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;

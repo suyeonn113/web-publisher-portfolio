@@ -119,7 +119,7 @@ body {
   font-family: $font-suit;
   line-height: $base-line-height;
   color: $text-primary;
-  background-color: $bg-main;
+  background-color: var(--color-bg-main);
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

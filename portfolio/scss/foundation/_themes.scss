@@ -182,48 +182,43 @@
   --color-text-disabled: #475569;
   --color-text-inverse: #0f172a;
 
-  --shadow-text-soft: 0 1px 10px rgba(2, 6, 23, 0.44);
-  --shadow-text-strong: 0 8px 24px rgba(2, 6, 23, 0.54);
+  --shadow-text-soft: 0 1px 10px rgba(0, 0, 0, 0.42);
+  --shadow-text-strong: 0 8px 24px rgba(0, 0, 0, 0.54);
 
   /* Background */
-  --color-bg-main: #0a1220;
-  --color-bg-surface: #111b2d;
-  --color-bg-elevated: #162236;
-  --color-bg-glass: rgba(17, 27, 45, 0.62);
-  --color-bg-glass-strong: rgba(17, 27, 45, 0.84);
-  --color-scrollbar: #4b5563;
-  --color-scrollbar-hover: #6b7280;
-
-  --color-border-soft: rgba(191, 219, 254, 0.12);
-  --color-border-strong: rgba(100, 210, 255, 0.28);
-
-  --shadow-surface-soft: 0 18px 42px rgba(2, 6, 23, 0.34);
-  --shadow-surface-strong: 0 28px 72px rgba(2, 6, 23, 0.48);
-
+  --color-bg-main: #1f1f1d;
+  --color-bg-door: #050505;
+  --color-bg-work: #242422;
+  --color-bg-surface: #292927;
+  --color-bg-elevated: #333330;
+  --color-bg-glass: rgba(36, 36, 34, 0.66);
+  --color-bg-glass-strong: rgba(31, 31, 29, 0.86);
+  --color-scrollbar: #5a5852;
+  --color-scrollbar-hover: #747168;
+  --color-border-soft: rgba(245, 242, 232, 0.12);
+  --color-border-strong: rgba(245, 242, 232, 0.28);
+  --shadow-surface-soft: 0 18px 42px rgba(0, 0, 0, 0.34);
+  --shadow-surface-strong: 0 28px 72px rgba(0, 0, 0, 0.5);
   --overlay-bottom-soft: linear-gradient(
     to top,
-    rgba(2, 6, 23, 0.42) 0%,
-    rgba(2, 6, 23, 0.16) 42%,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.16) 42%,
     transparent 72%
   );
-
   --overlay-bottom-strong: linear-gradient(
     to top,
-    rgba(2, 6, 23, 0.58) 0%,
-    rgba(2, 6, 23, 0.24) 44%,
+    rgba(0, 0, 0, 0.58) 0%,
+    rgba(0, 0, 0, 0.24) 44%,
     transparent 72%
   );
-
   --main-bg-highlight: rgba(255, 255, 255, 0.08);
 
   /* Accent */
-  --color-point-primary: #4DA3FF;
+  --color-point-primary: #d8d2c4;
   --color-point-highlight: #ff7a96;
   --color-point-success: #32d74b;
 
-  /* ============================================================
-     Component
-  ============================================================ */
+  /* ---------------- Component ---------------- */
 
   /* Button */
   --button-text: var(--color-text-primary);
@@ -232,75 +227,134 @@
   --button-letter-spacing: 0.01em;
   --button-border-width: 1px;
   --button-backdrop: blur(12px) saturate(1.08);
-  --button-surface-bg: rgba(47, 70, 101, 0.32);
-  --button-surface-bg-hover: rgba(176, 192, 221, 0.16);
+
+  --button-surface-bg: rgba(245, 242, 232, 0.08);
+  --button-surface-bg-hover: rgba(245, 242, 232, 0.14);
   --button-surface-bg-active: linear-gradient(
     135deg,
-    rgba(232, 245, 255, 0.18) 0%,
-    rgba(126, 193, 238, 0.3) 34%,
-    rgba(56, 109, 187, 0.4) 68%,
-    rgba(17, 27, 45, 0.3) 100%
+    rgba(245, 242, 232, 0.18) 0%,
+    rgba(189, 181, 164, 0.22) 42%,
+    rgba(58, 58, 54, 0.44) 100%
   );
-  --button-border: var(--work-folder-image-border);
-  --button-border-hover: rgba(120, 210, 255, 0.32);
-  --button-border-active: rgba(120, 210, 255, 0.42);
+
+  --button-border: rgba(245, 242, 232, 0.12);
+  --button-border-hover: rgba(245, 242, 232, 0.28);
+  --button-border-active: rgba(245, 242, 232, 0.38);
+
   --button-shadow:
-    inset 0 1px 0 var(--work-folder-image-inset-highlight);
+    inset 0 1px 0 rgba(245, 242, 232, 0.12);
+
   --button-shadow-hover:
-    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+    inset 0 1px 0 rgba(245, 242, 232, 0.18);
+
   --button-shadow-active:
-    0 14px 32px rgba(2, 6, 23, 0.24),
-    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+    0 14px 32px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(245, 242, 232, 0.22);
+
+  --button-focus-ring: rgba(216, 210, 196, 0.5);
+
+  --button-light-dot-bg: rgba(245, 242, 232, 0.95);
+  --button-light-dot-shadow-soft:
+    0 0 8px rgba(245, 242, 232, 0.36);
+  --button-light-dot-shadow-warm:
+    0 0 16px rgba(216, 210, 196, 0.28);
 
   /* Chip */
   --chip-text: var(--color-text-primary);
+  --chip-text-hover: var(--color-point-primary);
+  --chip-text-active: var(--color-point-primary);
+
   --chip-border-width: 1px;
   --chip-backdrop: blur(12px) saturate(1.08);
-  --chip-surface-bg: rgba(47, 70, 101, 0.32);
-  --chip-border: var(--work-folder-image-border);
-  --chip-shadow:
-    inset 0 1px 0 var(--work-folder-image-inset-highlight);
 
-  /* Card */
-  --card-meta-text: var(--work-folder-meta-icon-color);
-  --card-meta-text-hover: var(--work-folder-text);
-  --card-meta-text-opacity: 0.88;
-  --card-meta-text-opacity-hover: 1;
-  --card-meta-chip-bg: rgba(47, 70, 101, 0.22);
-  --card-meta-chip-bg-hover: rgba(176, 192, 221, 0.16);
-  --card-meta-chip-border: rgba(218, 238, 255, 0.08);
-  --card-meta-chip-border-hover: rgba(218, 238, 255, 0.14);
-  --card-meta-chip-shadow:
-    inset 0 1px 0 rgba(232, 245, 255, 0.14);
-  --card-meta-chip-shadow-hover:
-    inset 0 1px 0 rgba(232, 245, 255, 0.22);
+  --chip-surface-bg: rgba(245, 242, 232, 0.08);
+  --chip-surface-bg-hover: rgba(245, 242, 232, 0.14);
+  --chip-surface-bg-active: linear-gradient(
+    135deg,
+    rgba(245, 242, 232, 0.18) 0%,
+    rgba(189, 181, 164, 0.22) 52%,
+    rgba(58, 58, 54, 0.4) 100%
+  );
+
+  --chip-border: rgba(245, 242, 232, 0.12);
+  --chip-border-hover: rgba(245, 242, 232, 0.26);
+  --chip-border-active: rgba(245, 242, 232, 0.38);
+
+  --chip-shadow:
+    inset 0 1px 0 rgba(245, 242, 232, 0.12);
+  --chip-shadow-hover:
+    inset 0 1px 0 rgba(245, 242, 232, 0.18);
+  --chip-shadow-active:
+    0 14px 32px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(245, 242, 232, 0.22);
+
+
+  /* Work Card */
+  --work-card-bg: linear-gradient(
+    180deg,
+    rgba(36, 36, 34, 0.78) 0%,
+    rgba(31, 31, 29, 0.5) 100%
+  );
+  --work-card-border: rgba(245, 242, 232, 0.13);
+  --work-card-shadow: var(--shadow-surface-soft);
+  --work-card-shadow-hover: var(--shadow-surface-strong);
+
+  --work-card-gloss: linear-gradient(
+    135deg,
+    rgba(245, 242, 232, 0.14) 0%,
+    rgba(245, 242, 232, 0.03) 38%
+  );
+
+  --work-card-title: var(--color-text-primary);
+  --work-card-title-hover: #f5f2e8;
+  --work-card-title-shadow: rgba(0, 0, 0, 0.56);
+
+  --work-card-meta: rgba(245, 242, 232, 0.78);
+  --work-card-meta-hover: rgba(245, 242, 232, 0.95);
+  --work-card-meta-opacity: 0.88;
+  --work-card-meta-opacity-hover: 1;
+
+  --work-card-chip-bg: rgba(245, 242, 232, 0.08);
+  --work-card-chip-bg-hover: rgba(245, 242, 232, 0.14);
+  --work-card-chip-border: rgba(245, 242, 232, 0.12);
+  --work-card-chip-border-hover: rgba(245, 242, 232, 0.26);
+  --work-card-chip-shadow:
+    inset 0 1px 0 rgba(245, 242, 232, 0.12);
+  --work-card-chip-shadow-hover:
+    inset 0 1px 0 rgba(245, 242, 232, 0.18),
+    0 8px 18px rgba(0, 0, 0, 0.2);
+
 
   /* Panel */
   --work-empty-bg: rgba(241, 245, 249, 0.08);
+
   --detail-panel-bg: linear-gradient(
     180deg,
-    rgba(17, 27, 45, 0.58) 0%,
-    rgba(17, 27, 45, 0.34) 100%
+    rgba(36, 36, 34, 0.62) 0%,
+    rgba(31, 31, 29, 0.38) 100%
   );
   --detail-panel-bg-strong: linear-gradient(
     180deg,
-    rgba(24, 39, 63, 0.76) 0%,
-    rgba(17, 27, 45, 0.48) 100%
+    rgba(49, 49, 46, 0.78) 0%,
+    rgba(31, 31, 29, 0.54) 100%
   );
-  --detail-panel-border: rgba(191, 219, 254, 0.18);
+  --detail-panel-border: rgba(245, 242, 232, 0.16);
   --detail-panel-shadow:
-    0 24px 58px rgba(2, 6, 23, 0.3),
-    inset 0 1px 0 rgba(226, 238, 255, 0.08);
+    0 24px 58px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(245, 242, 232, 0.08);
   --detail-panel-shadow-hover:
-    0 28px 72px rgba(2, 6, 23, 0.38),
-    inset 0 1px 0 rgba(226, 238, 255, 0.12);
+    0 28px 72px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(245, 242, 232, 0.12);
   --detail-panel-backdrop: blur(22px) saturate(1.1);
 
   /* Cursor */
+  --cursor-key: var(--color-text-primary);
+  --cursor-key-hover: #FFD76A;
+  --cursor-key-hover-glow: rgba(255, 215, 106, 0.42);
   --cursor-bg: linear-gradient(
     135deg,
-    rgba(255,255,255,0.35) 0%,
-    rgba(255,255,255,0.05) 40%,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
     transparent 60%
   );
   --cursor-border: rgba(255, 255, 255, 0.4);
@@ -332,7 +386,7 @@
   --color-jquery: #2F8FE0;
   --color-react: #4FD4E8;
   --color-java: #3FA9E0;
-  --color-github: #24292F;
+  --color-github: #f1f5f9;
   --color-git: #E35C47;
 }
 
@@ -346,7 +400,6 @@ $text-secondary: var(--color-text-secondary);
 $text-tertiary: var(--color-text-tertiary);
 $text-disabled: var(--color-text-disabled);
 $text-inverse: var(--color-text-inverse);
-
 $shadow-soft: var(--shadow-text-soft);
 $shadow-strong: var(--shadow-text-strong);
 
@@ -355,34 +408,73 @@ $bg-main: var(--color-bg-main);
 $bg-door: var(--color-bg-door);
 $bg-work: var(--color-bg-work);
 
+/* Border / Shadow */
 $border-soft: var(--color-border-soft);
 $border-strong: var(--color-border-strong);
-
 $shadow-surface-soft: var(--shadow-surface-soft);
 $shadow-surface-strong: var(--shadow-surface-strong);
-
 $overlay-soft: var(--overlay-bottom-soft);
 $overlay-strong: var(--overlay-bottom-strong);
 
 /* Accent */
 $point-primary: var(--color-point-primary);
-$point-secondary: var(--color-point-primary);
 $point-highlight: var(--color-point-highlight);
-$point-info: var(--color-point-primary);
 $point-success: var(--color-point-success);
 
-/* ============================================================
-   Component
-============================================================ */
+/* ---------------- Component ---------------- */
+
+/* Button */
+$button-text: var(--button-text);
+$button-text-hover: var(--button-text-hover);
+$button-text-active: var(--button-text-active);
+$button-letter-spacing: var(--button-letter-spacing);
+$button-border-width: var(--button-border-width);
+$button-surface-bg: var(--button-surface-bg);
+$button-surface-bg-hover: var(--button-surface-bg-hover);
+$button-surface-bg-active: var(--button-surface-bg-active);
+$button-border: var(--button-border);
+$button-border-hover: var(--button-border-hover);
+$button-border-active: var(--button-border-active);
+$button-shadow: var(--button-shadow);
+$button-shadow-hover: var(--button-shadow-hover);
+$button-shadow-active: var(--button-shadow-active);
+$button-focus-ring: var(--button-focus-ring);
 
 /* Chip */
 $chip-text: var(--chip-text);
+$chip-text-hover: var(--chip-text-hover);
+$chip-text-active: var(--chip-text-active);
 $chip-border-width: var(--chip-border-width);
 $chip-backdrop: var(--chip-backdrop);
 $chip-surface-bg: var(--chip-surface-bg);
+$chip-surface-bg-hover: var(--chip-surface-bg-hover);
+$chip-surface-bg-active: var(--chip-surface-bg-active);
 $chip-border: var(--chip-border);
+$chip-border-hover: var(--chip-border-hover);
+$chip-border-active: var(--chip-border-active);
 $chip-shadow: var(--chip-shadow);
+$chip-shadow-hover: var(--chip-shadow-hover);
+$chip-shadow-active: var(--chip-shadow-active);
 
+/* Work Card */
+$work-card-bg: var(--work-card-bg);
+$work-card-border: var(--work-card-border);
+$work-card-shadow: var(--work-card-shadow);
+$work-card-shadow-hover: var(--work-card-shadow-hover);
+$work-card-gloss: var(--work-card-gloss);
+$work-card-title: var(--work-card-title);
+$work-card-title-hover: var(--work-card-title-hover);
+$work-card-title-shadow: var(--work-card-title-shadow);
+$work-card-meta: var(--work-card-meta);
+$work-card-meta-hover: var(--work-card-meta-hover);
+$work-card-meta-opacity: var(--work-card-meta-opacity);
+$work-card-meta-opacity-hover: var(--work-card-meta-opacity-hover);
+$work-card-chip-bg: var(--work-card-chip-bg);
+$work-card-chip-bg-hover: var(--work-card-chip-bg-hover);
+$work-card-chip-border: var(--work-card-chip-border);
+$work-card-chip-border-hover: var(--work-card-chip-border-hover);
+$work-card-chip-shadow: var(--work-card-chip-shadow);
+$work-card-chip-shadow-hover: var(--work-card-chip-shadow-hover);
 
 /* Panel */
 $work-empty-bg: var(--work-empty-bg);
@@ -392,6 +484,16 @@ $detail-panel-border: var(--detail-panel-border);
 $detail-panel-shadow: var(--detail-panel-shadow);
 $detail-panel-shadow-hover: var(--detail-panel-shadow-hover);
 $detail-panel-backdrop: var(--detail-panel-backdrop);
+
+/* Cursor */
+$cursor-key: var(--cursor-key);
+$cursor-key-hover: var(--cursor-key-hover);
+$cursor-key-hover-glow: var(--cursor-key-hover-glow);
+$cursor-bg: var(--cursor-bg);
+$cursor-bg-hover: var(--cursor-bg-hover);
+$cursor-border: var(--cursor-border);
+$cursor-border-hover: var(--cursor-border-hover);
+$cursor-shadow-inset: var(--cursor-shadow-inset);
 
 /* Brand colors */
 $html: var(--color-html);
