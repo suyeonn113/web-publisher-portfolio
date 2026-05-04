@@ -283,7 +283,7 @@ body[data-page='project-detail'] {
   .project-hero__visual > div[data-project-mode='responsive'] .project-hero__device--pc {
     grid-column: 1 / -1;
     grid-row: 1;
-    z-index: 1;
+    z-index: get-z('base');
     width: clamp(rem(360px), 38vw, rem(620px));
   }
 

@@ -257,10 +257,10 @@ export async function loadWorkCardList() {
       _featuredOrder: project.featuredOrder ?? 999
     }));
 
-  render(state.projects);
   bindEvents();
-  applyState();
+  applyState({ animate: false });
   initMobileWorkPinObserver();
+
 
   return true;
 }

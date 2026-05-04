@@ -19,6 +19,16 @@
   --color-bg-work: #e2e1dd;
   --work-bg-line: rgba(0, 0, 0, 0.03);
 
+  --table-top-bg: #e9e3d7;
+  --table-front-bg: #d2c7b6; 
+  --table-edge: #a58668;
+  --table-edge-soft: rgba(122, 92, 62, 0.14);
+  --table-edge-shadow: rgba(122, 92, 62, 0.22);
+
+  --grid-color: rgba(60, 40, 20, 0.05);
+  --grid-line: 1px;
+  --grid-size: 64px;
+
   /* Accent */
   --color-point-primary: #389233;
   --color-point-highlight: #ff6482;
@@ -123,6 +133,10 @@
     0 22px 56px rgba(78, 116, 176, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.54);
   --detail-panel-backdrop: blur(22px) saturate(1.12);
+
+  /* Telephone */
+  --color-phone-body: #302b26;
+  --color-phone-accent: #8d8184;
 
   /* Cursor */
   --cursor-key: var(--color-bg-door);
