@@ -26,15 +26,42 @@
 }
 
 .site-header__theme-toggle {
-  display: block;
+  position: relative;
+  @include flex-center;
+  width: map-get(map-get($font-sizes, 'lg'), 'default');
+  aspect-ratio: 1 / 1;
   & svg {
     @include icon-size('md');
-    stroke-width: 1.5px;
     transition: $tr-base;
+  }
+  & svg {
+    stroke-width: 1.5px;
   }
   @media (hover: hover) and (pointer: fine) {
     &:hover svg {
-      stroke: $point-primary;
+      color: $point-primary;
     }
   }
+}
+
+
+.site-header__theme-icon {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: $tr-base;
+}
+
+[data-theme='dark'] .icon--light {
+  opacity: 1;
+}
+
+[data-theme='light'] .icon--dark,
+:root:not([data-theme='dark']) .icon--dark {
+  opacity: 1;
+}
+
+[data-theme='dark'] .icon--dark {
+  opacity: 0;
 }

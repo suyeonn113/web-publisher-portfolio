@@ -11,75 +11,82 @@ body[data-page='contact'] {
     @include responsive-spacing('padding-top', 'page-offset', 'header');
   }
 
-  .contact-hero__inner,
-  .contact-thanks__inner {
+  .contact-hero__inner {
     width: min(100%, rem(1180px));
     margin: 0 auto;
   }
 
   .contact-hero__inner {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(rem(260px), 3fr);
     align-items: center;
-    @include f-gap('gap', 'sm');
+    @include g-gap('gap', 'md');
   }
 
-  .contact-hero__header,
-  .contact-thanks__inner {
+  .contact-hero__visual {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: flex-start;
+    min-height: rem(520px);
   }
 
-  .contact-hero__header {
-    @include f-gap('gutter', 'xs');
+  .contact-hero__phone {
+    display: block;
+    width: min(100%, rem(860px));
   }
 
-  .contact-hero__eyebrow,
-  .contact-thanks__eyebrow {
-    @include text-style('xs', 'bold');
-    color: $point-primary;
+  .contact-hero__phone-img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
-  .contact-hero__title {
-    @include text-style('lg', 'bold', 'tight', 'tight');
-    color: $text-primary;
+  .contact-hero__phone-svg {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
-  .contact-hero__desc {
-    @include text-style('sm');
-    color: $text-secondary;
+  .contact-hero__phone.is-inline-ready .contact-hero__phone-img--telephone {
+    display: none;
+  }
+
+  .contact-hero__phone-img--handset {
+    display: none;
   }
 
   .contact-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     width: 100%;
-    @include g-gap('gutter', 'md');
+    border-top: 1px solid $border-soft;
   }
 
   .contact-card {
     min-width: 0;
+    border-bottom: 1px solid $border-soft;
   }
 
   .contact-card__link {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: rem(330px);
-    @include pad('pad', 'lg');
-
-    border: 1px solid $border-soft;
-    @include rd('lg');
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    min-height: rem(74px);
+    @include g-gap('gutter', 'sm');
+    @include pad('gutter', 'xs', 'top');
+    @include pad('gutter', 'xs', 'bottom');
   }
 
   .contact-card__link:hover,
   .contact-card__link:focus-visible {
-    border-color: var(--button-border-hover);
-    background: var(--cursor-bg);
+    color: $point-primary;
+
+    .contact-card__title {
+      color: $point-primary;
+    }
+
     .contact-card__bottom svg {
-      stroke: var(--color-point-primary);
+      stroke: $point-primary;
       animation: contact-arrow-nudge 1.2s ease-in-out infinite;
     }
   }
@@ -97,26 +104,102 @@ body[data-page='contact'] {
     }
   }
 
+  @keyframes contact-handset-ring {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+
+    10% {
+      transform: translate(rem(-5px), rem(-8px)) rotate(-3deg);
+    }
+
+    20% {
+      transform: translate(rem(4px), rem(5px)) rotate(2.6deg);
+    }
+
+    30% {
+      transform: translate(rem(-4px), rem(-6px)) rotate(-2.4deg);
+    }
+
+    40% {
+      transform: translate(rem(3px), rem(4px)) rotate(2deg);
+    }
+
+    50% {
+      transform: translate(rem(-2px), rem(-4px)) rotate(-1.6deg);
+    }
+
+    60% {
+      transform: translate(rem(2px), rem(2px)) rotate(1.2deg);
+    }
+
+    72% {
+      transform: translate(rem(-1px), rem(-2px)) rotate(-0.8deg);
+    }
+  }
+
+  @keyframes contact-mobile-handset-ring {
+    0%,
+    80%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+
+    83% {
+      transform: translate(rem(-3px), rem(-5px)) rotate(-2.4deg);
+    }
+
+    86% {
+      transform: translate(rem(3px), rem(3px)) rotate(2.2deg);
+    }
+
+    89% {
+      transform: translate(rem(-3px), rem(-4px)) rotate(-2deg);
+    }
+
+    92% {
+      transform: translate(rem(2px), rem(2px)) rotate(1.6deg);
+    }
+
+    95% {
+      transform: translate(rem(-1px), rem(-2px)) rotate(-1deg);
+    }
+
+    97% {
+      transform: translate(rem(1px), rem(1px)) rotate(0.7deg);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .contact-hero:has(.contact-card__link:hover, .contact-card__link:focus-visible) {
+      .contact-hero__phone-svg #handset {
+        transform-box: fill-box;
+        transform-origin: 38% 34%;
+        animation: contact-handset-ring 0.74s ease-in-out infinite;
+      }
+    }
+  }
+
   .contact-card__icon {
     @include flex-center;
-    @include pad('pad', 'lg', 'top');
     width: fit-content;
-    color: $text-primary;
+    color: $text-secondary;
   }
 
   .contact-card__icon svg {
-    width: rem(34px);
-    height: rem(34px);
+    width: rem(22px);
+    height: rem(22px);
   }
 
   .contact-card__body {
     display: flex;
     flex-direction: column;
-    @include f-gap('gutter', 'sm');
+    gap: rem(4px);
   }
 
   .contact-card__title {
-    @include text-style('lg', 'bold', 'tight', 'tight');
+    @include text-style('base', 'bold', 'tight', 'tight');
     color: $text-primary;
   }
 
@@ -134,35 +217,14 @@ body[data-page='contact'] {
   }
 
   .contact-card__bottom span {
-    width: rem(48px);
+    display: none;
+    width: rem(24px);
     height: 1px;
   }
 
   .contact-card__bottom svg {
     width: rem(22px);
     height: rem(22px);
-  }
-
-  .contact-thanks {
-    flex: 1 0 auto;
-    @include pad('gap', 'sm', 'top');
-    @include pad('gap', 'md', 'bottom');
-  }
-
-  .contact-thanks__inner {
-    @include f-gap('gutter', 'md');
-  }
-
-  .contact-thanks__title {
-    @include text-style('lg', 'medium', 'tight', 'base');
-    color: $text-primary;
-    word-break: keep-all;
-  }
-
-  .contact-thanks__mark {
-    @include text-style('lg', 'medium');
-    color: $point-primary;
-    line-height: 1;
   }
 
   .site-footer--contact {
@@ -176,22 +238,66 @@ body[data-page='contact'] {
   }
 
   @include respond-down('tablet') {
-    .contact-list {
+    .contact-hero__inner {
       grid-template-columns: 1fr;
     }
 
+    .contact-hero__visual {
+      justify-content: center;
+      min-height: auto;
+    }
+
+    .contact-hero__phone {
+      width: min(100%, rem(460px));
+    }
+
     .contact-card__link {
-      min-height: rem(260px);
+      min-height: rem(88px);
     }
   }
 
   @include respond-down('mobile') {
-    .contact-card__link {
-      min-height: rem(230px);
+    .contact-hero__inner {
+      grid-template-columns: minmax(rem(100px), rem(160px)) minmax(0, 1fr);
+      align-items: center;
+      @include g-gap('gutter', 'md');
     }
 
-    .contact-thanks__title {
-      @include text-style('base', 'medium', 'tight', 'base');
+    .contact-hero__visual {
+      justify-content: center;
+    }
+
+    .contact-hero__phone {
+      width: min(100%, rem(96px));
+    }
+
+    .contact-hero__phone-img--telephone {
+      display: none;
+    }
+
+    .contact-hero__phone-svg {
+      display: none;
+    }
+
+    .contact-hero__phone-img--handset {
+      display: block;
+      transform-origin: 50% 34%;
+      animation: contact-mobile-handset-ring 4.8s ease-in-out infinite;
+    }
+
+    .contact-card__link {
+      grid-template-columns: auto minmax(0, 1fr);
+      min-height: rem(64px);
+      @include pad('gutter', 'sm', 'top');
+      @include pad('gutter', 'sm', 'bottom');
+    }
+
+    .contact-card__text {
+      display: none;
+    }
+
+    .contact-card__bottom {
+      display: none;
     }
 
     .site-footer--contact .site-footer__inner {
@@ -199,6 +305,12 @@ body[data-page='contact'] {
       flex-direction: column;
       min-height: rem(112px);
       @include f-gap('gutter', 'sm');
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-hero__phone-img--handset {
+      animation: none;
     }
   }
 }

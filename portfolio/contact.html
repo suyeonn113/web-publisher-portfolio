@@ -11,11 +11,16 @@
   <main id="main" class="contact-page transition-main" data-page="contact">
     <section class="contact-hero l-fullspan" aria-labelledby="contact-title">
       <div class="contact-hero__inner">
-        <header class="contact-hero__header">
-          <p class="contact-hero__eyebrow">CONTACT INFO</p>
+        <header class="contact-hero__header visually-hidden">
           <h1 id="contact-title" class="contact-hero__title">연락 방법</h1>
-          <p class="contact-hero__desc">문의 및 협업 연락을 환영합니다.</p>
         </header>
+
+        <div class="contact-hero__visual" aria-hidden="true">
+          <span class="contact-hero__phone" data-contact-phone aria-hidden="true">
+            <img class="contact-hero__phone-img contact-hero__phone-img--telephone" src="./assets/icons/telephone.svg" alt="">
+            <img class="contact-hero__phone-img contact-hero__phone-img--handset" src="./assets/icons/handset.svg" alt="">
+          </span>
+        </div>
 
         <ul class="contact-list" aria-label="연락 방법 목록">
           <li class="contact-card">
@@ -75,17 +80,6 @@
             </a>
           </li>
         </ul>
-      </div>
-    </section>
-
-    <section class="contact-thanks l-fullspan" aria-labelledby="contact-thanks-title">
-      <div class="contact-thanks__inner">
-        <p class="contact-thanks__eyebrow">THANK YOU</p>
-        <h2 id="contact-thanks-title" class="contact-thanks__title">
-          포트폴리오를 확인해주셔서 감사합니다.<br>
-          궁금한 점이 있다면 언제든 연락 주세요.
-        </h2>
-        <span class="contact-thanks__mark" aria-hidden="true">✦</span>
       </div>
     </section>
   </main>

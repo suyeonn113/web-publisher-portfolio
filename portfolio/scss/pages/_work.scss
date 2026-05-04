@@ -368,20 +368,6 @@ body[data-page="work"] {
   }
 }
 
-.work-page__filter-btn::before {
-  content: "";
-  position: absolute;
-  top: 10%;
-  left: 56.5%;
-  width: rem(36px);
-  aspect-ratio: 1;
-  background: url("../assets/images/work-hover.png") center / contain no-repeat;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 3;
-  transform: translate(-50%) rotate(18deg) scale(0.86);
-}
-
 .work-card::before {
   content: "";
   position: absolute;
@@ -394,10 +380,6 @@ body[data-page="work"] {
   pointer-events: none;
   z-index: 3;
   transform: translate(-50%) rotate(18deg) scale(0.86);
-}
-
-.work-page__filter-btn[aria-pressed=true]::before {
-  animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
 }
 
 @include respond-down('mobile') {
@@ -415,7 +397,6 @@ body[data-page="work"] {
     }
   }
 
-  .work-page__filter-btn:hover::before,
   .work-card:hover::before {
     animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
   }

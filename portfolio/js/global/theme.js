@@ -33,7 +33,7 @@ function applyTheme(theme) {
 
 function updateThemeToggle(theme) {
   const toggleButton = document.querySelector('.site-header__theme-toggle');
-  const icon = toggleButton?.querySelector('[data-lucide]');
+  const icon = toggleButton?.querySelector('.site-header__theme-icon');
 
   if (!toggleButton || !icon) return;
 
@@ -44,9 +44,6 @@ function updateThemeToggle(theme) {
     'aria-label',
     isDark ? '라이트모드 전환' : '다크모드 전환'
   );
-
-  icon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
-  renderThemeIcon();
 }
 
 export function initTheme() {
