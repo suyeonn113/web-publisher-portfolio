@@ -24,7 +24,7 @@
           <div class="work-page__filters" aria-label="작업물 필터">
             <!-- Device Filter -->
             <div class="work-page__filter-set">
-              <p id="work-page-device-filter-title" class="work-page__filter-title visually-hidden">Device</p>
+              <p id="work-page-device-filter-title" class="work-page__filter-title">Device</p>
               <div class="work-page__filter-group"
                   role="toolbar"
                   aria-labelledby="work-page-device-filter-title">
@@ -33,10 +33,6 @@
                         data-filter-group="device"
                         data-filter-value="mobile"
                         aria-pressed="false">
-                  <img class="work-filter__paper"
-                       src="assets/images/work-filters/paper-tag-01.png"
-                       alt=""
-                       aria-hidden="true">
                   <span class="work-filter__label">Mobile</span>
                 </button>
                 <button type="button"
@@ -58,7 +54,7 @@
 
             <!-- Type Filter -->
             <div class="work-page__filter-set">
-              <p id="work-page-type-filter-title" class="work-page__filter-title visually-hidden">Type</p>
+              <p id="work-page-type-filter-title" class="work-page__filter-title">Type</p>
               <div class="work-page__filter-group"
                   role="toolbar"
                   aria-labelledby="work-page-type-filter-title">
@@ -114,21 +110,19 @@
             총 <span class="work-page__count">0</span>개의 작업물이 있습니다.
           </p>
           <div class="work-page__list-wrap">
-            
             <ul id="work-list" class="work-page__list" aria-label="작업물 목록">
               <li class="work-page__loading">
                 <div class="home-work__loading work__loading">
                   <span class="loading-text">Loading...</span>
                 </div>
               </li>
-              <!-- Card Component-->
+              <!-- Project cards render here -->
             </ul>
           </div>
         </section>
       </div>
     </section>
   </main>
-  
   <div class="door-transition" aria-hidden="true">
     <div class="door-transition__panel"></div>
   </div>

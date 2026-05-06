@@ -3,44 +3,20 @@
 body[data-page="work"] {
   position: relative;
   min-height: 100vh;
-  background: $bg-work;
-  // Pattern
-  background-image: 
-    linear-gradient(var(--work-bg-line) 1px, transparent 1px); 
-  background-size: 100% 3px;
-  
-  &::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    filter: url(#noiseFilter);
-    opacity: 0.04;
-    z-index: -1;
-    pointer-events: none;
-  }
+  background: $bg-main;
+}
+
+body[data-page="work"] #main,
+body[data-page="work"] .site-footer {
+  position: relative;
+  z-index: 1;
 }
 
 .work-page {
+  position: relative;
   width: 100%;
+  min-height: 100vh;
   @include responsive-spacing('padding-top', 'page-offset', 'header');
-  @include pad('gap', 'md', 'bottom');
-}
-
-.work-page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  filter: url(#noiseFilter);
-  
-  opacity: 0.4; 
-  
-  pointer-events: none;
-  z-index: 0;
 }
 
 .work-page__inner {
@@ -55,6 +31,11 @@ body[data-page="work"] {
   min-width: 0;
   margin: 0 auto;
   @include f-gap('cluster', 'lg');
+}
+
+.work-page__body {
+  position: relative;
+  z-index: 1;
 }
 
 .work-page__header,
@@ -84,6 +65,7 @@ body[data-page="work"] {
   color: $text-secondary;
 }
 
+/* START work index filter */
 .work-page__controls {
   display: flex;
   flex-direction: column;
@@ -94,21 +76,28 @@ body[data-page="work"] {
 .work-page__filters {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   min-width: 0;
-  @include f-gap('gutter', 'md');
+  @include f-gap('gutter', 'lg');
 }
 
 .work-page__filter-set {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
   min-width: 0;
-  @include f-gap('gutter', 'sm');
+  @include f-gap('gutter', 'md');
 }
 
 .work-page__filter-title {
-  @include text-style('sm', 'medium');
-  color: $text-tertiary;
+  flex: 0 0 auto;
+  width: fit-content;
+  font-family: $font-main;
+  @include text-style('sm', 'semi-bold', 'wide');
+  line-height: 1.1;
+  color: $text-primary;
+  text-transform: uppercase;
 }
 
 .work-page__filter-group {
@@ -116,14 +105,34 @@ body[data-page="work"] {
   flex-wrap: wrap;
   align-items: center;
   min-width: 0;
-  @include f-gap('gutter', 'lg');
+  @include f-gap('gutter', 'sm');
 }
 
 .work-page__filter-btn {
   flex: 0 0 auto;
   position: relative;
   overflow: visible;
-  @include text-style('sm', 'medium');
+  padding: 0 0 rem(2px);
+  border: 0;
+  transform: none;
+
+  @include text-style('sm', 'medium', 'base');
+  color: $text-tertiary;
+  background: none;
+  box-shadow: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &[aria-pressed='true'] {
+    color: var(--color-point-primary);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover,
+    &:focus-visible {
+      color: $text-primary;
+    }
+  }
 }
 
 .work-filter__paper {
@@ -142,23 +151,34 @@ body[data-page="work"] {
 
 .work-page__sort {
   display: flex;
+  gap: rem(16px);
   align-items: center;
-  width: 100%;
+  width: fit-content;
   min-width: 0;
+
+  &::before {
+    content: "SORT";
+    flex: 0 0 auto;
+    font-family: $font-main;
+    @include text-style('sm', 'semi-bold', 'wide');
+    line-height: 1.1;
+    color: $text-primary;
+  }
 }
 
 .work-page__select {
-  width: 100%;
+  width: auto;
   min-width: 0;
-  min-height: rem(48px);
-  @include pad('pad', 'sm', 'x');
-  @include pad('pad', 'xs', 'y');
-  @include text-style('sm', 'medium');
+  min-height: auto;
+  padding: 0 rem(20px) rem(3px) 0;
+  @include text-style('sm', 'medium', 'base');
 
-  color: var(--button-text);
-  background: var(--button-surface-bg);
-  border: var(--button-border-width) solid var(--button-border);
-  box-shadow: var(--button-shadow);
+  color: $text-tertiary;
+  background: none;
+  border: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 
   appearance: none;
   -webkit-appearance: none;
@@ -168,13 +188,11 @@ body[data-page="work"] {
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      background: var(--button-surface-bg-hover);
-      border-color: var(--button-border-hover);
-      color: var(--button-text-hover);
-      box-shadow: var(--button-shadow-hover);
+      color: $text-primary;
     }
   }
 }
+/* END work index filter */
 
 
 /* ============================================================
@@ -185,17 +203,20 @@ body[data-page="work"] {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  height: max-content;
   @include f-gap('gap', 'sm');
 }
 
 .work-page__list-wrap {
   min-width: 0;
+  margin-top: rem(48px);
 }
 
 .work-page__list {
   display: flex;
   flex-wrap: wrap;
   position: relative;
+  z-index: 1;
   min-width: 0;
   @include f-gap('gutter', 'md');
 }
@@ -229,105 +250,95 @@ body[data-page="work"] {
 
 /* Card */
 .work-card {
+  --work-card-image-width: clamp(#{rem(240px)}, 18vw, #{rem(350px)});
+  --work-pin-left: 58%;
+  --work-pin-top: #{rem(-28px)};
+
   position: relative;
   height: 100%;
   overflow: visible;
+  transition: $tr-base;
 }
 
 .work-card__link {
   position: relative;
-  display: block;
+  display: inline-flex;
+  flex-direction: column;
   min-width: 0;
   height: auto;
-  overflow: hidden;
+  overflow: visible;
   transition: $tr-base;
 }
 
 .work-card__image {
-  width: clamp(rem(300px), 23vw, rem(430px));
+  display: block;
+  width: var(--work-card-image-width);
   @include respond-down('mobile') {
     width: 100%;
-    max-height: rem(520px);
+    max-height: rem(480px);
   }
 }
 
-/* BASE - Card Content Position */
+/* START work card caption */
 .work-card__body {
-  position: absolute;
-  left: rem(24px);
-  right: rem(24px);
-  bottom: rem(20px);
-  z-index: get-z('base');
-
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-
-  max-width: min(32rem, calc(100% - #{rem(48px)}));
+  width: var(--work-card-image-width);
+  margin-top: rem(12px);
+  @include f-gap('gutter', 'xs');
   transition: $tr-base;
 
-  @include respond-down('laptop') {
-    left: rem(20px);
-    right: rem(20px);
-    bottom: rem(18px);
-    max-width: min(28rem, calc(100% - #{rem(40px)}));
-  }
-
   @include respond-down('tablet') {
-    left: rem(16px);
-    right: rem(16px);
-    bottom: rem(16px);
-    max-width: calc(100% - #{rem(32px)});
-    @include f-gap('gutter', 'xs');
-  }
-
-  @include respond-down('mobile') {
-    left: rem(14px);
-    right: rem(14px);
-    bottom: rem(14px);
-    max-width: calc(100% - #{rem(28px)});
+    width: 100%;
   }
 }
+/* END work card caption */
 
-/* Card Content Position Override */
+/* START responsive card caption */
+@include respond-up('laptop') {
+  .work-card--portrait {
+    .work-card__link {
+      flex-direction: row;
+      align-items: flex-start;
+      @include f-gap('gutter', 'sm');
+    }
+
+    .work-card__body {
+      width: clamp(#{rem(112px)}, 9vw, #{rem(148px)});
+      margin-top: 0;
+    }
+  }
+}
+/* END responsive card caption */
+
+/* START work card image sizes */
 .work-page__item[data-project-id="p01"] {
-  .work-card__body {
-    max-width: 65%;
-    bottom: clamp(9%, 7vw, 11%);
-    left: 22%;
+  .work-card {
+    --work-card-image-width: clamp(#{rem(240px)}, 18vw, #{rem(350px)});
   }
 }
 
 .work-page__item[data-project-id="p02"] {
-  .work-card__image {
-    width: clamp(rem(300px), 21vw, rem(430px));
-  }
-  .work-card__body {
-    left: 7%;
-    bottom: clamp(1%, 8vw, 4%);
+  .work-card {
+    --work-card-image-width: clamp(#{rem(240px)}, 17vw, #{rem(350px)});
   }
 }
 
 .work-page__item[data-project-id="p03"] {
-  .work-card__image {
-    width: clamp(rem(490px), 35vw, rem(700px));
-  }
-  .work-card__body {
-    left: 5%;
-    bottom: clamp(54%, 17.5vw, 55%);
+  .work-card {
+    --work-card-image-width: clamp(#{rem(390px)}, 28vw, #{rem(560px)});
   }
 }
-/* END - Card Content Position Override */
+/* END work card image sizes */
 
 .work-card__title {
-  @include text-style('lg', 'extra-bold', 'tight');
-  line-height: 1.18;
-  color: var(--work-card-title);
+  @include text-style('sm', 'extra-bold', 'base', 'tight');
+  color: $text-primary;
 }
 
 .work-card__year {
   @include text-style('xs', 'medium', 'wide');
-  color: var(--work-card-title);
+  color: $text-secondary;
 }
 
 .work-card__meta {
@@ -336,15 +347,13 @@ body[data-page="work"] {
   align-items: flex-start;
   min-width: 0;
   max-width: 100%;
-  height: 1.4em;
 
   @include f-gap('gutter', 'xs');
-  overflow: hidden;
 
   @include text-style('xs', 'medium', 'wide');
-  color: var(--work-card-title);
+  color: $text-secondary;
 
-  .work-card__meta li {
+  li {
     flex: 0 0 auto;
     min-width: 0;
   }
@@ -371,8 +380,8 @@ body[data-page="work"] {
 .work-card::before {
   content: "";
   position: absolute;
-  top: clamp(rem(-38px), -2.5vw, rem(-40px));
-  left: clamp(56%, 58vw, 58%);
+  top: var(--work-pin-top);
+  left: var(--work-pin-left);
   width: rem(52px);
   aspect-ratio: 1;
   background: url("../assets/images/work-hover.png") center / contain no-repeat;
@@ -382,15 +391,12 @@ body[data-page="work"] {
   transform: translate(-50%) rotate(18deg) scale(0.86);
 }
 
-@include respond-down('mobile') {
-  .work-card.is-active::before {
-    top: rem(-15px);
-    animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
-  }
+.work-card.is-active::before {
+  animation: workPinDrop 0.32s cubic-bezier(0.16, 0.84, 0.28, 1.18) both;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .work-card__link:hover {
+  .work-card:hover {
     transform: translateY(rem(-18px));
     @include respond-down('mobile') {
       transform: translateY(0px);
@@ -411,18 +417,18 @@ body[data-page="work"] {
 @include respond-up('laptop') {
   .work-page__controls {
     flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: baseline;
   }
 
   .work-page__filters {
-    flex: 1 1 auto;
-    align-items: flex-end;
+    flex: 0 1 auto;
+    align-items: baseline;
   }
 
   .work-page__sort {
-    flex: 0 0 rem(220px);
-    width: auto;
-    align-self: flex-end;
+    flex: 0 0 auto;
+    align-self: baseline;
   }
 }

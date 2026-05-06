@@ -28,6 +28,8 @@ const state = {
 };
 
 let workPinObserver = null;
+let cleanupWorkPinMediaQuery = null;
+const mobilePinQuery = window.matchMedia('(max-width: 480px)');
 
 /* ========================================
    Utils
@@ -39,6 +41,68 @@ const getYear = (date = '') => (date.match(/\d{4}/)?.[0] || '');
 const getMeta = (project) => {
   return [project.device, project.projectType, ...(project.keywords || [])].filter(Boolean);
 };
+
+/* START responsive card caption */
+function syncCardCaptionPlacement(card) {
+  const image = card.querySelector('.work-card__image');
+  if (!image?.naturalWidth || !image?.naturalHeight) return;
+
+  const ratio = image.naturalWidth / image.naturalHeight;
+  const isPortrait = ratio < 0.82;
+
+  card.classList.toggle('work-card--portrait', isPortrait);
+}
+
+function applyCardCaptionPlacement(listEl) {
+  listEl.querySelectorAll('.work-card').forEach((card) => {
+    const image = card.querySelector('.work-card__image');
+    if (!image) return;
+
+    if (image.complete) {
+      syncCardCaptionPlacement(card);
+      return;
+    }
+
+    image.addEventListener('load', () => syncCardCaptionPlacement(card), { once: true });
+  });
+}
+/* END responsive card caption */
+
+/* START work pin position */
+function syncWorkPinPosition(card) {
+  const image = card.querySelector('.work-card__image');
+  if (!image) return;
+
+  const cardRect = card.getBoundingClientRect();
+  const imageRect = image.getBoundingClientRect();
+  const pinX = imageRect.left - cardRect.left + imageRect.width * 0.58;
+  const pinY = imageRect.top - cardRect.top - 28;
+
+  card.style.setProperty('--work-pin-left', `${Math.round(pinX)}px`);
+  card.style.setProperty('--work-pin-top', `${Math.round(pinY)}px`);
+}
+
+function applyWorkPinPositions(listEl) {
+  listEl.querySelectorAll('.work-card').forEach((card) => {
+    const image = card.querySelector('.work-card__image');
+    if (!image) return;
+
+    if (image.complete) {
+      syncWorkPinPosition(card);
+      return;
+    }
+
+    image.addEventListener('load', () => syncWorkPinPosition(card), { once: true });
+  });
+}
+
+function refreshWorkPinPositions() {
+  const listEl = document.querySelector(SELECTOR.list);
+  if (!listEl) return;
+
+  applyWorkPinPositions(listEl);
+}
+/* END work pin position */
 
 /* ========================================
    Filter / Sort
@@ -91,6 +155,8 @@ function render(list = []) {
     state.elements.set(item.dataset.projectId, item);
   });
 
+  applyCardCaptionPlacement(listEl);
+  applyWorkPinPositions(listEl);
   updateCount(list.length);
   toggleEmptyState(!list.length);
   initInteractiveTone();
@@ -100,7 +166,9 @@ function updateList(list = []) {
   const listEl = document.querySelector(SELECTOR.list);
   if (!listEl) return;
 
-  if (!state.elements.size) {
+  const hasCurrentCards = Boolean(listEl.querySelector('.work-page__item'));
+
+  if (!state.elements.size || !hasCurrentCards) {
     render(list);
     return;
   }
@@ -124,6 +192,8 @@ function updateList(list = []) {
     card.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
   });
 
+  applyCardCaptionPlacement(listEl);
+  applyWorkPinPositions(listEl);
   updateCount(list.length);
   toggleEmptyState(!list.length);
 
@@ -176,18 +246,45 @@ function initMobileWorkPinObserver() {
     workPinObserver = null;
   }
 
+  cleanupWorkPinMediaQuery?.();
+  cleanupWorkPinMediaQuery = null;
+
   const cards = document.querySelectorAll('.work-card');
   if (!cards.length) return;
 
+  const visibleCards = new Set();
+
+  function syncActivePin() {
+    cards.forEach((card) => card.classList.remove('is-active'));
+
+    if (!mobilePinQuery.matches) {
+      visibleCards.clear();
+      return;
+    }
+
+    const firstVisibleCard = [...cards].find((card) => visibleCards.has(card));
+    firstVisibleCard?.classList.add('is-active');
+  }
+
   workPinObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      entry.target.classList.toggle('is-active', entry.isIntersecting);
+      if (entry.isIntersecting) {
+        visibleCards.add(entry.target);
+      } else {
+        visibleCards.delete(entry.target);
+      }
     });
+
+    syncActivePin();
   }, {
     threshold: 0.55
   });
 
   cards.forEach((card) => workPinObserver.observe(card));
+
+  mobilePinQuery.addEventListener('change', syncActivePin);
+  cleanupWorkPinMediaQuery = () => mobilePinQuery.removeEventListener('change', syncActivePin);
+  syncActivePin();
 }
 
 function cardMarkup(project) {
@@ -260,6 +357,9 @@ export async function loadWorkCardList() {
   bindEvents();
   applyState({ animate: false });
   initMobileWorkPinObserver();
+
+  window.removeEventListener('resize', refreshWorkPinPositions);
+  window.addEventListener('resize', refreshWorkPinPositions);
 
 
   return true;

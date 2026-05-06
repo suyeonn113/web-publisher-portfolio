@@ -339,7 +339,7 @@ body[data-page='project-detail'] {
   }
 
   .project-summary__label {
-    @include text-style('lg', 'bold', 'tight', 'tight');
+    @include text-style('base', 'bold', 'tight', 'tight');
     color: $text-tertiary;
     letter-spacing: 0.04em;
     word-break: keep-all;
@@ -348,7 +348,7 @@ body[data-page='project-detail'] {
 
   .project-summary__text {
     max-width: rem(760px);
-    @include text-style('lg', 'bold', 'tight', 'tight');
+    @include text-style('lg', 'medium', 'tight', 'tight');
     color: $text-primary;
     word-break: keep-all;
     overflow-wrap: break-word;
@@ -593,7 +593,7 @@ body[data-page='project-detail'] {
   }
 
   .flow-panel__title {
-    @include text-style('lg', 'bold', 'tight');
+    @include text-style('base', 'bold', 'tight');
   }
 
   .flow-panel__layout {
@@ -915,7 +915,7 @@ body[data-page='project-detail'] {
   }
 
   .highlight-display__title {
-    @include text-style('lg', 'bold', 'tight', 'tight');
+    @include text-style('lg', 'medium', 'tight', 'tight');
     color: $text-primary;
     word-break: keep-all;
     overflow: hidden;

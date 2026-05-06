@@ -25,7 +25,6 @@ import { renderFooter } from "./components/footer.js";
 import { loadWorkCardList } from './components/WorkCardList.js';
 import { initWorkSlider } from './components/workSlider.js';
 import { loadProjectDetail } from './components/ProjectDetail.js';
-import { initContactPhone } from './components/contactPhone.js';
 
 // Animations
 import { initHeroText } from './animations/heroText.js';
@@ -86,9 +85,6 @@ async function initPage() {
     }
   }
 
-  if (page === 'contact') {
-    initContactPhone();
-  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
