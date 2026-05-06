@@ -332,12 +332,12 @@ body[data-page="work"] .site-footer {
 /* END work card image sizes */
 
 .work-card__title {
-  @include text-style('sm', 'extra-bold', 'base', 'tight');
+  @include text-style('base', 'extra-bold', 'base', 'tight');
   color: $text-primary;
 }
 
 .work-card__year {
-  @include text-style('xs', 'medium', 'wide');
+  @include text-style('sm', 'medium', 'wide');
   color: $text-secondary;
 }
 
@@ -350,7 +350,7 @@ body[data-page="work"] .site-footer {
 
   @include f-gap('gutter', 'xs');
 
-  @include text-style('xs', 'medium', 'wide');
+  @include text-style('sm', 'medium', 'wide');
   color: $text-secondary;
 
   li {
