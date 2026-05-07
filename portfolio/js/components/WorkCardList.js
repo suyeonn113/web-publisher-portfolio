@@ -3,10 +3,7 @@
 ======================================== */
 
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
-import Flip from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/Flip/+esm";
 import { initInteractiveTone } from '../global/hoverTone.js';
-
-gsap.registerPlugin(Flip);
 
 /* ========================================
    Selector / State
@@ -35,6 +32,9 @@ let cleanupWorkPinMediaQuery = null;
 const mobilePinQuery = window.matchMedia('(max-width: 480px)');
 let workMasonryResizeObserver = null;
 let workMasonryFrame = null;
+let isWorkListAnimating = false;
+let workListTimeline = null;
+let workListUpdateId = 0;
 
 /* ========================================
    Utils
@@ -79,6 +79,25 @@ function applyCardCaptionPlacement(listEl) {
 }
 /* END responsive card caption */
 
+function waitForWorkImages(cards = []) {
+  const images = cards
+    .map((card) => card.querySelector('.work-card__image'))
+    .filter(Boolean);
+
+  return Promise.all(images.map((image) => {
+    if (image.complete) {
+      return image.decode?.().catch(() => {}) || Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      image.addEventListener('load', () => {
+        image.decode?.().catch(() => {}).finally(resolve);
+      }, { once: true });
+      image.addEventListener('error', resolve, { once: true });
+    });
+  }));
+}
+
 /* START work card back thumbnail */
 function applyCardBackThumbnails(listEl) {
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -91,6 +110,8 @@ function applyCardBackThumbnails(listEl) {
 
     const backSrc = getBackThumbnail(frontSrc);
     if (backSrc === frontSrc) return;
+
+    image.dataset.frontSrc = frontSrc;
 
     const backImage = new Image();
 
@@ -117,13 +138,20 @@ function applyCardBackThumbnails(listEl) {
             ease: 'expo.out',
             clearProps: 'opacity,visibility,transform'
           });
+        card._workHoverTween = flipTween;
       };
 
       card.addEventListener('mouseenter', () => {
+        if (isWorkListAnimating) return;
         flipTo(backSrc);
       });
 
       card.addEventListener('mouseleave', () => {
+        if (isWorkListAnimating) {
+          image.src = frontSrc;
+          return;
+        }
+
         flipTo(frontSrc);
       });
     }, { once: true });
@@ -169,6 +197,23 @@ function refreshWorkPinPositions() {
 }
 /* END work pin position */
 
+function resetWorkHoverThumbnails(cards = []) {
+  cards.forEach((card) => {
+    const image = card.querySelector('.work-card__image');
+    const frontSrc = image?.dataset.frontSrc;
+
+    card._workHoverTween?.kill();
+
+    if (image && frontSrc && image.getAttribute('src') !== frontSrc) {
+      image.src = frontSrc;
+    }
+
+    if (image) {
+      gsap.set(image, { clearProps: 'opacity,visibility,transform' });
+    }
+  });
+}
+
 /* START masonry layout */
 function getListGap(listEl) {
   const styles = window.getComputedStyle(listEl);
@@ -180,25 +225,42 @@ function getListGap(listEl) {
 
 function getVisibleItems(listEl) {
   return [...listEl.querySelectorAll('.work-page__item')]
-    .filter((item) => item.style.display !== 'none' && item.getAttribute('aria-hidden') !== 'true');
+    .filter((item) => item.getAttribute('aria-hidden') !== 'true');
 }
 
-function layoutWorkMasonry(listEl) {
-  const items = getVisibleItems(listEl);
-
-  if (!items.length) {
-    listEl.style.height = '';
-    return;
-  }
-
+function calculateWorkMasonry(listEl, items = getVisibleItems(listEl)) {
   const { columnGap, rowGap } = getListGap(listEl);
   const listWidth = listEl.clientWidth;
+  const shouldStack = listWidth <= 560;
   const placed = [];
+  const positions = new Map();
+
+  if (shouldStack) {
+    let y = 0;
+
+    items.forEach((item) => {
+      const itemHeight = item.offsetHeight || item.getBoundingClientRect().height;
+
+      positions.set(item, { x: 0, y: Math.round(y) });
+      placed.push({
+        x: 0,
+        y,
+        width: listWidth,
+        height: itemHeight,
+      });
+      y += itemHeight + rowGap;
+    });
+
+    return {
+      height: Math.max(0, Math.ceil(y ? y - rowGap : 0)),
+      positions,
+      isStacked: true
+    };
+  }
 
   items.forEach((item) => {
-    const rect = item.getBoundingClientRect();
-    const itemWidth = Math.min(rect.width, listWidth);
-    const itemHeight = rect.height;
+    const itemWidth = Math.min(item.offsetWidth || item.getBoundingClientRect().width, listWidth);
+    const itemHeight = item.offsetHeight || item.getBoundingClientRect().height;
     const candidates = [0, ...placed.map((entry) => entry.x + entry.width + columnGap)]
       .filter((x) => x + itemWidth <= listWidth + 1);
     const target = candidates
@@ -211,8 +273,10 @@ function layoutWorkMasonry(listEl) {
       })
       .sort((a, b) => a.y - b.y || a.x - b.x)[0] || { x: 0, y: 0 };
 
-    item.style.transform = `translate(${Math.round(target.x)}px, ${Math.round(target.y)}px)`;
-    item.classList.add('is-masonry-ready');
+    const x = Math.round(target.x);
+    const y = Math.round(target.y);
+
+    positions.set(item, { x, y });
     placed.push({
       x: target.x,
       y: target.y,
@@ -221,13 +285,44 @@ function layoutWorkMasonry(listEl) {
     });
   });
 
-  const height = Math.max(...placed.map((entry) => entry.y + entry.height));
-  listEl.style.height = `${Math.max(0, Math.ceil(height))}px`;
+  const height = placed.length
+    ? Math.max(...placed.map((entry) => entry.y + entry.height))
+    : 0;
+
+  return {
+    height: Math.max(0, Math.ceil(height)),
+    positions,
+    isStacked: false
+  };
+}
+
+function setWorkItemPosition(item, { x, y }) {
+  item.dataset.masonryX = String(x);
+  item.dataset.masonryY = String(y);
+  gsap.set(item, { x, y });
+}
+
+function layoutWorkMasonry(listEl) {
+  const items = getVisibleItems(listEl);
+
+  if (!items.length) {
+    listEl.style.height = '';
+    return;
+  }
+
+  const layout = calculateWorkMasonry(listEl, items);
+
+  layout.positions.forEach((position, item) => {
+    setWorkItemPosition(item, position);
+  });
+
+  listEl.style.height = `${layout.height}px`;
   applyWorkPinPositions(listEl);
 }
 
 function queueWorkMasonryLayout(listEl = document.querySelector(SELECTOR.list)) {
   if (!listEl) return;
+  if (isWorkListAnimating) return;
 
   window.cancelAnimationFrame(workMasonryFrame);
   workMasonryFrame = window.requestAnimationFrame(() => {
@@ -249,7 +344,7 @@ function observeWorkMasonry(listEl) {
 /* ========================================
    Filter / Sort
 ======================================== */
-function applyState() {
+async function applyState() {
   let list = [...state.projects];
 
   list = list.filter((project) => {
@@ -269,7 +364,7 @@ function applyState() {
 
   state.filtered = list;
   syncFilterButtons();
-  updateList(list);
+  await updateList(list);
 }
 
 function syncFilterButtons() {
@@ -322,9 +417,10 @@ function render(list = []) {
   initInteractiveTone();
 }
 
-function updateList(list = []) {
+async function updateList(list = []) {
   const listEl = document.querySelector(SELECTOR.list);
   if (!listEl) return;
+  const updateId = ++workListUpdateId;
 
   const hasCurrentCards = Boolean(listEl.querySelector('.work-page__item'));
 
@@ -333,11 +429,39 @@ function updateList(list = []) {
     return;
   }
 
+  if (workListTimeline) {
+    workListTimeline.kill();
+    workListTimeline = null;
+    listEl.style.transition = '';
+    isWorkListAnimating = false;
+  }
+
+  isWorkListAnimating = true;
+
+  const previousListHeight = listEl.offsetHeight;
+  const previousListTransition = listEl.style.transition;
+  const previousListPointerEvents = listEl.style.pointerEvents;
   const cards = state.projects
     .map((project) => state.elements.get(project.id))
     .filter(Boolean);
   const nextIds = new Set(list.map((project) => project.id));
-  const flipState = Flip.getState(cards);
+  const previousLayout = new Map(cards.map((card) => [
+    card,
+    {
+      x: Number(gsap.getProperty(card, 'x')) || 0,
+      y: Number(gsap.getProperty(card, 'y')) || 0,
+      isVisible: card.getAttribute('aria-hidden') !== 'true'
+    }
+  ]));
+  const enteringCards = [];
+  const stayingCards = [];
+  const leavingCards = [];
+
+  listEl.style.pointerEvents = 'none';
+  cards.forEach((card) => card.classList.remove('is-masonry-ready'));
+  gsap.killTweensOf(cards);
+  gsap.set(cards, { visibility: 'visible' });
+  resetWorkHoverThumbnails(cards);
 
   list.forEach((project) => {
     const card = state.elements.get(project.id);
@@ -348,43 +472,127 @@ function updateList(list = []) {
 
   cards.forEach((card) => {
     const isVisible = nextIds.has(card.dataset.projectId);
-    card.style.display = isVisible ? '' : 'none';
-    card.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+    const wasVisible = previousLayout.get(card)?.isVisible;
+
+    if (isVisible && wasVisible) {
+      stayingCards.push(card);
+    } else if (isVisible) {
+      enteringCards.push(card);
+    } else if (wasVisible) {
+      leavingCards.push(card);
+    }
+
+    card.style.display = '';
   });
 
-  applyCardCaptionPlacement(listEl);
-  layoutWorkMasonry(listEl);
+  if (enteringCards.length) {
+    await waitForWorkImages(enteringCards);
+    if (updateId !== workListUpdateId) return;
+  }
+
+  window.cancelAnimationFrame(workMasonryFrame);
+
+  enteringCards.forEach((card) => syncCardCaptionPlacement(card));
+
+  const nextItems = list
+    .map((project) => state.elements.get(project.id))
+    .filter(Boolean);
+  const nextLayout = calculateWorkMasonry(listEl, nextItems);
+
+  enteringCards.forEach((card) => {
+    const next = nextLayout.positions.get(card) || { x: 0, y: 0 };
+
+    gsap.set(card, {
+      x: next.x,
+      y: next.y,
+      opacity: 0,
+      scale: 1,
+      force3D: true
+    });
+  });
+
+  cards.forEach((card) => {
+    card.setAttribute('aria-hidden', nextIds.has(card.dataset.projectId) ? 'false' : 'true');
+  });
+
+  listEl.style.transition = 'none';
+  gsap.set(listEl, { height: previousListHeight });
   observeWorkMasonry(listEl);
   updateCount(list.length);
   toggleEmptyState(!list.length);
 
-  Flip.from(flipState, {
-    duration: 0.72,
-    ease: 'power2.inOut',
-    absolute: true,
-    scale: true,
-    stagger: 0.045,
-    prune: true,
-    onEnter: (elements) => gsap.fromTo(
-      elements,
-      { autoAlpha: 0, scale: 0.88, filter: 'blur(16px)' },
-      {
-        autoAlpha: 1,
-        scale: 1,
-        filter: 'blur(0px)',
-        duration: 0.62,
-        ease: 'power2.out',
-        clearProps: 'filter'
-      }
-    ),
-    onLeave: (elements) => gsap.to(elements, {
-      autoAlpha: 0,
-      scale: 0.88,
-      filter: 'blur(16px)',
-      duration: 0.42,
-      ease: 'power2.in'
-    }),
-    onComplete: () => queueWorkMasonryLayout(listEl)
+  workListTimeline = gsap.timeline({
+    defaults: { ease: 'power2.inOut' },
+    onUpdate: () => resetWorkHoverThumbnails(cards),
+    onComplete: () => {
+      resetWorkHoverThumbnails(cards);
+      listEl.style.transition = previousListTransition;
+      listEl.style.pointerEvents = previousListPointerEvents;
+      workListTimeline = null;
+      isWorkListAnimating = false;
+      queueWorkMasonryLayout(listEl);
+    }
+  });
+
+  stayingCards.forEach((card, index) => {
+    const previous = previousLayout.get(card);
+    const next = nextLayout.positions.get(card) || previous;
+
+    gsap.set(card, { x: previous.x, y: previous.y, opacity: 1, scale: 1 });
+    workListTimeline.to(card, {
+      x: next.x,
+      y: next.y,
+      duration: 0.64,
+      onComplete: () => {
+        card.dataset.masonryX = String(next.x);
+        card.dataset.masonryY = String(next.y);
+      },
+      clearProps: 'scale'
+    }, index * 0.025);
+  });
+
+  workListTimeline.to(listEl, {
+    height: nextLayout.height,
+    duration: 0.64
+  }, 0);
+
+  enteringCards.forEach((card, index) => {
+    const next = nextLayout.positions.get(card) || { x: 0, y: 0 };
+    const fromY = nextLayout.isStacked ? next.y : next.y + 18;
+
+    gsap.set(card, {
+      x: next.x,
+      y: fromY,
+      opacity: 0,
+      scale: nextLayout.isStacked ? 1 : 0.96
+    });
+
+    workListTimeline.to(card, {
+      x: next.x,
+      y: next.y,
+      opacity: 1,
+      scale: 1,
+      duration: nextLayout.isStacked ? 0.36 : 0.5,
+      ease: 'power2.out',
+      onComplete: () => {
+        card.dataset.masonryX = String(next.x);
+        card.dataset.masonryY = String(next.y);
+      },
+      clearProps: 'opacity,scale'
+    }, 0.08 + index * 0.04);
+  });
+
+  leavingCards.forEach((card, index) => {
+    const previous = previousLayout.get(card);
+
+    gsap.set(card, { x: previous.x, y: previous.y, opacity: 1, scale: 1 });
+    workListTimeline.to(card, {
+      opacity: 0,
+      scale: 0.96,
+      duration: 0.24,
+      ease: 'power2.in',
+      clearProps: 'scale'
+    }, index * 0.025);
   });
 }
 
@@ -460,7 +668,7 @@ function cardMarkup(project) {
     <li class="work-page__item" data-project-id="${project.id}">
       <article class="work-card">
         <a href="${detailHref}" class="work-card__link">
-          <img class="work-card__image" src="${thumb}" alt="${previewAlt}" loading="lazy">
+          <img class="work-card__image" src="${thumb}" alt="${previewAlt}" decoding="async">
           <div class="work-card__body">
             <h3 class="work-card__title">${title}</h3>
             <p class="work-card__year">${year}</p>

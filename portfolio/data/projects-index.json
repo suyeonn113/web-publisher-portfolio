@@ -1,23 +1,17 @@
 {
   "guide": {
-    "note": "목록 UI는 projects만 읽고, guide는 작성 참고용입니다.",
+    "note": "The work list UI reads projects only. This guide is for authoring reference.",
     "summary": {
-      "id": "고유 ID",
-      "slug": "상세 연결용 슬러그",
-      "title": "목록에 보일 제목",
+      "id": "Unique ID",
+      "slug": "Detail page slug",
+      "title": "Title shown in the list",
       "date": "YYYY-MM",
-      "thumbnail": "목록 썸네일 경로",
-      "device":      ["Mobile",  
-                      "PC", 
-                      "Responsive"],
-      "projectType": ["Brand", 
-                      "E-commerce", 
-                      "Personal", 
-                      "Editorial", 
-                      "Public"],
-      "keywords": "목록 메타용 키워드 배열",
-      "techStack": "아이콘 표시용 기술 배열",
-      "featuredOrder": "Featured 정렬 순서"
+      "thumbnail": "Thumbnail image path",
+      "device": ["Mobile", "PC", "Responsive"],
+      "projectType": ["Brand", "E-commerce", "Personal", "Editorial", "Public"],
+      "keywords": "List metadata keyword array",
+      "techStack": "Technology icon array",
+      "featuredOrder": "Featured sort order"
     },
     "techStackExamples": [
       "HTML",
@@ -36,9 +30,6 @@
       "git"
     ]
   },
-
-
-
   "projects": [
     {
       "id": "p01",
@@ -51,8 +42,6 @@
       "keywords": ["Minimal", "Mono-Tone"],
       "featuredOrder": 2
     },
-
-
     {
       "id": "p02",
       "slug": "seoul-youth-center",
@@ -64,8 +53,6 @@
       "keywords": ["A11y", "Grid-System", "Standard"],
       "featuredOrder": 1
     },
-
-
     {
       "id": "p03",
       "slug": "portfolio",
@@ -77,27 +64,23 @@
       "keywords": ["Editorial", "Interactive"],
       "featuredOrder": 3
     },
-
-
     {
       "id": "p04",
       "slug": "airline",
       "title": "Airline",
       "date": "2026-05",
-      "thumbnail": "assets/images/work-thumbnails/p04.png",
+      "thumbnail": "assets/images/work-thumbnails/p04-thumb.png",
       "device": "PC",
       "projectType": "Brand",
       "keywords": ["Impactful", "Modern"],
       "featuredOrder": 4
     },
-
-
     {
       "id": "p05",
       "slug": "team-project",
       "title": "5",
       "date": "2026-05",
-      "thumbnail": "assets/images/work-thumbnails/p05.png",
+      "thumbnail": "assets/images/work-thumbnails/p05-thumb.png",
       "device": "Responsive",
       "projectType": "Brand",
       "keywords": ["Keyword", "Keyword"],

@@ -397,7 +397,7 @@ body[data-page="work"] .site-footer {
   position: absolute;
   top: var(--work-pin-top);
   left: var(--work-pin-left);
-  width: rem(52px);
+  width: clamp(#{rem(40px)}, calc(1.8rem + 2vw), #{rem(52px)});
   aspect-ratio: 1;
   background: url("../assets/images/work-hover.png") center / contain no-repeat;
   opacity: 0;

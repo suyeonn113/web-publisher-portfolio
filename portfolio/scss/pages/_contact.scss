@@ -204,7 +204,7 @@ body[data-page='contact'] {
   }
 
   .contact-card__note {
-    align-self: left;
+    align-self: flex-start;
     max-width: 80%;
     margin-top: auto;
     color: $text-primary;
@@ -249,21 +249,21 @@ body[data-page='contact'] {
 
   @include respond-down('tablet') {
     .contact {
-      @include responsive-spacing('padding-bottom', 'pad', 'lg');
+      @include responsive-spacing('padding-bottom', 'pad', 'md');
     }
 
     .contact-cardcase {
-      width: clamp(rem(140px), 28vw, rem(190px));
+      width: clamp(rem(100px), 18vw, rem(150px));
 
       &.is-open {
-        width: clamp(rem(60px), 15vw, rem(110px));
+        width: clamp(rem(40px), 10vw, rem(90px));
       }
     }
 
     .contact-list {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 35%;
+      left: 35%;
       grid-template-columns: minmax(0, rem(460px));
       justify-content: center;
       width: min(calc(100% - #{rem(64px)}), rem(500px));
@@ -299,7 +299,8 @@ body[data-page='contact'] {
     }
 
     .contact-card__link {
-      aspect-ratio: 16 / 9;
+      aspect-ratio: auto;
+      min-height: clamp(rem(168px), 46vw, rem(208px));
     }
 
     .contact-card__title {
