@@ -31,10 +31,10 @@ export function renderHeader() {
                     class="site-header__theme-toggle"
                     aria-label="다크모드 전환"
                     aria-pressed="false">
-              <svg class="site-header__theme-icon icon--dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.67 516.92" fill="currentColor">
+              <svg class="site-header__theme-icon icon--light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.67 516.92" fill="currentColor">
                 <path d="m317.51,463.31c-111.58,0-202.01-90.56-201.8-202.19S207.82,59.58,317.74,59.71c90.56.1,167.15,59.86,192.58,142.09.07.22.39.13.34-.09C484.82,86.36,381.87.14,258.76,0,116.25-.16,0,115.95,0,258.46s115.72,258.46,258.46,258.46c113.97,0,210.71-73.78,245.07-176.18.07-.22-.24-.34-.33-.13-30.77,72.13-102.32,122.7-185.7,122.7Z"/>
               </svg>
-              <svg class="site-header__theme-icon icon--light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.07 491.05" fill="currentColor">
+              <svg class="site-header__theme-icon icon--dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510.07 491.05" fill="currentColor">
                 <path d="m254.95,491.05c-13.69-39.5-8.52-85.39-12.13-127.25-4.51-19.85,4.93-20.33,22.14-18.97,6.16,39.33,3.6,106.9-10.01,146.21Z"/>
                 <path d="m336.07,248.35c2.34,101.88-159.91,102.17-159.27,1.83-6.87-105.14,165.31-100.06,159.27-1.83Z"/>
                 <path d="m26.06,158.72c43.67,12.43,108.87,21.1,138.6,49.09-6,5.74-3.14,27.43-14.43,21.74-17.61-7.53-35.26-14.98-52.73-22.82-10.79-8.16-103.31-37.63-71.43-48.01Z"/>

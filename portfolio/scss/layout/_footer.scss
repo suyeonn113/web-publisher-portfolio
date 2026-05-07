@@ -3,7 +3,7 @@
 .site-footer {
   position: relative;
   display: block;
-  @include text-style('base');
+  @include text-style('sm', 'regular', 'base', 'tight');
   z-index: get-z('toast');
 }
 

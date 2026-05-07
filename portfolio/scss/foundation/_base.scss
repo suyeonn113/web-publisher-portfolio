@@ -182,7 +182,9 @@ input[type="search"]::-webkit-search-decoration {
 ============================================================ */
 
 :focus-visible {
-  outline: 2px solid $point-primary;
+  outline: 2px solid var(--color-focus-ring);
+  box-shadow:
+    0 0 0 4px var(--color-focus-shadow);
   outline-offset: 3px;
 }
 

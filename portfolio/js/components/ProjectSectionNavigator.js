@@ -125,8 +125,16 @@ function scrollToSection(root, sectionName) {
   }, prefersReducedMotion ? 0 : 450);
 }
 
+function isFlowIslandViewport() {
+  return window.matchMedia('(max-width: 767px)').matches;
+}
+
 export function initProjectSectionNavigator(root) {
   if (!root) return null;
+
+  if (document.body.dataset.page !== 'project-detail') {
+    return null;
+  }
 
   const button = createSkipButton();
   const triggers = [];
@@ -135,10 +143,8 @@ export function initProjectSectionNavigator(root) {
     const section = getSection(root, item.current);
     if (!section) return;
 
-    const isMobile = window.matchMedia('(max-width: 767px)').matches;
-
     const handleEnter = () => {
-      if (isMobile && item.current === 'key-flows') {
+      if (isFlowIslandViewport() && item.current === 'key-flows') {
         updateSkipButton(button, null);
         return;
       }
@@ -155,6 +161,24 @@ export function initProjectSectionNavigator(root) {
 
     triggers.push(trigger);
   });
+
+  const keyFlowsSection = getSection(root, 'key-flows');
+
+  if (keyFlowsSection) {
+    triggers.push(
+      ScrollTrigger.create({
+        trigger: keyFlowsSection,
+        start: () => `top bottom-=${96}`,
+        end: 'bottom bottom',
+        onEnter: () => {
+          if (isFlowIslandViewport()) updateSkipButton(button, null);
+        },
+        onEnterBack: () => {
+          if (isFlowIslandViewport()) updateSkipButton(button, null);
+        }
+      })
+    );
+  }
 
   const summarySection = getSection(root, 'summary');
 

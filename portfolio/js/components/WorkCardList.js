@@ -19,11 +19,14 @@ const SELECTOR = {
   empty: '.work-page__empty'
 };
 
+const DEFAULT_FILTERS = { device: null, type: null };
+const DEFAULT_SORT = 'featured';
+
 const state = {
   projects: [],
   filtered: [],
-  filters: { device: null, type: null },
-  sort: 'featured',
+  filters: { ...DEFAULT_FILTERS },
+  sort: DEFAULT_SORT,
   elements: new Map()
 };
 
@@ -41,6 +44,8 @@ const getYear = (date = '') => (date.match(/\d{4}/)?.[0] || '');
 const getMeta = (project) => {
   return [project.device, project.projectType, ...(project.keywords || [])].filter(Boolean);
 };
+
+const getBackThumbnail = (src = '') => src.replace(/(\.[^./?#]+)([?#].*)?$/, '-back$1$2');
 
 /* START responsive card caption */
 function syncCardCaptionPlacement(card) {
@@ -67,6 +72,60 @@ function applyCardCaptionPlacement(listEl) {
   });
 }
 /* END responsive card caption */
+
+/* START work card back thumbnail */
+function applyCardBackThumbnails(listEl) {
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!canHover) return;
+
+  listEl.querySelectorAll('.work-card__image').forEach((image) => {
+    const card = image.closest('.work-card');
+    const frontSrc = image.getAttribute('src');
+    if (!card || !frontSrc) return;
+
+    const backSrc = getBackThumbnail(frontSrc);
+    if (backSrc === frontSrc) return;
+
+    const backImage = new Image();
+
+    backImage.addEventListener('load', () => {
+      let flipTween = null;
+
+      const flipTo = (nextSrc) => {
+        flipTween?.kill();
+
+        flipTween = gsap.timeline({
+          defaults: { duration: 0.07, ease: 'power3.out' }
+        })
+          .to(image, {
+            autoAlpha: 0.72,
+            scale: 0.992,
+            onComplete: () => {
+              image.src = nextSrc;
+            }
+          })
+          .to(image, {
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.22,
+            ease: 'power2.out',
+            clearProps: 'opacity,visibility,transform'
+          });
+      };
+
+      card.addEventListener('mouseenter', () => {
+        flipTo(backSrc);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        flipTo(frontSrc);
+      });
+    }, { once: true });
+
+    backImage.src = backSrc;
+  });
+}
+/* END work card back thumbnail */
 
 /* START work pin position */
 function syncWorkPinPosition(card) {
@@ -140,6 +199,22 @@ function syncFilterButtons() {
   });
 }
 
+function resetControls() {
+  state.filtered = [];
+  state.filters = { ...DEFAULT_FILTERS };
+  state.sort = DEFAULT_SORT;
+  state.elements.clear();
+
+  document.querySelectorAll(SELECTOR.filterBtn).forEach((btn) => {
+    btn.setAttribute('aria-pressed', 'false');
+  });
+
+  const sortEl = document.querySelector(SELECTOR.sort);
+  if (sortEl) {
+    sortEl.value = DEFAULT_SORT;
+  }
+}
+
 /* ========================================
    Render
 ======================================== */
@@ -156,6 +231,7 @@ function render(list = []) {
   });
 
   applyCardCaptionPlacement(listEl);
+  applyCardBackThumbnails(listEl);
   applyWorkPinPositions(listEl);
   updateCount(list.length);
   toggleEmptyState(!list.length);
@@ -336,6 +412,8 @@ function bindEvents() {
    Init
 ======================================== */
 export async function loadWorkCardList() {
+  resetControls();
+
   const response = await fetch('./data/projects-index.json');
   const data = await response.json();
   const projects = Array.isArray(data) ? data : data?.projects;

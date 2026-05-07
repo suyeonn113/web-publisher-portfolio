@@ -209,7 +209,6 @@ body[data-page="work"] .site-footer {
 
 .work-page__list-wrap {
   min-width: 0;
-  margin-top: rem(48px);
 }
 
 .work-page__list {
@@ -218,7 +217,7 @@ body[data-page="work"] .site-footer {
   position: relative;
   z-index: 1;
   min-width: 0;
-  @include f-gap('gutter', 'md');
+  @include f-gap('gutter', 'lg');
 }
 
 .work-page__item,
@@ -314,13 +313,13 @@ body[data-page="work"] .site-footer {
 /* START work card image sizes */
 .work-page__item[data-project-id="p01"] {
   .work-card {
-    --work-card-image-width: clamp(#{rem(240px)}, 18vw, #{rem(350px)});
+    --work-card-image-width: clamp(#{rem(360px)}, 30vw, #{rem(560px)});
   }
 }
 
 .work-page__item[data-project-id="p02"] {
   .work-card {
-    --work-card-image-width: clamp(#{rem(240px)}, 17vw, #{rem(350px)});
+    --work-card-image-width: clamp(#{rem(360px)}, 18vw, #{rem(350px)});
   }
 }
 
@@ -387,7 +386,7 @@ body[data-page="work"] .site-footer {
   background: url("../assets/images/work-hover.png") center / contain no-repeat;
   opacity: 0;
   pointer-events: none;
-  z-index: 3;
+  z-index: get-z('overlay');
   transform: translate(-50%) rotate(18deg) scale(0.86);
 }
 

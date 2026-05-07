@@ -20,12 +20,13 @@
 
 
   /* Accent */
-  --color-point-primary: #2F3540;
-  --color-point-highlight: #CFC6B4;
-
+  --color-point-primary: #d8421d;
+  --color-focus-ring: #E7C98B;
+  --color-focus-shadow: rgba(231, 201, 139, 0.22);
   --shadow-glow:
-    0 0 4px rgba(166, 75, 60, 0.22),
-    0 0 12px rgba(166, 75, 60, 0.12);
+    0 0 0 3px rgba(255, 122, 58, 0.12),
+    0 0 14px rgba(255, 153, 51, 0.32),
+    0 0 32px rgba(255, 214, 102, 0.24);
 
   /* ============================================================
      Component
@@ -33,35 +34,49 @@
 
   /* Button */
   --button-text: var(--color-text-secondary);
-  --button-text-hover: var(--color-point-primary);
-  --button-text-active: var(--color-text-inverse);
+  --button-text-hover: var(--color-text-primary);
+  --button-text-active: #2f3540;
   --button-letter-spacing: 0.01em;
   --button-border-width: 1px;
 
-  --button-surface-bg: rgba(255, 251, 246, 0.74);
-  --button-surface-bg-hover: rgba(248, 244, 236, 0.72);
-  --button-surface-bg-active: var(--color-point-primary);
+  --button-surface-bg: rgba(255, 255, 255, 0.62);
+  --button-surface-bg-hover:
+    linear-gradient(
+      135deg,
+      rgba(255, 250, 246, 0.9) 0%,
+      rgba(255, 232, 214, 0.54) 46%,
+      rgba(255, 188, 140, 0.22) 100%
+    );
+
+  --button-surface-bg-active:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 248, 0.9) 0%,
+      rgba(255, 248, 222, 0.46) 45%,
+      rgba(255, 232, 170, 0.22) 100%
+    );
 
   --button-border: rgba(24, 32, 44, 0.08);
-  --button-border-hover: var(--color-text-tertiary);
-  --button-border-active: var(--button-border-hover);
+  --button-border-hover: rgba(255, 132, 76, 0.34);
+  --button-border-active: rgba(255, 196, 82, 0.38);
 
   --button-shadow-hover:
-    inset 0 1px 0 rgba(255,255,255,0.84),
-    0 10px 22px rgba(15, 23, 42, 0.08);
+    inset 0 1px 0 rgba(255, 255, 255, 0.88),
+    0 4px 14px rgba(255, 124, 72, 0.12),
+    0 0 22px rgba(255, 178, 102, 0.1);
 
   /* Chip */
   --chip-text: var(--color-text-secondary);
   --chip-text-hover: var(--color-text-primary);
-  --chip-text-active: var(--color-point-primary);
+  --chip-text-active: var(--color-text-primary);
 
   --chip-border-width: 1px;
 
-  --chip-surface-bg: rgba(255, 251, 246, 0.74);
+  --chip-surface-bg: var(--button-surface-bg);
   --chip-surface-bg-hover: var(--button-surface-bg-hover);
-  --chip-surface-bg-active: var(--color-point-primary);
+  --chip-surface-bg-active: var(--button-surface-bg-active);
 
-  --chip-border: rgba(24, 32, 44, 0.08);
+  --chip-border: var(--button-border);
   --chip-border-hover: var(--button-border-hover);
   --chip-border-active: var(--button-border-active);
 
@@ -78,11 +93,18 @@
 
 
   /* Card */
-  --card-text: #18202c;
-  --card-sub-text: #495464;
-
-  --card-text-hover: #FFF4D6;
-  --card-text-shadow: rgba(15, 23, 42, 0.34);
+  --contact-card-bg: #fffbf7;
+  --contact-cardcase-shadow: 
+    invert(0.03)
+    brightness(1.2)
+    contrast(0.95)
+    drop-shadow(0 18px 15px rgba(0, 0, 0, 0.1));
+  --contact-hint-card-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  --contact-card-shadow:
+    0 10px 22px rgba(15, 23, 42, 0.1),
+    0 1px 0 rgba(15, 23, 42, 0.05);
 
   /* Panel */
   --work-empty-bg: rgba(17, 17, 17, 0.04);
@@ -106,6 +128,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.54);
   --detail-panel-backdrop: blur(22px) saturate(1.12);
 
+
   /* Cursor */
   --cursor-key: var(--color-bg-door);
   --cursor-key-hover: #FFD76A;
@@ -126,6 +149,7 @@
   --color-java: #007396;
   --color-github: #181717;
   --color-git: #F05032;
+  --color-vscode: #007ACC;
 }
 
 /* ============================================================
@@ -149,56 +173,71 @@
   --color-table-bg: #3a3d36;
 
   /* Accent */
-  --color-point-primary: #508dff;
-  --color-point-highlight: #ff7a96;
-  --color-point-success: #32d74b;
-
+  --color-point-primary: #7C8BFF;
+  --color-focus-ring: #D8D1BE;
+  --color-focus-shadow: rgba(216, 209, 190, 0.18);
   --shadow-glow:
-  0 0 6px rgba(91, 140, 255, 1),
-  0 0 14px rgba(120, 170, 255, 0.7),
-  0 0 26px rgba(91, 140, 255, 0.4);
+    0 0 0 3px rgba(124, 139, 255, 0.16),
+    0 0 12px rgba(124, 139, 255, 0.8),
+    0 0 28px rgba(124, 139, 255, 0.42);
 
   /* ---------------- Component ---------------- */
 
   /* Button */
   --button-text: var(--color-text-primary);
-  --button-text-hover: var(--color-point-primary);
-  --button-text-active: var(--color-point-primary);
+  --button-text-hover: var(--color-text-primary);
+  --button-text-active: #f8fafc;
   --button-letter-spacing: 0.01em;
   --button-border-width: 1px;
 
-  --button-surface-bg: rgba(236, 232, 214, 0.08);
-  --button-surface-bg-hover: rgba(236, 232, 214, 0.15);
-  --button-surface-bg-active: linear-gradient(
-    135deg,
-    rgba(236, 232, 214, 0.18) 0%,
-    rgba(186, 183, 163, 0.22) 42%,
-    rgba(63, 68, 58, 0.44) 100%
-  );
+  --button-surface-bg: rgba(248, 247, 255, 0.07);
+  --button-surface-bg-hover: rgba(167, 139, 250, 0.16);
+  --button-surface-bg-active: rgba(167, 139, 250, 0.24);
 
-  --button-border: rgba(236, 232, 214, 0.13);
-  --button-border-hover: rgba(236, 232, 214, 0.3);
-  --button-border-active: rgba(236, 232, 214, 0.4);
+  --button-border: rgba(248, 247, 255, 0.12);
+  --button-border-hover: rgba(196, 181, 253, 0.34);
+  --button-border-active: rgba(216, 203, 255, 0.52);
 
   --button-shadow-hover:
-    inset 0 1px 0 rgba(245, 242, 232, 0.18);
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 18px rgba(167, 139, 250, 0.16);
 
   /* Chip */
   --chip-text: var(--color-text-primary);
+  --chip-text-hover: var(--color-text-primary);
+  --chip-text-active: var(--color-text-primary);
   --chip-border-width: 1px;
   --chip-backdrop: blur(12px) saturate(1.08);
-  --chip-surface-bg: rgba(236, 232, 214, 0.08);
-  --chip-border: rgba(245, 242, 232, 0.12);
+  --chip-surface-bg: var(--button-surface-bg);
+  --chip-surface-bg-hover: var(--button-surface-bg-hover);
+  --chip-surface-bg-active: var(--button-surface-bg-active);
+  --chip-border: var(--button-border);
+  --chip-border-hover: var(--button-border-hover);
+  --chip-border-active: var(--button-border-active);
   --chip-shadow:
-    inset 0 1px 0 rgba(245, 242, 232, 0.12);
+    inset 0 1px 0 rgba(248, 247, 255, 0.1);
+
+  --chip-shadow-hover:
+    inset 0 1px 0 rgba(248, 247, 255, 0.14),
+    0 6px 16px rgba(0, 0, 0, 0.12);
+
+  --chip-shadow-active:
+    inset 0 1px 0 rgba(248, 247, 255, 0.16),
+    0 8px 20px rgba(0, 0, 0, 0.18);
 
   /* Card */
-  --card-text: #18202c;
-  --card-sub-text: #495464;
-
-  --work-card-text: #18202c;
-  --work-card-text-hover: #223046;
-  --work-card-text-shadow: rgba(0, 0, 0, 0.56);
+  --contact-card-bg: #222229;
+  --contact-cardcase-shadow:
+    invert(0.03)
+    brightness(1.5)
+    contrast(0.96)
+    drop-shadow(0 18px 15px rgba(0, 0, 0, 0.16));
+  --contact-hint-card-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  --contact-card-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.18),
+    0 1px 0 rgba(245, 242, 232, 0.05);
 
   /* Panel */
   --work-empty-bg: rgba(241, 245, 249, 0.08);
@@ -222,15 +261,11 @@
     inset 0 1px 0 rgba(245, 242, 232, 0.12);
   --detail-panel-backdrop: blur(22px) saturate(1.1);
 
+
   /* Cursor */
   --cursor-key: var(--color-text-primary);
   --cursor-key-hover: #FFD76A;
   --cursor-key-hover-glow: rgba(255, 215, 106, 0.42);
-
-  /* Icon and interaction */
-  --color-icon-base: var(--color-text-primary);
-  --color-icon-active: var(--color-point-primary);
-  --color-icon-focus: var(--color-point-primary);
 
   /* Brand colors */
   --color-html: #E5532F;
@@ -247,6 +282,7 @@
   --color-java: #3FA9E0;
   --color-github: #f1f5f9;
   --color-git: #E35C47;
+  --color-vscode: #4FA3FF;
 }
 
 /* ============================================================
@@ -269,34 +305,17 @@ $bg-door: var(--color-bg-door);
 /* Border / Shadow */
 $border-soft: var(--button-border);
 $border-strong: var(--button-border-active);
-$shadow-surface-soft: var(--shadow-surface-soft);
-$shadow-surface-strong: var(--shadow-surface-strong);
-$overlay-soft: var(--overlay-bottom-soft);
-$overlay-strong: var(--overlay-bottom-strong);
 
 /* Accent */
 $point-primary: var(--color-point-primary);
 $point-highlight: var(--color-point-highlight);
-$point-success: var(--color-point-success);
 
 /* ---------------- Component ---------------- */
 
 /* Button */
-$button-text: var(--button-text);
-$button-text-hover: var(--button-text-hover);
-$button-text-active: var(--button-text-active);
-$button-letter-spacing: var(--button-letter-spacing);
 $button-border-width: var(--button-border-width);
 $button-surface-bg: var(--button-surface-bg);
-$button-surface-bg-hover: var(--button-surface-bg-hover);
-$button-surface-bg-active: var(--button-surface-bg-active);
 $button-border: var(--button-border);
-$button-border-hover: var(--button-border-hover);
-$button-border-active: var(--button-border-active);
-$button-shadow: var(--button-shadow);
-$button-shadow-hover: var(--button-shadow-hover);
-$button-shadow-active: var(--button-shadow-active);
-$button-focus-ring: var(--button-focus-ring);
 
 /* Chip */
 $chip-text: var(--chip-text);
@@ -316,18 +335,3 @@ $detail-panel-shadow: var(--detail-panel-shadow);
 $detail-panel-shadow-hover: var(--detail-panel-shadow-hover);
 $detail-panel-backdrop: var(--detail-panel-backdrop);
 
-/* Brand colors */
-$html: var(--color-html);
-$css: var(--color-css);
-$scss-color: var(--color-scss);
-$js: var(--color-js);
-$gsap: var(--color-gsap);
-$lenis: var(--color-lenis);
-$php: var(--color-php);
-$mysql: var(--color-mysql);
-$figma: var(--color-figma);
-$jquery: var(--color-jquery);
-$react: var(--color-react);
-$java: var(--color-java);
-$github: var(--color-github);
-$git: var(--color-git);

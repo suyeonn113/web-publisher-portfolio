@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SUYEON | Contact</title>
+  <title>수연의 작업실</title>
   <link rel="stylesheet" href="./css/main.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -14,12 +14,22 @@
         <header class="contact__header visually-hidden">
           <h1 id="contact-title" class="contact__title">연락 방법</h1>
         </header>
-
         <ul class="contact-list" aria-label="연락 방법 목록">
+          <li class="contact-cardcase-item">
+            <div class="contact-cardcase" aria-hidden="true">
+              <img class="contact-cardcase__base"
+                   src="./assets/images/cardcase.png" alt=""/>
+              <span class="contact-cardcase__hint-card"></span>
+              <img class="contact-cardcase__front"
+                   src="./assets/images/cardcase-front.png" alt=""/>
+            </div>
+          </li>
+
           <li class="contact-card">
             <a class="contact-card__link" href="mailto:suyeonn113@naver.com">
               <span class="contact-card__body">
                 <strong class="contact-card__title">Email</strong>
+                <span class="contact-card__note">Project inquiries<br>and collaboration</span>
                 <span class="contact-card__text">suyeonn113@naver.com</span>
               </span>
             </a>
@@ -29,6 +39,7 @@
             <a class="contact-card__link" href="https://github.com/suyeonn113" target="_blank" rel="noopener">
               <span class="contact-card__body">
                 <strong class="contact-card__title">GitHub</strong>
+                <span class="contact-card__note">Archive of code<br>and visual experiments</span>
                 <span class="contact-card__text">github.com/suyeonn113</span>
               </span>
             </a>
@@ -38,6 +49,7 @@
             <a class="contact-card__link" href="./assets/files/resume.pdf" target="_blank" rel="noopener">
               <span class="contact-card__body">
                 <strong class="contact-card__title">Resume</strong>
+                <span class="contact-card__note">Profile, skills<br>and experience</span>
                 <span class="contact-card__text">PDF 보기</span>
               </span>
             </a>

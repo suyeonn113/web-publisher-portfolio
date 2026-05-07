@@ -11,6 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const SQUARE_RATIO_MIN = 0.85;
 const SQUARE_RATIO_MAX = 1.15;
+const GALLERY_SWIPE_MIN_DISTANCE = 48;
+const GALLERY_SWIPE_MAX_VERTICAL_DRIFT = 64;
 
 /* ========================================
    Device Frame Assets
@@ -55,9 +57,10 @@ const TOOL_ICON_MAP = {
   php: { icon: 'php', color: 'var(--color-php)' },
   react: { icon: 'react', color: 'var(--color-react)' },
   scss: { icon: 'scss', color: 'var(--color-scss)' },
-  vscode: { icon: null, color: 'var(--color-text-secondary)' },
-  'vs code': { icon: null, color: 'var(--color-text-secondary)' },
-  filezilla: { icon: null, color: 'var(--color-text-secondary)' }
+  vscode: { icon: 'vscode', color: 'var(--color-vscode)' },
+  'vs code': { icon: 'vscode', color: 'var(--color-vscode)' },
+  'visual studio code': { icon: 'vscode', color: 'var(--color-vscode)' },
+  filezilla: { icon: 'filezilla', preserveColor: true }
 };
 
 function getProjectSlug() {
@@ -1018,6 +1021,41 @@ function stepGallery(state, direction) {
   animateModalImageChange(nextButton, state);
 }
 
+function bindGallerySwipe(root, state) {
+  const modalState = state.galleryModal;
+  const swipeTarget = modalState?.media || modalState?.dialog || modalState?.root;
+  if (!swipeTarget) return;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  swipeTarget.addEventListener('touchstart', (event) => {
+    if (modalState.root?.hidden || event.touches.length !== 1) return;
+
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  swipeTarget.addEventListener('touchend', (event) => {
+    if (modalState.root?.hidden || !event.changedTouches.length) return;
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    if (
+      Math.abs(deltaX) < GALLERY_SWIPE_MIN_DISTANCE ||
+      Math.abs(deltaY) > GALLERY_SWIPE_MAX_VERTICAL_DRIFT ||
+      Math.abs(deltaX) <= Math.abs(deltaY)
+    ) {
+      return;
+    }
+
+    stepGallery(state, deltaX < 0 ? 1 : -1);
+  }, { passive: true });
+}
+
 function renderHighlights(project, root) {
   const container = root.querySelector('[data-field="highlights"]');
   const template = root.querySelector('#tpl-highlight');
@@ -1082,14 +1120,24 @@ function renderEtcTools(project, root) {
     item.setAttribute('role', 'listitem');
 
     if (meta?.icon) {
-      const icon = document.createElement('span');
-      icon.className = 'project-tools__icon';
-      icon.style.setProperty('--tool-icon', `url("${TOOL_ICON_BASE}/${meta.icon}.svg")`);
-      icon.style.setProperty('--tool-color', meta.color);
-      icon.setAttribute('aria-hidden', 'true');
       item.setAttribute('aria-label', tool);
       item.title = tool;
-      item.appendChild(icon);
+
+      if (meta.preserveColor) {
+        const icon = document.createElement('img');
+        icon.className = 'project-tools__image';
+        icon.src = `${TOOL_ICON_BASE}/${meta.icon}.svg`;
+        icon.alt = '';
+        icon.setAttribute('aria-hidden', 'true');
+        item.appendChild(icon);
+      } else {
+        const icon = document.createElement('span');
+        icon.className = 'project-tools__icon';
+        icon.style.setProperty('--tool-icon', `url("${TOOL_ICON_BASE}/${meta.icon}.svg")`);
+        icon.style.setProperty('--tool-color', meta.color);
+        icon.setAttribute('aria-hidden', 'true');
+        item.appendChild(icon);
+      }
     } else {
       item.classList.add('project-tools__item--text');
       item.textContent = tool;
@@ -1205,6 +1253,8 @@ function bindFlowEvents(root, state) {
   root.querySelector('[data-gallery-next]')?.addEventListener('click', () => {
     stepGallery(state, 1);
   });
+
+  bindGallerySwipe(root, state);
 }
 
 function initFlowScrollSync(root, state) {

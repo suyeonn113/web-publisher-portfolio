@@ -31,7 +31,7 @@ body[data-page='project-detail'] {
 
   .section-title {
     @include text-style('sm', 'bold', 'tight', 'tight');
-    color: $point-primary;
+    color: $text-tertiary;
     @include mar('gutter', 'md', 'bottom');
   }
 
@@ -138,24 +138,25 @@ body[data-page='project-detail'] {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     @include g-gap('gutter', 'md');
-    @include pad('pad', 'md', 'top');
-    border-top: 1px solid $border-soft;
   }
 
   .project-meta > div {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    @include f-gap('gutter', 'sm');
+    @include pad('pad', 'sm', 'left');
+    @include f-gap('gutter', 'xs');
+    border-left: 1px solid $border-soft;
   }
 
   .project-meta dt {
-    @include text-style('xs', 'bold');
+    @include text-style('xs', 'bold', 'wide', 'tight');
     color: $text-tertiary;
+    text-transform: uppercase;
   }
 
   .project-meta dd {
-    @include text-style('sm', 'medium');
+    @include text-style('sm', 'medium', 'base', 'tight');
     color: $text-primary;
   }
 
@@ -185,13 +186,23 @@ body[data-page='project-detail'] {
     @include f-gap('gutter', 'md');
   }
 
+  .project-hero__visual > div[data-project-mode='pc'],
+  .project-hero__visual > div[data-project-mode='responsive'] {
+    padding-top: clamp(rem(24px), 5vh, rem(72px));
+  }
+
+  .project-hero__visual > div[data-project-mode='mobile'] {
+    padding-top: clamp(rem(12px), 3vh, rem(40px));
+    justify-content: center;
+  }
+
   /* Responsive Project Mode */
   .project-hero__visual > div[data-project-mode='responsive'] {
     display: grid;
-    grid-template-columns: minmax(0, 0.26fr) minmax(0, 1fr) minmax(0, 0.22fr);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     align-items: end;
     justify-items: center;
-    gap: 0;
+    column-gap: 0;
   }
 
   .project-hero__device {
@@ -227,11 +238,12 @@ body[data-page='project-detail'] {
   }
 
   .project-hero__visual > div[data-project-mode='responsive'] .project-hero__device--mobile {
-    grid-column: 3;
+    grid-column: 10 / 13;
     grid-row: 1;
     z-index: 3;
-    width: clamp(rem(96px), 8vw, rem(132px));
-    transform: translateX(rem(-16px));
+    justify-self: start;
+    width: clamp(rem(116px), 9.2vw, rem(164px));
+    transform: translateX(rem(-18px));
   }
 
   .project-hero__device--mobile .project-hero__screen {
@@ -260,12 +272,12 @@ body[data-page='project-detail'] {
   }
 
   .project-hero__visual > div[data-project-mode='responsive'] .project-hero__device--tablet {
-    grid-column: 1 / 3;
+    grid-column: 1 / 5;
     grid-row: 1;
-    justify-self: start;
-    z-index: 3;
-    width: clamp(rem(190px), 20vw, rem(290px));
-    transform: translateX(rem(-12px));
+    justify-self: end;
+    z-index: 2;
+    width: clamp(rem(220px), 20vw, rem(340px));
+    transform: translateX(rem(22px));
   }
 
   .project-hero__device--tablet .project-hero__screen {
@@ -281,10 +293,10 @@ body[data-page='project-detail'] {
   }
 
   .project-hero__visual > div[data-project-mode='responsive'] .project-hero__device--pc {
-    grid-column: 1 / -1;
+    grid-column: 2 / 12;
     grid-row: 1;
     z-index: get-z('base');
-    width: clamp(rem(360px), 38vw, rem(620px));
+    width: min(100%, clamp(rem(500px), 50vw, rem(820px)));
   }
 
   .project-hero__device--pc .project-hero__screen {
@@ -347,7 +359,7 @@ body[data-page='project-detail'] {
   }
 
   .project-summary__text {
-    max-width: rem(760px);
+    max-width: min(100%, rem(1040px));
     @include text-style('lg', 'medium', 'tight', 'tight');
     color: $text-primary;
     word-break: keep-all;
@@ -378,7 +390,7 @@ body[data-page='project-detail'] {
     }
 
     .project-summary__text {
-      max-width: rem(880px);
+      max-width: min(100%, rem(1120px));
     }
   }
 
@@ -445,7 +457,7 @@ body[data-page='project-detail'] {
 
   .project-key-flows__eyebrow {
     @include text-style('xs', 'bold');
-    color: $text-tertiary;
+    color: $text-secondary;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -594,6 +606,7 @@ body[data-page='project-detail'] {
 
   .flow-panel__title {
     @include text-style('base', 'bold', 'tight');
+    color: $text-primary;
   }
 
   .flow-panel__layout {
@@ -619,12 +632,13 @@ body[data-page='project-detail'] {
 
   .flow-panel__content h4 {
     @include text-style('base', 'bold');
-    color: $text-secondary;
+    color: $text-primary;
   }
 
   .flow-panel__content p,
   .flow-panel__implementation-item {
     @include text-style('base');
+    color: $text-secondary;
   }
 
   .flow-panel__content ul {
@@ -645,7 +659,7 @@ body[data-page='project-detail'] {
     left: 0;
     width: rem(5px);
     height: rem(5px);
-    background: var(--home-hero-main-strong-mid);
+    background: $text-tertiary;
   }
 
   .flow-steps {
@@ -954,7 +968,7 @@ body[data-page='project-detail'] {
   .project-etc__grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    @include g-gap('gutter', 'md');
+    @include g-gap('gutter', 'lg');
   }
 
   .project-etc__grid > div {
@@ -963,24 +977,28 @@ body[data-page='project-detail'] {
     justify-content: flex-start;
     min-width: 0;
     height: 100%;
-    @include pad('pad', 'sm', 'top');
-    @include f-gap('gutter', 'md');
+    @include pad('pad', 'md', 'top');
+    @include f-gap('gutter', 'sm');
     border-top: 1px solid $border-soft;
   }
 
   .project-etc__grid h3 {
-    @include text-style('base', 'bold');
+    @include text-style('xs', 'bold', 'wide', 'tight');
+    color: $text-primary;
+    text-transform: uppercase;
   }
 
   .project-etc__grid p {
     @include text-style('base');
+    color: $text-secondary;
   }
 
   .project-tools {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    @include f-gap('gutter', 'sm');
+    @include f-gap('gutter', 'md');
+    @include pad('pad', 'xs', 'top');
   }
 
   .project-tools__item {
@@ -991,11 +1009,18 @@ body[data-page='project-detail'] {
 
   .project-tools__icon {
     display: inline-block;
-    width: rem(28px);
+    width: rem(30px);
     aspect-ratio: 1;
     background-color: var(--tool-color, currentColor);
     mask: var(--tool-icon) center / contain no-repeat;
     -webkit-mask: var(--tool-icon) center / contain no-repeat;
+  }
+
+  .project-tools__image {
+    display: block;
+    width: rem(30px);
+    aspect-ratio: 1;
+    object-fit: contain;
   }
 
   .project-tools__item--text {
@@ -1004,7 +1029,7 @@ body[data-page='project-detail'] {
 
   @include respond-up('tablet') {
     .project-hero__inner {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
       align-items: center;
     }
 
@@ -1031,7 +1056,7 @@ body[data-page='project-detail'] {
 
   @include respond-up('desktop') {
     .project-hero__inner {
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
     }
 
     .project-hero__visual > div {
@@ -1039,7 +1064,7 @@ body[data-page='project-detail'] {
     }
 
     .project-hero__device--pc {
-      max-width: rem(800px);
+      max-width: rem(860px);
     }
 
     .project-key-flows__layout {
