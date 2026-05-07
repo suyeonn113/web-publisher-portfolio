@@ -16,8 +16,6 @@
   /* Background */
   --color-bg-main: #FCFCFC;
   --color-bg-door: #050505;
-  --color-table-bg: #e9e9e9;
-
 
   /* Accent */
   --color-point-primary: #d8421d;
@@ -28,9 +26,7 @@
     0 0 14px rgba(255, 153, 51, 0.32),
     0 0 32px rgba(255, 214, 102, 0.24);
 
-  /* ============================================================
-     Component
-  ============================================================ */
+  /* ---------------- Component ---------------- */
 
   /* Button */
   --button-text: var(--color-text-secondary);
@@ -40,30 +36,17 @@
   --button-border-width: 1px;
 
   --button-surface-bg: rgba(255, 255, 255, 0.62);
-  --button-surface-bg-hover:
-    linear-gradient(
-      135deg,
-      rgba(255, 250, 246, 0.9) 0%,
-      rgba(255, 232, 214, 0.54) 46%,
-      rgba(255, 188, 140, 0.22) 100%
-    );
-
-  --button-surface-bg-active:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 248, 0.9) 0%,
-      rgba(255, 248, 222, 0.46) 45%,
-      rgba(255, 232, 170, 0.22) 100%
-    );
+  --button-surface-bg-hover: rgba(255, 253, 250, 0.96);
+  --button-surface-bg-active: rgba(255, 248, 226, 0.52);
 
   --button-border: rgba(24, 32, 44, 0.08);
-  --button-border-hover: rgba(255, 132, 76, 0.34);
-  --button-border-active: rgba(255, 196, 82, 0.38);
+  --button-border-hover: rgba(255, 210, 178, 0.42);
+  --button-border-active: rgba(255, 224, 156, 0.48);
 
   --button-shadow-hover:
-    inset 0 1px 0 rgba(255, 255, 255, 0.88),
-    0 4px 14px rgba(255, 124, 72, 0.12),
-    0 0 22px rgba(255, 178, 102, 0.1);
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 4px 12px rgba(255, 214, 168, 0.14),
+    0 0 18px rgba(255, 236, 196, 0.12);
 
   /* Chip */
   --chip-text: var(--color-text-secondary);
@@ -91,14 +74,13 @@
     inset 0 1px 0 rgba(248, 244, 236, 0.74),
     0 8px 20px rgba(24, 32, 44, 0.08);
 
-
   /* Card */
-  --contact-card-bg: #fffbf7;
-  --contact-cardcase-shadow: 
+  --contact-card-bg: #fffcf8ea;
+  --contact-cardcase-filter:
     invert(0.03)
-    brightness(1.2)
-    contrast(0.95)
-    drop-shadow(0 18px 15px rgba(0, 0, 0, 0.1));
+    brightness(1.34)
+    contrast(0.9);
+  --contact-cardcase-shadow: drop-shadow(0 18px 15px rgba(0, 0, 0, 0.1));
   --contact-hint-card-shadow:
     0 8px 18px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.62);
@@ -127,7 +109,6 @@
     0 22px 56px rgba(78, 116, 176, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.54);
   --detail-panel-backdrop: blur(22px) saturate(1.12);
-
 
   /* Cursor */
   --cursor-key: var(--color-bg-door);
@@ -170,7 +151,6 @@
   /* Background */
   --color-bg-main: #22231f;
   --color-bg-door: #050505;
-  --color-table-bg: #3a3d36;
 
   /* Accent */
   --color-point-primary: #7C8BFF;
@@ -226,12 +206,12 @@
     0 8px 20px rgba(0, 0, 0, 0.18);
 
   /* Card */
-  --contact-card-bg: #222229;
-  --contact-cardcase-shadow:
-    invert(0.03)
-    brightness(1.5)
-    contrast(0.96)
-    drop-shadow(0 18px 15px rgba(0, 0, 0, 0.16));
+  --contact-card-bg: #3b3b44;
+  --contact-cardcase-filter:
+    invert(0.10)
+    brightness(0.79)
+    contrast(0.96);
+  --contact-cardcase-shadow: drop-shadow(0 18px 15px rgba(0, 0, 0, 0.16));
   --contact-hint-card-shadow:
     0 8px 18px rgba(0, 0, 0, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.26);
@@ -260,7 +240,6 @@
     0 28px 72px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(245, 242, 232, 0.12);
   --detail-panel-backdrop: blur(22px) saturate(1.1);
-
 
   /* Cursor */
   --cursor-key: var(--color-text-primary);

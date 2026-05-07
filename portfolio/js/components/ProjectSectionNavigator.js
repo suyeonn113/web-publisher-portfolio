@@ -27,6 +27,13 @@ const SKIP_ITEMS = [
   }
 ];
 
+const BACK_TO_TOP_ITEM = {
+  current: '',
+  next: 'top',
+  label: 'Back to Top',
+  direction: 'up'
+};
+
 function getSection(root, sectionName) {
   return root.querySelector(`[data-section="${sectionName}"]`);
 }
@@ -138,6 +145,17 @@ export function initProjectSectionNavigator(root) {
 
   const button = createSkipButton();
   const triggers = [];
+  let activeItem = null;
+  let isScrollingUp = false;
+
+  const syncSkipButton = () => {
+    if (isScrollingUp && window.scrollY > 12) {
+      updateSkipButton(button, BACK_TO_TOP_ITEM);
+      return;
+    }
+
+    updateSkipButton(button, activeItem);
+  };
 
   SKIP_ITEMS.forEach((item) => {
     const section = getSection(root, item.current);
@@ -145,10 +163,13 @@ export function initProjectSectionNavigator(root) {
 
     const handleEnter = () => {
       if (isFlowIslandViewport() && item.current === 'key-flows') {
-        updateSkipButton(button, null);
+        activeItem = null;
+        syncSkipButton();
         return;
       }
-      updateSkipButton(button, item);
+
+      activeItem = item;
+      syncSkipButton();
     };
 
     const trigger = ScrollTrigger.create({
@@ -171,10 +192,16 @@ export function initProjectSectionNavigator(root) {
         start: () => `top bottom-=${96}`,
         end: 'bottom bottom',
         onEnter: () => {
-          if (isFlowIslandViewport()) updateSkipButton(button, null);
+          if (isFlowIslandViewport()) {
+            activeItem = null;
+            syncSkipButton();
+          }
         },
         onEnterBack: () => {
-          if (isFlowIslandViewport()) updateSkipButton(button, null);
+          if (isFlowIslandViewport()) {
+            activeItem = null;
+            syncSkipButton();
+          }
         }
       })
     );
@@ -188,10 +215,28 @@ export function initProjectSectionNavigator(root) {
         trigger: summarySection,
         start: 'top bottom',
         end: 'top center',
-        onLeaveBack: () => updateSkipButton(button, null)
+        onLeaveBack: () => {
+          activeItem = null;
+          syncSkipButton();
+        }
       })
     );
   }
+
+  triggers.push(
+    ScrollTrigger.create({
+      trigger: root,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: (self) => {
+        const nextIsScrollingUp = self.direction === -1;
+        if (nextIsScrollingUp === isScrollingUp) return;
+
+        isScrollingUp = nextIsScrollingUp;
+        syncSkipButton();
+      }
+    })
+  );
 
   button.addEventListener('click', () => {
     const nextSection = button.dataset.nextSection;

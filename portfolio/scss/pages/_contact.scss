@@ -1,11 +1,14 @@
 @use '../foundation' as *;
 
 body[data-page='contact'] {
-  /* START contact asset layout */
+  /* ========================================
+    Base Layout
+  ======================================== */
+
   .contact-page {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .contact {
@@ -16,14 +19,18 @@ body[data-page='contact'] {
   .contact__inner {
     position: relative;
     @include flex-center;
+    align-items: start;
     min-height: inherit;
   }
+
+  /* ========================================
+    Cardcase
+  ======================================== */
 
   .contact-cardcase {
     position: relative;
     flex: 0 0 auto;
     width: clamp(rem(160px), 10vw, rem(300px));
-
     aspect-ratio: 906 / 1223;
     transform: rotate(-10deg);
     filter: var(--contact-cardcase-shadow);
@@ -34,12 +41,11 @@ body[data-page='contact'] {
     &__front {
       position: absolute;
       inset: 0;
-
       display: block;
       width: 100%;
       height: 100%;
-
       object-fit: contain;
+      filter: var(--contact-cardcase-filter);
     }
 
     &__base {
@@ -50,15 +56,12 @@ body[data-page='contact'] {
       position: absolute;
       top: 8%;
       left: 0%;
-
+      z-index: 2;
       width: 90%;
       height: 85%;
       border-radius: rem(4px);
-
       background: var(--contact-card-bg);
       box-shadow: var(--contact-hint-card-shadow);
-
-      z-index: 2;
       transition: $tr-base;
       will-change: transform;
     }
@@ -68,27 +71,12 @@ body[data-page='contact'] {
     }
 
     &.is-open {
-      width: clamp(rem(80px), 8vw, rem(180px));
+      width: clamp(rem(80px), 6vw, rem(180px));
       transform: rotate(-14deg);
 
       .contact-cardcase__hint-card {
         opacity: 0;
         visibility: hidden;
-      }
-    }
-    @include respond-down('laptop') { 
-      width: clamp(rem(150px), 16vw, rem(210px));
-
-      &.is-open {
-        width: clamp(rem(80px), 8vw, rem(150px));
-      }
-    }
-
-    @include respond-down('tablet') {
-      width: clamp(rem(140px), 28vw, rem(190px));
-
-      &.is-open {
-        width: clamp(rem(96px), 18vw, rem(130px));
       }
     }
   }
@@ -105,18 +93,19 @@ body[data-page='contact'] {
       display: block;
       flex: 0 0 auto;
       @include responsive-spacing('width', 'gap', 'md');
-      @include respond-down('laptop') {
-        @include responsive-spacing('width', 'pad', 'md');
-      }
     }
 
     &:hover,
     &:focus-within {
       .contact-cardcase__hint-card {
-        filter: brightness(1.3);       
+        filter: brightness(1.3);
       }
     }
   }
+
+  /* ========================================
+    Contact List
+  ======================================== */
 
   .contact-list {
     --contact-list-max: #{rem(1120px)};
@@ -131,20 +120,19 @@ body[data-page='contact'] {
     z-index: get-z('overlay');
     top: 50%;
     left: 30%;
-
     display: grid;
     grid-template-columns: max-content;
     align-items: center;
-    @include g-gap('gutter', 'md');
     width: max-content;
     transform: translate(
       calc(-50% - var(--contact-list-shift)),
       calc(-50% - #{rem(24px)})
     );
     transition: $tr-base;
+    @include g-gap('gutter', 'md');
 
     &.is-open {
-      top: 25%;
+      top: 18%;
       left: auto;
       grid-template-columns: minmax(rem(220px), max-content) repeat(3, minmax(0, 1fr));
       width: min(calc(100% - #{rem(80px)}), rem(1300px));
@@ -152,13 +140,9 @@ body[data-page='contact'] {
     }
   }
 
-  @include respond-down('laptop') {
-    .contact-list.is-open {
-      grid-template-columns: minmax(rem(190px), max-content) repeat(3, minmax(0, 1fr));
-      width: min(calc(100% - #{rem(48px)}), rem(880px));
-      @include g-gap('gutter', 'sm');
-    }
-  }
+  /* ========================================
+    Cards
+  ======================================== */
 
   .contact-card {
     display: none;
@@ -181,14 +165,14 @@ body[data-page='contact'] {
   .contact-card__link {
     position: relative;
     display: flex;
-    aspect-ratio: 5 / 7.2;
+    aspect-ratio: 5 / 8;
     overflow: hidden;
-    @include pad('pad', 'sm');
     color: inherit;
     background: var(--contact-card-bg);
     box-shadow: var(--contact-card-shadow);
     outline-offset: rem(4px);
     transition: $tr-base;
+    @include pad('pad', 'sm');
   }
 
   .contact-card:hover,
@@ -200,7 +184,7 @@ body[data-page='contact'] {
   .contact-card__body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     width: 100%;
     min-height: 100%;
     @include f-gap('gutter', 'xs');
@@ -213,18 +197,19 @@ body[data-page='contact'] {
     color: $text-primary;
   }
 
+  .contact-card__text {
+    @include text-style('sm', 'semi-bold', 'base', 'tight');
+    color: $text-tertiary;
+    word-break: break-word;
+  }
+
   .contact-card__note {
     align-self: left;
     max-width: 80%;
-    @include text-style('xs', 'medium', 'base', 'wide');
+    margin-top: auto;
     color: $text-primary;
     text-align: left;
-  }
-
-  .contact-card__text {
-    @include text-style('sm', 'semi-bold', 'base', 'tight');
-    color: $text-primary;
-    word-break: break-word;
+    @include text-style('xs', 'medium', 'base', 'wide');
   }
 
   .contact-card:hover,
@@ -234,9 +219,45 @@ body[data-page='contact'] {
     }
   }
 
+  /* ========================================
+    Laptop
+  ======================================== */
+
+  @include respond-down('laptop') {
+    .contact-cardcase {
+      width: clamp(rem(150px), 16vw, rem(210px));
+
+      &.is-open {
+        width: clamp(rem(60px), 8vw, rem(150px));
+      }
+    }
+
+    .contact-cardcase-item::after {
+      @include responsive-spacing('width', 'pad', 'md');
+    }
+
+    .contact-list.is-open {
+      grid-template-columns: minmax(rem(190px), max-content) repeat(3, minmax(0, 1fr));
+      width: min(calc(100% - #{rem(48px)}), rem(880px));
+      @include g-gap('gutter', 'sm');
+    }
+  }
+
+  /* ========================================
+    Tablet and Mobile
+  ======================================== */
+
   @include respond-down('tablet') {
     .contact {
       @include responsive-spacing('padding-bottom', 'pad', 'lg');
+    }
+
+    .contact-cardcase {
+      width: clamp(rem(140px), 28vw, rem(190px));
+
+      &.is-open {
+        width: clamp(rem(60px), 15vw, rem(110px));
+      }
     }
 
     .contact-list {
@@ -281,14 +302,18 @@ body[data-page='contact'] {
       aspect-ratio: 16 / 9;
     }
 
-    .contact-card__note {
-      max-width: 56%;
-    }
-
     .contact-card__title {
       font-size: clamp(rem(24px), 3.6vw, rem(30px));
     }
+
+    .contact-card__note {
+      max-width: 56%;
+    }
   }
+
+  /* ========================================
+    Reduced Motion
+  ======================================== */
 
   @media (prefers-reduced-motion: reduce) {
     .contact-cardcase,
@@ -337,6 +362,10 @@ body[data-page='contact'] {
         @include responsive-spacing('padding-bottom', 'pad', 'lg');
       }
 
+      .contact-cardcase {
+        width: clamp(rem(96px), 18vw, rem(130px));
+      }
+
       .contact-list {
         position: relative;
         top: auto;
@@ -344,10 +373,6 @@ body[data-page='contact'] {
         grid-template-columns: minmax(0, rem(460px));
         width: min(calc(100% - #{rem(64px)}), rem(500px));
         transform: none;
-      }
-
-      .contact-cardcase {
-        width: clamp(rem(96px), 18vw, rem(130px));
       }
 
       .contact-cardcase-item {

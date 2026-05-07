@@ -196,12 +196,6 @@ export function initContactCardcase() {
     openCards();
   });
 
-  document.addEventListener('click', (event) => {
-    if (event.target.closest?.('.site-header__link')) {
-      closeCards({ immediate: true });
-    }
-  }, true);
-
   window.addEventListener('resize', resetCard);
   document.addEventListener('mouseleave', resetCard);
 }

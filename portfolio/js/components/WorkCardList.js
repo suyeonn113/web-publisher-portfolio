@@ -101,7 +101,7 @@ function applyCardBackThumbnails(listEl) {
         flipTween?.kill();
 
         flipTween = gsap.timeline({
-          defaults: { duration: 0.07, ease: 'power3.out' }
+          defaults: { duration: 0.1, ease: 'expo.out' }
         })
           .to(image, {
             autoAlpha: 0.72,
@@ -113,8 +113,8 @@ function applyCardBackThumbnails(listEl) {
           .to(image, {
             autoAlpha: 1,
             scale: 1,
-            duration: 0.22,
-            ease: 'power2.out',
+            duration: 0.52,
+            ease: 'expo.out',
             clearProps: 'opacity,visibility,transform'
           });
       };

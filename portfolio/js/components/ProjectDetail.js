@@ -613,11 +613,13 @@ function initHighlightInteractiveAnimation(project, root) {
     resetSplitLineMarkup(title);
     resetSplitLineMarkup(description);
 
+    const itemDescription = item.description || item.summary || '';
+
     title.dataset.originalText = item.title || '';
-    description.dataset.originalText = item.description || '';
+    description.dataset.originalText = itemDescription;
 
     title.textContent = item.title || '';
-    description.textContent = item.description || '';
+    description.textContent = itemDescription;
 
     if (immediate || prefersReducedMotion) return;
 
@@ -1080,9 +1082,9 @@ function renderHighlights(project, root) {
     container.appendChild(node);
   });
 
-  const firstItem = items[0] || { title: '', description: '' };
+  const firstItem = items[0] || { title: '', description: '', summary: '' };
   displayTitle.textContent = firstItem.title || '';
-  displayDescription.textContent = firstItem.description || '';
+  displayDescription.textContent = firstItem.description || firstItem.summary || '';
 }
 
 function normalizeToolName(tool = '') {
