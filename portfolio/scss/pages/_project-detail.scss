@@ -47,13 +47,6 @@ body[data-page='project-detail'] {
     backdrop-filter: $detail-panel-backdrop;
   }
 
-  .project-section-transition__frame {
-    position: relative;
-    width: 100%;
-    transform-origin: 50% 0%;
-    backface-visibility: hidden;
-  }
-
   .flow-panel {
     transition: $tr-base;
   }

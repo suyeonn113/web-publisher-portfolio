@@ -33,6 +33,8 @@ const state = {
 let workPinObserver = null;
 let cleanupWorkPinMediaQuery = null;
 const mobilePinQuery = window.matchMedia('(max-width: 480px)');
+let workMasonryResizeObserver = null;
+let workMasonryFrame = null;
 
 /* ========================================
    Utils
@@ -65,10 +67,14 @@ function applyCardCaptionPlacement(listEl) {
 
     if (image.complete) {
       syncCardCaptionPlacement(card);
+      queueWorkMasonryLayout(listEl);
       return;
     }
 
-    image.addEventListener('load', () => syncCardCaptionPlacement(card), { once: true });
+    image.addEventListener('load', () => {
+      syncCardCaptionPlacement(card);
+      queueWorkMasonryLayout(listEl);
+    }, { once: true });
   });
 }
 /* END responsive card caption */
@@ -159,9 +165,86 @@ function refreshWorkPinPositions() {
   const listEl = document.querySelector(SELECTOR.list);
   if (!listEl) return;
 
-  applyWorkPinPositions(listEl);
+  queueWorkMasonryLayout(listEl);
 }
 /* END work pin position */
+
+/* START masonry layout */
+function getListGap(listEl) {
+  const styles = window.getComputedStyle(listEl);
+  const columnGap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+  const rowGap = Number.parseFloat(styles.rowGap || styles.gap) || columnGap;
+
+  return { columnGap, rowGap };
+}
+
+function getVisibleItems(listEl) {
+  return [...listEl.querySelectorAll('.work-page__item')]
+    .filter((item) => item.style.display !== 'none' && item.getAttribute('aria-hidden') !== 'true');
+}
+
+function layoutWorkMasonry(listEl) {
+  const items = getVisibleItems(listEl);
+
+  if (!items.length) {
+    listEl.style.height = '';
+    return;
+  }
+
+  const { columnGap, rowGap } = getListGap(listEl);
+  const listWidth = listEl.clientWidth;
+  const placed = [];
+
+  items.forEach((item) => {
+    const rect = item.getBoundingClientRect();
+    const itemWidth = Math.min(rect.width, listWidth);
+    const itemHeight = rect.height;
+    const candidates = [0, ...placed.map((entry) => entry.x + entry.width + columnGap)]
+      .filter((x) => x + itemWidth <= listWidth + 1);
+    const target = candidates
+      .map((x) => {
+        const y = placed
+          .filter((entry) => x < entry.x + entry.width + columnGap && x + itemWidth + columnGap > entry.x)
+          .reduce((bottom, entry) => Math.max(bottom, entry.y + entry.height + rowGap), 0);
+
+        return { x, y };
+      })
+      .sort((a, b) => a.y - b.y || a.x - b.x)[0] || { x: 0, y: 0 };
+
+    item.style.transform = `translate(${Math.round(target.x)}px, ${Math.round(target.y)}px)`;
+    item.classList.add('is-masonry-ready');
+    placed.push({
+      x: target.x,
+      y: target.y,
+      width: itemWidth,
+      height: itemHeight,
+    });
+  });
+
+  const height = Math.max(...placed.map((entry) => entry.y + entry.height));
+  listEl.style.height = `${Math.max(0, Math.ceil(height))}px`;
+  applyWorkPinPositions(listEl);
+}
+
+function queueWorkMasonryLayout(listEl = document.querySelector(SELECTOR.list)) {
+  if (!listEl) return;
+
+  window.cancelAnimationFrame(workMasonryFrame);
+  workMasonryFrame = window.requestAnimationFrame(() => {
+    layoutWorkMasonry(listEl);
+  });
+}
+
+function observeWorkMasonry(listEl) {
+  workMasonryResizeObserver?.disconnect();
+
+  if (!listEl || !window.ResizeObserver) return;
+
+  workMasonryResizeObserver = new ResizeObserver(() => queueWorkMasonryLayout(listEl));
+  workMasonryResizeObserver.observe(listEl);
+  getVisibleItems(listEl).forEach((item) => workMasonryResizeObserver.observe(item));
+}
+/* END masonry layout */
 
 /* ========================================
    Filter / Sort
@@ -232,7 +315,8 @@ function render(list = []) {
 
   applyCardCaptionPlacement(listEl);
   applyCardBackThumbnails(listEl);
-  applyWorkPinPositions(listEl);
+  queueWorkMasonryLayout(listEl);
+  observeWorkMasonry(listEl);
   updateCount(list.length);
   toggleEmptyState(!list.length);
   initInteractiveTone();
@@ -269,7 +353,8 @@ function updateList(list = []) {
   });
 
   applyCardCaptionPlacement(listEl);
-  applyWorkPinPositions(listEl);
+  layoutWorkMasonry(listEl);
+  observeWorkMasonry(listEl);
   updateCount(list.length);
   toggleEmptyState(!list.length);
 
@@ -298,7 +383,8 @@ function updateList(list = []) {
       filter: 'blur(16px)',
       duration: 0.42,
       ease: 'power2.in'
-    })
+    }),
+    onComplete: () => queueWorkMasonryLayout(listEl)
   });
 }
 

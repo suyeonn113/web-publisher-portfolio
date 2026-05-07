@@ -4,7 +4,6 @@
 
 import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
 import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
-import { initProjectPageTransitions } from "./ProjectPageTransitions.js";
 import { initProjectSectionNavigator } from "./ProjectSectionNavigator.js";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -1259,19 +1258,21 @@ function bindFlowEvents(root, state) {
 
 function initFlowScrollSync(root, state) {
   const section = root.querySelector('.project-key-flows');
+  const layout = root.querySelector('.project-key-flows__layout');
   const nav = root.querySelector('.project-key-flows__nav-inner');
   const island = root.querySelector('[data-flow-island]');
   const panels = gsap.utils.toArray('.flow-panel', root);
 
-  if (!section || !nav || !panels.length) return;
+  if (!section || !layout || !nav || !panels.length) return;
 
   const media = gsap.matchMedia();
   state.flowMatchMedia = media;
 
   media.add('(min-width: 768px)', () => {
     const pinTrigger = ScrollTrigger.create({
-      trigger: section,
+      trigger: layout,
       start: () => `top top+=${getFlowScrollOffset()}`,
+      endTrigger: section,
       end: () => `bottom bottom-=${32}`,
       pin: nav,
       pinSpacing: false,
@@ -1384,7 +1385,6 @@ export async function loadProjectDetail() {
     initSummaryScrollAnimation(root);
     initHighlightInteractiveAnimation(project, root);
     initFlowScrollSync(root, state);
-    initProjectPageTransitions(root);
     initProjectSectionNavigator(root);
 
     return true;
