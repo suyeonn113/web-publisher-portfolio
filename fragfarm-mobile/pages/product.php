@@ -120,6 +120,7 @@ $visibleProducts = $productList['items'];
             </form>
         </section>
         <section class="catalog">
+            <p class="product-toast" data-product-toast role="status" aria-live="polite" hidden></p>
             <!-- Product Actions Form -->
             <form id="product-form" class="product-form" data-module="product">
                 <!-- Product Name -->

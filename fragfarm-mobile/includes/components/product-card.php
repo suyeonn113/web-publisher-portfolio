@@ -48,7 +48,7 @@ if (in_array('soldout', $state, true)) {
         data-state="<?= $stateAttr ?>">
         <a
             class="product__link"
-            href="#"
+            href="<?= BASE_URL ?>/pages/product-detail.php?id=<?= $id ?>"
             data-role="link">
             <div class="product__media">
                 <div class="product__gallery" aria-label="상품 이미지 미리보기">

@@ -55,7 +55,7 @@ $saleProducts = array_values(array_filter($products, function ($product) {
                 <?php foreach (array_slice($newProducts, 0, 9) as $product): ?>
                     <li class="product__card product__card--compact">
                         <a class="product__link" 
-                           href="#">
+                           href="<?= BASE_URL ?>/pages/product-detail.php?id=<?= htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8') ?>">
                             <span class="effect-fairy">
                                 <img
                                     class="product__image"
@@ -98,7 +98,7 @@ $saleProducts = array_values(array_filter($products, function ($product) {
                 <?php foreach (array_slice(array_values($groupedSaleProducts), 0, 6) as $product): ?>
                     <li class="product__card product__card--compact">
                         <a class="product__link" 
-                           href="#">
+                           href="<?= BASE_URL ?>/pages/product-detail.php?id=<?= htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8') ?>">
                             <div class="product__media">
                                 <?php if (($product['discount'] ?? 0) > 0): ?>
                                     <span class="product__badge" aria-label="<?= (int) $product['discount'] ?>퍼센트 할인">

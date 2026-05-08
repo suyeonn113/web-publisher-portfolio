@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initSortSubmit();
     initProductGalleryIndicators();
+    initProductWishButtons();
 });
 
 function initSortSubmit() {
@@ -39,5 +40,35 @@ function initProductGalleryIndicators() {
         window.addEventListener('resize', updateCurrentDot);
 
         updateCurrentDot();
+    });
+}
+
+function initProductWishButtons() {
+    const wishButtons = document.querySelectorAll('[data-action="toggle-wish"]');
+    const toast = document.querySelector('[data-product-toast]');
+    let toastTimer;
+
+    const showToast = (message) => {
+        if (!toast) return;
+
+        window.clearTimeout(toastTimer);
+        toast.textContent = message;
+        toast.hidden = false;
+
+        toastTimer = window.setTimeout(() => {
+            toast.hidden = true;
+        }, 1800);
+    };
+
+    wishButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const isActive = button.getAttribute('aria-pressed') === 'true';
+            const nextState = !isActive;
+
+            button.setAttribute('aria-pressed', String(nextState));
+            button.setAttribute('aria-label', nextState ? '위시리스트에서 제거' : '위시리스트에 추가');
+
+            showToast(nextState ? '위시리스트에 담겼습니다.' : '위시리스트에서 삭제되었습니다.');
+        });
     });
 }
