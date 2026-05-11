@@ -3,46 +3,78 @@ document.addEventListener('DOMContentLoaded', () => {
     initSelectedProduct();
     initWishToggle();
     initReviewSection();
+    initReviewWrite();
+    initQnaSection();
     initPlaceholderActions();
 });
 
 function initProductDetailThumbs() {
     const mainImage = document.querySelector('#product-main-image');
-    const thumbs = document.querySelectorAll('.product-detail__thumb');
+    const thumbs = Array.from(document.querySelectorAll('.product-detail__thumb'));
 
     if (!mainImage || thumbs.length === 0) return;
 
-    thumbs.forEach((thumb) => {
-        thumb.addEventListener('click', () => {
-            const nextSrc = thumb.dataset.imageSrc;
-            const nextAlt = thumb.dataset.imageAlt || '';
+    let currentIndex = thumbs.findIndex((thumb) => thumb.classList.contains('is-current'));
+    let swipeStartX = 0;
+    let swipeStartY = 0;
 
-            if (!nextSrc) return;
+    if (currentIndex < 0) {
+        currentIndex = 0;
+    }
 
-            mainImage.src = nextSrc;
-            mainImage.alt = nextAlt;
+    const renderImage = (index) => {
+        const nextIndex = (index + thumbs.length) % thumbs.length;
+        const nextThumb = thumbs[nextIndex];
+        const nextSrc = nextThumb.dataset.imageSrc;
+        const nextAlt = nextThumb.dataset.imageAlt || '';
 
-            thumbs.forEach((item) => {
-                const isCurrent = item === thumb;
-                item.classList.toggle('is-current', isCurrent);
-                item.setAttribute('aria-current', String(isCurrent));
-            });
+        if (!nextSrc) return;
+
+        currentIndex = nextIndex;
+        mainImage.src = nextSrc;
+        mainImage.alt = nextAlt;
+
+        thumbs.forEach((item, itemIndex) => {
+            const isCurrent = itemIndex === currentIndex;
+            item.classList.toggle('is-current', isCurrent);
+            item.setAttribute('aria-current', String(isCurrent));
         });
+
+        nextThumb.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center',
+        });
+    };
+
+    thumbs.forEach((thumb, index) => {
+        thumb.addEventListener('click', () => {
+            renderImage(index);
+        });
+    });
+
+    mainImage.addEventListener('pointerdown', (event) => {
+        swipeStartX = event.clientX;
+        swipeStartY = event.clientY;
+    });
+
+    mainImage.addEventListener('pointerup', (event) => {
+        const deltaX = event.clientX - swipeStartX;
+        const deltaY = event.clientY - swipeStartY;
+
+        if (Math.abs(deltaX) < 40 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+        renderImage(currentIndex + (deltaX < 0 ? 1 : -1));
     });
 }
 
 function initPlaceholderActions() {
     const buttons = document.querySelectorAll('[data-placeholder="true"]');
-    const feedback = document.querySelector('.product-detail__feedback');
 
     buttons.forEach((button) => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
-
-            if (feedback) {
-                feedback.textContent = '연결 준비중입니다.';
-                clearFeedbackAfterDelay(feedback);
-            }
+            showProductToast(button.dataset.toastMessage || getPlaceholderMessage(button));
         });
     });
 }
@@ -65,6 +97,16 @@ function initSelectedProduct() {
 
     const formatPrice = (price) => `${price.toLocaleString('ko-KR')}원`;
 
+    const updateQuantity = () => {
+        if (selectedQty) {
+            selectedQty.textContent = String(quantity);
+        }
+
+        if (selectedPrice) {
+            selectedPrice.textContent = formatPrice(unitPrice * quantity);
+        }
+    };
+
     const renderSelectedProduct = (size) => {
         quantity = 1;
         selectedProduct.hidden = false;
@@ -76,32 +118,36 @@ function initSelectedProduct() {
         updateQuantity();
     };
 
-    const updateQuantity = () => {
-        if (selectedQty) {
-            selectedQty.textContent = String(quantity);
-        }
-
-        if (selectedPrice) {
-            selectedPrice.textContent = formatPrice(unitPrice * quantity);
-        }
-    };
-
     const clearSelectedProduct = () => {
         quantity = 1;
         selectedProduct.hidden = true;
 
         sizeInputs.forEach((input) => {
             input.checked = false;
+            input.dataset.wasChecked = 'false';
         });
 
         updateQuantity();
     };
 
     sizeInputs.forEach((input) => {
-        input.addEventListener('change', () => {
-            if (input.checked) {
-                renderSelectedProduct(input.value);
+        input.addEventListener('click', () => {
+            const isAlreadyChecked = input.dataset.wasChecked === 'true';
+
+            sizeInputs.forEach((item) => {
+                item.dataset.wasChecked = 'false';
+            });
+
+            if (isAlreadyChecked) {
+                input.checked = false;
+                clearSelectedProduct();
+                return;
             }
+
+            input.checked = true;
+            input.dataset.wasChecked = 'true';
+
+            renderSelectedProduct(input.value);
         });
     });
 
@@ -126,21 +172,18 @@ function initSelectedProduct() {
 
 function initWishToggle() {
     const wishButton = document.querySelector('[data-wish-toggle]');
-    const feedback = document.querySelector('.product-detail__feedback');
 
     if (!wishButton) return;
 
-    wishButton.addEventListener('click', () => {
+    wishButton.addEventListener('click', (event) => {
+        event.preventDefault();
+
         const isActive = wishButton.getAttribute('aria-pressed') === 'true';
         const nextState = !isActive;
 
         wishButton.setAttribute('aria-pressed', String(nextState));
         wishButton.setAttribute('aria-label', nextState ? '위시리스트에서 제거' : '위시리스트 추가');
-
-        if (feedback) {
-            feedback.textContent = nextState ? '위시리스트에 담겼습니다.' : '위시리스트에서 삭제되었습니다.';
-            clearFeedbackAfterDelay(feedback);
-        }
+        showProductToast(wishButton.dataset.toastMessage || '준비중입니다.');
     });
 }
 
@@ -148,7 +191,6 @@ function initReviewSection() {
     const closeButtons = document.querySelectorAll('[data-review-close]');
     const deleteButtons = document.querySelectorAll('[data-comment-delete]');
     const loginRequiredControls = document.querySelectorAll('[data-login-required]');
-    const feedback = document.querySelector('.product-detail__feedback');
 
     closeButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -169,23 +211,104 @@ function initReviewSection() {
     loginRequiredControls.forEach((control) => {
         control.addEventListener('click', (event) => {
             event.preventDefault();
-
-            if (feedback) {
-                feedback.textContent = '로그인 후 이용해 주세요.';
-                clearFeedbackAfterDelay(feedback);
-            } else {
-                window.alert('로그인 후 이용해 주세요.');
-            }
+            showProductToast(control.dataset.toastMessage || '로그인 후 이용해주세요.');
         });
     });
 }
 
-let feedbackTimer;
+function initReviewWrite() {
+    const reviewForm = document.querySelector('[data-review-write]');
 
-function clearFeedbackAfterDelay(feedback) {
-    window.clearTimeout(feedbackTimer);
+    if (!reviewForm) return;
 
-    feedbackTimer = window.setTimeout(() => {
-        feedback.textContent = '';
+    const panel = reviewForm.querySelector('[data-review-write-panel]');
+    const toggleButton = reviewForm.querySelector('[data-review-write-toggle]');
+    const isLoggedOut = reviewForm.querySelector('[data-login-required]') !== null;
+
+    if (!isLoggedOut && panel && toggleButton) {
+        toggleButton.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const shouldOpen = panel.hidden;
+
+            panel.hidden = !shouldOpen;
+            toggleButton.classList.toggle('is-active', shouldOpen);
+            toggleButton.setAttribute('aria-expanded', String(shouldOpen));
+        });
+
+        return;
+    }
+
+    reviewForm.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        showProductToast('로그인 후 이용해주세요.');
+    }, true);
+}
+
+function initQnaSection() {
+    const qnaForm = document.querySelector('.qna-form');
+
+    if (!qnaForm) return;
+
+    const isLoggedOut = document.querySelector('[data-login-required]') !== null;
+    const controls = qnaForm.querySelectorAll('textarea, button');
+
+    controls.forEach((control) => {
+        control.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            showProductToast(isLoggedOut ? '로그인 후 이용해주세요.' : '상품 문의를 남겨주세요.');
+        });
+    });
+}
+
+function getPlaceholderMessage(control) {
+    if (control.closest('[data-review-write]')) {
+        return '후기를 남겨주세요.';
+    }
+
+    if (control.closest('.review-comment-form')) {
+        return '댓글을 작성해주세요.';
+    }
+
+    if (control.closest('.qna-form')) {
+        return '상품 문의를 남겨주세요.';
+    }
+
+    return '준비중입니다.';
+}
+
+let productToastTimer;
+
+function showProductToast(message) {
+    const toast = getProductToast();
+
+    if (!toast) return;
+
+    window.clearTimeout(productToastTimer);
+    toast.textContent = message;
+    toast.hidden = false;
+
+    productToastTimer = window.setTimeout(() => {
+        toast.hidden = true;
     }, 1800);
+}
+
+function getProductToast() {
+    const existingToast = document.querySelector('[data-product-toast]');
+
+    if (existingToast) return existingToast;
+
+    const toast = document.createElement('p');
+    toast.className = 'product-toast';
+    toast.dataset.productToast = '';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.hidden = true;
+
+    document.querySelector('.mobile-shell')?.appendChild(toast);
+
+    return toast;
 }

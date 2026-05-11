@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: 6rem auto;
     align-items: center;
-    row-gap: 1rem;
+    row-gap: 0.95rem;
 
     padding: 1rem;
     padding-bottom: .5rem;

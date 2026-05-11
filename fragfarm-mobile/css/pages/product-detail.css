@@ -4,6 +4,31 @@
     color: #111;
 }
 
+.product-toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(1.5rem + env(safe-area-inset-bottom));
+    z-index: 1100;
+
+    width: calc(100% - 2rem);
+    max-width: calc(var(--shell-width) - 2rem);
+    padding: .85rem 1rem;
+
+    color: #fff;
+    text-align: center;
+    font-size: .8125rem;
+    line-height: 1.4;
+
+    background: rgba(17, 17, 17, .86);
+    border-radius: 3px;
+
+    transform: translateX(-50%);
+}
+
+.product-toast[hidden] {
+    display: none;
+}
+
 .product-detail__media {
     display: grid;
     place-items: center;
@@ -18,13 +43,15 @@
     aspect-ratio: 4 / 5;
     object-fit: cover;
     object-position: center;
+    touch-action: pan-y;
+    user-select: none;
 }
 
 .product-detail__thumbs {
     display: flex;
     gap: .5rem;
     overflow-x: auto;
-    padding: .75rem 0 .25rem;
+    padding: .75rem 0 .25rem .75rem;
 }
 
 .product-detail__thumbs::-webkit-scrollbar {
@@ -393,14 +420,15 @@
     align-items: center;
 }
 
-.review-stars svg {
+.review-stars span {
     width: .625rem;
     height: .625rem;
-    fill: #d8d5d2;
+    background: url("../../assets/icons/star.svg") center / contain no-repeat;
+    opacity: .22;
 }
 
-.review-stars svg.is-filled {
-    fill: #f25c74;
+.review-stars span.is-filled {
+    opacity: 1;
 }
 
 .review-item__meta {
@@ -431,7 +459,7 @@
 }
 
 .review-item[open] .review-item__thumb {
-    visibility: hidden;
+    display: none;
 }
 
 .review-item[open] .review-item__text {
@@ -445,7 +473,7 @@
 
 .review-item__close {
     display: none;
-    grid-column: 3;
+    grid-column: 4;
     grid-row: 1;
     justify-self: end;
     align-self: center;
@@ -461,7 +489,6 @@
 }
 
 .review-item__content {
-    padding-right: 2rem;
     font-size: .8125rem;
     line-height: 1.6;
 }
@@ -535,6 +562,124 @@
 .review-comment-form button[data-login-required] {
     color: #999;
     border-color: #d8d5d2;
+}
+
+.review-write {
+    display: grid;
+    gap: .75rem;
+    margin-top: 1rem;
+}
+
+.review-write__box {
+    display: grid;
+    min-height: 10rem;
+    padding: .75rem;
+    border: 1px solid #111;
+    border-radius: 3px;
+    background: #fff;
+}
+
+.review-write__box[hidden] {
+    display: none;
+}
+
+.review-write__box textarea {
+    width: 100%;
+    min-height: 5.5rem;
+    padding: 0;
+    resize: none;
+    border: 0;
+    outline: 0;
+    font-size: .8125rem;
+    line-height: 1.7;
+}
+
+.review-write__box textarea::placeholder {
+    color: #8a8a8a;
+}
+
+.review-write__box textarea[readonly] {
+    cursor: pointer;
+}
+
+.review-write__tools {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    align-self: end;
+}
+
+.review-write__photo {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #111;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.review-write__photo input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.review-write__photo svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.review-write__rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: .08rem;
+    border: 0;
+}
+
+.review-write__rating input {
+    position: absolute;
+    opacity: 0;
+}
+
+.review-write__rating label {
+    width: 1rem;
+    height: 1rem;
+    background: url("../../assets/icons/star.svg") center / contain no-repeat;
+    opacity: .28;
+    cursor: pointer;
+}
+
+.review-write__rating input:checked ~ label,
+.review-write__rating label:hover,
+.review-write__rating label:hover ~ label {
+    opacity: 1;
+}
+
+.review-write__rating input:disabled + label,
+.review-write__photo:has(input:disabled) {
+    cursor: pointer;
+}
+
+.review-write__submit {
+    justify-self: end;
+    width: 5rem;
+    height: 2.25rem;
+    border: 1px solid #111;
+    border-radius: 3px;
+    font-size: .75rem;
+}
+
+.review-write__submit.is-active {
+    color: #fff;
+    border-color: #f25c74;
+    background: #f25c74;
 }
 
 .detail-toggle summary {

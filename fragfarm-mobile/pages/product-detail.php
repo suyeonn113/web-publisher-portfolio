@@ -338,9 +338,7 @@ $reviewItems = [
                         <summary class="review-item__summary">
                             <span class="review-stars" aria-label="<?= (int) $review['score'] ?>점">
                                 <?php for ($star = 1; $star <= 5; $star++): ?>
-                                    <svg class="<?= $star <= (int) $review['score'] ? 'is-filled' : '' ?>" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-                                        <path d="M8 1.15L10.08 5.36L14.73 6.04L11.36 9.32L12.16 13.95L8 11.77L3.84 13.95L4.64 9.32L1.27 6.04L5.92 5.36L8 1.15Z"/>
-                                    </svg>
+                                    <span class="<?= $star <= (int) $review['score'] ? 'is-filled' : '' ?>" aria-hidden="true"></span>
                                 <?php endfor; ?>
                             </span>
                             <span class="review-item__meta">
@@ -383,6 +381,46 @@ $reviewItems = [
                     </details>
                 <?php endforeach; ?>
             </div>
+
+            <form class="review-write" action="#" method="post" enctype="multipart/form-data" data-review-write>
+                <div class="review-write__box" data-review-write-panel hidden>
+                    <textarea
+                        name="review"
+                        rows="5"
+                        placeholder="<?= $isLoggedIn ? '후기를 남겨주세요.' : '로그인 후 이용해주세요.' ?>"
+                        <?= $isLoggedIn ? '' : 'readonly data-login-required' ?>></textarea>
+
+                    <div class="review-write__tools">
+                        <label class="review-write__photo" aria-label="사진 첨부">
+                            <input type="file" name="review_image" accept="image/*" <?= $isLoggedIn ? '' : 'disabled' ?>>
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.2l1.1-1.6A2 2 0 0 1 10.45 3.5h3.1a2 2 0 0 1 1.65.9L16.3 6h1.2A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-8Z"/>
+                                <path d="M12 15.5a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/>
+                            </svg>
+                        </label>
+
+                        <fieldset class="review-write__rating" aria-label="별점 선택">
+                            <?php for ($star = 5; $star >= 1; $star--): ?>
+                                <input
+                                    id="review-rating-<?= $star ?>"
+                                    type="radio"
+                                    name="rating"
+                                    value="<?= $star ?>"
+                                    <?= $isLoggedIn ? '' : 'disabled' ?>>
+                                <label for="review-rating-<?= $star ?>" aria-label="<?= $star ?>점"></label>
+                            <?php endfor; ?>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <button
+                    class="review-write__submit"
+                    type="button"
+                    aria-expanded="false"
+                    <?= $isLoggedIn ? 'data-review-write-toggle' : 'data-login-required' ?>>
+                    리뷰쓰기
+                </button>
+            </form>
         </section>
 
         <section class="product-detail__accordions" aria-label="상품 상세 정보">
@@ -437,8 +475,13 @@ $reviewItems = [
                 <div class="detail-toggle__body">
                     <form class="qna-form" action="#" method="post">
                         <label for="qna-content">문의 내용</label>
-                        <textarea id="qna-content" name="qna" rows="5" placeholder="상품 문의를 남겨주세요."></textarea>
-                        <button type="button" data-placeholder="true">작성하기</button>
+                        <textarea
+                            id="qna-content"
+                            name="qna"
+                            rows="5"
+                            placeholder="<?= $isLoggedIn ? '상품 문의를 남겨주세요.' : '로그인 후 이용해주세요.' ?>"
+                            <?= $isLoggedIn ? '' : 'readonly data-login-required' ?>></textarea>
+                        <button type="button" <?= $isLoggedIn ? 'data-placeholder="true"' : 'data-login-required' ?>>작성하기</button>
                     </form>
                 </div>
             </details>
