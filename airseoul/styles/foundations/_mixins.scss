@@ -1,0 +1,103 @@
+/* ================================
+   MIXINS
+================================ */
+
+@use 'sass:map';
+
+@use './maps' as *;
+@use './functions' as *;
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@mixin respond-down($device) {
+  @media (max-width: map.get($breakpoints, $device)) {
+    @content;
+  }
+}
+
+@mixin respond-up($device) {
+  @media (min-width: map.get($breakpoints, $device)) {
+    @content;
+  }
+}
+
+/* =========================
+   FLEX
+========================= */
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+@mixin text-size($key) {
+  $size: map.get($font-sizes, $key);
+
+  font-size: map.get($size, default);
+
+  @include respond-down(tablet) {
+    font-size: map.get($size, tablet);
+  }
+
+  @include respond-down(mobile) {
+    font-size: map.get($size, mobile);
+  }
+}
+
+/* =========================
+   ELLIPSIS
+========================= */
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin ellipsis-multi($line: 2) {
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+/* =========================
+   ABSOLUTE
+========================= */
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+/* =========================
+   TRANSITION
+========================= */
+
+@mixin transition(
+  $property: all,
+  $duration: base,
+  $easing: standard
+) {
+  transition:
+    $property
+    get-duration($duration)
+    get-easing($easing);
+}

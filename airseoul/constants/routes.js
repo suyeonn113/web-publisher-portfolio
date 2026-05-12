@@ -1,21 +1,56 @@
+// src/constants/routes.js
+
 export const ROUTES = {
-  HOME: '/',
+  home: '/',
 
-  BOOKING: '/booking',
-  BOOKING_FLIGHT: '/booking/flight',
-  BOOKING_SCHEDULE: '/booking/schedule',
-  BOOKING_CHECKIN: '/booking/checkin',
-  BOOKING_MANAGE: '/booking/manage',
+  booking: {
+    root: '/booking',
 
-  TRAVEL: '/travel',
+    flight: '/booking/flight',
+    bookingCheck: '/booking/check',
+    refund: '/booking/refund',
+    checkin: '/booking/checkin',
+    flightStatus: '/booking/status',
+  },
 
-  SERVICE: '/service',
-  SERVICE_NOTICE: '/service/notice',
-  SERVICE_FAQ: '/service/faq',
-  SERVICE_CONTACT: '/service/contact',
-  SERVICE_LOST: '/service/lost',
+  travel: {
+    root: '/travel',
 
-  EVENT: '/event',
+    seat: '/travel/seat',
+    baggage: '/travel/baggage',
+    meal: '/travel/meal',
+    insurance: '/travel/insurance',
+    airportService: '/travel/airport-service',
+    travelSupport: '/travel/support',
+  },
 
-  LOGIN: '/login',
+  service: {
+    root: '/service',
+
+    cabinService: '/service/cabin-service',
+    aircraft: '/service/aircraft',
+    groupBooking: '/service/group-booking',
+    documents: '/service/documents',
+  },
+
+  benefit: {
+    root: '/benefit',
+
+    event: '/benefit/event',
+    partnership: '/benefit/partnership',
+    membership: '/benefit/membership',
+  },
+
+  contact: {
+    root: '/contact',
+
+    notice: '/contact/notice',
+    faq: '/contact/faq',
+    inquiry: '/contact/inquiry',
+    lost: '/contact/lost',
+  },
+
+  auth: {
+    login: '/login',
+  },
 };

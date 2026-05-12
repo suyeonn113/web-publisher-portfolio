@@ -1,0 +1,105 @@
+/* ================================
+   TOKENS
+================================ */
+
+:root {
+  /* =========================
+     COLOR
+  ========================= */
+
+  --color-white: #ffffff;
+  --color-black: #111111;
+
+  /* Brand */
+  --color-mint: #1ab899;
+  --color-mint-dark: #008b7c;
+
+  --color-mint-light-1: #9bd3ab;
+  --color-mint-light-2: #c4e4c9;
+
+  --color-green-1: #6ec178;
+  --color-green-2: #b3d175;
+
+  --color-pink: #ee3c8b;
+  --color-yellow: #ffe800;
+
+  --color-silver: #d1d2d4;
+  --color-gray: #b6bab0;
+
+  /* Text */
+  --color-text-primary: #111111;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+
+  /* Background */
+  --color-bg-main: #ffffff;
+  --color-bg-sub: #f7f7f7;
+
+  --color-bg-mint: var(--color-mint-light-2);
+  --color-bg-green: var(--color-green-2);
+
+  /* Border */
+  --color-border-primary: #e5e5e5;
+  --color-border-secondary: #d9d9d9;
+
+  --color-border-mint: var(--color-mint);
+  --color-border-gray: var(--color-gray);
+
+  /* Point */
+  --color-point-primary: var(--color-mint-dark);
+  --color-point-pink: var(--color-pink);
+  --color-point-yellow: var(--color-yellow);
+
+  /* State */
+  --color-focus-ring: var(--color-mint-dark);
+
+  /* =========================
+     TYPOGRAPHY
+  ========================= */
+
+  --font-family-base:
+    'Pretendard',
+    'SUIT',
+    sans-serif;
+
+  --font-size-base: 16px;
+  --line-height-base: 1.5;
+
+  /* =========================
+     LAYOUT
+  ========================= */
+
+  --header-height: 88px;
+  --header-height-mobile: 64px;
+
+  --container-width: 1440px;
+  --container-padding: 24px;
+
+  /* =========================
+     RADIUS
+  ========================= */
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* =========================
+     SHADOW
+  ========================= */
+
+  --shadow-sm:
+    0 2px 8px rgba(0, 0, 0, 0.04);
+
+  --shadow-md:
+    0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* =========================
+     TRANSITION
+  ========================= */
+
+  --duration-fast: 0.2s;
+  --duration-base: 0.4s;
+
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}

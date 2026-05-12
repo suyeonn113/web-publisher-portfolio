@@ -1,0 +1,61 @@
+/* ================================
+   FUNCTIONS
+================================ */
+
+@use 'sass:map';
+
+/* =========================
+   PX → REM
+========================= */
+
+@function rem($px, $base: 16px) {
+  @return calc($px / $base) * 1rem;
+}
+
+/* =========================
+   Z-INDEX
+========================= */
+
+@function get-z($key) {
+  @return map.get($z-indexes, $key);
+}
+
+/* =========================
+   SPACING
+========================= */
+
+@function get-space($key) {
+  @return map.get($spacing, $key);
+}
+
+/* =========================
+   RADIUS
+========================= */
+
+@function get-radius($key) {
+  @return map.get($radius, $key);
+}
+
+/* =========================
+   SHADOW
+========================= */
+
+@function get-shadow($key) {
+  @return map.get($shadows, $key);
+}
+
+/* =========================
+   DURATION
+========================= */
+
+@function get-duration($key) {
+  @return map.get($durations, $key);
+}
+
+/* =========================
+   EASING
+========================= */
+
+@function get-easing($key) {
+  @return map.get($easings, $key);
+}
