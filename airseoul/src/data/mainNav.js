@@ -1,4 +1,4 @@
-// src/data/navigation/mainNav.js
+// src/data/mainNav.js
 
 import { ROUTES } from '../constants/routes';
 

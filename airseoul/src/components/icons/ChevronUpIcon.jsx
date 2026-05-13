@@ -1,11 +1,11 @@
 import IconBase from './IconBase';
 
-function ChevronUp(props) {
+function ChevronUpIcon(props) {
   return (
     <IconBase {...props}>
-      <path d="m18 15-6-6-6 6"/>
+      <path d="m18 15-6-6-6 6" />
     </IconBase>
   );
 }
 
-export default ChevronUp;
+export default ChevronUpIcon;

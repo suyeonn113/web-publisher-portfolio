@@ -2,6 +2,8 @@
    MAPS
 ================================ */
 
+/* Sass-only values used by functions and mixins. */
+
 /* =========================
    BREAKPOINT
 ========================= */
@@ -89,42 +91,3 @@ $z-indexes: (
   toast: 1000,
 );
 
-/* =========================
-   RADIUS
-========================= */
-
-$radius: (
-  sm: 8px,
-  md: 16px,
-  lg: 24px,
-  full: 999px,
-);
-
-/* =========================
-   SHADOW
-========================= */
-
-$shadows: (
-  sm: (
-    0 2px 8px rgba(0, 0, 0, 0.04)
-  ),
-
-  md: (
-    0 8px 24px rgba(0, 0, 0, 0.08)
-  ),
-);
-
-/* =========================
-   TRANSITION
-========================= */
-
-$durations: (
-  fast: 0.2s,
-  base: 0.4s,
-  slow: 0.6s,
-);
-
-$easings: (
-  standard: cubic-bezier(0.22, 1, 0.36, 1),
-  smooth: cubic-bezier(0.65, 0, 0.35, 1),
-);

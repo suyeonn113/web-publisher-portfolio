@@ -1,6 +1,8 @@
+import { iconSize } from '../../tokens/size';
+
 function IconBase({
   children,
-  size = 24,
+  size = iconSize.md,
   className = '',
   ...props
 }) {

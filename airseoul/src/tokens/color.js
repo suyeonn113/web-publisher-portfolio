@@ -1,0 +1,40 @@
+// Mirrors color custom properties in styles/foundation/_tokens.scss.
+export const color = {
+  white: 'var(--color-white)',
+  black: 'var(--color-black)',
+
+  mint: 'var(--color-mint)',
+  mintDark: 'var(--color-mint-dark)',
+  mintLight1: 'var(--color-mint-light-1)',
+  mintLight2: 'var(--color-mint-light-2)',
+
+  green1: 'var(--color-green-1)',
+  green2: 'var(--color-green-2)',
+
+  pink: 'var(--color-pink)',
+  yellow: 'var(--color-yellow)',
+
+  silver: 'var(--color-silver)',
+  gray: 'var(--color-gray)',
+
+  textPrimary: 'var(--color-text-primary)',
+  textSecondary: 'var(--color-text-secondary)',
+  textTertiary: 'var(--color-text-tertiary)',
+
+  bgMain: 'var(--color-bg-main)',
+  bgSub: 'var(--color-bg-sub)',
+  bgMint: 'var(--color-bg-mint)',
+  bgGreen: 'var(--color-bg-green)',
+
+  borderPrimary: 'var(--color-border-primary)',
+  borderSecondary: 'var(--color-border-secondary)',
+  borderMint: 'var(--color-border-mint)',
+  borderGray: 'var(--color-border-gray)',
+
+  pointPrimary: 'var(--color-point-primary)',
+  pointPink: 'var(--color-point-pink)',
+  pointYellow: 'var(--color-point-yellow)',
+
+  focusRing: 'var(--color-focus-ring)',
+  current: 'currentColor',
+};

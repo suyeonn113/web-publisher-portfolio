@@ -1,0 +1,35 @@
+export default function HeaderMobileNavPanel({ menus, sectionRefs }) {
+  return (
+    <div className="site-header__mobile-nav-panel">
+      {menus.map((menu) => (
+        <section
+          className="site-header__mobile-panel-section"
+          key={menu.id}
+          ref={(element) => {
+            sectionRefs.current[menu.id] = element;
+          }}
+        >
+          <h3 className="site-header__mobile-panel-heading">
+            {menu.label}
+          </h3>
+
+          <ul className="site-header__mobile-panel-list">
+            {menu.children?.map((item) => (
+              <li
+                className="site-header__mobile-panel-item"
+                key={item.id}
+              >
+                <a
+                  className="site-header__mobile-panel-link"
+                  href={item.href}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}

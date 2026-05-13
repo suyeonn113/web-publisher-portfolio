@@ -1,13 +1,37 @@
-export default function HeaderMobileButton() {
+import { useRef, useState } from 'react';
+
+import { mainNav } from '../../../data/mainNav';
+import { utilityNav } from '../../../data/utilityNav';
+import HeaderMobileNav from './HeaderMobileNav';
+import HeaderMobileNavPanel from './HeaderMobileNavPanel';
+
+const contactMenu = utilityNav.find((item) => item.id === 'contact');
+const mobileNav = contactMenu ? [...mainNav, contactMenu] : mainNav;
+
+export default function HeaderMobileMenu({ isOpen }) {
+  const [activeMenuId, setActiveMenuId] = useState(mobileNav[0]?.id);
+  const sectionRefs = useRef({});
+
+  const handleMenuSelect = (menuId) => {
+    setActiveMenuId(menuId);
+
+    sectionRefs.current[menuId]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
+  if (!isOpen) return null;
+
   return (
-    <button
-      className="site-header__mobile-button"
-      type="button"
-      aria-label="모바일 메뉴 열기"
-    >
-      <span className="site-header__mobile-line" />
-      <span className="site-header__mobile-line" />
-      <span className="site-header__mobile-line" />
-    </button>
+    <div className="site-header__mobile-menu">
+      <HeaderMobileNav
+        activeMenuId={activeMenuId}
+        menus={mobileNav}
+        onActiveMenuChange={handleMenuSelect}
+      />
+
+      <HeaderMobileNavPanel menus={mobileNav} sectionRefs={sectionRefs} />
+    </div>
   );
 }

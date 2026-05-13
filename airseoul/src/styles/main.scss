@@ -3,3 +3,7 @@
 @use './foundation/functions';
 @use './foundation/mixins';
 @use './foundation/reset';
+
+@use '../components/layout/header/header';
+
+@use './pages/home';

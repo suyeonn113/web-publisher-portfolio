@@ -1,4 +1,4 @@
-// src/data/navigation/utilityNav.js
+// src/data/utilityNav.js
 
 import { ROUTES } from '../constants/routes';
 
