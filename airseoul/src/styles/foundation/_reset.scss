@@ -103,3 +103,28 @@ i {
   color: var(--color-text-inverse);
   background: var(--color-point-primary);
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-gray) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-border-gray);
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-tertiary);
+}

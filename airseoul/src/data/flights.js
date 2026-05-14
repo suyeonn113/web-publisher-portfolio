@@ -32,21 +32,18 @@ export const flights = [
 
     fares: {
       currency: 'KRW',
-
       special: {
         label: '특가운임',
         price: 123500,
         seatsLeft: 1,
         baggageIncluded: false,
       },
-
       discount: {
         label: '할인운임',
         price: 178500,
         seatsLeft: 2,
         baggageIncluded: true,
       },
-
       normal: {
         label: '정상운임',
         price: 378500,
@@ -60,7 +57,6 @@ export const flights = [
       seatsLeft: 7,
     },
   },
-
   {
     id: 'rs716-kix-icn-20260521',
     airline: {
@@ -94,21 +90,18 @@ export const flights = [
 
     fares: {
       currency: 'KRW',
-
       special: {
         label: '특가운임',
         price: 152500,
         seatsLeft: 1,
         baggageIncluded: false,
       },
-
       discount: {
         label: '할인운임',
         price: 192500,
         seatsLeft: 2,
         baggageIncluded: true,
       },
-
       normal: {
         label: '정상운임',
         price: 414700,
