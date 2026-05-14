@@ -1,0 +1,13 @@
+.flight-search-results {
+  width: 100%;
+}
+
+.date-fare-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.date-fare-bar__item {
+  min-width: 120px;
+}

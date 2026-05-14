@@ -13,7 +13,7 @@ export const mainNav = [
       { id: 'booking-check', label: '예약 조회', href: ROUTES.booking.bookingCheck },
       { id: 'booking-refund', label: '변경 및 환불', href: ROUTES.booking.refund },
       { id: 'booking-checkin', label: '체크인', href: ROUTES.booking.checkin },
-      { id: 'flight-status', label: '운항 정보', href: ROUTES.booking.flightStatus },
+      { id: 'flight-status', label: '출도착 / 스케줄', href: ROUTES.booking.flightStatus },
     ],
   },
 

@@ -4,6 +4,7 @@ import { utilityNav } from '../../../data/utilityNav';
 import { iconSize } from '../../../tokens/size';
 import ChevronDownIcon from '../../icons/ChevronDownIcon';
 import GlobeIcon from '../../icons/GlobeIcon';
+import { moveDropdownFocus } from './headerDropdownKeyboard';
 
 const languageMenu = utilityNav.find((item) => item.id === 'language');
 
@@ -52,6 +53,8 @@ export default function HeaderLanguageMenu({
     setIsOpen(false);
   };
   const handleKeyDown = (event) => {
+    if (moveDropdownFocus(event)) return;
+
     if (event.key !== 'Escape') return;
 
     setIsOpen(false);

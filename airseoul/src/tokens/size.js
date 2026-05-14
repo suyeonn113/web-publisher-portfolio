@@ -15,6 +15,7 @@ export const layoutSize = {
   headerMobileButtonSize: 'var(--header-mobile-button-size)',
   headerMobileLineWidth: 'var(--header-mobile-line-width)',
   headerMobileLineHeight: 'var(--header-mobile-line-height)',
+  mobileDrawerWidth: 'var(--mobile-drawer-width)',
   logoWidth: 'var(--logo-width)',
   logoWidthMobile: 'var(--logo-width-mobile)',
   containerWidth: 'var(--container-width)',

@@ -3,7 +3,14 @@
 @use './foundation/functions';
 @use './foundation/mixins';
 @use './foundation/reset';
+@use './animations/panel';
 
 @use '../components/layout/header/header';
+@use '../components/layout/header/header-desktop';
+@use '../components/layout/header/header-mobile';
+@use '../components/login/login-panel';
 
+@use '../components/home/special-fare';
+@use '../components/flight/booking/flight-booking';
 @use './pages/home';
+@use './pages/flight-search-results';

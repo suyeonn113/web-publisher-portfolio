@@ -32,10 +32,12 @@
   --color-text-primary: #111111;
   --color-text-secondary: #666666;
   --color-text-tertiary: #999999;
+  --color-text-inverse: #ffffff;
 
   /* Background */
   --color-bg-main: #ffffff;
   --color-bg-sub: #f7f7f7;
+  --color-bg-backdrop: rgba(0, 0, 0, 0.42);
 
   --color-bg-mint: var(--color-mint-light-2);
   --color-bg-green: var(--color-green-2);
@@ -80,6 +82,7 @@
   --header-mobile-button-size: 44px;
   --header-mobile-line-width: 20px;
   --header-mobile-line-height: 2px;
+  --mobile-drawer-width: 520px;
 
   --logo-width: 180px;
   --logo-width-mobile: 124px;
@@ -120,9 +123,11 @@
   ========================= */
 
   --duration-fast: 0.2s;
+  --duration-panel: 0.42s;
   --duration-base: 0.4s;
   --duration-slow: 0.6s;
 
   --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-panel: cubic-bezier(0.16, 1, 0.3, 1);
 }

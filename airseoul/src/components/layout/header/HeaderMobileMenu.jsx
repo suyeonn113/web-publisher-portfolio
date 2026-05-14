@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 
 import { mainNav } from '../../../data/mainNav';
 import { utilityNav } from '../../../data/utilityNav';
+import { usePanelTransition } from '../../../hooks/usePanelTransition';
 import HeaderMobileNav from './HeaderMobileNav';
 import HeaderMobileNavPanel from './HeaderMobileNavPanel';
 
@@ -11,6 +12,7 @@ const mobileNav = contactMenu ? [...mainNav, contactMenu] : mainNav;
 export default function HeaderMobileMenu({ isOpen }) {
   const [activeMenuId, setActiveMenuId] = useState(mobileNav[0]?.id);
   const sectionRefs = useRef({});
+  const { shouldRender, transitionState } = usePanelTransition(isOpen);
 
   const handleMenuSelect = (menuId) => {
     setActiveMenuId(menuId);
@@ -21,10 +23,13 @@ export default function HeaderMobileMenu({ isOpen }) {
     });
   };
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
 
   return (
-    <div className="site-header__mobile-menu">
+    <div
+      className="site-header__mobile-menu panel-motion--slide-right"
+      data-state={transitionState}
+    >
       <HeaderMobileNav
         activeMenuId={activeMenuId}
         menus={mobileNav}

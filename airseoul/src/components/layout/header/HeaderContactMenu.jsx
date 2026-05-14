@@ -4,6 +4,7 @@ import { utilityNav } from '../../../data/utilityNav';
 import { iconSize } from '../../../tokens/size';
 import ChevronDownIcon from '../../icons/ChevronDownIcon';
 import HeadphonesIcon from '../../icons/HeadphonesIcon';
+import { moveDropdownFocus } from './headerDropdownKeyboard';
 
 const contactMenu = utilityNav.find((item) => item.id === 'contact');
 
@@ -27,6 +28,8 @@ export default function HeaderContactMenu({
     setIsOpen(true);
   };
   const handleKeyDown = (event) => {
+    if (moveDropdownFocus(event)) return;
+
     if (event.key !== 'Escape') return;
 
     setIsOpen(false);

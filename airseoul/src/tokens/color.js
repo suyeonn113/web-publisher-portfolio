@@ -23,6 +23,7 @@ export const color = {
 
   bgMain: 'var(--color-bg-main)',
   bgSub: 'var(--color-bg-sub)',
+  bgBackdrop: 'var(--color-bg-backdrop)',
   bgMint: 'var(--color-bg-mint)',
   bgGreen: 'var(--color-bg-green)',
 

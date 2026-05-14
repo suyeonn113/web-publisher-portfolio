@@ -1,16 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Logo from '../../common/Logo';
+import LoginPanel from '../../login/LoginPanel';
 import HeaderActions from './HeaderActions';
 import HeaderMobileMenu from './HeaderMobileMenu';
 import HeaderNav from './HeaderNav';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoginPanelOpen, setIsLoginPanelOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((isOpen) => !isOpen);
   };
+
+  const openLoginPanel = () => {
+    setIsLoginPanelOpen(true);
+    setIsMobileMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined;
+
+    const closeMobileMenu = (event) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', closeMobileMenu);
+
+    return () => {
+      document.removeEventListener('keydown', closeMobileMenu);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <header className="site-header">
@@ -21,11 +44,16 @@ export default function Header() {
 
         <HeaderActions
           isMobileMenuOpen={isMobileMenuOpen}
+          onLoginOpen={openLoginPanel}
           onMobileMenuToggle={toggleMobileMenu}
         />
       </div>
 
       <HeaderMobileMenu isOpen={isMobileMenuOpen} />
+      <LoginPanel
+        isOpen={isLoginPanelOpen}
+        onClose={() => setIsLoginPanelOpen(false)}
+      />
     </header>
   );
 }
