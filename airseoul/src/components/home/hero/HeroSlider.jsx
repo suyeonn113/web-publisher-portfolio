@@ -1,0 +1,115 @@
+import { useEffect, useRef, useState } from 'react';
+
+function formatPrice(price) {
+  if (typeof price !== 'number') return '';
+
+  return price.toLocaleString('ko-KR');
+}
+
+function HeroSlider({ slides = [], autoPlayDelay = 5000 }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const videoRefs = useRef([]);
+
+  useEffect(() => {
+    const currentVideo = videoRefs.current[activeIndex];
+
+    if (!currentVideo) return;
+
+    currentVideo.currentTime = 0;
+    currentVideo.play().catch(() => {});
+  }, [activeIndex]);
+
+  useEffect(() => {
+    if (slides.length <= 1) return undefined;
+
+    const timer = window.setInterval(() => {
+      setActiveIndex((prevIndex) => {
+        return (prevIndex + 1) % slides.length;
+      });
+    }, autoPlayDelay);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [slides.length, autoPlayDelay]);
+
+  if (slides.length === 0) return null;
+
+  return (
+    <div
+      className="hero-slider"
+      aria-roledescription="carousel"
+    >
+      <div className="hero-slider__track">
+        {slides.map((slide, index) => {
+          const isActive = index === activeIndex;
+          const price = slide.lowestFare?.price;
+          const toCity = slide.flight?.route?.to?.city ?? slide.visual.subtitle;
+          const departureDate = slide.flight?.schedule?.departureDate;
+
+          return (
+            <article
+              className={`hero-slider__slide ${isActive ? 'is-active' : ''}`}
+              key={slide.id}
+              aria-hidden={!isActive}
+            >
+              <div className="hero-slider__media" aria-hidden="true">
+                <video
+                  ref={(node) => {
+                    videoRefs.current[index] = node;
+                  }}
+                  muted
+                  loop
+                  playsInline
+                  // poster={slide.visual.media.poster}
+                  src={slide.visual.media.src}
+                />
+              </div>
+
+              <div className="hero-slider__content">
+                <p className="hero-slider__eyebrow">
+                  AIR SEOUL SPECIAL FARE
+                </p>
+
+                <h3 className="hero-slider__title">
+                  {slide.visual.title}
+                </h3>
+
+                <p className="hero-slider__subtitle">
+                  {toCity}
+                </p>
+
+                {price && (
+                  <p className="hero-slider__price">
+                    편도 총액 <strong>{formatPrice(price)}원</strong>부터
+                  </p>
+                )}
+
+                {departureDate && (
+                  <p className="hero-slider__date">
+                    {departureDate} 출발 기준
+                  </p>
+                )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="hero-slider__pagination" aria-label="히어로 슬라이드">
+        {slides.map((slide, index) => (
+          <button
+            type="button"
+            key={slide.id}
+            className={index === activeIndex ? 'is-active' : ''}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`${slide.visual.subtitle} 특가 보기`}
+            aria-pressed={index === activeIndex}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default HeroSlider;

@@ -4,13 +4,15 @@
 /* Header shell */
 
 .site-header {
-  position: sticky;
+  @include transition(background-color, fast, standard);
+  position: fixed;
   top: 0;
   z-index: get-z(header);
 
+  width: 100%;
+
   color: var(--color-text-primary);
-  background: var(--color-bg-main);
-  border-bottom: var(--line-thin) solid var(--color-border-primary);
+  background: var(--color-white-medium);
 }
 
 .site-header__main {

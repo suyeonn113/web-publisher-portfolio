@@ -10,8 +10,7 @@
 @use '../components/layout/header/header-mobile';
 @use '../components/login/login-panel';
 
-@use '../components/home/special-fare';
-@use '../components/home/service-shortcut-section';
+@use '../components/home/hero/hero';
 @use '../components/flight/flight-service/flight-service';
 @use '../components/flight/shared/flight-shared';
 @use '../components/flight/shared/flight-date-picker';
