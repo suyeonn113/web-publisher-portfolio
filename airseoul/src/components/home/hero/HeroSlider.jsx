@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function formatPrice(price) {
   if (typeof price !== 'number') return '';
@@ -44,7 +45,10 @@ function HeroSlider({ slides = [], autoPlayDelay = 5000 }) {
         {slides.map((slide, index) => {
           const isActive = index === activeIndex;
           const price = slide.lowestFare?.price;
-          const toCity = slide.flight?.route?.to?.city ?? slide.visual.subtitle;
+          const description =
+            slide.visual.description ??
+            slide.flight?.route?.to?.city ??
+            slide.visual.subtitle;
           const departureDate = slide.flight?.schedule?.departureDate;
 
           return (
@@ -76,7 +80,7 @@ function HeroSlider({ slides = [], autoPlayDelay = 5000 }) {
                 </h3>
 
                 <p className="hero-slider__subtitle">
-                  {toCity}
+                  {description}
                 </p>
 
                 {price && (
@@ -90,6 +94,10 @@ function HeroSlider({ slides = [], autoPlayDelay = 5000 }) {
                     {departureDate} 출발 기준
                   </p>
                 )}
+
+                <Link className="hero-slider__cta" to="">
+                  지금 예약하기
+                </Link>
               </div>
             </article>
           );

@@ -168,3 +168,11 @@
   border: var(--line-thin) solid var(--color-border-mint);
   border-radius: var(--radius-full);
 }
+
+.site-header:not(.is-solid):not(:has(.site-header__dropdown-button[aria-expanded='true']))
+  .site-header__desktop-actions
+  .site-header__login-link:not(:hover):not(:focus-visible) {
+  color: inherit;
+  font-weight: 700;
+  border-color: color-mix(in srgb, var(--color-text-inverse) 72%, transparent);
+}

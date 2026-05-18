@@ -6,6 +6,7 @@ export const heroSlides = [
     visual: {
       title: 'TOKYO',
       subtitle: '도쿄',
+      description: '설레는 일본, 지금이 가장 좋은 순간',
       media: {
         type: 'video',
         src: '/videos/hero/tokyo.mp4',
@@ -21,6 +22,7 @@ export const heroSlides = [
     visual: {
       title: 'OSAKA',
       subtitle: '오사카',
+      description: '미식과 산책이 가벼워지는 도시',
       media: {
         type: 'video',
         src: '/videos/hero/osaka.mp4',
@@ -36,6 +38,7 @@ export const heroSlides = [
     visual: {
       title: 'JEJU',
       subtitle: '제주',
+      description: '가까운 바다로 떠나는 가장 산뜻한 방법',
       media: {
         type: 'video',
         src: '/videos/hero/jeju.mp4',
@@ -51,6 +54,7 @@ export const heroSlides = [
     visual: {
       title: 'DA NANG',
       subtitle: '다낭',
+      description: '따뜻한 휴식이 필요한 날의 선택',
       media: {
         type: 'video',
         src: '/videos/hero/danang.mp4',
@@ -66,6 +70,7 @@ export const heroSlides = [
     visual: {
       title: 'NHA TRANG',
       subtitle: '나트랑',
+      description: '눈부신 해변으로 이어지는 여행',
       media: {
         type: 'video',
         src: '/videos/hero/nhatrang.mp4',
