@@ -31,7 +31,10 @@ const getMonthTitle = (date) => `${date.getFullYear()}년 ${date.getMonth() + 1}
 function FlightDatePicker({
   tripType,
   firstDate,
+  maxDate,
+  minDate,
   secondDate,
+  showTripTypeOptions = true,
   onClose,
   onDateChange,
   onTripTypeChange,
@@ -45,8 +48,18 @@ function FlightDatePicker({
   const returnDate = tripType === TRIP_TYPES.ROUND_TRIP ? selectedDates[1] : '';
   const nextMonth = addMonths(visibleMonth, 1);
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const cannotGoPrevMonth = visibleMonth <= currentMonth;
+
   const handleSelectDate = (date) => {
     const dateText = formatDate(date);
+
+    if ((minDate && dateText < minDate) || (maxDate && dateText > maxDate)) {
+      return;
+    }
 
     if (tripType === TRIP_TYPES.ONE_WAY) {
       onDateChange(dateText, '');
@@ -85,6 +98,9 @@ function FlightDatePicker({
           const isReturn = dateText === returnDate;
           const isInRange =
             departureDate && returnDate && dateText > departureDate && dateText < returnDate;
+          const isPastDate = date < today;
+          const isDisabled =
+            isPastDate || (minDate && dateText < minDate) || (maxDate && dateText > maxDate);
 
           return (
             <button
@@ -93,9 +109,11 @@ function FlightDatePicker({
                 isDeparture ? 'is-start' : '',
                 isReturn ? 'is-end' : '',
                 isInRange ? 'is-range' : '',
+                isDisabled ? 'is-disabled' : '',
               ]
                 .filter(Boolean)
                 .join(' ')}
+              disabled={isDisabled}
               key={dateText}
               type="button"
               onClick={() => handleSelectDate(date)}
@@ -110,6 +128,7 @@ function FlightDatePicker({
 
   return (
     <div className="flight-date-picker" aria-label="출발일 선택">
+      {showTripTypeOptions && (
       <div className="flight-date-picker__options">
         <div className="flight-date-picker__trip" role="group" aria-label="여정 유형">
           <button
@@ -128,13 +147,18 @@ function FlightDatePicker({
           </button>
         </div>
       </div>
+      )}
 
       <div className="flight-date-picker__calendar">
         <button
           className="flight-date-picker__nav flight-date-picker__nav--prev"
           type="button"
           aria-label="이전 달"
-          onClick={() => setVisibleMonth(addMonths(visibleMonth, -1))}
+          disabled={cannotGoPrevMonth}
+          onClick={() => {
+            if (cannotGoPrevMonth) return;
+            setVisibleMonth(addMonths(visibleMonth, -1));
+          }}
         >
           <ChevronLeftIcon size={24} />
         </button>

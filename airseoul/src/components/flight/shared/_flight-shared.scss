@@ -3,6 +3,8 @@
 
 .flight-service-chips {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: get-space(sm);
 }
 
@@ -30,13 +32,18 @@
   align-items: center;
   gap: get-space(sm);
 
+  
   > button:not(.flight-route-selector__swap) {
     position: relative;
     display: grid;
     gap: 2px;
     min-width: 0;
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary);
     text-align: center;
+
+    &.is-selected {
+      color: var(--color-text-primary);
+    }
   }
 
   span,
@@ -70,6 +77,12 @@
   color: var(--color-text-primary);
   border: var(--line-thin) solid var(--color-border-primary);
   border-radius: var(--radius-full);
+
+  &:disabled {
+    color: var(--color-text-tertiary);
+    cursor: default;
+    pointer-events: none;
+  }
 }
 
 .flight-service-field-button {
@@ -205,6 +218,7 @@
 }
 
 .flight-lookup-form {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
   align-items: end;
@@ -212,15 +226,34 @@
   min-height: 112px;
 }
 
+.flight-booking-service__schedule-search {
+  position: relative;
+}
+
+.flight-booking-panel__search > .flight-service-popup,
+.flight-lookup-form > .flight-service-popup,
+.flight-booking-service__schedule-search > .flight-service-popup {
+  position: absolute;
+  top: calc(var(--popup-top, 0) + #{get-space(sm)});
+  left: 0;
+  z-index: get-z(modal);
+  margin: 0;
+}
+
+.flight-lookup-form > .flight-service-popup {
+  grid-column: 1 / -1;
+}
+
 .flight-lookup-field {
   display: grid;
   gap: get-space(sm);
   min-width: 0;
   color: var(--color-text-primary);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .flight-lookup-field__control {
+  position: relative;
   display: flex;
   align-items: center;
   gap: get-space(sm);
@@ -242,8 +275,58 @@
     }
   }
 
+  select {
+    min-width: 0;
+    width: 100%;
+    color: var(--color-text-primary);
+    background: transparent;
+    border: 0;
+    appearance: none;
+  }
+
   svg {
     flex-shrink: 0;
+  }
+}
+
+.flight-check-in-date-select {
+  flex: 1;
+  min-width: 0;
+}
+
+.flight-check-in-date-select__button {
+  width: 100%;
+  color: var(--color-text-primary);
+  text-align: left;
+}
+
+.flight-check-in-date-select__list {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: get-z(dropdown);
+  display: grid;
+  gap: get-space(xs);
+  padding: get-space(xs);
+  background: var(--color-bg-main);
+  border: var(--line-thin) solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.flight-check-in-date-select__option {
+  min-height: 36px;
+  padding: 0 get-space(sm);
+  color: var(--color-text-primary);
+  text-align: left;
+  border-radius: var(--radius-xs);
+
+  &:hover,
+  &:focus-visible,
+  &.is-active {
+    color: var(--color-text-inverse);
+    background: var(--color-point-primary);
   }
 }
 
@@ -254,7 +337,7 @@
   min-height: 48px;
   padding: 0 get-space(lg);
   color: var(--color-text-inverse);
-  font-weight: 800;
+  font-weight: 700;
   background: var(--color-point-primary);
   border-radius: var(--radius-full);
 }
@@ -296,11 +379,25 @@
     border-left: 0;
   }
 
+  .flight-service-popup--date,
+  .flight-service-popup--passengers {
+    width: min(100%, calc(100vw - #{get-space(xl) * 2}));
+    transform: none;
+  }
+
+  .flight-airport-picker {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+}
+
+@include respond-down(mobile) {
   .flight-service-popup {
     position: fixed;
     inset: 0;
     z-index: get-z(modal);
     width: auto;
+    height: 100svh;
     overflow-y: auto;
     margin: 0;
     padding: get-space(lg);
@@ -308,11 +405,6 @@
     border: 0;
     border-radius: 0;
     transform: none;
-  }
-
-  .flight-airport-picker {
-    grid-template-columns: 1fr;
-    max-height: none;
   }
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+﻿import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import AdultIcon from '../../icons/AdultIcon';
 import ChildIcon from '../../icons/ChildIcon';
 import ChevronDownIcon from '../../icons/ChevronDownIcon';
@@ -18,6 +18,7 @@ import AirportSelectionPanel from '../shared/AirportSelectionPanel';
 import FlightDateField from '../shared/FlightDateField';
 import FlightDatePicker from '../shared/FlightDatePicker';
 import FlightRouteSelector from '../shared/FlightRouteSelector';
+import useFlightServicePopupPosition from '../shared/useFlightServicePopupPosition';
 import { getAirport } from '../../../utils/airports';
 
 const PANEL_TYPES = {
@@ -41,29 +42,29 @@ const PASSENGER_TYPES = [
 
 const PASSENGER_NOTICE_GROUPS = [
   {
-    title: '소아/유아 및 만 14세 미만 승객 안내',
+    title: '소아/유아 및 만 14세 미만 탑승객 안내',
     items: [
       {
-        text: '소아는 첫번째 항공편 출발일 기준 나이입니다. 유아는 각 항공편별 탑승일 기준 나이입니다.',
+        text: '소아는 첫 번째 항공편 출발일 기준 나이입니다. 유아는 각 항공편 탑승일 기준 나이입니다.',
       },
       {
-        text: '유아는 생후 7일부터 탑승 가능하며, 좌석을 점유하지 않습니다. 또한 탑승일 기준 만 18세 이상의 보호자가 동반해야 하며, 함께 예약되어야 합니다.',
+        text: '유아는 생후 7일부터 탑승 가능하며 좌석은 점유하지 않습니다. 또한 탑승일 기준 만 18세 이상의 보호자가 동반해야 하며, 함께 예약되어야 합니다.',
         isAccent: true,
       },
       {
         text: '유아 좌석 점유를 원하시는 경우, 소아로 예매를 진행하시기 바랍니다.',
       },
       {
-        text: '만 14세 미만 승객은 예매 시 법정대리인의 동의 및 인증이 필요합니다. 로그인 후 예매를 진행하여 주시기 바랍니다.',
+        text: '만 14세 미만 탑승객은 예매 시 법정대리인의 동의 및 인증이 필요합니다. 로그인 후 예매를 진행하여 주시기 바랍니다.',
         isAccent: true,
       },
     ],
   },
   {
-    title: '구매와 동시승급 진행 시 유의사항',
+    title: '구매와 동시에 발권 진행 시 유의사항',
     items: [
       {
-        text: '마일리지 공제를 위해 등록된 가족 기준으로 승객선택을 해주시기 바랍니다.',
+        text: '마일리지 공제를 위해 등록된 가족 기준으로 탑승객을 선택해 주시기 바랍니다.',
       },
       {
         text: '가족 마일리지 합산은 로그인 회원 본인 1인 예매 시에만 가능합니다.',
@@ -75,17 +76,21 @@ const PASSENGER_NOTICE_GROUPS = [
 function FlightBookingPanel({ defaultValues, onSearch }) {
   const [tripType, setTripType] = useState(defaultValues?.tripType ?? TRIP_TYPES.ROUND_TRIP);
   const [from, setFrom] = useState(defaultValues?.from ?? 'ICN');
-  const [to, setTo] = useState(defaultValues?.to ?? 'KIX');
+  const [to, setTo] = useState(defaultValues?.to ?? '');
   const [firstDate, setFirstDate] = useState(defaultValues?.departureDate ?? '');
   const [secondDate, setSecondDate] = useState(defaultValues?.returnDate ?? '');
   const [passengers, setPassengers] = useState({ adult: 1, child: 0, infant: 0 });
   const [promotionCode, setPromotionCode] = useState('');
   const [activePanel, setActivePanel] = useState(null);
-  const [popupPosition, setPopupPosition] = useState({ left: 0 });
   const [isAgeCalculatorOpen, setIsAgeCalculatorOpen] = useState(false);
-  const searchRef = useRef(null);
+  const [hasPendingRoundTripDate, setHasPendingRoundTripDate] = useState(false);
   const popupRef = useRef(null);
-  const triggerRef = useRef(null);
+  const {
+    containerRef: searchRef,
+    popupPosition,
+    triggerRef,
+    updatePopupPosition,
+  } = useFlightServicePopupPosition(POPUP_WIDTHS);
 
   const selectedDates = useMemo(() => {
     const dates = tripType === TRIP_TYPES.ONE_WAY ? [firstDate] : [firstDate, secondDate];
@@ -99,10 +104,20 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
   const departureDateLabel = formatKoreanMonthDay(departureDate);
   const returnDateLabel = returnDate ? formatKoreanMonthDay(returnDate) : '';
 
-  const closePanel = () => {
+  const closePanel = useCallback(({ shouldValidateDate = false } = {}) => {
+    if (
+      shouldValidateDate &&
+      activePanel === PANEL_TYPES.DATE &&
+      tripType === TRIP_TYPES.ROUND_TRIP &&
+      hasPendingRoundTripDate
+    ) {
+      window.alert('왕복 일정은 오는 날을 선택해 주세요.');
+      return;
+    }
+
     setActivePanel(null);
     triggerRef.current?.focus();
-  };
+  }, [activePanel, hasPendingRoundTripDate, triggerRef, tripType]);
 
   useEffect(() => {
     if (activePanel) {
@@ -117,7 +132,7 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
 
     const handleEscapeKey = (event) => {
       if (event.key === 'Escape') {
-        closePanel();
+        closePanel({ shouldValidateDate: true });
       }
     };
 
@@ -126,27 +141,15 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
     return () => {
       window.removeEventListener('keydown', handleEscapeKey);
     };
-  }, [activePanel]);
+  }, [activePanel, closePanel]);
 
   const openPanel = (panelType, event) => {
-    triggerRef.current = event.currentTarget;
-    const triggerRect = event.currentTarget.getBoundingClientRect();
-    const searchRect = searchRef.current?.getBoundingClientRect();
-
-    if (searchRect) {
-      const popupWidth = Math.min(
-        POPUP_WIDTHS[panelType] ?? POPUP_WIDTHS.DEFAULT,
-        searchRect.width
-      );
-      const preferredLeft = triggerRect.left - searchRect.left;
-      const maxLeft = Math.max(searchRect.width - popupWidth, 0);
-
-      setPopupPosition({
-        left: Math.min(Math.max(preferredLeft, 0), maxLeft),
-      });
-    }
-
+    updatePopupPosition(panelType, event);
     setActivePanel(panelType);
+
+    if (panelType === PANEL_TYPES.DATE) {
+      setHasPendingRoundTripDate(false);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -175,6 +178,12 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
   const handleDateChange = (nextFirstDate, nextSecondDate) => {
     setFirstDate(nextFirstDate);
     setSecondDate(nextSecondDate);
+    setHasPendingRoundTripDate(
+      activePanel === PANEL_TYPES.DATE &&
+        tripType === TRIP_TYPES.ROUND_TRIP &&
+        Boolean(nextFirstDate) &&
+        !nextSecondDate
+    );
   };
 
   const updatePassenger = (key, amount) => {
@@ -212,9 +221,9 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
     if (key === 'child') {
       return (
         <span role="tooltip">
-          국내선 : 만 2세 이상 ~ 만 13세 미만
+          국내선: 만 2세 이상 ~ 만 13세 미만
           <br />
-          국제선 : 만 2세 이상 ~ 만 12세 미만
+          국제선: 만 2세 이상 ~ 만 12세 미만
         </span>
       );
     }
@@ -305,7 +314,7 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
     if (activePanel === PANEL_TYPES.FROM) return '출발지';
     if (activePanel === PANEL_TYPES.TO) return '도착지';
     if (activePanel === PANEL_TYPES.DATE) return '출발일';
-    if (activePanel === PANEL_TYPES.PASSENGERS) return '승객 선택';
+    if (activePanel === PANEL_TYPES.PASSENGERS) return '탑승객 선택';
     return '';
   };
 
@@ -340,6 +349,38 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
     return null;
   };
 
+  const renderServicePopup = () => {
+    if (!activePanel) {
+      return null;
+    }
+
+    return (
+      <div
+        className={`flight-service-popup flight-service-popup--${activePanel}`}
+        style={{
+          '--popup-left': `${popupPosition.left}px`,
+          '--popup-top': `${popupPosition.top}px`,
+        }}
+        ref={popupRef}
+        role="dialog"
+        aria-modal="false"
+        tabIndex="-1"
+      >
+        <header className="flight-service-popup__header">
+          <strong>{getPanelTitle()}</strong>
+          <button
+            type="button"
+            aria-label="선택 창 닫기"
+            onClick={() => closePanel({ shouldValidateDate: true })}
+          >
+            <XIcon size={20} />
+          </button>
+        </header>
+        {renderActivePanel()}
+      </div>
+    );
+  };
+
   return (
     <form className="flight-booking-panel__content" onSubmit={handleSubmit}>
       <div className="flight-booking-panel__options">
@@ -371,7 +412,7 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
               <span className="flight-booking-panel__help-hit">
                 <CircleQuestionMarkIcon size={16} />
               </span>
-              <span role="tooltip">프로모션 코드를 입력하시면 할인된 금액을 조회합니다.</span>
+              <span role="tooltip">프로모션 코드를 입력하시면 할인 금액을 조회합니다.</span>
             </button>
           </span>
           <input
@@ -391,13 +432,11 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
           onSwap={handleSwapRoute}
           onToClick={(event) => openPanel(PANEL_TYPES.TO, event)}
         />
-
         <FlightDateField
           departureDateLabel={departureDateLabel}
           returnDateLabel={returnDateLabel}
           onClick={(event) => openPanel(PANEL_TYPES.DATE, event)}
         />
-
         <button
           className="flight-service-field-button flight-passenger-field"
           type="button"
@@ -419,30 +458,11 @@ function FlightBookingPanel({ defaultValues, onSearch }) {
             </span>
           </strong>
         </button>
-
+        {renderServicePopup()}
         <button className="flight-booking-panel__submit" type="submit">
-          항공편 검색
+          항공권 검색
         </button>
       </div>
-
-      {activePanel && (
-        <div
-          className={`flight-service-popup flight-service-popup--${activePanel}`}
-          style={{ '--popup-left': `${popupPosition.left}px` }}
-          ref={popupRef}
-          role="dialog"
-          aria-modal="false"
-          tabIndex="-1"
-        >
-          <header className="flight-service-popup__header">
-            <strong>{getPanelTitle()}</strong>
-            <button type="button" aria-label="선택 창 닫기" onClick={closePanel}>
-              <XIcon size={20} />
-            </button>
-          </header>
-          {renderActivePanel()}
-        </div>
-      )}
     </form>
   );
 }

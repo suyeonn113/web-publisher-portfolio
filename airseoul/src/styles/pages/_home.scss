@@ -13,7 +13,7 @@
   display: none;
 }
 
-@include respond-down(tablet) {
+@include respond-down(mobile-sm) {
   .home-mobile-quick {
     position: fixed;
     right: 0;

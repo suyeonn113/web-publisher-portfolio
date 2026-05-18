@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FlightBookingPanel from '../booking/FlightBookingPanel';
 import FlightCheckInPanel from '../check-in/FlightCheckInPanel';
 import FlightMyTripPanel from '../my-trip/FlightMyTripPanel';
@@ -6,8 +6,36 @@ import FlightSchedulePanel from '../schedule/FlightSchedulePanel';
 import FlightServiceTabs from './FlightServiceTabs';
 import { FLIGHT_SERVICE_TAB_IDS } from './flightServiceTabsData';
 
+const ACTIVE_TAB_STORAGE_KEY = 'flightServiceActiveTab';
+
 function FlightServiceSection({ defaultValues, onSearch, variant = 'home' }) {
-  const [activeTab, setActiveTab] = useState(FLIGHT_SERVICE_TAB_IDS.BOOKING);
+  const [activeTab, setActiveTab] = useState(() => {
+    return sessionStorage.getItem(ACTIVE_TAB_STORAGE_KEY) ?? FLIGHT_SERVICE_TAB_IDS.BOOKING;
+  });
+
+  const handleTabChange = (nextTabId) => {
+    setActiveTab(nextTabId);
+    sessionStorage.setItem(ACTIVE_TAB_STORAGE_KEY, nextTabId);
+  };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 480px)');
+
+    const resetToBookingOnMobile = (event) => {
+      if (!event.matches) return;
+
+      setActiveTab(FLIGHT_SERVICE_TAB_IDS.BOOKING);
+      sessionStorage.setItem(ACTIVE_TAB_STORAGE_KEY, FLIGHT_SERVICE_TAB_IDS.BOOKING);
+    };
+
+    resetToBookingOnMobile(mediaQuery);
+
+    mediaQuery.addEventListener('change', resetToBookingOnMobile);
+
+    return () => {
+      mediaQuery.removeEventListener('change', resetToBookingOnMobile);
+    };
+  }, []);
 
   const renderActivePanel = () => {
     if (activeTab === FLIGHT_SERVICE_TAB_IDS.MY_TRIP) {
@@ -32,7 +60,7 @@ function FlightServiceSection({ defaultValues, onSearch, variant = 'home' }) {
     >
       <div className="flight-booking-section__inner">
         <div className="flight-booking-panel">
-          <FlightServiceTabs activeTab={activeTab} onTabChange={setActiveTab} />
+          <FlightServiceTabs activeTab={activeTab} onTabChange={handleTabChange} />
           <div className="flight-booking-panel__body">{renderActivePanel()}</div>
         </div>
       </div>

@@ -3,8 +3,10 @@
 
 .flight-booking-service__schedule-options {
   display: flex;
+  align-items: flex-end;
   flex-wrap: wrap;
-  gap: get-space(sm) get-space(xl);
+  gap: get-space(md) get-space(xl);
+  min-height: 56px;
 }
 
 .flight-booking-service__schedule-search {
@@ -14,51 +16,143 @@
   gap: get-space(lg);
 }
 
-.flight-route-selector--summary {
+.flight-schedule-flight-number {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
-  align-items: center;
   gap: get-space(sm);
-  padding-right: get-space(lg);
+  min-width: 0;
 
-  > button:not(.flight-route-selector__swap) {
-    display: grid;
-    gap: get-space(xs);
-    color: var(--color-text-secondary);
-    text-align: center;
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
 
-    strong {
-      font-size: rem(36px);
-      font-weight: 500;
-      line-height: 1;
+.flight-schedule-flight-number__input {
+  display: flex;
+  align-items: center;
+  gap: get-space(xs);
+
+  min-height: 48px;
+  padding-inline: get-space(md);
+
+  border: var(--line-thin) solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-main);
+
+  strong {
+    flex-shrink: 0;
+    padding-right: get-space(sm);
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    min-height: 48px;
+
+    color: var(--color-text-primary);
+
+    border: 0;
+    outline: 0;
+    background: transparent;
+
+    &::placeholder {
+      color: var(--color-text-tertiary);
+      font-weight: 400;
     }
+  }
+
+  &:focus-within {
+    border-color: var(--color-point-primary);
   }
 }
 
 .flight-booking-realtime {
   display: grid;
-  gap: get-space(md);
-  margin-top: get-space(md);
+  gap: get-space(sm);
 
   header {
     display: flex;
     align-items: baseline;
-    gap: get-space(sm);
+    gap: get-space(md);
   }
 
   h3 {
+    @include text-size(body);
     color: var(--color-text-primary);
-    font-size: rem(18px);
-    font-weight: 800;
+    font-weight: 500;
   }
 
   header span {
-    color: var(--color-text-secondary);
-    font-size: rem(12px);
+    @include text-size(caption);
+    color: var(--color-text-tertiary);
   }
 }
 
-@include respond-down(tablet) {
+.flight-booking-realtime__board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  section {
+    display: grid;
+    grid-auto-rows: max-content;
+    align-content: start;
+    gap: get-space(xs);
+  }
+
+  h4 {
+    @include flex-center;
+    @include text-size(body);
+    
+    flex-direction: column;
+    padding-bottom: get-space(xs);
+    text-align: center;
+    min-height: 36px;
+
+    font-weight: 700;
+    border-bottom: var(--line-thin) solid var(--color-border-primary);
+  }
+}
+
+.flight-booking-realtime__row {
+  display: grid;
+  grid-template-columns: 56px 48px minmax(0, 1fr);
+  gap: get-space(md);
+  align-items: center;
+
+  min-height: 48px;
+  padding-inline: get-space(xs);
+
+  strong {
+    @include text-size(caption);
+    color: var(--color-text-primary);
+    font-weight: 700;
+  }
+
+  span {
+    @include text-size(caption);
+    color: var(--color-text-secondary);
+    font-weight: 700;
+  }
+
+  em {
+    @include ellipsis;
+
+    color: var(--color-text-primary);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border-primary) 72%, transparent);
+  }
+}
+
+@include respond-down(laptop) {
+  .flight-booking-service__schedule-search {
+    grid-template-columns: 1fr;
+    gap: get-space(md);
+  }
+
   .flight-route-selector--summary {
     padding-right: 0;
     border-right: 0;
@@ -66,6 +160,11 @@
 
   .flight-booking-realtime__board {
     grid-template-columns: 1fr;
+    gap: get-space(md);
+
+    section:first-child {
+      padding-bottom: get-space(md);
+    }
   }
 }
 
@@ -80,52 +179,19 @@
     gap: get-space(xs);
   }
 
+  .flight-schedule-flight-number__input {
+    min-height: 44px;
+    padding-inline: get-space(sm);
+
+    input {
+      min-height: 44px;
+    }
+  }
+
   .flight-booking-realtime__row {
-    grid-template-columns: 52px 44px minmax(0, 1fr);
+    grid-template-columns: 48px 40px minmax(0, 1fr);
     gap: get-space(xs);
-  }
-}
-
-.flight-booking-realtime__board {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  padding: get-space(sm);
-  background: var(--color-border-primary);
-
-  section {
-    display: grid;
-    gap: get-space(xs);
-    padding: get-space(sm) get-space(md);
-    background: var(--color-bg-main);
-  }
-
-  h4 {
-    padding-bottom: get-space(xs);
-    text-align: center;
-    background: var(--color-bg-sub);
-  }
-}
-
-.flight-booking-realtime__row {
-  display: grid;
-  grid-template-columns: 56px 48px minmax(0, 1fr);
-  gap: get-space(sm);
-  align-items: center;
-  min-height: 32px;
-  border-bottom: 1px solid var(--color-border-primary);
-
-  strong,
-  span {
-    color: var(--color-point-secondary);
-    font-size: rem(13px);
-  }
-
-  em {
-    @include ellipsis;
-
-    color: var(--color-text-primary);
-    font-style: normal;
-    font-weight: 700;
+    min-height: 44px;
+    padding-inline: 0;
   }
 }

@@ -9,7 +9,7 @@ function App() {
   const [searchParams, setSearchParams] = useState(null);
   const defaultSearchParams = createFixedRoundTripSearchParams({
     from: 'ICN',
-    to: 'KIX',
+    to: '',
     baseDate: APP_BASE_DATE,
   });
 

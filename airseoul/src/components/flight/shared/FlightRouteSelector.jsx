@@ -3,12 +3,14 @@ import { formatAirportDisplayName } from '../../../utils/airports';
 import ArrowRightLeftIcon from '../../icons/ArrowRightLeftIcon';
 
 function FlightRouteSelector({
+
   className = 'flight-route-selector',
-  displayMode = 'detail',
+  variant = 'default',
   fromAirport,
   fromCode,
   fromLabel = '출발지',
   fromName,
+  fromPlaceholderCode = 'From',
   onFromClick,
   onSwap,
   onToClick,
@@ -19,26 +21,38 @@ function FlightRouteSelector({
   toCode,
   toLabel = '도착지',
   toName,
+  toPlaceholderCode = 'To',
 }) {
+  const canSwapRoute = Boolean(fromAirport && toAirport);
+  const isPlaceholderVariant = variant === 'placeholder';
+
   const resolvedFromCode = fromCode ?? fromAirport?.code;
   const resolvedToCode = toCode ?? toAirport?.code;
   const resolvedFromName = fromName ?? formatAirportDisplayName(fromAirport);
   const resolvedToName = toName ?? formatAirportDisplayName(toAirport);
-  const isSummary = displayMode === 'summary';
+
+  const hasFromValue = Boolean(resolvedFromCode || resolvedFromName);
+  const hasToValue = Boolean(resolvedToCode || resolvedToName);
+
+  const shouldShowFromValue = hasFromValue;
+  const shouldShowToValue = hasToValue;
 
   return (
     <div className={className}>
-      <button type="button" onClick={onFromClick}>
-        {isSummary ? (
+      <button
+        className={shouldShowFromValue ? 'is-selected' : ''}
+        type="button"
+        onClick={onFromClick}
+      >
+        {shouldShowFromValue ? (
           <>
             <strong>{resolvedFromCode}</strong>
-            <span>{resolvedFromName || fromLabel}</span>
+            <span>{resolvedFromName}</span>
           </>
         ) : (
           <>
+            <strong>{fromPlaceholderCode}</strong>
             <span>{fromLabel}</span>
-            <strong>{resolvedFromCode}</strong>
-            <em>{resolvedFromName}</em>
           </>
         )}
       </button>
@@ -46,23 +60,27 @@ function FlightRouteSelector({
       <button
         className={swapButtonClassName}
         type="button"
+        disabled={!canSwapRoute}
         aria-label={swapAriaLabel}
         onClick={onSwap}
       >
         <ArrowRightLeftIcon size={swapIconSize} />
       </button>
 
-      <button type="button" onClick={onToClick}>
-        {isSummary ? (
+      <button
+        className={shouldShowToValue ? 'is-selected' : ''}
+        type="button"
+        onClick={onToClick}
+      >
+        {shouldShowToValue ? (
           <>
             <strong>{resolvedToCode}</strong>
-            <span>{resolvedToName || toLabel}</span>
+            <span>{resolvedToName}</span>
           </>
         ) : (
           <>
+            <strong>{toPlaceholderCode}</strong>
             <span>{toLabel}</span>
-            <strong>{resolvedToCode}</strong>
-            <em>{resolvedToName}</em>
           </>
         )}
       </button>
