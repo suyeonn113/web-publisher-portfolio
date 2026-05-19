@@ -1,0 +1,16 @@
+
+  [32m[1mVITE[22m v8.0.12[39m  [2mready in [0m[1m221[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5174[22m/[39m
+[2mAM 11:57:09[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/layout/Footer.jsx[22m
+[2mAM 11:57:09[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/layout/Footer.jsx[22m
+[2mAM 11:57:09[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/main.scss[22m
+[2mAM 11:59:50[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/home/info/AboutAirSeoulCard.jsx, /src/components/home/info/CustomerCenterPanel.jsx, /src/components/home/info/NoticePanel.jsx[22m
+[2mAM 11:59:50[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/home/info/CustomerCenterPanel.jsx[22m
+[2mAM 11:59:50[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/home/info/NoticePanel.jsx[22m
+[2mPM 12:00:33[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/home/info/HomeInfoSection.jsx[22m
+[2mPM 12:00:33[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/home/info/AboutAirSeoulCard.jsx[22m
+[2mPM 12:00:58[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/main.scss[22m
+[2mPM 12:01:30[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/home/info/AboutAirSeoulCard.jsx, /src/components/home/info/CustomerCenterPanel.jsx, /src/components/home/info/NoticePanel.jsx[22m
+[2mPM 12:01:30[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/home/info/CustomerCenterPanel.jsx[22m
+[2mPM 12:01:30[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/main.scss[22m

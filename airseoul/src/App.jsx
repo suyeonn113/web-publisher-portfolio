@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Header from './components/layout/header/Header';
+import Footer from './components/layout/Footer';
 import { APP_BASE_DATE } from './constants/appDate';
 import Home from './pages/Home';
 import FlightSearchResults from './pages/FlightSearchResults';
@@ -19,7 +20,10 @@ function App() {
       {searchParams ? (
         <FlightSearchResults searchParams={searchParams} />
       ) : (
-        <Home defaultSearchParams={defaultSearchParams} onSearch={setSearchParams} />
+        <>
+          <Home defaultSearchParams={defaultSearchParams} onSearch={setSearchParams} />
+          <Footer />
+        </>
       )}
     </>
   );

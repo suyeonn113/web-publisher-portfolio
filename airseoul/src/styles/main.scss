@@ -8,9 +8,12 @@
 @use '../components/layout/header/header';
 @use '../components/layout/header/header-desktop';
 @use '../components/layout/header/header-mobile';
+@use '../components/layout/footer';
 @use '../components/login/login-panel';
 
 @use '../components/home/hero/hero';
+@use '../components/home/info/home-info';
+@use '../components/home/service-shortcut/service-shortcut';
 @use '../components/flight/flight-service/flight-service';
 @use '../components/flight/shared/flight-shared';
 @use '../components/flight/shared/flight-date-picker';
