@@ -30,6 +30,8 @@
 
   --color-green-1: #6ec178;
   --color-green-2: #b3d175;
+  --color-green-light: #d7ecaa;
+  --color-blue-soft: #dff4ff;
 
   --color-pink: #ee3c8b;
   --color-yellow: #ffe800;
@@ -45,7 +47,7 @@
 
   /* Background */
   --color-bg-main: #ffffff;
-  --color-bg-sub: #f7f7f7;
+  --color-bg-sub: #f1f3f3;
   --color-bg-backdrop: rgb(var(--color-black-rgb) / 0.42);
 
   --color-bg-mint: var(--color-mint-light-2);
@@ -114,6 +116,12 @@
   --icon-size-sm: 16px;
   --icon-size-md: 24px;
   --icon-size-lg: 32px;
+
+  --service-icon-line: #162320;
+  --service-icon-point: #20ad95;
+  --service-icon-point-sub: #b9e3d5;
+  --service-icon-point-warm: #f4d84c;
+  --service-icon-point-cool: #cfe8f3;
 
   /* =========================
      RADIUS

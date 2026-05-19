@@ -2,12 +2,16 @@
 @use '../../../styles/foundation/mixins' as *;
 
 .service-shortcut {
+  display: flex;
+  align-items: center;
+  min-height: clamp(520px, 64svh, 700px);
   background: var(--color-bg-main);
 }
 
 .service-shortcut__inner {
   @include container;
 
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(240px, 308px) minmax(0, 1fr);
   gap: get-space(xxl);
@@ -27,7 +31,7 @@
   @include text-size(caption);
 
   margin-bottom: get-space(md);
-  color: var(--color-point-primary);
+  color: var(--color-mint);
   font-weight: 800;
   letter-spacing: 0;
 }
@@ -78,6 +82,7 @@
   @include transition(transform, fast, standard);
 
   display: flex;
+  gap: get-space(md);
   min-width: 0;
   height: 100%;
   flex-direction: column;
@@ -118,6 +123,26 @@
     object-fit: contain;
     background: var(--color-bg-main);
   }
+
+  .icon-line {
+    fill: var(--service-icon-line);
+  }
+
+  .icon-point {
+    fill: var(--service-icon-point);
+  }
+
+  .icon-point-sub {
+    fill: var(--service-icon-point-sub);
+  }
+
+  .icon-point-yellow {
+    fill: var(--service-icon-point-warm);
+  }
+
+  .icon-point-blue {
+    fill: var(--service-icon-point-cool);
+  }
 }
 
 .service-shortcut__label {
@@ -137,19 +162,6 @@
   color: var(--color-text-secondary);
   line-height: 1.6;
   word-break: keep-all;
-}
-
-.service-shortcut__arrow {
-  @include flex-center;
-  @include button-hover-white;
-
-  width: 40px;
-  aspect-ratio: 1;
-  margin-top: auto;
-  border: var(--line-thin) solid var(--color-border-primary);
-  border-radius: var(--radius-full);
-  color: var(--color-text-primary);
-  background: var(--color-bg-main);
 }
 
 @include respond-down(laptop) {
@@ -175,8 +187,21 @@
   }
 
   .service-shortcut__text {
-    max-width: 420px;
+    max-width: none;
     margin-top: 0;
+
+    span {
+      display: inline;
+      white-space: normal;
+    }
+
+    span + span::before {
+      content: ' ';
+    }
+  }
+
+  .service-shortcut__title br {
+    display: none;
   }
 
   .service-shortcut__guide {
@@ -192,6 +217,10 @@
 }
 
 @include respond-down(mobile) {
+  .service-shortcut {
+    min-height: auto;
+  }
+
   .service-shortcut__inner {
     padding-block: get-space(xl);
   }
@@ -199,6 +228,24 @@
   .service-shortcut__content {
     display: flex;
     align-items: flex-start;
+  }
+
+  .service-shortcut__title br {
+    display: initial;
+  }
+
+  .service-shortcut__text {
+    max-width: 256px;
+    margin-top: get-space(lg);
+
+    span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    span + span::before {
+      content: none;
+    }
   }
 
   .service-shortcut__list {
@@ -213,6 +260,6 @@
 
 @include respond-down(mobile-sm) {
   .service-shortcut__list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

@@ -13,7 +13,7 @@ function ServiceShortcutSection() {
           <span className="service-shortcut__eyebrow">ADDITIONAL SERVICE</span>
 
           <h2 className="service-shortcut__title" id="service-shortcut-title">
-            부가서비스
+            부가서비스&nbsp;
             <br />
             구매
           </h2>

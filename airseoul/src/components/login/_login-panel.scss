@@ -78,7 +78,7 @@
 .login-panel__tab {
   @include text-size(body);
   @include flex-center;
-  @include button-hover-gray;
+  @include button-hover-subtle;
 
   min-height: 58px;
   padding: get-space(md) get-space(sm);
@@ -164,7 +164,7 @@
 .login-panel__simple-button {
   @include flex-center;
   @include text-size(caption);
-  @include button-hover-gray;
+  @include button-hover-subtle;
 
   position: relative;
   gap: get-space(xs);

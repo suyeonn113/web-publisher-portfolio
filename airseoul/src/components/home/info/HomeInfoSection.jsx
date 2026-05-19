@@ -9,7 +9,6 @@ function HomeInfoSection() {
         <header className="home-info__header">
           <h2 id="home-info-title">필요한 정보, 빠르게 확인하세요</h2>
           <p>에어서울의 최신 소식과 다양한 고객 지원 서비스를 만나보세요.</p>
-          <img src="/images/home-info/icons/plane-accent.svg" alt="" aria-hidden="true" />
         </header>
 
         <div className="home-info__layout">

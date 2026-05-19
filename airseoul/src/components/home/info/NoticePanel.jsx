@@ -2,14 +2,16 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../constants/routes';
 import { homeNotices } from '../../../data/homeInfo';
 import { iconSize } from '../../../tokens/size';
+import BellIcon from '../../icons/BellIcon';
 import ChevronRightIcon from '../../icons/ChevronRightIcon';
+import MegaphoneIcon from '../../icons/MegaphoneIcon';
 
 function NoticePanel() {
   return (
     <article className="home-info-notice">
       <header className="home-info-card-header">
         <div className="home-info-card-header__title">
-          <img src="/images/home-info/icons/notice.svg" alt="" aria-hidden="true" />
+          <MegaphoneIcon />
           <h3>공지사항</h3>
         </div>
         <Link className="home-info-more" to={ROUTES.contact.notice}>
@@ -31,7 +33,7 @@ function NoticePanel() {
       </ul>
 
       <Link className="home-info-status" to={ROUTES.booking.flightStatus}>
-        <img src="/images/home-info/icons/status.svg" alt="" aria-hidden="true" />
+        <BellIcon />
         <span>
           <strong>운항 현황 안내</strong>
           <small>실시간 운항 정보를 확인하세요.</small>

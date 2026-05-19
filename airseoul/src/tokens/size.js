@@ -6,6 +6,13 @@ export const iconSize = {
   lg: 32,
 };
 
+export const illustrationIconSize = {
+  sm: 48,
+  md: 64,
+  lg: 80,
+  xl: 96,
+};
+
 // Mirrors layout size custom properties in styles/foundation/_tokens.scss.
 export const layoutSize = {
   headerMainHeight: 'var(--header-main-height)',

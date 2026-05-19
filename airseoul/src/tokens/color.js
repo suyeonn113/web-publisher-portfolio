@@ -38,6 +38,12 @@ export const color = {
   pointPink: 'var(--color-point-pink)',
   pointYellow: 'var(--color-point-yellow)',
 
+  serviceIconLine: 'var(--service-icon-line)',
+  serviceIconPoint: 'var(--service-icon-point)',
+  serviceIconPointSub: 'var(--service-icon-point-sub)',
+  serviceIconPointWarm: 'var(--service-icon-point-warm)',
+  serviceIconPointCool: 'var(--service-icon-point-cool)',
+
   focusRing: 'var(--color-focus-ring)',
   bgHover: 'var(--color-bg-hover)',
   textHover: 'var(--color-text-hover)',

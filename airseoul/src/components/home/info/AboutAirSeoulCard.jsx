@@ -33,15 +33,19 @@ function AboutAirSeoulCard() {
       />
 
       <ul className="home-info-about__stats">
-        {airSeoulStats.map((stat) => (
-          <li className="home-info-about__stat" key={stat.id}>
-            <img src={stat.icon} alt="" aria-hidden="true" />
-            <span>
-              <strong>{stat.value}</strong>
-              <small>{stat.label}</small>
-            </span>
-          </li>
-        ))}
+        {airSeoulStats.map((stat) => {
+          const StatIcon = stat.icon;
+
+          return (
+            <li className="home-info-about__stat" key={stat.id}>
+              <StatIcon />
+              <span>
+                <strong>{stat.value}</strong>
+                <small>{stat.label}</small>
+              </span>
+            </li>
+          );
+        })}
       </ul>
     </article>
   );

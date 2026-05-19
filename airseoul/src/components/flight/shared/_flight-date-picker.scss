@@ -43,16 +43,16 @@
 .flight-date-picker__days {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: get-space(xs);
+  row-gap: get-space(sm);
 }
 
 .flight-date-picker__weekdays {
   text-align: center;
+  gap: get-space(xs);
 }
 
 .flight-date-picker__day {
   @include flex-center;
-
   min-width: 0;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -65,6 +65,7 @@
 
   &.is-range {
     background: var(--color-bg-sub);
+    border-radius: 0;
   }
 
   &:disabled,
@@ -94,7 +95,7 @@
   }
 
   .flight-date-picker__calendar {
-    gap: get-space(xs);
+    gap: get-space(md);
   }
 }
 

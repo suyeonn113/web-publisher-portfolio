@@ -1,8 +1,8 @@
-import { iconSize } from '../../tokens/size';
+import { illustrationIconSize } from '../../tokens/size';
 
-function IconBase({
+function IllustrationIconBase({
   children,
-  size = iconSize.md,
+  size = illustrationIconSize.md,
   className = '',
   ...props
 }) {
@@ -12,12 +12,12 @@ function IconBase({
       width={size}
       height={size}
 
-      viewBox="0 0 24 24"
+      viewBox="0 0 500 500"
       fill="none"
       aria-hidden="true"
 
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1"
       strokeLinecap="round"
       strokeLinejoin="round"
 
@@ -28,4 +28,4 @@ function IconBase({
   );
 }
 
-export default IconBase;
+export default IllustrationIconBase;

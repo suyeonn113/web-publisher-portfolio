@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { TRIP_TYPES } from '../../../constants/tripType';
-import { formatDate, toDate } from '../../../utils/date';
+import { formatDate, getAppNow, toDate } from '../../../utils/date';
 import { sortSelectedDates } from '../../../utils/searchParams';
 import ChevronLeftIcon from '../../icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../icons/ChevronRightIcon';
@@ -48,7 +48,7 @@ function FlightDatePicker({
   const departureDate = selectedDates[0];
   const returnDate = tripType === TRIP_TYPES.ROUND_TRIP ? selectedDates[1] : '';
 
-  const today = new Date();
+  const today = getAppNow();
   today.setHours(0, 0, 0, 0);
 
   const currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);

@@ -6,14 +6,17 @@ import {
   partnershipInquiries,
 } from '../../../data/homeInfo';
 import { iconSize } from '../../../tokens/size';
+import ChatIcon from '../../icons/ChatIcon';
 import ChevronRightIcon from '../../icons/ChevronRightIcon';
 
 function CustomerCenterPanel() {
+  const CustomerIcon = customerCenterInfo.icon;
+
   return (
     <article className="home-info-customer">
       <header className="home-info-card-header">
         <div className="home-info-card-header__title">
-          <img src="/images/home-info/icons/customer.svg" alt="" aria-hidden="true" />
+          <ChatIcon />
           <h3>고객센터</h3>
         </div>
         <Link className="home-info-more" to={ROUTES.contact.root}>
@@ -23,7 +26,7 @@ function CustomerCenterPanel() {
       </header>
 
       <div className="home-info-customer__main">
-        <img src={customerCenterInfo.icon} alt="" aria-hidden="true" />
+        <CustomerIcon />
         <div>
           <strong>{customerCenterInfo.title}</strong>
           <a href={`tel:${customerCenterInfo.phone.replaceAll('-', '')}`}>
@@ -34,12 +37,17 @@ function CustomerCenterPanel() {
       </div>
 
       <div className="home-info-customer__actions">
-        {customerActionLinks.map((action) => (
-          <Link className="home-info-customer__button" to={action.to} key={action.id}>
-            <span>{action.label}</span>
-            <ChevronRightIcon size={iconSize.sm} />
-          </Link>
-        ))}
+        {customerActionLinks.map((action) => {
+          const ActionIcon = action.icon;
+
+          return (
+            <Link className="home-info-customer__button" to={action.to} key={action.id}>
+              <ActionIcon size={iconSize.sm} />
+              <span>{action.label}</span>
+              <ChevronRightIcon size={iconSize.sm} />
+            </Link>
+          );
+        })}
       </div>
 
       <ul className="home-info-customer__inquiries">

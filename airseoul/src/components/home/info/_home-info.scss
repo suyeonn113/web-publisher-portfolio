@@ -88,10 +88,10 @@
 .home-info-card-header__title {
   gap: get-space(sm);
 
-  img {
+  svg {
     width: 28px;
     height: 28px;
-    object-fit: contain;
+    color: var(--color-mint);
   }
 }
 
@@ -143,10 +143,11 @@
   color: var(--color-text-primary);
   border: var(--line-thin) solid var(--color-border-primary);
 
-  > img {
+  > svg {
     width: 32px;
     height: 32px;
-    object-fit: contain;
+    flex-shrink: 0;
+    color: var(--color-mint);
   }
 
   > span {
@@ -170,10 +171,11 @@
   color: var(--color-text-primary);
   border: var(--line-thin) solid var(--color-border-primary);
 
-  img {
+  svg {
     width: 32px;
     height: 32px;
-    object-fit: contain;
+    flex-shrink: 0;
+    color: var(--color-mint);
   }
 
   div {
@@ -205,12 +207,20 @@
 }
 
 .home-info-customer__button {
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: get-space(sm);
   padding: get-space(sm) get-space(md);
   color: var(--color-text-primary);
   border: var(--line-thin) solid var(--color-border-primary);
   font-weight: 800;
+
+  span {
+    flex: 1;
+  }
+
+  svg:first-child {
+    color: var(--color-mint);
+  }
 }
 
 .home-info-customer__inquiries {
@@ -280,7 +290,10 @@
 }
 
 .home-info-about__eyebrow {
-  color: var(--color-point-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: get-space(xs);
+  color: var(--color-mint);
   font-weight: 800;
 }
 
@@ -295,10 +308,8 @@
 
 .home-info-about__visual {
   position: absolute;
-  top: get-space(xl);
-  right: get-space(lg);
-  width: min(42%, 320px);
-  max-height: 60%;
+  bottom: -10%;
+  width: 100%;
   object-fit: contain;
 }
 
@@ -315,10 +326,11 @@
   gap: get-space(md);
   min-width: 0;
 
-  img {
+  svg {
     width: 44px;
     height: 44px;
-    object-fit: contain;
+    flex-shrink: 0;
+    color: var(--color-mint);
   }
 
   span {
@@ -347,6 +359,12 @@
   .home-info-about {
     min-height: 420px;
   }
+
+  .home-info-about__visual {
+    bottom: -65%;
+    width: 100%;
+    max-height: none;
+  }
 }
 
 @include respond-down(tablet) {
@@ -355,10 +373,9 @@
   }
 
   .home-info-about__visual {
-    position: static;
+    bottom: -30%;
     width: 100%;
     max-height: none;
-    margin-top: get-space(lg);
   }
 }
 

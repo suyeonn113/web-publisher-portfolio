@@ -13,27 +13,57 @@
 
 .site-footer__main {
   display: grid;
-  grid-template-columns: minmax(180px, 0.32fr) minmax(0, 1fr);
-  gap: get-space(xl);
+  grid-template-columns: auto 1fr;
+  gap: get-space(xxl);
   align-items: start;
 }
 
 .site-footer__brand {
+  display: grid;
+  gap: get-space(md);
+  padding-right: get-space(lg);
+  
   .logo {
-    width: 160px;
+    order: 1;
+    display: block;
+    width: var(--logo-width);
     color: var(--color-point-primary);
+  }
+}
+
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: get-space(xs);
+  order: 2;
+
+  a {
+    @include flex-center;
+    @include transition(all, fast, standard);
+
+    width: 36px;
+    aspect-ratio: 1;
+    color: var(--color-text-secondary);
+    border: var(--line-thin) solid var(--color-border-primary);
+    border-radius: var(--radius-full);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-mint);
+      border-color: var(--color-border-mint);
+    }
   }
 }
 
 .site-footer__nav {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: get-space(lg);
+  gap: get-space(md);
 }
 
 .site-footer__group {
   display: grid;
-  gap: get-space(sm);
+  gap: get-space(lg);
 
   h2 {
     color: var(--color-text-primary);
@@ -44,6 +74,7 @@
 
 .site-footer__links {
   display: grid;
+  grid-template-rows: repeat(5, 1fr);
   gap: get-space(xs);
 
   a {

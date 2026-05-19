@@ -1,4 +1,10 @@
 import { ROUTES } from '../constants/routes';
+import CircleQuestionMarkIcon from '../components/icons/CircleQuestionMarkIcon';
+import HeartRouteIcon from '../components/icons/HeartRouteIcon';
+import MailIcon from '../components/icons/MailIcon';
+import PhoneIcon from '../components/icons/PhoneIcon';
+import BuildingIcon from '../components/icons/BuildingIcon';
+import UsersGroupIcon from '../components/icons/UsersGroupIcon';
 
 export const homeNotices = [
   {
@@ -25,18 +31,20 @@ export const customerCenterInfo = {
   title: '에어서울 고객센터',
   phone: '1800-8100',
   hours: '매일 09:00 ~ 18:00',
-  icon: '/images/home-info/icons/customer.svg',
+  icon: PhoneIcon,
 };
 
 export const customerActionLinks = [
   {
     id: 'faq',
     label: '자주 묻는 질문',
+    icon: CircleQuestionMarkIcon,
     to: ROUTES.contact.faq,
   },
   {
     id: 'inquiry',
     label: '1:1 문의',
+    icon: MailIcon,
     to: ROUTES.contact.inquiry,
   },
 ];
@@ -67,18 +75,18 @@ export const airSeoulStats = [
     id: 'founded',
     value: '2016',
     label: '설립연도',
-    icon: '/images/home-info/icons/seat.svg',
+    icon: BuildingIcon,
   },
   {
     id: 'routes',
     value: '20+',
     label: '취항 노선',
-    icon: '/images/home-info/icons/route.svg',
+    icon: HeartRouteIcon,
   },
   {
     id: 'passengers',
     value: '2,500만+',
     label: '누적 탑승객',
-    icon: '/images/home-info/icons/passengers.svg',
+    icon: UsersGroupIcon,
   },
 ];
