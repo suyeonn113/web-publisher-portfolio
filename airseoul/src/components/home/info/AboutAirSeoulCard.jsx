@@ -27,7 +27,7 @@ function AboutAirSeoulCard() {
 
       <img
         className="home-info-about__visual"
-        src="/images/home-info/about-airseoul-v2.png"
+        src={`${import.meta.env.BASE_URL}images/home-info/about-airseoul-v2.png`}
         alt=""
         aria-hidden="true"
       />
