@@ -101,6 +101,7 @@ function FlightDatePicker({
           const dateText = formatDate(date);
           const isDeparture = dateText === departureDate;
           const isReturn = dateText === returnDate;
+          const hasDateRange = Boolean(departureDate && returnDate);
           const isInRange =
             departureDate && returnDate && dateText > departureDate && dateText < returnDate;
           const isPastDate = date < today;
@@ -113,6 +114,8 @@ function FlightDatePicker({
                 'flight-date-picker__day',
                 isDeparture ? 'is-start' : '',
                 isReturn ? 'is-end' : '',
+                isDeparture && hasDateRange ? 'is-connected-start' : '',
+                isReturn && hasDateRange ? 'is-connected-end' : '',
                 isInRange ? 'is-range' : '',
                 isDisabled ? 'is-disabled' : '',
               ]
