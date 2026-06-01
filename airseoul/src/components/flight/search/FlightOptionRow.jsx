@@ -15,6 +15,8 @@ const formatDuration = (minutes) => {
 };
 
 function FlightOptionRow({ fareGroupName, flight, onSelectFare, selectedFareKey }) {
+  const isFlightSoldOut = flight.availability.seatsLeft <= 0;
+
   return (
     <article className="flight-option-row">
       <div className="flight-option-row__summary">
@@ -48,18 +50,27 @@ function FlightOptionRow({ fareGroupName, flight, onSelectFare, selectedFareKey 
       <div className="flight-option-row__fares">
         {FARE_OPTIONS.map((option) => {
           const fare = flight.fares[option.key];
+          const isFareSoldOut = isFlightSoldOut || fare.seatsLeft <= 0;
 
           return (
-            <label className="flight-option-row__fare" key={option.key}>
+            <label
+              className={`flight-option-row__fare${isFareSoldOut ? ' is-sold-out' : ''}`}
+              key={option.key}
+            >
               <input
                 type="radio"
                 name={fareGroupName}
-                checked={selectedFareKey === option.key}
-                onChange={() => onSelectFare?.(option.key)}
+                checked={!isFareSoldOut && selectedFareKey === option.key}
+                disabled={isFareSoldOut}
+                onChange={() => {
+                  if (!isFareSoldOut) {
+                    onSelectFare?.(option.key);
+                  }
+                }}
               />
               <span>
                 <strong>{option.label}</strong>
-                <em>{formatKRW(fare.price)}</em>
+                <em>{isFareSoldOut ? '매진' : formatKRW(fare.price)}</em>
                 <small>{fare.seatsLeft}석</small>
               </span>
             </label>

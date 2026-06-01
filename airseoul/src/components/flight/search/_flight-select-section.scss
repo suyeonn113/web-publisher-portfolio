@@ -258,6 +258,18 @@
     }
   }
 
+  &.is-sold-out {
+    color: var(--color-text-muted);
+    background: var(--color-bg-sub);
+    cursor: not-allowed;
+
+    strong,
+    em,
+    small {
+      color: var(--color-text-muted);
+    }
+  }
+
   input {
     position: absolute;
     opacity: 0;

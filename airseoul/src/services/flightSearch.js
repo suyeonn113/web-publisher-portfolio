@@ -1,5 +1,5 @@
-import { flightFareRows } from '../data/flightFareRows';
-import { flightRows } from '../data/flightRows';
+import flightFareRows from '../data/flightFareRows.json';
+import flightRows from '../data/flightRows.json';
 
 const getFaresByFlightId = () =>
   flightFareRows.reduce((faresByFlightId, fareRow) => {
