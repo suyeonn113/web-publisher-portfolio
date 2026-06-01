@@ -20,6 +20,11 @@ $imageSrc = $image['src'] ?? '';
 $imageAlt = $image['alt'] ?? ($program['title'] ?? '');
 
 $url = $program['url'] ?? '#';
+$programId = (int) ($program['id'] ?? 0);
+
+if ($url === '#' && $programId > 0) {
+    $url = '/programs.php#program-' . $programId;
+}
 $title = $program['title'] ?? '';
 $summary = $program['summary'] ?? '';
 

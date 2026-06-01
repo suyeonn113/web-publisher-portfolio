@@ -1,6 +1,8 @@
 <?php
 
-$isLocal = in_array($_SERVER['SERVER_NAME'], [
+$serverName = $_SERVER['SERVER_NAME'] ?? 'localhost';
+
+$isLocal = in_array($serverName, [
     'localhost',
     '127.0.0.1',
     '::1'

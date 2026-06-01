@@ -8,100 +8,14 @@ include __DIR__ . '/../includes/functions/program.service.php';
 
 /**
  * -----------------------------------------
- * 1) 입력값
+ * 1) 청소년 프로그램 필터링
  * -----------------------------------------
  */
-$age = isset($_GET['age']) ? trim((string) $_GET['age']) : null;
-$field = isset($_GET['field']) ? trim((string) $_GET['field']) : null;
+$filteredYouthPrograms = getRecommendPrograms($youthPrograms, $_GET);
 
 /**
  * -----------------------------------------
- * 2) 유틸
- * - 배열/문자열 모두 대응
- * - 나중에 DB로 바뀌면 이 구간 대신 SQL 조건으로 교체
- * -----------------------------------------
- */
-function normalizeToArray($value) {
-    if (is_array($value)) {
-        return array_values(array_filter(array_map('strval', $value)));
-    }
-
-    if (is_string($value) && $value !== '') {
-        $parts = preg_split('/[\s,]+/u', $value);
-        return array_values(array_filter(array_map('trim', $parts)));
-    }
-
-    return [];
-}
-
-function matchAgeFilter($program, $age) {
-    if (!$age) return true;
-
-    $candidates = [];
-
-    if (isset($program['age_group_codes'])) {
-        $candidates = array_merge($candidates, normalizeToArray($program['age_group_codes']));
-    }
-
-    if (isset($program['age_groups'])) {
-        $candidates = array_merge($candidates, normalizeToArray($program['age_groups']));
-    }
-
-    if (isset($program['target_codes'])) {
-        $candidates = array_merge($candidates, normalizeToArray($program['target_codes']));
-    }
-
-    if (isset($program['target_code'])) {
-        $candidates = array_merge($candidates, normalizeToArray($program['target_code']));
-    }
-
-    $candidates = array_unique($candidates);
-
-    return in_array($age, $candidates, true);
-}
-
-function matchFieldFilter($program, $field) {
-    if (!$field) return true;
-
-    $candidates = [];
-
-    if (isset($program['field_code'])) {
-        $candidates = array_merge($candidates, normalizeToArray($program['field_code']));
-    }
-
-    if (isset($program['field_codes'])) {
-        $candidates = array_merge($candidates, normalizeToArray($program['field_codes']));
-    }
-
-    if (isset($program['field'])) {
-        $candidates = array_merge($candidates, normalizeToArray($program['field']));
-    }
-
-    $candidates = array_unique($candidates);
-
-    return in_array($field, $candidates, true);
-}
-
-function filterRecommendPrograms($programs, $age, $field) {
-    $filtered = array_filter($programs, function ($program) use ($age, $field) {
-        return matchAgeFilter($program, $age) && matchFieldFilter($program, $field);
-    });
-
-    return array_values($filtered);
-}
-
-/**
- * -----------------------------------------
- * 3) 청소년 프로그램 필터링
- * -----------------------------------------
- */
-$programs = filterActivePrograms($youthPrograms);
-$programs = sortProgramsForDisplay($programs);
-$filteredYouthPrograms = filterRecommendPrograms($programs, $age, $field);
-
-/**
- * -----------------------------------------
- * 4) 청소년 프로그램 HTML 생성
+ * 2) 청소년 프로그램 HTML 생성
  * -----------------------------------------
  */
 ob_start();
@@ -120,22 +34,18 @@ $youthHtml = ob_get_clean();
 
 /**
  * -----------------------------------------
- * 5) 평생교육 프로그램 필터링
+ * 3) 평생교육 프로그램 필터링
  * -----------------------------------------
  */
 $educationPrograms = isset($educationPrograms) && is_array($educationPrograms)
     ? $educationPrograms
     : [];
 
-$educationPrograms = array_values(array_filter($educationPrograms, function ($program) {
-    return !empty($program['is_active']);
-}));
-
-$filteredEducationPrograms = filterRecommendPrograms($educationPrograms, $age, $field);
+$filteredEducationPrograms = getRecommendPrograms($educationPrograms, $_GET);
 
 /**
  * -----------------------------------------
- * 6) 평생교육 프로그램 HTML 생성
+ * 4) 평생교육 프로그램 HTML 생성
  * - ul.education__track 안에 들어가므로 li 구조 사용
  * - 카드 전체 클릭 가능하도록 a.card__link로 감싸기
  * - 메타는 항상 출력해서 높이 흐트러짐 방지
@@ -185,7 +95,7 @@ $educationHtml = ob_get_clean();
 
 /**
  * -----------------------------------------
- * 7) 응답
+ * 5) 응답
  * -----------------------------------------
  */
 echo json_encode([

@@ -16,7 +16,9 @@
 <header class="inner">
     <!-- Logo -->
     <h1 class="logo">
-        <img src="./assets/images/logo.gif" alt="서울시립청소년센터">
+        <a class="logo__link" href="<?= BASE_URL ?>/index.php" aria-label="서울시립청소년센터 홈으로 이동">
+            <img src="<?= BASE_URL ?>/assets/images/logo.gif" alt="서울시립청소년센터">
+        </a>
     </h1>
     <!-- Search -->
     <form class="search" id="search-panel" role="search" data-state="closed">
@@ -208,7 +210,7 @@
             <ul class="sub-menu">
                 <li class="sub-menu__title">청소년 프로그램</li>
                 <li class="sub-menu__item">
-                    <a class="sub-menu__link" href="#">활동신청</a>
+                    <a class="sub-menu__link" href="<?= BASE_URL ?>/programs.php">활동신청</a>
                 </li>
                 <li class="sub-menu__item">
                     <a class="sub-menu__link" href="#">참여활동</a>
@@ -316,7 +318,7 @@
     <ul class="quick-menu__list">
         <li class="quick-menu__item">
             <a class="quick-menu__link gap" 
-               href="#">
+               href="<?= BASE_URL ?>/index.php">
                 <span class="icon--home__background">
                     <svg class="icon--home icon--quick-menu icon" 
                         viewBox="0 0 24 24"
@@ -351,7 +353,7 @@
         </li>
         <li class="quick-menu__item">
             <a class="quick-menu__link" 
-               href="#">
+               href="<?= BASE_URL ?>/programs.php">
                 <svg class="icon--youth icon--quick-menu icon" 
                      viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg"
@@ -395,4 +397,3 @@
         </li>
     </ul>
 </nav>
-

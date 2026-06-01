@@ -140,16 +140,16 @@
     row-gap: var(--section-gap);
 }
 
-.card {
+.programs__track > .card {
     position: relative;
     flex: 0 0 65%;
 }
 @media (min-width: 600px) {
-    .card {flex: 0 0 40%;}
+    .programs__track > .card {flex: 0 0 40%;}
 }
 
 @media (min-width: 1024px) {
-    .card {flex: 0 0 28%;}
+    .programs__track > .card {flex: 0 0 28%;}
 }
 
 /* ========== Recommend ========== */

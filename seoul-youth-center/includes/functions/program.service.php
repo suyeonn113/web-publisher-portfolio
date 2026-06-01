@@ -13,6 +13,53 @@ final class ProgramStatus
     public const CLOSED = 'closed';
 }
 
+function getProgramAgeLabel(array $program): string
+{
+    $labels = [
+        'infant' => '유아',
+        'elementary-low' => '초등 저학년',
+        'elementary-high' => '초등 고학년',
+        'early-youth' => '초기 청소년',
+        'mid-youth' => '중기 청소년',
+        'late-youth' => '후기 청소년',
+        'citizen' => '시민',
+    ];
+
+    $codes = $program['age_group_codes'] ?? [];
+    $names = array_map(
+        static fn(string $code): string => $labels[$code] ?? $code,
+        $codes
+    );
+
+    return implode(', ', $names);
+}
+
+function getProgramFieldLabel(array $program): string
+{
+    $labels = [
+        'career' => '진로직업',
+        'culture-art' => '문화예술',
+        'emotional' => '정서관계',
+        'competency' => '역량성장',
+        'citizen' => '시민참여',
+    ];
+
+    $fieldCode = (string) ($program['field_code'] ?? '');
+
+    return $labels[$fieldCode] ?? '청소년활동';
+}
+
+function findProgramById(array $programs, int $id): ?array
+{
+    foreach ($programs as $program) {
+        if ((int) ($program['id'] ?? 0) === $id) {
+            return $program;
+        }
+    }
+
+    return null;
+}
+
 /**
  * 프로그램 자동화 계산 함수
  * - DB 연결 전: 현재 PHP 배열 데이터에 그대로 사용
@@ -246,6 +293,45 @@ function getProgramCardMeta(array $program, ?DateTime $today = null): array
         'activity_period' => formatProgramActivityPeriod($program),
         'activity_days' => getProgramActivityDays($program),
         'data_attributes' => getProgramDataAttributes($program, $today),
+    ];
+}
+
+function getProgramDetailContent(array $program, ?DateTime $today = null): array
+{
+    $meta = getProgramCardMeta($program, $today);
+    $fieldLabel = getProgramFieldLabel($program);
+    $ageLabel = getProgramAgeLabel($program);
+    $title = (string) ($program['title'] ?? '청소년 프로그램');
+    $hashtags = $program['hashtags'] ?? [];
+    $tagText = !empty($hashtags) ? implode(', ', $hashtags) : $fieldLabel;
+    $capacity = (int) ($program['capacity'] ?? (18 + (((int) ($program['id'] ?? 0) % 5) * 4)));
+    $applied = (int) ($program['applied_count'] ?? min($capacity, 6 + (((int) ($program['id'] ?? 0) % 7) * 2)));
+
+    return [
+        'description' => $program['description'] ?? "{$fieldLabel} 분야에 관심 있는 {$ageLabel}을 위한 참여형 프로그램입니다. {$tagText}를 주제로 직접 경험하고 협업하며 자신의 생각을 구체적인 활동으로 확장해 볼 수 있습니다.",
+        'location' => $program['location'] ?? '서울시립청소년센터 활동실',
+        'capacity' => $capacity,
+        'applied_count' => $applied,
+        'waiting_count' => (int) ($program['waiting_count'] ?? 0),
+        'contact' => $program['contact'] ?? '청소년활동팀 02-1234-5678',
+        'attachment' => $program['attachment'] ?? "{$fieldLabel} 프로그램 안내문.pdf",
+        'schedule' => $program['schedule'] ?? [
+            '오리엔테이션 및 활동 안내',
+            "{$fieldLabel} 주제 탐색과 팀별 기획",
+            '결과 공유 및 활동 마무리',
+        ],
+        'benefits' => $program['benefits'] ?? [
+            '활동 확인서 발급',
+            '프로그램 자료 제공',
+            '우수 참여자 소정의 기념품 증정',
+        ],
+        'notes' => $program['notes'] ?? [
+            '신청 후 담당자 확인 연락이 진행될 수 있습니다.',
+            '세부 일정은 센터 운영 상황에 따라 일부 조정될 수 있습니다.',
+            '무단 불참 시 이후 프로그램 신청이 제한될 수 있습니다.',
+        ],
+        'summary_label' => $meta['activity_period'] !== '' ? $meta['activity_period'] : '상시 운영',
+        'title' => $title,
     ];
 }
 

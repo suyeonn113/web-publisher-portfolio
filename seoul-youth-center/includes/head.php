@@ -23,6 +23,8 @@
     
     <!-- pages -->
     <?php if (!empty($pageCss)): ?>
-        <link rel="stylesheet" href="<?= BASE_URL ?>/css/pages/<?= htmlspecialchars($pageCss) ?>">
+        <?php foreach ((array) $pageCss as $cssFile): ?>
+            <link rel="stylesheet" href="<?= BASE_URL ?>/css/pages/<?= htmlspecialchars($cssFile) ?>">
+        <?php endforeach; ?>
     <?php endif; ?>
 </head>

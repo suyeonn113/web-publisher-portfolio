@@ -24,7 +24,7 @@ $programs = sortProgramsForDisplay($programs);
 <?php include './includes/global-nav.php'; ?>
 
 <!------------ <Main> ------------>
-<main>
+<main id="main">
     <!------------ Hero ------------>
     <section class="hero inner">
         <!-- Banner -->
@@ -103,7 +103,7 @@ $programs = sortProgramsForDisplay($programs);
             <ul class="quick-menu--home__list">
                 <li class="quick-menu--home__item">
                     <a class="quick-menu--home__link" 
-                    href="#">
+                    href="<?= BASE_URL ?>/programs.php">
                         <span class="line">
                             <svg class="icon--youth icon--quick-menu home icon stroke" 
                                 viewBox="0 0 40 40" 
@@ -245,7 +245,7 @@ $programs = sortProgramsForDisplay($programs);
                 </button>
             </div>
             <a class="button--more button"
-               href="#"
+               href="<?= BASE_URL ?>/programs.php"
                aria-label="청소년 프로그램 더보기">
                 더보기
             </a>
@@ -329,7 +329,7 @@ $programs = sortProgramsForDisplay($programs);
                         </button>
                     </div>
                     <a class="button--more button"
-                        href="#"
+                        href="<?= BASE_URL ?>/programs.php"
                         aria-label="청소년 프로그램 더보기">
                         더보기
                     </a>
@@ -579,14 +579,18 @@ $programs = sortProgramsForDisplay($programs);
             </a>
 
             <ul class="news-card__list news-card__list--press">
+                <li class="news-card__item">
                     <a class="news-card__link"
                        href="#">                
                     [2025.02.05] 소셜임팩트뉴스-청다온 등 35건(2025년 3분기)
                     </a>
+                </li>
+                <li class="news-card__item">
                     <a class="news-card__link"
                        href="#">                
                     [2025.01.06] KNS뉴스통신-움아트 외 39건
-                    </a>                    
+                    </a>
+                </li>
             </ul>
         </article>
     </section>
@@ -1078,7 +1082,7 @@ $programs = sortProgramsForDisplay($programs);
 <script>
     window.APP_BASE_URL = '<?= BASE_URL ?>';
 </script>
-<script src="<?= BASE_URL ?>/js/gloval-nav.js"></script>
+<script src="<?= BASE_URL ?>/js/global-nav.js"></script>
 <script src="<?= BASE_URL ?>/js/header-search.js"></script>
 <script src="<?= BASE_URL ?>/js/banner.js"></script>
 <script src="<?= BASE_URL ?>/js/programs.js"></script>

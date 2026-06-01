@@ -17,8 +17,8 @@
     </div>
     <div class="wrapper--bottom">
         <div class="footer__bottom inner">
-            <a href="../index.php" class="footer__logo">
-                <img src="./assets/images/logo.gif" alt="서울시립청소년센터">
+            <a href="<?= BASE_URL ?>/index.php" class="footer__logo">
+                <img src="<?= BASE_URL ?>/assets/images/logo.gif" alt="서울시립청소년센터">
             </a>
             <ul class="footer__sns">
                 <li class="footer__sns--wrapper wrapper__instagram">
@@ -28,7 +28,7 @@
                        target="_blank" 
                        rel="noopener">
                         <img class="instagram" 
-                             src="./assets/icons/instagram.png" 
+                             src="<?= BASE_URL ?>/assets/icons/instagram.png" 
                              alt="">
                     </a>
                 </li>
@@ -39,7 +39,7 @@
                        target="_blank" 
                        rel="noopener">
                         <img class="youtube"
-                             src="./assets/icons/youtube.png" 
+                             src="<?= BASE_URL ?>/assets/icons/youtube.png" 
                              alt="">
                     </a>
                 </li>
@@ -50,7 +50,7 @@
                        target="_blank" 
                        rel="noopener">
                         <img class="facebook" 
-                             src="./assets/icons/facebook.png" 
+                             src="<?= BASE_URL ?>/assets/icons/facebook.png" 
                              alt="">
                     </a>
                 </li>
@@ -61,7 +61,7 @@
                        target="_blank" 
                        rel="noopener">
                         <img class="naverblog" 
-                             src="./assets/icons/naverblog.png" 
+                             src="<?= BASE_URL ?>/assets/icons/naverblog.png" 
                              alt="">
                     </a>
                 </li>
@@ -72,7 +72,7 @@
                        target="_blank" 
                        rel="noopener">
                         <img class="kakao" 
-                             src="./assets/icons/kakao.png" 
+                             src="<?= BASE_URL ?>/assets/icons/kakao.png" 
                              alt="">
                     </a>
                 </li>

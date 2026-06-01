@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let cleanupMegaMenu = null;
     let cleanupMenuColumns = null;
     let cleanupMobileTabletMenu = null;
+    let cleanupDesktopHeaderScroll = null;
 
     /* ===== 2. Shared Utilities (공통 유틸 함수) ===== */
     // addListenerWithCleanup
@@ -93,6 +94,81 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!panelId) return null;
             return document.getElementById(panelId);
         }
+
+    function initDesktopHeaderScroll() {
+        const topBar = document.querySelector('.top-bar');
+        const siteHeader = document.querySelector('body > header');
+        const mainMenu = menuPanel.querySelector('.main-menu');
+
+        if (!topBar || !siteHeader || !mainMenu) return () => {};
+
+        const cleanups = [];
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        const SCROLL_THRESHOLD = 8;
+
+        function syncLayoutVars() {
+            if (!desktopMq.matches) return;
+
+            const topBarHeight = topBar.getBoundingClientRect().height;
+            const headerHeight = siteHeader.getBoundingClientRect().height;
+            const menuHeight = mainMenu.getBoundingClientRect().height;
+
+            document.documentElement.style.setProperty('--global-top-bar-height', `${topBarHeight}px`);
+            document.documentElement.style.setProperty('--global-header-height', `${headerHeight}px`);
+            document.documentElement.style.setProperty('--global-menu-height', `${menuHeight}px`);
+        }
+
+        function resetDesktopHeaderState() {
+            document.body.classList.remove('is-header-hidden', 'is-desktop-menu-stuck');
+            document.documentElement.style.removeProperty('--global-top-bar-height');
+            document.documentElement.style.removeProperty('--global-header-height');
+            document.documentElement.style.removeProperty('--global-menu-height');
+        }
+
+        function updateScrollState() {
+            if (!desktopMq.matches) {
+                resetDesktopHeaderState();
+                ticking = false;
+                return;
+            }
+
+            syncLayoutVars();
+
+            const currentY = window.scrollY;
+            const delta = currentY - lastScrollY;
+            const isNearTop = currentY <= 4;
+
+            document.body.classList.toggle('is-desktop-menu-stuck', currentY > 4);
+
+            if (isNearTop) {
+                document.body.classList.remove('is-header-hidden');
+            } else if (Math.abs(delta) >= SCROLL_THRESHOLD) {
+                document.body.classList.toggle('is-header-hidden', delta > 0);
+            }
+
+            lastScrollY = currentY;
+            ticking = false;
+        }
+
+        function requestScrollStateUpdate() {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(updateScrollState);
+        }
+
+        syncLayoutVars();
+        updateScrollState();
+
+        cleanups.push(addListenerWithCleanup(window, 'scroll', requestScrollStateUpdate, { passive: true }));
+        cleanups.push(addListenerWithCleanup(window, 'resize', requestScrollStateUpdate));
+        cleanups.push(addMqChangeListener(desktopMq, requestScrollStateUpdate));
+
+        return () => {
+            resetDesktopHeaderState();
+            cleanups.forEach((cleanup) => cleanup());
+        };
+    }
 
     /* ===== 3. Mobile / Tablet Menu (모바일 / 태블릿 메뉴) ===== */
 
@@ -1056,8 +1132,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ===== 9. Initial Boot (초기 실행) ===== */
     // init 함수 실행들
     bindModeToggleButtons();
+    cleanupDesktopHeaderScroll = initDesktopHeaderScroll();
     cleanupMobileTabletMenu = initMobileTabletMenu();
     switchMenuMode(menuPanel.dataset.menuMode || 'drawer');
 
 });
-
