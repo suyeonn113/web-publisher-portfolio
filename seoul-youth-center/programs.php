@@ -8,6 +8,8 @@ $pageCss = ['programs.css', 'program-confirm-modal.css'];
 
 $statusFilter = isset($_GET['status']) ? trim((string) $_GET['status']) : '';
 $keyword = isset($_GET['keyword']) ? trim((string) $_GET['keyword']) : '';
+$currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$programsPerPage = 12;
 $allowedStatuses = [
     '',
     ProgramStatus::ALWAYS,
@@ -42,6 +44,27 @@ function matchesProgramKeyword(array $program, string $keyword): bool
     return false;
 }
 
+function buildProgramPageUrl(int $page, string $statusFilter, string $keyword): string
+{
+    $params = [];
+
+    if ($statusFilter !== '') {
+        $params['status'] = $statusFilter;
+    }
+
+    if ($keyword !== '') {
+        $params['keyword'] = $keyword;
+    }
+
+    if ($page > 1) {
+        $params['page'] = $page;
+    }
+
+    $query = http_build_query($params);
+
+    return BASE_URL . '/programs.php' . ($query !== '' ? '?' . $query : '');
+}
+
 $programs = filterActivePrograms($youthPrograms);
 $programs = sortProgramsForDisplay($programs);
 $programs = array_values(array_filter(
@@ -52,6 +75,12 @@ $programs = array_values(array_filter(
         return $matchesStatus && matchesProgramKeyword($program, $keyword);
     }
 ));
+
+$totalPrograms = count($programs);
+$totalPages = max(1, (int) ceil($totalPrograms / $programsPerPage));
+$currentPage = max(1, min($currentPage, $totalPages));
+$pageOffset = ($currentPage - 1) * $programsPerPage;
+$pagedPrograms = array_slice($programs, $pageOffset, $programsPerPage);
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +95,7 @@ $programs = array_values(array_filter(
     <section class="program-page__header inner" aria-labelledby="program-page-title">
         <h1 id="program-page-title">청소년 활동 신청</h1>
         <p>
-            총 <strong><?= count($programs) ?></strong>개의 프로그램이 등록되어 있습니다.
+            총 <strong><?= $totalPrograms ?></strong>개의 프로그램이 등록되어 있습니다.
         </p>
 
         <form class="program-search" action="<?= BASE_URL ?>/programs.php" method="get" role="search">
@@ -93,10 +122,10 @@ $programs = array_values(array_filter(
     </section>
 
     <section class="program-list inner" aria-label="청소년 활동 신청 프로그램 목록">
-        <?php if (empty($programs)): ?>
+        <?php if (empty($pagedPrograms)): ?>
             <p class="program-list__empty">조건에 맞는 프로그램이 없습니다.</p>
         <?php else: ?>
-            <?php foreach ($programs as $program): ?>
+            <?php foreach ($pagedPrograms as $program): ?>
                 <?php
                 $programMeta = getProgramCardMeta($program);
                 $status = $programMeta['status'];
@@ -164,13 +193,33 @@ $programs = array_values(array_filter(
         <?php endif; ?>
     </section>
 
-    <nav class="program-pagination inner" aria-label="프로그램 목록 페이지">
-        <button type="button" disabled aria-label="첫 페이지">«</button>
-        <button type="button" disabled aria-label="이전 페이지">‹</button>
-        <strong aria-current="page">1</strong>
-        <button type="button" disabled aria-label="다음 페이지">›</button>
-        <button type="button" disabled aria-label="마지막 페이지">»</button>
-    </nav>
+    <?php if ($totalPages > 1): ?>
+        <nav class="program-pagination inner" aria-label="프로그램 목록 페이지">
+            <?php if ($currentPage > 1): ?>
+                <a href="<?= htmlspecialchars(buildProgramPageUrl(1, $statusFilter, $keyword), ENT_QUOTES, 'UTF-8') ?>" aria-label="첫 페이지">«</a>
+                <a href="<?= htmlspecialchars(buildProgramPageUrl($currentPage - 1, $statusFilter, $keyword), ENT_QUOTES, 'UTF-8') ?>" aria-label="이전 페이지">‹</a>
+            <?php else: ?>
+                <span aria-disabled="true" aria-label="첫 페이지">«</span>
+                <span aria-disabled="true" aria-label="이전 페이지">‹</span>
+            <?php endif; ?>
+
+            <?php for ($page = 1; $page <= $totalPages; $page++): ?>
+                <?php if ($page === $currentPage): ?>
+                    <strong aria-current="page"><?= $page ?></strong>
+                <?php else: ?>
+                    <a href="<?= htmlspecialchars(buildProgramPageUrl($page, $statusFilter, $keyword), ENT_QUOTES, 'UTF-8') ?>"><?= $page ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+            <?php if ($currentPage < $totalPages): ?>
+                <a href="<?= htmlspecialchars(buildProgramPageUrl($currentPage + 1, $statusFilter, $keyword), ENT_QUOTES, 'UTF-8') ?>" aria-label="다음 페이지">›</a>
+                <a href="<?= htmlspecialchars(buildProgramPageUrl($totalPages, $statusFilter, $keyword), ENT_QUOTES, 'UTF-8') ?>" aria-label="마지막 페이지">»</a>
+            <?php else: ?>
+                <span aria-disabled="true" aria-label="다음 페이지">›</span>
+                <span aria-disabled="true" aria-label="마지막 페이지">»</span>
+            <?php endif; ?>
+        </nav>
+    <?php endif; ?>
 
     <?php include __DIR__ . '/includes/components/program-confirm-modal.php'; ?>
 </main>

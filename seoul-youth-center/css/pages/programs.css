@@ -190,14 +190,25 @@
     color: var(--color-text-on);
     font-size: var(--button-text-size);
     font-weight: var(--button-text-weight);
+    transition: background-color 180ms ease;
 }
 
 .program-apply-card__cta.is-apply {
     background: var(--color-orange);
 }
 
+.program-apply-card__cta.is-apply:hover,
+.program-apply-card__cta.is-apply:focus-visible {
+    background: var(--color-orange-70);
+}
+
 .program-apply-card__cta.is-confirm {
     background: var(--color-purple);
+}
+
+.program-apply-card__cta.is-confirm:hover,
+.program-apply-card__cta.is-confirm:focus-visible {
+    background: rgb(217 70 239 / 70%);
 }
 
 .program-apply-card__cta.is-closed {
@@ -212,7 +223,8 @@
     padding-top: var(--space-5);
 }
 
-.program-pagination button,
+.program-pagination a,
+.program-pagination span,
 .program-pagination strong {
     display: grid;
     place-items: center;
@@ -221,6 +233,15 @@
     color: var(--color-text-default-soft);
     background: var(--color-white);
     border: 1px solid var(--color-line);
+    transition:
+        color 180ms ease,
+        background-color 180ms ease;
+}
+
+.program-pagination a:hover,
+.program-pagination a:focus-visible {
+    color: var(--color-text-default);
+    background: var(--color-lightblue);
 }
 
 .program-pagination strong {
@@ -229,7 +250,7 @@
     border-color: var(--color-orange);
 }
 
-.program-pagination button:disabled {
+.program-pagination span[aria-disabled="true"] {
     color: var(--color-gray);
     cursor: default;
 }
