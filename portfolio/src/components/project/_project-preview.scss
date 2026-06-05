@@ -1,0 +1,34 @@
+@use '../../styles/foundation/functions' as *;
+
+.project-preview {
+  position: relative;
+  width: 100%;
+  container-type: inline-size;
+  overflow: hidden;
+  background: var(--color-white);
+  transform-origin: center;
+}
+
+.project-preview__scale {
+  width: rem(720px);
+  min-height: rem(1120px);
+  transform: scale(calc(100cqw / #{rem(720px)}));
+  transform-origin: 0 0;
+}
+
+.project-preview__fallback {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: rem(24px);
+  background: var(--color-white);
+}
+
+.project-preview--opening {
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.project-preview--opening .project-preview__scale {
+  transform: scale(1);
+}

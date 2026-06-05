@@ -1,0 +1,15 @@
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-canvas: #cfcfcf;
+  --color-accent: #ff2a2a;
+  --color-text-primary: #000000;
+  --color-text-muted: #555555;
+  --font-family-base: 'SUIT', 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  --font-family-point: 'Syne', 'SUIT', sans-serif;
+  --page-padding-inline: clamp(30px, 4vw, 76px);
+  --duration-base: 0.4s;
+  --duration-page: 0.56s;
+  --ease-page: cubic-bezier(0.16, 1, 0.3, 1);
+  --line-heavy: 4px;
+}

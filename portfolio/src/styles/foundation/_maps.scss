@@ -1,0 +1,45 @@
+@use './functions' as *;
+
+$breakpoints: (
+  laptop: 1200px,
+  rail-collapse: 900px,
+  mobile: 560px
+);
+
+$work-layout: (
+  rail: (
+    top: clamp(#{rem(58px)}, 5.55vw, #{rem(108px)}),
+    logo-left: clamp(#{rem(26px)}, 2.2vw, #{rem(42px)}),
+    logo-width: clamp(#{rem(78px)}, 6.5vw, #{rem(124px)}),
+    content-left: clamp(#{rem(150px)}, 12.4vw, #{rem(236px)}),
+    content-right: clamp(#{rem(150px)}, 12.4vw, #{rem(236px)})
+  ),
+  compact-rail: (
+    top: rem(58px),
+    logo-left: rem(25px),
+    logo-width: rem(79px),
+    content-left: rem(150px),
+    content-right: rem(150px)
+  ),
+  stacked: (
+    logo-top: rem(38px),
+    logo-left: rem(76px),
+    logo-width: rem(78px),
+    content-top: rem(168px),
+    content-inline: rem(76px)
+  ),
+  mobile: (
+    logo-top: rem(24px),
+    logo-left: rem(30px),
+    logo-width: rem(64px),
+    content-top: rem(136px),
+    content-inline: rem(30px)
+  )
+);
+
+$preview-ratios: (
+  rail: 1.06,
+  compact-rail: 1.29,
+  stacked: 1.8,
+  mobile: 0.9
+);

@@ -1,0 +1,26 @@
+@use '../styles/foundation/functions' as *;
+
+.project-page {
+  min-height: 100vh;
+  background: var(--color-white);
+}
+
+.project-page__topbar {
+  position: fixed;
+  top: clamp(#{rem(28px)}, 3.2vw, #{rem(52px)});
+  right: clamp(#{rem(30px)}, 3.2vw, #{rem(52px)});
+  z-index: 1000;
+}
+
+.project-page__back {
+  display: inline-flex;
+  font-size: rem(16px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.project-page__state {
+  padding: rem(160px) rem(30px);
+  font-size: rem(16px);
+  font-weight: 700;
+}

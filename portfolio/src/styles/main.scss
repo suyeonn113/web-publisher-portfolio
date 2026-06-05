@@ -1,0 +1,12 @@
+@use './foundation/tokens';
+@use './foundation/maps';
+@use './foundation/functions';
+@use './foundation/mixins';
+@use './foundation/reset';
+
+@use '../components/layout/header';
+@use '../components/project/project-document';
+@use '../components/project/project-preview';
+
+@use '../pages/work-index';
+@use '../pages/project-page';
