@@ -1,21 +1,22 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import MainLayout from './layouts/MainLayout';
-import ProjectPage from './pages/ProjectPage';
-import StaticPage from './pages/StaticPage';
-import WorkIndex from './pages/WorkIndex';
+import { Navigate, Route, Routes } from "react-router-dom";
 
-function App() {
+import SeoulYouthCenterDetail from "./pages/Project/SeoulYouthCenter/SeoulYouthCenterDetail";
+
+const App = () => {
   return (
     <Routes>
-      <Route element={<MainLayout />}>
-        <Route index element={<WorkIndex />} />
-        <Route path="introduction" element={<StaticPage page="introduction" />} />
-        <Route path="resume" element={<StaticPage page="resume" />} />
-        <Route path="project/:slug" element={<ProjectPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Route>
+      {/* 인덱스 페이지 제작 전 임시 연결 */}
+      <Route
+        path="/"
+        element={<Navigate to="/projects/seoul-youth-center" replace />}
+      />
+
+      <Route
+        path="/projects/seoul-youth-center"
+        element={<SeoulYouthCenterDetail />}
+      />
     </Routes>
   );
-}
+};
 
 export default App;

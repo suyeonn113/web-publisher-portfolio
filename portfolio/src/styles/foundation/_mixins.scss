@@ -1,16 +1,52 @@
-@use './functions' as *;
-@use './maps' as *;
-@use 'sass:map';
+@use "sass:map";
+@use "./variables" as *;
+@use "./scales" as *;
+@use "./functions" as *;
 
-@mixin respond-down($breakpoint) {
-  $value: map.get($breakpoints, $breakpoint);
 
-  @if $value {
-    @media (max-width: $value) { @content; }
+// ========================================
+// Responsive
+// ========================================
+
+@mixin respond($key) {
+  @media (min-width: breakpoint($key)) {
+    @content;
   }
 }
 
-@mixin focus-ring {
-  outline: rem(2px) solid var(--color-accent);
-  outline-offset: rem(4px);
+@mixin responsive-value($property, $values) {
+  #{$property}: map.get($values, base);
+
+  @each $key, $value in $values {
+    @if $key != base {
+      @include respond($key) {
+        #{$property}: $value;
+      }
+    }
+  }
 }
+
+
+// ========================================
+// PPT Page
+// 상세 페이지 공통 캔버스
+// ========================================
+
+@mixin ppt-page {
+  @include responsive-value(--frame-gutter, $frame-gutters);
+  @include responsive-value(padding, $page-paddings);
+
+  width: min(
+    calc(100% - var(--frame-gutter) - var(--frame-gutter)),
+    $page-max-width
+  );
+  min-width: 0;
+  min-height: 100svh;
+  margin-inline: auto;
+
+  @include respond(compact) {
+    min-height: auto;
+    aspect-ratio: $page-aspect-ratio;
+  }
+}
+

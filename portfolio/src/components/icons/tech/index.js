@@ -1,0 +1,17 @@
+export { TechIconBase } from './TechIconBase';
+export { CssIcon } from './CssIcon';
+export { FigmaIcon } from './FigmaIcon';
+export { FileZillaIcon } from './FileZillaIcon';
+export { GitIcon } from './GitIcon';
+export { GithubIcon } from './GithubIcon';
+export { GsapIcon } from './GsapIcon';
+export { HtmlIcon } from './HtmlIcon';
+export { JavaIcon } from './JavaIcon';
+export { JavascriptIcon } from './JavascriptIcon';
+export { JqueryIcon } from './JqueryIcon';
+export { LenisIcon } from './LenisIcon';
+export { MysqlIcon } from './MysqlIcon';
+export { PhpIcon } from './PhpIcon';
+export { ReactIcon } from './ReactIcon';
+export { ScssIcon } from './ScssIcon';
+export { VscodeIcon } from './VscodeIcon';

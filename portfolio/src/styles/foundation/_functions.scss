@@ -1,9 +1,118 @@
-@use 'sass:math';
+@use "sass:map";
+@use "./scales" as *;
 
-@function rem($px, $base: 16px) {
-  @if math.is-unitless($px) {
-    $px: $px * 1px;
+
+// ========================================
+// Scale Getter
+// 내부에서만 사용하는 공통 조회 함수
+// ========================================
+
+@function _get-scale($scale, $key, $scale-name) {
+  $value: map.get($scale, $key);
+
+  @if $value == null {
+    @error "#{$scale-name} 스케일에 `#{$key}` 값이 없습니다. 사용 가능 값: #{map.keys($scale)}";
   }
 
-  @return math.div($px, $base) * 1rem;
+  @return $value;
 }
+
+
+// ========================================
+// Breakpoint
+// ========================================
+
+@function breakpoint($key) {
+  @return _get-scale($breakpoints, $key, "breakpoint");
+}
+
+
+// ========================================
+// Font Weight
+// ========================================
+
+@function weight($key) {
+  @return _get-scale($font-weights, $key, "font-weight");
+}
+
+
+// ========================================
+// Line Height
+// ========================================
+
+@function leading($key) {
+  @return _get-scale($line-heights, $key, "line-height");
+}
+
+
+// ========================================
+// Letter Spacing
+// ========================================
+
+@function tracking($key) {
+  @return _get-scale($letter-spacings, $key, "letter-spacing");
+}
+
+
+// ========================================
+// Border Width
+// ========================================
+
+@function stroke($key) {
+  @return _get-scale($border-widths, $key, "border-width");
+}
+
+
+// ========================================
+// Radius
+// ========================================
+
+@function radius($key) {
+  @return _get-scale($radii, $key, "radius");
+}
+
+
+// ========================================
+// Motion
+// ========================================
+
+@function duration($key) {
+  @return _get-scale($durations, $key, "duration");
+}
+
+@function easing($key) {
+  @return _get-scale($easings, $key, "easing");
+}
+
+// transition 속성 뒤에 붙이는 결합값
+@function motion(
+  $duration-key: base,
+  $easing-key: standard
+) {
+  @return duration($duration-key) easing($easing-key);
+}
+
+
+// ========================================
+// Z-index
+// ========================================
+
+@function layer($key) {
+  @return _get-scale($z-indexes, $key, "z-index");
+}
+
+
+/*
+.EX {
+  font-weight: weight(semibold);
+  line-height: leading(heading);
+  letter-spacing: tracking(base);
+
+  border-width: stroke(thin);
+  border-radius: radius(md);
+
+  z-index: layer(content);
+
+  transition: transform motion(base, standard);
+}
+*/

@@ -1,12 +1,16 @@
-@use './foundation/tokens';
-@use './foundation/maps';
-@use './foundation/functions';
-@use './foundation/mixins';
-@use './foundation/reset';
+@use "./foundation" as *;
+@use "./foundation/reset";
+@use "./foundation/themes";
 
-@use '../components/layout/header';
-@use '../components/project/project-document';
-@use '../components/project/project-preview';
 
-@use '../pages/work-index';
-@use '../pages/project-page';
+// ========================================
+// PPT Page Base
+// ========================================
+
+.ppt-page {
+  @include ppt-page;
+
+  position: relative;
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
+}

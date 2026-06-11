@@ -11,8 +11,6 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
-server/.env
 
 # Editor directories and files
 .vscode/*
@@ -24,6 +22,3 @@ server/.env
 *.njsproj
 *.sln
 *.sw?
-server*.txt
-*.log
-.DS_Store

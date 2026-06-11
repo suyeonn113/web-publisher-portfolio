@@ -1,0 +1,18 @@
+.seoul-youth-center__tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  svg {
+    flex: 0 0 auto;
+  }
+}

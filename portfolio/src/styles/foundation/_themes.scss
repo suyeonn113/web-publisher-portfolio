@@ -1,0 +1,165 @@
+// ========================================
+// Color Palette
+// 실제 색상값
+// ========================================
+
+:root {
+// Monochrome
+--color-white: #ffffff;
+--color-black: #171717;
+
+// Gray
+--color-gray-50: #f7f7f5;
+--color-gray-100: #f1f1ef;
+--color-gray-200: #e9e9e6;
+--color-gray-300: #d9d9d6;
+--color-gray-400: #b8b8b8;
+--color-gray-500: #929292;
+--color-gray-600: #5f5f5f;
+--color-gray-700: #3a3a3a;
+--color-gray-800: #292929;
+--color-gray-900: #191919;
+--color-gray-950: #111111;
+
+// Blue
+--color-blue-50: #eef2ff;
+--color-blue-100: #e0e7ff;
+--color-blue-300: #a5b4fc;
+--color-blue-400: #818cf8;
+--color-blue-500: #6366f1;
+--color-blue-600: #4f46e5;
+--color-blue-700: #4338ca;
+--color-blue-900: #312e81;
+--color-blue-950: #1e1b4b;
+}
+
+// ========================================
+// Light Theme
+// 의미 기반 색상
+// ========================================
+
+:root,
+[data-theme="light"] {
+color-scheme: light;
+
+// Background
+--color-bg-primary: var(--color-gray-50);
+--color-bg-secondary: var(--color-white);
+--color-bg-elevated: var(--color-white);
+
+// Text
+--color-text-primary: var(--color-black);
+--color-text-secondary: var(--color-gray-600);
+--color-text-muted: var(--color-gray-500);
+--color-text-inverse: var(--color-white);
+
+// Border
+--color-border-primary: var(--color-gray-300);
+--color-border-secondary: var(--color-gray-200);
+
+// Point
+--color-point: var(--color-blue-600);
+--color-point-hover: var(--color-blue-700);
+--color-point-soft: var(--color-blue-50);
+
+// Interaction
+--color-focus: var(--color-blue-500);
+--color-selection-bg: var(--color-blue-100);
+--color-selection-text: var(--color-black);
+
+// State
+--color-overlay: rgb(0 0 0 / 45%);
+
+// Shadow
+--shadow-sm: 0 2px 8px rgb(0 0 0 / 6%);
+--shadow-md: 0 12px 32px rgb(0 0 0 / 10%);
+
+// Tech Icons
+--color-tech-css-primary: #1572b6;
+--color-tech-figma-red: #f24e1e;
+--color-tech-figma-purple: #a259ff;
+--color-tech-filezilla-primary: #bf0000;
+--color-tech-filezilla-secondary: #ffffff;
+--color-tech-git-primary: #f05032;
+--color-tech-github-primary: #181717;
+--color-tech-github-secondary: #ffffff;
+--color-tech-gsap-primary: #88ce02;
+--color-tech-html-primary: #e34f26;
+--color-tech-java-primary: #007396;
+--color-tech-javascript-primary: #f7df1e;
+--color-tech-jquery-primary: #0769ad;
+--color-tech-jquery-secondary: #ffffff;
+--color-tech-lenis-primary: #111111;
+--color-tech-mysql-primary: #4479a1;
+--color-tech-mysql-secondary: #ffffff;
+--color-tech-php-primary: #777bb4;
+--color-tech-react-primary: #61dafb;
+--color-tech-react-secondary: #ffffff;
+--color-tech-scss-primary: #cc6699;
+--color-tech-vscode-primary: #007acc;
+}
+
+// ========================================
+// Dark Theme
+// 의미 기반 색상
+// ========================================
+
+[data-theme="dark"] {
+color-scheme: dark;
+
+// Background
+--color-bg-primary: var(--color-gray-950);
+--color-bg-secondary: var(--color-gray-900);
+--color-bg-elevated: var(--color-gray-800);
+
+// Text
+--color-text-primary: var(--color-gray-50);
+--color-text-secondary: var(--color-gray-400);
+--color-text-muted: var(--color-gray-500);
+--color-text-inverse: var(--color-black);
+
+// Border
+--color-border-primary: var(--color-gray-700);
+--color-border-secondary: var(--color-gray-800);
+
+// Point
+--color-point: var(--color-blue-400);
+--color-point-hover: var(--color-blue-300);
+--color-point-soft: var(--color-blue-950);
+
+// Interaction
+--color-focus: var(--color-blue-300);
+--color-selection-bg: var(--color-blue-900);
+--color-selection-text: var(--color-white);
+
+// State
+--color-overlay: rgb(0 0 0 / 65%);
+
+// Shadow
+--shadow-sm: 0 2px 8px rgb(0 0 0 / 24%);
+--shadow-md: 0 12px 32px rgb(0 0 0 / 36%);
+
+// Tech Icons
+--color-tech-css-primary: #38a3ff;
+--color-tech-figma-red: #ff7262;
+--color-tech-figma-purple: #a259ff;
+--color-tech-filezilla-primary: #ff4d4d;
+--color-tech-filezilla-secondary: #ffffff;
+--color-tech-git-primary: #ff725c;
+--color-tech-github-primary: #f0f6fc;
+--color-tech-github-secondary: #111111;
+--color-tech-gsap-primary: #9be22d;
+--color-tech-html-primary: #ff6d3a;
+--color-tech-java-primary: #4ba3d8;
+--color-tech-javascript-primary: #f7df1e;
+--color-tech-jquery-primary: #4aa3df;
+--color-tech-jquery-secondary: #111111;
+--color-tech-lenis-primary: #ffffff;
+--color-tech-mysql-primary: #6fb1d8;
+--color-tech-mysql-secondary: #111111;
+--color-tech-php-primary: #9aa0d8;
+--color-tech-react-primary: #61dafb;
+--color-tech-react-secondary: #111111;
+--color-tech-scss-primary: #e98abf;
+--color-tech-vscode-primary: #2aa7ff;
+}
