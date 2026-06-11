@@ -1,4 +1,6 @@
 @use "sass:map";
+@use "sass:string";
+@use "./variables" as *;
 @use "./scales" as *;
 
 
@@ -28,29 +30,30 @@
 
 
 // ========================================
-// Font Weight
+// Spacing
 // ========================================
 
-@function weight($key) {
-  @return _get-scale($font-weights, $key, "font-weight");
+@function space($key) {
+  @return _get-scale($spacing, $key, "spacing");
 }
 
 
 // ========================================
-// Line Height
+// Page Fluid Value
+// compact부터 1440 디자인 폭까지 부드럽게 값 적용
 // ========================================
 
-@function leading($key) {
-  @return _get-scale($line-heights, $key, "line-height");
-}
+@function fluid-page(
+  $min-value,
+  $max-value,
+  $min-width-key: compact,
+  $max-width: $page-design-width
+) {
+  $min-width: breakpoint($min-width-key);
 
-
-// ========================================
-// Letter Spacing
-// ========================================
-
-@function tracking($key) {
-  @return _get-scale($letter-spacings, $key, "letter-spacing");
+  @return string.unquote(
+    "clamp(#{$min-value}, calc(#{$min-value} + (#{$max-value} - #{$min-value}) * ((100vw - #{$min-width}) / (#{$max-width} - #{$min-width}))), #{$max-value})"
+  );
 }
 
 
@@ -104,10 +107,6 @@
 
 /*
 .EX {
-  font-weight: weight(semibold);
-  line-height: leading(heading);
-  letter-spacing: tracking(base);
-
   border-width: stroke(thin);
   border-radius: radius(md);
 

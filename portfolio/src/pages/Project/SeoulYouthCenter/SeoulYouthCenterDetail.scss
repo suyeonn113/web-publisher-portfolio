@@ -1,7 +1,9 @@
+@use "../../../styles/foundation" as *;
+
 .seoul-youth-center__tech-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 12px;
+  gap: space(2) space(3);
   padding: 0;
   margin: 0;
   list-style: none;
@@ -9,10 +11,212 @@
   li {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: space(2);
   }
 
   svg {
     flex: 0 0 auto;
+  }
+}
+
+@include respond-up(compact) {
+  .seoul-youth-center__cover {
+    display: grid;
+    grid-template-columns:
+      minmax(fluid-page(300px, 360px), 0.82fr)
+      minmax(0, 1.18fr);
+    grid-template-rows: minmax(0, 1fr);
+    align-items: center;
+    gap: fluid-page(32px, 48px);
+    overflow: hidden;
+  }
+
+  .seoul-youth-center__cover::before {
+    position: absolute;
+    inset: 0;
+    z-index: layer(base);
+    pointer-events: none;
+    content: "";
+    background-size:
+      fluid-page(56px, 72px)
+      fluid-page(56px, 72px);
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      rgb(var(--color-black-rgb) / 65%),
+      transparent 72%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      rgb(var(--color-black-rgb) / 65%),
+      transparent 72%
+    );
+  }
+
+  .seoul-youth-center__cover-copy,
+  .seoul-youth-center__cover-visual {
+    position: relative;
+    z-index: layer(content);
+  }
+
+  .seoul-youth-center__cover-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .seoul-youth-center__eyebrow {
+    @include typography(eyebrow);
+
+    margin: 0 0 fluid-page(10px, 18px);
+    color: var(--color-point);
+    text-transform: uppercase;
+  }
+
+  .seoul-youth-center__heading {
+    p,
+    h1 {
+      margin: 0;
+    }
+
+    p {
+      @include typography(body-lg);
+
+      color: var(--color-text-secondary);
+    }
+
+    h1 {
+      @include typography(display);
+
+      margin-top: fluid-page(6px, 12px);
+      word-break: keep-all;
+    }
+  }
+
+  .seoul-youth-center__summary {
+    @include typography(body-lg);
+
+    max-width: fluid-page(440px, 520px);
+    margin: fluid-page(14px, 28px) 0 0;
+    color: var(--color-text-secondary);
+    word-break: keep-all;
+  }
+
+  .seoul-youth-center__meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: fluid-page(10px, 16px) fluid-page(14px, 20px);
+    max-width: fluid-page(480px, 560px);
+    margin: fluid-page(18px, 40px) 0 0;
+
+    div {
+      min-width: 0;
+      padding-top: fluid-page(8px, 16px);
+      border-top: stroke(thin) solid var(--color-border-primary);
+    }
+
+    dt {
+      @include typography(eyebrow);
+
+      margin-bottom: fluid-page(4px, 8px);
+      color: var(--color-text-muted);
+    }
+
+    dd {
+      @include typography(meta);
+
+      margin: 0;
+      color: var(--color-text-primary);
+    }
+  }
+
+  .seoul-youth-center__tech-list {
+    gap: fluid-page(6px, 8px);
+
+    li {
+      min-height: fluid-page(20px, 24px);
+    }
+  }
+
+  .seoul-youth-center__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: fluid-page(6px, 8px);
+    margin-top: fluid-page(18px, 40px);
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: fluid-page(32px, 42px);
+      padding: 0 fluid-page(14px, 20px);
+      border: stroke(thin) solid var(--color-border-primary);
+      border-radius: radius(full);
+      @include typography(meta);
+
+      color: var(--color-text-primary);
+      text-decoration: none;
+      background: rgb(var(--color-white-rgb) / 72%);
+    }
+  }
+
+  .seoul-youth-center__cover-visual {
+    align-self: stretch;
+    min-height: 0;
+    margin: 0;
+  }
+
+  .seoul-youth-center__desktop-screen,
+  .seoul-youth-center__mobile-screen {
+    position: absolute;
+    overflow: hidden;
+    background: var(--color-bg-elevated);
+    border: stroke(thin) solid rgb(var(--color-black-rgb) / 12%);
+    box-shadow: var(--shadow-md);
+    animation: seoul-youth-center-screen-in duration(emphasis) easing(emphasis)
+      both;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .seoul-youth-center__desktop-screen {
+    top: 8%;
+    right: calc(#{fluid-page(6px, 8px)} * -1);
+    width: min(100%, fluid-page(500px, 740px));
+    aspect-ratio: 16 / 10;
+    border-radius: radius(lg);
+  }
+
+  .seoul-youth-center__mobile-screen {
+    right: 6%;
+    bottom: 8%;
+    width: min(25vw, fluid-page(148px, 210px));
+    aspect-ratio: 9 / 19.5;
+    border: fluid-page(5px, 7px) solid var(--color-gray-900);
+    border-radius: fluid-page(22px, 28px);
+    animation-delay: 120ms;
+  }
+}
+
+@keyframes seoul-youth-center-screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(fluid-page(12px, 18px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seoul-youth-center__desktop-screen,
+  .seoul-youth-center__mobile-screen {
+    animation: none;
   }
 }

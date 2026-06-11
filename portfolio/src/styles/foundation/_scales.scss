@@ -35,6 +35,95 @@ $letter-spacings: (
 
 
 // ========================================
+// Typography
+// 반응형 타이포그래피 시스템
+// ========================================
+
+$typography: (
+  display: (
+    sizes: (
+      base: 2.25rem,
+      tablet: 2.5rem,
+      compact: 2.5rem,
+      desktop: 3.125rem,
+      wide: 3.75rem,
+    ),
+    weight: bold,
+    leading: tight,
+    tracking: tight,
+  ),
+
+  heading: (
+    sizes: (
+      base: 1.75rem,
+      tablet: 2rem,
+      compact: 2.25rem,
+      wide: 3rem,
+    ),
+    weight: bold,
+    leading: heading,
+    tracking: heading,
+  ),
+
+  title: (
+    sizes: (
+      base: 1.25rem,
+      tablet: 1.5rem,
+      compact: 1.625rem,
+    ),
+    weight: semibold,
+    leading: heading,
+    tracking: heading,
+  ),
+
+  body-lg: (
+    sizes: (
+      base: 1rem,
+      tablet: 1.125rem,
+      compact: 1rem,
+      wide: 1.125rem,
+    ),
+    weight: regular,
+    leading: base,
+    tracking: base,
+  ),
+
+  body: (
+    sizes: (
+      base: 0.875rem,
+      tablet: 1rem,
+    ),
+    weight: regular,
+    leading: base,
+    tracking: base,
+  ),
+
+  meta: (
+    sizes: (
+      base: 0.75rem,
+      tablet: 0.875rem,
+      compact: 0.75rem,
+      wide: 0.875rem,
+    ),
+    weight: medium,
+    leading: heading,
+    tracking: base,
+  ),
+
+  eyebrow: (
+    sizes: (
+      base: 0.75rem,
+      compact: 0.6875rem,
+      wide: 0.8125rem,
+    ),
+    weight: semibold,
+    leading: tight,
+    tracking: wide,
+  ),
+);
+
+
+// ========================================
 // Border Width
 // ========================================
 
@@ -116,18 +205,46 @@ $breakpoints: (
 
 
 // ========================================
+// Spacing
+// 4px 기준 스케일
+// ========================================
+
+$spacing: (
+  0: 0,
+  1: 4px,
+  2: 8px,
+  3: 12px,
+  4: 16px,
+  5: 20px,
+  6: 24px,
+  7: 28px,
+  8: 32px,
+  10: 40px,
+  12: 48px,
+  14: 56px,
+  16: 64px,
+  18: 72px,
+  20: 80px,
+  22: 88px,
+  24: 96px,
+  26: 104px,
+);
+
+
+// ========================================
 // Frame Gutters
 // 브라우저와 페이지 프레임 사이 여백
 // ========================================
 
 $frame-gutters: (
-  base: 12px,
-  mobile: 16px,
-  tablet: 24px,
-  compact: 24px,
-  desktop: 32px,
-  wide: 40px,
+  base: 3,
+  mobile: 4,
+  tablet: 6,
+  compact: 6,
+  desktop: 8,
+  wide: 10,
 );
+
 
 // ========================================
 // Page Padding
@@ -135,12 +252,12 @@ $frame-gutters: (
 // ========================================
 
 $page-paddings: (
-  base: 20px,
-  mobile: 24px,
-  tablet: 32px,
-  compact: 40px,
-  desktop: 56px,
-  wide: 64px,
+  base: 5,
+  mobile: 6,
+  tablet: 8,
+  compact: 6,
+  desktop: 10,
+  wide: 12,
 );
 
 
@@ -150,12 +267,12 @@ $page-paddings: (
 // ========================================
 
 $section-spacings: (
-  base: 40px,
-  mobile: 48px,
-  tablet: 64px,
-  compact: 72px,
-  desktop: 88px,
-  wide: 104px,
+  base: 10,
+  mobile: 12,
+  tablet: 16,
+  compact: 18,
+  desktop: 22,
+  wide: 26,
 );
 
 
@@ -165,10 +282,10 @@ $section-spacings: (
 // ========================================
 
 $content-gaps: (
-  base: 12px,
-  mobile: 16px,
-  tablet: 24px,
-  compact: 28px,
-  desktop: 32px,
-  wide: 40px,
+  base: 3,
+  mobile: 4,
+  tablet: 6,
+  compact: 7,
+  desktop: 8,
+  wide: 10,
 );

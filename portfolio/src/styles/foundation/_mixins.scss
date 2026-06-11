@@ -6,21 +6,88 @@
 
 // ========================================
 // Responsive
+// 브레이크포인트 방향별 미디어쿼리
 // ========================================
 
-@mixin respond($key) {
+@mixin respond-up($key) {
   @media (min-width: breakpoint($key)) {
     @content;
   }
 }
+
+@mixin respond-down($key) {
+  @media (max-width: calc(#{breakpoint($key)} - 0.02px)) {
+    @content;
+  }
+}
+
+@mixin respond-between($min-key, $max-key) {
+  @media
+    (min-width: breakpoint($min-key)) and
+    (max-width: calc(#{breakpoint($max-key)} - 0.02px)) {
+    @content;
+  }
+}
+
+
+// ========================================
+// Responsive Value
+// min-width 기준 반응형 값 적용
+// ========================================
 
 @mixin responsive-value($property, $values) {
   #{$property}: map.get($values, base);
 
   @each $key, $value in $values {
     @if $key != base {
-      @include respond($key) {
+      @include respond-up($key) {
         #{$property}: $value;
+      }
+    }
+  }
+}
+
+
+// ========================================
+// Typography
+// 반응형 타이포그래피 스타일 적용
+// ========================================
+
+@mixin typography($style) {
+  $config: map.get($typography, $style);
+
+  @if $config == null {
+    @error "타이포그래피 스타일 `#{$style}`이 없습니다.";
+  }
+
+  $sizes: map.get($config, sizes);
+  $weight: map.get($font-weights, map.get($config, weight));
+  $leading: map.get($line-heights, map.get($config, leading));
+  $tracking: map.get($letter-spacings, map.get($config, tracking));
+  $compact-size: map.get($sizes, compact);
+  $wide-size: map.get($sizes, wide);
+
+  font-size: map.get($sizes, base);
+  font-weight: $weight;
+  line-height: $leading;
+  letter-spacing: $tracking;
+
+  @each $breakpoint, $size in $sizes {
+    @if $breakpoint != base {
+      @if $compact-size != null and $wide-size != null {
+        @if $breakpoint == compact {
+          @include respond-up(compact) {
+            font-size: fluid-page($compact-size, $wide-size);
+          }
+        } @else if $breakpoint != desktop and $breakpoint != wide {
+          @include respond-up($breakpoint) {
+            font-size: $size;
+          }
+        }
+      } @else {
+        @include respond-up($breakpoint) {
+          font-size: $size;
+        }
       }
     }
   }
@@ -33,8 +100,8 @@
 // ========================================
 
 @mixin ppt-page {
-  @include responsive-value(--frame-gutter, $frame-gutters);
-  @include responsive-value(padding, $page-paddings);
+  @include responsive-space(--frame-gutter, $frame-gutters);
+  @include responsive-space(padding, $page-paddings);
 
   width: min(
     calc(100% - var(--frame-gutter) - var(--frame-gutter)),
@@ -44,9 +111,33 @@
   min-height: 100svh;
   margin-inline: auto;
 
-  @include respond(compact) {
+  @include respond-up(compact) {
+    width: min(100%, $page-max-width);
     min-height: auto;
     aspect-ratio: $page-aspect-ratio;
   }
+
+  @include respond-up(wide) {
+    width: $page-max-width;
+  }
 }
 
+
+// ========================================
+// Responsive Spacing
+// 반응형 간격 스케일 적용
+// ========================================
+
+@mixin responsive-space($property, $values) {
+  $base-key: map.get($values, base);
+
+  #{$property}: space($base-key);
+
+  @each $breakpoint, $space-key in $values {
+    @if $breakpoint != base {
+      @include respond-up($breakpoint) {
+        #{$property}: space($space-key);
+      }
+    }
+  }
+}

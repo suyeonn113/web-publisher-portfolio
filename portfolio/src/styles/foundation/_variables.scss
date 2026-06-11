@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // ========================================
 // Font
 // ========================================
@@ -22,8 +24,9 @@ $font-family-mono:
 // ========================================
 
 // PPT형 페이지 프레임
-$page-max-width: 1440px;
-$page-aspect-ratio: 16 / 9;
+$page-design-width: 1440px;
+$page-max-width: $page-design-width;
+$page-aspect-ratio: math.div(16, 9);
 
 // 프레임 내부 실제 콘텐츠 영역
 $content-max-width: 1280px;
