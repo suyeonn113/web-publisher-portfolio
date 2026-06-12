@@ -64,11 +64,6 @@
     word-break: keep-all;
   }
 
-  :where(.seoul-youth-center__contents h2) {
-    @include typography(heading-sm);
-    word-break: keep-all;
-  }
-
   :where(.syc-page [class$="-number"]) {
     @include typography(meta);
 

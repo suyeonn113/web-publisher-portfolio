@@ -10,27 +10,97 @@ const ProjectSectionNav = ({
   project,
   sections = [],
 }) => {
+  const navigationGroups = useMemo(
+    () =>
+      sections
+        .map((section) => ({
+          ...section,
+          items: section.items.filter(
+            (item) => item.showInNav !== false,
+          ),
+        }))
+        .filter((section) => section.items.length > 0),
+    [sections],
+  );
+
   const navigationItems = useMemo(
     () =>
-      sections.flatMap((section) =>
-        section.items.filter(
-          (item) => item.showInNav !== false,
-        ),
+      navigationGroups.flatMap((section) =>
+        section.items.map((item) => ({
+          ...item,
+          groupNumber: section.number,
+        })),
       ),
-    [sections],
+    [navigationGroups],
   );
 
   const [activeSectionId, setActiveSectionId] = useState(
     navigationItems[0]?.id ?? "",
   );
 
+  const [
+    expandedGroupNumber,
+    setExpandedGroupNumber,
+  ] = useState(
+    navigationGroups[0]?.number ?? "",
+  );
+
   const [isOpen, setIsOpen] = useState(false);
+
   const [hasReachedStart, setHasReachedStart] =
     useState(false);
 
   const activeItem = navigationItems.find(
     (item) => item.id === activeSectionId,
   );
+
+  const activeGroupNumber =
+    activeItem?.groupNumber ??
+    navigationGroups[0]?.number ??
+    "";
+
+  /*
+   * 스크롤로 활성 섹션이 바뀌면
+   * 해당 섹션이 포함된 그룹을 자동으로 펼친다.
+   */
+  useEffect(() => {
+    if (!activeGroupNumber) {
+      return;
+    }
+
+    setExpandedGroupNumber(activeGroupNumber);
+  }, [activeGroupNumber]);
+
+  /*
+   * sections 데이터가 변경됐을 때
+   * 유효하지 않은 활성 섹션과 그룹을 초기화한다.
+   */
+  useEffect(() => {
+    if (!navigationItems.length) {
+      return;
+    }
+
+    setActiveSectionId((currentSectionId) => {
+      const hasCurrentSection = navigationItems.some(
+        (item) => item.id === currentSectionId,
+      );
+
+      return hasCurrentSection
+        ? currentSectionId
+        : navigationItems[0].id;
+    });
+
+    setExpandedGroupNumber((currentGroupNumber) => {
+      const hasCurrentGroup = navigationGroups.some(
+        (section) =>
+          section.number === currentGroupNumber,
+      );
+
+      return hasCurrentGroup
+        ? currentGroupNumber
+        : navigationGroups[0].number;
+    });
+  }, [navigationGroups, navigationItems]);
 
   useEffect(() => {
     const sectionElements = navigationItems
@@ -57,6 +127,7 @@ const ProjectSectionNav = ({
 
     const updateActiveSection = () => {
       const firstSectionElement = sectionElements[0];
+
       const firstSectionTop =
         firstSectionElement.getBoundingClientRect().top +
         window.scrollY;
@@ -66,21 +137,23 @@ const ProjectSectionNav = ({
 
       setHasReachedStart(nextHasReachedStart);
 
-      if (!nextHasReachedStart) {
-        setActiveSectionId(sectionElements[0]?.id ?? "");
+      if (!nextHasReachedStart || window.scrollY <= 1) {
+        setActiveSectionId(
+          sectionElements[0]?.id ?? "",
+        );
+
         return;
       }
 
-      if (window.scrollY <= 1) {
-        setActiveSectionId(sectionElements[0]?.id ?? "");
-        return;
-      }
-
-      const activationLine = window.innerHeight * 0.25;
+      const activationLine =
+        window.innerHeight * 0.25;
 
       const nextActiveSection =
         sectionElements.reduce(
-          (currentSectionId, sectionElement) => {
+          (
+            currentSectionId,
+            sectionElement,
+          ) => {
             if (
               sectionElement.getBoundingClientRect().top <=
               activationLine
@@ -103,19 +176,23 @@ const ProjectSectionNav = ({
         return;
       }
 
-      animationFrameId = window.requestAnimationFrame(
-        () => {
+      animationFrameId =
+        window.requestAnimationFrame(() => {
           updateActiveSection();
           animationFrameId = null;
-        },
-      );
+        });
     };
 
     updateActiveSection();
+
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
-    window.addEventListener("resize", handleScroll);
+
+    window.addEventListener(
+      "resize",
+      handleScroll,
+    );
 
     const handleHashChange = () => {
       const nextSectionId = decodeURIComponent(
@@ -137,17 +214,26 @@ const ProjectSectionNav = ({
     );
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener(
+        "scroll",
+        handleScroll,
+      );
 
-      if (animationFrameId) {
-        window.cancelAnimationFrame(animationFrameId);
-      }
+      window.removeEventListener(
+        "resize",
+        handleScroll,
+      );
 
       window.removeEventListener(
         "hashchange",
         handleHashChange,
       );
+
+      if (animationFrameId) {
+        window.cancelAnimationFrame(
+          animationFrameId,
+        );
+      }
     };
   }, [navigationItems]);
 
@@ -162,7 +248,10 @@ const ProjectSectionNav = ({
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener(
+      "keydown",
+      handleKeyDown,
+    );
 
     return () => {
       window.removeEventListener(
@@ -172,7 +261,20 @@ const ProjectSectionNav = ({
     };
   }, [isOpen]);
 
-  const handleSectionClick = (event, sectionId) => {
+  const handleGroupToggle = (groupNumber) => {
+    setExpandedGroupNumber(
+      (currentGroupNumber) =>
+        currentGroupNumber === groupNumber
+          ? ""
+          : groupNumber,
+    );
+  };
+
+  const handleSectionClick = (
+    event,
+    sectionId,
+    groupNumber,
+  ) => {
     event.preventDefault();
 
     const targetElement =
@@ -182,6 +284,7 @@ const ProjectSectionNav = ({
       return;
     }
 
+    setExpandedGroupNumber(groupNumber);
     setIsOpen(false);
 
     targetElement.scrollIntoView({
@@ -197,8 +300,13 @@ const ProjectSectionNav = ({
   };
 
   const handleScrollToTop = () => {
+    const firstItem = navigationItems[0];
+
     setIsOpen(false);
-    setActiveSectionId(navigationItems[0]?.id ?? "");
+    setActiveSectionId(firstItem?.id ?? "");
+    setExpandedGroupNumber(
+      firstItem?.groupNumber ?? "",
+    );
     setHasReachedStart(false);
 
     window.scrollTo({
@@ -222,15 +330,24 @@ const ProjectSectionNav = ({
       className={[
         "project-section-nav",
         isOpen ? "is-open" : "",
-        hasReachedStart ? "" : "is-before-start",
+        hasReachedStart
+          ? ""
+          : "is-before-start",
       ]
         .filter(Boolean)
         .join(" ")}
-      aria-label={`${project?.title ?? "프로젝트"} 목차`}
+      aria-label={`${
+        project?.title ?? "프로젝트"
+      } 목차`}
     >
       <button
         type="button"
-        className="project-section-nav__toggle"
+        className={[
+          "project-section-nav__toggle",
+          hasReachedStart ? "motion-fade-up" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
         aria-expanded={isOpen}
         aria-controls="project-section-nav-panel"
         onClick={() => {
@@ -254,7 +371,12 @@ const ProjectSectionNav = ({
 
       <nav
         id="project-section-nav-panel"
-        className="project-section-nav__panel"
+        className={[
+          "project-section-nav__panel",
+          hasReachedStart ? "motion-fade-up" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
         aria-label="프로젝트 상세 목차"
       >
         <header className="project-section-nav__header">
@@ -274,23 +396,47 @@ const ProjectSectionNav = ({
         </header>
 
         <ol className="project-section-nav__groups">
-          {sections.map((section) => {
-            const visibleItems =
-              section.items.filter(
-                (item) =>
-                  item.showInNav !== false,
-              );
+          {navigationGroups.map((section) => {
+            const isExpanded =
+              section.number ===
+              expandedGroupNumber;
 
-            if (!visibleItems.length) {
-              return null;
-            }
+            const isActiveGroup =
+              section.number ===
+              activeGroupNumber;
+
+            const itemsId = [
+              "project-section-nav-group",
+              section.number,
+              "items",
+            ].join("-");
 
             return (
               <li
-                className="project-section-nav__group"
+                className={[
+                  "project-section-nav__group",
+                  isExpanded
+                    ? "is-expanded"
+                    : "",
+                  isActiveGroup
+                    ? "is-active"
+                    : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 key={section.number}
               >
-                <div className="project-section-nav__group-heading">
+                <button
+                  type="button"
+                  className="project-section-nav__group-heading"
+                  aria-expanded={isExpanded}
+                  aria-controls={itemsId}
+                  onClick={() => {
+                    handleGroupToggle(
+                      section.number,
+                    );
+                  }}
+                >
                   <span className="project-section-nav__group-number">
                     {section.number}
                   </span>
@@ -298,10 +444,21 @@ const ProjectSectionNav = ({
                   <span className="project-section-nav__group-title">
                     {section.englishTitle}
                   </span>
-                </div>
 
-                <ol className="project-section-nav__items">
-                  {visibleItems.map((item) => {
+                  <span
+                    className="project-section-nav__group-indicator"
+                    aria-hidden="true"
+                  >
+                    {isExpanded ? "−" : "+"}
+                  </span>
+                </button>
+
+                <ol
+                  id={itemsId}
+                  className="project-section-nav__items"
+                  hidden={!isExpanded}
+                >
+                  {section.items.map((item) => {
                     const isActive =
                       item.id === activeSectionId;
 
@@ -329,6 +486,7 @@ const ProjectSectionNav = ({
                             handleSectionClick(
                               event,
                               item.id,
+                              section.number,
                             );
                           }}
                         >
