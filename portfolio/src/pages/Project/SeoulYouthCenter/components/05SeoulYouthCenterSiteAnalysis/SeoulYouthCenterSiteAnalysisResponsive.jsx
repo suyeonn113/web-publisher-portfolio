@@ -25,7 +25,7 @@ const SeoulYouthCenterSiteAnalysisResponsive = () => {
   return (
     <div className="ppt-page-wrap">
       <section
-        className="ppt-page seoul-youth-center__site-analysis-responsive"
+        className="ppt-page project-section-nav-safe-area seoul-youth-center__site-analysis-responsive"
         aria-labelledby="seoul-youth-center-site-analysis-responsive-title"
       >
         <header className="seoul-youth-center__site-analysis-responsive-header">
@@ -34,7 +34,7 @@ const SeoulYouthCenterSiteAnalysisResponsive = () => {
           </p>
 
           <h2 id="seoul-youth-center-site-analysis-responsive-title">
-            Responsive Gap
+            반응형 격차 분석
           </h2>
 
           <p className="seoul-youth-center__site-analysis-responsive-summary">

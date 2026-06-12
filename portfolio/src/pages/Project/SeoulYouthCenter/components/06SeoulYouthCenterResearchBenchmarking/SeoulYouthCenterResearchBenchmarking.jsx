@@ -46,7 +46,7 @@ const SeoulYouthCenterResearchBenchmarking = () => {
   return (
     <div className="ppt-page-wrap">
       <section
-        className="ppt-page seoul-youth-center__research-benchmarking"
+        className="ppt-page project-section-nav-safe-area seoul-youth-center__research-benchmarking"
         aria-labelledby="seoul-youth-center-research-benchmarking-title"
       >
         <header className="seoul-youth-center__research-benchmarking-header">
@@ -55,7 +55,7 @@ const SeoulYouthCenterResearchBenchmarking = () => {
           </p>
 
           <h2 id="seoul-youth-center-research-benchmarking-title">
-            Research &amp; Benchmarking
+            자료 조사 및 벤치마킹
           </h2>
 
           <p className="seoul-youth-center__research-benchmarking-summary">

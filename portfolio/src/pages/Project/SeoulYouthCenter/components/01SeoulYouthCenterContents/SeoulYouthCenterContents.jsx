@@ -15,7 +15,7 @@ const SeoulYouthCenterContents = () => {
           </p>
 
           <h2 id="seoul-youth-center-contents-title">
-            紐⑹감
+            목차
           </h2>
         </header>
 

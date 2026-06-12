@@ -31,7 +31,7 @@ const SeoulYouthCenterImprovementStrategy = () => {
   return (
     <div className="ppt-page-wrap">
       <section
-        className="ppt-page seoul-youth-center__improvement-strategy"
+        className="ppt-page project-section-nav-safe-area seoul-youth-center__improvement-strategy"
         aria-labelledby="seoul-youth-center-improvement-strategy-title"
       >
         <header className="seoul-youth-center__improvement-strategy-header">
@@ -40,7 +40,7 @@ const SeoulYouthCenterImprovementStrategy = () => {
           </p>
 
           <h2 id="seoul-youth-center-improvement-strategy-title">
-            Improvement Strategy
+            개선 전략
           </h2>
 
           <p className="seoul-youth-center__improvement-strategy-summary">

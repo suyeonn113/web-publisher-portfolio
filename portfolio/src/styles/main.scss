@@ -17,3 +17,16 @@
   color: var(--color-text-primary);
   background: transparent;
 }
+
+.project-section-nav-safe-area {
+  @include respond-up(compact) {
+    padding-left: var(
+      --project-section-nav-reserved-space,
+      calc(
+        var(--project-section-nav-offset, #{space(6)}) +
+        var(--project-section-nav-width, 220px) +
+        var(--project-section-nav-reserved-gap, #{space(4)})
+      )
+    );
+  }
+}
