@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
+import { NotFoundPage } from "./pages/NotFound";
 import SeoulYouthCenterDetail from "./pages/Project/SeoulYouthCenter/SeoulYouthCenterDetail";
+import ProjectPreviewPage from "./pages/ProjectPreview/ProjectPreviewPage";
 
 const App = () => {
   return (
@@ -15,6 +17,13 @@ const App = () => {
         path="/projects/seoul-youth-center"
         element={<SeoulYouthCenterDetail />}
       />
+
+      <Route
+        path="/projects/:slug/preview"
+        element={<ProjectPreviewPage />}
+      />
+
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

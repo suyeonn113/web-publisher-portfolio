@@ -5,7 +5,9 @@ mysqli_report(MYSQLI_REPORT_OFF);
 $mysqli = mysqli_connect('localhost', 'suyeonn', 'Hh0468139@', 'suyeonn');
 
 if (!$mysqli) {
-    die('DB 연결에 실패했습니다. 서버 DB 정보와 테이블 import 여부를 확인해주세요.');
+    error_log('Seoul Youth Center DB connection failed: ' . mysqli_connect_error());
+    header('Location: ' . BASE_URL . '/error.php');
+    exit;
 }
 
 mysqli_select_db($mysqli, 'suyeonn');
