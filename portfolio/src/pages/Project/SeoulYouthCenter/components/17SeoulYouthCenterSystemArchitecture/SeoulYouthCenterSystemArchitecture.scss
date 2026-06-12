@@ -16,6 +16,11 @@
   display: grid;
 }
 
+.seoul-youth-center__system-architecture-header {
+  --syc-section-number: "17.";
+  --syc-section-label: "System & Database Architecture";
+}
+
 .seoul-youth-center__system-architecture-flow {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }

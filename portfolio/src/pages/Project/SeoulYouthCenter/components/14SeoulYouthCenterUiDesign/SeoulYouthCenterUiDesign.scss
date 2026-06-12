@@ -1,4 +1,6 @@
 
+@use "../../../../../styles/foundation" as *;
+
 .seoul-youth-center__ui-design {
   display: grid;
   grid-template-rows: auto 1fr auto auto;
@@ -14,8 +16,64 @@
 }
 
 .seoul-youth-center__ui-design-header {
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: start;
+  --syc-section-number: "14.";
+  --syc-section-label: "UI Design";
+
+  position: relative;
+  display: block;
+
+  > div {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.28fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: space(16);
+    row-gap: space(2);
+
+    &::before {
+      @include typography(display);
+
+      grid-column: 1;
+      grid-row: 2;
+      color: var(--color-text-primary);
+      content: var(--syc-section-number);
+    }
+
+    &::after {
+      @include typography(body-lg);
+
+      grid-column: 2;
+      grid-row: 1;
+      align-self: end;
+      color: var(--color-text-primary);
+      font-weight: 600;
+      content: var(--syc-section-label);
+    }
+  }
+
+  .seoul-youth-center__ui-design-eyebrow {
+    display: none;
+  }
+
+  h2 {
+    @include typography(display);
+
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 10em;
+    align-self: start;
+  }
+
+  .seoul-youth-center__ui-design-summary {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: space(4);
+  }
+
+  .seoul-youth-center__ui-design-figma-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
 .seoul-youth-center__ui-design-layout {
@@ -50,7 +108,19 @@
 }
 
 @media (max-width: 1100px) {
-  .seoul-youth-center__ui-design-header,
+  .seoul-youth-center__ui-design-header {
+    > div {
+      grid-template-columns: minmax(96px, 0.22fr) minmax(0, 1fr);
+      column-gap: space(5);
+    }
+
+    .seoul-youth-center__ui-design-figma-link {
+      position: static;
+      justify-self: start;
+      margin-top: space(4);
+    }
+  }
+
   .seoul-youth-center__ui-design-layout,
   .seoul-youth-center__ui-design-device-set,
   .seoul-youth-center__ui-design-details {

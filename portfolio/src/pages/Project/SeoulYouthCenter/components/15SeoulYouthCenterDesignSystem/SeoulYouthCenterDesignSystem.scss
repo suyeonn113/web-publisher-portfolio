@@ -11,6 +11,11 @@
   display: grid;
 }
 
+.seoul-youth-center__design-system-header {
+  --syc-section-number: "15.";
+  --syc-section-label: "Design System & Style Guide";
+}
+
 .seoul-youth-center__design-system-list {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: center;

@@ -11,6 +11,11 @@
   display: grid;
 }
 
+.seoul-youth-center__project-schedule-header {
+  --syc-section-number: "19.";
+  --syc-section-label: "Project Schedule";
+}
+
 .seoul-youth-center__project-schedule-timeline {
   grid-template-columns: repeat(6, minmax(0, 1fr));
   align-items: center;

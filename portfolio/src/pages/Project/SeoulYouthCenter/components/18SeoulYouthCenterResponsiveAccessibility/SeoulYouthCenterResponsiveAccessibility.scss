@@ -13,6 +13,11 @@
   display: grid;
 }
 
+.seoul-youth-center__responsive-accessibility-header {
+  --syc-section-number: "18.";
+  --syc-section-label: "Responsive & Accessibility Implementation";
+}
+
 .seoul-youth-center__responsive-accessibility-layout {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);

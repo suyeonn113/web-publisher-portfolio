@@ -48,7 +48,6 @@
   margin: 0 0 22px;
   color: rgb(var(--color-white-rgb) / 82%);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 .seoul-youth-center__title-group {
@@ -61,7 +60,7 @@
   }
 
   > p:first-child {
-    @include typography(body-lg);
+    @include typography(title);
 
     color: rgb(var(--color-white-rgb) / 82%);
   }
@@ -71,12 +70,13 @@
 
     max-width: 940px;
     color: var(--color-white);
+    letter-spacing: 0;
     word-break: keep-all;
   }
 }
 
 .seoul-youth-center__summary {
-  @include typography(body-lg);
+  @include typography(body);
 
   max-width: 680px;
   color: rgb(var(--color-white-rgb) / 84%);

@@ -11,6 +11,11 @@
   display: grid;
 }
 
+.seoul-youth-center__future-improvements-header {
+  --syc-section-number: "21.";
+  --syc-section-label: "Future Improvements";
+}
+
 .seoul-youth-center__future-improvements-list {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: center;

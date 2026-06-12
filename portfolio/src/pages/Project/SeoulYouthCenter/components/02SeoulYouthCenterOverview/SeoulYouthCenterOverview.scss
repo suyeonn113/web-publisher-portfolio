@@ -2,12 +2,13 @@
 
 .seoul-youth-center__overview {
   grid-template-rows: auto minmax(0, 1fr);
-  row-gap: space(4);
+  row-gap: space(10);
   align-content: stretch;
 }
 
 .seoul-youth-center__overview-header {
-  max-width: 980px;
+  --syc-section-number: "02.";
+  --syc-section-label: "Project Overview";
 }
 
 .seoul-youth-center__overview-body {
@@ -30,9 +31,8 @@
   align-content: start;
   gap: space(3);
   min-height: 156px;
-  padding: space(5);
-  border: stroke(thin) solid var(--syc-rule-color);
-  background: var(--syc-soft-surface);
+  padding-block: space(4);
+  border-top: stroke(thick) solid var(--color-text-primary);
 
   dt {
     @include typography(meta);
@@ -45,6 +45,7 @@
     @include typography(body-lg);
 
     color: var(--color-text-primary);
+    font-weight: 500;
     word-break: keep-all;
   }
 }
@@ -84,10 +85,6 @@
     grid-template-rows: auto auto;
     row-gap: var(--syc-content-gap);
     align-content: start;
-  }
-
-  .seoul-youth-center__overview-header {
-    max-width: none;
   }
 
   .seoul-youth-center__overview-body {

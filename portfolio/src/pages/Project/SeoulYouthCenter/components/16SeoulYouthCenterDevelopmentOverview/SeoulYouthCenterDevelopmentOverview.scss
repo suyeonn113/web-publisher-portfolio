@@ -17,6 +17,11 @@
   display: grid;
 }
 
+.seoul-youth-center__development-overview-header {
+  --syc-section-number: "16.";
+  --syc-section-label: "Development Overview";
+}
+
 .seoul-youth-center__development-overview-layout {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);

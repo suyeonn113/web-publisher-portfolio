@@ -13,6 +13,11 @@
   display: grid;
 }
 
+.seoul-youth-center__results-impact-header {
+  --syc-section-number: "20.";
+  --syc-section-label: "Results & Expected Impact";
+}
+
 .seoul-youth-center__results-impact-comparison {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

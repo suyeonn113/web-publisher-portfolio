@@ -7,9 +7,8 @@
 }
 
 .seoul-youth-center__site-analysis-responsive-header {
-  display: grid;
-  max-width: 980px;
-  row-gap: var(--syc-line-gap);
+  --syc-section-number: "05.";
+  --syc-section-label: "Existing Site Analysis";
 }
 
 .seoul-youth-center__site-analysis-responsive-layout {
@@ -78,6 +77,8 @@
 
   h3 {
     @include typography(body-lg);
+
+    font-weight: 600;
   }
 
   p {
@@ -93,7 +94,6 @@
   gap: space(6);
   align-items: start;
   padding-top: space(4);
-  border-top: stroke(medium) solid var(--color-point);
 
   p {
     @include typography(meta);
@@ -107,6 +107,7 @@
     @include typography(body-lg);
 
     max-width: 980px;
+    font-weight: 600;
     word-break: keep-all;
   }
 }
