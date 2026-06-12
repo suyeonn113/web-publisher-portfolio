@@ -61,12 +61,17 @@ export const projects = [
     ],
 
     tech: [
+      "vscode",
       "figma",
       "html",
       "scss",
       "javascript",
       "php",
       "mysql",
+      "git",
+      "github",
+      "filezilla",
+      "dothome",
     ],
 
     tags: [

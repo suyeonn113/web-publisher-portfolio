@@ -53,7 +53,7 @@ const SeoulYouthCenterDetail = () => {
       <SeoulYouthCenterWireframes />
       <SeoulYouthCenterUiDesign />
       <SeoulYouthCenterDesignSystem />
-      <SeoulYouthCenterDevelopmentOverview />
+      <SeoulYouthCenterDevelopmentOverview project={project} />
       <SeoulYouthCenterSystemArchitecture />
       <SeoulYouthCenterResponsiveAccessibility />
       <SeoulYouthCenterProjectSchedule />

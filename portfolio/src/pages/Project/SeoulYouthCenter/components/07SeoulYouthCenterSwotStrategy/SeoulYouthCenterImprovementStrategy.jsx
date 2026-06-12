@@ -65,11 +65,16 @@ const SeoulYouthCenterImprovementStrategy = () => {
             )}
           </ol>
 
-          {/* 도식 가이드: 정보 구조 → 반응형 UX → 프로그램 탐색 → 신청 흐름으로 이어지는 간단한 전략 플로우 다이어그램 배치 */}
           <figure
             className="seoul-youth-center__improvement-strategy-diagram"
             aria-label="개선 전략 흐름 도식 영역"
-          />
+          >
+            {/* 이미지 가이드: 정보 구조 → 반응형 UX → 프로그램 탐색 → 신청 흐름으로 이어지는 개선 전략 플로우 다이어그램. 코드 도식으로 대체 가능하지만 이미지로 넣을 경우 정사각형 또는 4:3 비율 권장. 파일명은 improvement-strategy-flow.png로 저장 */}
+            <img
+              src="/images/projects/seoul-youth-center/improvement-strategy-flow.png"
+              alt="정보 구조, 반응형 UX, 프로그램 탐색, 신청 흐름으로 이어지는 개선 전략 도식"
+            />
+          </figure>
         </div>
 
         <footer className="seoul-youth-center__improvement-strategy-direction">

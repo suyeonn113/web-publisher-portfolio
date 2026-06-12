@@ -1,1 +1,43 @@
 
+.seoul-youth-center__system-architecture {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.seoul-youth-center__system-architecture-header,
+.seoul-youth-center__system-architecture-flow,
+.seoul-youth-center__system-architecture-flow li,
+.seoul-youth-center__system-architecture-data,
+.seoul-youth-center__system-architecture-section-heading,
+.seoul-youth-center__system-architecture-data ul,
+.seoul-youth-center__system-architecture-data li,
+.seoul-youth-center__system-architecture-erd,
+.seoul-youth-center__system-architecture-insight {
+  display: grid;
+}
+
+.seoul-youth-center__system-architecture-flow {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.seoul-youth-center__system-architecture-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.seoul-youth-center__system-architecture-data ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.seoul-youth-center__system-architecture-erd img {
+  display: block;
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .seoul-youth-center__system-architecture-flow,
+  .seoul-youth-center__system-architecture-layout,
+  .seoul-youth-center__system-architecture-data ul {
+    grid-template-columns: 1fr;
+  }
+}

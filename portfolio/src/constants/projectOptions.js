@@ -50,6 +50,9 @@ export const techMap = {
     label: "CSS",
     Icon: CssIcon,
   },
+  dothome: {
+    label: "Dothome",
+  },
   figma: {
     label: "Figma",
     Icon: FigmaIcon,

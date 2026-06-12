@@ -1,5 +1,8 @@
 import "./SeoulYouthCenterWireframes.scss";
 
+const wireframeFigmaUrl =
+  "https://www.figma.com/design/iipzgdotDJzzW46sqkONIq/Responsive-Website-Renewal-Project---%EC%84%9C%EC%9A%B8%EC%8B%9C%EB%A6%BD%EC%B2%AD%EC%86%8C%EB%85%84%EC%84%BC%ED%84%B0-?node-id=2-4&m=dev&t=o5twbfDtI8g3X7QH-1";
+
 const wireframeHighlights = [
   {
     title: "Main Structure",
@@ -67,21 +70,32 @@ const SeoulYouthCenterWireframes = () => {
         aria-labelledby="seoul-youth-center-wireframes-title"
       >
         <header className="seoul-youth-center__wireframes-header">
-          <p className="seoul-youth-center__wireframes-eyebrow">
-            13. Wireframes
-          </p>
+          <div>
+            <p className="seoul-youth-center__wireframes-eyebrow">
+              13. Wireframes
+            </p>
 
-          <h2 id="seoul-youth-center-wireframes-title">
-            와이어프레임
-          </h2>
+            <h2 id="seoul-youth-center-wireframes-title">
+              와이어프레임
+            </h2>
 
-          <p className="seoul-youth-center__wireframes-summary">
-            정보 구조와 사용자 흐름을 바탕으로, 메인 화면과
-            프로그램 탐색·신청 흐름을 중심으로 PC·태블릿·모바일
-            와이어프레임을 설계했습니다. 이 단계에서는 시각 디자인보다
-            콘텐츠 우선순위, 신청 진입점, 기기별 정보 흐름을 먼저
-            검토했습니다.
-          </p>
+            <p className="seoul-youth-center__wireframes-summary">
+              정보 구조와 사용자 흐름을 바탕으로, 메인 화면과
+              프로그램 탐색·신청 흐름을 중심으로 PC·태블릿·모바일
+              와이어프레임을 설계했습니다. 이 단계에서는 시각 디자인보다
+              콘텐츠 우선순위, 신청 진입점, 기기별 정보 흐름을 먼저
+              검토했습니다.
+            </p>
+          </div>
+
+          <a
+            className="seoul-youth-center__wireframes-figma-link"
+            href={wireframeFigmaUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            View Wireframes in Figma
+          </a>
         </header>
 
         <div className="seoul-youth-center__wireframes-layout">

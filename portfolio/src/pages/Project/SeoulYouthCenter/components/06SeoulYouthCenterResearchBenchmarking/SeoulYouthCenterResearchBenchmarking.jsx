@@ -95,11 +95,16 @@ const SeoulYouthCenterResearchBenchmarking = () => {
               ))}
             </ul>
 
-            {/* 캡쳐 가이드: 정부24, 서울시교육청, 서울시청소년몽땅정보통, 청소년시설 사이트의 대표 화면을 작은 캡쳐 3~4개로 모아 배치 */}
             <figure
               className="seoul-youth-center__research-benchmarking-media"
               aria-label="벤치마킹 대상 사이트 캡쳐 영역"
-            />
+            >
+              {/* 이미지 가이드: 정부24, 서울시교육청, 서울시청소년몽땅정보통, 청소년시설 사이트의 대표 화면을 3~4개 썸네일로 묶은 캡쳐. 공공성, 반응형 접근성, 메뉴 구조 비교가 느껴지도록 16:9 비율 권장. 파일명은 benchmarking-target-sites.png로 저장 */}
+              <img
+                src="/images/projects/seoul-youth-center/benchmarking-target-sites.png"
+                alt="벤치마킹 대상 사이트 대표 화면 모음"
+              />
+            </figure>
           </div>
         </div>
 
