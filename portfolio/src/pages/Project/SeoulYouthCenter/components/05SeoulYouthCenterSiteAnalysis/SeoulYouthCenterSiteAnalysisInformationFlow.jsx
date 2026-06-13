@@ -3,19 +3,19 @@ import "./SeoulYouthCenterSiteAnalysisInformationFlow.scss";
 const informationFlowFindings = [
   {
     number: "01",
-    title: "Structure",
+    title: "정보 구조",
     description:
       "메뉴와 콘텐츠 분류 기준이 명확하지 않아 사용자가 원하는 정보를 예측하기 어렵습니다.",
   },
   {
     number: "02",
-    title: "Priority",
+    title: "정보 우선순위",
     description:
       "상시 정보와 시의성 콘텐츠가 섞여 핵심 프로그램과 혜택의 주목도가 낮아집니다.",
   },
   {
     number: "03",
-    title: "Conversion",
+    title: "신청 전환",
     description:
       "프로그램 탐색 이후 상세 확인과 신청으로 이어지는 행동 경로가 충분히 강조되지 않습니다.",
   },

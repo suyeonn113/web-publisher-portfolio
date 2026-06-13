@@ -3,19 +3,19 @@ import "./SeoulYouthCenterSiteAnalysisResponsive.scss";
 const responsiveFindings = [
   {
     number: "01",
-    title: "Layout",
+    title: "화면 구조",
     description:
       "PC 중심의 고정형 화면 구조로 작은 화면에서 콘텐츠가 과밀하게 노출됩니다.",
   },
   {
     number: "02",
-    title: "Readability",
+    title: "정보 가독성",
     description:
       "텍스트와 버튼 크기가 작아 프로그램 정보 확인과 터치 조작이 어렵습니다.",
   },
   {
     number: "03",
-    title: "Access",
+    title: "접근 경로",
     description:
       "주요 메뉴와 신청 경로가 작은 화면에서 직관적으로 드러나지 않습니다.",
   },

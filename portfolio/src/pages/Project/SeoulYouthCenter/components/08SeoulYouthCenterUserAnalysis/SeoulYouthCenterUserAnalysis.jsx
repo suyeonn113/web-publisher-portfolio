@@ -3,8 +3,8 @@ import "./SeoulYouthCenterUserAnalysis.scss";
 const userTypes = [
   {
     number: "01",
-    type: "Teen User",
-    label: "청소년 사용자",
+    type: "청소년 사용자",
+    label: "Teen User",
     situation:
       "친구의 공유나 학교 선생님의 추천으로 프로그램을 알게 되고, 모바일로 관심 있는 활동과 신청 가능 여부를 확인합니다.",
     needs: [
@@ -17,8 +17,8 @@ const userTypes = [
   },
   {
     number: "02",
-    type: "Parent User",
-    label: "보호자",
+    type: "보호자",
+    label: "Parent User",
     situation:
       "자녀가 참여할 수 있는 주말·방학 프로그램을 찾고, 대상 연령과 일정, 장소, 비용, 기관 신뢰도를 확인한 뒤 신청 여부를 결정합니다.",
     needs: [
@@ -31,8 +31,8 @@ const userTypes = [
   },
   {
     number: "03",
-    type: "Youth Worker",
-    label: "청소년지도자",
+    type: "청소년 지도자",
+    label: "Youth Worker",
     situation:
       "프로그램을 안내하거나 참여자를 모집하기 위해 홈페이지에 등록된 정보, 신청 현황, 공지 전달 흐름을 확인합니다.",
     needs: [

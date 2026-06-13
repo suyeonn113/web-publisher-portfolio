@@ -3,25 +3,25 @@ import "./SeoulYouthCenterUserJourney.scss";
 const journeySteps = [
   {
     number: "01",
-    title: "Discover",
+    title: "탐색",
     description:
       "메인 화면 또는 프로그램 목록에서 관심 있는 활동을 발견합니다.",
   },
   {
     number: "02",
-    title: "Compare",
+    title: "비교",
     description:
       "모집 상태, 대상, 일정, 장소, 비용 등 참여 판단에 필요한 정보를 확인합니다.",
   },
   {
     number: "03",
-    title: "Apply",
+    title: "신청",
     description:
       "상세 페이지에서 신청 가능 여부를 확인하고 신청 정보를 입력합니다.",
   },
   {
     number: "04",
-    title: "Manage",
+    title: "관리",
     description:
       "신청 내역을 확인하고 필요 시 정보를 수정하거나 취소합니다.",
   },

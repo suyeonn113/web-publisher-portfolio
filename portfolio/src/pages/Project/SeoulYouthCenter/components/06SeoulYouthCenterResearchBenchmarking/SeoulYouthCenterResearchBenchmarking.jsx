@@ -3,25 +3,25 @@ import "./SeoulYouthCenterResearchBenchmarking.scss";
 const researchCriteria = [
   {
     number: "01",
-    title: "Responsive Access",
+    title: "반응형 접근",
     description:
       "모바일과 태블릿에서도 화면과 기능이 안정적으로 제공되는가",
   },
   {
     number: "02",
-    title: "Navigation Structure",
+    title: "탐색 구조",
     description:
       "사용자가 원하는 메뉴와 정보를 예측 가능한 위치에서 찾을 수 있는가",
   },
   {
     number: "03",
-    title: "Information Discovery",
+    title: "정보 발견성",
     description:
       "프로그램, 공지, 혜택 등 주요 정보를 직관적으로 탐색할 수 있는가",
   },
   {
     number: "04",
-    title: "Accessibility",
+    title: "웹 접근성",
     description:
       "색 대비, 터치 영역, 텍스트 크기, 키보드 이동 등 접근성 기준을 고려하고 있는가",
   },
