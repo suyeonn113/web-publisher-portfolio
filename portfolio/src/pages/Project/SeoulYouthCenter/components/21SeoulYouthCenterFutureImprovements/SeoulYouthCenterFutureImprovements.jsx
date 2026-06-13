@@ -63,15 +63,6 @@ const SeoulYouthCenterFutureImprovements = () => {
             </li>
           ))}
         </ol>
-
-        <footer className="seoul-youth-center__future-improvements-insight">
-          <p>Key Point</p>
-          <strong>
-            향후 개선은 기능을 단순히 추가하는 것보다, 프로그램
-            탐색·신청·참여 이후 확인까지 이어지는 서비스 경험을
-            더 정교하게 만드는 방향으로 확장할 수 있습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

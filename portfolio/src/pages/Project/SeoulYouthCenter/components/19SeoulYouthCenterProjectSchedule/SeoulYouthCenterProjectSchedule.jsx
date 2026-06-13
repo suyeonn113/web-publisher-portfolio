@@ -68,14 +68,6 @@ const SeoulYouthCenterProjectSchedule = () => {
             </li>
           ))}
         </ol>
-
-        <footer className="seoul-youth-center__project-schedule-insight">
-          <p>Key Point</p>
-          <strong>
-            일정은 산출물 제작 순서에 맞춰 진행하되, 각 단계에서
-            프로그램 참여 흐름이 유지되는지를 반복적으로 확인했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

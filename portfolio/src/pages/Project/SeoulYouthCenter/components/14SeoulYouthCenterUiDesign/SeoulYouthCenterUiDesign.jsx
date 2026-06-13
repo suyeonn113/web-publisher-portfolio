@@ -149,15 +149,6 @@ const SeoulYouthCenterUiDesign = () => {
             </figure>
           ))}
         </div>
-
-        <footer className="seoul-youth-center__ui-design-insight">
-          <p>Key Point</p>
-          <strong>
-            UI 디자인 단계에서는 청소년센터의 밝은 분위기를
-            유지하면서도, 프로그램 탐색과 신청 CTA가 묻히지 않도록
-            정보 위계와 화면 흐름을 정리했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

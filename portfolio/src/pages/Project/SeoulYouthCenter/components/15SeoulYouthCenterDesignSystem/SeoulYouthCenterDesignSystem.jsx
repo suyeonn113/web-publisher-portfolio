@@ -58,15 +58,6 @@ const SeoulYouthCenterDesignSystem = () => {
             </li>
           ))}
         </ol>
-
-        <footer className="seoul-youth-center__design-system-insight">
-          <p>Key Point</p>
-          <strong>
-            디자인 시스템은 화면의 분위기를 맞추는 기준이 아니라,
-            프로그램 탐색과 신청 흐름이 여러 화면에서 일관되게
-            보이도록 만든 사용성 기준입니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

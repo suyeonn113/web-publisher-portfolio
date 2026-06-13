@@ -2,9 +2,9 @@
 
 .seoul-youth-center__improvement-strategy {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  row-gap: space(4);
-  align-content: stretch;
+  grid-template-rows: auto auto auto;
+  row-gap: space(10);
+  align-content: start;
 }
 
 .seoul-youth-center__improvement-strategy-header {
@@ -16,154 +16,212 @@
 
 .seoul-youth-center__improvement-strategy-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.48fr);
-  gap: space(8);
-  align-items: stretch;
-  height: 100%;
+  grid-template-columns: 1fr!important;
+  align-items: start;
   min-height: 0;
-}
-
-.seoul-youth-center__improvement-strategy-list {
-  display: grid;
-  grid-template-rows: repeat(4, minmax(0, 1fr));
-  height: 100%;
-  min-height: 0;
-  gap: 0;
-  border-bottom: stroke(thin) solid var(--syc-rule-color);
-}
-
-.seoul-youth-center__improvement-strategy-list li {
-  display: grid;
-  grid-template-columns: minmax(space(8), auto) minmax(0, 1fr);
-  gap: space(4);
-  align-items: center;
-  min-height: 0;
-  padding-block: space(3);
-  border-bottom: stroke(thin) solid var(--syc-rule-color);
-
-  span {
-    @include typography(meta);
-
-    color: var(--color-point);
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-  }
-
-  div {
-    display: grid;
-    gap: space(2);
-    min-width: 0;
-  }
-
-  h3 {
-    @include typography(body-lg);
-
-    color: var(--color-text-primary);
-    font-weight: 700;
-  }
-
-  p {
-    @include typography(body);
-
-    line-height: line-height(base);
-  }
 }
 
 .seoul-youth-center__improvement-strategy-diagram {
+  --strategy-gap: #{space(10)};
+
+  position: relative;
   display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--strategy-gap);
   width: 100%;
-  height: 100%;
   min-height: 0;
-  padding: space(4);
-  overflow: hidden;
-  background:
-    linear-gradient(
-      135deg,
-      rgb(var(--color-white-rgb) / 96%),
-      var(--color-gray-50)
-    );
-  border: stroke(thin) solid var(--syc-element-border);
-  border-radius: radius(md);
-  box-shadow: 0 18px 40px rgb(var(--color-black-rgb) / 6%);
+  padding-block: space(2) space(4);
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  border: 0;
 }
 
-.seoul-youth-center__improvement-strategy-diagram img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  color: transparent;
-  font-size: 0;
-  object-fit: contain;
-  object-position: center;
+.seoul-youth-center__improvement-strategy-diagram-step {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: space(5);
+  align-content: start;
+  min-width: 0;
+  padding: space(6);
+  border: 1px solid var(--syc-element-border);
+}
+
+.seoul-youth-center__improvement-strategy-diagram-step:not(:last-child)::after {
+  @include typography(body-lg);
+
+  position: absolute;
+  top: space(7);
+  right: calc((var(--strategy-gap) / -10) * 3);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: space(6);
+  height: space(6);
+  color: var(--color-gray-300);
+  line-height: 1;
+  content: "→";
+  background: var(--color-white);
+}
+
+.seoul-youth-center__improvement-strategy-icon {
+  justify-self: start;
+  width: space(8);
+  height: space(8);
+  color: var(--color-point);
+  stroke-width: 1.8;
+  opacity: 0.9;
+}
+
+.seoul-youth-center__improvement-strategy-step-copy {
+  display: grid;
+  gap: space(2);
+  min-width: 0;
+}
+
+.seoul-youth-center__improvement-strategy-step-number {
+  @include typography(title);
+
+  color: var(--color-point);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.seoul-youth-center__improvement-strategy-step-copy h3 {
+  @include typography(body-lg);
+
+  color: var(--color-text-primary);
+  font-weight: 700;
+  line-height: line-height(heading);
+  word-break: keep-all;
+}
+
+.seoul-youth-center__improvement-strategy-step-copy p {
+  @include typography(body);
+
+  max-width: 18em;
+  color: var(--color-text-secondary);
+  line-height: line-height(base);
+  word-break: keep-all;
 }
 
 .seoul-youth-center__improvement-strategy-direction {
-  display: grid;
-  grid-template-columns: minmax(180px, 0.22fr) minmax(0, 1fr);
-  gap: space(5);
-  align-items: baseline;
-  padding: space(4) space(5);
+  position: relative;
+  justify-self: center;
+  margin-top: space(2);
+  width: 80%;
+  text-align: center;
   background: var(--syc-soft-surface);
-  border-left: stroke(medium) solid var(--color-text-primary);
-  border-radius: 0 radius(sm) radius(sm) 0;
+  border: 1px solid var(--syc-element-border);
+}
 
-  p {
-    @include typography(meta);
+.seoul-youth-center__improvement-strategy-direction::before {
+  @include typography(body-lg);
 
-    color: var(--color-text-primary);
-    font-weight: 700;
-    text-transform: uppercase;
-  }
+  position: absolute;
+  top: calc(#{space(5)} * -1);
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: space(6);
+  height: space(6);
+  color: var(--color-text-primary);
+  content: "↓";
+  background: var(--color-white);
+  border: 1px solid var(--syc-element-border);
+  border-radius: radius(full);
+  transform: translateX(-50%);
+}
 
-  strong {
-    @include typography(body-lg);
+.seoul-youth-center__improvement-strategy-direction p {
+  @include typography(meta);
 
-    color: var(--color-text-primary);
-    font-weight: 700;
-    word-break: keep-all;
-  }
+  color: var(--color-text-primary);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.seoul-youth-center__improvement-strategy-direction strong {
+  @include typography(body-lg);
+
+  color: var(--color-text-primary);
+  font-weight: 700;
+  line-height: line-height(base);
+  word-break: keep-all;
 }
 
 @include respond-down(wide) {
   .seoul-youth-center__improvement-strategy {
-    grid-template-rows: auto auto auto;
-    row-gap: var(--syc-content-gap);
-    align-content: start;
-  }
-
-  .seoul-youth-center__improvement-strategy-layout {
-    height: auto;
-    grid-template-columns: minmax(0, 0.54fr) minmax(0, 0.46fr);
-    gap: space(6);
-    align-items: start;
-  }
-
-  .seoul-youth-center__improvement-strategy-list {
-    height: auto;
-    min-height: initial;
-    grid-template-rows: none;
-  }
-
-  .seoul-youth-center__improvement-strategy-list li {
-    align-items: start;
-    min-height: initial;
-    padding-block: space(4);
+    row-gap: space(8);
   }
 
   .seoul-youth-center__improvement-strategy-diagram {
-    aspect-ratio: 4 / 3;
-    height: auto;
+    --strategy-gap: #{space(7)};
+  }
+
+  .seoul-youth-center__improvement-strategy-step-copy p {
+    max-width: none;
   }
 }
 
 @include respond-down(laptop) {
-  .seoul-youth-center__improvement-strategy-layout {
-    grid-template-columns: 1fr;
+  .seoul-youth-center__improvement-strategy-diagram {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: space(8) space(10);
+  }
+
+  .seoul-youth-center__improvement-strategy-diagram-step {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto;
+    column-gap: space(4);
+    align-items: start;
+  }
+
+  .seoul-youth-center__improvement-strategy-icon {
+    width: space(7);
+    height: space(7);
+  }
+
+  .seoul-youth-center__improvement-strategy-diagram-step:not(:last-child)::after {
+    display: none;
   }
 
   .seoul-youth-center__improvement-strategy-direction {
+    width: 100%;
+    padding: space(5) space(6);
+  }
+}
+
+@include respond-down(tablet) {
+  .seoul-youth-center__improvement-strategy {
+    row-gap: space(6);
+  }
+
+  .seoul-youth-center__improvement-strategy-diagram {
     grid-template-columns: 1fr;
-    gap: space(2);
+    row-gap: space(4);
+    padding-block-end: space(2);
+  }
+
+  .seoul-youth-center__improvement-strategy-diagram-step {
     padding: space(4);
+    background: var(--color-white);
+  }
+
+  .seoul-youth-center__improvement-strategy-diagram-step:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: calc(#{space(4)} * -1);
+    left: space(7);
+    display: grid;
+    content: "↓";
+    transform: translateX(-50%);
+  }
+
+  .seoul-youth-center__improvement-strategy-direction {
+    padding: space(5) space(4);
   }
 }

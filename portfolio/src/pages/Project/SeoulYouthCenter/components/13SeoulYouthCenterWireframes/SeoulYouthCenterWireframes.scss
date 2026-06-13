@@ -3,15 +3,14 @@
 
 .seoul-youth-center__wireframes {
   display: grid;
-  grid-template-rows: auto 1fr auto auto;
+  grid-template-rows: auto 1fr auto;
 }
 
 .seoul-youth-center__wireframes-header,
 .seoul-youth-center__wireframes-section-heading,
 .seoul-youth-center__wireframes-highlights,
 .seoul-youth-center__wireframes-highlights ul,
-.seoul-youth-center__wireframes-highlights li,
-.seoul-youth-center__wireframes-insight {
+.seoul-youth-center__wireframes-highlights li {
   display: grid;
 }
 

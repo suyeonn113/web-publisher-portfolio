@@ -108,15 +108,6 @@ const SeoulYouthCenterResultsImpact = () => {
             </li>
           ))}
         </ul>
-
-        <footer className="seoul-youth-center__results-impact-insight">
-          <p>Key Point</p>
-          <strong>
-            결과적으로 홈페이지의 역할을 단순 정보 안내에서
-            프로그램 탐색, 신청, 활동 확인, 홍보가 연결되는
-            참여 중심 접점으로 확장했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

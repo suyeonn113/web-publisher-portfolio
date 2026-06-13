@@ -232,16 +232,6 @@ const SeoulYouthCenterInformationArchitecture = () => {
             </article>
           ))}
         </div>
-
-        <footer className="seoul-youth-center__information-architecture-insight">
-          <p>Key Point</p>
-          <strong>
-            정보 구조를 메뉴 단위로만 정리하지 않고, 메인 화면에서
-            프로그램 탐색·신청·활동 확인·소식 전달이 함께
-            이루어지도록 설계해 홈페이지를 참여 중심의 서비스
-            진입점으로 전환했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

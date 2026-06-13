@@ -96,15 +96,6 @@ const SeoulYouthCenterUserJourney = () => {
             ))}
           </ul>
         </div>
-
-        <footer className="seoul-youth-center__user-journey-insight">
-          <p>Key Scenario</p>
-          <strong>
-            홈페이지의 핵심 흐름은 단순 정보 열람이 아니라 프로그램
-            탐색에서 신청 확인까지 끊기지 않는 참여 경험을 제공하는
-            것입니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

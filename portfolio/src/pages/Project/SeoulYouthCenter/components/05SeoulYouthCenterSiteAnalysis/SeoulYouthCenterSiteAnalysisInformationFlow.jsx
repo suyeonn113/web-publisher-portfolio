@@ -72,15 +72,6 @@ const SeoulYouthCenterSiteAnalysisInformationFlow = () => {
             </ol>
           </div>
         </div>
-
-        <footer className="seoul-youth-center__site-analysis-information-flow-finding">
-          <p>Key Finding</p>
-          <strong>
-            정보 구조와 참여 흐름을 함께 정리해야 홈페이지가 단순
-            안내 채널을 넘어 청소년 활동 참여의 시작점이 될 수
-            있습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

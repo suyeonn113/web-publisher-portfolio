@@ -124,15 +124,6 @@ const SeoulYouthCenterDevelopmentOverview = ({ project }) => {
             ))}
           </ul>
         </section>
-
-        <footer className="seoul-youth-center__development-overview-insight">
-          <p>Key Point</p>
-          <strong>
-            개발 단계에서는 디자인 시안을 정적인 화면으로 끝내지
-            않고, 프로그램 탐색과 신청 흐름이 실제 데이터와
-            연결되어 작동하는 반응형 웹사이트로 구현했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

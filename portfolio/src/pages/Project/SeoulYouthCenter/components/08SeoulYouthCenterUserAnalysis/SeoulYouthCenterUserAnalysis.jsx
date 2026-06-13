@@ -117,15 +117,6 @@ const SeoulYouthCenterUserAnalysis = () => {
             ),
           )}
         </div>
-
-        <footer className="seoul-youth-center__user-analysis-insight">
-          <p>Key Insight</p>
-          <strong>
-            청소년은 빠른 탐색을, 보호자는 신뢰할 수 있는 판단
-            정보를, 청소년지도자는 효율적인 안내와 운영 관리를
-            필요로 합니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

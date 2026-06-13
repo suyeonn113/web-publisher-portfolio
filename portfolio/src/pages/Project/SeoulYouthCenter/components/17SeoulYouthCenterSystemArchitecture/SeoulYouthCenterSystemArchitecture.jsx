@@ -92,15 +92,6 @@ const SeoulYouthCenterSystemArchitecture = () => {
             <figcaption>Database Structure</figcaption>
           </figure>
         </div>
-
-        <footer className="seoul-youth-center__system-architecture-insight">
-          <p>Key Point</p>
-          <strong>
-            시스템 구조는 화면 구현에 그치지 않고, 프로그램 정보와
-            신청 데이터가 저장·조회되는 흐름까지 연결해 실제 서비스
-            사용이 가능한 기반으로 설계했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

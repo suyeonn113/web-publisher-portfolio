@@ -72,14 +72,6 @@ const SeoulYouthCenterSiteAnalysisResponsive = () => {
             </ol>
           </div>
         </div>
-
-        <footer className="seoul-youth-center__site-analysis-responsive-finding">
-          <p>Key Finding</p>
-          <strong>
-            반응형 접근성 개선은 청소년 사용자가 홈페이지를 통해
-            정보를 얻고 활동 참여로 이동하기 위한 첫 번째 조건입니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

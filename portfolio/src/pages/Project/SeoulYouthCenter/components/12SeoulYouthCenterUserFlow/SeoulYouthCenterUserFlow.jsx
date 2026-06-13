@@ -163,15 +163,6 @@ const SeoulYouthCenterUserFlow = () => {
             ))}
           </ul>
         </div>
-
-        <footer className="seoul-youth-center__user-flow-insight">
-          <p>Key Point</p>
-          <strong>
-            사용자 흐름의 시작점을 메뉴 내부가 아니라 메인 화면으로
-            확장해, 프로그램 탐색·신청·활동 확인이 하나의 참여
-            경험으로 이어지도록 설계했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

@@ -142,16 +142,6 @@ const SeoulYouthCenterWireframes = () => {
             </figure>
           ))}
         </div>
-
-        <footer className="seoul-youth-center__wireframes-insight">
-          <p>Key Point</p>
-          <strong>
-            와이어프레임 단계에서 메인 화면의 정보 우선순위와
-            반응형 흐름을 먼저 검증해, 사용자가 어떤 기기에서도
-            프로그램을 찾고 신청으로 이동할 수 있는 구조를
-            설계했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );

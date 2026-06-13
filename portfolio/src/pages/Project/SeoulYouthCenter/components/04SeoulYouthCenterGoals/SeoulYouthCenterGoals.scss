@@ -1,7 +1,7 @@
 @use "../../../../../styles/foundation" as *;
 
 .seoul-youth-center__goals {
-  grid-template-rows: auto minmax(0, 1fr) 0.2fr;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   row-gap: space(4);
   align-content: stretch;
 }
@@ -61,8 +61,6 @@
   align-items: baseline;
   padding: space(4) space(5);
   background: var(--syc-soft-surface);
-  border-left: stroke(medium) solid var(--color-text-primary);
-  border-radius: 0 radius(sm) radius(sm) 0;
 
   p {
     @include typography(meta);

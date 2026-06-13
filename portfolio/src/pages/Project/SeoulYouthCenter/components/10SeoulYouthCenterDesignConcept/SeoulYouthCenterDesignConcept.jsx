@@ -62,14 +62,6 @@ const SeoulYouthCenterDesignConcept = () => {
             ),
           )}
         </ol>
-
-        <footer className="seoul-youth-center__design-concept-core">
-          <p>Core Concept</p>
-          <strong>
-            필요한 정보를 쉽게 찾고, 관심 활동을 빠르게 이해하며,
-            신청까지 자연스럽게 이어지는 청소년 활동 참여 경험
-          </strong>
-        </footer>
       </section>
     </div>
   );

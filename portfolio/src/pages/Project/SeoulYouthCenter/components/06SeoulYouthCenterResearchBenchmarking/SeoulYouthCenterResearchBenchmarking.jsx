@@ -116,14 +116,6 @@ const SeoulYouthCenterResearchBenchmarking = () => {
               </ul>
             </div>
           </div>
-
-          <footer className="seoul-youth-center__research-benchmarking-insight">
-            <p>Key Insight</p>
-            <strong>
-              공공기관의 신뢰성과 접근성 기준을 바탕으로, 청소년 활동
-              탐색과 참여 흐름만 서울시립청소년센터에 맞게 강화합니다.
-            </strong>
-          </footer>
         </section>
       </div>
 

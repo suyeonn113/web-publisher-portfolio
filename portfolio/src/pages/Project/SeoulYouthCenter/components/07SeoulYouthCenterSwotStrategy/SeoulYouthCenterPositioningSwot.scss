@@ -32,11 +32,10 @@
   max-height: 420px;
   min-height: 0;
   justify-self: center;
-  padding: space(8);
+  padding: space(6);
   overflow: hidden;
   color: var(--syc-muted-color);
   background: rgb(var(--color-black-rgb) / 2%);
-  border-radius: radius(md);
 }
 
 .seoul-youth-center__positioning-swot-axis-label {
@@ -50,26 +49,26 @@
 }
 
 .seoul-youth-center__positioning-swot-axis-label.is-top {
-  top: space(4);
+  top: space(6);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .seoul-youth-center__positioning-swot-axis-label.is-right {
   top: 50%;
-  right: space(4);
+  right: space(6);
   transform: translateY(-50%);
 }
 
 .seoul-youth-center__positioning-swot-axis-label.is-bottom {
-  bottom: space(4);
+  bottom: space(6);
   left: 50%;
   transform: translateX(-50%);
 }
 
 .seoul-youth-center__positioning-swot-axis-label.is-left {
   top: 50%;
-  left: space(4);
+  left: space(6);
   transform: translateY(-50%);
 }
 
@@ -81,21 +80,21 @@
 
 .seoul-youth-center__positioning-swot-axis.is-horizontal {
   top: 50%;
-  right: space(8);
-  left: space(8);
+  right: space(14) * 2;
+  left: space(18);
   height: 1px;
 }
 
 .seoul-youth-center__positioning-swot-axis.is-vertical {
-  top: space(8);
-  bottom: space(8);
+  top: space(12);
+  bottom: space(12);
   left: 50%;
   width: 1px;
 }
 
 .seoul-youth-center__positioning-swot-points {
   position: absolute;
-  inset: space(8);
+  inset: space(6);
   z-index: 3;
   padding: 0;
   margin: 0;
@@ -137,7 +136,7 @@
   align-self: center;
   align-content: start;
   gap: space(4);
-  padding: space(8) 0;
+  padding: space(6) 0;
 
   p {
     @include typography(meta);
@@ -253,11 +252,6 @@
   .seoul-youth-center__positioning-swot-position {
     align-content: start;
     padding: space(4) 0;
-  }
-
-  .seoul-youth-center__positioning-swot-position ul {
-    display: grid;
-    grid-template-columns: 1fr;
   }
 }
 

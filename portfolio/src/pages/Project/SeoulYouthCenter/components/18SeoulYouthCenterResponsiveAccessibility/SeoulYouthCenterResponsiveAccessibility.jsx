@@ -103,15 +103,6 @@ const SeoulYouthCenterResponsiveAccessibility = () => {
             </li>
           ))}
         </ul>
-
-        <footer className="seoul-youth-center__responsive-accessibility-insight">
-          <p>Key Point</p>
-          <strong>
-            반응형 구현은 화면을 줄이는 작업이 아니라, 각 기기에서
-            프로그램 탐색과 신청 행동이 유지되도록 정보 흐름을
-            재구성하는 작업으로 접근했습니다.
-          </strong>
-        </footer>
       </section>
     </div>
   );
