@@ -107,6 +107,17 @@ $pageTitle = '페이지를 찾을 수 없습니다 | 서울시립청소년센터
                 max-width: 280px;
             }
         }
+
+        @media (min-width: 1248px) {
+            .not-found-page {
+                padding-top: calc(
+                    var(--global-top-bar-height) +
+                    var(--global-header-height) +
+                    var(--global-menu-height) +
+                    80px
+                );
+            }
+        }
     </style>
 
     <h1>페이지를 찾을 수 없습니다</h1>

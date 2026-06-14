@@ -18,7 +18,12 @@ const ProjectPreviewPage = () => {
     return <NotFoundPage project={project} />;
   }
 
-  return <ResponsivePreviewPage project={project} preview={preview} />;
+  return (
+    <ResponsivePreviewPage
+      project={project}
+      preview={preview}
+    />
+  );
 };
 
 export default ProjectPreviewPage;

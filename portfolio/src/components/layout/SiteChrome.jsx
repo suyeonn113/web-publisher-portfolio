@@ -1,11 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./SiteChrome.scss";
 
 const SiteChrome = ({ children }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const lastScrollYRef = useRef(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const isHomePage = location.pathname === "/";
+
+  const handleBackClick = () => {
+    if (window.history.state?.idx > 0) {
+      navigate(-1);
+      return;
+    }
+
+    navigate("/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,9 +47,21 @@ const SiteChrome = ({ children }) => {
           .filter(Boolean)
           .join(" ")}
       >
-        <Link className="site-header__logo" to="/">
-          수연
-        </Link>
+        <div className="site-header__brand">
+          {!isHomePage && (
+            <button
+              className="site-header__back"
+              type="button"
+              aria-label="이전 페이지로 이동"
+              onClick={handleBackClick}
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+          )}
+          <Link className="site-header__logo" to="/">
+            수연의 Web Publisher Portfolio
+          </Link>
+        </div>
       </header>
 
       {children}
@@ -45,8 +69,12 @@ const SiteChrome = ({ children }) => {
       <footer className="site-footer">
         <p>© 2026 Suyeon. All rights reserved.</p>
         <nav aria-label="푸터 링크">
-          <a href="#">GitHub</a>
-          <a href="mailto:hello@example.com">hello@example.com</a>
+          <a href="https://github.com/suyeonn113" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a href="mailto:suyeonn113@naver.com" target="_blank" rel="noopener noreferrer">
+            Email
+          </a>
         </nav>
       </footer>
     </>

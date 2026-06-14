@@ -37,11 +37,9 @@ const getManualScrollTop = (step, deviceKey) => {
 
 const PreviewFrame = ({
   project,
-  previewMode,
   step,
   device,
   deviceKey,
-  onControlStatusChange,
   onUnavailable,
 }) => {
   const shellRef = useRef(null);
@@ -77,10 +75,6 @@ const PreviewFrame = ({
 
   useEffect(() => {
     setFrameHeight(device.frameHeight);
-    onControlStatusChange?.({
-      mode: previewMode,
-      message: null,
-    });
 
     return () => {
       if (measureTimeoutRef.current) {
@@ -91,12 +85,10 @@ const PreviewFrame = ({
     device.frameHeight,
     device.width,
     deviceKey,
-    onControlStatusChange,
-    previewMode,
     src,
   ]);
 
-  const applyManualControl = (reason) => {
+  const applyManualControl = () => {
     setFrameHeight(device.frameHeight);
 
     const iframe = iframeRef.current;
@@ -114,76 +106,49 @@ const PreviewFrame = ({
         left: 0,
         behavior: "auto",
       });
-
-      onControlStatusChange?.({
-        mode: previewMode === "auto" ? "manual-fallback" : "manual",
-        message: reason
-          ? "자동 이동이 어려워 수동 위치값을 적용했습니다."
-          : null,
-      });
     } catch {
-      onControlStatusChange?.({
-        mode: previewMode === "auto" ? "manual-fallback" : "manual",
-        message:
-          "수동 위치값을 직접 적용할 수 없습니다. 프레임 안에서 직접 확인해 주세요.",
-      });
+      // Cross-origin frames may block scroll control. The iframe remains usable.
     }
   };
 
-  const applyAutoControl = () => {
-    const iframe = iframeRef.current;
-    const frameWindow = iframe?.contentWindow;
-    const frameDocument = iframe?.contentDocument ?? frameWindow?.document;
+  const measureFrameHeight = () => {
+    try {
+      const iframe = iframeRef.current;
+      const frameWindow = iframe?.contentWindow;
+      const frameDocument = iframe?.contentDocument ?? frameWindow?.document;
 
-    if (!frameWindow || !frameDocument) {
-      throw new Error("iframe document is unavailable");
+      if (!frameDocument) {
+        return;
+      }
+
+      measureTimeoutRef.current = window.setTimeout(() => {
+        setFrameHeight(
+          Math.max(device.frameHeight, getDocumentHeight(frameDocument)),
+        );
+      }, 120);
+    } catch {
+      // Cross-origin frames cannot be measured.
     }
-
-    const targetElement = step.target
-      ? frameDocument.querySelector(step.target)
-      : null;
-
-    if (step.target && !targetElement) {
-      throw new Error(`target not found: ${step.target}`);
-    }
-
-    targetElement?.scrollIntoView({
-      block: "center",
-      inline: "nearest",
-    });
-
-    measureTimeoutRef.current = window.setTimeout(() => {
-      const measuredHeight = getDocumentHeight(frameDocument);
-      setFrameHeight(Math.max(device.frameHeight, measuredHeight));
-      onControlStatusChange?.({
-        mode: "auto",
-        message: null,
-      });
-    }, 120);
   };
 
   const handleLoad = () => {
-    if (previewMode !== "auto") {
-      applyManualControl();
-      return;
-    }
-
-    try {
-      applyAutoControl();
-    } catch {
-      applyManualControl(true);
-    }
+    applyManualControl();
+    measureFrameHeight();
   };
 
   return (
     <div
       ref={shellRef}
       className="preview-frame-shell"
+      data-device={deviceKey}
       style={{
         "--preview-device-width": `${device.width}px`,
         "--preview-frame-height": `${frameHeight}px`,
         "--preview-frame-scale": frameScale,
-        "--preview-shell-height": `${frameHeight * frameScale}px`,
+        "--preview-shell-height": `${Math.min(
+          frameHeight * frameScale,
+          device.maxShellHeight ?? Number.POSITIVE_INFINITY,
+        )}px`,
       }}
     >
       <iframe

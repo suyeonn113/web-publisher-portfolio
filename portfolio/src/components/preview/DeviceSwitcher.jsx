@@ -4,19 +4,29 @@ const DEVICE_LABELS = {
   desktop: "Desktop",
 };
 
-const DeviceSwitcher = ({ devices, selectedDevice, onChange }) => {
+const DeviceSwitcher = ({
+  devices,
+  selectedDevice,
+  disabledDevices = [],
+  onChange,
+}) => {
   return (
     <div className="device-switcher" aria-label="디바이스 선택">
-      {Object.keys(devices).map((device) => (
-        <button
-          key={device}
-          type="button"
-          aria-pressed={selectedDevice === device}
-          onClick={() => onChange(device)}
-        >
-          {DEVICE_LABELS[device] ?? device}
-        </button>
-      ))}
+      {Object.keys(devices).map((device) => {
+        const isDisabled = disabledDevices.includes(device);
+
+        return (
+          <button
+            key={device}
+            type="button"
+            aria-pressed={selectedDevice === device}
+            disabled={isDisabled}
+            onClick={() => onChange(device)}
+          >
+            {DEVICE_LABELS[device] ?? device}
+          </button>
+        );
+      })}
     </div>
   );
 };

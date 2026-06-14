@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+import ScrollToTop from "./components/layout/ScrollToTop";
 import SiteChrome from "./components/layout/SiteChrome";
 import HomePage from "./pages/Home/HomePage";
 import { NotFoundPage } from "./pages/NotFound";
@@ -9,6 +10,7 @@ import ProjectPreviewPage from "./pages/ProjectPreview/ProjectPreviewPage";
 const App = () => {
   return (
     <SiteChrome>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
 

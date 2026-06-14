@@ -22,14 +22,14 @@ const workLinks = [
     number: "03",
     title: "Daiso Mall",
     meta: "Team Project",
-    to: "/projects/daiso-mall",
+    to: "/projects/daisomall/preview",
     description: "한글 설명이 들어갈 거 같습니다만",
   },
   {
     number: "04",
     title: "Air Seoul",
     meta: "React · Responsive Web",
-    to: "/projects/air-seoul",
+    to: "/projects/air-seoul/preview",
     description: "한글 설명이 들어갈 거 같습니다만",
   },
   {
@@ -43,7 +43,7 @@ const workLinks = [
     number: "06",
     title: "Fragfarm",
     meta: "Mobile Web",
-    to: "/projects/fragfarm",
+    to: "/projects/fragfarm/preview",
     description: "한글 설명이 들어갈 거 같습니다만",
   },
 ];

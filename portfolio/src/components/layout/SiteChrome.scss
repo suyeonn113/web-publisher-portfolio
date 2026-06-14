@@ -22,6 +22,36 @@
   }
 }
 
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: space(2);
+}
+
+.site-header__back {
+  @include typography(title);
+
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0;
+  color: var(--color-text-primary);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition:
+    color motion(base, standard),
+    transform motion(base, standard);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-text-secondary);
+    transform: translateX(-2px);
+  }
+}
+
 .site-header__logo {
   @include typography(title);
 

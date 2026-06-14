@@ -1,7 +1,13 @@
+import { airSeoulPreview } from "./airSeoulPreview";
+import { daisoMallPreview } from "./daisoMallPreview";
+import { fragfarmPreview } from "./fragfarmPreview";
 import { seoulYouthCenterPreview } from "./seoulYouthCenterPreview";
 
 export const projectPreviews = [
+  daisoMallPreview,
+  airSeoulPreview,
   seoulYouthCenterPreview,
+  fragfarmPreview,
 ];
 
 export const getProjectPreviewById = (projectId) =>

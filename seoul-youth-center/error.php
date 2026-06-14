@@ -105,6 +105,17 @@ $pageTitle = '페이지를 불러올 수 없습니다 | 서울시립청소년센
                 max-width: 280px;
             }
         }
+
+        @media (min-width: 1248px) {
+            .error-page {
+                padding-top: calc(
+                    var(--global-top-bar-height) +
+                    var(--global-header-height) +
+                    var(--global-menu-height) +
+                    80px
+                );
+            }
+        }
     </style>
 
     <h1>페이지를 불러올 수 없습니다</h1>

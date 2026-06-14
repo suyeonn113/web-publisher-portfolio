@@ -102,6 +102,55 @@
 
 /* ========== Section ========== */
 
+.recommend,
+.schedule,
+.news,
+.gallery,
+.sns {
+    position: relative;
+    isolation: isolate;
+}
+
+.recommend::before,
+.schedule::before,
+.news::before,
+.gallery::before,
+.sns::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+
+    width: auto;
+
+    transform: none;
+}
+
+.recommend > *,
+.schedule > *,
+.news > *,
+.gallery > *,
+.sns > * {
+    position: relative;
+    z-index: 1;
+}
+
+.recommend::before,
+.gallery::before {
+    background: var(--color-white);
+}
+
+.schedule::before,
+.sns::before {
+    background: var(--color-lightblue);
+}
+
+.news::before {
+    background: var(--color-beige);
+}
+
 .section__title {
     font-size: var(--text-title-section-size);
     font-weight: var(--text-title-section-weight);
