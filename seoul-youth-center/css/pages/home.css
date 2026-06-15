@@ -144,11 +144,11 @@
 
 .schedule::before,
 .sns::before {
-    background: var(--color-lightblue);
+    background: var(--color-white);
 }
 
 .news::before {
-    background: var(--color-beige);
+    background: var(--color-white);
 }
 
 .section__title {

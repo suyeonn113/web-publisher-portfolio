@@ -1,17 +1,9 @@
-
 @use "../../../../../styles/foundation" as *;
 
 .seoul-youth-center__ui-design {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-}
-
-.seoul-youth-center__ui-design-header,
-.seoul-youth-center__ui-design-section-heading,
-.seoul-youth-center__ui-design-highlights,
-.seoul-youth-center__ui-design-highlights ul,
-.seoul-youth-center__ui-design-highlights li {
-  display: grid;
+  grid-template-rows: auto minmax(430px, 1fr) auto;
+  row-gap: space(5);
+  align-content: stretch;
 }
 
 .seoul-youth-center__ui-design-header {
@@ -19,135 +11,274 @@
   --syc-section-label: "UI Design";
 
   position: relative;
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(112px, 0.16fr) minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto;
+  column-gap: space(8);
+  row-gap: space(2);
+  align-items: start;
 
-  > div {
-    display: grid;
-    grid-template-columns: minmax(112px, 0.16fr) minmax(0, 1fr);
-    grid-template-rows: auto auto auto;
-    column-gap: space(8);
-    row-gap: space(2);
-
-    &::before {
-      @include typography(heading-sm);
-
-      grid-column: 1;
-      grid-row: 1 / span 2;
-      align-self: start;
-      color: var(--color-point-2);
-      content: var(--syc-section-number);
-    }
-
-    &::after {
-      @include typography(eyebrow);
-
-      grid-column: 2;
-      grid-row: 1;
-      align-self: end;
-      color: var(--syc-muted-color);
-      font-weight: font-weight(bold);
-      text-transform: uppercase;
-      content: var(--syc-section-label);
-    }
-  }
-
-  .seoul-youth-center__ui-design-eyebrow {
-    display: none;
-  }
-
-  h2 {
+  &::before {
     @include typography(heading-sm);
 
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    color: var(--color-point-2);
+    content: var(--syc-section-number);
+  }
+
+  &::after {
+    @include typography(eyebrow);
+
     grid-column: 2;
-    grid-row: 2;
-    max-width: 16em;
-    align-self: start;
-  }
-
-  .seoul-youth-center__ui-design-summary {
-    grid-column: 2;
-    grid-row: 3;
-    margin-top: space(1);
-  }
-
-  .seoul-youth-center__ui-design-figma-link {
-    position: absolute;
-    top: 0;
-    right: 0;
+    grid-row: 1;
+    align-self: end;
+    color: var(--syc-muted-color);
+    font-weight: font-weight(bold);
+    text-transform: uppercase;
+    content: var(--syc-section-label);
   }
 }
 
-.seoul-youth-center__ui-design-layout {
+.seoul-youth-center__ui-design-eyebrow {
+  display: none;
+}
+
+.seoul-youth-center__ui-design-header h2 {
+  @include typography(heading-sm);
+
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--color-text-primary);
+  font-weight: font-weight(bold);
+  line-height: line-height(heading);
+}
+
+.seoul-youth-center__ui-design-summary {
+  @include typography(body);
+
+  grid-column: 2;
+  grid-row: 3;
+  color: var(--color-text-primary);
+  line-height: line-height(base);
+}
+
+.seoul-youth-center__ui-design-figma-link {
+  @include typography(meta);
+
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: space(8);
+  padding-inline: space(5);
+  color: var(--color-text-primary);
+  font-weight: font-weight(bold);
+  text-decoration: none;
+  text-transform: uppercase;
+  background: var(--color-white);
+  border: stroke(thin) solid var(--syc-element-border);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-white);
+    background: var(--color-text-primary);
+    border-color: var(--color-text-primary);
+  }
+}
+
+.seoul-youth-center__ui-design-section {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: space(4);
+  min-height: 0;
 }
 
-.seoul-youth-center__ui-design-responsive {
+.seoul-youth-center__ui-design-section-heading {
   display: grid;
+  gap: space(1);
+  padding-bottom: space(2);
+  border-bottom: stroke(medium) solid var(--color-text-primary);
+
+  p {
+    @include typography(meta);
+
+    color: var(--color-point-2);
+    font-weight: font-weight(bold);
+    text-transform: uppercase;
+  }
+
+  h3 {
+    @include typography(body-lg);
+
+    color: var(--color-text-primary);
+    font-weight: font-weight(bold);
+    line-height: line-height(heading);
+  }
 }
 
-.seoul-youth-center__ui-design-device-set {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 0.8fr);
-  align-items: start;
-}
-
-.seoul-youth-center__ui-design-device-set figure,
-.seoul-youth-center__ui-design-details figure {
-  display: grid;
-}
-
-.seoul-youth-center__ui-design-device-set img,
-.seoul-youth-center__ui-design-details img {
-  display: block;
-  max-width: 100%;
-}
-
-.seoul-youth-center__ui-design-details {
+.seoul-youth-center__ui-design-board {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: space(4);
+  min-height: 0;
+  align-items: stretch;
+}
+
+.seoul-youth-center__ui-design-frame {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+}
+
+.seoul-youth-center__ui-design-viewport {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--syc-soft-surface);
+  border: stroke(thin) solid var(--syc-rule-color);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    object-position: center top;
+    transform: translateY(var(--ui-design-image-offset, 0)) scale(1.333);
+    transform-origin: top center;
+  }
+}
+
+.seoul-youth-center__ui-design-note {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.2fr) minmax(0, 1fr);
+  gap: space(6);
+  align-items: baseline;
+  padding: space(4) space(5);
+  background: var(--syc-soft-surface);
+  border-left: stroke(medium) solid var(--color-text-primary);
+
+  > p {
+    @include typography(meta);
+
+    color: var(--color-text-primary);
+    font-weight: font-weight(bold);
+    text-transform: uppercase;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: space(4);
+  }
+
+  li {
+    display: grid;
+    gap: space(1);
+    min-width: 0;
+  }
+
+  strong {
+    @include typography(meta);
+
+    color: var(--color-text-primary);
+    font-weight: font-weight(bold);
+    line-height: line-height(heading);
+  }
+
+  span {
+    @include typography(meta);
+
+    color: var(--syc-muted-color);
+    line-height: line-height(base);
+  }
+}
+
+@include respond-down(wide) {
+  .seoul-youth-center__ui-design {
+    grid-template-rows: auto auto auto;
+    row-gap: var(--syc-content-gap);
+    align-content: start;
+  }
+
+  .seoul-youth-center__ui-design-board {
+    gap: space(3);
+  }
+
+  .seoul-youth-center__ui-design-viewport {
+    aspect-ratio: 4 / 5;
+  }
+
+  .seoul-youth-center__ui-design-note {
+    grid-template-columns: minmax(180px, 0.28fr) minmax(0, 1fr);
+    gap: space(5);
+    padding: space(4);
+  }
 }
 
 @include respond-down(laptop) {
   .seoul-youth-center__ui-design-header {
-    > div {
-      grid-template-columns: 1fr;
-      column-gap: 0;
-    }
-
-    > div::before,
-    > div::after,
-    h2,
-    .seoul-youth-center__ui-design-summary {
-      grid-column: 1;
-    }
-
-    > div::before {
-      grid-row: 1;
-    }
-
-    > div::after {
-      grid-row: 2;
-    }
-
-    h2 {
-      grid-row: 3;
-    }
-
-    .seoul-youth-center__ui-design-summary {
-      grid-row: 4;
-    }
-
-    .seoul-youth-center__ui-design-figma-link {
-      position: static;
-      justify-self: start;
-      margin-top: space(4);
-    }
+    grid-template-columns: 1fr;
+    column-gap: 0;
   }
 
-  .seoul-youth-center__ui-design-layout,
-  .seoul-youth-center__ui-design-device-set,
-  .seoul-youth-center__ui-design-details {
+  .seoul-youth-center__ui-design-header::before,
+  .seoul-youth-center__ui-design-header::after,
+  .seoul-youth-center__ui-design-header h2,
+  .seoul-youth-center__ui-design-summary,
+  .seoul-youth-center__ui-design-figma-link {
+    grid-column: 1;
+  }
+
+  .seoul-youth-center__ui-design-header::before {
+    grid-row: 1;
+  }
+
+  .seoul-youth-center__ui-design-header::after {
+    grid-row: 2;
+  }
+
+  .seoul-youth-center__ui-design-header h2 {
+    grid-row: 3;
+  }
+
+  .seoul-youth-center__ui-design-summary {
+    grid-row: 4;
+  }
+
+  .seoul-youth-center__ui-design-figma-link {
+    grid-row: 5;
+    justify-self: start;
+    margin-top: space(2);
+  }
+
+  .seoul-youth-center__ui-design-board,
+  .seoul-youth-center__ui-design-note ul {
     grid-template-columns: 1fr;
+  }
+
+  .seoul-youth-center__ui-design-viewport {
+    aspect-ratio: 16 / 9;
+  }
+
+  .seoul-youth-center__ui-design-note {
+    grid-template-columns: 1fr;
+    gap: space(3);
+  }
+}
+
+@include respond-down(tablet) {
+  .seoul-youth-center__ui-design {
+    row-gap: space(6);
+  }
+
+  .seoul-youth-center__ui-design-board {
+    gap: space(4);
+  }
+
+  .seoul-youth-center__ui-design-note {
+    padding: space(4);
   }
 }

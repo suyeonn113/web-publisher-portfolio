@@ -42,7 +42,7 @@ const SeoulYouthCenterDesignConcept = () => {
 
           <p className="seoul-youth-center__design-concept-summary">
             서울시립청소년센터 홈페이지는 공공기관의 신뢰감을
-            유지하면서도, 사용자가 필요한 정보를 쉽게 찾고 프로그램
+            유지하면서도, <br />사용자가 필요한 정보를 쉽게 찾고 프로그램
             참여까지 자연스럽게 이어질 수 있도록 설계합니다.
           </p>
         </header>

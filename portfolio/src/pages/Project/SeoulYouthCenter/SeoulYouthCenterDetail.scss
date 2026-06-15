@@ -24,10 +24,7 @@
   }
 
   :where(
-    .syc-page
-      > header:not(.seoul-youth-center__wireframes-header):not(
-        .seoul-youth-center__ui-design-header
-      )
+    .syc-page > header:not(.seoul-youth-center__ui-design-header)
   ) {
     display: grid;
     align-content: start;
@@ -35,10 +32,7 @@
   }
 
   :where(
-    .syc-page
-      > header:not(.seoul-youth-center__wireframes-header):not(
-        .seoul-youth-center__ui-design-header
-      )
+    .syc-page > header:not(.seoul-youth-center__ui-design-header)
   ) {
     grid-template-columns: minmax(112px, 0.16fr) minmax(0, 1fr);
     grid-template-rows: auto auto auto;
@@ -87,10 +81,7 @@
   }
 
   :where(
-    .syc-page
-      > header:not(.seoul-youth-center__wireframes-header):not(
-        .seoul-youth-center__ui-design-header
-      )
+    .syc-page > header:not(.seoul-youth-center__ui-design-header)
       > [class$="-eyebrow"]
   ) {
     display: none;
@@ -244,10 +235,7 @@
     --syc-line-gap: #{space(3)};
 
     :where(
-      .syc-page
-        > header:not(.seoul-youth-center__wireframes-header):not(
-          .seoul-youth-center__ui-design-header
-        )
+      .syc-page > header:not(.seoul-youth-center__ui-design-header)
     ) {
       grid-template-columns: minmax(92px, 0.18fr) minmax(0, 1fr);
       column-gap: space(6);
@@ -277,10 +265,7 @@
 
   @include respond-down(laptop) {
     :where(
-      .syc-page
-        > header:not(.seoul-youth-center__wireframes-header):not(
-          .seoul-youth-center__ui-design-header
-        )
+      .syc-page > header:not(.seoul-youth-center__ui-design-header)
     ) {
       grid-template-columns: 1fr;
       column-gap: 0;

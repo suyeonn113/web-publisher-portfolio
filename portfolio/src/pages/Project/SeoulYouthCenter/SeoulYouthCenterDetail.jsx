@@ -11,6 +11,7 @@ import SeoulYouthCenterGoals from "./components/04SeoulYouthCenterGoals/SeoulYou
 import SeoulYouthCenterSiteAnalysisInformationFlow from "./components/05SeoulYouthCenterSiteAnalysis/SeoulYouthCenterSiteAnalysisInformationFlow";
 import SeoulYouthCenterSiteAnalysisResponsive from "./components/05SeoulYouthCenterSiteAnalysis/SeoulYouthCenterSiteAnalysisResponsive";
 import SeoulYouthCenterResearchBenchmarking from "./components/06SeoulYouthCenterResearchBenchmarking/SeoulYouthCenterResearchBenchmarking";
+import SeoulYouthCenterBenchmarkingBoard from "./components/06SeoulYouthCenterResearchBenchmarking/SeoulYouthCenterBenchmarkingBoard";
 import SeoulYouthCenterImprovementStrategy from "./components/07SeoulYouthCenterSwotStrategy/SeoulYouthCenterImprovementStrategy";
 import SeoulYouthCenterPositioningSwot from "./components/07SeoulYouthCenterSwotStrategy/SeoulYouthCenterPositioningSwot";
 import SeoulYouthCenterUserAnalysis from "./components/08SeoulYouthCenterUserAnalysis/SeoulYouthCenterUserAnalysis";
@@ -20,6 +21,8 @@ import SeoulYouthCenterInformationArchitecture from "./components/11SeoulYouthCe
 import SeoulYouthCenterInformationArchitectureStructure from "./components/11SeoulYouthCenterInformationArchitecture/SeoulYouthCenterInformationArchitectureStructure";
 import SeoulYouthCenterUserFlow from "./components/12SeoulYouthCenterUserFlow/SeoulYouthCenterUserFlow";
 import SeoulYouthCenterWireframes from "./components/13SeoulYouthCenterWireframes/SeoulYouthCenterWireframes";
+import SeoulYouthCenterResponsiveWireframes from "./components/13SeoulYouthCenterWireframes/SeoulYouthCenterResponsiveWireframes";
+import SeoulYouthCenterSectionResponsiveWireframes from "./components/13SeoulYouthCenterWireframes/SeoulYouthCenterSectionResponsiveWireframes";
 import SeoulYouthCenterUiDesign from "./components/14SeoulYouthCenterUiDesign/SeoulYouthCenterUiDesign";
 import SeoulYouthCenterDesignSystem from "./components/15SeoulYouthCenterDesignSystem/SeoulYouthCenterDesignSystem";
 import SeoulYouthCenterDevelopmentOverview from "./components/16SeoulYouthCenterDevelopmentOverview/SeoulYouthCenterDevelopmentOverview";
@@ -82,6 +85,7 @@ const SeoulYouthCenterDetail = () => {
         className="project-section-group"
       >
         <SeoulYouthCenterResearchBenchmarking />
+        <SeoulYouthCenterBenchmarkingBoard />
       </div>
 
       <div
@@ -133,6 +137,8 @@ const SeoulYouthCenterDetail = () => {
         className="project-section-group"
       >
         <SeoulYouthCenterWireframes />
+        <SeoulYouthCenterResponsiveWireframes />
+        <SeoulYouthCenterSectionResponsiveWireframes />
       </div>
 
       <div

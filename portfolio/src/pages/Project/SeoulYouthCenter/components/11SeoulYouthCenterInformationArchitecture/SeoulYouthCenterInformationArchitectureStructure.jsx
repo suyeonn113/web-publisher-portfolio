@@ -63,7 +63,7 @@ const SeoulYouthCenterInformationArchitectureStructure = () => {
           </h2>
 
           <p className="seoul-youth-center__information-architecture-structure-summary">
-            리뉴얼에서는 전체 메뉴를 사용자 목적 기준으로 재정리하고,
+            리뉴얼에서는 전체 메뉴를 사용자 목적 기준으로 재정리하고, <br />
             메인 화면에서 프로그램 탐색과 신청 진입점이 바로 드러나도록
             접근 구조를 설계했습니다.
           </p>

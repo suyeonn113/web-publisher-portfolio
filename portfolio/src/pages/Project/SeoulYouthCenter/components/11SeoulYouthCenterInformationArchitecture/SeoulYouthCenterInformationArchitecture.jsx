@@ -54,7 +54,8 @@ const SeoulYouthCenterInformationArchitecture = () => {
 
           <p className="seoul-youth-center__information-architecture-summary">
             기존 사이트는 프로그램 모집과 신청 정보가 커뮤니티 게시판
-            안에 섞여 있어, 사용자가 프로그램을 탐색한 뒤 참여로
+            안에 섞여 있어, <br />
+            사용자가 프로그램을 탐색한 뒤 참여로
             이어지는 흐름을 파악하기 어려웠습니다.
           </p>
         </header>
