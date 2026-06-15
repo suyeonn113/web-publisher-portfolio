@@ -1,5 +1,6 @@
 import {
   CssIcon,
+  DothomeIcon,
   FigmaIcon,
   FileZillaIcon,
   GitIcon,
@@ -52,6 +53,7 @@ export const techMap = {
   },
   dothome: {
     label: "Dothome",
+    Icon: DothomeIcon,
   },
   figma: {
     label: "Figma",

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./SeoulYouthCenterWireframes.scss";
 import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
@@ -29,6 +30,8 @@ const responsiveWireframes = [
 ];
 
 const SeoulYouthCenterResponsiveWireframes = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <div className="ppt-page-wrap">
       <section
@@ -56,7 +59,11 @@ const SeoulYouthCenterResponsiveWireframes = () => {
             <h3>기기별 구조 비교</h3>
           </div>
 
-          <div className="seoul-youth-center__wireframes-responsive-board">
+          <div
+            className={`seoul-youth-center__wireframes-responsive-board${
+              isExpanded ? " is-expanded" : ""
+            }`}
+          >
             {responsiveWireframes.map(({ title, className, src, alt }) => (
               <figure
                 className={`seoul-youth-center__wireframes-device-frame ${className}`}
@@ -72,6 +79,15 @@ const SeoulYouthCenterResponsiveWireframes = () => {
               </figure>
             ))}
           </div>
+
+          <button
+            className="seoul-youth-center__wireframes-toggle"
+            type="button"
+            onClick={() => setIsExpanded((current) => !current)}
+            aria-expanded={isExpanded}
+          >
+            {isExpanded ? "접기" : "크게 보기"}
+          </button>
         </section>
       </section>
     </div>

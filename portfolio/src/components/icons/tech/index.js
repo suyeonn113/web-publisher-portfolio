@@ -1,5 +1,6 @@
 export { TechIconBase } from './TechIconBase';
 export { CssIcon } from './CssIcon';
+export { DothomeIcon } from './DothomeIcon';
 export { FigmaIcon } from './FigmaIcon';
 export { FileZillaIcon } from './FileZillaIcon';
 export { GitIcon } from './GitIcon';
