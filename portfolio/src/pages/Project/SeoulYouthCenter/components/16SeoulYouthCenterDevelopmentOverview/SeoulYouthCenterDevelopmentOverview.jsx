@@ -5,21 +5,27 @@ import "./SeoulYouthCenterDevelopmentOverview.scss";
 const developmentScreens = [
   {
     title: "PC",
-    src: getPublicAssetPath("images/projects/seoul-youth-center/development-main-pc.png"),
+    src: getPublicAssetPath(
+      "images/projects/seoul-youth-center/development-main-pc.png",
+    ),
     alt: "서울시립청소년센터 PC 구현 화면",
-    note: "PC 실제 구현 메인 화면. 메인 상단부터 모집 중 프로그램 영역까지 포함해 퀵메뉴와 프로그램 진입 구조가 보이도록 캡쳐",
+    note: "PC 실제 구현 메인 화면",
   },
   {
     title: "Tablet",
-    src: getPublicAssetPath("images/projects/seoul-youth-center/development-main-tablet.png"),
+    src: getPublicAssetPath(
+      "images/projects/seoul-youth-center/development-main-tablet.png",
+    ),
     alt: "서울시립청소년센터 태블릿 구현 화면",
-    note: "태블릿 실제 구현 메인 화면. 상단 구조와 주요 접근 요소가 태블릿 폭에서 재배치된 모습이 보이도록 캡쳐",
+    note: "태블릿 실제 구현 메인 화면",
   },
   {
     title: "Mobile",
-    src: getPublicAssetPath("images/projects/seoul-youth-center/development-main-mobile.png"),
+    src: getPublicAssetPath(
+      "images/projects/seoul-youth-center/development-main-mobile.png",
+    ),
     alt: "서울시립청소년센터 모바일 구현 화면",
-    note: "모바일 실제 구현 메인 화면. 상단 구조, 주요 프로그램 접근, 모바일 하단바가 함께 보이도록 캡쳐",
+    note: "모바일 실제 구현 메인 화면",
   },
 ];
 
@@ -30,7 +36,7 @@ const developmentPoints = [
   },
   {
     title: "Interaction",
-    description: "메인 슬라이드, 프로그램 슬라이더, 필터, 탭, 하단바 조작 요소 구현",
+    description: "메인 슬라이드, 프로그램 슬라이더, 필터, 탭 조작 요소 구현",
   },
   {
     title: "PHP",
@@ -38,7 +44,7 @@ const developmentPoints = [
   },
   {
     title: "MySQL",
-    description: "프로그램 정보, 신청 데이터, 게시글 데이터를 저장하고 불러오는 구조 설계",
+    description: "프로그램 정보, 신청 데이터, 게시글 데이터 저장 구조 설계",
   },
 ];
 
@@ -62,7 +68,7 @@ const SeoulYouthCenterDevelopmentOverview = ({ project }) => {
 
           <p className="seoul-youth-center__development-overview-summary">
             기획과 UI 디자인을 바탕으로 HTML, SCSS, JavaScript,
-            PHP, MySQL을 활용해 반응형 웹사이트를 구현했습니다.
+            PHP, MySQL을 활용해 반응형 웹사이트를 구현했습니다. <br />
             메인 화면, 프로그램 탐색, 신청 흐름, 게시판 구조를
             실제 사용 가능한 페이지로 연결하는 데 중점을 두었습니다.
           </p>

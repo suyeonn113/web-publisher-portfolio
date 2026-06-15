@@ -13,19 +13,23 @@
 
 .seoul-youth-center__design-system-list {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 13.5rem));
   gap: space(4);
-  height: 125%;
+  justify-content: center;
+  height: auto;
   min-height: 0;
-  align-items: stretch;
+  align-items: start;
 }
 
 .seoul-youth-center__design-system-list > li {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   gap: space(6);
+  aspect-ratio: 216 / 495;
+  width: 100%;
   min-width: 0;
   min-height: 0;
+  overflow: hidden;
   padding: space(6) space(4);
   background: var(--color-white);
   border: stroke(thin) solid var(--syc-rule-color);
@@ -300,7 +304,7 @@
   }
 
   .seoul-youth-center__design-system-list {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 13.5rem));
     height: auto;
   }
 
@@ -311,7 +315,7 @@
 
 @include respond-down(laptop) {
   .seoul-youth-center__design-system-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 13.5rem));
   }
 }
 
@@ -321,7 +325,13 @@
   }
 
   .seoul-youth-center__design-system-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 13.5rem));
     gap: space(3);
+  }
+}
+
+@include respond-down(mobile) {
+  .seoul-youth-center__design-system-list {
+    grid-template-columns: minmax(0, 13.5rem);
   }
 }

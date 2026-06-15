@@ -1,23 +1,20 @@
 @use "../../../../../styles/foundation" as *;
 
 .seoul-youth-center__development-overview {
-  display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  row-gap: space(4);
+  row-gap: space(5);
   align-content: stretch;
 }
 
 .seoul-youth-center__development-overview-header {
   --syc-section-number: "16.";
   --syc-section-label: "Development Overview";
-
-  display: grid;
 }
 
 .seoul-youth-center__development-overview-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.68fr) minmax(0, 0.32fr);
-  gap: space(8);
+  grid-template-columns: minmax(0, 0.64fr) minmax(0, 0.36fr);
+  gap: space(6);
   height: 100%;
   min-height: 0;
   align-items: stretch;
@@ -31,6 +28,10 @@
   min-height: 0;
 }
 
+.seoul-youth-center__development-overview-preview {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
 .seoul-youth-center__development-overview-section-heading {
   display: grid;
   gap: space(1);
@@ -38,7 +39,7 @@
   p {
     @include typography(meta);
 
-    color: var(--color-text-primary);
+    color: var(--color-point-2);
     font-weight: font-weight(bold);
     text-transform: uppercase;
   }
@@ -48,14 +49,14 @@
 
     color: var(--color-text-primary);
     font-weight: font-weight(bold);
+    line-height: line-height(heading);
   }
 }
 
 .seoul-youth-center__development-overview-screens {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.82fr) minmax(0, 0.62fr);
+  grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.74fr) minmax(0, 0.56fr);
   gap: space(3);
-  height: 100%;
   min-height: 0;
   align-items: stretch;
 }
@@ -64,8 +65,8 @@
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
   gap: space(2);
+  min-width: 0;
   min-height: 0;
-  overflow: hidden;
 }
 
 .seoul-youth-center__development-overview-screens img {
@@ -73,13 +74,13 @@
   width: 100%;
   height: 100%;
   min-height: 0;
+  max-height: 250px;
   color: transparent;
   font-size: 0;
   object-fit: cover;
   object-position: top center;
-  background: var(--color-white);
-  border: stroke(thin) solid var(--syc-element-border);
-  border-radius: radius(sm);
+  background: var(--syc-soft-surface);
+  border: stroke(thin) solid var(--syc-rule-color);
 }
 
 .seoul-youth-center__development-overview-screens figcaption {
@@ -87,54 +88,63 @@
 
   color: var(--color-text-primary);
   font-weight: font-weight(bold);
+  text-transform: uppercase;
+}
+
+.seoul-youth-center__development-overview-points {
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: space(4);
+  background: var(--syc-soft-surface);
+  border-top: stroke(medium) solid var(--color-text-primary);
 }
 
 .seoul-youth-center__development-overview-points ul {
   display: grid;
-  grid-template-rows: repeat(4, minmax(0, 1fr));
-  gap: 0;
-  height: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: space(3);
   min-height: 0;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  border-bottom: stroke(thin) solid var(--syc-rule-color);
+  align-content: stretch;
 }
 
 .seoul-youth-center__development-overview-points li {
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: space(2);
-  align-content: center;
+  min-width: 0;
   min-height: 0;
-  padding-block: space(3);
-  border-bottom: stroke(thin) solid var(--syc-rule-color);
+  padding: space(4);
+  background: var(--color-white);
+  box-shadow: 0 space(2) space(6) rgb(var(--color-black-rgb) / 4%);
 
   strong {
-    @include typography(body-lg);
+    @include typography(body);
 
     color: var(--color-text-primary);
     font-weight: font-weight(bold);
+    line-height: line-height(heading);
   }
 
   p {
-    @include typography(body);
+    @include typography(meta);
 
+    color: var(--syc-muted-color);
     line-height: line-height(base);
   }
 }
 
 .seoul-youth-center__development-overview-tools {
-  grid-template-columns: minmax(160px, 0.18fr) minmax(0, 1fr);
+  grid-template-columns: minmax(150px, 0.18fr) minmax(0, 1fr);
+  gap: space(6);
   align-items: center;
+  padding-top: space(2);
+  padding-left: space(4);
+  border-left: stroke(medium) solid var(--color-text-primary);
 }
 
 .seoul-youth-center__development-overview-tools ul {
   display: flex;
   flex-wrap: wrap;
   gap: space(2);
-  padding: 0;
-  margin: 0;
-  list-style: none;
 }
 
 .seoul-youth-center__development-overview-tools li {
@@ -143,12 +153,11 @@
   display: inline-flex;
   align-items: center;
   gap: space(2);
-  min-height: space(8);
+  min-height: space(7);
   padding-inline: space(3);
   color: var(--color-text-primary);
   font-weight: font-weight(bold);
   background: var(--syc-soft-surface);
-  border-radius: radius(full);
 
   svg,
   .seoul-youth-center__development-overview-tool-placeholder {
@@ -165,20 +174,52 @@
   }
 
   .seoul-youth-center__development-overview-layout {
+    grid-template-columns: minmax(0, 0.62fr) minmax(0, 0.38fr);
     height: auto;
-    grid-template-columns: minmax(0, 0.68fr) minmax(0, 0.32fr);
   }
 
-  .seoul-youth-center__development-overview-points ul {
-    height: auto;
-    grid-template-rows: none;
+  .seoul-youth-center__development-overview-screens img {
+    max-height: none;
   }
 }
 
 @include respond-down(laptop) {
   .seoul-youth-center__development-overview-layout,
-  .seoul-youth-center__development-overview-screens,
   .seoul-youth-center__development-overview-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .seoul-youth-center__development-overview-screens {
+    height: auto;
+  }
+
+  .seoul-youth-center__development-overview-points {
+    padding: space(4);
+  }
+
+  .seoul-youth-center__development-overview-points ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .seoul-youth-center__development-overview-tools {
+    gap: space(3);
+  }
+}
+
+@include respond-down(tablet) {
+  .seoul-youth-center__development-overview {
+    row-gap: space(6);
+  }
+
+  .seoul-youth-center__development-overview-layout {
+    gap: space(5);
+  }
+
+  .seoul-youth-center__development-overview-points {
+    padding: space(4);
+  }
+
+  .seoul-youth-center__development-overview-points ul {
     grid-template-columns: 1fr;
   }
 }
