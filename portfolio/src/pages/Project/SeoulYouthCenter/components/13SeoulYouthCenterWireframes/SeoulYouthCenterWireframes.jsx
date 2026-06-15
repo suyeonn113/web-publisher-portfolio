@@ -1,4 +1,5 @@
-import "./SeoulYouthCenterWireframes.scss";
+﻿import "./SeoulYouthCenterWireframes.scss";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
 const wireframeFigmaUrl =
   "https://www.figma.com/design/iipzgdotDJzzW46sqkONIq/Responsive-Website-Renewal-Project---%EC%84%9C%EC%9A%B8%EC%8B%9C%EB%A6%BD%EC%B2%AD%EC%86%8C%EB%85%84%EC%84%BC%ED%84%B0-?node-id=2-4&m=dev&t=o5twbfDtI8g3X7QH-1";
@@ -29,19 +30,19 @@ const wireframeHighlights = [
 const responsiveWireframes = [
   {
     title: "PC",
-    src: "/images/projects/seoul-youth-center/wireframe-main-pc.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/wireframe-main-pc.png"),
     alt: "서울시립청소년센터 메인 PC 와이어프레임",
     note: "1440px 기준 메인 전체 프레임. 헤더, 비주얼, 퀵메뉴, 모집 중 프로그램, 맞춤 탐색, 일정, 공지, 활동사진, SNS, 푸터까지 포함",
   },
   {
     title: "Tablet",
-    src: "/images/projects/seoul-youth-center/wireframe-main-tablet.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/wireframe-main-tablet.png"),
     alt: "서울시립청소년센터 메인 태블릿 와이어프레임",
     note: "태블릿 메인 전체 프레임. PC의 주요 정보 흐름이 태블릿 폭에서 어떻게 재배치되는지 보이도록 상단부터 SNS 영역까지 포함",
   },
   {
     title: "Mobile",
-    src: "/images/projects/seoul-youth-center/wireframe-main-mobile.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/wireframe-main-mobile.png"),
     alt: "서울시립청소년센터 메인 모바일 와이어프레임",
     note: "모바일 메인 전체 프레임. 모바일 하단바, 퀵 접근, 프로그램 탐색, 공지/활동사진/SNS로 이어지는 세로 흐름이 보이도록 포함",
   },
@@ -50,13 +51,13 @@ const responsiveWireframes = [
 const supportingWireframes = [
   {
     title: "Program Flow",
-    src: "/images/projects/seoul-youth-center/wireframe-program-flow.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/wireframe-program-flow.png"),
     alt: "프로그램 목록과 신청 흐름 와이어프레임",
     note: "프로그램 목록, 필터, 카드, 상세 정보, 신청 CTA가 한 흐름으로 보이도록 목록/상세/신청 화면을 묶어 크롭",
   },
   {
     title: "Common Components",
-    src: "/images/projects/seoul-youth-center/wireframe-components.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/wireframe-components.png"),
     alt: "공통 컴포넌트 와이어프레임",
     note: "필터, 버튼, 프로그램 카드, 일정, 게시판, SNS 카드 등 반복 컴포넌트 묶음만 보이도록 크롭",
   },

@@ -1,4 +1,5 @@
-import "./SeoulYouthCenterSystemArchitecture.scss";
+﻿import "./SeoulYouthCenterSystemArchitecture.scss";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
 const systemFlow = [
   {
@@ -86,7 +87,7 @@ const SeoulYouthCenterSystemArchitecture = () => {
           <figure className="seoul-youth-center__system-architecture-erd">
             {/* 이미지 가이드: 실제 ERD 또는 DB 테이블 구조 캡쳐가 있을 경우 사용. Programs, Applications, Boards, Users/Applicants 관계가 보이도록 캡쳐. 파일명은 database-erd.png로 저장 */}
             <img
-              src="/images/projects/seoul-youth-center/database-erd.png"
+              src={getPublicAssetPath("images/projects/seoul-youth-center/database-erd.png")}
               alt="서울시립청소년센터 데이터베이스 구조"
             />
             <figcaption>Database Structure</figcaption>

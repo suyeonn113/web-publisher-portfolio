@@ -1,4 +1,5 @@
-import "./SeoulYouthCenterSiteAnalysisInformationFlow.scss";
+﻿import "./SeoulYouthCenterSiteAnalysisInformationFlow.scss";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
 const informationFlowFindings = [
   {
@@ -51,7 +52,7 @@ const SeoulYouthCenterSiteAnalysisInformationFlow = () => {
           >
             {/* 이미지 가이드: 기존 사이트 데스크톱 메인 화면 캡쳐. 배너, 공지, SNS, 퀵링크, 프로그램 모집 안내 등 여러 정보가 한 화면에서 경쟁하는 구성이 보이도록 16:10 또는 16:9 비율 권장. 파일명은 existing-information-flow-desktop.png로 저장 */}
             <img
-              src="/images/projects/seoul-youth-center/existing-information-flow-desktop.png"
+              src={getPublicAssetPath("images/projects/seoul-youth-center/existing-information-flow-desktop.png")}
               alt="기존 홈페이지 데스크톱 화면에서 정보 우선순위가 분산된 모습"
             />
           </figure>

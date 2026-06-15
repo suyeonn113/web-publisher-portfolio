@@ -45,7 +45,8 @@
   align-content: start;
   min-width: 0;
   padding: space(6);
-  border: 1px solid var(--syc-element-border);
+  border: stroke(thin) solid var(--syc-element-border);
+  border-radius: radius(sm);
 }
 
 .seoul-youth-center__improvement-strategy-step-arrow {
@@ -79,7 +80,7 @@
   @include typography(title);
 
   color: var(--color-point-2);
-  font-weight: 700;
+  font-weight: font-weight(bold);
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
@@ -88,7 +89,7 @@
   @include typography(body-lg);
 
   color: var(--color-text-primary);
-  font-weight: 700;
+  font-weight: font-weight(bold);
   line-height: line-height(heading);
   word-break: keep-all;
 }
@@ -109,7 +110,8 @@
   width: 80%;
   text-align: center;
   background: var(--syc-soft-surface);
-  border: 1px solid var(--syc-element-border);
+  border: stroke(thin) solid var(--syc-element-border);
+  border-radius: radius(sm);
 }
 
 .seoul-youth-center__improvement-strategy-direction-arrow {
@@ -121,7 +123,7 @@
   padding: space(1);
   color: var(--color-text-primary);
   background: var(--color-white);
-  border: 1px solid var(--syc-element-border);
+  border: stroke(thin) solid var(--syc-element-border);
   border-radius: radius(full);
   transform: translateX(-50%);
 }
@@ -130,7 +132,7 @@
   @include typography(meta);
 
   color: var(--color-text-primary);
-  font-weight: 700;
+  font-weight: font-weight(bold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -139,7 +141,7 @@
   @include typography(body-lg);
 
   color: var(--color-text-primary);
-  font-weight: 700;
+  font-weight: font-weight(bold);
   line-height: line-height(base);
   word-break: keep-all;
 }

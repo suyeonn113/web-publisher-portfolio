@@ -49,7 +49,7 @@
   h3 {
     @include typography(body-lg);
 
-    font-weight: 600;
+    font-weight: font-weight(semibold);
   }
 
   p {
@@ -72,7 +72,7 @@
     @include typography(meta);
 
     color: var(--color-text-primary);
-    font-weight: 700;
+    font-weight: font-weight(bold);
     text-transform: uppercase;
   }
 
@@ -80,7 +80,7 @@
     @include typography(body-lg);
 
     color: var(--color-text-primary);
-    font-weight: 700;
+    font-weight: font-weight(bold);
   }
 }
 

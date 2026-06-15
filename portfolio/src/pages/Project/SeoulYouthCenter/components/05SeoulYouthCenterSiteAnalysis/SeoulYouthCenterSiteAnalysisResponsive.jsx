@@ -1,4 +1,5 @@
-import "./SeoulYouthCenterSiteAnalysisResponsive.scss";
+﻿import "./SeoulYouthCenterSiteAnalysisResponsive.scss";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
 const responsiveFindings = [
   {
@@ -51,7 +52,7 @@ const SeoulYouthCenterSiteAnalysisResponsive = () => {
           >
             {/* 이미지 가이드: 기존 사이트를 모바일 또는 태블릿 폭에서 확인한 화면 캡쳐. PC 화면이 축소되어 보이거나 텍스트/버튼이 작아지는 문제가 드러나도록 세로형 9:16 비율 권장. 파일명은 existing-responsive-gap-mobile.png로 저장 */}
             <img
-              src="/images/projects/seoul-youth-center/existing-responsive-gap-mobile.png"
+              src={getPublicAssetPath("images/projects/seoul-youth-center/existing-responsive-gap-mobile.png")}
               alt="기존 홈페이지 모바일 화면에서 반응형 접근성이 부족한 모습"
             />
           </figure>

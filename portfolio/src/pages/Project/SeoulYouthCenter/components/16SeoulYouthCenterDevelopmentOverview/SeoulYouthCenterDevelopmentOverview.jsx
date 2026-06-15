@@ -1,22 +1,23 @@
-import { getProjectTechItems } from "../../../../../utils/projectHelpers";
+﻿import { getProjectTechItems } from "../../../../../utils/projectHelpers";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 import "./SeoulYouthCenterDevelopmentOverview.scss";
 
 const developmentScreens = [
   {
     title: "PC",
-    src: "/images/projects/seoul-youth-center/development-main-pc.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/development-main-pc.png"),
     alt: "서울시립청소년센터 PC 구현 화면",
     note: "PC 실제 구현 메인 화면. 메인 상단부터 모집 중 프로그램 영역까지 포함해 퀵메뉴와 프로그램 진입 구조가 보이도록 캡쳐",
   },
   {
     title: "Tablet",
-    src: "/images/projects/seoul-youth-center/development-main-tablet.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/development-main-tablet.png"),
     alt: "서울시립청소년센터 태블릿 구현 화면",
     note: "태블릿 실제 구현 메인 화면. 상단 구조와 주요 접근 요소가 태블릿 폭에서 재배치된 모습이 보이도록 캡쳐",
   },
   {
     title: "Mobile",
-    src: "/images/projects/seoul-youth-center/development-main-mobile.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/development-main-mobile.png"),
     alt: "서울시립청소년센터 모바일 구현 화면",
     note: "모바일 실제 구현 메인 화면. 상단 구조, 주요 프로그램 접근, 모바일 하단바가 함께 보이도록 캡쳐",
   },

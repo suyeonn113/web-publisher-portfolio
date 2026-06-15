@@ -1,17 +1,18 @@
-import {
+﻿import {
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
 import { Link } from "react-router-dom";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
 import ArrowIcon from "../../../../../components/icons/ArrowIcon";
 import { prepareProjectDetail } from "../../../../../utils/projectHelpers";
 import "./SeoulYouthCenterCover.scss";
 
 const coverImages = {
-  main: "/images/projects/seoul-youth-center/main-desktop.png",
+  main: getPublicAssetPath("images/projects/seoul-youth-center/main-desktop.png"),
 };
 
 const previewDevices = [

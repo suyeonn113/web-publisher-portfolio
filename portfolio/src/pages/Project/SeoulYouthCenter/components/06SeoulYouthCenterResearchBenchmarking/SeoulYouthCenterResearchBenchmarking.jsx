@@ -1,4 +1,5 @@
-import "./SeoulYouthCenterResearchBenchmarking.scss";
+﻿import "./SeoulYouthCenterResearchBenchmarking.scss";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
 const researchCriteria = [
   {
@@ -44,19 +45,19 @@ const benchmarkTargets = [
 
 const benchmarkImages = [
   {
-    src: "/images/projects/seoul-youth-center/benchmark-gov24.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/benchmark-gov24.png"),
     alt: "정부24 대표 화면",
   },
   {
-    src: "/images/projects/seoul-youth-center/benchmark-sen.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/benchmark-sen.png"),
     alt: "서울특별시교육청 대표 화면",
   },
   {
-    src: "/images/projects/seoul-youth-center/benchmark-youth-info.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/benchmark-youth-info.png"),
     alt: "서울시청소년몽땅정보통 대표 화면",
   },
   {
-    src: "/images/projects/seoul-youth-center/benchmark-youth-facility.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/benchmark-youth-facility.png"),
     alt: "청소년시설 대표 화면",
   },
 ];

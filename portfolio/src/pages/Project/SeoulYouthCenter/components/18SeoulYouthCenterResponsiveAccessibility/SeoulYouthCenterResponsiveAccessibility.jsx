@@ -1,21 +1,22 @@
-import "./SeoulYouthCenterResponsiveAccessibility.scss";
+﻿import "./SeoulYouthCenterResponsiveAccessibility.scss";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
 const responsiveScreens = [
   {
     title: "PC",
-    src: "/images/projects/seoul-youth-center/responsive-main-pc.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/responsive-main-pc.png"),
     alt: "PC 반응형 구현 화면",
     note: "PC 기준 실제 구현 화면. 메인 또는 프로그램 화면에서 넓은 화면의 카드/목록 병렬 배치가 보이도록 캡쳐",
   },
   {
     title: "Tablet",
-    src: "/images/projects/seoul-youth-center/responsive-main-tablet.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/responsive-main-tablet.png"),
     alt: "태블릿 반응형 구현 화면",
     note: "태블릿 기준 실제 구현 화면. PC의 정보 흐름이 태블릿 폭에서 컬럼 수를 줄여 재배치되는 모습이 보이도록 캡쳐",
   },
   {
     title: "Mobile",
-    src: "/images/projects/seoul-youth-center/responsive-main-mobile.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/responsive-main-mobile.png"),
     alt: "모바일 반응형 구현 화면",
     note: "모바일 기준 실제 구현 화면. 세로형 카드 흐름과 주요 접근 요소가 보이도록 캡쳐",
   },
@@ -89,7 +90,7 @@ const SeoulYouthCenterResponsiveAccessibility = () => {
           <aside className="seoul-youth-center__responsive-accessibility-mobile">
             {/* 이미지 가이드: 모바일 하단바와 주요 메뉴 접근 구조가 보이도록 화면 하단 영역을 크롭. 세로형 또는 카드형 이미지 권장. 파일명은 responsive-mobile-bottom-nav.png로 저장 */}
             <img
-              src="/images/projects/seoul-youth-center/responsive-mobile-bottom-nav.png"
+              src={getPublicAssetPath("images/projects/seoul-youth-center/responsive-mobile-bottom-nav.png")}
               alt="모바일 하단바 구현 화면"
             />
           </aside>

@@ -1,15 +1,16 @@
-import "./SeoulYouthCenterResultsImpact.scss";
+﻿import "./SeoulYouthCenterResultsImpact.scss";
+import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 
 const resultComparison = [
   {
     title: "Before",
-    src: "/images/projects/seoul-youth-center/result-before-community.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/result-before-community.png"),
     alt: "기존 커뮤니티 프로그램 모집안내 화면",
     note: "기존 사이트의 커뮤니티 > 프로그램 모집안내 화면 캡쳐. 신청 정보가 게시판 안에 묻혀 있던 맥락이 보이도록 메뉴와 목록을 함께 포함",
   },
   {
     title: "After",
-    src: "/images/projects/seoul-youth-center/result-after-main-program.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/result-after-main-program.png"),
     alt: "리뉴얼 메인 모집 중 프로그램 영역",
     note: "리뉴얼 메인 화면의 모집 중인 청소년 프로그램 영역 캡쳐. 신청 가능한 프로그램이 메인에서 바로 보이는 구조가 드러나도록 포함",
   },
@@ -18,19 +19,19 @@ const resultComparison = [
 const resultFlow = [
   {
     title: "Main",
-    src: "/images/projects/seoul-youth-center/result-flow-main.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/result-flow-main.png"),
     alt: "메인 프로그램 진입 영역",
     note: "메인에서 프로그램으로 진입하는 영역 캡쳐. 퀵메뉴 또는 모집 중 프로그램 영역이 보이도록 크롭",
   },
   {
     title: "Detail",
-    src: "/images/projects/seoul-youth-center/result-flow-detail.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/result-flow-detail.png"),
     alt: "프로그램 상세와 신청 CTA",
     note: "프로그램 상세 화면에서 신청 CTA가 보이는 영역 캡쳐. 상세 정보 확인 후 신청으로 이어지는 구조가 보이도록 크롭",
   },
   {
     title: "Apply",
-    src: "/images/projects/seoul-youth-center/result-flow-apply.png",
+    src: getPublicAssetPath("images/projects/seoul-youth-center/result-flow-apply.png"),
     alt: "프로그램 신청 폼",
     note: "신청 폼 화면 캡쳐. 입력 항목과 제출 흐름이 보이도록 상단부터 주요 입력 영역까지 포함",
   },

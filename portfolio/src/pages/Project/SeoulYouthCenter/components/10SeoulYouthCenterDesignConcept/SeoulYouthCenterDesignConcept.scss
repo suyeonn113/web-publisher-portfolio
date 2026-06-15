@@ -38,7 +38,7 @@
     @include typography(meta);
 
     color: var(--color-point-2);
-    font-weight: 700;
+    font-weight: font-weight(bold);
     font-variant-numeric: tabular-nums;
   }
 
@@ -53,14 +53,14 @@
     @include typography(heading-sm);
 
     color: var(--color-text-primary);
-    font-weight: 700;
+    font-weight: font-weight(bold);
   }
 
   h3 {
     @include typography(body-lg);
 
     color: var(--color-text-primary);
-    font-weight: 700;
+    font-weight: font-weight(bold);
     word-break: keep-all;
   }
 

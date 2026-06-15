@@ -72,7 +72,7 @@
 
   &__toggle-heading {
     font-size: 0.6875rem;
-    font-weight: 600;
+    font-weight: font-weight(semibold);
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
@@ -86,7 +86,7 @@
 
     span:first-child {
       color: var(--section-nav-accent);
-      font-weight: 600;
+      font-weight: font-weight(semibold);
     }
 
     span:last-child {
@@ -129,7 +129,7 @@
   &__eyebrow {
     margin: 0 0 space(1);
     font-size: 0.625rem;
-    font-weight: 600;
+    font-weight: font-weight(semibold);
     color: var(--section-nav-text-muted);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -139,7 +139,7 @@
     padding: 0;
     margin: 0;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: font-weight(semibold);
     line-height: line-height(heading);
     color: var(--section-nav-text-active);
     text-align: left;
@@ -187,7 +187,7 @@
     padding: space(1) 0;
     margin: 0;
     font-size: 0.625rem;
-    font-weight: 600;
+    font-weight: font-weight(semibold);
     line-height: line-height(heading);
     color: var(--section-nav-text-muted);
     text-align: left;
@@ -225,7 +225,7 @@
     width: 1rem;
     height: 1rem;
     font-size: 0.75rem;
-    font-weight: 400;
+    font-weight: font-weight(regular);
     line-height: 1;
     color: var(--section-nav-text-muted);
   }
@@ -326,11 +326,11 @@
 
   &__link.is-active &__item-number {
     color: var(--section-nav-accent);
-    font-weight: 600;
+    font-weight: font-weight(semibold);
   }
 
   &__link.is-active &__item-label {
-    font-weight: 600;
+    font-weight: font-weight(semibold);
   }
 
   // ========================================

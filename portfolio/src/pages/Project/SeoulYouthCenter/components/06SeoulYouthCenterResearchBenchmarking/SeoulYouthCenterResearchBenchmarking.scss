@@ -72,7 +72,7 @@
     @include typography(meta);
 
     color: var(--color-point-2);
-    font-weight: 700;
+    font-weight: font-weight(bold);
     font-variant-numeric: tabular-nums;
   }
 
@@ -123,6 +123,7 @@
       var(--color-gray-50)
     );
   border: stroke(thin) solid var(--syc-element-border);
+  border-radius: radius(sm);
   box-shadow: 0 20px 44px rgb(var(--color-black-rgb) / 8%);
 }
 

@@ -38,14 +38,14 @@
     @include typography(meta);
 
     color: var(--syc-muted-color);
-    font-weight: 700;
+    font-weight: font-weight(bold);
   }
 
   dd {
     @include typography(body-lg);
 
     color: var(--color-text-primary);
-    font-weight: 500;
+    font-weight: font-weight(medium);
     word-break: keep-all;
   }
 }
@@ -71,7 +71,7 @@
     @include typography(meta);
 
     color: var(--syc-muted-color);
-    font-weight: 700;
+    font-weight: font-weight(bold);
   }
 
   dd {

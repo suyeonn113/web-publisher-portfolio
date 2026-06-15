@@ -310,7 +310,7 @@
   padding-inline: 24px;
   white-space: nowrap;
   background: rgb(var(--color-white-rgb) / 90%);
-  border: 1px solid rgb(var(--color-black-rgb) / 10%);
+  border: stroke(thin) solid rgb(var(--color-black-rgb) / 10%);
   border-radius: radius(full);
   box-shadow: 0 8px 20px rgb(var(--color-black-rgb) / 10%);
 

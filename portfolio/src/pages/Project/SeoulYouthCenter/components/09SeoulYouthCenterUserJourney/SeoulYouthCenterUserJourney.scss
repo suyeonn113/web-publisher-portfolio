@@ -33,7 +33,7 @@
     @include typography(meta);
 
     color: var(--color-point-2);
-    font-weight: 700;
+    font-weight: font-weight(bold);
     font-variant-numeric: tabular-nums;
   }
 
@@ -47,7 +47,7 @@
     @include typography(body-lg);
 
     color: var(--color-text-primary);
-    font-weight: 700;
+    font-weight: font-weight(bold);
   }
 
   p {
@@ -73,7 +73,7 @@
     @include typography(meta);
 
     color: var(--color-text-primary);
-    font-weight: 700;
+    font-weight: font-weight(bold);
     text-transform: uppercase;
   }
 
@@ -81,7 +81,7 @@
     @include typography(body-lg);
 
     color: var(--color-text-primary);
-    font-weight: 700;
+    font-weight: font-weight(bold);
   }
 }
 
@@ -105,7 +105,7 @@
     @include typography(body-lg);
 
     color: var(--color-text-primary);
-    font-weight: 700;
+    font-weight: font-weight(bold);
   }
 
   p {

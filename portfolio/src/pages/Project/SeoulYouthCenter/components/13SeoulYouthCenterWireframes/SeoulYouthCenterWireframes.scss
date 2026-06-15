@@ -45,7 +45,7 @@
       grid-row: 1;
       align-self: end;
       color: var(--syc-muted-color);
-      font-weight: 700;
+      font-weight: font-weight(bold);
       text-transform: uppercase;
       content: var(--syc-section-label);
     }
