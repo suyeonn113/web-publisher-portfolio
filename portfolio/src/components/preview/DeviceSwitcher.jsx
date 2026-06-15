@@ -2,17 +2,19 @@ const DEVICE_LABELS = {
   mobile: "Mobile",
   tablet: "Tablet",
   desktop: "Desktop",
+  wide: "Wide",
 };
 
 const DeviceSwitcher = ({
   devices,
+  deviceKeys = Object.keys(devices),
   selectedDevice,
   disabledDevices = [],
   onChange,
 }) => {
   return (
     <div className="device-switcher" aria-label="디바이스 선택">
-      {Object.keys(devices).map((device) => {
+      {deviceKeys.map((device) => {
         const isDisabled = disabledDevices.includes(device);
 
         return (

@@ -16,7 +16,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: space(3) space(6);
-  width: min(100%, 1440px);
+  width: min(100%, $page-design-width);
   margin-inline: auto;
 
   p,
@@ -60,7 +60,7 @@
 
 .preview-control-row,
 .preview-feature-notes {
-  width: min(100%, 1440px);
+  width: min(100%, $page-design-width);
   margin-inline: auto;
 }
 
@@ -175,10 +175,60 @@
   display: grid;
   justify-items: center;
   width: 100%;
-  max-width: 1440px;
+  max-width: $page-design-width;
   min-width: 0;
   margin-inline: auto;
   padding-block: space(4);
+}
+
+.preview-floating-controls {
+  position: fixed;
+  top: 50%;
+  right: space(8);
+  z-index: layer(sticky);
+
+  display: grid;
+  gap: space(2);
+
+  transform: translateY(-50%);
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: space(10);
+    aspect-ratio: 1;
+
+    color: var(--color-gray-700);
+    cursor: pointer;
+    background: rgb(var(--color-white-rgb) / 88%);
+    border-radius: radius(full);
+    box-shadow: 0 5px 14px rgb(var(--color-black-rgb) / 12%);
+
+    transition:
+      background-color motion(base, standard),
+      color motion(base, standard),
+      transform motion(base, standard);
+
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+
+  button:hover,
+  button:focus-visible,
+  button.is-active {
+    color: var(--color-white);
+    background: var(--color-gray-900);
+    transform: translateY(-1px);
+  }
 }
 
 .preview-frame-shell {
@@ -206,6 +256,17 @@
 @include respond-down(tablet) {
   .responsive-preview-page {
     padding-inline: 6%;
+  }
+
+  .preview-floating-controls {
+    top: auto;
+    right: 6%;
+    bottom: space(6);
+    transform: none;
+
+    button {
+      width: space(8);
+    }
   }
 
   .preview-header {

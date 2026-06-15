@@ -287,6 +287,8 @@
 .seoul-youth-center__external-text {
   @include typography(meta);
 
+  align-items: center;
+  gap: space(1);
   color: var(--color-text-primary);
   transition:
     color motion(base, standard),
@@ -310,6 +312,11 @@
   border: 1px solid rgb(var(--color-black-rgb) / 10%);
   border-radius: radius(full);
   box-shadow: 0 8px 20px rgb(var(--color-black-rgb) / 10%);
+
+  .arrow-icon {
+    width: 1em;
+    height: 1em;
+  }
 }
 
 .seoul-youth-center__preview-cta:hover,
@@ -326,6 +333,11 @@
   padding-inline: 2px;
   color: rgb(var(--color-white-rgb) / 84%);
   white-space: nowrap;
+
+  .arrow-icon {
+    width: 1em;
+    height: 1em;
+  }
 }
 
 .seoul-youth-center__external-text:hover,

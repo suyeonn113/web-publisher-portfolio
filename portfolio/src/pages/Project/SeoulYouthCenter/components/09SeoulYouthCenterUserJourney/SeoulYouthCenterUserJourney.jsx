@@ -68,7 +68,7 @@ const SeoulYouthCenterUserJourney = () => {
           </p>
         </header>
 
-        {/* 도식 가이드: Discover → Compare → Apply → Manage 흐름을 가로 화살표 또는 단계형 타임라인으로 표현 */}
+        {/* 도식 가이드: Discover, Compare, Apply, Manage 흐름을 가로 화살표 또는 단계형 타임라인으로 표현 */}
         <ol className="seoul-youth-center__user-journey-steps">
           {journeySteps.map(({ number, title, description }) => (
             <li key={number}>

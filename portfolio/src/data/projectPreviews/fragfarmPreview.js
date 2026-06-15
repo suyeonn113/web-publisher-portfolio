@@ -1,6 +1,9 @@
 export const fragfarmPreview = {
   projectId: "fragfarm",
+  githubUrl:
+    "https://github.com/suyeonn113/web-publisher-portfolio/tree/main/fragfarm-mobile",
   defaultDevice: "mobile",
+  visibleDevices: ["mobile"],
   devices: {
     mobile: {
       width: 390,
@@ -13,6 +16,11 @@ export const fragfarmPreview = {
     desktop: {
       width: 1440,
       frameHeight: 900,
+      maxShellHeight: 720,
+    },
+    wide: {
+      width: 1920,
+      frameHeight: 1080,
       maxShellHeight: 720,
     },
   },

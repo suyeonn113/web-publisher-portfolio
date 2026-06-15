@@ -1,6 +1,9 @@
 export const seoulYouthCenterPreview = {
   projectId: "seoul-youth-center",
+  githubUrl:
+    "https://github.com/suyeonn113/web-publisher-portfolio/tree/main/seoul-youth-center",
   defaultDevice: "desktop",
+  visibleDevices: ["mobile", "tablet", "desktop"],
   devices: {
     mobile: {
       width: 390,
@@ -13,6 +16,11 @@ export const seoulYouthCenterPreview = {
     desktop: {
       width: 1440,
       frameHeight: 900,
+      maxShellHeight: 720,
+    },
+    wide: {
+      width: 1920,
+      frameHeight: 1080,
       maxShellHeight: 720,
     },
   },

@@ -45,9 +45,10 @@ const PreviewFrame = ({
   const shellRef = useRef(null);
   const iframeRef = useRef(null);
   const measureTimeoutRef = useRef(null);
-  const [frameHeight, setFrameHeight] = useState(device.frameHeight);
+  const [documentHeight, setDocumentHeight] = useState(device.frameHeight);
   const [frameScale, setFrameScale] = useState(1);
   const src = getPreviewUrl(project.liveUrl, step.path);
+  const viewportHeight = device.frameHeight;
 
   useEffect(() => {
     const shell = shellRef.current;
@@ -74,7 +75,7 @@ const PreviewFrame = ({
   }, [device.width]);
 
   useEffect(() => {
-    setFrameHeight(device.frameHeight);
+    setDocumentHeight(device.frameHeight);
 
     return () => {
       if (measureTimeoutRef.current) {
@@ -89,7 +90,7 @@ const PreviewFrame = ({
   ]);
 
   const applyManualControl = () => {
-    setFrameHeight(device.frameHeight);
+    setDocumentHeight(device.frameHeight);
 
     const iframe = iframeRef.current;
     const manualScrollTop = getManualScrollTop(step, deviceKey);
@@ -122,7 +123,7 @@ const PreviewFrame = ({
       }
 
       measureTimeoutRef.current = window.setTimeout(() => {
-        setFrameHeight(
+        setDocumentHeight(
           Math.max(device.frameHeight, getDocumentHeight(frameDocument)),
         );
       }, 120);
@@ -143,10 +144,11 @@ const PreviewFrame = ({
       data-device={deviceKey}
       style={{
         "--preview-device-width": `${device.width}px`,
-        "--preview-frame-height": `${frameHeight}px`,
+        "--preview-frame-height": `${viewportHeight}px`,
+        "--preview-document-height": `${documentHeight}px`,
         "--preview-frame-scale": frameScale,
         "--preview-shell-height": `${Math.min(
-          frameHeight * frameScale,
+          viewportHeight * frameScale,
           device.maxShellHeight ?? Number.POSITIVE_INFINITY,
         )}px`,
       }}
@@ -157,7 +159,7 @@ const PreviewFrame = ({
         title={`${project.title} ${step.title} preview`}
         src={src}
         width={device.width}
-        height={frameHeight}
+        height={viewportHeight}
         onLoad={handleLoad}
         onError={onUnavailable}
       />

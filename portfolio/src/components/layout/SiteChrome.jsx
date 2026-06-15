@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import ArrowIcon from "../icons/ArrowIcon";
 import "./SiteChrome.scss";
 
 const SiteChrome = ({ children }) => {
@@ -9,6 +10,9 @@ const SiteChrome = ({ children }) => {
   const lastScrollYRef = useRef(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const isHomePage = location.pathname === "/";
+  const isPreviewPage = /^\/projects\/[^/]+\/preview\/?$/.test(
+    location.pathname,
+  );
 
   const handleBackClick = () => {
     if (window.history.state?.idx > 0) {
@@ -20,6 +24,11 @@ const SiteChrome = ({ children }) => {
   };
 
   useEffect(() => {
+    if (isPreviewPage) {
+      setIsHeaderVisible(true);
+      return undefined;
+    }
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const isScrollingUp =
@@ -35,13 +44,14 @@ const SiteChrome = ({ children }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isPreviewPage]);
 
   return (
     <>
       <header
         className={[
           "site-header",
+          isPreviewPage ? "is-static" : "",
           isHeaderVisible ? "is-visible" : "is-hidden",
         ]
           .filter(Boolean)
@@ -55,7 +65,7 @@ const SiteChrome = ({ children }) => {
               aria-label="이전 페이지로 이동"
               onClick={handleBackClick}
             >
-              <span aria-hidden="true">←</span>
+              <ArrowIcon direction="left" />
             </button>
           )}
           <Link className="site-header__logo" to="/">

@@ -1,9 +1,14 @@
+@use "./variables" as *;
+
 // ========================================
 // Color Palette
 // 실제 색상값
 // ========================================
 
 :root {
+--font-family-base: #{$font-family-base};
+--font-family-mono: #{$font-family-mono};
+
 // Monochrome
 --color-white: #ffffff;
 --color-white-rgb: 255 255 255;

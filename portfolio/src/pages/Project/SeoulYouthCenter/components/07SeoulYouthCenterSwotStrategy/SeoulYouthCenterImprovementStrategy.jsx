@@ -1,3 +1,4 @@
+import ArrowIcon from "../../../../../components/icons/ArrowIcon";
 import "./SeoulYouthCenterImprovementStrategy.scss";
 
 const strategyItems = [
@@ -116,7 +117,7 @@ const SeoulYouthCenterImprovementStrategy = () => {
             aria-label="개선 전략 흐름 도식 영역"
           >
             {strategyItems.map(
-              ({ number, diagramTitle, description, icon }) => (
+              ({ number, diagramTitle, description, icon }, index) => (
                 <article
                   className="seoul-youth-center__improvement-strategy-diagram-step"
                   key={number}
@@ -130,6 +131,12 @@ const SeoulYouthCenterImprovementStrategy = () => {
                     <h3>{diagramTitle}</h3>
                     <p>{description}</p>
                   </div>
+                  {index < strategyItems.length - 1 ? (
+                    <ArrowIcon
+                      className="seoul-youth-center__improvement-strategy-step-arrow"
+                      direction="right"
+                    />
+                  ) : null}
                 </article>
               ),
             )}
@@ -137,6 +144,10 @@ const SeoulYouthCenterImprovementStrategy = () => {
         </div>
 
         <footer className="seoul-youth-center__improvement-strategy-direction">
+          <ArrowIcon
+            className="seoul-youth-center__improvement-strategy-direction-arrow"
+            direction="down"
+          />
           <p>Final Direction</p>
           <strong>
             기관 소개 중심 홈페이지에서 청소년 활동 참여를 돕는

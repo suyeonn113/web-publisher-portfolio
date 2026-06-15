@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import DeviceSwitcher from "./DeviceSwitcher";
+import PreviewFloatingControls from "./PreviewFloatingControls";
 import PreviewHeader from "./PreviewHeader";
 import PreviewStage from "./PreviewStage";
 import PreviewStepNavigation from "./PreviewStepNavigation";
@@ -10,18 +11,21 @@ import "./ResponsivePreviewPage.scss";
 const isMobileOnlyProject = (project) =>
   project.platforms?.length === 1 && project.platforms.includes("mobile");
 
-const getEnabledDeviceKeys = (project, devices) => {
+const getEnabledDeviceKeys = (project, preview) => {
+  const { devices, visibleDevices } = preview;
   const deviceKeys = Object.keys(devices);
 
   if (isMobileOnlyProject(project)) {
     return deviceKeys.filter((device) => device === "mobile");
   }
 
-  return deviceKeys;
+  return (visibleDevices ?? deviceKeys).filter((device) =>
+    deviceKeys.includes(device),
+  );
 };
 
 const getInitialDeviceKey = (project, preview) => {
-  const enabledDeviceKeys = getEnabledDeviceKeys(project, preview.devices);
+  const enabledDeviceKeys = getEnabledDeviceKeys(project, preview);
 
   if (enabledDeviceKeys.includes(preview.defaultDevice)) {
     return preview.defaultDevice;
@@ -38,9 +42,10 @@ const ResponsivePreviewPage = ({ project, preview }) => {
     preview.reviewSteps[0]?.id,
   );
   const [isPreviewUnavailable, setIsPreviewUnavailable] = useState(false);
+  const [isPageScrollLocked, setIsPageScrollLocked] = useState(false);
   const enabledDeviceKeys = useMemo(
-    () => getEnabledDeviceKeys(project, preview.devices),
-    [project, preview.devices],
+    () => getEnabledDeviceKeys(project, preview),
+    [project, preview],
   );
 
   const handleDeviceChange = useCallback((device) => {
@@ -86,13 +91,44 @@ const ResponsivePreviewPage = ({ project, preview }) => {
     selectedDevice,
   ]);
 
+  useEffect(() => {
+    if (!isPageScrollLocked) {
+      return undefined;
+    }
+
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousDocumentOverflow = documentElement.style.overflow;
+
+    body.style.overflow = "hidden";
+    documentElement.style.overflow = "hidden";
+
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousDocumentOverflow;
+    };
+  }, [isPageScrollLocked]);
+
   if (!selectedStep || !selectedDeviceConfig) {
     return <NotFoundPage project={project} />;
   }
 
   return (
-    <main className="responsive-preview-page">
-      <PreviewHeader project={project} />
+    <main
+      className={[
+        "responsive-preview-page",
+        isPageScrollLocked ? "is-page-scroll-locked" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <PreviewFloatingControls
+        isPageScrollLocked={isPageScrollLocked}
+        onTogglePageScrollLock={() => {
+          setIsPageScrollLocked((currentValue) => !currentValue);
+        }}
+      />
+      <PreviewHeader project={project} preview={preview} />
       <div className="preview-control-row">
         <PreviewStepNavigation
           steps={preview.reviewSteps}
@@ -101,6 +137,7 @@ const ResponsivePreviewPage = ({ project, preview }) => {
         />
         <DeviceSwitcher
           devices={preview.devices}
+          deviceKeys={enabledDeviceKeys}
           selectedDevice={selectedDevice}
           disabledDevices={disabledDeviceKeys}
           onChange={handleDeviceChange}

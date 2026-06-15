@@ -48,21 +48,16 @@
   border: 1px solid var(--syc-element-border);
 }
 
-.seoul-youth-center__improvement-strategy-diagram-step:not(:last-child)::after {
-  @include typography(body-lg);
-
+.seoul-youth-center__improvement-strategy-step-arrow {
   position: absolute;
   top: space(7);
   right: calc((var(--strategy-gap) / -10) * 3);
   z-index: 1;
-  display: grid;
-  place-items: center;
   width: space(6);
   height: space(6);
   color: var(--color-gray-300);
-  line-height: 1;
-  content: "→";
   background: var(--color-white);
+  padding: space(1);
 }
 
 .seoul-youth-center__improvement-strategy-icon {
@@ -117,18 +112,14 @@
   border: 1px solid var(--syc-element-border);
 }
 
-.seoul-youth-center__improvement-strategy-direction::before {
-  @include typography(body-lg);
-
+.seoul-youth-center__improvement-strategy-direction-arrow {
   position: absolute;
   top: calc(#{space(5)} * -1);
   left: 50%;
-  display: grid;
-  place-items: center;
   width: space(6);
   height: space(6);
+  padding: space(1);
   color: var(--color-text-primary);
-  content: "↓";
   background: var(--color-white);
   border: 1px solid var(--syc-element-border);
   border-radius: radius(full);
@@ -185,7 +176,7 @@
     height: space(7);
   }
 
-  .seoul-youth-center__improvement-strategy-diagram-step:not(:last-child)::after {
+  .seoul-youth-center__improvement-strategy-step-arrow {
     display: none;
   }
 
@@ -211,14 +202,13 @@
     background: var(--color-white);
   }
 
-  .seoul-youth-center__improvement-strategy-diagram-step:not(:last-child)::after {
+  .seoul-youth-center__improvement-strategy-step-arrow {
     top: auto;
     right: auto;
     bottom: calc(#{space(4)} * -1);
     left: space(7);
     display: grid;
-    content: "↓";
-    transform: translateX(-50%);
+    transform: translateX(-50%) rotate(90deg);
   }
 
   .seoul-youth-center__improvement-strategy-direction {

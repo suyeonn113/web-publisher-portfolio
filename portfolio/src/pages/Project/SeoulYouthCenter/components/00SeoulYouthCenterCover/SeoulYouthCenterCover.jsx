@@ -6,6 +6,7 @@ import {
 } from "react";
 import { Link } from "react-router-dom";
 
+import ArrowIcon from "../../../../../components/icons/ArrowIcon";
 import { prepareProjectDetail } from "../../../../../utils/projectHelpers";
 import "./SeoulYouthCenterCover.scss";
 
@@ -443,7 +444,8 @@ const SeoulYouthCenterCover = ({ project }) => {
             className="seoul-youth-center__preview-cta hover-lift no-print"
             to={`/projects/${project.slug}/preview`}
           >
-            Responsive Preview →
+            <span>Responsive Preview</span>
+            <ArrowIcon direction="right" />
           </Link>
 
           {project.liveUrl ? (
@@ -605,7 +607,8 @@ const SeoulYouthCenterCover = ({ project }) => {
               target="_blank"
               rel="noreferrer"
             >
-              Website ↗
+              <span>Website</span>
+              <ArrowIcon direction="upRight" />
             </a>
           ) : null}
 
@@ -616,7 +619,8 @@ const SeoulYouthCenterCover = ({ project }) => {
               target="_blank"
               rel="noreferrer"
             >
-              GitHub ↗
+              <span>GitHub</span>
+              <ArrowIcon direction="upRight" />
             </a>
           ) : null}
         </div>

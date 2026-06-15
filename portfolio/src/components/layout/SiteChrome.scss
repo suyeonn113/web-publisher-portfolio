@@ -20,6 +20,11 @@
   &.is-visible {
     transform: translateY(0);
   }
+
+  &.is-static {
+    position: absolute;
+    transform: none;
+  }
 }
 
 .site-header__brand {
@@ -49,6 +54,11 @@
   &:focus-visible {
     color: var(--color-text-secondary);
     transform: translateX(-2px);
+  }
+
+  .arrow-icon {
+    width: 1em;
+    height: 1em;
   }
 }
 

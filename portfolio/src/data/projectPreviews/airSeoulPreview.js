@@ -1,6 +1,9 @@
 export const airSeoulPreview = {
   projectId: "air-seoul",
+  githubUrl:
+    "https://github.com/suyeonn113/web-publisher-portfolio/tree/main/airseoul",
   defaultDevice: "desktop",
+  visibleDevices: ["mobile", "tablet", "desktop", "wide"],
   devices: {
     mobile: {
       width: 390,
@@ -13,6 +16,11 @@ export const airSeoulPreview = {
     desktop: {
       width: 1440,
       frameHeight: 900,
+      maxShellHeight: 720,
+    },
+    wide: {
+      width: 1920,
+      frameHeight: 1080,
       maxShellHeight: 720,
     },
   },
