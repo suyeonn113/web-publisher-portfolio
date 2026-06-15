@@ -4,15 +4,15 @@ import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 const systemFlow = [
   {
     title: "Frontend",
-    description: "HTML, SCSS, JavaScript 기반의 반응형 화면과 사용자 조작 요소",
+    description: "반응형 화면 · 사용자 조작 요소",
   },
   {
     title: "PHP Pages",
-    description: "프로그램, 게시판, 신청 페이지의 서버 사이드 처리",
+    description: "프로그램 · 게시판 · 신청 페이지 처리",
   },
   {
     title: "MySQL DB",
-    description: "프로그램 정보, 신청 데이터, 게시글 데이터 저장 및 조회",
+    description: "프로그램 · 신청 · 게시글 데이터 저장 및 조회",
   },
 ];
 
@@ -52,46 +52,60 @@ const SeoulYouthCenterSystemArchitecture = () => {
           </h2>
 
           <p className="seoul-youth-center__system-architecture-summary">
-            프로그램 탐색과 신청 흐름이 실제 데이터와 연결될 수
-            있도록 프론트 화면, PHP 페이지, MySQL 데이터베이스의
-            역할을 나누어 구성했습니다.
+            프로그램 탐색과 신청 흐름이 실제 데이터와 연결될 수 있도록
+            화면, PHP 페이지, MySQL 데이터베이스의 역할을 나누어
+            구성했습니다.
           </p>
         </header>
 
-        <ol className="seoul-youth-center__system-architecture-flow">
-          {systemFlow.map(({ title, description }) => (
-            <li key={title}>
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </li>
-          ))}
-        </ol>
-
         <div className="seoul-youth-center__system-architecture-layout">
-          <section className="seoul-youth-center__system-architecture-data">
+          <section className="seoul-youth-center__system-architecture-flow-block">
             <div className="seoul-youth-center__system-architecture-section-heading">
-              <p>Data Groups</p>
-              <h3>주요 데이터 구조</h3>
+              <p>System Flow</p>
+              <h3>구현 구조</h3>
             </div>
 
-            <ul>
-              {dataGroups.map(({ title, description }) => (
+            <ol className="seoul-youth-center__system-architecture-flow">
+              {systemFlow.map(({ title, description }, index) => (
                 <li key={title}>
-                  <strong>{title}</strong>
-                  <p>{description}</p>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </div>
                 </li>
               ))}
-            </ul>
+            </ol>
           </section>
 
-          <figure className="seoul-youth-center__system-architecture-erd">
-            {/* 이미지 가이드: 실제 ERD 또는 DB 테이블 구조 캡쳐가 있을 경우 사용. Programs, Applications, Boards, Users/Applicants 관계가 보이도록 캡쳐. 파일명은 database-erd.png로 저장 */}
-            <img
-              src={getPublicAssetPath("images/projects/seoul-youth-center/database-erd.png")}
-              alt="서울시립청소년센터 데이터베이스 구조"
-            />
-            <figcaption>Database Structure</figcaption>
-          </figure>
+          <div className="seoul-youth-center__system-architecture-content">
+            <section className="seoul-youth-center__system-architecture-data">
+              <div className="seoul-youth-center__system-architecture-section-heading">
+                <p>Data Groups</p>
+                <h3>주요 데이터</h3>
+              </div>
+
+              <ul className="seoul-youth-center__system-architecture-data-list">
+                {dataGroups.map(({ title, description }) => (
+                  <li key={title}>
+                    <strong>{title}</strong>
+                    <p>{description}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <figure className="seoul-youth-center__system-architecture-erd">
+              {/* 이미지 가이드: 실제 ERD 또는 DB 테이블 구조 캡쳐. Programs, Applications, Boards, Users 관계가 보이도록 캡쳐. 파일명은 database-erd.png로 저장 */}
+              <img
+                src={getPublicAssetPath(
+                  "images/projects/seoul-youth-center/database-erd.png",
+                )}
+                alt="서울시립청소년센터 데이터베이스 구조"
+              />
+              <figcaption>Database Structure</figcaption>
+            </figure>
+          </div>
         </div>
       </section>
     </div>

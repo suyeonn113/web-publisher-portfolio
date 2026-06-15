@@ -1,33 +1,5 @@
 ﻿import { getProjectTechItems } from "../../../../../utils/projectHelpers";
-import { getPublicAssetPath } from "../../../../../utils/assetPaths";
 import "./SeoulYouthCenterDevelopmentOverview.scss";
-
-const developmentScreens = [
-  {
-    title: "PC",
-    src: getPublicAssetPath(
-      "images/projects/seoul-youth-center/development-main-pc.png",
-    ),
-    alt: "서울시립청소년센터 PC 구현 화면",
-    note: "PC 실제 구현 메인 화면",
-  },
-  {
-    title: "Tablet",
-    src: getPublicAssetPath(
-      "images/projects/seoul-youth-center/development-main-tablet.png",
-    ),
-    alt: "서울시립청소년센터 태블릿 구현 화면",
-    note: "태블릿 실제 구현 메인 화면",
-  },
-  {
-    title: "Mobile",
-    src: getPublicAssetPath(
-      "images/projects/seoul-youth-center/development-main-mobile.png",
-    ),
-    alt: "서울시립청소년센터 모바일 구현 화면",
-    note: "모바일 실제 구현 메인 화면",
-  },
-];
 
 const developmentPoints = [
   {
@@ -75,23 +47,6 @@ const SeoulYouthCenterDevelopmentOverview = ({ project }) => {
         </header>
 
         <div className="seoul-youth-center__development-overview-layout">
-          <section className="seoul-youth-center__development-overview-preview">
-            <div className="seoul-youth-center__development-overview-section-heading">
-              <p>Implemented Screens</p>
-              <h3>반응형 구현 화면</h3>
-            </div>
-
-            <div className="seoul-youth-center__development-overview-screens">
-              {developmentScreens.map(({ title, src, alt, note }) => (
-                <figure key={title}>
-                  {/* 이미지 가이드: {note}. 파일명은 {src.replace("/images/projects/seoul-youth-center/", "")}로 저장 */}
-                  <img src={src} alt={alt} />
-                  <figcaption>{title}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-
           <aside className="seoul-youth-center__development-overview-points">
             <div className="seoul-youth-center__development-overview-section-heading">
               <p>Development Points</p>

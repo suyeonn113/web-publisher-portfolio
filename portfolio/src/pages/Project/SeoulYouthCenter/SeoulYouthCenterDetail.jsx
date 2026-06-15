@@ -1,4 +1,5 @@
 import { getProjectBySlug } from "../../../data/projects";
+import useResponsiveSectionScrollRestore from "../../../hooks/useResponsiveSectionScrollRestore";
 import ProjectSectionNav from "../../../components/project-detail/ProjectSectionNav/ProjectSectionNav";
 
 import { seoulYouthCenterSections } from "./sections";
@@ -36,6 +37,8 @@ import "./SeoulYouthCenterDetail.scss";
 
 const SeoulYouthCenterDetail = () => {
   const project = getProjectBySlug("seoul-youth-center");
+
+  useResponsiveSectionScrollRestore(seoulYouthCenterSections);
 
   if (!project) {
     return <p>Project information was not found.</p>;
