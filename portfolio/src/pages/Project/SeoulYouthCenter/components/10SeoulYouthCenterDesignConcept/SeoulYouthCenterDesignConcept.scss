@@ -3,7 +3,7 @@
 .seoul-youth-center__design-concept {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  row-gap: space(4);
+  row-gap: space(10);
   align-content: stretch;
 }
 
@@ -12,24 +12,69 @@
   --syc-section-label: "Design Concept";
 
   display: grid;
+  grid-template-columns: minmax(112px, 0.16fr) minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: space(8);
+  row-gap: space(2);
+
+  &::before {
+    @include typography(display);
+
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: start;
+    color: var(--color-point-2);
+    font-weight: font-weight(black);
+    line-height: 0.9;
+    content: var(--syc-section-number);
+  }
+
+  &::after {
+    @include typography(eyebrow);
+
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    color: var(--color-point-2);
+    font-weight: font-weight(bold);
+    text-transform: uppercase;
+    content: var(--syc-section-label);
+  }
+
+  h2 {
+    @include typography(heading);
+
+    grid-column: 2;
+    grid-row: 2;
+    max-width: none;
+    color: var(--color-text-primary);
+    font-weight: font-weight(black);
+  }
+}
+
+.seoul-youth-center__design-concept-summary {
+  @include typography(body-lg);
+
+  grid-column: 2;
+  grid-row: 3;
+  max-width: 58em;
+  margin-top: space(2);
+  color: var(--color-text-secondary);
+  line-height: line-height(relaxed);
 }
 
 .seoul-youth-center__design-concept-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: space(5);
-  height: 100%;
+  gap: space(8);
   min-height: 0;
-  padding: 0;
-  margin: 0;
-  list-style: none;
   align-items: stretch;
 }
 
 .seoul-youth-center__design-concept-list li {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  gap: space(5);
+  gap: space(8);
   min-height: 0;
   padding-top: space(4);
   border-top: stroke(medium) solid var(--color-text-primary);
@@ -45,46 +90,109 @@
   > div {
     display: grid;
     align-content: center;
-    gap: space(3);
+    gap: space(4);
     min-width: 0;
   }
 
   strong {
-    @include typography(heading-sm);
+    @include typography(display);
 
+    display: block;
     color: var(--color-text-primary);
-    font-weight: font-weight(bold);
+    font-weight: font-weight(black);
+    line-height: line-height(tight);
   }
 
   h3 {
-    @include typography(body-lg);
+    @include typography(title);
 
     color: var(--color-text-primary);
     font-weight: font-weight(bold);
     word-break: keep-all;
+
+    &::after {
+      display: block;
+      width: space(5);
+      height: stroke(medium);
+      margin-top: space(4);
+      content: "";
+      background: var(--color-point-2);
+    }
   }
 
   p {
     @include typography(body);
 
-    line-height: line-height(base);
+    max-width: 24em;
+    color: var(--color-text-secondary);
+    line-height: line-height(relaxed);
   }
 }
 
 @include respond-down(wide) {
   .seoul-youth-center__design-concept {
     grid-template-rows: auto auto;
-    row-gap: var(--syc-content-gap);
+    row-gap: space(8);
     align-content: start;
   }
 
   .seoul-youth-center__design-concept-list {
-    height: auto;
+    gap: space(6);
+  }
+
+  .seoul-youth-center__design-concept-list li {
+    gap: space(6);
+
+    strong {
+      @include typography(heading);
+    }
   }
 }
 
 @include respond-down(laptop) {
+  .seoul-youth-center__design-concept {
+    row-gap: var(--syc-content-gap);
+  }
+
+  .seoul-youth-center__design-concept-header {
+    grid-template-columns: 1fr;
+    row-gap: space(2);
+
+    &::before {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &::after {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    h2 {
+      grid-column: 1;
+      grid-row: 3;
+    }
+  }
+
+  .seoul-youth-center__design-concept-summary {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
   .seoul-youth-center__design-concept-list {
     grid-template-columns: 1fr;
+    gap: space(6);
+  }
+
+  .seoul-youth-center__design-concept-list li {
+    gap: space(4);
+
+    > div {
+      align-content: start;
+    }
+
+    p {
+      max-width: none;
+    }
   }
 }

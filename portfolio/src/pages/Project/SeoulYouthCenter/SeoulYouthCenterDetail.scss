@@ -6,17 +6,21 @@
   --syc-line-gap: #{space(5)};
   --syc-rule-color: var(--color-border-secondary);
   --syc-muted-color: var(--color-text-secondary);
-  --syc-soft-surface: var(--color-white);
+  --syc-inverse-color: var(--color-text-inverse);
+  --syc-bg-main: var(--color-white);
+  --syc-soft-surface: var(--color-gray-50);
   --syc-element-border: rgb(var(--color-black-rgb) / 12%);
 
   color: var(--color-text-primary);
-  background: var(--color-bg-primary);
+  background: var(--syc-bg-main);
 
   :where(.syc-page) {
     display: grid;
     align-content: start;
     overflow: hidden;
-    background: var(--color-white);
+    width: min(100%, 1440px) !important;
+    background: var(--syc-bg-main);
+    padding-bottom: space(18) *2 !important;
   }
 
   :where(
@@ -39,10 +43,10 @@
     grid-template-columns: minmax(112px, 0.16fr) minmax(0, 1fr);
     grid-template-rows: auto auto auto;
     column-gap: space(8);
-    row-gap: space(2);
+    row-gap: space(1);
     max-width: none;
-    padding-bottom: space(5);
-    margin-bottom: space(8);
+    padding-bottom: space(3);
+    margin-bottom: space(5);
 
     &::before {
       @include typography(heading-sm);

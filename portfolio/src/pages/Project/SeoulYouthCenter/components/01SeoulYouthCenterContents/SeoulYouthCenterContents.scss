@@ -16,8 +16,7 @@
   display: grid;
   height: 100%;
   min-height: 0;
-  grid-auto-rows: minmax(0, 1fr);
-  gap: 0;
+  grid-auto-rows: max-content;
   align-content: start;
 }
 
@@ -82,7 +81,6 @@
 
 .seoul-youth-center__contents-item-label {
   color: var(--syc-muted-color);
-  word-break: keep-all;
 }
 
 @include respond-down(wide) {

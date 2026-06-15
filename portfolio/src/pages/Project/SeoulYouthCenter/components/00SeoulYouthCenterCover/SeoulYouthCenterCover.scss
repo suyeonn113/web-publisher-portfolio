@@ -19,8 +19,8 @@
       to bottom,
       var(--color-point-2) 0%,
       var(--color-point-2) 58%,
-      var(--color-bg-primary) 58%,
-      var(--color-bg-primary) 100%
+      var(--syc-bg-main) 58%,
+      var(--syc-bg-main) 100%
     );
 }
 
@@ -70,7 +70,7 @@
     @include typography(display);
 
     max-width: 940px;
-    color: var(--color-white);
+    color: var(--syc-inverse-color);
     letter-spacing: 0;
     word-break: keep-all;
   }
@@ -263,7 +263,7 @@
 
   button:hover,
   button.is-active {
-    color: var(--color-white);
+    color: var(--syc-inverse-color);
     background: var(--color-gray-900);
     transform: translateY(-1px);
 
@@ -322,7 +322,7 @@
 
 .seoul-youth-center__preview-cta:hover,
 .seoul-youth-center__preview-cta:focus-visible {
-  color: var(--color-white);
+  color: var(--syc-inverse-color);
   background: var(--color-gray-900);
   border-color: var(--color-gray-900);
 }

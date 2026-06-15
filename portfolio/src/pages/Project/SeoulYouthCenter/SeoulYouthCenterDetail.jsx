@@ -17,6 +17,7 @@ import SeoulYouthCenterUserAnalysis from "./components/08SeoulYouthCenterUserAna
 import SeoulYouthCenterUserJourney from "./components/09SeoulYouthCenterUserJourney/SeoulYouthCenterUserJourney";
 import SeoulYouthCenterDesignConcept from "./components/10SeoulYouthCenterDesignConcept/SeoulYouthCenterDesignConcept";
 import SeoulYouthCenterInformationArchitecture from "./components/11SeoulYouthCenterInformationArchitecture/SeoulYouthCenterInformationArchitecture";
+import SeoulYouthCenterInformationArchitectureStructure from "./components/11SeoulYouthCenterInformationArchitecture/SeoulYouthCenterInformationArchitectureStructure";
 import SeoulYouthCenterUserFlow from "./components/12SeoulYouthCenterUserFlow/SeoulYouthCenterUserFlow";
 import SeoulYouthCenterWireframes from "./components/13SeoulYouthCenterWireframes/SeoulYouthCenterWireframes";
 import SeoulYouthCenterUiDesign from "./components/14SeoulYouthCenterUiDesign/SeoulYouthCenterUiDesign";
@@ -117,6 +118,7 @@ const SeoulYouthCenterDetail = () => {
         className="project-section-group"
       >
         <SeoulYouthCenterInformationArchitecture />
+        <SeoulYouthCenterInformationArchitectureStructure />
       </div>
 
       <div

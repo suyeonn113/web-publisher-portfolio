@@ -46,7 +46,6 @@
 
     color: var(--color-text-primary);
     font-weight: font-weight(medium);
-    word-break: keep-all;
   }
 }
 
@@ -64,7 +63,7 @@
   gap: space(8);
   align-items: baseline;
   min-height: 0;
-  padding-block: space(3);
+  padding-block: space(4);
   border-bottom: stroke(thin) solid var(--syc-rule-color);
 
   dt {
@@ -76,7 +75,6 @@
 
   dd {
     color: var(--color-text-primary);
-    word-break: keep-all;
   }
 }
 

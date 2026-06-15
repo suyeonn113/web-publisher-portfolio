@@ -1,0 +1,175 @@
+@use "../../../../../styles/foundation" as *;
+
+.seoul-youth-center__information-architecture-structure {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  row-gap: space(6);
+  align-content: stretch;
+}
+
+.seoul-youth-center__information-architecture-structure-header {
+  --syc-section-number: "11.";
+  --syc-section-label: "Information Architecture";
+}
+
+.seoul-youth-center__information-architecture-structure-map {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: space(5);
+  min-height: 0;
+  align-items: stretch;
+}
+
+.seoul-youth-center__information-architecture-structure-group {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: space(5);
+  min-width: 0;
+  min-height: 0;
+  padding: space(5);
+  background: var(--color-white);
+  border: stroke(thin) solid var(--syc-rule-color);
+  border-top: stroke(medium) solid var(--color-text-primary);
+
+  > div {
+    display: grid;
+    gap: space(2);
+    padding-bottom: space(4);
+    border-bottom: stroke(thin) solid var(--syc-rule-color);
+  }
+
+  > div p {
+    @include typography(meta);
+
+    color: var(--color-point-2);
+    font-weight: font-weight(bold);
+    text-transform: uppercase;
+  }
+
+  h3 {
+    @include typography(body-lg);
+
+    color: var(--color-text-primary);
+    font-weight: font-weight(bold);
+    line-height: line-height(heading);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(2);
+    align-content: start;
+  }
+
+  li {
+    @include typography(meta);
+
+    display: inline-flex;
+    align-items: center;
+    min-height: space(6);
+    padding-inline: space(3);
+    color: var(--color-text-primary);
+    font-weight: font-weight(semibold);
+    background: var(--syc-soft-surface);
+    border: stroke(thin) solid var(--syc-element-border);
+  }
+}
+
+.seoul-youth-center__information-architecture-structure-group:nth-child(2) {
+  background: var(--syc-soft-surface);
+  border-left: stroke(medium) solid var(--color-text-primary);
+
+  li {
+    background: var(--color-white);
+  }
+}
+
+.seoul-youth-center__information-architecture-structure-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: space(4);
+}
+
+.seoul-youth-center__information-architecture-structure-flow li {
+  display: grid;
+  grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
+  gap: space(4);
+  align-items: start;
+  padding-top: space(4);
+  border-top: stroke(medium) solid var(--color-text-primary);
+
+  > span {
+    @include typography(meta);
+
+    color: var(--color-point-2);
+    font-weight: font-weight(bold);
+    text-transform: uppercase;
+  }
+
+  > div {
+    display: grid;
+    gap: space(1);
+    min-width: 0;
+  }
+
+  strong {
+    @include typography(body);
+
+    color: var(--color-text-primary);
+    font-weight: font-weight(bold);
+    line-height: line-height(heading);
+  }
+
+  p {
+    @include typography(meta);
+
+    color: var(--syc-muted-color);
+    line-height: line-height(base);
+  }
+}
+
+@include respond-down(wide) {
+  .seoul-youth-center__information-architecture-structure {
+    grid-template-rows: auto auto auto;
+    row-gap: var(--syc-content-gap);
+    align-content: start;
+  }
+
+  .seoul-youth-center__information-architecture-structure-map,
+  .seoul-youth-center__information-architecture-structure-flow {
+    gap: space(4);
+  }
+
+  .seoul-youth-center__information-architecture-structure-group {
+    padding: space(4);
+  }
+}
+
+@include respond-down(laptop) {
+  .seoul-youth-center__information-architecture-structure-map {
+    grid-template-columns: 1fr;
+  }
+
+  .seoul-youth-center__information-architecture-structure-flow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@include respond-down(tablet) {
+  .seoul-youth-center__information-architecture-structure {
+    row-gap: space(6);
+  }
+
+  .seoul-youth-center__information-architecture-structure-map,
+  .seoul-youth-center__information-architecture-structure-flow {
+    gap: space(3);
+  }
+
+  .seoul-youth-center__information-architecture-structure-group {
+    padding: space(4);
+  }
+
+  .seoul-youth-center__information-architecture-structure-flow li {
+    grid-template-columns: 1fr;
+    gap: space(2);
+  }
+}
