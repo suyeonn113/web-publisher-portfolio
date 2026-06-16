@@ -372,12 +372,20 @@ const SeoulYouthCenterCover = ({ project }) => {
     `${project.title} 웹사이트 리뉴얼`;
 
   const previewScale =
-    previewFrame.height > 0
-      ? previewFrame.height / previewDevice.height
+    previewFrame.width > 0 && previewFrame.height > 0
+      ? Math.min(
+          previewFrame.width / previewDevice.width,
+          previewFrame.height / previewDevice.height,
+        )
       : 1;
 
-  const previewWidth =
-    previewDevice.width * previewScale;
+  const previewWidth = previewDevice.width * previewScale;
+  const previewHeight = previewDevice.height * previewScale;
+
+  const previewLeft = Math.max(
+    0,
+    (previewFrame.width - previewWidth) / 2,
+  );
 
   const previewScrollbarCover =
     previewDevice.scrollbarGutter * previewScale;
@@ -397,11 +405,6 @@ const SeoulYouthCenterCover = ({ project }) => {
 
   const fallbackOffset =
     fallbackScrollableHeight * (previewScroll / 100);
-
-  const previewLeft = Math.max(
-    0,
-    (previewFrame.width - previewWidth) / 2,
-  );
 
   const isFallbackMode = previewMode === "fallback";
 
@@ -473,7 +476,7 @@ const SeoulYouthCenterCover = ({ project }) => {
                   width: `${previewDevice.width}px`,
                   height: `${iframeHeight}px`,
                   left: `${previewLeft}px`,
-                  top: 0,
+                  top: `0`,
 
                   transform: iframeTransform,
                   transformOrigin: "top left",

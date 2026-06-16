@@ -51,6 +51,7 @@ const SiteChrome = ({ children }) => {
     <>
       <header
         className={[
+          "no-print",
           "site-header",
           isPreviewPage ? "is-static" : "",
           isHeaderVisible ? "is-visible" : "is-hidden",

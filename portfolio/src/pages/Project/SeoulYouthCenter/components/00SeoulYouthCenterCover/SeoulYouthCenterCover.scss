@@ -10,7 +10,7 @@
   isolation: isolate;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  row-gap: space(16);
+  row-gap: space(8);
   align-content: stretch;
   overflow: hidden;
   padding-block-start: calc(var(--frame-gutter) + #{$site-header-height});
@@ -37,7 +37,7 @@
   align-items: flex-start;
   width: min(63.5%, 1080px);
   max-width: none;
-  margin-left: 30%;
+  margin-left: 34%;
   margin-right: 0;
   color: var(--color-text-inverse);
   text-align: left;
@@ -55,11 +55,6 @@
   display: grid;
   gap: 14px;
 
-  p,
-  h1 {
-    margin: 0;
-  }
-
   > p:first-child {
     @include typography(title);
 
@@ -68,6 +63,9 @@
 
   h1 {
     @include typography(display);
+    @include respond-up (wide) {
+      font-size: clamp(42px, 3.9vw, 76px);
+    }
 
     max-width: 940px;
     color: var(--syc-inverse-color);
@@ -85,16 +83,13 @@
 }
 
 .seoul-youth-center__cover-image {
-  width: min(63.5%, 1080px);
+  width: min(58%, 960px);
   height: 100%;
-  min-height: 0;
   aspect-ratio: 16 / 9;
   margin-top: 0;
-  margin-left: 30%;
-  margin-right: 0;
+  margin-left: 34%;
   overflow: visible;
-  background: transparent;
-  box-shadow: none;
+  background: var(--color-white);
 
   .seoul-youth-center__iframe-wrap,
   img {
