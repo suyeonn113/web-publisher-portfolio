@@ -131,7 +131,7 @@
     width: calc(var(--preview-scrollbar-cover, 0px) + 2px);
     pointer-events: none;
     content: "";
-    background: var(--color-bg-primary);
+    background: var(--color-white);
   }
 
   iframe {
