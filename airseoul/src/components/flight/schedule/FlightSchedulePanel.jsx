@@ -45,8 +45,16 @@ const REALTIME_FLIGHTS = {
   ],
 };
 
-function FlightSchedulePanel() {
-  const [searchType, setSearchType] = useState(SEARCH_TYPES.STATUS);
+function FlightSchedulePanel({
+  activeSearchType,
+  onSearchTypeChange,
+  onSubmit,
+  resultsContent,
+  showSearchTypeControls = true,
+  supplementaryContent,
+}) {
+  const [internalSearchType, setInternalSearchType] = useState(SEARCH_TYPES.STATUS);
+  const searchType = activeSearchType ?? internalSearchType;
   const [routeType, setRouteType] = useState('route');
   const [tripType, setTripType] = useState(TRIP_TYPES.ROUND_TRIP);
   const [from, setFrom] = useState('');
@@ -144,6 +152,24 @@ function FlightSchedulePanel() {
       setSecondDate('');
     }
   };
+
+  const handleSearchTypeChange = (nextSearchType) => {
+    setInternalSearchType(nextSearchType);
+    onSearchTypeChange?.(nextSearchType);
+  };
+
+  const handleSubmit = () => {
+    onSubmit?.({
+      departureDate,
+      flightNo: flightNo ? `RS${flightNo.replace(/^RS/i, '')}` : '',
+      from,
+      returnDate,
+      routeType,
+      searchType,
+      to,
+      tripType,
+    });
+  };
   const selectedDates = useMemo(() => {
     const dates =
       searchType === SEARCH_TYPES.WEEKLY && tripType === TRIP_TYPES.ROUND_TRIP
@@ -211,30 +237,33 @@ function FlightSchedulePanel() {
 
   return (
     <div className="flight-service-panel flight-service-panel--schedule">
+      {(showSearchTypeControls || searchType !== SEARCH_TYPES.REALTIME) && (
       <div className="flight-schedule-options">
+        {showSearchTypeControls && (
         <div className="flight-service-chips" role="group" aria-label="조회 유형">
           <button
             className={searchType === SEARCH_TYPES.STATUS ? 'is-active' : ''}
             type="button"
-            onClick={() => setSearchType(SEARCH_TYPES.STATUS)}
+            onClick={() => handleSearchTypeChange(SEARCH_TYPES.STATUS)}
           >
             출도착 조회
           </button>
           <button
             className={searchType === SEARCH_TYPES.WEEKLY ? 'is-active' : ''}
             type="button"
-            onClick={() => setSearchType(SEARCH_TYPES.WEEKLY)}
+            onClick={() => handleSearchTypeChange(SEARCH_TYPES.WEEKLY)}
           >
             주간 스케줄
           </button>
           <button
             className={searchType === SEARCH_TYPES.REALTIME ? 'is-active' : ''}
             type="button"
-            onClick={() => setSearchType(SEARCH_TYPES.REALTIME)}
+            onClick={() => handleSearchTypeChange(SEARCH_TYPES.REALTIME)}
           >
             실시간
           </button>
         </div>
+        )}
         {searchType === SEARCH_TYPES.WEEKLY && (
           <div className="flight-service-chips" role="group" aria-label="여정 유형">
             <button
@@ -272,6 +301,7 @@ function FlightSchedulePanel() {
         </div>
         )}
       </div>
+      )}
 
       {searchType === SEARCH_TYPES.REALTIME ? (
         <section className="flight-schedule-realtime" aria-label="실시간 출도착 정보">
@@ -340,12 +370,16 @@ function FlightSchedulePanel() {
             returnDateLabel={returnDateLabel}
             onClick={(event) => openPanel(PANEL_TYPES.DATE, event)}
           />
-          <button className="flight-service-submit" type="button">
+          <button className="flight-service-submit" type="button" onClick={handleSubmit}>
             조회
           </button>
           {renderServicePopup()}
         </div>
       )}
+
+      {resultsContent}
+
+      {supplementaryContent}
 
     </div>
   );

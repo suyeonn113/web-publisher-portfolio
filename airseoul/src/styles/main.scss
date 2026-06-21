@@ -18,6 +18,8 @@
 @use '../components/flight/shared/flight-shared';
 @use '../components/flight/shared/flight-date-picker';
 @use '../components/flight/booking/flight-booking';
+@use '../components/flight/check-in/flight-check-in';
+@use '../components/flight/my-trip/flight-my-trip';
 @use '../components/flight/search/booking-content-layout';
 @use '../components/flight/search/booking-step-nav';
 @use '../components/flight/search/flight-select-section';
@@ -25,4 +27,8 @@
 
 @use '../pages/home';
 @use '../pages/booking';
+@use '../pages/booking-change-refund';
+@use '../pages/flight-service-detail';
 @use '../pages/flight-search-results';
+@use '../pages/information-pages';
+@use '../pages/travel-guide';

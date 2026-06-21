@@ -1,5 +1,6 @@
 import flightFareRows from '../data/flightFareRows.json';
 import flightRows from '../data/flightRows.json';
+import { addDays, formatDate, toDate } from '../utils/date';
 
 const getFaresByFlightId = () =>
   flightFareRows.reduce((faresByFlightId, fareRow) => {
@@ -69,3 +70,33 @@ export const searchRoundTripFlights = ({ from, to, departureDate, returnDate }) 
     departureDate: returnDate,
   }),
 });
+
+export const searchFlightsByNumber = ({ flightNo, departureDate }) => {
+  const normalizedFlightNo = flightNo.replace(/\s/g, '').toUpperCase();
+
+  return getFlightsWithFares().filter((flight) => {
+    const matchesFlightNo = flight.flightNo.replace(/\s/g, '') === normalizedFlightNo;
+    const matchesDepartureDate =
+      !departureDate || flight.schedule.departureDate === departureDate;
+
+    return matchesFlightNo && matchesDepartureDate;
+  });
+};
+
+export const searchWeeklyFlights = ({ from, to, startDate, days = 7 }) => {
+  const start = toDate(startDate);
+  const dates = Array.from({ length: days }, (_, index) => formatDate(addDays(start, index)));
+  const dateSet = new Set(dates);
+  const flights = getFlightsWithFares().filter((flight) => {
+    return (
+      flight.route.from.code === from &&
+      flight.route.to.code === to &&
+      dateSet.has(flight.schedule.departureDate)
+    );
+  });
+
+  return dates.map((date) => ({
+    date,
+    flights: flights.filter((flight) => flight.schedule.departureDate === date),
+  }));
+};

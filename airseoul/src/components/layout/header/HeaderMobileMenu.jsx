@@ -9,7 +9,7 @@ import HeaderMobileNavPanel from './HeaderMobileNavPanel';
 const contactMenu = utilityNav.find((item) => item.id === 'contact');
 const mobileNav = contactMenu ? [...mainNav, contactMenu] : mainNav;
 
-export default function HeaderMobileMenu({ isOpen }) {
+export default function HeaderMobileMenu({ isOpen, onClose }) {
   const [activeMenuId, setActiveMenuId] = useState(mobileNav[0]?.id);
   const sectionRefs = useRef({});
   const { shouldRender, transitionState } = usePanelTransition(isOpen);
@@ -36,7 +36,11 @@ export default function HeaderMobileMenu({ isOpen }) {
         onActiveMenuChange={handleMenuSelect}
       />
 
-      <HeaderMobileNavPanel menus={mobileNav} sectionRefs={sectionRefs} />
+      <HeaderMobileNavPanel
+        menus={mobileNav}
+        onNavigate={onClose}
+        sectionRefs={sectionRefs}
+      />
     </div>
   );
 }

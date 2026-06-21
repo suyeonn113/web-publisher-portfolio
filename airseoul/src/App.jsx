@@ -3,9 +3,14 @@ import { APP_BASE_DATE } from './constants/appDate';
 import { ROUTES } from './constants/routes';
 import MainLayout from './layouts/MainLayout';
 import Booking from './pages/Booking';
+import BookingChangeRefund from './pages/BookingChangeRefund';
 import Home from './pages/Home';
 import FlightSearchResults from './pages/FlightSearchResults';
+import FlightServiceDetail from './pages/FlightServiceDetail';
 import NotFound from './pages/NotFound';
+import AirportService from './pages/AirportService';
+import BaggageGuide from './pages/BaggageGuide';
+import { FLIGHT_SERVICE_TAB_IDS } from './components/flight/flight-service/flightServiceTabsData';
 import { createFixedRoundTripSearchParams } from './utils/searchParams';
 
 function App() {
@@ -21,6 +26,42 @@ function App() {
         <Route path={ROUTES.home} element={<Home defaultSearchParams={defaultSearchParams} />} />
         <Route path={ROUTES.booking.root} element={<Booking />} />
         <Route path={ROUTES.booking.flight} element={<FlightSearchResults />} />
+        <Route path={ROUTES.booking.refund} element={<BookingChangeRefund />} />
+        <Route
+          path={ROUTES.booking.bookingCheck}
+          element={(
+            <FlightServiceDetail
+              serviceType={FLIGHT_SERVICE_TAB_IDS.MY_TRIP}
+              title="예약 조회"
+            />
+          )}
+        />
+        <Route
+          path={ROUTES.booking.checkin}
+          element={(
+            <FlightServiceDetail
+              serviceType={FLIGHT_SERVICE_TAB_IDS.CHECK_IN}
+              title="체크인"
+            />
+          )}
+        />
+        <Route
+          path={ROUTES.booking.flightStatus}
+          element={(
+            <FlightServiceDetail
+              serviceType={FLIGHT_SERVICE_TAB_IDS.SCHEDULE}
+              title="출도착 / 스케줄"
+            />
+          )}
+        />
+        <Route
+          path={ROUTES.travel.airportService}
+          element={<AirportService />}
+        />
+        <Route
+          path={ROUTES.travel.baggage}
+          element={<BaggageGuide />}
+        />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

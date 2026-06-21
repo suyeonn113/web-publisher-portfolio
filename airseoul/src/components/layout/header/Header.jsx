@@ -5,6 +5,7 @@ import LoginPanel from '../../login/LoginPanel';
 import HeaderActions from './HeaderActions';
 import HeaderMobileMenu from './HeaderMobileMenu';
 import HeaderNav from './HeaderNav';
+import { UI_EVENTS } from '../../../constants/uiEvents';
 
 export default function Header({ hasHero = true }) {
   const headerRef = useRef(null);
@@ -20,6 +21,19 @@ export default function Header({ hasHero = true }) {
     setIsLoginPanelOpen(true);
     setIsMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    const handleLoginPanelOpen = () => {
+      setIsLoginPanelOpen(true);
+      setIsMobileMenuOpen(false);
+    };
+
+    window.addEventListener(UI_EVENTS.OPEN_LOGIN_PANEL, handleLoginPanelOpen);
+
+    return () => {
+      window.removeEventListener(UI_EVENTS.OPEN_LOGIN_PANEL, handleLoginPanelOpen);
+    };
+  }, []);
 
   useEffect(() => {
     const heroSection = document.querySelector('.hero-section');
@@ -97,7 +111,10 @@ export default function Header({ hasHero = true }) {
         />
       </div>
 
-      <HeaderMobileMenu isOpen={isMobileMenuOpen} />
+      <HeaderMobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
       <LoginPanel
         isOpen={isLoginPanelOpen}
         onClose={() => setIsLoginPanelOpen(false)}

@@ -9,8 +9,17 @@ function MainLayout() {
   const hasHero = location.pathname === ROUTES.home;
 
   useEffect(() => {
+    if (location.hash) {
+      const frameId = window.requestAnimationFrame(() => {
+        document.querySelector(location.hash)?.scrollIntoView({ block: 'start' });
+      });
+
+      return () => window.cancelAnimationFrame(frameId);
+    }
+
     window.scrollTo({ top: 0, left: 0 });
-  }, [location.pathname]);
+    return undefined;
+  }, [location.hash, location.pathname]);
 
   return (
     <>

@@ -7,24 +7,24 @@ export const ROUTES = {
     root: '/booking',
 
     flight: '/booking/flight',
-    bookingCheck: '#',
-    refund: '#',
-    checkin: '#',
-    flightStatus: '#',
+    bookingCheck: '/booking/check',
+    refund: '/booking/change-refund',
+    checkin: '/booking/check-in',
+    flightStatus: '/booking/flight-status',
   },
 
   travel: {
     root: '#',
 
     seat: '#',
-    baggage: '#',
+    baggage: '/travel/baggage',
     meal: '#',
     insurance: '#',
 
     dutyFree: '#',
     cafeMint: '#',
 
-    airportService: '#',
+    airportService: '/travel/airport-service',
     travelSupport: '#',
   },
 

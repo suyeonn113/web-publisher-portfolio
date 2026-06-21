@@ -1,6 +1,6 @@
-import AppLink from '../../common/AppLink';
+import AppLink, { isPlaceholderLink } from '../../common/AppLink';
 
-export default function HeaderMobileNavPanel({ menus, sectionRefs }) {
+export default function HeaderMobileNavPanel({ menus, onNavigate, sectionRefs }) {
   return (
     <div className="site-header__mobile-nav-panel">
       {menus.map((menu) => (
@@ -23,6 +23,9 @@ export default function HeaderMobileNavPanel({ menus, sectionRefs }) {
               >
                 <AppLink
                   className="site-header__mobile-panel-link"
+                  onClick={() => {
+                    if (!isPlaceholderLink(item.href)) onNavigate?.();
+                  }}
                   to={item.href}
                 >
                   {item.label}
