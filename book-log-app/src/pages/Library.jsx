@@ -33,7 +33,7 @@ function Library({ user }) {
 
     try {
       await saveBookToMyLibrary(user, book)
-      setMessage('Saved to your library.')
+      setMessage('Saved. Check it on Home.')
     } catch (error) {
       setMessage(error.message)
     } finally {
@@ -44,7 +44,7 @@ function Library({ user }) {
   return (
     <section className="library-page">
       <div className="library-heading">
-        <p className="eyebrow">My library</p>
+        <p className="eyebrow">Library</p>
         <h1>Library</h1>
       </div>
 

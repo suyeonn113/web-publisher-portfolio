@@ -1,4 +1,13 @@
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from 'firebase/firestore'
 import { db } from '../firebase/firebase'
 
 function getBookDocumentId(book) {
@@ -48,4 +57,26 @@ export async function saveBookToMyLibrary(user, book) {
   )
 
   return bookId
+}
+
+export async function getMyLibraryBooks(user) {
+  const personalBooksQuery = query(
+    collection(db, 'personalBooks'),
+    where('userId', '==', user.uid),
+    where('deletedAt', '==', null),
+  )
+  const personalBooksSnap = await getDocs(personalBooksQuery)
+  const personalBooks = personalBooksSnap.docs.map((item) => item.data())
+
+  const books = await Promise.all(
+    personalBooks.map(async (libraryItem) => {
+      const bookSnap = await getDoc(doc(db, 'books', libraryItem.bookId))
+      return {
+        ...libraryItem,
+        book: bookSnap.exists() ? bookSnap.data() : null,
+      }
+    }),
+  )
+
+  return books
 }
