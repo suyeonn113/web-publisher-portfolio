@@ -6,6 +6,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
   where,
 } from 'firebase/firestore'
 import { db } from '../firebase/firebase'
@@ -44,11 +45,12 @@ export async function saveBookToMyLibrary(user, book) {
       id: personalBookId,
       userId: user.uid,
       bookId,
-      status: 'reading',
+      status: 'unfinished',
       rating: 0,
       syncEnabled: false,
       source: 'personal',
       viewType: 'cover',
+      readDate: new Date().toISOString().slice(0, 10),
       deletedAt: null,
       updatedAt: serverTimestamp(),
       createdAt: serverTimestamp(),
@@ -57,6 +59,34 @@ export async function saveBookToMyLibrary(user, book) {
   )
 
   return bookId
+}
+
+export async function getLibraryBookDetail(user, personalBookId) {
+  const personalBookSnap = await getDoc(doc(db, 'personalBooks', personalBookId))
+
+  if (!personalBookSnap.exists()) {
+    throw new Error('Book not found')
+  }
+
+  const libraryItem = personalBookSnap.data()
+
+  if (libraryItem.userId !== user.uid) {
+    throw new Error('You do not have access to this book')
+  }
+
+  const bookSnap = await getDoc(doc(db, 'books', libraryItem.bookId))
+
+  return {
+    ...libraryItem,
+    book: bookSnap.exists() ? bookSnap.data() : null,
+  }
+}
+
+export async function updateLibraryBookMeta(personalBookId, meta) {
+  await updateDoc(doc(db, 'personalBooks', personalBookId), {
+    ...meta,
+    updatedAt: serverTimestamp(),
+  })
 }
 
 export async function getMyLibraryBooks(user) {

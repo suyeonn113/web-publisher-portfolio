@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { getMyLibraryBooks } from '../services/libraryService'
 
 function Home({ user }) {
@@ -47,7 +48,11 @@ function Home({ user }) {
 
       <div className={`saved-book-list saved-book-list--${viewType}`}>
         {libraryBooks.map((item) => (
-          <article className="saved-book-card" key={item.id}>
+          <Link
+            className="saved-book-card"
+            key={item.id}
+            to={`/books/${item.id}`}
+          >
             {!isTextView && (
               <div className="saved-book-cover">
                 {item.book?.thumbnail ? (
@@ -62,7 +67,7 @@ function Home({ user }) {
               <p>{item.book?.author || '-'}</p>
               <p>{item.book?.publisher || '-'}</p>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>
