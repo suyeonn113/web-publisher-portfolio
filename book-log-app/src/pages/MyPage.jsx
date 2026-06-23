@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { signOut, updateProfile } from 'firebase/auth'
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import { useToast } from '../components/ToastProvider'
 import { auth, db } from '../firebase/firebase'
 
 function MyPage({ user }) {
+  const { showToast } = useToast()
   const [nickname, setNickname] = useState(user.displayName || '')
   const [isSaving, setIsSaving] = useState(false)
-  const [message, setMessage] = useState('')
 
   const handleSave = async (event) => {
     event.preventDefault()
     setIsSaving(true)
-    setMessage('')
 
     try {
       const trimmedNickname = nickname.trim()
@@ -30,9 +30,9 @@ function MyPage({ user }) {
       )
 
       setNickname(trimmedNickname)
-      setMessage('Saved.')
+      showToast('Saved')
     } catch (error) {
-      setMessage(error.message)
+      showToast(error.message)
     } finally {
       setIsSaving(false)
     }
@@ -66,8 +66,6 @@ function MyPage({ user }) {
           {isSaving ? 'Saving' : 'Save'}
         </button>
       </form>
-
-      {message && <p className="library-message">{message}</p>}
 
       <button type="button" className="logout-button" onClick={handleLogout}>
         Logout

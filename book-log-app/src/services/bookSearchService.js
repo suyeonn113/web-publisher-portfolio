@@ -1,4 +1,10 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
+function getApiBaseUrl() {
+  if (import.meta.env.DEV) {
+    return ''
+  }
+
+  return import.meta.env.VITE_API_BASE_URL || ''
+}
 
 export async function searchBooks(query) {
   const keyword = query.trim()
@@ -8,7 +14,7 @@ export async function searchBooks(query) {
   }
 
   const response = await fetch(
-    `${API_BASE_URL}/api/search-books?query=${encodeURIComponent(keyword)}`,
+    `${getApiBaseUrl()}/api/search-books?query=${encodeURIComponent(keyword)}`,
   )
 
   if (!response.ok) {

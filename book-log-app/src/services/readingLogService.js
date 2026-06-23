@@ -22,6 +22,7 @@ export async function getReadingLog(user, personalBookId) {
     ? logSnap.data()
     : {
         body: '',
+        contentJson: null,
       }
 }
 
@@ -38,7 +39,7 @@ export async function getReadingBlocks(user, personalBookId) {
     .sort((a, b) => a.order - b.order)
 }
 
-export async function saveReadingLog(user, personalBookId, log, blocks) {
+export async function saveReadingLog(user, personalBookId, log, blocks = []) {
   await setDoc(
     doc(db, 'readingLogs', getLogId(user, personalBookId)),
     {
@@ -46,6 +47,7 @@ export async function saveReadingLog(user, personalBookId, log, blocks) {
       userId: user.uid,
       personalBookId,
       body: log.body,
+      contentJson: log.contentJson || null,
       updatedAt: serverTimestamp(),
       createdAt: serverTimestamp(),
     },

@@ -89,6 +89,13 @@ export async function updateLibraryBookMeta(personalBookId, meta) {
   })
 }
 
+export async function deleteLibraryBook(personalBookId) {
+  await updateDoc(doc(db, 'personalBooks', personalBookId), {
+    deletedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  })
+}
+
 export async function getMyLibraryBooks(user) {
   const personalBooksQuery = query(
     collection(db, 'personalBooks'),
@@ -108,5 +115,10 @@ export async function getMyLibraryBooks(user) {
     }),
   )
 
-  return books
+  return books.sort((a, b) => {
+    const aCreatedAt = a.createdAt?.toMillis?.() || 0
+    const bCreatedAt = b.createdAt?.toMillis?.() || 0
+
+    return bCreatedAt - aCreatedAt
+  })
 }

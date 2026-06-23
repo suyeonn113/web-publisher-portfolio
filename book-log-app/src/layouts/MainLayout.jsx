@@ -11,6 +11,11 @@ function MainLayout() {
             <span>My page</span>
           </NavLink>
 
+          <NavLink className="app-nav-link" to="/reading-groups">
+            <Icon icon="fluent:people-community-24-regular" width="20" height="20" />
+            <span>Groups</span>
+          </NavLink>
+
           <NavLink className="app-nav-link" to="/">
             <Icon icon="fluent:home-24-regular" width="20" height="20" />
             <span>Home</span>

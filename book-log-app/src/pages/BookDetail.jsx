@@ -1,26 +1,29 @@
 import { useEffect, useState } from 'react'
-import { Icon } from '@iconify/react'
-import { Link, useParams } from 'react-router-dom'
-import ReadingBlockEditor from '../components/ReadingBlockEditor'
-import { createReadingBlock, readingBlockTypes } from '../data/readingBlockTypes'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import BookLogEditor from '../components/BookLogEditor'
+import { useToast } from '../components/ToastProvider'
 import {
+  deleteLibraryBook,
   getLibraryBookDetail,
   updateLibraryBookMeta,
 } from '../services/libraryService'
 import {
-  deleteReadingBlock,
-  getReadingBlocks,
   getReadingLog,
   saveReadingLog,
 } from '../services/readingLogService'
 
+const FINISHED_LABEL = '\uC644\uB3C5'
+const UNFINISHED_LABEL = '\uBBF8\uC644\uB3C5'
+
 function BookDetail({ user }) {
   const { personalBookId } = useParams()
+  const navigate = useNavigate()
+  const { showToast } = useToast()
   const [libraryItem, setLibraryItem] = useState(null)
-  const [log, setLog] = useState({ body: '' })
-  const [blocks, setBlocks] = useState([])
+  const [log, setLog] = useState({ body: '', contentJson: null })
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -29,15 +32,16 @@ function BookDetail({ user }) {
       setMessage('')
 
       try {
-        const [bookDetail, savedLog, savedBlocks] = await Promise.all([
+        const [bookDetail, savedLog] = await Promise.all([
           getLibraryBookDetail(user, personalBookId),
           getReadingLog(user, personalBookId),
-          getReadingBlocks(user, personalBookId),
         ])
 
         setLibraryItem(bookDetail)
-        setLog({ body: savedLog.body || '' })
-        setBlocks(savedBlocks)
+        setLog({
+          body: savedLog.body || '',
+          contentJson: savedLog.contentJson || null,
+        })
       } catch (error) {
         setMessage(error.message)
       } finally {
@@ -48,52 +52,37 @@ function BookDetail({ user }) {
     loadBookLog()
   }, [personalBookId, user])
 
-  const handleAddBlock = (type) => {
-    setBlocks((current) => [...current, createReadingBlock(type)])
-  }
-
-  const handleBlockChange = (blockId, fieldName, value) => {
-    setBlocks((current) =>
-      current.map((block) =>
-        block.id === blockId
-          ? {
-              ...block,
-              fields: {
-                ...block.fields,
-                [fieldName]: value,
-              },
-            }
-          : block,
-      ),
-    )
-  }
-
-  const handleDeleteBlock = async (block) => {
-    setBlocks((current) => current.filter((item) => item.id !== block.id))
-
-    if (!block.isNew) {
-      await deleteReadingBlock(block.id)
-    }
-  }
-
   const handleSave = async () => {
     setIsSaving(true)
     setMessage('')
 
     try {
       await Promise.all([
-        saveReadingLog(user, personalBookId, log, blocks),
+        saveReadingLog(user, personalBookId, log),
         updateLibraryBookMeta(personalBookId, {
           status: libraryItem.status,
           readDate: libraryItem.readDate || null,
         }),
       ])
-      setBlocks((current) => current.map((block) => ({ ...block, isNew: false })))
-      setMessage('Saved.')
+      showToast('Saved')
     } catch (error) {
-      setMessage(error.message)
+      showToast(error.message)
     } finally {
       setIsSaving(false)
+    }
+  }
+
+  const handleDelete = async () => {
+    setIsDeleting(true)
+    setMessage('')
+
+    try {
+      await deleteLibraryBook(personalBookId)
+      showToast('Deleted')
+      navigate('/')
+    } catch (error) {
+      showToast(error.message)
+      setIsDeleting(false)
     }
   }
 
@@ -140,7 +129,7 @@ function BookDetail({ user }) {
               }))
             }
           >
-            {isFinished ? '완독' : '미완독'}
+            {isFinished ? FINISHED_LABEL : UNFINISHED_LABEL}
           </button>
         </div>
       </header>
@@ -157,44 +146,8 @@ function BookDetail({ user }) {
       </header>
 
       <section className="writing-editor">
-        <textarea
-          value={log.body}
-          rows="8"
-          placeholder="Write freely..."
-          onChange={(event) =>
-            setLog((current) => ({
-              ...current,
-              body: event.target.value,
-            }))
-          }
-        />
-
-        <div className="block-picker">
-          {readingBlockTypes.map((blockType) => (
-            <button
-              type="button"
-              key={blockType.type}
-              onClick={() => handleAddBlock(blockType.type)}
-            >
-              <Icon icon={blockType.icon} width="18" height="18" />
-              {blockType.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="log-block-list">
-          {blocks.map((block) => (
-            <ReadingBlockEditor
-              key={block.id}
-              block={block}
-              onChange={handleBlockChange}
-              onDelete={handleDeleteBlock}
-            />
-          ))}
-        </div>
+        <BookLogEditor log={log} onChange={setLog} />
       </section>
-
-      {message && <p className="library-message">{message}</p>}
 
       <button
         type="button"
@@ -203,6 +156,15 @@ function BookDetail({ user }) {
         disabled={isSaving}
       >
         {isSaving ? 'Saving' : 'Save'}
+      </button>
+
+      <button
+        type="button"
+        className="delete-book-button"
+        onClick={handleDelete}
+        disabled={isDeleting}
+      >
+        {isDeleting ? 'Deleting' : 'Delete'}
       </button>
     </section>
   )

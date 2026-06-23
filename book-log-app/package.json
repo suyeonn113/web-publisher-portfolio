@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",
+    "@tiptap/react": "^3.27.1",
+    "@tiptap/starter-kit": "^3.27.1",
     "firebase": "^12.15.0",
     "lucide-react": "^1.21.0",
     "react": "^19.2.7",

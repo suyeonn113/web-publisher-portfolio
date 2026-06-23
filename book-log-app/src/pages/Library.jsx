@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import BookResultCard from '../components/BookResultCard'
 import BookSearchForm from '../components/BookSearchForm'
+import { useToast } from '../components/ToastProvider'
 import { searchBooks } from '../services/bookSearchService'
 import { saveBookToMyLibrary } from '../services/libraryService'
 
 function Library({ user }) {
+  const { showToast } = useToast()
   const [query, setQuery] = useState('')
   const [books, setBooks] = useState([])
   const [isSearching, setIsSearching] = useState(false)
@@ -21,7 +23,7 @@ function Library({ user }) {
       setBooks(results)
       setMessage(results.length ? '' : 'No books found.')
     } catch (error) {
-      setMessage(error.message)
+      showToast(error.message)
     } finally {
       setIsSearching(false)
     }
@@ -33,9 +35,9 @@ function Library({ user }) {
 
     try {
       await saveBookToMyLibrary(user, book)
-      setMessage('Saved. Check it on Home.')
+      showToast('Added')
     } catch (error) {
-      setMessage(error.message)
+      showToast(error.message)
     } finally {
       setSavingBookId('')
     }
